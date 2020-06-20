@@ -29,7 +29,7 @@
         </a>
       </div>
     </div>
-    <div class="pbody">
+    <div class="pbody" id="postinfo" pid="@{post['pid']!!s}">
       <div class="post-heading">
         @if announcement:
         <span class="announcement">@{_('Announcement')}</span>
@@ -97,7 +97,12 @@
           <span><a data-ac="block" class="unblk">@{_('block sub')}</a></span>
         @end
         <a data-ac="report" class="report-post">@{_('report')}</a>
-      </div>
+	   
+	@if post['uid'] == current_user.uid or current_user.is_admin() or current_user.uid in subMods['all']:      
+	  <li id="delpostli"><a @{(post['uid'] == current_user.uid) and 'selfdel="true"' or ''} class="delete-post"> @{_('delete')} </a></li>
+	@end      
+      
+       </div>
     </div>
 </div>
 @end
