@@ -671,3 +671,8 @@ body.dark {
   background: linear-gradient(to bottom,  #36393f 0%, #36393f 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#36393f', endColorstr='#36393f',GradientType=0 );
 }
+
+.new-post-button{
+    background-color: gray;
+}
+
