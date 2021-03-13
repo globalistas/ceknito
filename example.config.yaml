@@ -227,9 +227,7 @@ mail:
   username: throat
   password: pass1234
   # Sender address
-  default_from: ''
-  # recipient address
-  default_to: ''
+  default_from: 'noreply@example.com'
 storage:
   # One of: LOCAL, S3, S3_US_WEST, S3_US_WEST_OREGON, S3_EU_WEST,
   # S3_AP_SOUTHEAST, S3_AP_NORTHEAST, GOOGLE_STORAGE, AZURE_BLOBS,
