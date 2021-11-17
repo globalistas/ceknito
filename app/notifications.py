@@ -14,10 +14,10 @@ from .models import (
     SubPostComment,
     SubPostCommentVote,
     SubPostCommentView,
-    SubPostVote,
+    SubPostVote, UserMetadata,
 )
 from .socketio import socketio
-from .misc import get_notification_count
+from .misc import get_notification_count, send_email
 
 
 class Notifications(object):
@@ -149,9 +149,9 @@ class Notifications(object):
                 JOIN.LEFT_OUTER,
                 on=(SubPostVote.uid == uid) & (SubPostVote.pid == SubPost.pid),
             )
-            .switch(Notification)
-            .join(SubPostComment, JOIN.LEFT_OUTER)
-            .join(
+                .switch(Notification)
+                .join(SubPostComment, JOIN.LEFT_OUTER)
+                .join(
                 SubPostCommentVote,
                 JOIN.LEFT_OUTER,
                 on=(
@@ -223,12 +223,16 @@ class Notifications(object):
         )
 
         ignore = None
+        target_email_notify = UserMetadata.select(UserMetadata.value).where(UserMetadata.uid == target.uid) == "1"
         if notification_type in [
             "POST_REPLY",
             "COMMENT_REPLY",
             "POST_MENTION",
             "COMMENT_MENTION",
         ]:
+            if target_email_notify and notification_type in ["POST_REPLY", "COMMENT_REPLY"]:
+                tidy_type = notification_type.replace("_", " ")
+                send_email(target, tidy_type, f"New {tidy_type} from {User.get(User.uid == sender).name}")
             try:
                 TargetSubMod = SubMod.alias()
                 ignore = (

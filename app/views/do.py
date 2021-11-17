@@ -296,6 +296,7 @@ def edit_user():
         current_user.update_prefs("noscroll", form.noscroll.data)
         current_user.update_prefs("nochat", form.nochat.data)
         current_user.update_prefs("subtheme", form.subtheme.data, False)
+        current_user.update_prefs("email_notify", "1" if form.email_notify.data else "0")
 
         cache.delete_memoized(current_user.get_global_stylesheet)
 
@@ -379,9 +380,9 @@ def delete_post():
         try:
             ann = (
                 SiteMetadata.select()
-                .where(SiteMetadata.key == "announcement")
-                .where(SiteMetadata.value == post.pid)
-                .get()
+                    .where(SiteMetadata.key == "announcement")
+                    .where(SiteMetadata.value == post.pid)
+                    .get()
             )
             ann.delete_instance()
             cache.delete_memoized(misc.getAnnouncementPid)
@@ -1050,9 +1051,9 @@ def get_txtpost(pid):
                 JOIN.LEFT_OUTER,
                 on=(SubPostPollVote.vid == SubPostPollOption.id),
             )
-            .where(SubPostPollOption.pid == pid)
-            .group_by(SubPostPollOption.id)
-            .order_by(SubPostPollOption.id)
+                .where(SubPostPollOption.pid == pid)
+                .group_by(SubPostPollOption.id)
+                .order_by(SubPostPollOption.id)
         )
         pollData["options"] = options
         total_votes = SubPostPollVote.select().where(SubPostPollVote.pid == pid).count()
@@ -4085,9 +4086,9 @@ def close_comment_related_reports(related_reports, original_report):
     # Select only the reports that are related and still need closing.
     related_reports = (
         SubPostCommentReport.select(SubPostCommentReport.id, SubPost.sid)
-        .join(SubPostComment)
-        .join(SubPost)
-        .join(
+            .join(SubPostComment)
+            .join(SubPost)
+            .join(
             OriginalSubPostCommentReport,
             JOIN.LEFT_OUTER,
             on=(OriginalSubPostCommentReport.cid == SubPostCommentReport.cid),

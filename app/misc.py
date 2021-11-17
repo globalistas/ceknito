@@ -1420,11 +1420,11 @@ def get_mod_notification_counts(uid):
                     & (conversation_newest.c.maxtime == Message.posted)
                 ),
             )
-            .switch(Message)
-            .join(UserUnreadMessage)
-            .where((SubMod.user == uid) & (UserUnreadMessage.uid == uid))
-            .group_by(Sub.sid)
-            .dicts()
+                .switch(Message)
+                .join(UserUnreadMessage)
+                .where((SubMod.user == uid) & (UserUnreadMessage.uid == uid))
+                .group_by(Sub.sid)
+                .dicts()
         )
     return post_report_counts, comment_report_counts, unread_modmail_counts
 
@@ -1792,8 +1792,8 @@ def getUserComments(uid, page, include_deleted_comments=False):
 def getSubMods(sid):
     modsquery = (
         SubMod.select(User.uid, User.name, SubMod.power_level)
-        .join(User, on=(User.uid == SubMod.uid))
-        .where(SubMod.sid == sid)
+            .join(User, on=(User.uid == SubMod.uid))
+            .where(SubMod.sid == sid)
     )
     modsquery = modsquery.where((User.status == 0) & (~SubMod.invite))
 
@@ -1887,9 +1887,9 @@ def getSubData(sid, simple=False, extra=False):
         try:
             creator = (
                 User.select(User.uid, User.name, User.status)
-                .where(User.uid == data.get("mod"))
-                .dicts()
-                .get()
+                    .where(User.uid == data.get("mod"))
+                    .dicts()
+                    .get()
             )
         except User.DoesNotExist:
             creator = {"uid": "0", "name": "Nobody"}
@@ -2978,8 +2978,8 @@ def getReports(view, status, page, *_args, **kwargs):
             SubPostReport.open,
             Sub.name.alias("sub"),
         )
-        .join(User, on=User.uid == SubPostReport.uid)
-        .switch(SubPostReport)
+            .join(User, on=User.uid == SubPostReport.uid)
+            .switch(SubPostReport)
     )
 
     # filter by if Mod or Admin view and if filtering by sub, specific post, or related posts
@@ -2993,10 +2993,10 @@ def getReports(view, status, page, *_args, **kwargs):
     elif view == "admin" and sid:
         sub_post_reports = (
             all_post_reports.where(SubPostReport.send_to_admin)
-            .join(SubPost)
-            .join(Sub)
-            .where(Sub.sid == sid)
-            .join(SubMod)
+                .join(SubPost)
+                .join(Sub)
+                .where(Sub.sid == sid)
+                .join(SubMod)
         )
     elif view == "mod" and sid:
         sub_post_reports = (
@@ -3068,11 +3068,11 @@ def getReports(view, status, page, *_args, **kwargs):
     elif view == "admin" and sid:
         sub_comment_reports = (
             all_comment_reports.where(SubPostCommentReport.send_to_admin)
-            .join(SubPostComment)
-            .join(SubPost)
-            .join(Sub)
-            .where(Sub.sid == sid)
-            .join(SubMod)
+                .join(SubPostComment)
+                .join(SubPost)
+                .join(Sub)
+                .where(Sub.sid == sid)
+                .join(SubMod)
         )
     elif view == "mod" and sid:
         sub_comment_reports = (
@@ -3097,10 +3097,10 @@ def getReports(view, status, page, *_args, **kwargs):
         )
         sub_comment_reports = (
             all_comment_reports.where(SubPostCommentReport.cid == base_report["cid"])
-            .join(SubPostComment)
-            .join(SubPost)
-            .join(Sub)
-            .join(SubMod)
+                .join(SubPostComment)
+                .join(SubPost)
+                .join(Sub)
+                .join(SubMod)
         )
     else:
         sub_comment_reports = (
@@ -3299,8 +3299,8 @@ def recent_activity(sidebar=True):
         comment_activity = comment_activity.where(SubPost.nsfw == 0)
     comment_activity = (
         comment_activity.where(SubPostComment.status.is_null(True))
-        .order_by(SubPostComment.time.desc())
-        .limit(50)
+            .order_by(SubPostComment.time.desc())
+            .limit(50)
     )
 
     if sidebar and config.site.recent_activity.defaults_only:
