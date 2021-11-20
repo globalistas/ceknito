@@ -183,11 +183,17 @@ class Notifications(object):
             (Notification.read.is_null(True)) & (Notification.target == uid)
         ).execute()
     
+    
+    
     @staticmethod
     def email_template(notification_type, user, post, sub):
-        user_url = url_for("user.view", user=user.name, _scheme='https',_external=True)
-        post_url = url_for("sub.view_post", sub=sub.name, pid=post.pid,_scheme='https',_external=True)
-        sub_url = url_for("sub.view_sub", sub=sub.name, _scheme='https',_external=True)
+        def create_external_url(url):
+            server_name = config.site.server_name
+            return "/".join(('https:/', server_name, *url.split('/')[:-2]))
+        user_url = create_external_url(url_for("user.view", user=user.name, _scheme='https', _external=True))
+        post_url = create_external_url(url_for("sub.view_post", sub=sub.name, pid=post.pid, _scheme='https', _external=True))        
+        sub_url = create_external_url(url_for("sub.view_sub", sub=sub.name, _scheme='https', _external=True))
+        
         if notification_type == 'POST_REPLY':
             return _('<a href="{}">{}</a> replied to your post'
                            '<a href="{}">{}</a>'
@@ -195,8 +201,8 @@ class Notifications(object):
         elif notification_type == 'COMMENT_REPLY':
             return _('<a href="{}">{}'
                            '</a> replied to your comment in the post titled'
-                           ' <a href="{}">{}"></a>'
-                           ' in <a href="{}">{}</a>'.format(user_url, user.name, post_url, post.title, sub_url, sub.title))
+                           ' <a href="{}">{}></a>'
+                           ' in <a href="{}" >{}</a>'.format(user_url, user.name, post_url, post.title, sub_url, sub.title))
         elif notification_type in ('POST_MENTION', 'COMMENT_MENTION'):
             return _('<a href="{}">{}</a>'
                            ' mentioned you in <a href="{}">{}</a>'.format(user_url, user.name, post_url, post.title))
@@ -267,8 +273,17 @@ class Notifications(object):
         target_email_notify = (UserMetadata.select(UserMetadata.value)
                                .where((UserMetadata.uid == target & UserMetadata.key == 'email_notify')) == "1")
         if target_email_notify:
-            email = self.email_template(notification_type, User.get_by_id(pk=target), SubPost.get_by_id(pk=post), Sub.get_by_id(pk=sub))
-            send_email(User.get_by_id(pk=target).email, subject =_('New Notification'), text_content='', html_content=email)
+            email = self.email_template(
+                notification_type,
+                User.get_by_id(pk=target),
+                SubPost.get_by_id(pk=post),
+                Sub.get_by_id(pk=sub)
+            )
+            send_email(
+                User.get_by_id(pk=target).email,
+                subject=_('New notification.'),
+                text_content='',
+                html_content=email)
 
         if notification_type in [
             "POST_REPLY",
