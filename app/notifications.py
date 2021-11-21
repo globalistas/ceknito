@@ -193,16 +193,16 @@ class Notifications(object):
         if notification_type == "POST_REPLY":
             return _(
                 
-                'User [%(user_name)s] <a href="%(url)s">replied<a>'
-                '<br> to your post'
+                'User %(user_name)s <a href="%(url)s">replied</a>'
+                ' to your post'
                 '<br><b> %(post_title)s</b><br>'
                 '<br> in %(sub_name)s',
                     user_name =user.name, post_title = post.title, sub_name = sub.name, url=generate_external_url()
                 )
         elif notification_type == "COMMENT_REPLY":
             return _(
-                'User [%(user_name)s] <a href="%(url)s">replied<a>'
-                '<br> to your comment in the post titled'
+                'User %(user_name)s <a href="%(url)s">replied</a>'
+                ' to your comment in the post titled'
                 '<br><b> %(post_title)s<b><br>'
                 '<br> in %(sub_name)s'
                 , user_name = user.name, post_title = post.title, sub_name=sub.name , url=generate_external_url()
