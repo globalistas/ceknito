@@ -187,27 +187,25 @@ class Notifications(object):
     @staticmethod
     def email_template(notification_type, user, post, sub):
         server_name = config.site.server_name
-        def generate_external_url(url):
-            return '/'.join(('https:/',server_name,*url.split("/")[-2:]))
+        def generate_external_url():
+            return '/'.join(('https:/',server_name,'messages','notifications'))
 
-        user_url = generate_external_url(url_for("user.view", user=user.name, _scheme="https", _external=True))
-        post_url = generate_external_url(url_for(
-            "sub.view_post", sub=sub.name, pid=post.pid, title=post.title, _scheme="https", _external=True
-        ))
-        sub_url = generate_external_url(url_for("sub.view_sub", sub=sub.name, _scheme="https", _external=True))
         if notification_type == "POST_REPLY":
             return _(
-                '<a href="%(user_url)s">%(user_name)s</a> replied to your post'
-                ' <a href="%(post_url)s">%(post_title)s</a>'
-                ' in <a href="%(sub_url)s">%(sub_name)s</a>',
-                    user_url=user_url, user_name =user.name, post_url=post_url, post_title = post.title, sub_url = sub_url, sub_name = sub.name
+                
+                'User [%(user_name)s] <a href="%(url)s">replied<a>'
+                '<br> to your post'
+                '<br><b> %(post_title)s</b><br>'
+                '<br> in %(sub_name)s',
+                    user_name =user.name, post_title = post.title, sub_name = sub.name, url=generate_external_url()
                 )
         elif notification_type == "COMMENT_REPLY":
             return _(
-                '<a href="%(user_url)s">%(user_name)s'
-                '</a> replied to your comment in the post titled"'
-                ' <a href="%(post_url)s">%(post_title)s</a>'
-                ' in <a href="%(sub_url)s">%(sub_name)s</a>' , user_url=user_url, user_name = user.name,post_url= post_url, post_title = post.title, sub_url= sub_url, sub_name=sub.name
+                'User [%(user_name)s] <a href="%(url)s">replied<a>'
+                '<br> to your comment in the post titled'
+                '<br><b> %(post_title)s<b><br>'
+                '<br> in %(sub_name)s'
+                , user_name = user.name, post_title = post.title, sub_name=sub.name , url=generate_external_url()
                 )
             
     def send(
