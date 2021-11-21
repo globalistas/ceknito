@@ -311,13 +311,13 @@ msgstr "Invalid status request"
 #: app/notifications.py:200
 #, python-format
 msgid ""
-"User %(user_name)s <a href=\"%(url)s\">replied</a> to your post<br><br>"
-"<i>%(post_title)s</i><br><br>in <i>%(sub_name)s</i>"
+"User %(user_name)s <a href=\"%(url)s\">replied</a> to your post "
+"<br><br><i>%(post_title)s</i><br><br>in <i>%(sub_name)s</i>"
 msgstr ""
-"Používateľ %(user_name)s <a href=\"%(url)s\">odpovedal(a)</a> na tvoj príspevok<br><br>"
-"<i>%(post_title)s</i><br><br>v skupine <i>%(sub_name)s</i>"
+"Používateľ %(user_name)s <a href=\"%(url)s\">odpovedal(a)</a> na tvoj príspevok "
+"<br><br><i>%(post_title)s</i><br><br>v skupine <i>%(sub_name)s</i>"
 
-#: app/notifications.py:208
+#: app/notifications.py:209
 #, python-format
 msgid ""
 "User %(user_name)s <a href=\"%(url)s\">replied</a> to your comment in the"
