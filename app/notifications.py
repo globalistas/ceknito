@@ -187,27 +187,27 @@ class Notifications(object):
     @staticmethod
     def email_template(notification_type, user, post, sub):
         server_name = config.site.server_name
+
         def generate_external_url():
-            return '/'.join(('https:/',server_name,'messages','notifications'))
+            return "/".join(("https:/", server_name, "messages", "notifications"))
 
         if notification_type == "POST_REPLY":
             return _(
-                
-                'User %(user_name)s <a href="%(url)s">replied</a>'
-                ' to your post'
-                '<br><b> %(post_title)s</b><br>'
-                '<br> in %(sub_name)s',
-                    user_name =user.name, post_title = post.title, sub_name = sub.name, url=generate_external_url()
-                )
+                'User %(user_name)s <a href="%(url)s">replied</a> to your post <b>%(post_title)s</b> in %(sub_name)s',
+                user_name=user.name,
+                post_title=post.title,
+                sub_name=sub.name,
+                url=generate_external_url(),
+            )
         elif notification_type == "COMMENT_REPLY":
             return _(
-                'User %(user_name)s <a href="%(url)s">replied</a>'
-                ' to your comment in the post titled'
-                '<br><b> %(post_title)s<b><br>'
-                '<br> in %(sub_name)s'
-                , user_name = user.name, post_title = post.title, sub_name=sub.name , url=generate_external_url()
-                )
-            
+                'User %(user_name)s <a href="%(url)s">replied</a> to your comment in the post titled <b>%(post_title)s<b> in %(sub_name)s',
+                user_name=user.name,
+                post_title=post.title,
+                sub_name=sub.name,
+                url=generate_external_url(),
+            )
+
     def send(
         self,
         notification_type,
