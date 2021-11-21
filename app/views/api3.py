@@ -210,7 +210,7 @@ def register():
 @API.route("/refresh", methods=["POST"])
 @jwt_refresh_token_required
 def refresh():
-    """ Returns a new access token. Requires providing a refresh token """
+    """Returns a new access token. Requires providing a refresh token"""
     current_user = get_jwt_identity()
     try:
         user = User.get_by_id(current_user)
@@ -228,7 +228,7 @@ def refresh():
 @gevent_required  # Uses Keycloak service if configured.
 @ratelimit(AUTH_LIMIT)
 def fresh_login():
-    """ Returns a fresh access token. Requires username and password """
+    """Returns a fresh access token. Requires username and password"""
     if not request.is_json:
         return jsonify(msg="Missing JSON in request"), 400
     username = request.json.get("username", None)
@@ -364,7 +364,7 @@ def get_post_list(target):
 @API.route("/post/<sub>/<int:pid>", methods=["GET"])
 @jwt_optional
 def get_post(sub, pid):
-    """Returns information for a post """
+    """Returns information for a post"""
     uid = get_jwt_identity()
     base_query = SubPost.select(
         SubPost.nsfw,
@@ -551,7 +551,7 @@ def delete_post(sub, pid):
 @API.route("/post/<_sub>/<int:pid>/vote", methods=["POST"])
 @jwt_required
 def vote_post(_sub, pid):
-    """ Logs an upvote to a post. """
+    """Logs an upvote to a post."""
     uid = get_jwt_identity()
     if not request.is_json:
         return jsonify(msg="Missing JSON in request"), 400
@@ -786,7 +786,7 @@ def create_comment(sub, pid):
 @API.route("/post/<_sub>/<int:pid>/comment/<cid>", methods=["PATCH"])
 @jwt_required
 def edit_comment(_sub, pid, cid):
-    """ Edits a comment """
+    """Edits a comment"""
     uid = get_jwt_identity()
     if not request.is_json:
         return jsonify(msg="Missing JSON in request"), 400
@@ -885,7 +885,7 @@ def delete_comment(_sub, pid, cid):
 @API.route("/post/<_sub>/<int:_pid>/comment/<cid>/vote", methods=["POST"])
 @jwt_required
 def vote_comment(_sub, _pid, cid):
-    """ Logs an upvote to a post. """
+    """Logs an upvote to a post."""
     uid = get_jwt_identity()
     value = request.json.get("upvote", None)
     if type(value) is not bool:
@@ -935,13 +935,13 @@ def get_post_comment_children(_sub, pid, cid):
 
 
 class ChallengeRequired(Exception):
-    """ Raised when a challenge is required. Catched by the error handlers below """
+    """Raised when a challenge is required. Catched by the error handlers below"""
 
     pass
 
 
 class ChallengeWrong(Exception):
-    """ Raised when a challenge's solution is wrong. Catcher by the error handlers below """
+    """Raised when a challenge's solution is wrong. Catcher by the error handlers below"""
 
     pass
 
@@ -1231,7 +1231,7 @@ def get_sub_rules():
 
 @API.route("/user/<username>", methods=["GET"])
 def get_user(username, uid=False):
-    """ Returns user profile data """
+    """Returns user profile data"""
     if not uid:
         try:
             user = (
@@ -1333,7 +1333,7 @@ def user_overview(username):
 @API.route("/user", methods=["GET"])
 @jwt_required
 def get_own_user():
-    """ Return user info and notifications count for the current user """
+    """Return user info and notifications count for the current user"""
     uid = get_jwt_identity()
     mcount = Message.select(fn.Count(Message.mid)).where(
         (Message.receivedby == uid) & (Message.mtype == 1) & Message.read.is_null(True)
@@ -1409,7 +1409,7 @@ def delete_notification():
 @API.route("/notifications/ignore", methods=["GET"])
 @jwt_required
 def get_ignored():
-    """ Lists all the users the user has blocked. """
+    """Lists all the users the user has blocked."""
     uid = get_jwt_identity()
 
     ignores = (
@@ -1424,7 +1424,7 @@ def get_ignored():
 @API.route("/notifications/ignore", methods=["POST"])
 @jwt_required
 def ignore_notifications():
-    """ Ignores all notifications coming from a certain user. """
+    """Ignores all notifications coming from a certain user."""
     uid = get_jwt_identity()
     if not request.is_json:
         return jsonify(msg="Missing JSON in request"), 400
@@ -1489,7 +1489,7 @@ def ignore_notifications():
 @API.route("/notifications/ignore", methods=["DELETE"])
 @jwt_required
 def unignore_notifications():
-    """ Removes an ignore. """
+    """Removes an ignore."""
     uid = get_jwt_identity()
     if not request.is_json:
         return jsonify(msg="Missing JSON in request"), 400
@@ -1530,7 +1530,7 @@ def unignore_notifications():
 @API.route("/messages", methods=["GET"])
 @jwt_required
 def get_messages():
-    """ Returns an array of received messages """
+    """Returns an array of received messages"""
     uid = get_jwt_identity()
     page = request.args.get("page", default=1, type=int)
     # autoMarkAsRead = request.args.get('autoMarkAsRead', default=True, type=bool)
@@ -1603,7 +1603,7 @@ def send_message():
 @API.route("/messages/sent", methods=["GET"])
 @jwt_required
 def get_sent_messages():
-    """ Returns an array of sent messages """
+    """Returns an array of sent messages"""
     uid = get_jwt_identity()
     page = request.args.get("page", default=1, type=int)
     msg = misc.get_messages_sent(page, uid)
@@ -1614,7 +1614,7 @@ def get_sent_messages():
 @API.route("/messages/<int:mid>/read", methods=["POST"])
 @jwt_required
 def read_message(mid):
-    """ Marks a message as read """
+    """Marks a message as read"""
     uid = get_jwt_identity()
     try:
         Message.get((Message.mid == mid) & (Message.receivedby == uid))
@@ -1659,11 +1659,12 @@ def message_fields_for_api(m):
 @API.route("/user/settings", methods=["GET"])
 @jwt_required
 def get_settings():
-    """ Returns account settings """
+    """Returns account settings"""
     uid = get_jwt_identity()
     prefs = UserMetadata.select().where(UserMetadata.uid == uid)
     prefs = prefs.where(
-        UserMetadata.key << ("labrat", "nostyles", "nsfw", "nsfw_blur", "nochat","email_notify")
+        UserMetadata.key
+        << ("labrat", "nostyles", "nsfw", "nsfw_blur", "nochat", "email_notify")
     )
     prefs = {x.key: x.value for x in prefs}
     return jsonify(
@@ -1673,7 +1674,7 @@ def get_settings():
             "nsfw": True if prefs.get("nsfw", False) == "1" else False,
             "nsfw_blur": True if prefs.get("nsfw_blur", False) == "1" else False,
             "nochat": True if prefs.get("nochat", False) == "1" else False,
-            "email_notify":True if prefs.get("email_notify",False)=="1" else False,
+            "email_notify": True if prefs.get("email_notify", False) == "1" else False,
         }
     )
 
@@ -1697,7 +1698,8 @@ def set_settings():
     if [
         x
         for x in settings.keys()
-        if x not in ["labrat", "nostyles", "nsfw", "nsfw_blur", "nochat","email_notify"]
+        if x
+        not in ["labrat", "nostyles", "nsfw", "nsfw_blur", "nochat", "email_notify"]
     ]:
         return jsonify(msg="Invalid setting options sent"), 400
 
@@ -1705,7 +1707,14 @@ def set_settings():
     qrys = []
     for sett in settings:
         value = settings[sett]
-        if sett in ["labrat", "nostyles", "nsfw", "nsfw_blur", "nochat","email_notify"]:
+        if sett in [
+            "labrat",
+            "nostyles",
+            "nsfw",
+            "nsfw_blur",
+            "nochat",
+            "email_notify",
+        ]:
             if not isinstance(settings[sett], bool):
                 return jsonify(msg="Invalid type for setting"), 400
             value = "1" if value else "0"
@@ -1735,7 +1744,7 @@ def grab_title():
 @gevent_required  # Uses notification service if configured.
 @jwt_required
 def inform_push_token():
-    """ Informs a new push token """
+    """Informs a new push token"""
     # 1. Verify if the token is valid
     uid = get_jwt_identity()
 
