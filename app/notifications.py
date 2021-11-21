@@ -193,7 +193,7 @@ class Notifications(object):
 
         if notification_type == "POST_REPLY":
             return _(
-                'User %(user_name)s <a href="%(url)s">replied</a> to your post<br><br><i>%(post_title)s</i><br><br>in ><i>%(sub_name)s</i>',
+                'User %(user_name)s <a href="%(url)s">replied</a> to your post<br><br><i>%(post_title)s</i><br><br>in <i>%(sub_name)s</i>',
                 user_name=user.name,
                 post_title=post.title,
                 sub_name=sub.name,
