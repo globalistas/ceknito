@@ -197,22 +197,19 @@ class Notifications(object):
         sub_url = generate_external_url(url_for("sub.view_sub", sub=sub.name, _scheme="https", _external=True))
         if notification_type == "POST_REPLY":
             return _(
-                '<a clicktracking=off href="{}">{}</a> replied to your post'
-                ' <a clicktracking=off href="{}">{}</a>'
-                ' in <a clicktracking=off href="{}">{}</a>'.format(
-                    user_url, user.name, post_url, post.title, sub_url, sub.name
+                '<a clicktracking=off href="{%(user_url)s}">{%(user_name)s}</a> replied to your post'
+                ' <a clicktracking=off href="{%(post_url)s}">{%(post_title)s}</a>'
+                ' in <a clicktracking=off href="{%(sub_url)s}">{%(sub_name)s}</a>',
+                    user_url=user_url, user_name =user.name, post_url=post_url, post_title = post.title, sub_url = sub_url, sub_name = sub.name
                 )
-            )
         elif notification_type == "COMMENT_REPLY":
             return _(
-                '<a clicktracking=off href="{}">{}'
+                '<a clicktracking=off href="{%(user_url)s}">{%(user_name)s}'
                 '</a> replied to your comment in the post titled"'
-                ' <a clicktracking=off href="{}">{}</a>'
-                ' in <a clicktracking=off href="{}">{}</a>'.format(
-                    user_url, user.name, post_url, post.title, sub_url, sub.title
+                ' <a clicktracking=off href="{%(post_url)s}">{%(post_title)s}</a>'
+                ' in <a clicktracking=off href="{%(sub_url)s}">{%(sub_name)s}</a>' , user_url=user_url, user_name = user.name,post_url= post_url, post_title = post.title, sub_url= sub_url, sub_name=sub.name
                 )
-            )
-
+            
     def send(
         self,
         notification_type,
