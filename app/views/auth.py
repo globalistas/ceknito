@@ -236,6 +236,7 @@ def register():
         theuser = misc.load_user(user.uid)
         login_user(theuser)
         theuser.update_prefs("nsfw", "1")
+        theuser.update_prefs("email_notify", "0")
         session["remember_me"] = False
         return redirect(url_for("wiki.welcome"))
 
