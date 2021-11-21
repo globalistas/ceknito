@@ -197,17 +197,17 @@ class Notifications(object):
         sub_url = generate_external_url(url_for("sub.view_sub", sub=sub.name, _scheme="https", _external=True))
         if notification_type == "POST_REPLY":
             return _(
-                '<a href="{%(user_url)s}">{%(user_name)s}</a> replied to your post'
-                ' <a href="{%(post_url)s}">{%(post_title)s}</a>'
-                ' in <a href="{%(sub_url)s}">{%(sub_name)s}</a>',
+                '<a href="%(user_url)s">%(user_name)s</a> replied to your post'
+                ' <a href="%(post_url)s">%(post_title)s</a>'
+                ' in <a href="%(sub_url)s">%(sub_name)s</a>',
                     user_url=user_url, user_name =user.name, post_url=post_url, post_title = post.title, sub_url = sub_url, sub_name = sub.name
                 )
         elif notification_type == "COMMENT_REPLY":
             return _(
-                '<a href="{%(user_url)s}">{%(user_name)s}'
+                '<a href="%(user_url)s">%(user_name)s'
                 '</a> replied to your comment in the post titled"'
-                ' <a href="{%(post_url)s}">{%(post_title)s}</a>'
-                ' in <a href="{%(sub_url)s}">{%(sub_name)s}</a>' , user_url=user_url, user_name = user.name,post_url= post_url, post_title = post.title, sub_url= sub_url, sub_name=sub.name
+                ' <a href="%(post_url)s">%(post_title)s</a>'
+                ' in <a href="%(sub_url)s">%(sub_name)s</a>' , user_url=user_url, user_name = user.name,post_url= post_url, post_title = post.title, sub_url= sub_url, sub_name=sub.name
                 )
             
     def send(
@@ -259,7 +259,7 @@ class Notifications(object):
         if target_email_notify:
             email = self.email_template(
                 notification_type,
-                User.get_by_id(pk=target),
+                User.get_by_id(pk=sender),
                 SubPost.get_by_id(pk=post),
                 Sub.get_by_id(pk=sub),
             )
