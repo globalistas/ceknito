@@ -192,7 +192,7 @@ class Notifications(object):
 
         user_url = generate_external_url(url_for("user.view", user=user.name, _scheme="https", _external=True))
         post_url = generate_external_url(url_for(
-            "sub.view_post", sub=sub.name, pid=post.pid, _scheme="https", _external=True
+            "sub.view_post", sub=sub.name, pid=post.pid, title=post.title, _scheme="https", _external=True
         ))
         sub_url = generate_external_url(url_for("sub.view_sub", sub=sub.name, _scheme="https", _external=True))
         if notification_type == "POST_REPLY":
