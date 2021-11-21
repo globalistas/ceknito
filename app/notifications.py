@@ -252,7 +252,6 @@ class Notifications(object):
             post=post,
             content=content,
         )
-        print(notification_type)
         ignore = None
         target_email_notify = (
             UserMetadata.select(UserMetadata.value).where(
