@@ -6,127 +6,117 @@
 </form>
 
 @if not current_user.is_authenticated:
-<a href="@{url_for('subs.submit', ptype='link', sub=sub['name'])}" class="sbm-post pure-button">@{_('Submit a
-  post')}</a>
+	<a href="@{url_for('subs.submit', ptype='link', sub=sub['name'])}" class="sbm-post pure-button">@{_('Submit a post')}</a>
 @end
 
 @if current_user.is_authenticated:
-@if subInfo.get('restricted', 0) == '1' and not (current_user.uid in (subMods['all'])):
-<div>@{_('Only mods can post.')}</div>
-@else:
-@if current_user.is_subban(sub):
-<div>@{_('You are currently banned from posting.')}</div>
-@else:
-<a href="@{url_for('subs.submit', ptype='link', sub=sub['name'])}" class="sbm-post pure-button">@{_('Submit a
-  post')}</a>
-@endif
-@end
+  @if subInfo.get('restricted', 0) == '1' and not (current_user.uid in (subMods['all'])):
+    <div>@{_('Only mods can post.')}</div>
+  @else:
+    @if current_user.is_subban(sub):
+      <div>@{_('You are currently banned from posting.')}</div>
+    @else:
+      <a href="@{url_for('subs.submit', ptype='link', sub=sub['name'])}" class="sbm-post pure-button">@{_('Submit a post')}</a>
+    @endif
+  @end
 @end
 
 <div class="subinfo">
   <h3><a href="@{url_for('sub.view_sub', sub=sub['name'])}">/@{config.site.sub_prefix}/@{sub['name']}</a> \
-    @if sub['nsfw']:
+  @if sub['nsfw']:
     <div class="nsfw" alt="@{_('Not safe for work')}">@{_('NSFW')}</div> \
-    @end
+  @end
   </h3>
 </div>
 <div class="subs">@{_('%(subs)i subscribers', subs=sub['subscribers'])}</div>
 
 @if current_user.is_authenticated:
-<div class="subbuttonscentered">
-  <div role="group" class="pure-button-group" data-sid="@{sub['sid']}">
+	<div class="subbuttonscentered">
+	  <div role="group" class="pure-button-group" data-sid="@{sub['sid']}">
     @if current_user.has_subscribed(sub['name']):
-    <button data-ac="unsubscribe" class="sub button-secondary pure-button button-xsmall pure-button-active"><span
-        class="sbm-icon" data-icon="check"></span>@{_('Subscribed')}</button>
+      <button data-ac="unsubscribe" class="sub button-secondary pure-button button-xsmall pure-button-active"><span class="sbm-icon" data-icon="check"></span>@{_('Subscribed')}</button>
     @else:
-    <button data-ac="subscribe" class="unsub button-secondary pure-button button-xsmall"><span class="sbm-icon"
-        data-icon="add"></span>@{_('Subscribe')}</button>
+      <button data-ac="subscribe" class="unsub button-secondary pure-button button-xsmall"><span class="sbm-icon" data-icon="add"></span>@{_('Subscribe')}</button>
     @end
     @if current_user.has_blocked(sub['sid']):
-    <button data-ac="unblock" class="blk button-warning pure-button button-xsmall pure-button-active"><span
-        class="sbm-icon" data-icon="check"></span>@{_('Blocked')}</button>
+      <button data-ac="unblock" class="blk button-warning pure-button button-xsmall pure-button-active"><span class="sbm-icon" data-icon="check"></span>@{_('Blocked')}</button>
     @else:
-    <button data-ac="block" class="unblk button-warning pure-button button-xsmall"><span class="sbm-icon"
-        data-icon="close"></span>@{_('Block')}</button>
+      <button data-ac="block" class="unblk button-warning pure-button button-xsmall"><span class="sbm-icon" data-icon="close"></span>@{_('Block')}</button>
+    @end
+	  </div>
+	</div>
+  
+  <div class="flairsettings">
+    @{_("Your flair:")}
+    <a class="user" href="/u/@{current_user.name}">@{current_user.name}</a>
+    @if func.get_user_flair(sub['sid'], current_user.uid):
+      <span class="user_flair">@{func.get_user_flair(sub['sid'], current_user.uid)}</span>
+    @end
+    @if subInfo.get('user_can_flair_self', 0) == '1' or subInfo.get('freeform_user_flairs', 0) == '1':
+      <a href="#" id="change_user_flair" class="small">@{_("(change)")}</a>
     @end
   </div>
-</div>
 
-<div class="flairsettings">
-  @{_("Your flair:")}
-  <a class="user" href="/u/@{current_user.name}">@{current_user.name}</a>
-  @if func.get_user_flair(sub['sid'], current_user.uid):
-  <span class="user_flair">@{func.get_user_flair(sub['sid'], current_user.uid)}</span>
-  @end
   @if subInfo.get('user_can_flair_self', 0) == '1' or subInfo.get('freeform_user_flairs', 0) == '1':
-  <a href="#" id="change_user_flair" class="small">@{_("(change)")}</a>
+    <div style="display:none;" id="userflair" class="popup">
+      <span class="closemsg">×</span>
+      <h3>@{_("Set user flair")}</h3>
+      @if subInfo.get('freeform_user_flairs', 0) == '1':
+        <form method="POST" class="ajaxform pure-form" data-reload="true" action="@{url_for('do.set_user_flair_text', sub=sub['name'])}">
+          <div class="alert div-error"></div>
+          @{ form.SetOwnUserFlairForm().csrf_token() !!html}
+          <input type="text" name="flair" placeholder="Text tagu" maxlength="16" required />
+          <button class="pure-button">Nastaviť tag</button>
+        </form>
+      @end
+      @if func.get_sub_flair_choices(sub['sid']) and subInfo.get('user_can_flair_self', 0) == '1':
+        <hr/>
+        @if subInfo.get('freeform_user_flairs', 0) == '1':
+          <div>@{_('... or pick a pre-defined one')}</div>
+        @end
+        @for ll in func.get_sub_flair_choices(sub['sid']):
+          <span class="selflair" data-sub="@{sub['name']}" data-flair="@{ll['id']}">@{ll['flair']}</span>
+        @end
+      @end
+      <form method="POST" class="ajaxform" data-reload="true" action="@{url_for('do.delete_user_own_flair', sub=sub['name'])}">
+        <button class="pure-button button-error body_admin">Zmazať môj tag</button>
+      </form>
+    </div>
   @end
-</div>
-
-@if subInfo.get('user_can_flair_self', 0) == '1' or subInfo.get('freeform_user_flairs', 0) == '1':
-<div style="display:none;" id="userflair" class="popup">
-  <span class="closemsg">×</span>
-  <h3>@{_("Set user flair")}</h3>
-  @if subInfo.get('freeform_user_flairs', 0) == '1':
-  <form method="POST" class="ajaxform pure-form" data-reload="true"
-    action="@{url_for('do.set_user_flair_text', sub=sub['name'])}">
-    <div class="alert div-error"></div>
-    @{ form.SetOwnUserFlairForm().csrf_token() !!html}
-    <input type="text" name="flair" placeholder="Text tagu" maxlength="16" required />
-    <button class="pure-button">Nastaviť tag</button>
-  </form>
-  @end
-  @if func.get_sub_flair_choices(sub['sid']) and subInfo.get('user_can_flair_self', 0) == '1':
-  <hr />
-  @if subInfo.get('freeform_user_flairs', 0) == '1':
-  <div>@{_('... or pick a pre-defined one')}</div>
-  @end
-  @for ll in func.get_sub_flair_choices(sub['sid']):
-  <span class="selflair" data-sub="@{sub['name']}" data-flair="@{ll['id']}">@{ll['flair']}</span>
-  @end
-  @end
-  <form method="POST" class="ajaxform" data-reload="true"
-    action="@{url_for('do.delete_user_own_flair', sub=sub['name'])}">
-    <button class="pure-button button-error body_admin">Zmazať môj tag</button>
-  </form>
-</div>
-@end
 @end
 
 @if subInfo.get('flairs'):
-<form class="pure-form pure-g flairpicker">
-  <select id="flairpicker" class="pure-u-1">
-    <option value="" disabled selected>@{_('Show posts with flair...')}</option>
-    @for flair in subInfo.get('flairs'):
-    <option value="@{url_for('sub.view_sub_hot', sub=sub['name'], flair=flair)}">@{flair}</option>
-    @end
-  </select>
-</form>
+  <form class="pure-form pure-g flairpicker">
+    <select id="flairpicker" class="pure-u-1">
+      <option value="" disabled selected>@{_('Show posts with flair...')}</option>
+      @for flair in subInfo.get('flairs'):
+        <option value="@{url_for('sub.view_sub_hot', sub=sub['name'], flair=flair)}">@{flair}</option>
+      @end
+    </select>
+  </form>
 @end
 
 <hr>
 @if sub['sidebar'] != '':
-@{func.our_markdown(sub['sidebar'])!!html}
-<hr>
+  @{func.our_markdown(sub['sidebar'])!!html}
+  <hr>
 @end
 
 <div class="moderators">
   @{_('Moderators')}
   <ul>
-    @for owner in subMods['owners']:
-    <li><span title="@{_('Owner')}" class="i-icon" data-icon="owner"></span> <a
-        href="@{url_for('user.view', user=subMods['owners'][owner])}">@{subMods['owners'][owner]}</a></li>
-    @end
-    @for mod in subMods['mods']:
+  @for owner in subMods['owners']:
+    <li><span title="@{_('Owner')}" class="i-icon" data-icon="owner"></span> <a href="@{url_for('user.view', user=subMods['owners'][owner])}">@{subMods['owners'][owner]}</a></li>
+  @end
+  @for mod in subMods['mods']:
     <li><a href="@{url_for('user.view', user=subMods['mods'][mod])}">@{subMods['mods'][mod]}</a></li>
-    @end
-    @for janitor in subMods['janitors']:
+  @end
+  @for janitor in subMods['janitors']:
     <li><a href="@{url_for('user.view', user=subMods['janitors'][janitor])}">@{subMods['janitors'][janitor]}</a></li>
-    @end
+  @end
   </ul>
   @if config.site.enable_modmail and current_user.is_authenticated and not (current_user.uid in (subMods['all'])):
-  <a href="/@{config.site.sub_prefix}/@{sub['name']}/contact_mods" class="sbm-post pure-button">@{_('Message the
-    Mods')}</a>
+  <a href="/@{config.site.sub_prefix}/@{sub['name']}/contact_mods" class="sbm-post pure-button">@{_('Message the Mods')}</a>
   @endif
 
 </div>
@@ -147,6 +137,7 @@
   @end
 @end
 <hr>
+
 @if config.site.force_sublog_public or (subInfo.get('sublog_private', 0) != '1') or (current_user.uid in (subMods['all'])) or current_user.can_admin:
   <a href="@{url_for('sub.view_sublog', sub=sub['name'])}" class="sbm-post pure-button">@{_('Sub Log')}</a>
 @end
