@@ -35,6 +35,9 @@
     </div>
     <div class="pbody">
       <div class="post-heading">
+        @if post['flair']:
+          <a class="postflair" href="@{url_for('sub.view_sub_hot', sub=post['sub'], flair=post['flair'])}">@{post['flair']}</a> \
+        @end
         @if post['link']:
           @if func.getDomain(post['link'].lower()) in config.site.expando_sites:
           <div class="expando" data-pid="@{post['pid']}" data-t="lnk" title="@{_('Embed video')}" data-link="@{post['link']}"><div data-icon="play" class="icon expando-btn"></div></div>
@@ -56,9 +59,6 @@
         @end
         @if post['nsfw']:
         <div class="nsfw" alt="@{_('Not safe for work')}">@{_('NSFW')}</div> \
-        @end
-        @if post['flair']:
-          <a class="postflair" href="@{url_for('sub.view_sub_hot', sub=post['sub'], flair=post['flair'])}">@{post['flair']}</a> \
         @end
         @if post['link'] == None:
           <a href="/@{config.site.sub_prefix}/@{post['sub']}/@{post['pid']}/@{func.slugify(post['title'])}" class="title @{post['blur']}">@{post['title']}</a> \
