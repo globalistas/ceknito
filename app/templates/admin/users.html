@@ -45,6 +45,7 @@
               <th>XP</th>
               <th>Status</th>
               <th>Joined</th>
+              <th>Email</th>
             </tr>
           </thead>
           <tbody>
@@ -60,6 +61,7 @@
                 <td>{{func.get_user_level(user.uid)[1]}}</td>
                 <td>{{user.status}}</td>
                 <td>{{user.joindate.isoformat()}}</td>
+                <td>{{user.email}}</td>
               </tr>
             {% endfor %}
           </tbody>
