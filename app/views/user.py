@@ -312,9 +312,7 @@ def edit_user():
     exp = "labrat" in current_user.prefs
     noscroll = "noscroll" in current_user.prefs
     nochat = "nochat" in current_user.prefs
-    email_notify = True
-    if "email_notify" in current_user.prefs:
-        email_notify = current_user.prefs["email_notify"] == "1"
+    email_notify = "email_notify" in current_user.prefs
 
     form = EditUserForm(
         show_nsfw=nsfw_option,

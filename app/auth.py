@@ -340,7 +340,7 @@ class AuthProvider:
 
     @staticmethod
     def _set_email_verified(user, value=True):
-        """Set the UserMetadata email_verified flag. """
+        """Set the UserMetadata email_verified flag."""
         value = "1" if value else "0"
         try:
             umd = UserMetadata.get(
@@ -476,6 +476,8 @@ def create_user(username, password, email, invite_code, existing_user):
         prefs.append(dict(uid=user.uid, key="nsfw", value="1"))
     if config.site.nsfw.new_user_default.blur:
         prefs.append(dict(uid=user.uid, key="nsfw_blur", value="1"))
+    if config.site.email_notify_default:
+        prefs.append(dict(uid=user.uid, key="email_notify", value="1"))
     if prefs:
         UserMetadata.insert(prefs).execute()
 
