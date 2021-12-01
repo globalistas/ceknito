@@ -354,11 +354,19 @@ socket.on('msg', function (data) {
     data.user = "*";
     xc = xc + " msg-ac";
   }
+
+  function addZero(i) {
+    if (i < 10) { i = "0" + i }
+    return i;
+  }
+
   var d = new Date(data.time * 1000);
-  var hours = d.getHours();
-  var minutes = d.getMinutes();
-  var seconds = d.getSeconds();
+  var hours = addZero(d.getHours());
+  var minutes = addZero(d.getMinutes());
+  var seconds = addZero(d.getSeconds());
+
   cont.innerHTML = cont.innerHTML + '<div class="msg ' + xc + '"><span class="msgtime">(' + hours + ':' + minutes + ':' + seconds + ') </span><span class="msguser">' + data.user + '&gt;</span><span class="damsg">' + anchorme(ircStylize(data.msg.replace(/  /g, '&#32;&nbsp;')), { emails: false, files: false, attributes: [{ name: "target", value: "blank" }] }).replace(reg, "$1<a href='/u/$3'>$2$3</a>$4") + '</span></div>';
+
   if (k.length > 3) {
     if (u.isScrolledIntoView(k[k.length - 2])) {
       k[k.length - 2].scrollIntoView();
