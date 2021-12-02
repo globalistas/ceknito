@@ -817,6 +817,15 @@ def edit_mod():
         return jsonify(status="error", error=[_("User does not exist")])
 
     if form.validate():
+        # Get the previous owner
+        try:
+            sm = SubMod.get((SubMod.sid == sub.sid) & (SubMod.power_level == 0))
+            # Reduce em to regular mod.
+            sm.power_level = 1
+            sm.save()
+        except SubMod.DoesNotExist:
+            pass
+
         try:
             sm = SubMod.get((SubMod.sid == sub.sid) & (SubMod.uid == user.uid))
             sm.power_level = 0
@@ -2657,7 +2666,7 @@ def create_rule(sub):
 
     form = CreateSubRule()
     if form.validate():
-        allowed_rules = re.compile("^[a-zA-Z0-9._ -]+$")
+        allowed_rules = re.compile("^[a-zA-Z0-9.,_ -/'?!:;()~]+$")
         if not allowed_rules.match(form.text.data):
             return jsonify(status="error", error=[_("Rule has invalid characters")])
 
