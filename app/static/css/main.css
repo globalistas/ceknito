@@ -2127,6 +2127,12 @@ table td {
   font-style: italic;
 }
 
+/* chat timestamps */
+.msgtime {
+	color: #808080;
+	font-size: 12px;
+}
+
 /* chat text format */
 
 .irc-underline {
