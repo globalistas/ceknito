@@ -47,6 +47,9 @@ site:
   # a timed one-time password.
   enable_totp: False
 
+  # Enable email notifications on by default for new users 
+  email_notify_default: True
+
 auth:
   # Set to LOCAL to store user authentication in database,
   # or KEYCLOAK to use a Keycloak server to authenticate users.
