@@ -66,9 +66,3 @@ img[src*='#center'] {
   display: block;
   margin: auto;
 }
-
-/* chat timestamps */
-.msgtime {
-	color: #808080;
-	font-size: 12px;
-}
