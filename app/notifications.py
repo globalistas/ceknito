@@ -19,6 +19,7 @@ from .models import (
 )
 from .socketio import socketio
 from .misc import get_notification_count, send_email
+from flask import url_for
 
 
 class Notifications(object):
@@ -185,10 +186,6 @@ class Notifications(object):
 
     @staticmethod
     def email_template(notification_type, user, post, sub):
-        server_name = config.site.server_name
-
-        def generate_external_url():
-            return "/".join(("https:/", server_name, "messages", "notifications"))
 
         if notification_type == "POST_REPLY":
             return _(
@@ -197,7 +194,7 @@ class Notifications(object):
                 user_name=user.name,
                 post_title=post.title,
                 sub_name=sub.name,
-                url=generate_external_url(),
+                url=url_for("messages.view_notifications", _external=True),
             )
         elif notification_type == "COMMENT_REPLY":
             return _(
@@ -206,7 +203,7 @@ class Notifications(object):
                 user_name=user.name,
                 post_title=post.title,
                 sub_name=sub.name,
-                url=generate_external_url(),
+                url=url_for("messages.view_notifications", _external=True),
             )
 
     def send(
