@@ -13,12 +13,12 @@ SQL = pw.SQL
 def migrate(migrator, database, fake=False, **kwargs):
     SiteMetadata = migrator.orm["site_metadata"]
     if not fake:
-        SiteMetadata.create(key="site.email_notify_default", value="0")
+        SiteMetadata.create(key="site.email_notify.default", value="0")
 
 
 def rollback(migrator, database, fake=False, **kwargs):
     SiteMetadata = migrator.orm["site_metadata"]
     if not fake:
         SiteMetadata.delete().where(
-            SiteMetadata.key == "site.email_notify_default"
+            SiteMetadata.key == "site.email_notify.default"
         ).execute()

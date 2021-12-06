@@ -476,7 +476,7 @@ def create_user(username, password, email, invite_code, existing_user):
         prefs.append(dict(uid=user.uid, key="nsfw", value="1"))
     if config.site.nsfw.new_user_default.blur:
         prefs.append(dict(uid=user.uid, key="nsfw_blur", value="1"))
-    if config.site.email_notify_default:
+    if config.site.email_notify.default:
         prefs.append(dict(uid=user.uid, key="email_notify", value="1"))
     if prefs:
         UserMetadata.insert(prefs).execute()

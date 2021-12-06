@@ -455,10 +455,10 @@ configurable_defaults = {
                     },
                 },
             },
-            "email_notify_default": {
+            "email_notify": {
                 "type": "map",
                 "value": {
-                    "email_notify_default": {
+                    "default": {
                         "type": "bool",
                         "doc": _l(
                             "If enabled, new users have email notifications enabled by default."
