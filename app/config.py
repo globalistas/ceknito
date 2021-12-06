@@ -455,6 +455,18 @@ configurable_defaults = {
                     },
                 },
             },
+            "email_notify_default": {
+                "type": "map",
+                "value": {
+                    "email_notify_default": {
+                        "type": "bool",
+                        "doc": _l(
+                            "If enabled, new users have email notifications enabled by default."
+                        ),
+                        "value": False,
+                    },
+                },
+            },
         },
     },
     "storage": {
@@ -725,7 +737,7 @@ class Map:
 
 
 class Config(Map):
-    """ Main config object """
+    """Main config object"""
 
     def __init__(
         self,
@@ -822,7 +834,7 @@ class Config(Map):
 
 
 def ensure_trailing_slash(val):
-    """ Add a slash to the string if it doesn't already have one. """
+    """Add a slash to the string if it doesn't already have one."""
     if val and val[-1] != "/":
         return val + "/"
     else:
