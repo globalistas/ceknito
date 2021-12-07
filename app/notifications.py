@@ -205,6 +205,8 @@ class Notifications(object):
                 sub_name=sub.name,
                 url=url_for("messages.view_notifications", _external=True),
             )
+        else:
+            return None
 
     def send(
         self,
@@ -252,7 +254,7 @@ class Notifications(object):
             )
             == "1"
         )
-        if target_email_notify:
+        if target_email_notify and notification_type in ["POST_REPLY", "COMMENT_REPLY"]:
             email = self.email_template(
                 notification_type,
                 User.get_by_id(pk=sender),
