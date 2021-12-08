@@ -30,3 +30,6 @@ Disallow: /
 
 User-agent: DataForSeoBot
 Disallow: /
+
+User-agent: AdsBot
+Disallow: /
