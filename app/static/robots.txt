@@ -33,3 +33,6 @@ Disallow: /
 
 User-agent: AdsBot
 Disallow: /
+
+User-agent: YandexBot
+Disallow: /
