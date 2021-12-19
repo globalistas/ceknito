@@ -2641,8 +2641,8 @@ div.post.admin>div>div>a.authorlink {
 
 div.post.mod>div>div>a.authorlink {
   display: inline-block;
-  background-color: green;
-  color: #FDD8D4;
+  background-color: #63db5252;
+  color: black;
   border-radius: 2px;
   padding: .15em;
 }
