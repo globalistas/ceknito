@@ -2634,7 +2634,7 @@ a.close-report {
 div.post.admin>div>div>a.authorlink {
   display: inline-block;
   background-color: var(--primary-color);
-  color: #FDD8D4;
+  color: black;
   border-radius: 2px;
   padding: .15em;
 }
@@ -2650,15 +2650,15 @@ div.post.mod>div>div>a.authorlink {
 article.text-post.comment.admin>div>div>div>a.poster {
   display: inline-block;
   background-color: var(--primary-color);
-  color: #FDD8D4;
+  color: black;
   border-radius: 2px;
   padding: .15em;
 }
 
 article.text-post.comment.mod>div>div>div>a.poster {
   display: inline-block;
-  background-color: green;
-  color: #FDD8D4;
+  background-color: #63db5252;
+  color: black;
   border-radius: 2px;
   padding: .15em;
 }
