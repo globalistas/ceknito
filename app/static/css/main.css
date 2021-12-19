@@ -1531,7 +1531,7 @@ input[type=search] {
 }
 
 .post-content-container {
-  background-color: #f1f1f1;
+  background: #f6f6f6;
   border: solid;
   border-width: thin;
   border-color: #888888;
