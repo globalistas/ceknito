@@ -1142,6 +1142,7 @@ img.nsfw-blur, img.block-blur {
   font-family: verdana,arial,sans-serif;
   font-size: 14px;
   line-height: 1.3em;
+  background-color: #0e000008;
 }
 
 /* /POST PAGE STYLES */
