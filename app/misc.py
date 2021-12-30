@@ -2391,7 +2391,9 @@ def get_comment_query(pid, sort):
     elif sort == "best":
         comments = comments.order_by(SubPostComment.best_score.desc())
     elif sort == "top":
-        comments = comments.order_by(SubPostComment.score.desc())
+        comments = comments.order_by(
+            SubPostComment.score.desc(), SubPostComment.time.desc()
+        )
     comments = comments.dicts()
     return comments
 
