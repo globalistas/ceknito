@@ -66,7 +66,7 @@
           @if post['link'].startswith('http:'):
           <!--  <span title="@{_('not https')}" class="p-icon" data-icon="exclaim"></span> \ -->
           @end
-          <a target="_blank" rel="noopener nofollow ugc" href="@{post['link']}" class="title @{post['blur']}">@{post['title']}</a> <a href="/domain/@{func.getDomain(post['link'])}" class="domain">(@{func.getDomain(post['link'])})</a>
+          <a target="_blank" rel="noopener nofollow ugc" href="@{post['link']}" class="title @{post['blur']}">@{post['title']}</a> <span class="domain">(@{func.getDomain(post['link'])})</span>
         @end
       </div>
 	  
