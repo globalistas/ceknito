@@ -16,6 +16,12 @@
                 <div title="@{_('Downvote')}" class="c-downvote @{(comment.get('positive') == False) and 'downvoted' or ''} @{(comment['visibility'] == 'blur-block') and 'hidden' or ''}" data-pid="@{post['pid']}" data-icon="downvote"></div>
               @end
             </div>
+          @else:
+            <div class="pull left votecomment">
+              @if comment['visibility'] in ['', 'blur-block']:
+                <div title="" data-icon=""></div>
+              @end
+            </div>
           @end
           <div class="commblock">
             <div class="commenthead">
