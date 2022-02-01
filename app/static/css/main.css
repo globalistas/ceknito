@@ -582,6 +582,7 @@ span#notification.fade {
 .post-heading h1 {
     font-size: medium;
     margin: 0;
+    margin-right: 110px;
     font-weight: normal;
     display: inline-block;
 }
