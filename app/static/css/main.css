@@ -566,6 +566,7 @@ span#notification.fade {
 
 .post-heading {
     padding-top: 2px;
+    margin-right: 110px;
 }
 
 .post:nth-child(2n) {
@@ -582,7 +583,6 @@ span#notification.fade {
 .post-heading h1 {
     font-size: medium;
     margin: 0;
-    margin-right: 110px;
     font-weight: normal;
     display: inline-block;
 }
