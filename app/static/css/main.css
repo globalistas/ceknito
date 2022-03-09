@@ -1514,6 +1514,7 @@ input[type=search] {
 .postbar {
   white-space: nowrap;
   min-height: 70px;
+  padding-right: 110px;
 }
 
 .postbar * {
