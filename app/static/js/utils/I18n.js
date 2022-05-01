@@ -3,7 +3,7 @@ let languages = {
     'sk': require('../../../translations/sk/LC_MESSAGES/messages.po'),
     'es': require('../../../translations/es/LC_MESSAGES/messages.po'),
     'ru': require('../../../translations/ru/LC_MESSAGES/messages.po'),
-    'sk': require('../../../translations/sk/LC_MESSAGES/messages.po'),
+    'cs': require('../../../translations/cs/LC_MESSAGES/messages.po'),
 };
 
 // Taken from gettext.js
@@ -21,13 +21,13 @@ const strfmt = function (fmt) {
         .replace(/%% /g, '%');
 };
 
-function _(){
+function _() {
     let string = arguments[0];
     let args = Array.from(arguments);
     args.shift();
     let lang = document.getElementsByTagName('html')[0].getAttribute('lang');
-    
-    if(!languages[lang] || !languages[lang][string]){
+
+    if (!languages[lang] || !languages[lang][string]) {
         return strfmt.apply(strfmt, [string, ...args]);
     }
     return languages[lang][string](args);

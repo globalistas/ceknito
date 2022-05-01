@@ -106,6 +106,7 @@ app:
   # the user's language.
   languages:
     - sk
+    - cs
     - en
 
   # Fallback language when there is no accept-language header sent by the browser
