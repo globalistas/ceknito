@@ -58,15 +58,15 @@ from .models import (
     SiteMetadata,
     SubSubscriber,
     Message,
+    MessageThread,
     UserMetadata,
     SubRule,
     SubUserFlair,
-)
-from .models import (
     MessageType,
     MessageMailbox,
     UserUnreadMessage,
     UserMessageMailbox,
+    SubMessageMailbox,
     SubPostVote,
     SubPostComment,
     SubPostCommentVote,
@@ -75,15 +75,11 @@ from .models import (
     SubLog,
     db,
     SubUserFlairChoice,
-)
-from .models import (
     SubPostReport,
     SubPostCommentReport,
     PostReportLog,
     CommentReportLog,
     Notification,
-)
-from .models import (
     SubMetadata,
     rconn,
     SubStylesheet,
@@ -93,11 +89,14 @@ from .models import (
     SubUploads,
     SubFlair,
     InviteCode,
+    SubMod,
+    SubBan,
+    SubPostCommentHistory,
+    SubPostMetadata,
 )
-from .models import SubMod, SubBan, SubPostCommentHistory, SubPostMetadata
 
 from .storage import file_url, thumbnail_url
-from peewee import JOIN, fn, SQL, NodeList, Value, Case
+from peewee import JOIN, fn, SQL, NodeList, Value
 import logging
 import logging.config
 from werkzeug.local import LocalProxy
@@ -258,11 +257,11 @@ class SiteUser(object):
 
     @cache.memoize(1)
     def mod_notifications(self):
-        if self.is_mod:
+        if self.is_a_mod:
             reports, comments, messages = get_mod_notification_counts(self.uid)
             return {"reports": reports, "comments": comments, "messages": messages}
         else:
-            return []
+            return {}
 
     def mod_notifications_json(self):
         return json.dumps(self.mod_notifications())
@@ -1377,7 +1376,7 @@ def get_mod_notification_counts(uid):
         .join(SubPost)
         .join(Sub)
         .join(SubMod)
-        .where((SubMod.user == uid) & SubPostReport.open)
+        .where((SubMod.user == uid) & SubPostReport.open & ~SubMod.invite)
         .group_by(Sub.sid)
         .dicts()
     )
@@ -1389,55 +1388,93 @@ def get_mod_notification_counts(uid):
         .join(SubPost)
         .join(Sub)
         .join(SubMod)
-        .where((SubMod.user == uid) & SubPostCommentReport.open)
+        .where((SubMod.user == uid) & SubPostCommentReport.open & ~SubMod.invite)
         .group_by(Sub.sid)
         .dicts()
     )
+    # Count modmail conversations where the newest message in the
+    # thread is unread.
     if not config.site.enable_modmail:
-        unread_modmail_counts = {}
+        unread_modmail_counts = []
     else:
-        # Count modmail conversations where the newest message in the
-        # thread is unread.
-        MessageAlias1 = Message.alias()
-        conversation = MessageAlias1.select(
-            Case(
-                None,
-                [(MessageAlias1.reply_to.is_null(), MessageAlias1.mid)],
-                MessageAlias1.reply_to,
-            ).alias("convo_mid"),
-        )
-        MessageAlias2 = Message.alias()
-        conversation_newest = (
-            MessageAlias2.select(
-                conversation.c.convo_mid, fn.MAX(MessageAlias2.posted).alias("maxtime")
+        # Use Postgres's lateral join capability for a more efficient
+        # query.
+        if "Postgresql" in config.database.engine:
+            thread_newest = (
+                Message.select()
+                .where(Message.mtid == MessageThread.mtid)
+                .order_by(Message.posted.desc())
+                .limit(1)
+            )
+            unread_modmail_query = (
+                MessageThread.select(
+                    MessageThread.sub.alias("sid"),
+                    fn.COUNT(thread_newest.c.mid).alias("count"),
+                )
+                .join(thread_newest, JOIN.LEFT_LATERAL)
+                .join(
+                    UserUnreadMessage, on=(thread_newest.c.mid == UserUnreadMessage.mid)
+                )
+            )
+        else:
+            MessageAlias = Message.alias()
+            MessageThreadAlias = MessageThread.alias()
+            SubModAlias = SubMod.alias()
+            thread_newest = (
+                MessageAlias.select(
+                    MessageAlias.thread.alias("mtid"),
+                    fn.MAX(MessageAlias.posted).alias("maxtime"),
+                )
+                .join(MessageThreadAlias)
+                .join(
+                    SubModAlias,
+                    on=(
+                        (SubModAlias.sid == MessageThreadAlias.sid)
+                        & (SubModAlias.user == uid)
+                        & ~SubModAlias.invite
+                    ),
+                )
+                .group_by(MessageAlias.thread)
+            )
+            unread_modmail_query = (
+                MessageThread.select(
+                    MessageThread.sub.alias("sid"), fn.COUNT(Message.mid).alias("count")
+                )
+                .join(
+                    thread_newest,
+                    on=(thread_newest.c.mtid == MessageThread.mtid),
+                )
+                .join(
+                    Message,
+                    on=(
+                        (Message.mtid == thread_newest.c.mtid)
+                        & (Message.posted == thread_newest.c.maxtime)
+                    ),
+                )
+                .join(UserUnreadMessage, on=(Message.mid == UserUnreadMessage.mid))
+            )
+        unread_modmail_query = (
+            unread_modmail_query.join(
+                SubMessageMailbox,
+                on=(SubMessageMailbox.thread == MessageThread.mtid),
             )
             .join(
-                conversation,
-                on=(conversation.c.convo_mid == MessageAlias2.mid)
-                | (conversation.c.convo_mid == MessageAlias2.reply_to),
-            )
-            .group_by(conversation.c.convo_mid)
-        )
-        unread_modmail_counts = dictify(
-            Message.select(Sub.sid, fn.COUNT(Message.mid).alias("count"))
-            .join(Sub)
-            .join(SubMod)
-            .join(
-                conversation_newest,
+                SubMod,
                 on=(
-                    (
-                        (conversation_newest.c.convo_mid == Message.mid)
-                        | (conversation_newest.c.convo_mid == Message.reply_to)
-                    )
-                    & (conversation_newest.c.maxtime == Message.posted)
+                    (SubMod.sid == MessageThread.sid)
+                    & (SubMod.user == uid)
+                    & ~SubMod.invite
                 ),
             )
-            .switch(Message)
-            .join(UserUnreadMessage)
-            .where((SubMod.user == uid) & (UserUnreadMessage.uid == uid))
-            .group_by(Sub.sid)
+            .where(
+                MessageThread.sid.is_null(False)
+                & (UserUnreadMessage.uid == uid)
+                & (SubMessageMailbox.mailbox == MessageMailbox.INBOX)
+            )
+            .group_by(MessageThread.sid)
             .dicts()
         )
+        unread_modmail_counts = dictify(unread_modmail_query)
     return post_report_counts, comment_report_counts, unread_modmail_counts
 
 
@@ -1570,7 +1607,6 @@ def get_messages_inbox(page, uid=None):
     """Returns user's messages inbox as dictionary."""
     if uid is None:
         uid = current_user.uid
-    Conversation = Message.alias()
     msgs = (
         Message.select(
             Message.mid,
@@ -1578,16 +1614,19 @@ def get_messages_inbox(page, uid=None):
             Sub.name.alias("sub"),
             Message.sentby,
             Message.receivedby,
-            Message.reply_to,
-            Message.subject,
-            Conversation.subject.alias("thread"),
+            Message.first,
+            MessageThread.subject,
             Message.content,
             Message.posted,
             Message.mtype,
             UserUnreadMessage.id.alias("unread_id"),
             UserMetadata.value.alias("sender_can_admin"),
         )
-        .join(Conversation, JOIN.LEFT_OUTER, on=(Conversation.mid == Message.reply_to))
+        .join(
+            MessageThread,
+            JOIN.LEFT_OUTER,
+            on=(MessageThread.mtid == Message.thread),
+        )
         .join(
             UserMessageBlock,
             JOIN.LEFT_OUTER,
@@ -1597,7 +1636,7 @@ def get_messages_inbox(page, uid=None):
             ),
         )
         .join(User, JOIN.LEFT_OUTER, on=(User.uid == Message.sentby))
-        .join(Sub, JOIN.LEFT_OUTER, on=(Sub.sid == Message.sub))
+        .join(Sub, JOIN.LEFT_OUTER, on=(Sub.sid == MessageThread.sub))
         .join(
             UserUnreadMessage,
             JOIN.LEFT_OUTER,
@@ -1642,23 +1681,21 @@ def get_messages_sent(page, uid=None):
     """Returns messages sent"""
     if uid is None:
         uid = current_user.uid
-    Conversation = Message.alias()
     return process_msgs(
         Message.select(
             Message.mid,
             Message.sentby,
-            Message.reply_to,
+            Message.first,
             User.name.alias("username"),
             Sub.name.alias("sub"),
-            Message.subject,
-            Conversation.subject.alias("thread"),
+            MessageThread.subject,
             Message.content,
             Message.posted,
             Message.mtype,
         )
-        .join(Conversation, JOIN.LEFT_OUTER, on=(Conversation.mid == Message.reply_to))
+        .join(MessageThread)
         .join(User, JOIN.LEFT_OUTER, on=(User.uid == Message.receivedby))
-        .join(Sub, JOIN.LEFT_OUTER, on=(Sub.sid == Message.sub))
+        .join(Sub, JOIN.LEFT_OUTER, on=(Sub.sid == MessageThread.sub))
         .join(
             UserMessageMailbox,
             JOIN.LEFT_OUTER,
@@ -1681,24 +1718,26 @@ def get_messages_saved(page, uid=None):
     """Returns saved messages"""
     if uid is None:
         uid = current_user.uid
-    Conversation = Message.alias()
     msgs = (
         Message.select(
             Message.mid,
             User.name.alias("username"),
             Sub.name.alias("sub"),
             Message.receivedby,
-            Message.reply_to,
-            Message.subject,
-            Conversation.subject.alias("thread"),
+            Message.first,
+            MessageThread.subject,
             Message.content,
             Message.posted,
             Message.mtype,
             UserUnreadMessage.id.alias("unread_id"),
         )
-        .join(Conversation, JOIN.LEFT_OUTER, on=(Conversation.mid == Message.reply_to))
+        .join(
+            MessageThread,
+            JOIN.LEFT_OUTER,
+            on=(MessageThread.mtid == Message.thread),
+        )
         .join(User, on=(User.uid == Message.sentby))
-        .join(Sub, JOIN.LEFT_OUTER, on=(Sub.sid == Message.sub))
+        .join(Sub, JOIN.LEFT_OUTER, on=(Sub.sid == MessageThread.sub))
         .join(
             UserUnreadMessage,
             JOIN.LEFT_OUTER,
@@ -1733,8 +1772,8 @@ def process_msgs(msgs):
         if msg["mtype"] == MessageType.MOD_TO_USER_AS_MOD:
             msg["username"] = None
             msg["sentby"] = None
-        if msg["thread"] is not None:
-            msg["subject"] = _("Re: %(subject)s", subject=msg["thread"])
+        if not msg["first"]:
+            msg["subject"] = _("Re: %(subject)s", subject=msg["subject"])
         msg["read"] = msg.get("unread_id") is None
         return msg
 
@@ -2052,10 +2091,12 @@ def pick_random_security_question():
 def create_message(mfrom, to, subject, content, mtype):
     """Creates a message."""
     posted = datetime.utcnow()
+    msg_thread = MessageThread.create(subject=subject)
     msg = Message.create(
         sentby=mfrom,
         receivedby=to,
-        subject=subject,
+        first=True,
+        thread=msg_thread.mtid,
         content=content,
         posted=posted,
         mtype=mtype,
@@ -2076,6 +2117,7 @@ def create_message_reply(message, content):
     """Creates a reply to a message."""
     posted = datetime.utcnow()
     sender = message.receivedby.uid
+    thread = message.thread.mtid
     if message.mtype == MessageType.USER_TO_USER:
         mtype = MessageType.USER_TO_USER
         recipient = message.sentby.uid
@@ -2083,24 +2125,22 @@ def create_message_reply(message, content):
         mtype = MessageType.USER_TO_MODS
         recipient = None
 
-    reply_to = (
-        message.reply_to.get_id() if message.reply_to is not None else message.mid
-    )
-
     msg = Message.create(
         sentby=sender,
         receivedby=recipient,
-        subject="",
+        first=False,
         content=content,
         posted=posted,
-        reply_to=reply_to,
+        thread=thread,
         mtype=mtype,
-        sub=message.sub,
     )
-    Message.update(replies=Message.replies + 1).where(Message.mid == reply_to).execute()
+    MessageThread.update(replies=MessageThread.replies + 1).where(
+        MessageThread.mtid == thread
+    ).execute()
     UserMessageMailbox.create(uid=sender, mid=msg.mid, mailbox=MessageMailbox.SENT)
+    mt = MessageThread.get(MessageThread.mtid == thread)
 
-    if message.sub is None:
+    if mt.sub is None:
         UserUnreadMessage.create(uid=recipient, mid=msg.mid)
         UserMessageMailbox.create(
             uid=recipient, mid=msg.mid, mailbox=MessageMailbox.INBOX
@@ -2112,7 +2152,10 @@ def create_message_reply(message, content):
             room="user" + recipient,
         )
     else:
-        for mod_uid in getSubMods(message.sub)["all"]:
+        SubMessageMailbox.update(mailbox=MessageMailbox.INBOX).where(
+            SubMessageMailbox.mtid == thread
+        ).execute()
+        for mod_uid in getSubMods(mt.sub)["all"]:
             UserUnreadMessage.create(uid=mod_uid, mid=msg.mid)
             socketio.emit(
                 "notification",
