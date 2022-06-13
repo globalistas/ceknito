@@ -29,7 +29,7 @@
                   [as mod of <a href="{{url_for('sub.view_sub', sub=message.sub)}}">/{{config.site.sub_prefix}}/{{message.sub}}</a>]
                 {% endif %}
               {% elif message.sub %}
-                moderátormi skupiny <a href="{{url_for('sub.view_sub', sub=message.sub)}}">/{{config.site.sub_prefix}}/{{message.sub}}</a>
+                by the mods of <a href="{{url_for('sub.view_sub', sub=message.sub)}}">/{{config.site.sub_prefix}}/{{message.sub}}</a>
               {% else %}
                 webom <a href="#">{{config.site.name}}</a>
               {% endif %}
