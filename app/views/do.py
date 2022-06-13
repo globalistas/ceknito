@@ -465,16 +465,16 @@ def undelete_post():
 
         if as_admin:
             content = _(
-                "Administrátor obnopvil(a) tvoj príspevok %(postlink)s v skupine %(sublink)s. "
-                "Dôvod: %(reason)s",
+                "The site administrators restored your post %(postlink)s to %(sublink)s. "
+                "Reason: %(reason)s",
                 sublink=sublink,
                 postlink=postlink,
                 reason=form.reason.data,
             )
         else:
             content = _(
-                "Moderátor skupiny %(sublink)s obnovil(a) tvoj príspevok %(postlink)s. "
-                "Dôvod: %(reason)s",
+                "The moderators of %(sublink)s restored your post %(postlink)s. "
+                "Reason: %(reason)s",
                 sublink=sublink,
                 postlink=postlink,
                 reason=form.reason.data,
