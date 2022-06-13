@@ -337,8 +337,8 @@ def delete_post():
             if as_admin:
                 deletion = 3
                 content = _(
-                    "Administrátor vymazal(a) tvoj príspevok %(postlink)s zo skupiny %(sublink)s. "
-                    "Dôvod: %(reason)s",
+                    "The site administrators deleted your post %(postlink)s from %(sublink)s. "
+                    "Reason: %(reason)s",
                     sublink=sublink,
                     postlink=postlink,
                     reason=form.reason.data,
@@ -346,8 +346,8 @@ def delete_post():
             else:
                 deletion = 2
                 content = _(
-                    "Moderátor skupiny %(sublink)s vymazal(a) tvoj príspevok %(postlink)s. "
-                    "Dôvod: %(reason)s",
+                    "The moderators of %(sublink)s deleted your post %(postlink)s. "
+                    "Reason: %(reason)s",
                     sublink=sublink,
                     postlink=postlink,
                     reason=form.reason.data,
