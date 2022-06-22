@@ -531,7 +531,7 @@ def subs_search(term):
     """WIP: Search for a sub."""
     if not current_user.is_admin():
         abort(404)
-    term = re.sub(r"[^A-Za-z0-9.\-_]+", "", term)
+    term = re.sub(r"[^A-Za-zÁ-ž0-9.\-_]+", "", term)
     subs = Sub.select().where(Sub.name.contains(term))
     return render_template(
         "admin/subs.html",
@@ -645,7 +645,7 @@ def post_search(term):
     """WIP: Post search result."""
     if not current_user.is_admin():
         abort(404)
-    term = re.sub(r"[^A-Za-z0-9.\-_]+", "", term)
+    term = re.sub(r"[^A-Za-zÁ-ž0-9.\-_]+", "", term)
     try:
         post = SubPost.get(SubPost.pid == term)
     except SubPost.DoesNotExist:

@@ -21,14 +21,14 @@ bp = Blueprint("home", __name__)
 
 @bp.route("/")
 def index():
-    """ The index page, shows /hot of current subscriptions """
+    """The index page, shows /hot of current subscriptions"""
     return hot(1)
 
 
 @bp.route("/hot", defaults={"page": 1})
 @bp.route("/hot/<int:page>")
 def hot(page):
-    """ /hot for subscriptions """
+    """/hot for subscriptions"""
     posts = misc.getPostList(misc.postListQueryHome(), "hot", page)
     return engine.get_template("index.html").render(
         {
@@ -46,7 +46,7 @@ def hot(page):
 @bp.route("/new", defaults={"page": 1})
 @bp.route("/new/<int:page>")
 def new(page):
-    """ /new for subscriptions """
+    """/new for subscriptions"""
     posts = misc.getPostList(misc.postListQueryHome(), "new", page)
     return engine.get_template("index.html").render(
         {
@@ -64,7 +64,7 @@ def new(page):
 @bp.route("/top", defaults={"page": 1})
 @bp.route("/top/<int:page>")
 def top(page):
-    """ /top for subscriptions """
+    """/top for subscriptions"""
     posts = misc.getPostList(misc.postListQueryHome(), "top", page)
     return engine.get_template("index.html").render(
         {
@@ -81,7 +81,7 @@ def top(page):
 
 @bp.route("/all/new.rss")
 def all_new_rss():
-    """ RSS feed for /all/new """
+    """RSS feed for /all/new"""
     posts = misc.getPostList(misc.postListQueryBase(), "new", 1)
     fg = FeedGenerator()
     fg.id(request.url)
@@ -98,7 +98,7 @@ def all_new_rss():
 @bp.route("/all/new", defaults={"page": 1})
 @bp.route("/all/new/<int:page>")
 def all_new(page):
-    """ The index page, all posts sorted as most recent posted first """
+    """The index page, all posts sorted as most recent posted first"""
     posts = misc.getPostList(
         misc.postListQueryBase(isSubMod=current_user.can_admin), "new", page
     )
@@ -118,7 +118,7 @@ def all_new(page):
 @bp.route("/all/<sort>/more", defaults={"pid": None})
 @bp.route("/all/<sort>/more/<int:page>/<int:pid>")
 def all_more(sort, page, pid):
-    """ Infinite scroll pagination for /all """
+    """Infinite scroll pagination for /all"""
     # XXX: Our pagination is very slow
     if sort == "new":
         posts = misc.getPostList(
@@ -147,7 +147,7 @@ def all_more(sort, page, pid):
 @bp.route("/home/<sort>/more", defaults={"pid": None})
 @bp.route("/home/<sort>/more/<int:page>/<int:pid>")
 def home_more(sort, page, pid):
-    """ Infinite scroll pagination for /all """
+    """Infinite scroll pagination for /all"""
     # XXX: Our pagination is very slow
     if sort == "new":
         posts = misc.getPostList(
@@ -168,7 +168,7 @@ def home_more(sort, page, pid):
 @bp.route("/domain/<domain>", defaults={"page": 1})
 @bp.route("/domain/<domain>/<int:page>")
 def all_domain_new(domain, page):
-    """ The index page, all posts sorted as most recent posted first """
+    """The index page, all posts sorted as most recent posted first"""
     domain = re.sub(r"[^A-Za-z0-9.\-_]+", "", domain)
     posts = misc.getPostList(
         misc.postListQueryBase(noAllFilter=True).where(
@@ -194,8 +194,8 @@ def all_domain_new(domain, page):
 @bp.route("/search/<term>/<int:page>")
 @ratelimit(POSTING_LIMIT)
 def search(page, term):
-    """ The index page, with basic title search """
-    term = re.sub(r'[^A-Za-z0-9.,\-_\'" ]+', "", term)
+    """The index page, with basic title search"""
+    term = re.sub(r'[^A-Za-zÁ-ž0-9.,\-_\'" ]+', "", term)
     posts = misc.getPostList(
         misc.postListQueryBase().where(SubPost.title ** ("%" + term + "%")), "new", page
     )
@@ -215,7 +215,7 @@ def search(page, term):
 @bp.route("/all/top", defaults={"page": 1})
 @bp.route("/all/top/<int:page>")
 def all_top(page):
-    """ The index page, all posts sorted as most recent posted first """
+    """The index page, all posts sorted as most recent posted first"""
     posts = misc.getPostList(
         misc.postListQueryBase(isSubMod=current_user.can_admin), "top", page
     )
@@ -236,7 +236,7 @@ def all_top(page):
 @bp.route("/all/hot", defaults={"page": 1})
 @bp.route("/all/hot/<int:page>")
 def all_hot(page):
-    """ The index page, all posts sorted as most recent posted first """
+    """The index page, all posts sorted as most recent posted first"""
     posts = misc.getPostList(
         misc.postListQueryBase(isSubMod=current_user.can_admin), "hot", page
     )
@@ -262,7 +262,7 @@ def all_hot(page):
 @bp.route("/subs/<int:page>", defaults={"sort": "name_asc"})
 @bp.route("/subs/<int:page>/<sort>")
 def view_subs(page, sort):
-    """ Here we can view available subs """
+    """Here we can view available subs"""
     c = Sub.select(
         Sub.sid, Sub.name, Sub.title, Sub.nsfw, Sub.creation, Sub.subscribers, Sub.posts
     )
@@ -296,8 +296,8 @@ def view_subs(page, sort):
 @bp.route("/subs/search/<term>/<int:page>/<sort>")
 @ratelimit(POSTING_LIMIT)
 def subs_search(page, term, sort):
-    """ The subs index page, with basic title search """
-    term = re.sub(r"[^A-Za-z0-9\-_]+", "", term)
+    """The subs index page, with basic title search"""
+    term = re.sub(r"[^A-Za-zÁ-ž0-9\-_]+", "", term)
     c = Sub.select(
         Sub.sid, Sub.name, Sub.title, Sub.nsfw, Sub.creation, Sub.subscribers, Sub.posts
     )
