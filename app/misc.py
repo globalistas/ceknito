@@ -925,7 +925,10 @@ def getSubOfTheDay():
     if not daysub:
         try:
             daysub = (
-                Sub.select(Sub.sid, Sub.name, Sub.title).order_by(db.random()).get()
+                Sub.select(Sub.sid, Sub.name, Sub.title)
+                .where(Sub.status == 0)
+                .order_by(db.random())
+                .get()
             )
         except Sub.DoesNotExist:  # No subs
             return False
@@ -976,6 +979,7 @@ def getSinglePost(pid):
         SubPost.link,
         User.name.alias("user"),
         Sub.name.alias("sub"),
+        Sub.sid,
         SubPost.flair,
         SubPost.edited,
         SubPost.comments,
@@ -1178,8 +1182,10 @@ def postListQueryBase(
             )
         elif not current_user.is_admin():
             posts = posts.where(SubPost.deleted << [0, 2, 3])
+            # Also hide posts from suspended subs
+            posts = posts.where(Sub.status == 0)
     else:
-        posts = posts.where(SubPost.deleted == 0)
+        posts = posts.where((SubPost.deleted == 0) & (Sub.status == 0))
 
     if not noAllFilter and not nofilter:
         if current_user.is_authenticated and current_user.blocksid:
@@ -1848,6 +1854,7 @@ def getUserComments(uid, page, include_deleted_comments=False):
                 )
         else:
             com = com.where(SubPostComment.status.is_null())
+            com = com.where(Sub.status == 0)
 
         if "nsfw" not in current_user.prefs:
             com = com.where(SubPost.nsfw == 0)

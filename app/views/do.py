@@ -315,6 +315,11 @@ def delete_post():
         except SubPost.DoesNotExist:
             return jsonify(status="error", error=[_("Post does not exist")])
 
+        sub = Sub.get(Sub.sid == post.sid)
+
+        if sub.status != 0 and not current_user.is_admin():
+            return jsonify(status="error", error=[_("Sub is disabled")])
+
         if post.deleted != 0:
             return jsonify(status="error", error=[_("Post was already deleted")])
 
@@ -443,6 +448,11 @@ def undelete_post():
         except SubPost.DoesNotExist:
             return jsonify(status="error", error=[_("Post does not exist")])
 
+        sub = Sub.get(Sub.sid == post.sid)
+
+        if sub.status != 0 and not current_user.is_admin():
+            return jsonify(status="error", error=[_("Sub is disabled")])
+
         if post.deleted == 0:
             return jsonify(status="error", error=[_("Post is not deleted")])
 
@@ -529,6 +539,9 @@ def edit_sub_css(sub):
     except Sub.DoesNotExist:
         return jsonify(status="error", error=[_("Sub does not exist")])
 
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
+
     if not current_user.is_mod(sub.sid, 1) and not current_user.is_admin():
         return jsonify(status="error", error=[_("Not authorized")])
 
@@ -561,6 +574,10 @@ def edit_sub(sub):
         sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
     except Sub.DoesNotExist:
         return jsonify(status="error", error=[_("Sub does not exist")])
+
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
+
     if current_user.is_mod(sub.sid, 1) or current_user.is_admin():
         form = EditSubForm()
         if form.validate():
@@ -622,6 +639,9 @@ def mod_assign_flair(sub):
     except Sub.DoesNotExist:
         return jsonify(status="error", error=[_("Sub does not exist")])
 
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
+
     if not current_user.is_mod(sub.sid) and not current_user.is_admin():
         return jsonify(status="error", error=[_("Not authorized")])
 
@@ -679,6 +699,9 @@ def set_user_flair_text(sub):
     except Sub.DoesNotExist:
         return jsonify(status="error", error=[_("Sub does not exist")])
 
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
+
     form = SetOwnUserFlairForm()
 
     if not form.validate():
@@ -713,6 +736,9 @@ def set_user_flair_choice(sub, flair_id):
         sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
     except Sub.DoesNotExist:
         return jsonify(status="error", error=[_("Sub does not exist")])
+
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
 
     sub_info = misc.getSubData(sub.sid)
 
@@ -750,6 +776,9 @@ def delete_user_own_flair(sub):
     except Sub.DoesNotExist:
         return jsonify(status="error", error=[_("Sub does not exist")])
 
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
+
     sub_info = misc.getSubData(sub.sid)
 
     if (
@@ -777,6 +806,9 @@ def assign_post_flair(sub, pid, fl):
         sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
     except Sub.DoesNotExist:
         return jsonify(status="error", error=[_("Sub does not exist")])
+
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
 
     try:
         post = SubPost.get(SubPost.pid == pid)
@@ -811,6 +843,9 @@ def remove_post_flair(sub, pid):
     except Sub.DoesNotExist:
         return jsonify(status="error", error=[_("Sub does not exist")])
 
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
+
     try:
         post = SubPost.get(SubPost.pid == pid)
     except SubPost.DoesNotExist:
@@ -844,6 +879,9 @@ def edit_mod():
         sub = Sub.get(fn.Lower(Sub.name) == form.sub.data.lower())
     except Sub.DoesNotExist:
         return jsonify(status="error", error=[_("Sub does not exist")])
+
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
 
     try:
         user = User.get(fn.Lower(User.name) == form.user.data.lower())
@@ -937,9 +975,12 @@ def remove_userbadge():
 def subscribe_to_sub(sid):
     """Subscribe to sub"""
     try:
-        Sub.get(Sub.sid == sid)
+        sub = Sub.get(Sub.sid == sid)
     except Sub.DoesNotExist:
         return jsonify(status="error", error=_("sub not found"))
+
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
 
     if current_user.has_subscribed(sid):
         return jsonify(status="ok", message=_("already subscribed"))
@@ -1049,6 +1090,10 @@ def get_txtpost(pid):
         post = misc.getSinglePost(pid)
     except SubPost.DoesNotExist:
         return abort(404)
+
+    sub = Sub.get(Sub.sid == post["sid"])
+    if sub.status != 0 and not current_user.is_admin():
+        abort(403)
 
     post["visibility"] = ""
     if post["deleted"] == 1:
@@ -1229,6 +1274,11 @@ def edit_txtpost(pid):
         except SubPost.DoesNotExist:
             return jsonify(status="error", error=[_("Post not found")])
 
+        sub = Sub.get(Sub.sid == post.sid)
+
+        if sub.status != 0 and not current_user.is_admin():
+            return jsonify(status="error", error=[_("Sub is disabled")])
+
         if post.deleted != 0:
             return jsonify(status="error", error=[_("Post was deleted")])
 
@@ -1305,6 +1355,10 @@ def create_comment(pid):
             sub = Sub.get(Sub.sid == post.sid_id)
         except Sub.DoesNotExist:
             return jsonify(status="error", error=_("Internal error")), 400
+
+        if sub.status != 0 and not current_user.is_admin():
+            return jsonify(status="error", error=[_("Sub is disabled")])
+
         if current_user.is_subban(sub):
             return (
                 jsonify(
@@ -1642,6 +1696,9 @@ def inv_mod(sub):
     except Sub.DoesNotExist:
         return jsonify(status="error", error=[_("Sub does not exist")])
 
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
+
     try:
         SubMod.get(
             (SubMod.sid == sub.sid)
@@ -1743,6 +1800,10 @@ def remove_sub_ban(sub, user):
         sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
     except Sub.DoesNotExist:
         return jsonify(status="error", error=[_("Sub does not exist")])
+
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
+
     form = CsrfTokenOnlyForm()
     if form.validate():
         if current_user.is_mod(sub.sid, 2) or current_user.is_admin():
@@ -1844,6 +1905,10 @@ def remove_mod2(sub, user):
         sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
     except Sub.DoesNotExist:
         return jsonify(status="error", error=[_("Sub does not exist")])
+
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
+
     form = CsrfTokenOnlyForm()
     if form.validate():
         isTopMod = current_user.is_mod(sub.sid, 0)
@@ -1947,6 +2012,10 @@ def accept_modinv(sub, user):
         sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
     except Sub.DoesNotExist:
         return jsonify(status="error", error=[_("Sub does not exist")])
+
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
+
     form = CsrfTokenOnlyForm()
     if form.validate():
         try:
@@ -2112,6 +2181,10 @@ def edit_title():
         except SubPost.DoesNotExist:
             return jsonify(status="error", error=_("Post does not exist"))
         sub = Sub.get(Sub.sid == post.sid)
+
+        if sub.status != 0 and not current_user.is_admin():
+            return jsonify(status="error", error=[_("Sub is disabled")])
+
         if current_user.is_subban(sub):
             return jsonify(status="error", error=_("You are banned on this sub."))
 
@@ -2814,6 +2887,10 @@ def edit_comment():
 
         post = SubPost.get(SubPost.pid == comment.pid)
         sub = Sub.get(Sub.sid == post.sid)
+
+        if sub.status != 0 and not current_user.is_admin():
+            return jsonify(status="error", error=[_("Sub is disabled")])
+
         if current_user.is_subban(sub):
             return jsonify(status="error", error=[_("You are banned on this sub.")])
 
@@ -2864,6 +2941,10 @@ def delete_comment():
         )
         sid = post.sid.get_id()
         sub_name = post.sid.name
+        sub = Sub.get(Sub.sid == post.sid.get_id())
+
+        if sub.status != 0 and not current_user.is_admin():
+            return jsonify(status="error", error=[_("Sub is disabled")])
 
         if comment.uid_id != current_user.uid and not (
             current_user.is_admin() or current_user.is_mod(sid)
@@ -2956,6 +3037,10 @@ def undelete_comment():
         )
         sid = post.sid.get_id()
         sub_name = post.sid.name
+        sub = Sub.get(Sub.sid == post.sid.get_id())
+
+        if sub.status != 0 and not current_user.is_admin():
+            return jsonify(status="error", error=[_("Sub is disabled")])
 
         if not comment.status:
             return jsonify(status="error", error=_("Comment is not deleted"))
@@ -3066,6 +3151,10 @@ def get_sibling(pid, cid, lim):
         post = misc.getSinglePost(pid)
     except SubPost.DoesNotExist:
         return jsonify(status="ok", posts=[])
+
+    sub = Sub.get(Sub.sid == post["sid"])
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
 
     default_sort = "best" if post["best_sort_enabled"] else "top"
     sort = request.args.get("sort", default=default_sort, type=str)
@@ -3296,6 +3385,9 @@ def sub_upload(sub):
     except Sub.DoesNotExist:
         abort(404)
 
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
+
     if not current_user.is_mod(sub.sid, 1) and not current_user.is_admin():
         abort(403)
 
@@ -3419,6 +3511,10 @@ def sub_upload_delete(sub, name):
         sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
     except Sub.DoesNotExist:
         jsonify(status="error")  # descriptive errors where?
+
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
+
     form = CsrfTokenOnlyForm()
     if not form.validate():
         return redirect(url_for("sub.edit_sub_css", sub=sub.name))
