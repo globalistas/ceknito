@@ -567,7 +567,7 @@ def sub_markdown_link(sub_name):
 def user_markdown_link(user_name):
     """Construct a link to to a user in markdown format, given the name."""
     userurl = url_for("user.view", user=user_name)
-    userlink = f"[userurl]({userurl})"
+    userlink = f"[{user_name}]({userurl})"
     return userlink
 
 
@@ -2146,7 +2146,7 @@ def create_message(mfrom, to, subject, content, mtype):
 
 
 def create_notification_message(mfrom, as_admin, sub, to, subject, content):
-    """ Create a message to notify a user of a mod action. """
+    """Create a message to notify a user of a mod action."""
     posted = datetime.utcnow()
     if as_admin and config.site.admin_sub != "":
         sub = Sub.get(fn.Lower(Sub.name) == config.site.admin_sub.lower()).sid
