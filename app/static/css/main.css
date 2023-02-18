@@ -1164,7 +1164,7 @@ img.block-blur {
   width: 1.3em;
   text-align: center;
   margin-right: .3em;
-  /*  margin-top: .3em; */
+  margin-top: 0.01em;
 }
 
 .c-upvote svg,
