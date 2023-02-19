@@ -558,14 +558,14 @@ def post_and_sub_markdown_links(post):
 
 
 def sub_markdown_link(sub_name):
-    """Construct a link to to a sub in markdown format, given its name."""
+    """Construct a link to a sub in markdown format, given its name."""
     suburl = url_for("sub.view_sub", sub=sub_name)
     sublink = f"[{suburl}]({suburl})"
     return sublink
 
 
 def user_markdown_link(user_name):
-    """Construct a link to to a user in markdown format, given the name."""
+    """Construct a link to a user in markdown format, given the name."""
     userurl = url_for("user.view", user=user_name)
     userlink = f"[{user_name}]({userurl})"
     return userlink
@@ -752,7 +752,9 @@ def getYoutubeID(url):
 
 def workWithMentions(data, receivedby, post, _sub, cid=None, c_user=current_user):
     """Does all the job for mentions"""
-    mts = re.findall(re_amention.LINKS, data)
+    if not data:
+        return
+    mts = re_amention.LINKS.findall(data)
     if mts:
         mts = list(set(mts))  # Removes dupes
         clean_mts = []
@@ -3471,7 +3473,7 @@ def recent_activity(sidebar=True):
             parsed = BeautifulSoup(our_markdown(rec["content"]), features="lxml")
             for spoiler in parsed.findAll("spoiler"):
                 spoiler.string.replace_with("█" * len(spoiler.string))
-            stripped = parsed.findAll(text=True)
+            stripped = parsed.findAll(string=True)
             rec["content"] = word_truncate("".join(stripped).replace("\n", " "), 350)
         add_blur(rec)
 
