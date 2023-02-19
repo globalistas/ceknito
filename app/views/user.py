@@ -96,7 +96,7 @@ def view(user):
     level, xp = misc.get_user_level(user.uid)
 
     if xp > 0:
-        currlv = (level ** 2) * 10
+        currlv = (level**2) * 10
         nextlv = ((level + 1) ** 2) * 10
 
         required_xp = nextlv - currlv

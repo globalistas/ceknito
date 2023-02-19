@@ -1173,7 +1173,7 @@ def search_sub():
     query = "%" + query + "%"
     subs = (
         Sub.select(Sub.name)
-        .where((Sub.name ** query) & (Sub.status == 0))
+        .where((Sub.name**query) & (Sub.status == 0))
         .limit(10)
         .dicts()
     )

@@ -458,9 +458,9 @@ class MentionRegex:
     def init_app(self, app):
         prefix = app.config["THROAT_CONFIG"].site.sub_prefix
         BARE = (
-            fr"(?<=^|(?<=[^a-zA-Z0-9-_\.\/]))((@|\/u\/|\/{prefix}\/)([A-Za-z0-9\-\_]+))"
+            rf"(?<=^|(?<=[^a-zA-Z0-9-_\.\/]))((@|\/u\/|\/{prefix}\/)([A-Za-z0-9\-\_]+))"
         )
-        PRE0 = fr"(?:(?:\[.+?\]\(.+?\))|(?<=^|(?<=[^a-zA-Z0-9-_\.\/]))(?:(?:@|\/u\/|\/{prefix}\/)(?:[A-Za-z0-9\-\_]+)))"
+        PRE0 = rf"(?:(?:\[.+?\]\(.+?\))|(?<=^|(?<=[^a-zA-Z0-9-_\.\/]))(?:(?:@|\/u\/|\/{prefix}\/)(?:[A-Za-z0-9\-\_]+)))"
         PRE1 = r"(?:(\[.+?\]\(.+?\))|" + BARE + r")"
         self.ESCAPED = re.compile(
             r"```.*{0}.*```|`.*?{0}.*?`|({1})".format(PRE0, PRE1),

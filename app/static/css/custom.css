@@ -1,8 +1,8 @@
 /** You can add custom styles for your site here */
 
 .flairsettings {
-    margin-top: 9px;
-    text-align: center;
+  margin-top: 9px;
+  text-align: center;
 }
 
 .subbuttonscentered {
@@ -23,7 +23,7 @@
   cursor: pointer;
   direction: ltr;
   display: block;
-  font-family: "SF Pro Text","SF Pro Icons","AOS Icons","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 17px;
   font-weight: 400;
   letter-spacing: -.022em;
@@ -62,7 +62,7 @@
 }
 
 /* center sidebar img */
-img[src*='#center'] { 
+img[src*='#center'] {
   display: block;
   margin: auto;
 }
