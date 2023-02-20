@@ -47,7 +47,11 @@ defaults = {  # key => default value
         "icon_url": None,
         "logo": "app/static/img/throat-logo.svg",
     },
-    "auth": {"provider": "LOCAL", "require_valid_emails": False, "keycloak": {}},
+    "auth": {
+        "provider": "LOCAL",
+        "require_valid_emails": False,
+        "keycloak": {"use_oidc": False},
+    },
     "cache": {"type": "null"},
     "mail": {"default_to": "example@shitpost8x8.com"},
     "storage": {
