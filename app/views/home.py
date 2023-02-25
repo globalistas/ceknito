@@ -319,7 +319,7 @@ def view_subs(page, sort):
 @ratelimit(POSTING_LIMIT)
 def subs_search(page, term, sort):
     """The subs index page, with basic title search"""
-    term = re.sub(r"[^A-Za-zÁ-ž0-9\-_]+", "", term)
+    term = re.sub(r"[^A-Za-z0-9\-_]+", "", term)
     c = Sub.select(
         Sub.sid, Sub.name, Sub.title, Sub.nsfw, Sub.creation, Sub.subscribers, Sub.posts
     )

@@ -34,9 +34,14 @@
                   @{edituserform.nochat()!!html}
               </div>
             @end
-
-            <div class="new-form-one">
-                <label for="subtheme" class="new-form-one">@{edituserform.subtheme.label.text}</label>
+            @if config.app.allow_email_forwarded_notifications:
+              <div class="new-form-one">
+                  <label for="emailnotify" class="new-form-one">@{edituserform.email_forwarded_notifications.label.text}</label>
+                  @{edituserform.email_forwarded_notifications()!!html}
+              </div>
+            @end
+            <div class="pure-control-group">
+                <label for="subtheme" class="pure-checkbox">@{edituserform.subtheme.label.text}</label>
                 @{edituserform.subtheme(class_="sub_autocomplete")!!html}
             </div>
 

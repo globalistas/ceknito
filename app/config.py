@@ -47,7 +47,11 @@ defaults = {  # key => default value
         "icon_url": None,
         "logo": "app/static/img/throat-logo.svg",
     },
-    "auth": {"provider": "LOCAL", "require_valid_emails": False, "keycloak": {}},
+    "auth": {
+        "provider": "LOCAL",
+        "require_valid_emails": False,
+        "keycloak": {"use_oidc": False, "active_session_check": False},
+    },
     "cache": {"type": "null"},
     "mail": {"default_to": "example@shitpost8x8.com"},
     "storage": {
@@ -77,6 +81,7 @@ defaults = {  # key => default value
         "max_content_length": 10485760,  # 10mb
         "fallback_language": "en",
         "testing": False,
+        "allow_email_forwarded_notifications": False,
     },
     "aws": {},
     "database": {"autoconnect": False},

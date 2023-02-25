@@ -72,7 +72,7 @@ timing_logger = logging.getLogger("app.sql_timing")
 
 
 def peewee_count_queries(dex, sql, *args, **kwargs):
-    """ Used to count and display number of queries """
+    """Used to count and display number of queries"""
     try:
         if not hasattr(g, "pqc"):
             g.pqc = 0
@@ -120,13 +120,12 @@ class User(BaseModel):
     joindate = DateTimeField(null=True)
     name = CharField(null=True, unique=True, max_length=64)
     password = CharField(null=True)
-
+    email_forwarded_notifications = CharField(null=True)
     score = IntegerField(default=0)  # AKA phuks taken
     given = IntegerField(default=0)  # AKA phuks given
     # status: 0 = OK; 10 = deleted; 5 = site-ban
     status = IntegerField(default=0)
     resets = IntegerField(default=0)
-
     language = CharField(default=None, null=True, max_length=11)
 
     def __repr__(self):
@@ -225,7 +224,7 @@ class Sub(BaseModel):
             return None
 
     def update_metadata(self, key, value, boolean=True):
-        """ Updates `key` for submetadata. Only works for single keys. """
+        """Updates `key` for submetadata. Only works for single keys."""
         if boolean:
             if value:
                 value = "1"
@@ -332,7 +331,7 @@ class SubPost(BaseModel):
 
 
 class SubPostPollOption(BaseModel):
-    """ List of options for a poll """
+    """List of options for a poll"""
 
     pid = ForeignKeyField(db_column="pid", model=SubPost, field="pid")
     text = CharField()
@@ -345,7 +344,7 @@ class SubPostPollOption(BaseModel):
 
 
 class SubPostPollVote(BaseModel):
-    """ List of options for a poll """
+    """List of options for a poll"""
 
     pid = ForeignKeyField(db_column="pid", model=SubPost, field="pid")
     uid = ForeignKeyField(db_column="uid", model=User)
@@ -460,7 +459,7 @@ class SubStylesheet(BaseModel):
 
 
 class SubSubscriber(BaseModel):
-    """ Stores subscribed and blocked subs """
+    """Stores subscribed and blocked subs"""
 
     order = IntegerField(null=True)
     sid = ForeignKeyField(db_column="sid", null=True, model=Sub, field="sid")
@@ -726,7 +725,7 @@ class APIToken(BaseModel):
 
 
 class APITokenSettings(BaseModel):
-    """ API Token settings. Mainly used for IP whitelisting """
+    """API Token settings. Mainly used for IP whitelisting"""
 
     token = ForeignKeyField(model=APIToken, field="id")
     key = CharField()
@@ -851,7 +850,7 @@ class Wiki(BaseModel):
 
 
 class Notification(BaseModel):
-    """ Holds user notifications. """
+    """Holds user notifications."""
 
     # Notification type. Can be one of:
     # - POST_REPLY, COMMENT_REPLY

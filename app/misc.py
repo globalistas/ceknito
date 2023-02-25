@@ -1,5 +1,6 @@
 """ Misc helper function and classes. """
 import hashlib
+from typing import List, NamedTuple
 from urllib.parse import urlparse, parse_qs
 import json
 import math
@@ -44,12 +45,13 @@ from tinycss2.ast import (
 )
 
 from .config import config
-from flask_login import AnonymousUserMixin, current_user
+from flask_login import AnonymousUserMixin, current_user, logout_user
 from flask_babel import Babel, _
 from flask_talisman import Talisman
 from .caching import cache
 from .socketio import socketio
 from .badges import badges
+from .auth import auth_provider
 
 from .models import (
     Sub,
@@ -210,10 +212,9 @@ class SiteUser(object):
         else:
             self.is_active = True
         self.is_active = True if self.user["status"] == 0 else False
-        self.is_authenticated = True if self.user["status"] == 0 else False
+
         self.is_anonymous = True if self.user["status"] != 0 else False
         # True if the user is an admin, even without authing with TOTP
-        self.can_admin = "admin" in self.prefs
 
         self.subs_modded = [
             s.sid
@@ -223,10 +224,18 @@ class SiteUser(object):
         ]
         self.is_a_mod = len(self.subs_modded) > 0
 
+        self.can_admin = "admin" in self.prefs
+
         if time.time() - session.get("apriv", 0) < 7200 or not config.site.enable_totp:
             self.admin = "admin" in self.prefs
         else:
             self.admin = False
+
+        if config.auth.provider == "KEYCLOAK" and config.auth.keycloak.use_oidc:
+            self.can_admin = session.get("is_admin", False)
+
+            if time.time() - session.get("apriv", 0) < 7200:
+                self.admin = self.can_admin
 
         self.canupload = True if ("canupload" in self.prefs) or self.admin else False
         if config.site.allow_uploads and config.site.upload_min_level == 0:
@@ -249,6 +258,27 @@ class SiteUser(object):
     def get_id(self):
         """Returns the unique user id. Used on load_user"""
         return self.uid if self.resets == 0 else f"{self.uid}${self.resets}"
+
+    @cache.memoize(1)
+    def _check_keycloak_auth(self):
+        # XXX: Active session checking disabled by default because it is a blocking network op!
+        if (
+            config.auth.provider == "KEYCLOAK"
+            and config.auth.keycloak.use_oidc
+            and config.auth.keycloak.active_session_check
+        ):
+            # Perform the slow check for session activity if using OIDC
+            user_intro = auth_provider.introspect()
+            if not user_intro["active"]:
+                logout_user()
+                return False
+        return True
+
+    @property
+    def is_authenticated(self):
+        if not self._check_keycloak_auth():
+            return False
+        return True if self.user["status"] == 0 else False
 
     @cache.memoize(1)
     def is_mod(self, sid, power_level=2):
@@ -458,9 +488,9 @@ class MentionRegex:
     def init_app(self, app):
         prefix = app.config["THROAT_CONFIG"].site.sub_prefix
         BARE = (
-            fr"(?<=^|(?<=[^a-zA-Z0-9-_\.\/]))((@|\/u\/|\/{prefix}\/)([A-Za-z0-9\-\_]+))"
+            rf"(?<=^|(?<=[^a-zA-Z0-9-_\.\/]))((@|\/u\/|\/{prefix}\/)([A-Za-z0-9\-\_]+))"
         )
-        PRE0 = fr"(?:(?:\[.+?\]\(.+?\))|(?<=^|(?<=[^a-zA-Z0-9-_\.\/]))(?:(?:@|\/u\/|\/{prefix}\/)(?:[A-Za-z0-9\-\_]+)))"
+        PRE0 = rf"(?:(?:\[.+?\]\(.+?\))|(?<=^|(?<=[^a-zA-Z0-9-_\.\/]))(?:(?:@|\/u\/|\/{prefix}\/)(?:[A-Za-z0-9\-\_]+)))"
         PRE1 = r"(?:(\[.+?\]\(.+?\))|" + BARE + r")"
         self.ESCAPED = re.compile(
             r"```.*{0}.*```|`.*?{0}.*?`|({1})".format(PRE0, PRE1),
@@ -558,14 +588,14 @@ def post_and_sub_markdown_links(post):
 
 
 def sub_markdown_link(sub_name):
-    """Construct a link to to a sub in markdown format, given its name."""
+    """Construct a link to a sub in markdown format, given its name."""
     suburl = url_for("sub.view_sub", sub=sub_name)
     sublink = f"[{suburl}]({suburl})"
     return sublink
 
 
 def user_markdown_link(user_name):
-    """Construct a link to to a user in markdown format, given the name."""
+    """Construct a link to a user in markdown format, given the name."""
     userurl = url_for("user.view", user=user_name)
     userlink = f"[{user_name}]({userurl})"
     return userlink
@@ -689,28 +719,43 @@ def getInviteCodeInfo(uid):
     return info
 
 
+class SMTPEmail(NamedTuple):
+    sender: str
+    recipients: List[str]
+    subject: str
+    text_content: str
+    html_content: str
+
+
+class SendgridEmail(NamedTuple):
+    sender: str
+    to: List[str]
+    subject: str
+    html_content: str
+
+
 def send_email(to, subject, text_content, html_content, sender=None):
+    if not isinstance(to, list):
+        to = [to]
     if "server" in config.mail:
         if sender is None:
             sender = config.mail.default_from
-        send_email_with_smtp(sender, to, subject, text_content, html_content)
+        send_email_with_smtp(SMTPEmail(sender, to, subject, text_content, html_content))
     elif "sendgrid" in config:
         if sender is None:
             sender = config.sendgrid.default_from
-        send_email_with_sendgrid(sender, to, subject, html_content)
+        send_email_with_sendgrid(SendgridEmail(sender, to, subject, html_content))
     else:
         raise RuntimeError("Email not configured")
 
 
-def send_email_with_smtp(sender, recipients, subject, text_content, html_content):
-    if not isinstance(recipients, list):
-        recipients = [recipients]
+def send_email_with_smtp(email: SMTPEmail):
     msg = EmailMessage(
-        subject,
-        sender=sender,
-        recipients=recipients,
-        body=text_content,
-        html=html_content,
+        subject=email.subject,
+        sender=email.sender,
+        recipients=email.recipients,
+        body=email.text_content,
+        html=email.html_content,
     )
     if config.app.testing:
         send_smtp_email_async(current_app, msg)
@@ -723,14 +768,15 @@ def send_smtp_email_async(app, msg):
         mail.send(msg)
 
 
-def send_email_with_sendgrid(sender, to, subject, html_content):
+def send_email_with_sendgrid(email: SendgridEmail):
     """Send a mail through sendgrid"""
     sg = sendgrid.SendGridAPIClient(api_key=config.sendgrid.api_key)
-
     mail = sendgrid.helpers.mail.Mail(
-        from_email=sender, to_emails=to, subject=subject, html_content=html_content
+        from_email=email.sender,
+        to_emails=email.to,
+        subject=email.subject,
+        html_content=email.html_content,
     )
-
     sg.send(mail)
 
 
@@ -752,7 +798,9 @@ def getYoutubeID(url):
 
 def workWithMentions(data, receivedby, post, _sub, cid=None, c_user=current_user):
     """Does all the job for mentions"""
-    mts = re.findall(re_amention.LINKS, data)
+    if not data:
+        return
+    mts = re_amention.LINKS.findall(data)
     if mts:
         mts = list(set(mts))  # Removes dupes
         clean_mts = []
@@ -3471,7 +3519,7 @@ def recent_activity(sidebar=True):
             parsed = BeautifulSoup(our_markdown(rec["content"]), features="lxml")
             for spoiler in parsed.findAll("spoiler"):
                 spoiler.string.replace_with("█" * len(spoiler.string))
-            stripped = parsed.findAll(text=True)
+            stripped = parsed.findAll(string=True)
             rec["content"] = word_truncate("".join(stripped).replace("\n", " "), 350)
         add_blur(rec)
 
