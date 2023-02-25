@@ -183,8 +183,6 @@ class EditUserForm(FlaskForm):
 
     language = SelectField(_l("Language"), validate_choice=False)
 
-    email_notify = BooleanField(_l("Send email notifications"))
-
 
 class EditIgnoreForm(FlaskForm):
     """Edit User blocks form."""

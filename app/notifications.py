@@ -7,7 +7,6 @@ from .config import config
 from .models import (
     Notification,
     User,
-    UserMetadata,
     UserContentBlock,
     Sub,
     SubMod,
@@ -18,8 +17,7 @@ from .models import (
     SubPostVote,
 )
 from .socketio import socketio
-from .misc import get_notification_count, send_email
-from flask import url_for
+from .misc import get_notification_count
 
 
 class Notifications(object):
@@ -184,30 +182,6 @@ class Notifications(object):
             (Notification.read.is_null(True)) & (Notification.target == uid)
         ).execute()
 
-    @staticmethod
-    def email_template(notification_type, user, post, sub):
-
-        if notification_type == "POST_REPLY":
-            return _(
-                'User %(user_name)s <a href="%(url)s">replied</a> to your post '
-                "<br><br><i>%(post_title)s</i><br><br>in <i>%(sub_name)s</i>",
-                user_name=user.name,
-                post_title=post.title,
-                sub_name=sub.name,
-                url=url_for("messages.view_notifications", _external=True),
-            )
-        elif notification_type == "COMMENT_REPLY":
-            return _(
-                'User %(user_name)s <a href="%(url)s">replied</a> to your comment '
-                "in the post titled<br><br><i>%(post_title)s<i><br><br>in <i>%(sub_name)s</i>",
-                user_name=user.name,
-                post_title=post.title,
-                sub_name=sub.name,
-                url=url_for("messages.view_notifications", _external=True),
-            )
-        else:
-            return None
-
     def send(
         self,
         notification_type,
@@ -242,26 +216,6 @@ class Notifications(object):
             content=content,
         )
         ignore = None
-
-        target_email_notify = (
-            UserMetadata.select(UserMetadata.value).where(
-                (UserMetadata.uid == target & UserMetadata.key == "email_notify")
-            )
-            == "1"
-        )
-        if target_email_notify and notification_type in ["POST_REPLY", "COMMENT_REPLY"]:
-            email = self.email_template(
-                notification_type,
-                User.get_by_id(pk=sender),
-                SubPost.get_by_id(pk=post),
-                Sub.get_by_id(pk=sub),
-            )
-            send_email(
-                User.get_by_id(pk=target).email,
-                subject=_("New notification."),
-                text_content="",
-                html_content=email,
-            )
 
         try:
             TargetSubMod = SubMod.alias()

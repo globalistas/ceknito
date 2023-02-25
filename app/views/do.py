@@ -295,7 +295,6 @@ def edit_user():
         current_user.update_prefs("noscroll", form.noscroll.data)
         current_user.update_prefs("nochat", form.nochat.data)
         current_user.update_prefs("subtheme", form.subtheme.data, False)
-        current_user.update_prefs("email_notify", form.email_notify.data)
 
         cache.delete_memoized(current_user.get_global_stylesheet)
 
