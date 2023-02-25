@@ -321,7 +321,6 @@ def edit_user():
         nochat=nochat,
         subtheme=current_user.subtheme,
         language=current_user.language,
-        email_notify=email_notify,
     )
     languages = config.app.languages
     form.language.choices = []
