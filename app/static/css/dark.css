@@ -114,11 +114,11 @@ body.dark .th-subbar a:hover {
 }
 
 /* Posts */
-
+/*
 body.dark .comments article.comment.highlight {
   background-color: #40444b;
 }
-
+*/
 body.dark .post:nth-child(2n) {
   background-color: #373a3f;
   -webkit-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
