@@ -46,6 +46,7 @@ defaults = {  # key => default value
         "custom_hot_sort": False,
         "icon_url": None,
         "logo": "app/static/img/throat-logo.svg",
+        "email_forwarded_notifications": False,
     },
     "auth": {
         "provider": "LOCAL",
@@ -81,7 +82,6 @@ defaults = {  # key => default value
         "max_content_length": 10485760,  # 10mb
         "fallback_language": "en",
         "testing": False,
-        "allow_email_forwarded_notifications": False,
     },
     "aws": {},
     "database": {"autoconnect": False},
