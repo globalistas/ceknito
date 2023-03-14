@@ -1,9 +1,9 @@
 #!/bin/bash
 cd $(git rev-parse --show-toplevel)
 git pull
-pip install -r requirements.txt
+poetry install
 npm install
 npm run build
-./throat.py translations compile
-./throat.py migration apply
+poetry run ./throat.py migration apply
+poetry run ./throat.py translations compile
 killall -HUP gunicorn
