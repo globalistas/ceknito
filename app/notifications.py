@@ -186,7 +186,6 @@ class Notifications(object):
 
     @staticmethod
     def email_template(notification_type, user, post, sub):
-
         if notification_type == "POST_REPLY":
             return _(
                 'User %(user_name)s <a href="%(url)s">replied</a> to your post '
@@ -262,7 +261,6 @@ class Notifications(object):
                 text_content="",
                 html_content=email,
             )
-
         try:
             TargetSubMod = SubMod.alias()
             ignore = (
@@ -294,10 +292,8 @@ class Notifications(object):
             ).get()
         except UserContentBlock.DoesNotExist:
             pass
-
         if ignore is not None:
             return
-
         notification_count = get_notification_count(target)
         socketio.emit(
             "notification",
@@ -308,10 +304,8 @@ class Notifications(object):
         if self.push_service:
             if sender:
                 sender = User.get(User.uid == sender)
-
             if sub:
                 sub = Sub.get(Sub.sid == sub)
-
             if post:
                 post = SubPost.get(SubPost.pid == post)
             # TODO: Set current language to target's lang
@@ -352,7 +346,6 @@ class Notifications(object):
                     name=sender.name,
                     title=post.title,
                 )
-
             # TODO: click_action (URL the notification sends you to)
             # - Blocker: Implementing messaging in PWA
             # TODO: actions (mark as read?)
