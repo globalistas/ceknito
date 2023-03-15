@@ -69,7 +69,7 @@
           <a target="_blank" rel="noopener nofollow ugc" href="@{post['link']}" class="title @{post['blur']}">@{post['title']}</a> <span class="domain">(@{func.getDomain(post['link'])})</span>
         @end
       </div>
-	  
+
       <div class="author">
         @(
         timeago = '<time-ago datetime="' + post['posted'].isoformat() + 'Z"></time-ago>'

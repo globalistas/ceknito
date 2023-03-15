@@ -299,6 +299,6 @@ window.onload = function(){
       var expandoButtons = document.querySelectorAll(".expando");
       for(var i= 0;i<expandoButtons.length;i++){
           expandoButtons[i].click();
-      }            
+      }
   }
 }

@@ -598,7 +598,7 @@ if (typeof(document.getElementsByClassName("subinfo")[0]) != 'undefined' && docu
 /* load all comments on a post */
 if (typeof(document.getElementById("cmnts")) != 'undefined' && document.getElementById("cmnts") != null){
   if (typeof(document.getElementById("cmnts").children[0]) != 'undefined' && document.getElementById("cmnts").children[0] != null){
-      document.getElementById("cmnts").children[0].addEventListener('click', function(event){   
+      document.getElementById("cmnts").children[0].addEventListener('click', function(event){
         event.preventDefault();
         var self = this;
         var interval = setInterval(function(){
@@ -610,23 +610,23 @@ if (typeof(document.getElementById("cmnts")) != 'undefined' && document.getEleme
             for(var i = 0;i<comments.length;i++){
                 comments[i].click();
             }
-        },300); 
-        return false;    
+        },300);
+        return false;
       });
   }
-}  
+}
 
 //topbar active page link indication
 var activePage = window.location.pathname.split("/").slice(0,3).join("/");
 if("/all/hot" == activePage)
-   activePage = "/all";   
+   activePage = "/all";
 var childs = document.getElementById("topbar").children;
 for(var i = 0;i<childs.length;i++){
     if( childs[i].firstElementChild){
         if(childs[i].firstElementChild.nodeName == "A"){
             var nodeLink = childs[i].firstElementChild.getAttribute("href").split("/").slice(0,3).join("/");
             if(nodeLink == activePage){
-                 childs[i].firstElementChild.classList.add("active-page-link"); 
+                 childs[i].firstElementChild.classList.add("active-page-link");
                  childs[i].firstElementChild.style.color = '#c90511';
             }
         }
