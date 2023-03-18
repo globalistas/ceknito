@@ -42,3 +42,6 @@ Disallow: /
 
 User-agent: bingbot
 Disallow: /
+
+User-agent: SEOkicks
+Disallow: /
