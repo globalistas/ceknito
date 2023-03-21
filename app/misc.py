@@ -589,7 +589,7 @@ def post_and_sub_markdown_links(post):
 def sub_markdown_link(sub_name):
     """Construct a link to a sub in markdown format, given its name."""
     suburl = url_for("sub.view_sub", sub=sub_name)
-    sublink = f"[{suburl}]({suburl})"
+    sublink = f"[{sub_name}]({suburl})"
     return sublink
 
 
