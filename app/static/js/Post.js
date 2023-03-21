@@ -26,8 +26,8 @@ u.sub('.removesavedpost', 'click', function (e) {
 u.addEventForChild(document, 'click', '.distinguish', function (e, qelem) {
     function distinguish(admin) {
         u.post('/do/distinguish', {
-           cid : qelem.getAttribute('data-cid'),
-            pid : qelem.getAttribute('data-pid'),
+            cid: qelem.getAttribute('data-cid'),
+            pid: qelem.getAttribute('data-pid'),
             as_admin: admin
         },
             function (data) {
@@ -37,8 +37,8 @@ u.addEventForChild(document, 'click', '.distinguish', function (e, qelem) {
                     document.location.reload();
                 }
             })
-        }
-    if(qelem.text == _('distinguish') && document.getElementById('pagefoot-admin').getAttribute('data-value') == 'True') {
+    }
+    if (qelem.text == _('distinguish') && document.getElementById('pagefoot-admin').getAttribute('data-value') == 'True') {
         InlinePrompt({
             text: _("distinguish as:"),
             options: [
@@ -61,7 +61,11 @@ u.addEventForChild(document, 'click', '.delete-post', function (e, qelem) {
                 return false;
             }
         }
-        u.post('/do/delete_post', {post: document.getElementById('postinfo').getAttribute('pid'), reason: reason},
+        var element = document.getElementById('postinfo');
+        if (typeof (element) == 'undefined' || element == null) {
+            element = qelem;
+        }
+        u.post('/do/delete_post', { post: element.getAttribute('pid'), reason: reason },
             function (data) {
                 if (data.status != "ok") {
                     document.getElementById('delpostli').innerHTML = _('Error.');
@@ -80,7 +84,7 @@ u.addEventForChild(document, 'click', '.undelete-post', function (e, qelem) {
         if (!reason) {
             return false;
         }
-        u.post('/do/undelete_post', {post: document.getElementById('postinfo').getAttribute('pid'), reason: reason},
+        u.post('/do/undelete_post', { post: document.getElementById('postinfo').getAttribute('pid'), reason: reason },
             function (data) {
                 if (data.status != "ok") {
                     document.getElementById('delpostli').innerHTML = _('Error.');
@@ -93,40 +97,40 @@ u.addEventForChild(document, 'click', '.undelete-post', function (e, qelem) {
 });
 
 u.addEventForChild(document, 'click', '.browse-history', function (e, qelem) {
-  const action = qelem.getAttribute("data-action")
-  const content = qelem.parentNode.parentNode;
-  const history = content.querySelectorAll('.history')
-  const shown = Array.from(history).filter(function(span) {
-      return span.style['display'] != 'none'
-  })[0]
-  const id = parseInt(shown.getAttribute("data-id"))
-  let next_id
+    const action = qelem.getAttribute("data-action")
+    const content = qelem.parentNode.parentNode;
+    const history = content.querySelectorAll('.history')
+    const shown = Array.from(history).filter(function (span) {
+        return span.style['display'] != 'none'
+    })[0]
+    const id = parseInt(shown.getAttribute("data-id"))
+    let next_id
 
-  if (action == "back") {
-    next_id = (id + 1)
-  } else {
-    next_id = (id - 1)
-  }
+    if (action == "back") {
+        next_id = (id + 1)
+    } else {
+        next_id = (id - 1)
+    }
 
-  history[next_id].style['display'] = ''
-  shown.style['display'] = 'none'
+    history[next_id].style['display'] = ''
+    shown.style['display'] = 'none'
 
-  const fwd_button = content.querySelector('.browse-history.forward')
-  const back_button = content.querySelector('.browse-history.back')
+    const fwd_button = content.querySelector('.browse-history.forward')
+    const back_button = content.querySelector('.browse-history.back')
 
-  if (next_id == 0){
-    fwd_button.classList.add('disabled')
-    back_button.classList.remove('disabled')
-  } else if (next_id == (history.length - 1)) {
-    back_button.classList.add('disabled')
-    fwd_button.classList.remove('disabled')
-  }
-  else {
-    fwd_button.classList.remove('disabled')
-    back_button.classList.remove('disabled')
-  }
+    if (next_id == 0) {
+        fwd_button.classList.add('disabled')
+        back_button.classList.remove('disabled')
+    } else if (next_id == (history.length - 1)) {
+        back_button.classList.add('disabled')
+        fwd_button.classList.remove('disabled')
+    }
+    else {
+        fwd_button.classList.remove('disabled')
+        back_button.classList.remove('disabled')
+    }
 
-  content.querySelector('.history-version').innerHTML = (next_id + 1) + '/' + history.length
+    content.querySelector('.history-version').innerHTML = (next_id + 1) + '/' + history.length
 
 });
 
@@ -138,7 +142,7 @@ u.addEventForChild(document, 'click', '.edit-title', function (e, qelem) {
         if (!reason) {
             return false;
         }
-        u.post('/do/edit_title', {'reason': reason, 'post': qelem.getAttribute('data-pid')},
+        u.post('/do/edit_title', { 'reason': reason, 'post': qelem.getAttribute('data-pid') },
             function (data) {
                 if (data.status != "ok") {
                     tg.innerHTML = data.error;
@@ -154,7 +158,7 @@ u.addEventForChild(document, 'click', '.stick-post', function (e, qelem) {
     const parent = qelem.parentNode.parentNode;
     const pid = qelem.parentNode.parentNode.getAttribute('data-pid'), tg = e.currentTarget;
     TextConfirm(qelem, function () {
-        u.post('/do/stick/' + pid, {post: document.getElementById('postinfo').getAttribute('pid')},
+        u.post('/do/stick/' + pid, { post: document.getElementById('postinfo').getAttribute('pid') },
             function (data) {
                 if (data.status != "ok") {
                     alert(data.error);
@@ -169,14 +173,14 @@ u.addEventForChild(document, 'click', '.stick-post', function (e, qelem) {
 // Stick comment
 u.addEventForChild(document, 'click', '.stick-comment', function (e, qelem) {
     u.post('/do/stick_comment/' + qelem.getAttribute('data-cid'),
-           {post: document.getElementById('postinfo').getAttribute('pid')},
-           function (data) {
-               if (data.status != "ok") {
-                   qelem.innerHTML = data.error;
-               } else {
-                   document.location.reload();
-               }
-           });
+        { post: document.getElementById('postinfo').getAttribute('pid') },
+        function (data) {
+            if (data.status != "ok") {
+                qelem.innerHTML = data.error;
+            } else {
+                document.location.reload();
+            }
+        });
 })
 
 // Sticky post default comment sort
@@ -184,7 +188,7 @@ u.addEventForChild(document, 'click', '.sort-comments', function (e, qelem) {
     const parent = qelem.parentNode.parentNode;
     const pid = qelem.parentNode.parentNode.getAttribute('data-pid'), tg = e.currentTarget;
     TextConfirm(qelem, function () {
-        u.post('/do/sticky_sort/' + pid, {post: document.getElementById('postinfo').getAttribute('pid')},
+        u.post('/do/sticky_sort/' + pid, { post: document.getElementById('postinfo').getAttribute('pid') },
             function (data) {
                 if (data.status != "ok") {
                     parent.innerHTML = data.error;
@@ -201,7 +205,7 @@ u.addEventForChild(document, 'click', '.lock-comments', function (e, qelem) {
     const parent = qelem.parentNode.parentNode;
     const pid = qelem.parentNode.parentNode.getAttribute('data-pid'), tg = e.currentTarget;
     TextConfirm(qelem, function () {
-        u.post('/do/lock_comments/' + pid, {post: document.getElementById('postinfo').getAttribute('pid')},
+        u.post('/do/lock_comments/' + pid, { post: document.getElementById('postinfo').getAttribute('pid') },
             function (data) {
                 if (data.status != "ok") {
                     alert(data.error);
@@ -216,7 +220,7 @@ u.addEventForChild(document, 'click', '.lock-comments', function (e, qelem) {
 u.addEventForChild(document, 'click', '.announce-post', function (e, qelem) {
     const pid = qelem.parentNode.parentNode.getAttribute('data-pid'), tg = e.currentTarget;
     TextConfirm(qelem, function () {
-        u.post('/do/makeannouncement', {post: pid},
+        u.post('/do/makeannouncement', { post: pid },
             function (data) {
                 if (data.status != "ok") {
                     tg.innerHTML = _('Error.');
@@ -237,7 +241,7 @@ u.sub('.selflair', 'click', function () {
     const pid = this.getAttribute('data-pid');
     const flair = this.getAttribute('data-flair');
     const nsub = this.getAttribute('data-sub'), tg = this;
-    u.post('/do/flair/' + nsub + '/' + pid + '/' + flair, {post: document.getElementById('postinfo').getAttribute('pid')},
+    u.post('/do/flair/' + nsub + '/' + pid + '/' + flair, { post: document.getElementById('postinfo').getAttribute('pid') },
         function (data) {
             if (data.status != "ok") {
                 tg.parentNode.innerHTML = _('Error: %1', data.error);
@@ -252,7 +256,7 @@ u.sub('.selflair', 'click', function () {
 u.sub('#remove-flair', 'click', function () {
     const pid = this.getAttribute('data-pid');
     const nsub = this.getAttribute('data-sub'), tg = this;
-    u.post('/do/remove_post_flair/' + nsub + '/' + pid, {post: document.getElementById('postinfo').getAttribute('pid')},
+    u.post('/do/remove_post_flair/' + nsub + '/' + pid, { post: document.getElementById('postinfo').getAttribute('pid') },
         function (data) {
             if (data.status != "ok") {
                 tg.innerHTML = _('Error: %1', data.error);
@@ -268,7 +272,7 @@ u.sub('#remove-flair', 'click', function () {
 u.addEventForChild(document, 'click', '.nsfw-post', function (e, qelem) {
     const tg = e.currentTarget;
     TextConfirm(qelem, function () {
-        u.post('/do/nsfw', {post: document.getElementById('postinfo').getAttribute('pid')},
+        u.post('/do/nsfw', { post: document.getElementById('postinfo').getAttribute('pid') },
             function (data) {
                 if (data.status != "ok") {
                     tg.innerHTML = _('Error: %1', data.error);
@@ -283,7 +287,7 @@ u.addEventForChild(document, 'click', '.nsfw-post', function (e, qelem) {
 u.addEventForChild(document, 'click', '.poll-close', function (e, qelem) {
     const tg = e.currentTarget;
     TextConfirm(qelem, function () {
-        u.post('/do/close_poll', {post: document.getElementById('postinfo').getAttribute('pid')},
+        u.post('/do/close_poll', { post: document.getElementById('postinfo').getAttribute('pid') },
             function (data) {
                 if (data.status != "ok") {
                     tg.innerHTML = _('Error: %1', data.error);
@@ -410,7 +414,7 @@ u.addEventForChild(document, 'click', '.edit-comment', function (e, qelem) {
 u.addEventForChild(document, 'click', '.btn-editpost', function (e, qelem) {
     const content = document.querySelector('#editpost textarea').value;
     qelem.setAttribute('disabled', true);
-    u.post('/do/edit_txtpost/' + qelem.getAttribute('data-pid'), {content: content},
+    u.post('/do/edit_txtpost/' + qelem.getAttribute('data-pid'), { content: content },
         function (data) {
             if (data.status != "ok") {
                 qelem.parentNode.querySelector('.error').style.display = 'block';
@@ -431,7 +435,7 @@ u.addEventForChild(document, 'click', '.btn-editcomment', function (e, qelem) {
     const cid = qelem.getAttribute('data-cid');
     const content = document.querySelector('#ecomm-' + cid + ' textarea').value;
     qelem.setAttribute('disabled', true);
-    u.post('/do/edit_comment', {cid: cid, text: content},
+    u.post('/do/edit_comment', { cid: cid, text: content },
         function (data) {
             if (data.status != "ok") {
                 qelem.parentNode.querySelector('.error').style.display = 'block';
@@ -461,13 +465,13 @@ u.addEventForChild(document, 'click', '.btn-preview', function (e, qelem) {
     }
     qelem.setAttribute('disabled', true);
     qelem.innerHTML = _('Loading...');
-    u.post('/do/preview', {text: content},
+    u.post('/do/preview', { text: content },
         function (data) {
             if (data.status == "ok") {
                 qelem.parentNode.querySelector('.cpreview-content').innerHTML = data.text;
                 const title = qelem.parentNode.parentNode.querySelector('#title');
                 console.log(title);
-                if(title) {
+                if (title) {
                     const h = document.createElement('h2');
                     h.innerText = title.value;
                     qelem.parentNode.querySelector('.cpreview-content').prepend(document.createElement('hr'));
@@ -500,7 +504,7 @@ u.addEventForChild(document, 'click', '.delete-comment', function (e, qelem) {
                 return false;
             }
         }
-        u.post('/do/delete_comment', {cid: cid, 'reason': reason},
+        u.post('/do/delete_comment', { cid: cid, 'reason': reason },
             function (data) {
                 if (data.status != "ok") {
                     tg.innerHTML = _('Error: %1', data.error);
@@ -522,7 +526,7 @@ u.addEventForChild(document, 'click', '.undelete-comment', function (e, qelem) {
         if (!reason) {
             return false;
         }
-        u.post('/do/undelete_comment', {cid: cid, 'reason': reason},
+        u.post('/do/undelete_comment', { cid: cid, 'reason': reason },
             function (data) {
                 if (data.status != "ok") {
                     tg.parentNode.innerHTML = _('Error: %1', data.error);
@@ -551,7 +555,7 @@ function setTitle(data) {
 // grab shows up, we can ignore it.
 var grabtitleToken = null;
 
-socket.on('grab_title', function(data) {
+socket.on('grab_title', function (data) {
     if (data.target == grabtitleToken) {
         setTitle(data);
         grabtitleToken = null;
@@ -567,7 +571,7 @@ u.sub('#graburl', 'click', function (e) {
     }
     this.setAttribute('disabled', true);
     this.innerHTML = _('Grabbing...');
-    u.post('/do/grabtitle', {u: uri}, function (data) {
+    u.post('/do/grabtitle', { u: uri }, function (data) {
         if (data.status == 'deferred') {
             // Subscribe for notification when the title is ready.
             // Set a timer to put up an error alert if the site we are
@@ -576,10 +580,10 @@ u.sub('#graburl', 'click', function (e) {
             setTimeout(function () {
                 if (grabtitleToken == data.token) {
                     grabtitleToken = null;
-                    setTitle({status: 'error'});
+                    setTitle({ status: 'error' });
                 }
             }, 15 * 1000);
-            socket.emit('deferred', {target: data.token})
+            socket.emit('deferred', { target: data.token })
         } else {
             setTitle(data)
         }
@@ -600,7 +604,7 @@ const markCommentsSeen = u.debounce(function () {
         }
     }
     if (cids.length > 0) {
-        u.post('/do/mark_viewed', {'cids': JSON.stringify(cids)}, function (data) {});
+        u.post('/do/mark_viewed', { 'cids': JSON.stringify(cids) }, function (data) { });
     }
 }, false, 250);
 
@@ -658,12 +662,12 @@ u.addEventForChild(document, 'click', '.togglecomment', function (e, qelem) {
     if (qelem.classList.contains('collapse')) {
         qelem.classList.remove('collapse');
         qelem.classList.add('expand');
-        if(document.querySelector('#comment-' + cid + ' .votecomment .c-upvote')) {
+        if (document.querySelector('#comment-' + cid + ' .votecomment .c-upvote')) {
             document.querySelector('#comment-' + cid + ' .votecomment .c-upvote').classList.add('hidden');
             document.querySelector('#comment-' + cid + ' .votecomment .c-downvote').classList.add('hidden');
         }
         document.querySelector('#comment-' + cid + ' .bottombar').classList.add('hidden');
-        if(document.querySelector('#comment-' + cid + ' .replybox')) {
+        if (document.querySelector('#comment-' + cid + ' .replybox')) {
             document.querySelector('#comment-' + cid + ' .replybox').classList.add('hidden');
         }
         document.querySelector('#comment-' + cid + ' .commblock .content').classList.add('hidden');
@@ -672,12 +676,12 @@ u.addEventForChild(document, 'click', '.togglecomment', function (e, qelem) {
         qelem.innerHTML = '[–]';
         qelem.classList.add('collapse');
         qelem.classList.remove('expand');
-        if(document.querySelector('#comment-' + cid + ' .votecomment .c-upvote')) {
+        if (document.querySelector('#comment-' + cid + ' .votecomment .c-upvote')) {
             document.querySelector('#comment-' + cid + ' .votecomment .c-upvote').classList.remove('hidden');
             document.querySelector('#comment-' + cid + ' .votecomment .c-downvote').classList.remove('hidden');
         }
         document.querySelector('#comment-' + cid + ' .bottombar').classList.remove('hidden');
-        if(document.querySelector('#comment-' + cid + ' .replybox')) {
+        if (document.querySelector('#comment-' + cid + ' .replybox')) {
             document.querySelector('#comment-' + cid + ' .replybox').classList.remove('hidden');
         }
         document.querySelector('#comment-' + cid + ' .commblock .content').classList.remove('hidden');
@@ -739,14 +743,14 @@ u.addEventForChild(document, 'click', '.btn-postcomment', function (e, qelem) {
 
     const previewChild = qelem.parentNode.querySelector('.cmpreview');
     previewChild.insertAdjacentHTML('afterend', '<div class="cmpreview canclose" style="display:none;"><h4>' +
-                                    _('Comment preview') + '</h4><span class="closemsg">&times;</span>' +
-                                    '<div class="cpreview-content"></div></div>');
+        _('Comment preview') + '</h4><span class="closemsg">&times;</span>' +
+        '<div class="cpreview-content"></div></div>');
     qelem.parentNode.removeChild(previewChild);
 
     window.sending = true;
     let pcid = cid;
-    if(pcid[0] == '-') pcid = 0;
-    u.post('/do/sendcomment/' + pid, {parent: pcid, post: pid, comment: content},
+    if (pcid[0] == '-') pcid = 0;
+    u.post('/do/sendcomment/' + pid, { parent: pcid, post: pid, comment: content },
         function (data) {
             const errorNode = qelem.parentNode.querySelector('.error');
             if (data.status != "ok") {
@@ -757,7 +761,7 @@ u.addEventForChild(document, 'click', '.btn-postcomment', function (e, qelem) {
                 errorNode.style.display = 'none';
                 const cmtcount = document.getElementById('cmnts');
                 window.sending = false;
-                if(!cmtcount) {
+                if (!cmtcount) {
                     document.querySelector('.reply-comment[data-to="' + cid + '"] s').click();
                     return;
                 }
@@ -784,9 +788,9 @@ u.addEventForChild(document, 'click', '.btn-postcomment', function (e, qelem) {
                 if (cid == '0') {
                     qelem.removeAttribute('disabled');
                     document.querySelector('#rcomm-' + cid + ' textarea').value = '';
-                    if(cmtcount.nextSibling && cmtcount.nextSibling.nextSibling && cmtcount.nextSibling.nextSibling.tagName == 'DIV') {
+                    if (cmtcount.nextSibling && cmtcount.nextSibling.nextSibling && cmtcount.nextSibling.nextSibling.tagName == 'DIV') {
                         cmtcount.parentNode.insertBefore(div.firstChild, cmtcount.nextSibling.nextSibling.nextSibling);
-                    }else{
+                    } else {
                         cmtcount.parentNode.insertBefore(div.firstChild, cmtcount.nextSibling);
                     }
                     //document.getElementById(data.cid).scrollIntoView();
@@ -798,10 +802,10 @@ u.addEventForChild(document, 'click', '.btn-postcomment', function (e, qelem) {
             }
         }, function (e) {
             qelem.parentNode.querySelector('.error').style.display = 'block';
-            if(e.startsWith('{')){
+            if (e.startsWith('{')) {
                 let err = JSON.parse(e);
-                qelem.parentNode.querySelector('.error').innerHTML =err.error[0];
-            }else {
+                qelem.parentNode.querySelector('.error').innerHTML = err.error[0];
+            } else {
                 qelem.parentNode.querySelector('.error').innerHTML = _('Could not contact the server ' + e);
             }
             qelem.removeAttribute('disabled');
@@ -814,30 +818,30 @@ let reportHtml = (data, sub_rules_html) => '<h2>' + _('Report post') + '</h2>' +
     '<div class="pure-control-group">' +
     '<label for="report_reason">' + _('Select a reason to report this post:') + '</label>' +
     '<select name="report_reason" id="report_reason">' +
-      '<option value="" disabled selected>' + _('Select one...') + '</option>' +
-      '<option value="spam">' + _('SPAM') + '</option>' +
-      '<option value="tos">' + _('TOS violation') + '</option>' +
-      '<option value="rule">' + _('Sub Rule violation') + '</option>' +
-      '<option value="other">' + _('Other') + '</option>' +
+    '<option value="" disabled selected>' + _('Select one...') + '</option>' +
+    '<option value="spam">' + _('SPAM') + '</option>' +
+    '<option value="tos">' + _('TOS violation') + '</option>' +
+    '<option value="rule">' + _('Sub Rule violation') + '</option>' +
+    '<option value="other">' + _('Other') + '</option>' +
     '</select>' +
-  '</div>' +
-  '<div class="pure-control-group" style="display:none" id="report_rule_set">'+
-  '<label for="report_reason">' + _('Which Sub rule did this post violate?') + '</label>' +
+    '</div>' +
+    '<div class="pure-control-group" style="display:none" id="report_rule_set">' +
+    '<label for="report_reason">' + _('Which Sub rule did this post violate?') + '</label>' +
     '<select name="report_rule" id="report_rule">' +
-      '<option value="" disabled selected>' + _('Select one...') + '</option>' +
-      sub_rules_html +
-      '<option value="other sub rule">' + _('Other sub rule') + '</option>' +
+    '<option value="" disabled selected>' + _('Select one...') + '</option>' +
+    sub_rules_html +
+    '<option value="other sub rule">' + _('Other sub rule') + '</option>' +
     '</select>' +
-  '</div>' +
-  '<div class="pure-control-group" style="display:none" id="report_text_set">'+
-    '<label for="report_text">' + _('Explain why you\'re reporting this post:') + '</label>'+
-    '<input type="text" name="report_text" id="report_text" style="width:50%" /> '+
-  '</div>' +
-  '<div class="pure-controls">' +
+    '</div>' +
+    '<div class="pure-control-group" style="display:none" id="report_text_set">' +
+    '<label for="report_text">' + _('Explain why you\'re reporting this post:') + '</label>' +
+    '<input type="text" name="report_text" id="report_text" style="width:50%" /> ' +
+    '</div>' +
+    '<div class="pure-controls">' +
     '<div style="display:none" class="error">{{error}}</div>' +
     '<button type="button" class="pure-button" id="submit_report" disabled ' + data + '>' + _('Submit') + '</button>' +
-  '</div>' +
-'</form>';
+    '</div>' +
+    '</form>';
 
 let report_classes = ['.report-post', '.report-comment']
 
@@ -846,28 +850,28 @@ u.addEventForChild(document, 'click', report_classes, function (e, qelem) {
     const cid = qelem.getAttribute('cid');
 
     // fetch sub rules
-    u.get('/api/v3/sub/rules?pid=' + pid, function(data){
-      let rules = [];
-      let sub_rules_html = '';
-      rules = data.results;
+    u.get('/api/v3/sub/rules?pid=' + pid, function (data) {
+        let rules = [];
+        let sub_rules_html = '';
+        rules = data.results;
 
-      // set html element for each sub rule
-      rules.forEach(function(rule) {
-        let rule_html = '<option value="Sub Rule: ' + rule.text + '">' + rule.text + '</option>';
-        sub_rules_html = sub_rules_html + rule_html;
-        return sub_rules_html
-      });
+        // set html element for each sub rule
+        rules.forEach(function (rule) {
+            let rule_html = '<option value="Sub Rule: ' + rule.text + '">' + rule.text + '</option>';
+            sub_rules_html = sub_rules_html + rule_html;
+            return sub_rules_html
+        });
 
-      const modal = new Tingle.modal({});
-      // set content
-      if (cid) {
-        modal.setContent(reportHtml('data-cid=' + cid, 'sub_rules_html=' + sub_rules_html));
-      }
-      else {
-        modal.setContent(reportHtml('data-pid=' + pid, 'sub_rules_html=' + sub_rules_html));
-      }
-      // open modal
-      modal.open();
+        const modal = new Tingle.modal({});
+        // set content
+        if (cid) {
+            modal.setContent(reportHtml('data-cid=' + cid, 'sub_rules_html=' + sub_rules_html));
+        }
+        else {
+            modal.setContent(reportHtml('data-pid=' + pid, 'sub_rules_html=' + sub_rules_html));
+        }
+        // open modal
+        modal.open();
     });
 });
 
@@ -887,12 +891,12 @@ u.addEventForChild(document, 'change', '#report_reason', function (e, qelem) {
             document.getElementById('submit_report').setAttribute('disabled', 'true');
         }
         if (document.getElementById('report_rule').value == 'other sub rule') {
-          document.getElementById('report_rule_set').style.display = 'block';
-          document.getElementById('report_text_set').style.display = 'block';
+            document.getElementById('report_rule_set').style.display = 'block';
+            document.getElementById('report_text_set').style.display = 'block';
         }
         else {
-          document.getElementById('report_text_set').style.display = 'none';
-          document.getElementById('report_rule_set').style.display = 'block';
+            document.getElementById('report_text_set').style.display = 'none';
+            document.getElementById('report_rule_set').style.display = 'block';
         }
     }
 });
@@ -906,18 +910,18 @@ u.addEventForChild(document, 'keyup', '#report_text', function (e, qelem) {
 });
 
 u.addEventForChild(document, 'change', '#report_rule', function (e, qelem) {
-  if (qelem.value == 'other sub rule') {
-      if (document.getElementById('report_text').value.length < 3) {
-          document.getElementById('submit_report').setAttribute('disabled', 'true');
-      }
-      document.getElementById('report_text_set').style.display = 'block';
-  } else if (qelem.value != '') {
-    document.getElementById('report_text_set').style.display = 'none';
-    document.getElementById('submit_report').removeAttribute('disabled');
-  } else {
-    document.getElementById('report_text_set').style.display = 'none';
-    document.getElementById('submit_report').setAttribute('disabled', 'true');
-  }
+    if (qelem.value == 'other sub rule') {
+        if (document.getElementById('report_text').value.length < 3) {
+            document.getElementById('submit_report').setAttribute('disabled', 'true');
+        }
+        document.getElementById('report_text_set').style.display = 'block';
+    } else if (qelem.value != '') {
+        document.getElementById('report_text_set').style.display = 'none';
+        document.getElementById('submit_report').removeAttribute('disabled');
+    } else {
+        document.getElementById('report_text_set').style.display = 'none';
+        document.getElementById('submit_report').setAttribute('disabled', 'true');
+    }
 });
 
 
@@ -933,12 +937,12 @@ u.addEventForChild(document, 'click', '#submit_report', function (e, qelem) {
         reason = document.getElementById('report_text').value;
     }
     if (reason == 'rule') {
-      send_to_admin = false;
-      if (document.getElementById('report_rule').value == "other sub rule") {
-        reason = "Sub Rule: " + document.getElementById('report_text').value;
-      } else {
-        reason = document.getElementById('report_rule').value;
-      }
+        send_to_admin = false;
+        if (document.getElementById('report_rule').value == "other sub rule") {
+            reason = "Sub Rule: " + document.getElementById('report_text').value;
+        } else {
+            reason = document.getElementById('report_rule').value;
+        }
     }
 
     qelem.setAttribute('disabled', true);
@@ -947,7 +951,7 @@ u.addEventForChild(document, 'click', '#submit_report', function (e, qelem) {
         pid = qelem.getAttribute('data-cid');
         uri = '/do/report/comment';
     }
-    u.post(uri, {post: pid, reason: reason, send_to_admin: send_to_admin},
+    u.post(uri, { post: pid, reason: reason, send_to_admin: send_to_admin },
         function (data) {
             if (data.status != "ok") {
                 errorbox.style.display = 'block';
@@ -977,12 +981,12 @@ u.addEventForChild(document, 'click', 'a.unblk', function (e, qelem) {
 });
 
 // Show the comments on a NSFW post when clicked.
-u.addEventForChild(document, 'click', '.show-post-comments', function(e, qelem) {
+u.addEventForChild(document, 'click', '.show-post-comments', function (e, qelem) {
     document.getElementById('post-comments').classList.remove('hide');
     qelem.classList.add('hide');
 });
 
-u.addEventForChild(document, 'change', '#flairpicker', function(e, qelem) {
+u.addEventForChild(document, 'change', '#flairpicker', function (e, qelem) {
     if (qelem.selectedIndex !== 0) {
         window.location.href = qelem.value;
     }

@@ -120,6 +120,9 @@
         @if post['open_report_id']:
           <li><a class="post-open-reports" href="@{url_for('mod.report_details', sub=post['sub'], report_type='post', report_id=post['open_report_id'])}">@{_('open reports (%(num)s)', num=post['open_reports'])}</a></li>
         @end
+        @if post['uid'] == current_user.uid or current_user.is_admin():
+         <li id="delpostli"><a @{(post['uid'] == current_user.uid) and 'selfdel="true"' or ''!!html} pid="@{post['pid']}" class="delete-post"> @{_('delete')} </a></li>
+        @end
       </div>
     </div>
 </div>
