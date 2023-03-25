@@ -181,7 +181,7 @@ class EditUserForm(FlaskForm):
 
     subtheme = StringField(_l("Global stylesheet (select a sub)"))
 
-    language = SelectField(_l("Language"), validate_choice=False)
+    language = SelectField(_l("Language"), choices=[], validate_choice=False)
 
     email_notify = BooleanField(_l("Send email notifications"))
 
