@@ -26,6 +26,7 @@ from .. import misc
 from ..config import config
 from ..auth import auth_provider, email_validation_is_required
 from ..auth import normalize_email, create_user
+from ..badges import Badges
 from ..forms import LoginForm, RegistrationForm, ResendConfirmationForm, is_safe_url
 from ..misc import engine, send_email, is_domain_banned, gevent_required
 from ..misc import ratelimit, AUTH_LIMIT, SIGNUP_LIMIT
@@ -225,6 +226,9 @@ def register():
     ip = request.environ.get("HTTP_X_REAL_IP", request.remote_addr)
     text_content = user.name + "\n" + ip + "\n" + regdate + "\n" + useragent
     send_email(config.mail.default_to, "New registration", text_content, "")
+
+    if config.site.auto_adopter:
+        Badges.assign_userbadge(user.uid, 3)
 
     if email_validation_is_required():
         send_login_link_email(user)
