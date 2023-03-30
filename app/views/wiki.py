@@ -1,6 +1,7 @@
 """ Pages to be migrated to a wiki-like system """
 from flask import Blueprint, render_template, abort, redirect, url_for
 from flask_babel import lazy_gettext as _l
+from flask_login import login_required
 from ..misc import engine
 from ..models import Wiki
 
@@ -8,6 +9,7 @@ bp = Blueprint("wiki", __name__)
 
 
 @bp.route("/welcome")
+@login_required
 def welcome():
     """Welcome page for new users"""
     try:
