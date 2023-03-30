@@ -48,7 +48,7 @@ site:
   enable_totp: False
 
   # Enables automatic assignment of the "Early Adopter" badge to new user accounts
-  auto_adopte: False
+  auto_adopter: False
 
 auth:
   # Set to LOCAL to store user authentication in database,
