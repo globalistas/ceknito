@@ -311,9 +311,10 @@ a:hover {
 }
 
 #container {
-  padding-top: 1em;
+  padding-top: 0.4em;
   padding-left: .5em;
   width: 100%;
+  background: #eee;
 }
 
 .error {
@@ -588,19 +589,19 @@ a.pure-button-primary {
 .post {
   min-height: 70px;
   padding: 0.6em 0.1em 0.6em 0.2em;
-  border-radius: 8px 0 0 8px;
+  /*  border-radius: 8px 0 0 8px;*/
 }
 
-.post-heading {
+/*.post-heading {
   padding-top: 2px;
-}
+}*/
 
-.post:nth-child(2n) {
+/*.post:nth-child(2n) {
   background-color: #f7f7f7;
   -webkit-box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.1);
-}
+}*/
 
 .post:nth-child(2n) .expandotxt {
   background-color: #f2f2f2;
@@ -635,9 +636,12 @@ a.pure-button-primary {
 }
 
 .pbody {
+  background: #fff;
   display: inline-block;
   width: calc(100% - 130px);
-  padding-left: .2em;
+  padding: 5px 10px 5px 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
 }
 
 .post:after {
@@ -740,6 +744,7 @@ iframe {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+  border: 1px solid #555;
 }
 
 .c-upvote,
@@ -921,6 +926,10 @@ a.reply-comment {
   font-size: 11px;
 }
 
+.alldaposts {
+  background-color: #eee;
+}
+
 .alldaposts .links a {
   color: #777;
 }
@@ -968,10 +977,12 @@ img.block-blur {
 }
 
 .stickyposts {
-  margin-top: 1em;
-  margin-bottom: .5em;
+  /*  margin-top: 1em;*/
+  /*  margin-bottom: .5em;*/
+  /*  padding-top: 0.5em;*/
   padding-bottom: .5em;
   border-bottom: 1px solid #efefef;
+  background-color: #eee;
 }
 
 .stickyposts .links a.comments {
@@ -1120,7 +1131,8 @@ img.block-blur {
 }
 
 .wholepost {
-  margin-top: 1.5em;
+  /*  margin-top: 1.5em;*/
+  background-color: #eee;
 }
 
 .comment-form {
@@ -1189,11 +1201,11 @@ img.block-blur {
 .commblock {
   display: inline-block;
   width: calc(100% - 2em);
-  max-width: 60em;
+  /*  max-width: 60em;*/
   font-family: verdana, arial, sans-serif;
   font-size: 14px;
   line-height: 1.3em;
-  background: #00000008;
+  background: #fff;
   padding: 5px 10px 5px 5px;
   border: 1px solid #ccc;
   border-radius: 3px;
@@ -1620,17 +1632,17 @@ input[type=search] {
 }
 
 .post-content-container {
-  background: #f6f6f6;
+  background: #fff;
   border: solid;
   border-width: thin;
-  border-color: #888888;
+  border-color: #ccc;
   margin-left: 1em;
   margin-right: 1.1em;
   padding: .4em 1em;
   /* 1px margin on botton and top so it respects <p>'s margin */
   font-family: verdana, arial, sans-serif;
-  font-size: 15px;
-  line-height: 1.3em;
+  font-size: 13px;
+  line-height: normal;
   width: 90%;
 }
 
@@ -1660,6 +1672,7 @@ input[type=search] {
 
 div.comments {
   padding-right: 8px;
+  padding-bottom: 12px;
 }
 
 .show-post-comments {
@@ -2001,12 +2014,12 @@ li.profilebadge {
 article.comment {
   padding: .8em 0 0 .5em;
   border-radius: 8px 0 0 8px;
-  background-color: #fefefe;
+  background-color: #eee;
   margin: 4px 0;
 }
 
 article.comment:nth-child(2n) {
-  background-color: #fefefe;
+  background-color: #eee;
   /*    -webkit-box-shadow: -3px 2px 4px 0 rgba(0, 0, 0, .1);
     -moz-box-shadow: -3px 2px 4px 0 rgba(0, 0, 0, .1);
     box-shadow: -3px 2px 4px 0 rgba(0, 0, 0, .1);

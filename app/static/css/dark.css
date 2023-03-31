@@ -119,6 +119,30 @@ body.dark .comments article.comment.highlight {
   background-color: #40444b;
 }
 */
+body.dark #container {
+  background: #373a3f;
+}
+
+body.dark #center-container {
+  background-color: transparent;
+}
+
+body.dark .wholepost {
+  background-color: transparent;
+}
+
+body.dark .pbody {
+  background: #373a3f;
+  display: inline-block;
+  width: calc(100% - 130px);
+  padding: 5px 10px 5px 5px;
+  border: none;
+}
+
+body.dark .post {
+  background-color: #373a3f;
+}
+
 body.dark .post:nth-child(2n) {
   background-color: #373a3f;
   -webkit-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
@@ -594,6 +618,10 @@ body.dark thead a {
   color: #231411
 }
 
+body.dark .alldaposts {
+  background-color: transparent;
+}
+
 body.dark .alldaposts .links a.comments {
   color: #526a7d;
 }
@@ -806,6 +834,7 @@ body.dark #chloading {
 
 body.dark .stickyposts {
   border-bottom: 1px solid #40444b;
+  background-color: #18223d;
 }
 
 body.dark .expando {
@@ -884,4 +913,5 @@ body.dark {
 
 body.dark .commblock {
   border: none;
+  background-color: transparent;
 }
