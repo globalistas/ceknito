@@ -12,7 +12,7 @@
     Hover color for post links
     Phuks: #ff6d15
      */
-    --post-link-hover: #820609;
+    --post-link-hover: #848484;
     /**
     Color for visited links.
     Phuks: #d95204
@@ -26,9 +26,12 @@
     --primary-highlight: #800000;
 
     /* These are used only for buttons */
-    --button-success-bg: rgb(28, 184, 65); /* Green buttons. Currently unused */
-    --button-error-bg: rgb(202, 60, 60); /* Red button. Menacing. */
-    --button-warning-bg: rgb(200, 5, 17); /* Orange button. Mostly known for being the "block" button on subs */
+    --button-success-bg: rgb(28, 184, 65);
+    /* Green buttons. Currently unused */
+    --button-error-bg: rgb(202, 60, 60);
+    /* Red button. Menacing. */
+    --button-warning-bg: rgb(200, 5, 17);
+    /* Orange button. Mostly known for being the "block" button on subs */
 
     /* Used as the "active" form of some buttons (profile, PMs, settings, sub sort) */
     --button-secondary-bg: #101010;

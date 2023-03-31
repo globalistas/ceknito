@@ -263,7 +263,7 @@ blockquote {
 }
 
 a {
-  color: #0f5386;
+  color: #344c6ae0;
   text-decoration: none;
 }
 
@@ -637,7 +637,7 @@ a.pure-button-primary {
 .pbody {
   display: inline-block;
   width: calc(100% - 130px);
-  padding-left: .5em;
+  padding-left: .2em;
 }
 
 .post:after {
@@ -720,12 +720,12 @@ iframe {
 .post .domain a,
 .post .domain {
   color: #25b2dce8;
-  font-size: small;
+  font-size: x-small;
 }
 
 .post .author {
-  font-size: small;
-  color: #5d5454;
+  font-size: x-small;
+  color: #888;
   margin-top: .4em;
 }
 
@@ -879,7 +879,7 @@ div#sortbuttons {
 }
 
 .links {
-  margin: 4px 0 0 .3em;
+  margin: 1px 0 0 .45em;
   padding: 0;
 }
 
@@ -905,7 +905,8 @@ a.slink {
 .links a {
   position: relative;
   right: 12px;
-  font-size: 13px;
+  font-size: x-small;
+  font-weight: bold;
   color: #888;
 
   cursor: pointer;
@@ -914,12 +915,6 @@ a.slink {
   -webkit-user-select: none;
   user-select: none;
   margin-left: .5em;
-}
-
-.links a.comments,
-.postinfo .links a,
-.bottombar.links a {
-  font-weight: 700;
 }
 
 .alldaposts .links a {
@@ -1090,9 +1085,13 @@ img.block-blur {
 }
 
 .commenthead {
-  font-size: smaller;
-  color: #414141;
+  font-size: x-small;
+  color: #888;
   /**  margin-top: 1em; **/
+}
+
+.poster {
+  font-weight: bold;
 }
 
 .c-downvote {
@@ -1394,7 +1393,7 @@ span.hasmail {
 }
 
 .sidebarlists {
-  color: #5d5454;
+  color: #888;
 }
 
 .sbm-post {
@@ -1612,8 +1611,8 @@ input[type=search] {
 
 .wholepost .author {
   font-size: small;
-  color: #5d5454;
-  margin-top: 0.3em;
+  color: #888;
+  margin-top: 0em;
 }
 
 .post-content-container {
@@ -2639,7 +2638,7 @@ button.new-form-one {
 /* Proper size and align post links in sub/post/comments */
 
 .wholepost .postinfo .links {
-  margin: 4px 0 0 0.09em;
+  margin: 4px 0 0 0.25em;
 }
 
 .commblock .bottombar.links {
