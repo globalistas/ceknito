@@ -1,7 +1,6 @@
 #!/bin/bash
 cd $(git rev-parse --show-toplevel)
 git pull
-poetry lock --no-update
 poetry install
 npm install
 npm run build
