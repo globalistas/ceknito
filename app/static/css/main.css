@@ -917,6 +917,10 @@ a.slink {
   margin-left: .5em;
 }
 
+a.reply-comment {
+  font-size: 11px;
+}
+
 .alldaposts .links a {
   color: #777;
 }
