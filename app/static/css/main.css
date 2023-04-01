@@ -300,6 +300,7 @@ a:hover {
 }
 
 #center-container {
+  background-color: #eee;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1415,7 +1416,7 @@ span.hasmail {
 .sbm-post {
   display: block;
   margin: 4px 23px 5px 28px;
-  background-color: #eee;
+  /*  background-color: #eee; */
 }
 
 .sbm-post-grad {
