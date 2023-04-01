@@ -712,7 +712,7 @@ for (var i = 0; i < subscribeButtons.length; i++) {
 // Enable href to post on pbody class
 //get all pbody elements
 var pbodyElements = document.querySelectorAll('.pbody');
-//loop each one of them and atach onclick event
+//loop each one of them and attach onclick event
 for (var i = 0; i < pbodyElements.length; i++) {
   //attach onclick event
   var pbody = pbodyElements[i];
@@ -722,22 +722,36 @@ for (var i = 0; i < pbodyElements.length; i++) {
     //check if clicked element is some link or not
     if (elementName == "A") {
       //ignore this script if is clicked on this buttons
-      if (event.target.className == "unblk" || event.target.className == "report-post" || event.target.className == "delete-post" || event.target.className == "" || event.target.className === undefined) {
+      if (event.target.className == "expando" || event.target.className == "unblk" || event.target.className == "report-post" || event.target.className == "delete-post" || event.target.className == "" || event.target.className === undefined) {
         return false;
       }
       //if is link get url and just redirect like a normal link
       var link = event.target.href;
-      //if clicked link is title open in new tab, otherwhise not
-      if (event.target.className == "title ") {
-        window.open(link, "_blank");
+      //check if link is relative or not
+      if (link.indexOf(server_name) !== -1) {
+        event.preventDefault();
+        var commentsElement = this.querySelector(".comments");
+        if (commentsElement !== null && commentsElement.href !== undefined) {
+          window.location.href = commentsElement.href;
+        }
       } else {
-        window.location.href = link;
+        //if clicked link is title open in new tab, otherwise not
+        if (event.target.className == "title ") {
+          window.open(link, "_blank");
+        } else {
+          window.location.href = link;
+        }
       }
+    } else if (event.target.closest('.post-heading') !== null) {
+      //ignore clicks inside post-heading element
+      return false;
     } else {
       //if is not link get comment link and redirect
       event.preventDefault();//stop html link to work;
       var commentsElement = this.querySelector(".comments");
-      window.location.href = commentsElement.href;
+      if (commentsElement !== null && commentsElement.href !== undefined) {
+        window.location.href = commentsElement.href;
+      }
     }
 
   });
