@@ -1648,13 +1648,13 @@ input[type=search] {
 }
 
 .poll-space {
-  padding: .4em 1em;
+  /*  padding: .4em 1em; */
   margin-left: 1em;
   margin-right: 1.1em;
   margin-top: 1.1em;
   font-family: verdana, arial, sans-serif;
-  font-size: 15px;
-  line-height: 1.3em;
+  font-size: 14px;
+  line-height: 1.5em;
 }
 
 .post-content-container textarea,
@@ -2013,7 +2013,7 @@ li.profilebadge {
 }
 
 article.comment {
-  padding: .8em 0 0 .5em;
+  padding: .8em 0 0 0em;
   border-radius: 8px 0 0 8px;
   background-color: #eee;
   margin: 4px 0;
@@ -2409,7 +2409,7 @@ table td {
 .poll-pbar {
   border: 1px solid #ccc;
   width: 70%;
-  margin: 0 5px 2px 0;
+  margin: 0 5px 2px -5px;
   padding: 1px;
   vertical-align: middle;
   display: inline-block;
@@ -2888,7 +2888,7 @@ article.text-post.comment.deleted {
 }
 
 #sortby {
-  background-color: #e6e6e6;
+  background-color: #ffffff;
   font-size: smaller;
   text-align: center;
   cursor: pointer;
