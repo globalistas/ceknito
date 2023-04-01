@@ -725,11 +725,11 @@ iframe {
 .post .domain a,
 .post .domain {
   color: #25b2dce8;
-  font-size: x-small;
+  font-size: 0.7em;
 }
 
 .post .author {
-  font-size: x-small;
+  font-size: 0.7em;
   color: #888;
   margin-top: .4em;
 }
@@ -911,7 +911,7 @@ a.slink {
 .links a {
   position: relative;
   right: 12px;
-  font-size: x-small;
+  font-size: 0.7em;
   font-weight: bold;
   color: #888;
 
@@ -1101,7 +1101,7 @@ img.block-blur {
 }
 
 .commenthead {
-  font-size: x-small;
+  font-size: 0.7em;
   color: #888;
   /**  margin-top: 1em; **/
 }
@@ -2661,7 +2661,7 @@ button.new-form-one {
 }
 
 .commblock .bottombar.links {
-  margin: 4px 0 0 0.69em;
+  margin: 4px 0 0 0.25em;
   font: -webkit-control;
 }
 
