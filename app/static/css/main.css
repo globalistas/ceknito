@@ -1649,7 +1649,7 @@ input[type=search] {
 }
 
 .poll-space {
-  /*  padding: .4em 1em; */
+  padding: .4em 1em;
   margin-left: 1em;
   margin-right: 1.1em;
   margin-top: 1.1em;
