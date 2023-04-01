@@ -708,3 +708,38 @@ var subscribeButtons = document.querySelectorAll('.unsub');
 for (var i = 0; i < subscribeButtons.length; i++) {
   subscribeButtons[i].addEventListener('click', handleSubscriptionClick);
 }
+
+// Enable href to post on pbody class
+//get all pbody elements
+var pbodyElements = document.querySelectorAll('.pbody');
+//loop each one of them and atach onclick event
+for (var i = 0; i < pbodyElements.length; i++) {
+  //attach onclick event
+  var pbody = pbodyElements[i];
+  pbody.addEventListener('click', function handleClick(event) {
+
+    var elementName = event.target.tagName;
+    //check if clicked element is some link or not
+    if (elementName == "A") {
+      //ignore this script if is clicked on this buttons
+      if (event.target.className == "unblk" || event.target.className == "report-post" || event.target.className == "delete-post" || event.target.className == "" || event.target.className === undefined) {
+        return false;
+      }
+      //if is link get url and just redirect like a normal link
+      var link = event.target.href;
+      //if clicked link is title open in new tab, otherwhise not
+      if (event.target.className == "title ") {
+        window.open(link, "_blank");
+      } else {
+        window.location.href = link;
+      }
+    } else {
+      //if is not link get comment link and redirect
+      event.preventDefault();//stop html link to work;
+      var commentsElement = this.querySelector(".comments");
+      window.location.href = commentsElement.href;
+    }
+
+  });
+
+};
