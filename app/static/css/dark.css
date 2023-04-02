@@ -87,6 +87,12 @@ body.dark .th-navbar {
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.75);
 }
 
+/* Footer */
+
+body.dark .footer {
+  color: #c1c1c1
+}
+
 /* body.dark .th-navbar.open {
   background-color: #000;
     -webkit-box-shadow: 0 2px 3px 0 var(--dark-shadow);
@@ -420,12 +426,22 @@ body.dark .i-icon svg {
 /* /SUBS PAGE */
 
 /* USER PAGE */
+body.dark .pblock a,
+body.dark .userrow a {
+  color: #556a7c;
+}
+
 body.dark .pblock.level .inset {
   background-color: #0a0a0a;
 }
 
 body.dark .pblock.level {
   background-color: #474747;
+}
+
+body.dark .pblock a,
+.userrow a {
+  color: #0f5387;
 }
 
 body.dark .uprofile.content {

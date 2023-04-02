@@ -2044,6 +2044,11 @@ article.comment:nth-child(2n) {
   text-align: left;
 }
 
+.pblock a,
+.userrow a {
+  color: #0f5387;
+}
+
 li.habitentry {
   text-align: left;
 }
