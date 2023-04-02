@@ -2666,6 +2666,18 @@ button.new-form-one {
   font-size: 1em;
 }
 
+.bottombar.links a:hover {
+  text-decoration: underline;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+
+.links a.comments:hover {
+  text-decoration: none;
+}
+
 /* Horizontal create post type buttons */
 
 .label-v {
