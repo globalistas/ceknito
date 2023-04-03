@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block title %}Welcome{%endblock%}
+{% block title %}Vitaj na čekni.to{%endblock%}
 {% block content %}
 {{ super() }}
   <div class="content">
@@ -20,7 +20,7 @@
         Otvorí Tvoju schránku, kam budú chodiť reakcie na Tvoje príspevky a komentáre, ako aj súkromné správy
       </li>
       <li>
-        Ak dostaneš novú správu, obálka zmení farbu a bude mať číslo v červenom kruhu
+        Ak dostaneš novú správu, na ikone schránky sa objaví číslo v čiernom kruhu
       </li>
     </ul>
     <hr>
@@ -49,9 +49,5 @@
     </ul>
     <h2>Hlásenie problémov</h2>
     Ak náš chceš kontaktovať ohľadom akýchkoľvek bugov alebo iných problémov, nájdeš nás na <a target="_blank" href="https://discord.gg/8HFrGrzEx2">Discorde</a>.
-
-    <p><a href="{{url_for('wiki.view', slug="privacy")}}">Ochrana osobných údajov</a></p>
-
-    <p><a href="{{url_for('wiki.view', slug="tos")}}">Podmienky používania</a></p>
   </div>
 {%endblock%}
