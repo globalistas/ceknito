@@ -2187,7 +2187,7 @@ msgstr "Vytvoř skupinu věnovanou tvé oblíbené komunitě nebo oblasti zájmu
 
 #: app/html/sub/create.html:20
 msgid "Alphanumeric characters"
-msgstr "Alfanumerické znaky"
+msgstr "Alfanumerické znaky. V názvu nemohou být mezery. Diakritika je podporována."
 
 #: app/html/sub/create.html:23
 msgid "Description"
@@ -2950,7 +2950,7 @@ msgstr "Přihlášení"
 
 #: app/html/user/login.html:15 app/static/js/main.js:52
 msgid "Alphanumeric characters plus '-' and '_'"
-msgstr "Alfanumerické znaky plus '-' a '_'"
+msgstr "Alfanumerické znaky plus '-' and '_', bez diakritiky. Ve jménu nemohou být mezery."
 
 #: app/html/user/login.html:33 app/html/user/password_recovery.html:37
 #: app/html/user/register.html:71
@@ -3085,7 +3085,7 @@ msgstr "Příspěvky a komentáře od %(user)s se budou normálně zobrazovat ve
 #: app/html/user/register.html:24
 #, python-format
 msgid "Alphanumeric characters plus '-' and '_'; between 2 and %(num)d characters long"
-msgstr "Alfanumerické znaky plus '-' a '_'; minimální délka 2 a maximální délka %(num)d znaků"
+msgstr "Alfanumerické znaky plus '-' and '_'; bez diakritiky a bez mezer. Minimální délka 2 a maximální délka %(num)d znaků."
 
 #: app/html/user/register.html:62
 msgid "I accept the <a href=\"/wiki/tos\">Terms of Use</a>"
