@@ -1420,11 +1420,11 @@ span.hasmail {
 }
 
 .sbm-post-grad {
-  background-color: #800000;
-  /* border: 1px solid #4a1e1e;*/
+  background-color: #e6e6e6;
+  border: 1px solid #c9c6c6;
   /* border-radius: 2px;*/
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: #2e2e2e;
   font-size: 17px;
   letter-spacing: -.022em;
   line-height: 1.47059;
