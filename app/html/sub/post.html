@@ -250,7 +250,7 @@
               <li><a class="stick-post">@{_('make sticky')}</a></li>
             @end
 
-            @if post['sub'] == 'announcements' and current_user.is_admin():
+            @if post['sub'] == 'Oznamy' and current_user.is_admin():
               @if not func.getAnnouncement() or func.getAnnouncement()['pid'] != post['pid']:
                 <li><a class="announce-post">@{_('make announcement')}</a></li>
               @end
