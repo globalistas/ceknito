@@ -2811,7 +2811,7 @@ article.text-post.comment.admin>div>div>div>a.poster {
 
 article.text-post.comment.mod>div>div>div>a.poster {
   display: inline-block;
-  background-color: #63db5252;
+  background-color: #59cbef70;
   color: black;
   border-radius: 2px;
   padding: .15em;
