@@ -2209,7 +2209,7 @@ msgstr "Vytvor skupinu venovanú tvojej obľúbenej komunite alebo oblasti záuj
 
 #: app/html/sub/create.html:20
 msgid "Alphanumeric characters"
-msgstr "Alfanumerické znaky. V názve nemôžu byť medzery. Diakritika je podporovaná."
+msgstr "Použi prosím iba alfanumerické znaky, bez medzier. Diakritika je podporovaná."
 
 #: app/html/sub/create.html:23
 msgid "Description"
@@ -3107,7 +3107,7 @@ msgstr "Príspevky a komentáre od %(user)s sa budú normálne zobrazovať v sku
 #: app/html/user/register.html:24
 #, python-format
 msgid "Alphanumeric characters plus '-' and '_'; between 2 and %(num)d characters long"
-msgstr "Alfanumerické znaky plus '-' and '_'; bez diakritiky a bez medzier. Minimálna dĺžka 2 a maximálna dĺžka %(num)d znakov."
+msgstr "Použi prosím iba alfanumerické znaky plus '-' a '_'; bez diakritiky a bez medzier. Minimálna dĺžka 2 a maximálna dĺžka %(num)d znakov."
 
 #: app/html/user/register.html:62
 msgid "I accept the <a href=\"/wiki/tos\">Terms of Use</a>"
