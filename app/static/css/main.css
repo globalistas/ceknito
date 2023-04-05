@@ -1559,6 +1559,10 @@ input[type=search] {
   .content.wiki {
     width: 95%;
   }
+
+  .post .thumbnail {
+    margin-left: -6px;
+  }
 }
 
 #createPostIcon {
@@ -2934,9 +2938,9 @@ article.text-post.comment.deleted {
 }
 
 @media only screen and (max-width: 900px) {
-  .pure-g {
+  /*  .pure-g {
     display: block;
-  }
+  }*/
 
   .pure-u-1-2 {
     display: block;
