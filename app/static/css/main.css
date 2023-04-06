@@ -3265,3 +3265,42 @@ li.mod-table-header {
 #chloading {
   padding: 1em;
 }
+
+/* New rules for Sidebar and Ccontainer. To be applied on mobile. It keeps the original widths. */
+@media only screen and (max-width: 915px) {
+
+  .pure-u-md-3-4,
+  .pure-u-md-18-24 {
+    width: 75%;
+  }
+
+  .pure-u-md-1-4,
+  .pure-u-md-6-24 {
+    width: 25%;
+  }
+
+  .pure-u-1,
+  .pure-u-1-1,
+  .pure-u-5-5,
+  .pure-u-24-24 {
+    width: 100% !important;
+  }
+}
+
+/* Container. To be applied on desktop. It expands the Container by 5%. */
+@media only screen and (min-width: 915px) {
+
+  .pure-u-md-3-4,
+  .pure-u-md-18-24 {
+    width: 80%;
+  }
+}
+
+/* Sidebar. To be applied on desktop. It narrows the Sidebar by 5% */
+@media only screen and (min-width: 915px) {
+
+  .pure-u-md-1-4,
+  .pure-u-md-6-24 {
+    width: 20%;
+  }
+}
