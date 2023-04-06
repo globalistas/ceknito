@@ -643,6 +643,7 @@ a.pure-button-primary {
   padding: 5px 10px 5px 5px;
   border: 1px solid #ccc;
   border-radius: 3px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
 }
 
 .post:after {
@@ -1210,6 +1211,7 @@ img.block-blur {
   padding: 5px 10px 5px 5px;
   border: 1px solid #ccc;
   border-radius: 3px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
 }
 
 /* /POST PAGE STYLES */
@@ -1753,7 +1755,8 @@ article.comment .score {
   box-shadow: none;
   border-top-left-radius: unset;
   border-top-right-radius: unset;
-  width: 100%
+  width: 100%;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
 }
 
 /* /EDITOR STYLES */
@@ -2915,6 +2918,7 @@ article.text-post.comment.deleted {
   font-size: smaller;
   text-align: center;
   cursor: pointer;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
 }
 
 .pure-menu-children {
