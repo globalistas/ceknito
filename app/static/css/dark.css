@@ -449,7 +449,7 @@ body.dark article.comment {
 }
 
 body.dark article.comment:nth-child(2n) {
-  background-color: #393c42;
+  /*  background-color: #393c42;*/
 }
 
 /* /USER PAGE */
