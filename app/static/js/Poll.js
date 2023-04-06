@@ -119,6 +119,7 @@ u.addEventForChild(document, 'click', '.poll-vote-btn', function (e, qelem) {
                 // 5 - Show results.
                 var m = document.querySelector(".poll-space[data-pid='" + pid + "'] .poll-show-results")
                 if (m) m.click();
+                location.reload();
 
             }
         });
