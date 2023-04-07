@@ -145,6 +145,10 @@ body.dark .pbody {
   border: none;
 }
 
+body.dark .pbody:hover {
+  box-shadow: none;
+}
+
 body.dark .post {
   background-color: #373a3f;
 }

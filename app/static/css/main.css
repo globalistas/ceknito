@@ -646,6 +646,12 @@ a.pure-button-primary {
   box-shadow: 0 0px 3px rgb(0 0 0 / 10%);
 }
 
+.pbody:hover {
+  background: #f5f5f5;
+  border: 1px solid transparent;
+  box-shadow: 0 0px 3px 2px rgb(0 0 0 / 10%);
+}
+
 .post:after {
   content: "";
   display: table;
