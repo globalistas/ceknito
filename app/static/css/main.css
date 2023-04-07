@@ -1411,10 +1411,9 @@ span.hasmail {
 
 .sidebar h4 {
   color: #222222;
-  margin: 0;
+  /*  margin: 0;*/
   padding-top: 3px;
   padding-left: 0.5em;
-  text-align: center;
 }
 
 .sidebar ul {
