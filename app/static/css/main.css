@@ -593,9 +593,9 @@ a.pure-button-primary {
   /*  border-radius: 8px 0 0 8px;*/
 }
 
-/*.post-heading {
-  padding-top: 2px;
-}*/
+.post-heading {
+  width: fit-content;
+}
 
 /*.post:nth-child(2n) {
   background-color: #f7f7f7;
