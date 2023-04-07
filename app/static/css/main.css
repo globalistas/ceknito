@@ -1394,6 +1394,19 @@ span.hasmail {
   position: relative !important;
 }
 
+.sidebar p {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.moderators {
+  padding-left: 0.5em;
+}
+
+.createdby {
+  text-align: center;
+}
+
 .sidebar h4 {
   color: #1b1b1b;
   margin: 0;
