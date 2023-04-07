@@ -650,6 +650,7 @@ a.pure-button-primary {
   background: #f5f5f5;
   border: 1px solid transparent;
   box-shadow: 0 0px 3px 2px rgb(0 0 0 / 10%);
+  transition: all 50ms ease-out;
 }
 
 .post:after {
