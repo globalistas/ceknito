@@ -1410,8 +1410,11 @@ span.hasmail {
 }
 
 .sidebar h4 {
-  color: #1b1b1b;
+  color: #222222;
   margin: 0;
+  padding-top: 3px;
+  padding-left: 0.5em;
+  text-align: center;
 }
 
 .sidebar ul {
@@ -1427,10 +1430,6 @@ span.hasmail {
 
 .sidebarlists ul li {
   padding-top: 8px;
-}
-
-.sidebar h4 {
-  padding-top: 3px;
 }
 
 .sidebarlists {
