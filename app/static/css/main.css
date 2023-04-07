@@ -1397,6 +1397,8 @@ span.hasmail {
 .sidebar p {
   padding-left: 0.5em;
   padding-right: 0.5em;
+  font-size: 0.9em;
+  color: #222222 !important;
 }
 
 .moderators {
