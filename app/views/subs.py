@@ -6,6 +6,7 @@ from flask import Blueprint, abort, request, redirect, url_for
 from flask_login import login_required, current_user
 from flask_babel import _
 from .. import misc
+from ..badges import Badges
 from ..config import config
 from ..misc import engine, ratelimit, POSTING_LIMIT, gevent_required
 from ..socketio import socketio
@@ -363,6 +364,11 @@ def create_post(ptype, sub):
 
     misc.workWithMentions(form.content.data, None, post, sub)
     misc.workWithMentions(form.title.data, None, post, sub)
+
+    # checks if automatic "Ready Steady Check" badge assignment is enabled and assigns the badge
+    if config.site.auto_rsc:
+        Badges.assign_userbadge(current_user.uid, 5)
+
     return redirect(addr)
 
 
