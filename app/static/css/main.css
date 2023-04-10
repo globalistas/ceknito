@@ -351,10 +351,12 @@ a:hover {
 .message {
   margin-top: 1em;
   padding: 5px;
-  background-color: #8000008a;
+  background-color: #36363699;
   color: white;
   margin-bottom: 15px;
   border-radius: 3px;
+  text-align: center;
+  font-weight: bold;
 }
 
 .message span {
