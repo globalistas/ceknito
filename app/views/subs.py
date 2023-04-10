@@ -365,7 +365,8 @@ def create_post(ptype, sub):
     misc.workWithMentions(form.content.data, None, post, sub)
     misc.workWithMentions(form.title.data, None, post, sub)
 
-    # checks if automatic "Ready Steady Check" badge assignment is enabled and assigns the badge only if the user does not already have it
+    # We check if automatic "Ready Steady Check" badge assignment is enabled in config
+    # Then we assign the badge only if the user does not already have it
     if config.site.auto_rsc:
         user_badges = Badges.badges_for_user(current_user.uid)
         badge_ids = [badge.bid for badge in user_badges]
