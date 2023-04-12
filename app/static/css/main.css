@@ -758,6 +758,10 @@ iframe {
   border: 1px solid #555;
 }
 
+.post .thumbnail:hover {
+  -webkit-filter: opacity(85%);
+}
+
 .c-upvote,
 .c-downvote,
 .upvote,
