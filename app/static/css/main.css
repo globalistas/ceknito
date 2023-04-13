@@ -1658,7 +1658,8 @@ input[type=search] {
 }
 
 .wholepost .title {
-  font-size: 1.2em;
+  font-size: 1.25em;
+  text-decoration: 1px dotted underline;
 }
 
 .wholepost .author {
