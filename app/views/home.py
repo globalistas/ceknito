@@ -173,7 +173,7 @@ def all_domain_new(domain, page):
     domain = re.sub(r"[^A-Za-z0-9.\-_]+", "", domain)
     posts = misc.getPostList(
         misc.postListQueryBase(noAllFilter=True).where(
-            SubPost.link % ("%://" + domain + "/%")
+            SubPost.link % ("%://" + domain + "/%") | SubPost.link % ("%://" + domain)
         ),
         "new",
         page,
