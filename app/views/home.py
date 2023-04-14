@@ -178,6 +178,10 @@ def all_domain_new(domain, page):
         "new",
         page,
     )
+    count = misc.postListQueryBase(noAllFilter=True).where(
+        SubPost.link % ("%://" + domain + "/%") | SubPost.link % ("%://" + domain)
+    )
+    post_count = len(count)
     return engine.get_template("index.html").render(
         {
             "posts": posts,
@@ -186,7 +190,7 @@ def all_domain_new(domain, page):
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
             "ann": misc.getAnnouncement(),
-            "kw": {"domain": domain},
+            "kw": {"domain": domain, "post_count": post_count},
         }
     )
 
