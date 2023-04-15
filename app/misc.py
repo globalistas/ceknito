@@ -12,6 +12,7 @@ import re
 import gevent
 from gevent import monkey
 import ipaddress
+import locale
 from collections import defaultdict
 from functools import wraps
 
@@ -639,8 +640,14 @@ def getDefaultSubs():
     defaults = [
         x.value for x in SiteMetadata.select().where(SiteMetadata.key == "default")
     ]
-    defaults = Sub.select(Sub.sid, Sub.name).where(Sub.sid << defaults)
-    return list(defaults.dicts())
+    defaults = (
+        Sub.select(Sub.sid, Sub.name).where(Sub.sid << defaults).order_by(Sub.name)
+    )
+    locale.setlocale(locale.LC_ALL, "en_US.UTF-8")
+    defaults = sorted(
+        list(defaults.dicts()), key=lambda x: locale.strxfrm(x["name"].lower())
+    )
+    return defaults
 
 
 @cache.memoize(600)
