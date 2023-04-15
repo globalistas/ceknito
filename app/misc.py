@@ -657,7 +657,8 @@ def getDefaultSubs_list(ext=False):
     if not ext:
         defaults = sorted(defaults, key=str.lower)
     else:
-        defaults = sorted(defaults, key=lambda x: x["name"].lower())
+        locale.setlocale(locale.LC_ALL, "en_US.UTF-8")
+        defaults = sorted(defaults, key=lambda x: locale.strxfrm(x["name"].lower()))
     return defaults
 
 
