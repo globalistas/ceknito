@@ -62,7 +62,7 @@
               <th>Created</th>
               <th>Owner</th>
               <th>Mods</th>
-              <th>Subs</th>
+              <th>Subscribers</th>
               <th>Posts</th>
               <th>Default</th>
             </tr>
@@ -70,7 +70,7 @@
           <tbody>
             {% set default_subs = func.getDefaultSubs() %}
             {% for sub in subs %}
-            {% set subInfo = func.getSubData(sub.sid, simple=False) %}
+            {% set subInfo = func.getSubData(sub.sid, simple=False) %}  <!-- not used for now -->
             {% set subMods = func.getSubMods(sub.sid) %}
             <tr>
               <td>
@@ -83,8 +83,8 @@
                 {% endfor %}
               </td>
               <td>{{subMods.mods|count}}</td>
-              <td>{{subInfo.subs}}</td>
-              <td>{{subInfo.posts}}</td>
+              <td>{{sub.subcribers}}</td>
+              <td>{{sub.posts}}</td>
               <td>
                 <div role="group" class="pure-button-group" data-sid="{{sub.name}}" style="display:inline-block;">
                 {% if sub.name in default_subs|map(attribute='name') %}
