@@ -47,12 +47,6 @@ site:
   # a timed one-time password.
   enable_totp: False
 
-  # Enables automatic assignment of the "Early Adopter" badge to new user accounts
-  auto_adopter: False
-
-  # Enables automatic assignment of the "Ready Steady Check" badge to user upon creating their first post
-  auto_rsc: False
-
 auth:
   # Set to LOCAL to store user authentication in database,
   # or KEYCLOAK to use a Keycloak server to authenticate users.
