@@ -482,28 +482,18 @@ configurable_defaults = {
                 },
             },
             "auto_adopter": {
-                "type": "map",
-                "value": {
-                    "default": {
-                        "type": "bool",
-                        "doc": _l(
-                            "If enabled, new users get their Early Adopter badge automatically."
-                        ),
-                        "value": False,
-                    },
-                },
+                "type": "bool",
+                "doc": _l(
+                    "If enabled, new users get their Early Adopter badge automatically."
+                ),
+                "value": False,
             },
             "auto_rsc": {
-                "type": "map",
-                "value": {
-                    "default": {
-                        "type": "bool",
-                        "doc": _l(
-                            "If enabled, users get their Ready Steady Check badge after their first post."
-                        ),
-                        "value": False,
-                    },
-                },
+                "type": "bool",
+                "doc": _l(
+                    "If enabled, users get their Ready Steady Check badge after their first post automatically."
+                ),
+                "value": False,
             },
             "admin_sub": {
                 "type": "string",
