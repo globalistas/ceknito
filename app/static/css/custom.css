@@ -32,9 +32,8 @@
   overflow: visible;
   padding: 4px 15px;
   text-align: center;
-  vertical-align: baseline;
-  user-select: none;
   -webkit-user-select: none;
+  user-select: none;
   touch-action: manipulation;
   white-space: nowrap;
 }
