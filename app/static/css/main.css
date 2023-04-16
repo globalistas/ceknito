@@ -2533,8 +2533,8 @@ spoiler:not(.shown) {
   color: #111;
   background-color: #111;
   border-radius: 3px;
-  user-select: none;
   -webkit-user-select: none;
+  user-select: none;
 }
 
 
