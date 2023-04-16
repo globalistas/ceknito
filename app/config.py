@@ -11,8 +11,6 @@ import logging
 defaults = {  # key => default value
     "site": {
         "enable_totp": False,
-        "auto_adopter": False,
-        "auto_rsc": False,
         "sub_prefix": "s",
         "cas_authorized_hosts": [],
         "upload_max_size": 16777216,
@@ -478,6 +476,30 @@ configurable_defaults = {
                         "type": "bool",
                         "doc": _l(
                             "If enabled, new users have email notifications enabled by default."
+                        ),
+                        "value": False,
+                    },
+                },
+            },
+            "auto_adopter": {
+                "type": "map",
+                "value": {
+                    "default": {
+                        "type": "bool",
+                        "doc": _l(
+                            "If enabled, new users get their Early Adopter badge automatically."
+                        ),
+                        "value": False,
+                    },
+                },
+            },
+            "auto_rsc": {
+                "type": "map",
+                "value": {
+                    "default": {
+                        "type": "bool",
+                        "doc": _l(
+                            "If enabled, users get their Ready Steady Check badge after their first post."
                         ),
                         "value": False,
                     },
