@@ -17,7 +17,7 @@
 {% block content %}
 {{ super() }}
 {% if not current_user.is_authenticated and config.site.block_anon_stalking %}
-    <div>Príspevky používateľa vidia iba prihlásení používatelia.</div>
+    <div class="message" style="margin-top: 2em;">Príspevky používateľa vidia iba prihlásení používatelia.</div>
 {% else %}
     {% if sort_type == 'user.view_user_posts' %}
       <h3>Posledné príspevky</h3>
