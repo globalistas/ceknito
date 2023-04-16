@@ -64,10 +64,11 @@
               <th>Mods</th>
               <th>Subs</th>
               <th>Posts</th>
-              <th>Comms</th>
+              <th>Default</th>
             </tr>
           </thead>
           <tbody>
+            {% set default_subs = func.getDefaultSubs() %}
             {% for sub in subs %}
             {% set subInfo = func.getSubData(sub.sid, simple=False) %}
             {% set subMods = func.getSubMods(sub.sid) %}
@@ -84,7 +85,15 @@
               <td>{{subMods.mods|count}}</td>
               <td>{{subInfo.subs}}</td>
               <td>{{subInfo.posts}}</td>
-              <td>xx</td>
+              <td>
+                <div role="group" class="pure-button-group" data-sid="{{sub.name}}" style="display:inline-block;">
+                {% if sub.name in default_subs|map(attribute='name') %}
+                  <button data-ac="remove_default" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon"></span>Yes</button>
+                {%else%}
+                  <button data-ac="add_default" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon"></span>No</button>
+                {%endif%}
+                </div>
+                </td>
             </tr>
             {% endfor %}
           </tbody>

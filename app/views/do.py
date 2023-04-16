@@ -4464,3 +4464,45 @@ def admin_modify_config_setting():
     )
 
     return jsonify(status="ok")
+
+
+@do.route("/do/add_default/<sub>", methods=["POST"])
+@login_required
+def add_default(sub):
+    if not current_user.is_admin():
+        abort(403)
+
+    try:
+        sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
+    except Sub.DoesNotExist:
+        return "Error: Sub does not exist"
+
+    try:
+        SiteMetadata.get(
+            (SiteMetadata.key == "default") & (SiteMetadata.value == sub.sid)
+        )
+        return "Error: Sub is already a default!"
+    except SiteMetadata.DoesNotExist:
+        SiteMetadata.create(key="default", value=sub.sid)
+        return "Done."
+
+
+@do.route("/do/remove_default/<sub>", methods=["POST"])
+@login_required
+def remove_default(sub):
+    if not current_user.is_admin():
+        abort(403)
+
+    try:
+        sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
+    except Sub.DoesNotExist:
+        return "Error: Sub does not exist"
+
+    try:
+        metadata = SiteMetadata.get(
+            (SiteMetadata.key == "default") & (SiteMetadata.value == sub.sid)
+        )
+        metadata.delete_instance()
+        return "Done."
+    except SiteMetadata.DoesNotExist:
+        return "Error: Sub is not a default"
