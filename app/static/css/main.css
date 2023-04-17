@@ -1174,6 +1174,10 @@ img.block-blur {
   margin-left: 1em;
 }
 
+.allcomments {
+  font-size: 14px;
+}
+
 .loadsibling {
   font-size: smaller;
 }
