@@ -1687,11 +1687,11 @@ input[type=search] {
 
 .post-content-container {
   background: #fff;
-  border: solid;
-  border-width: thin;
-  border-color: #ccc;
+  border: 1px solid #ccc;
+  border-radius: 7px;
   margin-left: 1em;
   margin-right: 1.1em;
+  margin-bottom: 5em;
   padding: .4em 1em;
   /* 1px margin on botton and top so it respects <p>'s margin */
   font-family: verdana, arial, sans-serif;
