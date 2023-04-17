@@ -991,3 +991,26 @@ u.addEventForChild(document, 'change', '#flairpicker', function (e, qelem) {
         window.location.href = qelem.value;
     }
 });
+
+/* load all comments on a post */
+if (typeof (document.getElementById("cmnts")) != 'undefined' && document.getElementById("cmnts") != null) {
+    if (typeof (document.getElementById("cmnts").children[0]) != 'undefined' && document.getElementById("cmnts").children[0] != null) {
+        document.getElementById("cmnts").children[0].addEventListener('click', function (event) {
+            var comments = document.getElementsByClassName("loadsibling");
+            if (comments.length > 0) {
+                event.preventDefault();
+                var self = this;
+                var interval = setInterval(function () {
+                    var comments = document.getElementsByClassName("loadsibling");
+                    if (comments.length == 0) {
+                        clearInterval(interval);
+                        interval = false;
+                    }
+                    for (var i = 0; i < comments.length; i++) {
+                        comments[i].click();
+                    }
+                }, 300);
+            }
+        });
+    }
+}
