@@ -389,56 +389,61 @@
       <h3><a class="show-post-comments">@{_('Show comments')}</a></h3>
     @end
     <div id="post-comments" class="comments @{'hide' if post['blur'] == 'nsfw-blur' else ''}">
-      <p id="cmnts" class="allcomments" data-cnt="@{post['comments']}"><b><a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'])}">@{_('%(comments)i comments', comments=post['comments'])}</a></b>
-      <div class="pure-menu pure-menu-horizontal">
-        <ul class="pure-menu-list">
-          <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-            @(
-            sorts = {'top': _('top'),
-                     'new': _('new')}
-            default_sort = sorts['top']
-            if post['best_sort_enabled']:
-              default_sort = sorts['best'] = _('best')
-            currsort = sorts.get(sort, default_sort)
-            )
-            <span id="sortby" class="pure-menu-link">@{_('Sort by: <b>%(currsort)s</b>', currsort=currsort)!!html}</span>
-            <ul class="pure-menu-children">
-              @if post['best_sort_enabled']:
-                <li class="pure-menu-item">
-                  <a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'], sort='best')}" class="pure-menu-link">
-                    @if sort == 'best':
-                      ✓
-                    @else:
-                      &nbsp;&nbsp;
-                    @end
-                    @{_('Best')}
-                  </a>
-                </li>
-              @end
-              <li class="pure-menu-item">
-                <a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'], sort='top')}" class="pure-menu-link">
-                  @if sort == 'top':
-                    ✓
-                  @else:
-                    &nbsp;&nbsp;
+      <p></p>
+        <div class="sortcomments">
+          <div class="pure-menu pure-menu-horizontal">
+            <ul class="pure-menu-list">
+              <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                @(
+                sorts = {'top': _('top'),
+                        'new': _('new')}
+                default_sort = sorts['top']
+                if post['best_sort_enabled']:
+                  default_sort = sorts['best'] = _('best')
+                currsort = sorts.get(sort, default_sort)
+                )
+                <span id="sortby" class="pure-menu-link">@{_('Sort by: <b>%(currsort)s</b>', currsort=currsort)!!html}</span>
+                <ul class="pure-menu-children">
+                  @if post['best_sort_enabled']:
+                    <li class="pure-menu-item">
+                      <a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'], sort='best')}" class="pure-menu-link">
+                        @if sort == 'best':
+                          ✓
+                        @else:
+                          &nbsp;&nbsp;
+                        @end
+                        @{_('Best')}
+                      </a>
+                    </li>
                   @end
-                  @{_('Top')}
-                </a>
-              </li>
-              <li class="pure-menu-item">
-                <a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'], sort='new')}" class="pure-menu-link">
-                  @if sort == 'new':
-                    ✓
-                  @else:
-                    &nbsp;&nbsp;
-                  @end
-                  @{_('New')}
-                </a>
+                  <li class="pure-menu-item">
+                    <a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'], sort='top')}" class="pure-menu-link">
+                      @if sort == 'top':
+                        ✓
+                      @else:
+                        &nbsp;&nbsp;
+                      @end
+                      @{_('Top')}
+                    </a>
+                  </li>
+                  <li class="pure-menu-item">
+                    <a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'], sort='new')}" class="pure-menu-link">
+                      @if sort == 'new':
+                        ✓
+                      @else:
+                        &nbsp;&nbsp;
+                      @end
+                      @{_('New')}
+                    </a>
+                  </li>
+                </ul>
               </li>
             </ul>
-          </li>
-        </ul>
-      </div>
+          </div>
+        </div>
+        <div id="allcomments">
+          <span id="cmnts" class="allcomments" data-cnt="@{post['comments']}"><b><a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'])}">@{_('%(comments)i comments', comments=post['comments'])}</a></b></span>
+        </div>
       @{pcomm.renderComments(post, postmeta, subInfo, subMods, comments, highlight, sort)!!html}
     </div>
   @end

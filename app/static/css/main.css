@@ -1175,7 +1175,17 @@ img.block-blur {
 }
 
 .allcomments {
-  font-size: 14px;
+  font-size: 16px;
+  position: relative;
+  top: 5px;
+}
+
+.sortcomments {
+  float: right;
+  position: relative;
+  bottom: 3px;
+  right: 4px;
+  border: 1px solid #ccc;
 }
 
 .loadsibling {
@@ -2953,7 +2963,7 @@ article.text-post.comment.deleted {
 
 #sortby {
   background-color: #ffffff;
-  font-size: smaller;
+  font-size: 14px;
   text-align: center;
   cursor: pointer;
   box-shadow: 0 0px 3px rgb(0 0 0 / 10%);
