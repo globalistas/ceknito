@@ -138,8 +138,8 @@ def register():
         # Allow reregistering an existing user account which has never
         # fetched the verification link and is more than two days old.
         if (
-            existing_user.status != UserStatus.PROBATION
-            or (datetime.utcnow() - existing_user.joindate).days < 2
+                existing_user.status != UserStatus.PROBATION
+                or (datetime.utcnow() - existing_user.joindate).days < 2
         ):
             return engine.get_template("user/register.html").render(
                 {
@@ -238,18 +238,19 @@ def register():
 
     subject = _("Vitaj na čekni.to")
 
-    content = _("A ďakujeme za registráciu!"
-                "\n\nAko bonus od nás dostávaš odznak \"Early Adopter\" (jeden z prvých používateľov), ktorý zvyšuje "
-                "tvoj"
-                "používateľský level na 7, čo ti napríklad umožňuje založiť novú skupinu! Tento odznak dostane iba "
-                "prvých tisíc registrovaných používateľov. Môžeš si ho pozrieť vo svojom profile /u/%(user_name)s."
-                "\n\nAk sem prilákaš ďalšieho používateľa, daj mi vedieť, a dostaneš navyše odznak \"Headhunter\", "
-                "ktorý ti ešte viac navýši level. A za Tvoj prvý príspevok dostaneš ďalší odznak - aktívne "
-                "prispievanie je základom rastúcej komunity, a budeme zaň veľmi vďační."
-                "\n\nP.S. Tu nájdeš stručný návod ako používať tento web: "
-                'https://cekni.to/s/Oznamy/2594/ako-pouzivat-tento-web',
-                user_name=user.name,
-                )
+    content = _(
+        "A ďakujeme za registráciu!"
+        '\n\nAko bonus od nás dostávaš odznak "Early Adopter" (jeden z prvých používateľov), ktorý zvyšuje '
+        "tvoj"
+        "používateľský level na 7, čo ti napríklad umožňuje založiť novú skupinu! Tento odznak dostane iba "
+        "prvých tisíc registrovaných používateľov. Môžeš si ho pozrieť vo svojom profile /u/%(user_name)s."
+        '\n\nAk sem prilákaš ďalšieho používateľa, daj mi vedieť, a dostaneš navyše odznak "Headhunter", '
+        "ktorý ti ešte viac navýši level. A za Tvoj prvý príspevok dostaneš ďalší odznak - aktívne "
+        "prispievanie je základom rastúcej komunity, a budeme zaň veľmi vďační."
+        "\n\nP.S. Tu nájdeš stručný návod ako používať tento web: "
+        "https://cekni.to/s/Oznamy/2594/ako-pouzivat-tento-web",
+        user_name=user.name,
+    )
     if config.site.auto_welcome:
         create_message(admin_primary.uid, user.uid, subject, content, 100)
 
@@ -313,9 +314,9 @@ def login_with_token(token):
         return redirect(url_for("home.index"))
     user = user_from_login_token(token)
     if (
-        user is None
-        or user.status == UserStatus.BANNED
-        or user.status == UserStatus.DELETED
+            user is None
+            or user.status == UserStatus.BANNED
+            or user.status == UserStatus.DELETED
     ):
         flash(_("The link you used is invalid or has expired."), "error")
         return redirect(url_for("auth.resend_confirmation_email"))
