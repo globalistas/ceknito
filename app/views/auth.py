@@ -242,8 +242,7 @@ def register():
 
     content = _(
         "A ďakujeme za registráciu!"
-        '\n\nAko bonus od nás dostávaš odznak "Early Adopter" (jeden z prvých používateľov), ktorý zvyšuje '
-        "tvoj"
+        '\n\nAko bonus od nás dostávaš odznak "Early Adopter" (jeden z prvých používateľov), ktorý zvyšuje tvoj '
         "používateľský level na 7, čo ti napríklad umožňuje založiť novú skupinu! Tento odznak dostane iba "
         "prvých tisíc registrovaných používateľov. Môžeš si ho pozrieť vo svojom profile /u/%(user_name)s."
         '\n\nAk sem prilákaš ďalšieho používateľa, daj mi vedieť, a dostaneš navyše odznak "Headhunter", '
