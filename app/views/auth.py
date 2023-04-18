@@ -138,8 +138,8 @@ def register():
         # Allow reregistering an existing user account which has never
         # fetched the verification link and is more than two days old.
         if (
-                existing_user.status != UserStatus.PROBATION
-                or (datetime.utcnow() - existing_user.joindate).days < 2
+            existing_user.status != UserStatus.PROBATION
+            or (datetime.utcnow() - existing_user.joindate).days < 2
         ):
             return engine.get_template("user/register.html").render(
                 {
@@ -232,9 +232,11 @@ def register():
         Badges.assign_userbadge(user.uid, 3)
 
     # Automatically send a welcome message
-    admin_primary = UserMetadata.select().where(
-        (UserMetadata.key == "admin") & (UserMetadata.value == "1")
-    ).first()
+    admin_primary = (
+        UserMetadata.select()
+        .where((UserMetadata.key == "admin") & (UserMetadata.value == "1"))
+        .first()
+    )
 
     subject = _("Vitaj na čekni.to")
 
@@ -314,9 +316,9 @@ def login_with_token(token):
         return redirect(url_for("home.index"))
     user = user_from_login_token(token)
     if (
-            user is None
-            or user.status == UserStatus.BANNED
-            or user.status == UserStatus.DELETED
+        user is None
+        or user.status == UserStatus.BANNED
+        or user.status == UserStatus.DELETED
     ):
         flash(_("The link you used is invalid or has expired."), "error")
         return redirect(url_for("auth.resend_confirmation_email"))
