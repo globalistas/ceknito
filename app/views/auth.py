@@ -28,7 +28,7 @@ from ..auth import auth_provider, email_validation_is_required
 from ..auth import normalize_email, create_user
 from ..badges import Badges
 from ..forms import LoginForm, RegistrationForm, ResendConfirmationForm, is_safe_url
-from ..misc import engine, send_email, is_domain_banned, gevent_required
+from ..misc import engine, send_email, is_domain_banned, gevent_required, create_message
 from ..misc import ratelimit, AUTH_LIMIT, SIGNUP_LIMIT
 from ..models import User, UserStatus, InviteCode, rconn, UserMetadata, UserAuthSource
 
@@ -227,8 +227,31 @@ def register():
     text_content = user.name + "\n" + ip + "\n" + regdate + "\n" + useragent
     send_email(config.mail.default_to, "New registration", text_content, "")
 
+    # Automatically assign the Early Adopter badge
     if config.site.auto_adopter:
         Badges.assign_userbadge(user.uid, 3)
+
+    # Automatically send a welcome message
+    admin_primary = UserMetadata.select().where(
+        (UserMetadata.key == "admin") & (UserMetadata.value == "1")
+    ).first()
+
+    subject = _("Vitaj na čekni.to")
+
+    content = _("A ďakujeme za registráciu!"
+                "\n\nAko bonus od nás dostávaš odznak \"Early Adopter\" (jeden z prvých používateľov), ktorý zvyšuje "
+                "tvoj"
+                "používateľský level na 7, čo ti napríklad umožňuje založiť novú skupinu! Tento odznak dostane iba "
+                "prvých tisíc registrovaných používateľov. Môžeš si ho pozrieť vo svojom profile /u/%(user_name)s."
+                "\n\nAk sem prilákaš ďalšieho používateľa, daj mi vedieť, a dostaneš navyše odznak \"Headhunter\", "
+                "ktorý ti ešte viac navýši level. A za Tvoj prvý príspevok dostaneš ďalší odznak - aktívne "
+                "prispievanie je základom rastúcej komunity, a budeme zaň veľmi vďační."
+                "\n\nP.S. Tu nájdeš stručný návod ako používať tento web: "
+                'https://cekni.to/s/Oznamy/2594/ako-pouzivat-tento-web',
+                user_name=user.name,
+                )
+    if config.site.auto_welcome:
+        create_message(admin_primary.uid, user.uid, subject, content, 100)
 
     if email_validation_is_required():
         send_login_link_email(user)

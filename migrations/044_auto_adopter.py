@@ -1,7 +1,7 @@
 """Peewee migrations -- 044_auto_adopter
 
-Add a admin site configuration option to control whether new users have
-email notifications on by default.
+Add an admin site configuration option to control whether new users get
+the Early Adopter badge automatically.
 
 """
 

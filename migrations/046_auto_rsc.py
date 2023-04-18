@@ -1,7 +1,7 @@
 """Peewee migrations -- 046_auto_rsc
 
-Add a admin site configuration option to control whether new users have
-email notifications on by default.
+Add an admin site configuration option to control whether users get the RSC
+badge automatically.
 
 """
 

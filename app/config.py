@@ -481,6 +481,13 @@ configurable_defaults = {
                     },
                 },
             },
+            "auto_welcome": {
+                "type": "bool",
+                "doc": _l(
+                    "If enabled, new users get an automated welcome message from the first admin user."
+                ),
+                "value": False,
+            },
             "auto_adopter": {
                 "type": "bool",
                 "doc": _l(
