@@ -339,6 +339,10 @@ body.dark .sidebar {
 
 }
 
+body.dark .sidebar p {
+  color: #8f8f8f;
+}
+
 body.dark .sidebar h4 {
   color: #ccc;
 }
@@ -849,7 +853,7 @@ body.dark #chloading {
 
 body.dark .stickyposts {
   border-bottom: 1px solid #40444b;
-  background-color: #18223d;
+  background-color: #373a3f;
 }
 
 body.dark .expando {
@@ -909,7 +913,7 @@ body.dark td.subsentry.subsubscribed {
 }
 
 body.dark .stick {
-  color: #555555;
+  color: #2c8b05;
 }
 
 body.dark .pblock.level .uprofile-level-box .fill {
