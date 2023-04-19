@@ -1152,7 +1152,7 @@ img.block-blur {
 
 .wholepost {
   /*  margin-top: 1.5em;*/
-  background-color: #eee;
+  background-color: #faf9f8;
 }
 
 .comment-form {
@@ -2070,12 +2070,12 @@ li.profilebadge {
 article.comment {
   padding: .8em 0 0 0em;
   /*  border-radius: 8px 0 0 8px; */
-  background-color: #eee;
+  background-color: #faf9f8;
   margin: 4px 0;
 }
 
 article.comment:nth-child(2n) {
-  background-color: #eee;
+  background-color: #faf9f8;
   /*    -webkit-box-shadow: -3px 2px 4px 0 rgba(0, 0, 0, .1);
     -moz-box-shadow: -3px 2px 4px 0 rgba(0, 0, 0, .1);
     box-shadow: -3px 2px 4px 0 rgba(0, 0, 0, .1);
