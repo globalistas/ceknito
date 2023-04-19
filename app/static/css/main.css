@@ -645,13 +645,14 @@ a.pure-button-primary {
   width: calc(100% - 130px);
   padding: 5px 10px 5px 5px;
   border: 1px solid #ccc;
-  /*  border-radius: 3px;*/
+  border-radius: 3px;
   box-shadow: 0 0px 3px rgb(0 0 0 / 10%);
 }
 
 .pbody:hover {
   background: #f5f5f5;
   border: 1px solid transparent;
+  border-radius: 3px;
   box-shadow: 0 0px 3px 2px rgb(0 0 0 / 10%);
   transition: all 50ms ease-out;
 }
@@ -749,6 +750,8 @@ iframe {
   width: 70px;
   height: 70px;
   text-align: center;
+  position: relative;
+  right: 2px;
 }
 
 .post .thumbnail img {
@@ -801,7 +804,8 @@ iframe {
 
 .score {
   font-size: 17px;
-  margin: 5px 0 5px -2px;
+  color: #505050;
+  margin: 5px 2px 5px 0px;
   text-align: center;
   letter-spacing: normal;
 }
@@ -1219,7 +1223,7 @@ img.block-blur {
 .c-downvote svg,
 .upvote svg,
 .downvote svg {
-  fill: #888;
+  fill: #8889;
   block-size: 0.6em;
 }
 
