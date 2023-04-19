@@ -300,7 +300,7 @@ a:hover {
 }
 
 #center-container {
-  background-color: #eee;
+  background-color: #faf9f8;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -351,7 +351,7 @@ a:hover {
 .message {
   margin-top: 1em;
   padding: 5px;
-  background-color: #eeeeee;
+  background-color: #faf9f8;
   /* color: white; */
   margin-bottom: 15px;
   /* border-radius: 3px; */
@@ -579,7 +579,7 @@ a.pure-button-primary {
 }
 
 #filetable {
-  background-color: #eee;
+  background-color: #faf9f8;
   padding: 1em;
   margin-bottom: 10px;
   margin-top: 10px;
