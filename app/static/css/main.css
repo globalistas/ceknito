@@ -19,7 +19,7 @@ abbr[title] {
 }
 
 .cw-brand div {
-  margin-left: 1em;
+  margin-left: 0.8em;
 }
 
 .content {
@@ -296,7 +296,7 @@ a:hover {
   -moz-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, .6);
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, .6);
   position: relative;
-  height: 3.6em;
+  height: 3.8em;
   z-index: 100;
 }
 
@@ -313,7 +313,7 @@ a:hover {
 }
 
 #container {
-  padding-top: 0.4em;
+  padding-top: .5em;
   padding-left: .5em;
   width: 100%;
   background: #faf9f8;
@@ -2607,9 +2607,9 @@ a[href="#toodamncool"] {
 
 .motto {
   z-index: 20;
-  bottom: 0;
+  left: 52px;
+  bottom: 3.5px;
   position: absolute;
-  left: 56px;
   color: white;
   font-size: smaller;
 }
