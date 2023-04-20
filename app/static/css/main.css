@@ -1385,7 +1385,7 @@ span.hasmail {
 }
 
 .th-subbar ul {
-  margin: .1em .1em .2em .1em;
+  margin: .1em .1em 0em .1em;
   padding: 0;
   white-space: nowrap;
   width: calc(100% - 5em);
