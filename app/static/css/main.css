@@ -645,9 +645,9 @@ a.pure-button-primary {
   display: inline-block;
   width: calc(100% - 130px);
   padding: 5px 10px 5px 5px;
-  border: 1px solid #ddd;
+  border: 1px solid #d5d5d5;
   border-radius: 3px;
-/*  box-shadow: 0 0px 3px rgb(0 0 0 / 10%);*/
+  box-shadow: -5px 5px 12px 0px rgb(0 0 0 / 10%);
 }
 
 .pbody:hover {
