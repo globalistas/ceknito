@@ -1423,7 +1423,7 @@ span.hasmail {
   border-left: solid 1px #cdcdcd;
   border-right: dotted 1px #cdcdcd;
   position: relative !important;
-  background: linear-gradient(0deg, #ffffff 60%, #e7e7e7 100%);
+  background: linear-gradient(0deg, #ffffff 30%, #e7e7e7 100%);
 }
 
 .sidebar p {
