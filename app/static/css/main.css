@@ -292,9 +292,9 @@ a:hover {
   padding: .4em 0 .4em .3em;
   overflow: hidden;
   transition: height 0.5s;
-  -webkit-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, .6);
-  -moz-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, .6);
-  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, .6);
+  -webkit-box-shadow: 0 2px 7px 0 rgba(0, 0, 0, .6);
+  -moz-box-shadow: 0 2px 7px 0 rgba(0, 0, 0, .6);
+  box-shadow: 0px 2px 7px 0 rgba(0, 0, 0, .6);
   position: relative;
   height: 3.8em;
   z-index: 100;
@@ -1494,7 +1494,7 @@ span.hasmail {
 }
 
 .sbm-post-grad:hover {
-  background-color: #9f0707;
+  background-color: var(--primary-color);
   color: white;
 }
 
@@ -2292,7 +2292,7 @@ table td {
 }
 
 #chtitle:hover {
-  background: #A50105;
+  background: #8e98a7;
 }
 
 #chcont {

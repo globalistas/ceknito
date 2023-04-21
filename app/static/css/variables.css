@@ -3,9 +3,9 @@
     The site's primary color. Used for sidebars, buttons and some icons on light mode.
     Phuks: #d94f00
     */
-    --primary-color: #800000;
+    --primary-color: #46586e;
     /* Used as box-shadow color */
-    --primary-shadow: #800000;
+    --primary-shadow: #46586e;
 
     /* Post link colors */
     /*
@@ -23,7 +23,7 @@
     Used only in the chatbox at the moment
     Phuks: #b74500
      */
-    --primary-highlight: #800000;
+    --primary-highlight: #b1bbc9;
 
     /* These are used only for buttons */
     --button-success-bg: rgb(28, 184, 65);
@@ -37,7 +37,7 @@
     --button-secondary-bg: #101010;
 
     /* Primary buttons used all over the site */
-    --button-primary-bg: #A50105;
+    --button-primary-bg: #b1bbc9;
     --button-primary-fg: #fff;
 
 
