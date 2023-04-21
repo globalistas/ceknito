@@ -329,6 +329,7 @@ body.dark input#buyamount~b {
 body.dark .sidebar {
   background-color: #2f3136;
   border: solid 1px #202225;
+  border-bottom: none;
   background: none;
 
 }
