@@ -85,3 +85,5 @@ configs
 stor
 
 *.mo
+/gunicornws.sh
+/gunicornmain.sh
