@@ -91,7 +91,7 @@ body.dark .th-navbar {
 
 body.dark .footer {
   color: #c1c1c1;
-  background-color: #373a3f;
+/*  background-color: #373a3f; */
 }
 
 /* body.dark .th-navbar.open {
@@ -243,15 +243,6 @@ body.dark .pure-button-primary {
   background-color: #202225;
 }
 
-body.dark .sidebar .pure-button-primary {
-  color: #fff;
-  background-color: #3a3c40;
-}
-
-body.dark .sidebar .pure-button-primary:hover {
-  background-color: #282828;
-}
-
 body.dark a#nextp,
 body.dark a#prevp {
   color: #c0c0c0;
@@ -275,7 +266,7 @@ body.dark .expando {
 
 body.dark .post .expandotxt,
 body.dark .post:nth-child(2n) .expandotxt {
-  background-color: #202225;
+/*  background-color: #202225; */
   color: #aaa;
 }
 
@@ -338,11 +329,12 @@ body.dark input#buyamount~b {
 body.dark .sidebar {
   background-color: #2f3136;
   border: solid 1px #202225;
+  background: none;
 
 }
 
 body.dark .sidebar p {
-  color: #8f8f8f;
+  color: #8f8f8f !important;
 }
 
 body.dark .sidebar h4 {
@@ -639,7 +631,10 @@ body.dark thead a {
   color: #231411
 }
 
+/* alldaposts */
+
 body.dark .alldaposts {
+  background: transparent;
   background-color: transparent;
 }
 
@@ -658,6 +653,18 @@ body.dark .stickyposts .links a {
 body.dark .stickyposts .links a.comments {
   color: #526a7d;
 }
+
+/* sidebar */
+
+body.dark .sidebar .pure-button-primary {
+  color: #fff;
+  background-color: #3a3c40;
+}
+
+body.dark .sidebar .pure-button-primary:hover {
+  background-color: #282828;
+}
+
 
 /* poll */
 body.dark .poll-pbar {
@@ -856,6 +863,7 @@ body.dark #chloading {
 body.dark .stickyposts {
   border-bottom: 1px solid #40444b;
   background-color: #373a3f;
+  background: #373a3f;
 }
 
 body.dark .expando {

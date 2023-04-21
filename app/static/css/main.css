@@ -316,7 +316,7 @@ a:hover {
   padding-top: .5em;
   padding-left: .5em;
   width: 100%;
-  background: #faf9f8;
+  background: linear-gradient(270deg, #ffffff 85%, #f1f1f1 100%);
 }
 
 .error {
@@ -645,9 +645,9 @@ a.pure-button-primary {
   display: inline-block;
   width: calc(100% - 130px);
   padding: 5px 10px 5px 5px;
-  border: 1px solid #d5d5d5;
+  border: 1px solid #dfdfdf;
   border-radius: 3px;
-  box-shadow: -5px 5px 12px 0px rgb(0 0 0 / 10%);
+/*  box-shadow: -5px 5px 12px 0px rgb(0 0 0 / 10%);*/
 }
 
 .pbody:hover {
@@ -947,18 +947,6 @@ a.reply-comment {
   font-size: 11px;
 }
 
-.alldaposts {
-  background-color: #faf9f8;
-}
-
-.alldaposts .links a {
-  color: #777;
-}
-
-.alldaposts .links a.comments {
-  color: #0f5387;
-}
-
 .links li {
   display: inline-block;
   padding: 0 .25em;
@@ -1003,7 +991,7 @@ img.block-blur {
   /*  padding-top: 0.5em;*/
   padding-bottom: .5em;
   border-bottom: 1px solid #efefef;
-  background-color: #faf9f8;
+  background: linear-gradient(270deg, #ffffff 85%, #f1f1f1 100%);
 }
 
 .stickyposts .links a.comments {
@@ -1410,14 +1398,32 @@ span.hasmail {
 
 /* /SUB BAR STYLES */
 
+
+/* alldaposts */
+
+.alldaposts {
+  background-color: #faf9f8;
+  background: linear-gradient(270deg, #ffffff 85%, #f1f1f1 100%);
+}
+
+.alldaposts .links a {
+  color: #777;
+}
+
+.alldaposts .links a.comments {
+  color: #0f5387;
+}
+
+
 /* SIDEBAR STYLES */
 
 .sidebar {
   padding: 1em 5px 5px 5px;
   overflow-wrap: break-word;
-  border-left: solid 1px #e2e2e2;
-  border-right: dotted 1px #ccc;
+  border-left: solid 1px #cdcdcd;
+  border-right: dotted 1px #cdcdcd;
   position: relative !important;
+  background: linear-gradient(0deg, #ffffff 60%, #e7e7e7 100%);
 }
 
 .sidebar p {
@@ -1426,6 +1432,8 @@ span.hasmail {
   font-size: 0.9em;
   color: #222222 !important;
 }
+
+/* mods */
 
 .moderators {
   padding-left: 0.5em;
@@ -1468,7 +1476,7 @@ span.hasmail {
 }
 
 .sbm-post-grad {
-  background-color: #e6e6e6;
+/*  background-color: #cdcdcd; */
   border: 1px solid #ccc;
   /* border-radius: 2px;*/
   box-sizing: border-box;
