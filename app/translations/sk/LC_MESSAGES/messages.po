@@ -3580,7 +3580,7 @@ msgstr "Správa bola zaslaná administrátorom."
 
 #: app/static/js/Sub.js:319
 msgid "No subs found"
-msgstr "skupina sa nenašla"
+msgstr "takúto skupinu tu zatiaľ nemáme, ale môžeš ju skúsiť založiť :)"
 
 #: app/static/js/main.js:44
 msgid "Log in or register to continue"
