@@ -1710,6 +1710,10 @@ input[type=search] {
   width: 90%;
 }
 
+.post-content-container-nocontent {
+  margin: 1em 1em 0em 1em;
+}
+
 .poll-space {
   padding: .4em 1em;
   margin-left: 1em;
