@@ -31,6 +31,7 @@ defaults = {  # key => default value
             "vine.co",
             "instaud.io",
             "player.vimeo.com",
+            "www.bitchute.com",
         ],
         "extra_connect_src": [],
         "footer": {
