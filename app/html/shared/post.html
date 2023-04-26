@@ -73,7 +73,10 @@
       <div class="author">
         @(
         timeago = '<time-ago datetime="' + post['posted'].isoformat() + 'Z"></time-ago>'
-        flairspan = (' <span class="user_flair" data-flair-id="' + str(post['user_flair_id']) + '">' + e(post['user_flair']) + '</span>' if post['user_flair'] else '')
+        if sub:
+            flairspan = (' <span class="user_flair" data-flair-id="' + str(post['user_flair_id']) + '">' + e(post['user_flair']) + '</span>' if post['user_flair'] else '')
+        else:
+            flairspan = ''
         if post['distinguish'] == 1:
             distinguish_text = _(' [speaking as mod]')
         elif post['distinguish'] == 2:
