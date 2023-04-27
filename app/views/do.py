@@ -4087,14 +4087,14 @@ def report_comment():
         if comm.status:
             return jsonify(status="error", error=_("Comment was removed"))
 
-        # check if user already reported the post
+        # check if user already reported the comment
         try:
             SubPostCommentReport.get(
                 (SubPostCommentReport.cid == comm.cid)
                 & (SubPostCommentReport.uid == current_user.uid)
             )
             return jsonify(
-                status="error", error=_("You have already reported this post")
+                status="error", error=_("You have already reported this comment")
             )
         except SubPostCommentReport.DoesNotExist:
             pass
