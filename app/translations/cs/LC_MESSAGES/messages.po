@@ -4222,6 +4222,10 @@ msgstr "Příspěvek byl smazán"
 msgid "You have already reported this post"
 msgstr "Tento příspěvek jsi již nahlásil(a)"
 
+#: app/views/do.py:4018 app/views/do.py:4097
+msgid "You have already reported this comment"
+msgstr "Tento komentář jsi již nahlásil(a)"
+
 #: app/views/do.py:4024 app/views/do.py:4097
 msgid "Report reason too short."
 msgstr "Důvod hlášení je příliš krátký."
