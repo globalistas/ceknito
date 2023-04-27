@@ -114,9 +114,6 @@
             @{_('comment')} \
           @end
         </a>
-        @if current_user.uid and not sub and not announcement:
-          <span><a data-ac="block" class="unblk">@{_('block sub')}</a></span>
-        @end
         @if current_user.uid and post['uid'] != current_user.uid:
           <a data-ac="report" data-pid="@{post['pid']}" class="report-post">@{_('report')}</a>
         @end
