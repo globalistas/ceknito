@@ -81,17 +81,20 @@ def auth():
             (UserMetadata.uid == current_user.uid)
             & (UserMetadata.key == "totp_setup_finished")
         )
+        setup = False
         template = "admin/totp.html"
     except UserMetadata.DoesNotExist:
+        setup = True
         pass
 
     if form.validate_on_submit():
         totp = pyotp.TOTP(user_secret.value)
         if totp.verify(form.totp.data):
             session["apriv"] = time.time()
-            UserMetadata.create(
-                uid=current_user.uid, key="totp_setup_finished", value="1"
-            )
+            if setup:
+                UserMetadata.create(
+                    uid=current_user.uid, key="totp_setup_finished", value="1"
+                )
             return redirect(url_for("admin.index"))
         else:
             return engine.get_template(template).render(

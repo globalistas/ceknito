@@ -52,3 +52,18 @@ def list_admins():
     print("Administrators: ")
     for i in users:
         print("  ", i.name)
+
+
+@admin.command(help="Resets TOTP setup for an administrator")
+@click.argument("username")
+def reset_totp(username):
+    try:
+        user = User.get(fn.Lower(User.name) == username.lower())
+    except User.DoesNotExist:
+        return print("Error: User does not exist.")
+
+    UserMetadata.delete().where(
+        (UserMetadata.uid == user.uid)
+        & (UserMetadata.key << ["totp_secret", "totp_setup_finished"])
+    ).execute()
+    print("Done.")
