@@ -2,31 +2,31 @@
 <html lang="{{func.get_locale()}}">
   <head>
     {% block head %}
-    <meta charset="utf-8">
-    <meta name="keywords" content="forum, diskusie, komentare, reddit, cekni, cekni.to, www.cekni.to">
-    <meta name="referrer" content="always">
+    <meta charset="utf-8" />
+    <meta name="keywords" content="forum, diskusie, komentare, reddit, cekni, cekni.to, www.cekni.to" />
+    <meta name="referrer" content="always" />
 
-    <meta name="description" content="{{config.site.lema}}">
-    <meta name="twitter:description" content=@{config.site.lema}/>
+    <meta name="description" content="{{config.site.lema}}" />
+    <meta name="twitter:description" content="{{config.site.lema}}" />
     <meta name="twitter:image:src" content="https://cekni.to/@{ url_for('static', filename='img/android-chrome-512x512.png') }" />
-    <meta name="twitter:title" content="Ovarit" />
+    <meta name="twitter:title" content="čekni.to" />
     <meta name="twitter:image:width" content="512" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:image:height" content="512" />
-    <meta name="description" content="@{config.site.lema}"/>
-    <meta property="og:description" content=@{config.site.lema}/>
+    <meta name="description" content="{{config.site.lema}}" />
+    <meta property="og:description" content={{config.site.lema}} />
     <meta property="og:image" content="https://cekni.to/@{ url_for('static', filename='img/android-chrome-512x512.png') }" />
-    <meta property="og:title" content="Ovarit" />
+    <meta property="og:title" content="čekni.to" />
     <meta property="og:image:width" content="512" />
     <meta property="og:image:height" content="512" />
-    <meta name="robots" content="index, follow">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- mobile stuff -->
-    <meta name="theme-color" content="white">
-    <meta name="msapplication-navbutton-color" content="white">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="white-translucent">
+    <meta name="theme-color" content="white" />
+    <meta name="msapplication-navbutton-color" content="white" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white-translucent" />
 
     <!--  <link rel="icon" href="{{ url_for('static', filename='img/icon.png') }}?v9"> -->
 
