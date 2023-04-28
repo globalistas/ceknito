@@ -53,7 +53,7 @@
             <span class="nsfw smaller" alt="Not safe for work">@{_('NSFW')}</span>
           @endif
           <div class="sidelocale">
-            @{_("%(timeago)s in %(sub)s", timeago='<time-ago datetime="' + post['time'].isoformat() + 'Z"></time-ago>', sub='<a href="' + url_for('sub.view_sub', sub=post['sub']) + '">/' + config.site.sub_prefix + '/' + post['sub'] + '</a>') !!html}
+            @{_("%(timeago)s in %(sub)s", timeago='<time-ago datetime="' + post['time'].isoformat() + 'Z"></time-ago>', sub='<a href="' + url_for('sub.view_sub', sub=post['sub']) + '">' + post['sub'] + '</a>') !!html}
           </div>
         </li>
       @end
