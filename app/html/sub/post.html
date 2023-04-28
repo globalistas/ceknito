@@ -199,7 +199,7 @@
         user_html = user_link if (post['userstatus'] != 10 or current_user.is_admin()) else deleted_link
         sublink = '<a href="/' + config.site.sub_prefix + '/' + post['sub'] + '">' + post['sub'] + '</a>'
         )
-        @{_('posted %(timeago)s by %(user)s on %(sub)s', timeago=timeago, user=user_html, sub=sublink)!!html}
+        @{_('posted %(timeago)s by %(user)s', timeago=timeago, user=user_html)!!html}
       </div>
       <ul class="links" data-pid="@{post['pid']}">
         @if current_user.is_authenticated and post['deleted'] == 0:

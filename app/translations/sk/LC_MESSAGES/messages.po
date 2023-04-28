@@ -1627,7 +1627,7 @@ msgstr " [blokované]"
 #: app/html/shared/post.html:93 app/html/sub/post.html:203
 #, python-format
 msgid "posted %(timeago)s by %(user)s on %(sub)s"
-msgstr "%(timeago)s pridal(a) %(user)s v %(sub)s"
+msgstr "%(timeago)s pridal(a) %(user)s v skupine %(sub)s"
 
 #: app/html/shared/post.html:95
 #, python-format
