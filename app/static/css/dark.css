@@ -32,6 +32,10 @@ body.dark div.author a.authorlink {
   color: #526a7d;
 }
 
+body.dark a.poster {
+  color: #526a7d;
+}
+
 body.dark .content,
 body.dark #container2 {
   color: #c1c1c1;
@@ -748,6 +752,15 @@ body.dark .browse-history:focus {
 
 body.dark .links a.post-open-reports {
   color: #526a7d;
+}
+
+body.dark .allcomments {
+  top: 0px;
+}
+
+body.dark .sortcomments {
+  bottom: 15px;
+  right: 0px
 }
 
 body.dark #sortby {
