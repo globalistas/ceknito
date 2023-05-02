@@ -754,31 +754,37 @@ body.dark .links a.post-open-reports {
   color: #526a7d;
 }
 
+body.dark .votecomment {
+  margin-top: 0.21em;
+  padding-left: 0.4em;
+}
+
 body.dark .allcomments {
   top: 0px;
 }
 
 body.dark .sortcomments {
   bottom: 15px;
-  right: 0px
+  right: 0px;
+  border: 1px solid #b9bbbe;
 }
 
 body.dark #sortby {
   background: #171717;
-  color: #ddd;
+  color: #b9bbbe;
   font-size: smaller;
   text-align: center;
   cursor: pointer;
 }
 
 body.dark .pure-menu-item a {
-  background: #806767;
-  color: #fff
+  background: #202225;
+  color: #abbbbe;
 }
 
 body.dark .pure-menu-item a:hover {
   background: #666;
-  color: #d17262;
+  color: #b9bbbe;
 }
 
 body.dark .pure-menu-children {
