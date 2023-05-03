@@ -164,8 +164,8 @@ def clear_metadata(fileobj: FileStorage, mime_type: str):
     elif mime_type == "video/mp4":
         video = MP4(fileobj)
         video.clear()
-        video.save(resultIO)
-        return resultIO
+        video.save(fileobj)
+        return fileobj
     elif mime_type == "video/webm":
         # XXX: Mutagen doesn't seem to support webm files
         return fileobj
