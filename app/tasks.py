@@ -122,7 +122,9 @@ def fetch_image_data(link):
         except (OSError, ValueError, IndexError):
             # for those weirdos using og:image:url instead
             try:
-                img = urljoin(link, og("meta", {"property": "og:image:url"})[0].get("content"))
+                img = urljoin(
+                    link, og("meta", {"property": "og:image:url"})[0].get("content")
+                )
                 _, image = safe_request(img, receive_timeout=60)
                 return "image", image
             except (OSError, ValueError, IndexError):
