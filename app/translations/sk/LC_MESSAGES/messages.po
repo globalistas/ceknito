@@ -891,7 +891,7 @@ msgstr "Page generated in __EXECUTION_TIME__ms with __DB_QUERIES__ queries"
 
 #: app/html/index.html:49 app/html/sub.html:40
 msgid "There are no posts here, yet."
-msgstr "Zatiaľ tu nemáme príspevky."
+msgstr "Nenašli sa žiadne príspevky."
 
 #: app/html/admin/reports.html:60 app/html/admin/wiki.html:48
 #: app/html/index.html:60 app/html/mod/closed.html:65
@@ -4419,3 +4419,11 @@ msgstr "Link pre reset hesla je neplatný"
 #: app/views/wiki.py:23
 msgid "License file was deleted :("
 msgstr "Licenčný súbor bol vymazaný :("
+
+#: app/html/shared/sidebar/sub.html:69
+msgid "Change flair"
+msgstr "Zmeniť tag"
+
+#: app/html/shared/sidebar/sub.html:82
+msgid "Delete my flair"
+msgstr "Vymazať môj tag"
