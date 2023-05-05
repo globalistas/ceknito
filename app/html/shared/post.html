@@ -13,16 +13,16 @@
       </div>
       <div class="thcontainer">
         @if post['link'] == None:
-          <a href="/@{config.site.sub_prefix}/@{post['sub']}/@{post['pid']}/@{func.slugify(post['title'])}">
+        <a href="/@{config.site.sub_prefix}/@{post['sub']}/@{post['pid']}/@{func.slugify(post['title'])}"></a>
         @else:
-          <a target="_blank" rel="noopener nofollow ugc" href="@{post['link']}">
+        <a target="_blank" rel="noopener nofollow ugc" href="@{post['link']}"></a>
         @end
           <div class="thumbnail">
             @if post['link'] != None:
               @if post['thumbnail'] == '':
                 <span class="placeholder" data-icon="link"></span>
               @elif post['thumbnail'] == 'deferred':
-                <span class="placeholder deferred @{post['blur']}" data-icon="link" data-deferred="SubPost-@{post['pid']}"/>
+                <span class="placeholder deferred @{post['blur']}" data-icon="link" data-deferred="SubPost-@{post['pid']}"></span>
               @else:
                 <img alt="@{_('Thumbnail')}" class="lazy @{post['blur']}" src="@{url_for('static', filename='img/1x1.gif')}" data-src="@{thumbnail_url(post['thumbnail'])}"/>
               @end
@@ -30,7 +30,6 @@
               <span class="placeholder" data-icon="chat"></span>
             @end
           </div>
-        </a>
       </div>
     </div>
     <div class="pbody">
