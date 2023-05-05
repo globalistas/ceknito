@@ -4517,3 +4517,11 @@ msgstr "Uživatel nemá komentáře."
 #: app/templates/usercomments.html:55
 msgid "Comment score"
 msgstr "bodů"
+
+#: app/html/index.html:51
+msgid "We have"
+msgstr "Máme zde"
+
+#: app/html/index.html:51
+msgid "posts from the domain"
+msgstr "příspěvků z domény"

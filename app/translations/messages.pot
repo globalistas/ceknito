@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2023-05-05 20:46+0200\n"
+"POT-Creation-Date: 2023-05-05 20:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -979,6 +979,14 @@ msgstr ""
 #: app/html/index.html:48 app/html/sub.html:40 app/templates/indexmulti.html:20
 #: app/templates/userposts.html:31
 msgid "There are no posts here, yet."
+msgstr ""
+
+#: app/html/index.html:51
+msgid "We have"
+msgstr ""
+
+#: app/html/index.html:51
+msgid "posts from the domain"
 msgstr ""
 
 #: app/html/admin/reports.html:63 app/html/admin/wiki.html:51
