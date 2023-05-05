@@ -2513,14 +2513,14 @@ table td {
 
 .uploads.content {
   max-width: 640px;
+  display: grid;
 }
 
 .uploaditem {
   float: left;
-  width: 120px;
+  width: 140px;
   height: 140px;
   border: 1px solid rgba(85, 85, 85, 0.25);
-  padding: 10px;
   text-align: center;
 }
 
@@ -2533,8 +2533,8 @@ table td {
 }
 
 .uploadthumb {
-  width: 70px;
-  height: 70px;
+  width: 140px;
+  height: 140px;
   margin: auto;
   border-radius: 4px;
 }

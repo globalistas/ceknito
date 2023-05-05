@@ -15,38 +15,38 @@
   <div class="inbox content">
     <div class="user-activity col-12">
       <h3 style="display: inline-block;"><span class="p-icon" data-icon="mail" style="display: inline-block;"></span> {{box_name}}</h3>
-      - <span class="links"><a class="markall">Označiť všetky ako prečítané</a></span>
+      - <span class="links"><a class="markall">{{_("Mark all as read")}}</a></span>
       {% for message in messages %}
         <article class="pmessage post{% if not message.read %} newmsg{% endif %}">
           <div class="main">
             <p class="title">{{message.subject}}</p>
             <p class="container">{{markdown(message.content)|safe}}</p>
             <p class="author">&#10148;
-              Odoslané <time-ago datetime="{{message.posted.isoformat()}}Z"></time-ago>
+              {{_("sent")}} <time-ago datetime="{{message.posted.isoformat()}}Z"></time-ago>
               {% if message.username %}
-                používateľom <a href="{{url_for('user.view', user=message.username)}}">{{message.username}}</a>
+                {{_("by user")}} <a href="{{url_for('user.view', user=message.username)}}">{{message.username}}</a>
                 {% if message.sub %}
                   [as mod of <a href="{{url_for('sub.view_sub', sub=message.sub)}}">/{{config.site.sub_prefix}}/{{message.sub}}</a>]
                 {% endif %}
               {% elif message.sub %}
                   by the mods of <a href="{{url_for('sub.view_sub', sub=message.sub)}}">/{{config.site.sub_prefix}}/{{message.sub}}</a>
               {% else %}
-                webom <a href="#">{{config.site.name}}</a>
+                via <a href="#">{{config.site.name}}</a>
               {% endif %}
             </p>
             <p class="container">
               {% if message.username or (message.sub and config.site.enable_modmail) %}
-                <a href="#msg-form" data-mid="{{message.mid}}" class="replymsg">reagovať</a>
+                <a href="#msg-form" data-mid="{{message.mid}}" class="replymsg">{{_("reply")}}</a>
               {% endif %}
               {% if not message.read %}
-                <a class="readmsg" data-mid="{{message.mid}}">označiť ako prečítané</a>
+                <a class="readmsg" data-mid="{{message.mid}}">{{_("mark as read")}}</a>
               {% endif %}
               <!--<a class="btn small">forward</a>-->
               {% if message.username and not message.sub and not message.sender_can_admin and not current_user.can_admin %}
                 <a class="block-msg" data-uid="{{message.sentby}}">{{_("block sender")}}</a>
               {% endif %}
-              <a class="savemsg" data-mid="{{message.mid}}">uložiť</a>
-              <a class="deletemsg" data-mid="{{message.mid}}">vymazať</a>
+              <a class="savemsg" data-mid="{{message.mid}}">{{_("save")}}</a>
+              <a class="deletemsg" data-mid="{{message.mid}}">{{_("delete")}}</a>
               <div class="alert div-error"></div>
             </p>
           </div>

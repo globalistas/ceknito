@@ -571,7 +571,7 @@ msgstr "Prispievať môžu iba moderátori"
 
 #: app/forms/sub.py:121
 msgid "Allow users to flair their own posts"
-msgstr "Členovia môžu tagovať vlastné príspevky"
+msgstr "Používatelia môžu tagovať vlastné príspevky"
 
 #: app/forms/sub.py:122
 msgid "Require users to flair their own posts"
@@ -1091,7 +1091,7 @@ msgstr "Vydaný"
 
 #: app/html/admin/wiki.html:26
 msgid "Last edited"
-msgstr "Naposledy upravené"
+msgstr "naposledy upravené"
 
 #: app/html/admin/wiki.html:38
 msgid "Edit"
@@ -2294,7 +2294,7 @@ msgstr "Uložené!"
 #: app/html/user/topbar.html:13 app/static/js/main.js:176
 #: app/static/js/main.js:180
 msgid "Save"
-msgstr "Uložíť"
+msgstr "uložíť"
 
 #: app/html/sub/css.html:35
 msgid "Upload files"
@@ -2870,7 +2870,7 @@ msgstr "Tagy používateľov v skupine <a href=\"%(url)s\">%(sub)s</a>"
 
 #: app/html/sub/user_flairs.html:27
 msgid "Assign flair"
-msgstr "Uložiť tag"
+msgstr "Nastaviť tag"
 
 #: app/html/sub/user_flairs.html:32
 msgid "Create new user flair"
@@ -3280,7 +3280,7 @@ msgstr "vymazať notifikáciu"
 #: app/html/user/messages/notifications.html:126
 #, python-format
 msgid "Please visit %(link)s to accept or reject the invitation"
-msgstr "Pozvanie môžeš odmietnuť alebo prijať %(link)s"
+msgstr "Pozvanie môžeš odmietnuť alebo prijať tu: %(link)s"
 
 #: app/html/user/settings/account.html:9
 #, python-format
@@ -4427,3 +4427,93 @@ msgstr "Zmeniť tag"
 #: app/html/shared/sidebar/sub.html:82
 msgid "Delete my flair"
 msgstr "Vymazať môj tag"
+
+#: app/html/sub/css.html:41
+msgid "Name"
+msgstr "Voliteľný názov"
+
+#: app/html/sub/user_flairs.html:19
+msgid "Assign flair to user"
+msgstr "Nastav tag používateľovi"
+
+#: app/html/user/profile.html:131
+msgid "Invited Users"
+msgstr "Pozvaní používatelia"
+
+#: app/templates/messages/messages.html:18
+msgid "Mark all as read"
+msgstr "Označiť všetky ako prečítané"
+
+#: app/templates/messages/messages.html:42
+msgid "mark as read"
+msgstr "označiť ako prečítané"
+
+#: app/templates/messages/messages.html:25
+msgid "sent"
+msgstr "odoslané"
+
+#: app/templates/messages/messages.html:27
+msgid "by user"
+msgstr "používateľom"
+
+#: app/templates/messages/nav.html:3
+msgid "Next"
+msgstr "Staršie"
+
+#: app/templates/messages/nav.html:6
+msgid "Previous"
+msgstr "Novšie"
+
+#: app/templates/messages/sent.html:23
+msgid "sent to user/mods"
+msgstr "odoslané používateľovi / skupine"
+
+#: app/templates/indexmulti.html:7
+msgid "New posts from:"
+msgstr "Nové príspevky z:"
+
+#: app/templates/indexpost.html:82
+msgid "on"
+msgstr "v skupine"
+
+#: app/templates/indexpost.html:75
+msgid "posted by"
+msgstr "pridal(a)"
+
+#: app/templates/subs.html:18
+msgid "Search sub name..."
+msgstr "Hľadať skupinu..."
+
+#: app/templates/subs.html:27
+msgid "There are no subs here, yet."
+msgstr "Nenašla sa žiadna skupina."
+
+#: app/templates/subs.html:45 app/templates/subs.html:47
+#: app/templates/subs.html:49
+msgid "Number of subscribers"
+msgstr "Počet členov"
+
+#: app/templates/subs.html:54 app/templates/subs.html:56
+#: app/templates/subs.html:58
+msgid "Number of posts"
+msgstr "Počet príspevkov"
+
+#: app/templates/uploads.html:15
+msgid "No uploads, yet."
+msgstr "Nemáš žiadne uploady."
+
+#: app/templates/usercomments.html:21
+msgid "Please log in to see this user's comments."
+msgstr "Komentáre používateľa vidia iba prihlásení používatelia."
+
+#: app/templates/userposts.html:20
+msgid "Please log in to see this user's posts."
+msgstr "Príspevky používateľa vidia iba prihlásení používatelia.""
+
+#: app/templates/usercomments.html:32
+msgid "This user has not commented on anything, yet."
+msgstr "Používateľ nemá komentáre."
+
+#: app/templates/usercomments.html:55
+msgid "Comment score"
+msgstr "bodov"

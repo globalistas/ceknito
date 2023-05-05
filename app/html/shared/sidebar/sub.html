@@ -65,7 +65,7 @@
         <form method="POST" class="ajaxform pure-form" data-reload="true" action="@{url_for('do.set_user_flair_text', sub=sub['name'])}">
           <div class="alert div-error"></div>
           @{ form.SetOwnUserFlairForm().csrf_token() !!html}
-          <input type="text" name="flair" placeholder="Text tagu" maxlength="16" required />
+          <input type="text" name="flair" placeholder="Text" maxlength="16" required />
           <button type="submit" class="pure-button">@{_("Change flair")}</button>
         </form>
       @end

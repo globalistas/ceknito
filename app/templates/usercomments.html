@@ -5,31 +5,31 @@
 {% block sidebar %}
 {{ super() }}
 <a href="{{url_for('user.view', user=user.name)}}" class="sbm-post pure-button">{{user.name}}</a>
-<a href="{{url_for('user.view_user_posts', user=user.name)}}" class="sbm-post pure-button">Príspevky používateľa</a>
-<a href="{{url_for('user.view_user_comments', user=user.name)}}" class="sbm-post pure-button">Komentáre používateľa</a>
+<a href="{{url_for('user.view_user_posts', user=user.name)}}" class="sbm-post pure-button">{{_('View posts')}}</a>
+<a href="{{url_for('user.view_user_comments', user=user.name)}}" class="sbm-post pure-button">{{_('View comments')}}</a>
 {% if user.uid == current_user.uid %}
   {% if current_user.canupload %}
-    <a href="{{url_for('user.view_user_uploads')}}" class="sbm-post pure-button">Uploady používateľa</a>
+    <a href="{{url_for('user.view_user_uploads')}}" class="sbm-post pure-button">{{_('View uploads')}}</a>
   {% endif %}
-  <a href="{{url_for('user.view_user_savedposts', user=user.name)}}" class="sbm-post pure-button">Uložené príspevky</a>
+  <a href="{{url_for('user.view_user_savedposts', user=user.name)}}" class="sbm-post pure-button">{{_('View saved posts')}}</a>
 {% endif %}
 {% endblock %}
 
 {% block content %}
 {{ super() }}
 {% if not current_user.is_authenticated and config.site.block_anon_stalking %}
-    <div class="message" style="margin-top: 2em;">Komentáre používateľa vidia iba prihlásení používatelia.</div>
+    <div class="message" style="margin-top: 2em;">{{_("Please log in to see this user's comments.")}}</div>
 {% else %}
     <div id="center-container">
       <div class="inbox content">
-        <h3>Posledné komentáre</h3>
+        <h3>{{_('View comments')}}</h3>
         {% if user.status == 10 %}
           <div class="helper-text deleted-user">{{_("%(user)s has deleted their account.", user=user.name)}}</div>
         {% endif %}
         <div class="recent">
             {% if comments|length < 1 %}
             <p>
-              Používateľ nemá žiadne komentáre
+              {{_('This user has not commented on anything, yet.')}}
             </p>
             {% else %}
             {% for comment in comments %}
@@ -46,19 +46,19 @@
                     <div class="nsfw" alt="Not safe for work">{{_('NSFW')}}</div>
                   {%endif%}
                 </a></span>
-                v skupine <a href="{{ url_for('sub.view_sub', sub=comment.sub) }}">{{comment.sub}}</a>
+                {{_('on')}} <a href="{{ url_for('sub.view_sub', sub=comment.sub) }}">{{comment.sub}}</a>
               </div>
               <div class="commentrow {%if comment.cid == highlight %}highlight{%endif%}" id="comment-{{comment.cid}}">
                 <div class="commblock">
                   <div class="commenthead">
                       <a href="{{ url_for('user.view', user=user.name) }}" class="poster">{{user.name}}</a> -
-                      <b>skóre: <span class="cscore">{{comment.score}}</span></b>
+                      <b><span class="cscore">{{comment.score}}</span> {{_('Comment score')}}</b>
                       <span class="time">
                          <time-ago datetime="{{comment.time.isoformat()}}Z"></time-ago>
                       </span>
                     {% if comment.lastedit %}
                       <span class="time edited">
-                        *(upravené <time-ago datetime="{{comment.lastedit.isoformat()}}Z"></time-ago>)
+                        *({{_('Last edited')}} <time-ago datetime="{{comment.lastedit.isoformat()}}Z"></time-ago>)
                       </span>
                     {% endif %}
                   </div>
@@ -71,16 +71,16 @@
                     <li><a href="{{url_for('sub.view_perm', sub=comment.sub, pid=comment.pid, cid=comment.cid)}}">permalink</a></li>
                     {%if current_user.is_authenticated%}
                       {%if not postmeta[comment.pid].get('lock-comments') and not comment.archived and comment.status not in [1, 2, 3] and comment.post_deleted == 0%}
-                        <li><a class="reply-comment" data-pid="{{comment.pid}}" data-to="{{comment.cid}}">reagovať</a></li>
+                        <li><a class="reply-comment" data-pid="{{comment.pid}}" data-to="{{comment.cid}}">{{_("reply")}}</a></li>
                         {% if comment.uid == current_user.uid %}
-                          <li><a class="edit-comment" data-cid="{{comment.cid}}">upraviť</a></li>
+                          <li><a class="edit-comment" data-cid="{{comment.cid}}">{{_("edit")}}</a></li>
                         {% endif %}
                       {%endif%}
                       {% if comment.uid == current_user.uid or current_user.is_admin() and comment.status not in [1, 2, 3] %}
-                        <li><a {{ ((comment['uid'] == current_user.uid) and 'selfdel="true"' or '')|safe }} class="delete-comment" data-cid="{{comment.cid}}">vymazať</a></li>
+                        <li><a {{ ((comment['uid'] == current_user.uid) and 'selfdel="true"' or '')|safe }} class="delete-comment" data-cid="{{comment.cid}}">{{_("delete")}}</a></li>
                       {% endif %}
                     {%endif%}
-                    <li><a class="comment-source" data-cid="{{comment.cid}}">formát</a></li>
+                    <li><a class="comment-source" data-cid="{{comment.cid}}">{{_("source")}}</a></li>
                   </ul>
                 </div>
               </div>
@@ -89,11 +89,11 @@
           {% endif %}
         </div>
 
-        {% if page > 1 %}
-        <a href="{{url_for('user.view_user_comments', user=user.name, page=(page-1))}}" class="pure-button">Novšie</a>
-        {% endif %}
         {% if comments|length == 20 %}
-        <a href="{{url_for('user.view_user_comments', user=user.name, page=(page+1))}}" class="pure-button">Staršie</a>
+        <a href="{{url_for('user.view_user_comments', user=user.name, page=(page+1))}}" class="pure-button">{{_('Next')}}</a>
+        {% endif %}
+        {% if page > 1 %}
+        <a href="{{url_for('user.view_user_comments', user=user.name, page=(page-1))}}" class="pure-button">{{_('Previous')}}</a>
         {% endif %}
 
       </div>

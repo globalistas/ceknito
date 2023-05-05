@@ -4,15 +4,15 @@
 {% block sidebar %}
 {{ super() }}
 <a href="{{url_for('user.view', user=current_user.name)}}" class="sbm-post pure-button">{{current_user.name}}</a>
-<a href="{{url_for('user.view_user_posts', user=current_user.name)}}" class="sbm-post pure-button">Príspevky používateľa</a>
-<a href="{{url_for('user.view_user_comments', user=current_user.name)}}" class="sbm-post pure-button">Komentáre používateľa</a>
-<a href="{{url_for('user.view_user_uploads')}}" class="sbm-post pure-button">Uploady používateľa</a>
-<a href="{{url_for('user.view_user_savedposts', user=current_user.name)}}" class="sbm-post pure-button">Uložené príspevky</a>
+<a href="{{url_for('user.view_user_posts', user=current_user.name)}}" class="sbm-post pure-button">{{_('View posts')}}</a>
+<a href="{{url_for('user.view_user_comments', user=current_user.name)}}" class="sbm-post pure-button">{{_('View comments')}}</a>
+<a href="{{url_for('user.view_user_uploads')}}" class="sbm-post pure-button">{{_('View uploads')}}</a>
+<a href="{{url_for('user.view_user_savedposts', user=current_user.name)}}" class="sbm-post pure-button">{{_('View saved posts')}}</a>
 {% endblock %}
 
 {% block content %}
 {{ super() }}
-{% if not uploads %}<h3 class="noshit">Nenašli sa žiadne uploady.</h3>{% endif %}
+{% if not uploads %}<h3 class="noshit">{{_('No uploads, yet.')}}</h3>{% endif %}
 <div id="center-container">
   <div class="uploads content">
       {% for item in uploads %}
@@ -28,20 +28,20 @@
                    data-src="{{ thumbnail_url(item.thumbnail) }}"/>
             {% endif %}
           </div>
-          <div class="uploadlinks">
-            <div class="uploadlink"><a href="{{url_for('site.view_post_inbox', pid=item.pid_id)}}">Príspevok</a></div>
-            <div class="uploadlink"><a href="{{file_url(item.fileid)}}">Link</a></div>
-          </div>
+        </div>
+        <div class="uploadlinks">
+          <div class="uploadlink"><a href="{{url_for('site.view_post_inbox', pid=item.pid_id)}}">{{_('Post')}}</a></div>
+          <div class="uploadlink"><a href="{{file_url(item.fileid)}}">Link</a></div>
         </div>
       {% endfor %}
   </div>
 </div>
 <div class="col-12">
-  {% if page > 1 %}
-    <a href="{{url_for('user.view_user_uploads', page=(page-1))}}" class="pure-button">Novšie</a>
-  {% endif %}
   {% if uploads|length == 30 %}
-    <a href="{{url_for('user.view_user_uploads', page=(page+1))}}" class="pure-button">Staršie</a>
+    <a href="{{url_for('user.view_user_uploads', page=(page+1))}}" class="pure-button">{{_('Next')}}</a>
+  {% endif %}
+  {% if page > 1 %}
+    <a href="{{url_for('user.view_user_uploads', page=(page-1))}}" class="pure-button">{{_('Previous')}}</a>
   {% endif %}
 </div>
 {% endblock %}

@@ -7,7 +7,7 @@
 {% endif %}
 
 <ul class="right">
-  <li class="large">Subs</li>
+  <li class="large">{{_('Subs')}}</li>
 </ul>
 {% endblock %}
 
@@ -15,7 +15,7 @@
 <div>
   <form class="pure-g search" action="{{ url_for('do.search', stype='home.subs') }}" method="post">
     <div class="icon" data-icon="search"> </div>
-    <input name="term" placeholder="Hľadať skupinu..." type="search" class="pure-u-1" value="{{term}}">
+    <input name="term" placeholder="{{_('Search sub name...')}}" type="search" class="pure-u-1" value="{{term}}">
   </form>
 </div>
 <hr>
@@ -24,7 +24,7 @@
 
 {% block content %}
 {{ super() }}
-{% if not subs %}<h3 class="notfound">There are no subs here, yet.</h3>{% endif %}
+{% if not subs %}<h3 class="notfound">{{_('There are no subs here, yet.')}}</h3>{% endif %}
 <div id="center-container">
   <div class="subs content">
     <table class="sortable pure-table" >
@@ -32,30 +32,30 @@
         <tr>
           <th>
             {% if sort == 'name_asc' %}
-              <a href="{{cp_uri}}/name_desc">Skupina <span class="tx-icon" data-icon="downvote"></span></a>
+              <a href="{{cp_uri}}/name_desc">{{_('Sub')}} <span class="tx-icon" data-icon="downvote"></span></a>
             {%elif sort == 'name_desc' %}
-              <a href="{{cp_uri}}/name_asc">Skupina <span class="tx-icon" data-icon="upvote"></span></a>
+              <a href="{{cp_uri}}/name_asc">{{_('Sub')}} <span class="tx-icon" data-icon="upvote"></span></a>
             {%else%}
-              <a href="{{cp_uri}}/name_asc">Skupina <span class="tx-icon" data-icon="updown"></span></a>
+              <a href="{{cp_uri}}/name_asc">{{_('Sub')}} <span class="tx-icon" data-icon="updown"></span></a>
             {%endif %}
             </th>
      <!--     <th>Vytvorená</th> -->
           <th>
             {% if sort == 'subs_asc' %}
-              <a href="{{cp_uri}}/subs_desc">Počet členov <span class="tx-icon" data-icon="downvote"></span></a>
+              <a href="{{cp_uri}}/subs_desc">{{_('Number of subscribers')}} <span class="tx-icon" data-icon="downvote"></span></a>
             {%elif sort == 'subs_desc' %}
-              <a href="{{cp_uri}}/subs_asc">Počet členov <span class="tx-icon" data-icon="upvote"></span></a>
+              <a href="{{cp_uri}}/subs_asc">{{_('Number of subscribers')}} <span class="tx-icon" data-icon="upvote"></span></a>
             {%else%}
-            <a href="{{cp_uri}}/subs_desc">Počet členov <span class="i-icon" data-icon="updown"></span></a>
+            <a href="{{cp_uri}}/subs_desc">{{_('Number of subscribers')}} <span class="i-icon" data-icon="updown"></span></a>
             {%endif %}
           </th>
           <th>
             {% if sort == 'posts_asc' %}
-              <a href="{{cp_uri}}/posts_desc">Počet príspevkov <span class="tx-icon" data-icon="downvote"></span></a>
+              <a href="{{cp_uri}}/posts_desc">{{_('Number of posts')}} <span class="tx-icon" data-icon="downvote"></span></a>
             {%elif sort == 'posts_desc' %}
-              <a href="{{cp_uri}}/posts_asc">Počet príspevkov <span class="tx-icon" data-icon="upvote"></span></a>
+              <a href="{{cp_uri}}/posts_asc">{{_('Number of posts')}} <span class="tx-icon" data-icon="upvote"></span></a>
             {%else%}
-              <a href="{{cp_uri}}/posts_desc">Počet príspevkov <span class="i-icon" data-icon="updown"></span></a>
+              <a href="{{cp_uri}}/posts_desc">{{_('Number of posts')}} <span class="i-icon" data-icon="updown"></span></a>
             {%endif %}
           </th>
 		  <th>
@@ -81,11 +81,11 @@
 			<td>
 			<div role="group" class="pure-button-group" data-sid="{{sub.sid}}" style="display:inline-block;">
               {% if current_user.has_subscribed(sub.name) %}
-                <button data-ac="unsubscribe" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon" data-icon="check"></span>Odoberám</button>
+                <button data-ac="unsubscribe" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon" data-icon="check"></span>{{_('Subscribed')}}</button>
               {% elif current_user.has_blocked(sub.sid) %}
-                <button data-ac="unblock" class="blk button-warning pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon" data-icon="block"></span>Blokujem</button>
+                <button data-ac="unblock" class="blk button-warning pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon" data-icon="block"></span>{{_('Blocked')}}</button>
               {%else%}
-                <button data-ac="subscribe" class="unsub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon" data-icon="add"></span>Odoberať</button>
+                <button data-ac="subscribe" class="unsub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon" data-icon="add"></span>{{_('Subscribe')}}</button>
               {%endif%}
 				</div>
 			</td>

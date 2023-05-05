@@ -2,9 +2,9 @@
     <div class="misctainer">
       <div class="votebuttons">
         {% if post.userstatus != 10 and not func.is_archived(post) %}
-        <div title="Upvote" class="upvote{%if post.positive == 1%} upvoted{%endif%}" data-pid="{{post.pid}}" data-icon="upvote"></div>
+        <div title="{{_('Upvote')}}" class="upvote{%if post.positive == 1%} upvoted{%endif%}" data-pid="{{post.pid}}" data-icon="upvote"></div>
         <div class="score">{{post.score}}</div>
-        <div title="Downvote" class="downvote{%if post.positive == 0%} downvoted{%endif%}" data-pid="{{post.pid}}" data-icon="downvote"></div>
+        <div title="{{_('Downvote')}}" class="downvote{%if post.positive == 0%} downvoted{%endif%}" data-pid="{{post.pid}}" data-icon="downvote"></div>
         {% else %}
         <div class="score archived">{{post.score}}</div>
         {%endif%}
@@ -72,19 +72,19 @@
         {% endif %}
       </div>
       <div class="author">
-      <time-ago datetime="{{post.posted.isoformat()}}Z"></time-ago> pridal(a)
+      <time-ago datetime="{{post.posted.isoformat()}}Z"></time-ago> {{_('posted by')}}
       {% if post.userstatus != 10 %}
         <a class="authorlink" href="{{url_for('user.view', user=post.user)}}">{{post.user}}</a>
       {% endif %}
       {% if sub and post.pid in func.getStickyPid(sub.sid) %}
       - <span class="stick">sticky</span>
       {% endif %}
-      {% if not sub %} v skupine
+      {% if not sub %} {{_('on')}}
       <a href="{{url_for('sub.view_sub', sub=post.sub)}}">{{post.sub}}</a>
       {%endif%}
     </div>
     <div class="links">
-      <a class="comments" href="{{url_for('sub.view_post', sub=post.sub, pid=post.pid)}}">komentáre {%if post.comments>0%}({{post.comments}}){%endif%}</a>
+      <a class="comments" href="{{url_for('sub.view_post', sub=post.sub, pid=post.pid)}}">{{_('comment')}} {%if post.comments>0%}({{post.comments}}){%endif%}</a>
     </div>
   </div>
 </div>

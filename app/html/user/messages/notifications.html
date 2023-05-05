@@ -15,8 +15,8 @@
         <div class="main" data-cid="@{msg['cid']}">
           @if msg['cid'] and not msg['comment_context']:
           <div class="pull left votecomment" style="margin-right: 10px;">
-            <div title="Upvote" class="c-upvote@{(msg.get('comment_positive') == 1) and ' upvoted' or ''}" data-icon="upvote"></div>
-            <div title="Downvote" class="c-downvote@{(msg.get('comment_positive') == 0) and ' downvoted' or ''}" data-icon="downvote"></div>
+            <div title="@{_('Upvote')}" class="c-upvote@{(msg.get('comment_positive') == 1) and ' upvoted' or ''}" data-icon="upvote"></div>
+            <div title="@{_('Downvote')}" class="c-downvote@{(msg.get('comment_positive') == 0) and ' downvoted' or ''}" data-icon="downvote"></div>
           </div>
           @end
           <p class="title">

@@ -128,9 +128,9 @@
                             @end
                             @if invitecodeinfo.get('invitedTo'):
                                 <div>
-                                    <h3>Invited Users:</h3>
+                                    <h3>@{_('Invited Users')}</h3>
                                     <table>
-                                        <thead><tr><th>User</th><th>Code</th></tr></thead>
+                                        <thead><tr><th>@{_('Username')}</th><th>@{_('Invite Code')}</th></tr></thead>
                                         <tbody>
                                         @for invited in invitecodeinfo['invitedTo']:
                                             <tr>

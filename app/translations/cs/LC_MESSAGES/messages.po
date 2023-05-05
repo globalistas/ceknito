@@ -332,6 +332,24 @@ msgstr "Příspěvek byl archivován"
 msgid "Invalid status request"
 msgstr "Invalid status request"
 
+#: app/notifications.py:200
+#, python-format
+msgid ""
+"User %(user_name)s <a href=\"%(url)s\">replied</a> to your post "
+"<br><br><i>%(post_title)s</i><br><br>in <i>%(sub_name)s</i>"
+msgstr ""
+"Uživatel %(user_name)s <a href=\"%(url)s\">odpověděl(a)</a> na tvůj příspěvek "
+"<br><br><i>%(post_title)s</i><br><br>ve skupině <i>%(sub_name)s</i>"
+
+#: app/notifications.py:209
+#, python-format
+msgid ""
+"User %(user_name)s <a href=\"%(url)s\">replied</a> to your comment in the"
+" post titled<br><br><i>%(post_title)s<i><br><br>in <i>%(sub_name)s</i>"
+msgstr ""
+"Uživatel %(user_name)s <a href=\"%(url)s\">odpověděl(a)</a> na tvůj komentář k"
+" příspěvku<br><br><i>%(post_title)s<i><br><br>v skupine <i>%(sub_name)s</i>"
+
 #: app/notifications.py:272
 msgid "Looks like nobody bothered to code the message for this notification :("
 msgstr "Vypadá to, že se nikdo neobtěžoval naprogramovat zprávu pro toto oznámení :("
@@ -553,7 +571,7 @@ msgstr "Přispívat mohou pouze moderátoři"
 
 #: app/forms/sub.py:121
 msgid "Allow users to flair their own posts"
-msgstr "Členové mohou tagovat vlastní příspěvky"
+msgstr "Uživatelé mohou tagovat vlastní příspěvky"
 
 #: app/forms/sub.py:122
 msgid "Require users to flair their own posts"
@@ -816,6 +834,10 @@ msgstr "Vypnout chat"
 msgid "Global stylesheet (select a sub)"
 msgstr "Globální styl (převzít z)"
 
+#: app/forms/user.py:186
+msgid "Send email notifications"
+msgstr "Emailové notifikace"
+
 #: app/forms/user.py:184
 msgid "Language"
 msgstr "Jazyk"
@@ -1069,7 +1091,7 @@ msgstr "Vydaný"
 
 #: app/html/admin/wiki.html:26
 msgid "Last edited"
-msgstr "Naposledy změněno"
+msgstr "naposledy upraveno"
 
 #: app/html/admin/wiki.html:38
 msgid "Edit"
@@ -1505,7 +1527,7 @@ msgstr "Přizpůsobit panel"
 
 #: app/html/shared/layout.html:66
 msgid "More"
-msgstr "ďalší"
+msgstr "další"
 
 #: app/html/shared/layout.html:96 app/html/user/register.html:5
 #: app/html/user/register.html:16 app/html/user/register.html:64
@@ -1800,7 +1822,7 @@ msgstr "(změnit)"
 
 #: app/html/shared/sidebar/sub.html:43
 msgid "Subscribed"
-msgstr "Odobírám"
+msgstr "Odebírám"
 
 #: app/html/shared/sidebar/sub.html:45
 msgid "Subscribe"
@@ -1808,7 +1830,7 @@ msgstr "Odebírat"
 
 #: app/html/shared/sidebar/sub.html:48
 msgid "Blocked"
-msgstr "Blokujem"
+msgstr "Blokuji"
 
 #: app/html/shared/sidebar/sub.html:50 app/html/user/profile.html:21
 msgid "Block"
@@ -2272,7 +2294,7 @@ msgstr "Uloženo!"
 #: app/html/user/topbar.html:13 app/static/js/main.js:176
 #: app/static/js/main.js:180
 msgid "Save"
-msgstr "Uložit"
+msgstr "uložit"
 
 #: app/html/sub/css.html:35
 msgid "Upload files"
@@ -2848,7 +2870,7 @@ msgstr "Tagy uživatelů ve skupině <a href=\"%(url)s\">%(sub)s</a>"
 
 #: app/html/sub/user_flairs.html:27
 msgid "Assign flair"
-msgstr "Uložit tag"
+msgstr "Nastavit tag"
 
 #: app/html/sub/user_flairs.html:32
 msgid "Create new user flair"
@@ -3258,7 +3280,7 @@ msgstr "vymazat notifikaci"
 #: app/html/user/messages/notifications.html:126
 #, python-format
 msgid "Please visit %(link)s to accept or reject the invitation"
-msgstr "Pozvání můžeš odmítnout nebo přijmout %(link)s"
+msgstr "Pozvání můžeš odmítnout nebo přijmout zde: %(link)s"
 
 #: app/html/user/settings/account.html:9
 #, python-format
@@ -4405,3 +4427,93 @@ msgstr "Změnit tag"
 #: app/html/shared/sidebar/sub.html:82
 msgid "Delete my flair"
 msgstr "Vymazat můj tag"
+
+#: app/html/sub/css.html:41
+msgid "Name"
+msgstr "Volitelný název"
+
+#: app/html/sub/user_flairs.html:19
+msgid "Assign flair to user"
+msgstr "Nastav tag uživateli"
+
+#: app/html/user/profile.html:131
+msgid "Invited Users"
+msgstr "Pozvaní uživatelé"
+
+#: app/templates/messages/messages.html:18
+msgid "Mark all as read"
+msgstr "Označit všechny jako přečtené"
+
+#: app/templates/messages/messages.html:42
+msgid "mark as read"
+msgstr "označit jako přečtené"
+
+#: app/templates/messages/messages.html:25
+msgid "sent"
+msgstr "odesláno"
+
+#: app/templates/messages/messages.html:27
+msgid "by user"
+msgstr "uživatelem"
+
+#: app/templates/messages/nav.html:3
+msgid "Next"
+msgstr "Starší"
+
+#: app/templates/messages/nav.html:6
+msgid "Previous"
+msgstr "Novější"
+
+#: app/templates/messages/sent.html:23
+msgid "sent to user/mods"
+msgstr "odesláno uživateli / skupině"
+
+#: app/templates/indexmulti.html:7
+msgid "New posts from:"
+msgstr "Nové příspěvky z:"
+
+#: app/templates/indexpost.html:82
+msgid "on"
+msgstr "ve skupině"
+
+#: app/templates/indexpost.html:75
+msgid "posted by"
+msgstr "přidal(a)"
+
+#: app/templates/subs.html:18
+msgid "Search sub name..."
+msgstr "Hledat skupinu..."
+
+#: app/templates/subs.html:27
+msgid "There are no subs here, yet."
+msgstr "Nenašla se žáadná skupina."
+
+#: app/templates/subs.html:45 app/templates/subs.html:47
+#: app/templates/subs.html:49
+msgid "Number of subscribers"
+msgstr "Počet členů"
+
+#: app/templates/subs.html:54 app/templates/subs.html:56
+#: app/templates/subs.html:58
+msgid "Number of posts"
+msgstr "Počet příspěvků"
+
+#: app/templates/uploads.html:15
+msgid "No uploads, yet."
+msgstr "Nemáš žádné uploady."
+
+#: app/templates/usercomments.html:21
+msgid "Please log in to see this user's comments."
+msgstr "Komentáře uživatele vidí pouze přihlášení uživatelé."
+
+#: app/templates/userposts.html:20
+msgid "Please log in to see this user's posts."
+msgstr "Příspěvky uživatele vidí pouze přihlášení uživatelé.""
+
+#: app/templates/usercomments.html:32
+msgid "This user has not commented on anything, yet."
+msgstr "Uživatel nemá komentáře."
+
+#: app/templates/usercomments.html:55
+msgid "Comment score"
+msgstr "bodů"

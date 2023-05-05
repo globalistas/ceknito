@@ -6,17 +6,17 @@
       {{msgform.csrf_token}}
       {{msgform.mid(required=True)}}
       <div class="pure-control-group markdown-editor" id="msge">
-        {{msgform.content(placeholder="Tvoja reakcia. Formátovanie textu povolené.", rows="10", **{'data-provide' :"markdown"})}}
+        {{msgform.content(placeholder="", rows="10", **{'data-provide' :"markdown"})}}
       </div>
       <div>
         {% if error %}
         <div class="error">{{error}}</div>
         {%endif%}
         <div class="alert div-error"></div>
-        <button type="submit" id="msg-btnsubmit" class="pure-button pure-button-primary" data-prog="Sending...">Odoslať</button>
-        <button data-pvid="msge" class="pure-button btn-preview">Náhľad</button>
+        <button type="submit" id="msg-btnsubmit" class="pure-button pure-button-primary" data-prog="Sending...">{{_('Submit')}}</button>
+        <button data-pvid="msge" class="pure-button btn-preview">{{_('Preview')}}</button>
         <div class="cmpreview canclose" style="display:none;">
-          <h4>Náhľad reakcie</h4>
+          <h4>{{_('Message preview')}}</h4>
           <span class="closemsg">×</span>
           <div class="cpreview-content"></div>
         </div>

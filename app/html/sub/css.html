@@ -38,7 +38,7 @@
       @if error:
         <div class="error">@{error}</div>
       @end
-        <input type="text" name="name" pattern="^[a-zA-Z0-9_-]+$" placeholder="Name" required/>
+        <input type="text" name="name" pattern="^[a-zA-Z0-9_-]+$" placeholder="@{_('Name')}" required/>
         <input type="file" name="files" placeholder="@{_('Only images allowed')}" />
         <button type="submit" class="pure-button pure-button-primary">@{_('Upload')}</button>
     </form>
@@ -55,6 +55,7 @@
               <img class="lazy" alt="@{_('Thumbnail')}" src="@{url_for('static', filename='img/1x1.gif')}" data-src="@{thumbnail_url(f.thumbnail)}"/>
             @end
           </div>
+        <br/>
         @{_('Filename: %(filename)s. Size: %(filesize)i KiB.', filename=f.name, filesize=f.size/1024)}
         <form  method="POST" data-reload="true" action="@{url_for('do.sub_upload_delete', sub=sub.name, name=f.name)}" class="ajaxform" style="display: inline-block; margin-left: 1em; margin-top: 5px;">
           @{form.csrf_token() !!html}

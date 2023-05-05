@@ -49,14 +49,14 @@
 
   <div class="th-subbar pure-u-1">
     <ul id="topbar">
-      <li><a href="/all">všetky</a></li>
-      <li><a href="/all/new">nové</a></li>
+      <li><a href="/all">{{_('all')}}</a></li>
+      <li><a href="/all/new">{{_('new')}}</a></li>
       {% if current_user.can_admin %}
         <li><a href="{{url_for('admin.index')}}">admin</a></li>
       {% endif %}
       <li>|</li>
       {% if not current_user.is_anonymous %}
-      <li class="editbar"><a href="/settings/subs" title="Customize this bar" class="tx-icon" data-icon="edit"></a></li>
+      <li class="editbar"><a href="/settings/subs" title="{{_('Customize this bar')}}" class="tx-icon" data-icon="edit"></a></li>
       {% endif %}
       {% for sub in current_user.get_top_bar() %}
         <li class="subinthebar"><a href="{{url_for('sub.view_sub', sub=sub['name'])}}">{{sub['name']}}</a></li>
@@ -64,7 +64,7 @@
     </ul>
     <div id="subsdropdown">
       <div class="dropdown-toggle moremenu">
-        Ďalšie
+        {{_('More')}}
       </div>
       <ul id="hiddensubs"></ul>
     </div>
@@ -99,12 +99,12 @@
         <div id="toggledark" class="glyphbutton">
           <span class="p-icon" data-icon="{%if request.cookies.get( "dayNight")=="dark" %}sun{%else%}moon{%endif%}"></span>
         </div>
-        <a href="{{url_for('auth.login', next=request.path)}}" class="pure-button pure-button-primary">Prihlásiť</a>
-        <a href="{{url_for('auth.register')}}" class="pure-button button-secondary">Registrácia</a>
+        <a href="{{url_for('auth.login', next=request.path)}}" class="pure-button pure-button-primary">{{_('Log in')}}</a>
+        <a href="{{url_for('auth.register')}}" class="pure-button button-secondary">{{_('Register')}}</a>
         {%else%}
         <a href="{{ url_for('user.view', user=current_user.name) }}" class="smallcaps">{{current_user.name}}</a>
         <span class="separator"></span>
-        <abbr title="Phuks taken" class="bold" id="postscore">{{current_user.score}}</abbr>
+        <abbr title="{{_('Total score')}}" class="bold" id="postscore">{{current_user.score}}</abbr>
         <span class="separator"></span>
         <div class="glyphbutton">
           <a href="{{ url_for('user.edit_user', user=current_user.name) }}"><span class="p-icon" data-icon="cog"></span></a>
@@ -132,7 +132,7 @@
         </div>
         <form method="POST" action="{{ url_for('do.logout') }}" id="logout">
           {{ logoutform.csrf_token }}
-          <button type="submit" class="pure-button button-secondary">Log out</button>
+          <button type="submit" class="pure-button button-secondary">{{_('Log out')}}</button>
         </form>
         {%endif%}
         {{ logoutform.csrf_token }}
