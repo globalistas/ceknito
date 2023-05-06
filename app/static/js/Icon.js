@@ -20,6 +20,7 @@ var Icons = {
   cog: require('../svg/cog.svg'),
   sun: require('../svg/sun-fill.svg') ,
   moon: require('../svg/moon-fill.svg'),
+  color: require('../svg/color-wheel.svg'),
 
   play: require('../svg/play_arrow.svg'),
   twitter: require('../svg/twitter.svg'),

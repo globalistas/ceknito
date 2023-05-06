@@ -497,6 +497,16 @@ span#notification.fade {
   display: block;
 }
 
+.p-icon-color {
+  margin-top: 5px;
+  width: 18px;
+  height: 18px;
+  display: block;
+  position: relative;
+  top: 1px;
+  right: 1px;
+}
+
 .tx-icon {
   display: inline-flex;
   align-self: center;

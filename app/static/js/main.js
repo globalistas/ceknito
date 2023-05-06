@@ -318,6 +318,51 @@ function getCookie(cname) {
   }
   return "";
 }
+
+// color picker for --primary-color with cookie
+
+const colorPickerButton = document.querySelector('#color-picker');
+const primaryColor = getCookie("primaryColor") || '#46586e';
+let isColorPickerOpen = false; // flag variable
+
+// set the initial value of the primary color
+document.documentElement.style.setProperty('--primary-color', primaryColor);
+
+// add a click event listener to the color picker button
+colorPickerButton.addEventListener('click', () => {
+  if (!isColorPickerOpen) {
+    // show the color picker dialog box
+    const colorPicker = document.createElement('input');
+    colorPicker.type = 'color';
+    colorPicker.value = primaryColor;
+    colorPicker.addEventListener('input', (event) => {
+      // update the value of the primary color
+      const newColor = event.target.value;
+      document.documentElement.style.setProperty('--primary-color', newColor);
+    });
+    colorPicker.addEventListener('change', (event) => {
+      // set a cookie with the selected color value
+      const newColor = event.target.value;
+      setCookie("primaryColor", newColor, 365);
+    });
+    document.body.appendChild(colorPicker); // append to the body
+    colorPicker.click();
+    isColorPickerOpen = true; // set flag to true
+  } else {
+    // hide the color picker dialog box
+    document.querySelector('input[type="color"]').remove();
+    isColorPickerOpen = false; // set flag to false
+  }
+});
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires=" + d.toGMTString();
+  document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+
+
 if (document.getElementById('delete_account')) {
   document.getElementById('delete_account').addEventListener('click', function (e) {
     if (document.getElementById('delete_account').checked) {
