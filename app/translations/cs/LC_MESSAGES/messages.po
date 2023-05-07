@@ -4508,7 +4508,7 @@ msgstr "Komentáře uživatele vidí pouze přihlášení uživatelé."
 
 #: app/templates/userposts.html:20
 msgid "Please log in to see this user's posts."
-msgstr "Příspěvky uživatele vidí pouze přihlášení uživatelé.""
+msgstr "Příspěvky uživatele vidí pouze přihlášení uživatelé."
 
 #: app/templates/usercomments.html:32
 msgid "This user has not commented on anything, yet."

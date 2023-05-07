@@ -4508,7 +4508,7 @@ msgstr "Komentáre používateľa vidia iba prihlásení používatelia."
 
 #: app/templates/userposts.html:20
 msgid "Please log in to see this user's posts."
-msgstr "Príspevky používateľa vidia iba prihlásení používatelia.""
+msgstr "Príspevky používateľa vidia iba prihlásení používatelia."
 
 #: app/templates/usercomments.html:32
 msgid "This user has not commented on anything, yet."
