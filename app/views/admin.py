@@ -580,9 +580,12 @@ def post_voting(page, term):
             SubPostVote.pid,
             User.name,
             SubPostVote.datetime,
-            SubPostVote.pid,
+            SubPost.title,
+            Sub.name.alias("sub"),
         )
-        votes = votes.join(SubPost, JOIN.LEFT_OUTER, on=SubPost.pid == SubPostVote.pid)
+        votes = votes.join(
+            SubPost, JOIN.LEFT_OUTER, on=SubPost.pid == SubPostVote.pid
+        ).join(Sub)
         votes = votes.switch(SubPost).join(
             User, JOIN.LEFT_OUTER, on=SubPost.uid == User.uid
         )
@@ -615,6 +618,7 @@ def comment_voting(page, term):
             SubPostCommentVote.positive,
             SubPostCommentVote.cid,
             SubPostComment.uid,
+            SubPostComment.content,
             User.name,
             SubPostCommentVote.datetime,
             SubPost.pid,

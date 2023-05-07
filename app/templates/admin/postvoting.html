@@ -25,18 +25,20 @@
           <table class="sortable pure-table">
             <thead>
               <tr>
-                <th>pid</th>
-                <th>vote</th>
+                <th>sub</th>
+                <th>post</th>
                 <th>user</th>
+                <th>vote</th>
                 <th>datetime</th>
               </tr>
             </thead>
             <tbody>
               {% for vote in votes %}
               <tr>
-                <td><a href="{{url_for('admin.post_search', term=vote.pid)}}">{{vote.pid}}</a></td>
-                <td>{% if vote.positive == 1 %}up{% else %}down{% endif %}</td>
+                <td>{{vote.sub}}</td>
+                <td><a href="{{url_for('admin.post_search', term=vote.pid)}}">{{vote.title|truncate(30, True)}}</a></td>
                 <td>{{vote.name}}</td>
+                <td>{% if vote.positive == 1 %}up{% else %}down{% endif %}</td>
                 <td>{{vote.datetime}}</td>
               </tr>
               {% endfor %}

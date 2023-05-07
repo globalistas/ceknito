@@ -28,7 +28,7 @@
           <table class="sortable pure-table">
             <thead>
               <tr>
-                <th>cid</th>
+                <th>comment</th>
                 <th>vote</th>
                 <th>user</th>
                 <th>datetime</th>
@@ -37,7 +37,7 @@
             <tbody>
               {% for vote in votes %}
               <tr>
-                <td><a href="{{url_for('sub.view_perm', sub=vote.sub, pid=vote.pid, cid=vote.cid)}}">link</a></td>
+                <td><a href="{{url_for('sub.view_perm', sub=vote.sub, pid=vote.pid, cid=vote.cid)}}">{{vote.content|truncate(50, True)}}</a></td>
                 <td>{% if vote.positive == 1 %}up{% else %}down{% endif %}</td>
                 <td>{{vote.name}}</td>
                 <td>{{vote.datetime}}</td>
