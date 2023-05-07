@@ -302,7 +302,8 @@ body.dark {
 body.dark .post-content-container,
 body.dark .poll-space {
   background: #40444b;
-  color: #b9bbbe
+  color: #b9bbbe;
+  border: 1px solid #8f8f8f;
 }
 
 body.dark .editbtns {
