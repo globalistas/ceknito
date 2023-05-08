@@ -3447,6 +3447,7 @@ def recent_activity(sidebar=True):
         SubPost.pid,
         SubPost.sid,
         SubPost.nsfw,
+        SubPost.title,
     )
     post_activity = post_activity.join(User).switch(SubPost)
     if "nsfw" not in current_user.prefs:
@@ -3463,6 +3464,7 @@ def recent_activity(sidebar=True):
         SubPost.pid,
         SubPost.sid,
         SubPost.nsfw,
+        SubPostComment.cid,
     )
     comment_activity = comment_activity.join(User).switch(SubPostComment).join(SubPost)
     if "nsfw" not in current_user.prefs:
@@ -3495,6 +3497,7 @@ def recent_activity(sidebar=True):
         activity.c.pid,
         activity.c.sid,
         activity.c.nsfw,
+        activity.c.cid,
         Sub.name.alias("sub"),
         Sub.nsfw.alias("sub_nsfw"),
     )
