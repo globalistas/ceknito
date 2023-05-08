@@ -299,8 +299,11 @@ body.dark {
   color: #666;
 }
 
-body.dark .post-content-container,
 body.dark .poll-space {
+  color: #b9bbbe;
+}
+
+body.dark .post-content-container {
   background: #40444b;
   color: #b9bbbe;
   border: 1px solid #8f8f8f;
