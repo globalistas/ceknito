@@ -83,9 +83,9 @@
         @end
       </div>
       <div class="thcontainer">
-        <a rel="noopener nofollow ugc" href="@{((post['visibility'] != 'none') and post['link']) or '#'}" target="@{((post['visibility'] != 'none') and '_blank') or '_self'}" class="title">
           <div class="thumbnail">
             @if post['link'] != None:
+            <a target="_blank" rel="noopener nofollow ugc" href="@{post['link']}">
               @if post['thumbnail'] == '' or post['visibility'] == 'none' or post['visibility'] == 'user-self-del':
                 <span class="placeholder" data-icon="link"></span>
               @elif post['thumbnail'] == 'deferred':
@@ -96,8 +96,8 @@
             @else:
               <span class="placeholder" data-icon="chat"></span>
             @end
+            </a>
           </div>
-        </a>
       </div>
     </div>
     <div class="postinfo" id="postinfo" pid="@{post['pid']}">

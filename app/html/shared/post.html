@@ -13,9 +13,9 @@
       </div>
       <div class="thcontainer">
         @if post['link'] == None:
-        <a href="/@{config.site.sub_prefix}/@{post['sub']}/@{post['pid']}/@{func.slugify(post['title'])}"></a>
+        <a href="/@{config.site.sub_prefix}/@{post['sub']}/@{post['pid']}/@{func.slugify(post['title'])}">
         @else:
-        <a target="_blank" rel="noopener nofollow ugc" href="@{post['link']}"></a>
+          <a target="_blank" rel="noopener nofollow ugc" href="@{post['link']}">
         @end
           <div class="thumbnail">
             @if post['link'] != None:
@@ -30,6 +30,7 @@
               <span class="placeholder" data-icon="chat"></span>
             @end
           </div>
+        </a>
       </div>
     </div>
     <div class="pbody">
