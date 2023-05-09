@@ -1762,6 +1762,10 @@ div.comments {
   border-left: 1px dotted #cecece;
 }
 
+.pchild blockquote {
+  margin-left: 2em;
+}
+
 .pchild-e {
   margin-left: 26px;
 }
