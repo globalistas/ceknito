@@ -497,14 +497,15 @@ span#notification.fade {
   display: block;
 }
 
-.p-icon-color {
+.p-icon-color span {
   margin-top: 5px;
   width: 18px;
   height: 18px;
-  display: block;
+  display: inline-block;
   position: relative;
   top: 1px;
   right: 1px;
+  pointer-events: none;
 }
 
 .tx-icon {

@@ -1,6 +1,6 @@
 :root {
     /*
-    The site's primary color. Used for sidebars, buttons and some icons on light mode. Also used as the initial color picker color but hardcoded in main.js
+    The site's primary color. Used for sidebars, buttons and some icons on light mode. Also used as the initial color picker color but hardcoded in Setcolor.js
     Phuks: #d94f00
     */
     --primary-color: #46586e;

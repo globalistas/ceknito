@@ -99,8 +99,8 @@
         <div id="toggledark" class="glyphbutton">
           <span class="p-icon" data-icon="{%if request.cookies.get( "dayNight")=="dark" %}sun{%else%}moon{%endif%}"></span>
         </div>
-        <div id="color-picker" class="glyphbutton">
-          <span class="p-icon-color" data-icon="color"></span>
+        <div class="glyphbutton">
+          <div class="p-icon-color" data-jscolor='{"previewElement":null,"showOnClick":false}'><span data-icon="color"></span></div>
         </div>
         <a href="{{url_for('auth.login', next=request.path)}}" class="pure-button pure-button-primary">{{_('Log in')}}</a>
         <a href="{{url_for('auth.register')}}" class="pure-button button-secondary">{{_('Register')}}</a>
@@ -133,8 +133,8 @@
         <div id="toggledark" class="glyphbutton">
           <span class="p-icon" data-icon="{%if request.cookies.get( "dayNight")=="dark" %}sun{%else%}moon{%endif%}"></span>
         </div>
-        <div id="color-picker" class="glyphbutton">
-          <span class="p-icon-color" data-icon="color"></span>
+        <div class="glyphbutton">
+          <div class="p-icon-color" data-jscolor='{"previewElement":null,"showOnClick":false}'><span data-icon="color"></span></div>
         </div>
         <form method="POST" action="{{ url_for('do.logout') }}" id="logout">
           {{ logoutform.csrf_token }}

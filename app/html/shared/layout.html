@@ -59,6 +59,8 @@
 
     <link rel="alternate" type="application/rss+xml" title="RSS" href="https://cekni.to/all/new.rss">
 
+    <script src="@{url_for('static', filename='/js/Setcolor.js')}"></script>
+
   </head>
 
 <body class="@{(config.site.enable_totp and current_user.admin) and 'body_admin' or ''} @{(request.cookies.get( "dayNight")=="dank") and 'dark dank' or ''} @{(request.cookies.get( "dayNight")=="dark") and 'dark' or ''}">
@@ -120,8 +122,8 @@
         <div id="toggledark" class="glyphbutton">
           <span class="p-icon" data-icon="@{(request.cookies.get( "dayNight")=="dark") and 'sun' or 'moon'}"></span>
         </div>
-        <div id="color-picker" class="glyphbutton">
-          <span class="p-icon-color" data-icon="color"></span>
+        <div class="glyphbutton">
+          <div class="p-icon-color" data-jscolor='{"previewElement":null,"showOnClick":false}'><span data-icon="color"></span></div>
         </div>
         <a href="@{url_for('auth.login', next=request.path)}" class="pure-button pure-button-primary">@{_('Log in')}</a>
         <a href="@{url_for('auth.register')}" class="pure-button button-secondary">@{_('Register')}</a>
@@ -154,8 +156,10 @@
         <div id="toggledark" class="glyphbutton">
           <span class="p-icon" data-icon="@{(request.cookies.get( "dayNight")=="dark") and 'sun' or 'moon'}"></span>
         </div>
-        <div id="color-picker" class="glyphbutton">
-            <span class="p-icon-color" data-icon="color"></span>
+        <div class="glyphbutton">
+          <div class="p-icon-color" data-jscolor='{"previewElement":null,"showOnClick":false}'>
+            <span data-icon="color"></span>
+          </div>
         </div>
         <form method="POST" action="@{ url_for('do.logout') }" id="logout">
           @{ form.LogOutForm().csrf_token() !!html }
