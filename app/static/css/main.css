@@ -1242,6 +1242,10 @@ img.block-blur {
   /*  box-shadow: 0 0px 3px rgb(0 0 0 / 10%);*/
 }
 
+.commblock .content {
+  max-width: 60em;
+}
+
 .commblock p {
   margin: 10px 0px 10px 0px;
 }
@@ -3378,13 +3382,5 @@ li.mod-table-header {
   .pure-u-md-1-4,
   .pure-u-md-6-24 {
     width: 20%;
-  }
-}
-
-/* Comment block. To be applied on desktop. It pads the block like Old Reddit does. */
-@media only screen and (min-width: 915px) {
-
-  .commblock {
-    padding-right:60em;
   }
 }
