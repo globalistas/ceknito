@@ -33,7 +33,6 @@
 
     <!--    <link rel="icon" href="@{url_for('static', filename='img/icon.png') }"> -->
 
-
     <link rel="apple-touch-icon" sizes="180x180" href="@{ url_for('static', filename='img/apple-touch-icon.png') }">
     <link rel="icon" type="image/png" sizes="32x32" href="@{ url_for('static', filename='img/favicon-32x32.png') }">
     <link rel="icon" type="image/png" sizes="16x16" href="@{ url_for('static', filename='img/favicon-16x16.png') }">
@@ -123,7 +122,11 @@
           <span class="p-icon" data-icon="@{(request.cookies.get( "dayNight")=="dark") and 'sun' or 'moon'}"></span>
         </div>
         <div class="glyphbutton">
-          <div class="p-icon-color" data-jscolor='{"previewElement":null,"showOnClick":false}'><span data-icon="color"></span></div>
+          <div class="p-icon-color">
+            <div class="color-picker">
+              <span data-icon="color"></span>
+            </div>
+          </div>
         </div>
         <a href="@{url_for('auth.login', next=request.path)}" class="pure-button pure-button-primary">@{_('Log in')}</a>
         <a href="@{url_for('auth.register')}" class="pure-button button-secondary">@{_('Register')}</a>
@@ -157,8 +160,10 @@
           <span class="p-icon" data-icon="@{(request.cookies.get( "dayNight")=="dark") and 'sun' or 'moon'}"></span>
         </div>
         <div class="glyphbutton">
-          <div class="p-icon-color" data-jscolor='{"previewElement":null,"showOnClick":false}'>
-            <span data-icon="color"></span>
+          <div class="p-icon-color">
+            <div class="color-picker">
+              <span data-icon="color"></span>
+            </div>
           </div>
         </div>
         <form method="POST" action="@{ url_for('do.logout') }" id="logout">

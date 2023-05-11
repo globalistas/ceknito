@@ -53,6 +53,7 @@
     </title>
 
     <link rel="stylesheet" type="text/css" href="@{asset_url_for('main.css') }">
+    <script src="@{url_for('static', filename='/js/Setcolor.js')}"></script>
   </head>
 
   <body class="@{(request.cookies.get( "dayNight")=="dank") and 'dark dank' or ''} @{(request.cookies.get( "dayNight")=="dark") and 'dark' or ''}">

@@ -1,5 +1,4 @@
 import './ext/CustomElements.min.js';
-import './ext/jscolor.js';
 import 'purecss/build/base.css';
 import 'purecss/build/forms.css';
 import 'purecss/build/buttons.css';
@@ -10,6 +9,8 @@ import 'tingle.js/dist/tingle.css';
 import 'time-elements';
 //import 'flatpickr/dist/flatpickr.css';
 import 'flatpickr/dist/themes/dark.css';
+import '@simonwep/pickr/dist/themes/nano.min.css';
+import Pickr from '@simonwep/pickr';
 
 import u from './Util';
 import Konami from './ext/konami';
@@ -305,40 +306,6 @@ if (document.getElementById('toggledark')) {
   })
 }
 
-// JS color picker
-jscolor.looseJSON=false
-jscolor.install()
-
-function updatecolor() {
-        setcolor(this.toString())
-    }
-function storecolor() {
-        setCookie("primaryColor", this.toString(), 365);
-    }
-document.addEventListener("DOMContentLoaded", (event) => {
-    const picker = document.querySelector(".p-icon-color").jscolor
-    picker.fromString(primaryColor)
-    updatecolor.call(picker)
-    picker.onInput=updatecolor
-    picker.onChange=storecolor
-})
-
-document.querySelector(".p-icon-color").addEventListener("click", (event) => {
-    const pickerElement = document.querySelector(".p-icon-color")
-
-    if (pickerElement.classList.contains("jscolor-active")) {
-        pickerElement.jscolor.hide()
-    }   else {
-        pickerElement.jscolor.show()
-    }
-})
-
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-  var expires = "expires=" + d.toGMTString();
-  document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
-}
 
 // delete account
 if (document.getElementById('delete_account')) {
@@ -759,3 +726,69 @@ for (var i = 0; i < pbodyElements.length; i++) {
   });
 
 };
+
+// Simonwep color picker
+const pickr = Pickr.create({
+    el: '.color-picker',
+    useAsButton: true,
+    theme: 'nano', // or 'monolith', or 'classic'
+
+    swatches: [
+        'rgba(70, 88, 110, 1)',
+        'rgba(72, 80, 108, 1)',
+        'rgba(128, 0, 0, 1)',
+        'rgba(116, 2, 9, 1)',
+        'rgba(44, 105, 104, 0.88)',
+        'rgba(20, 102, 149, 0.75)',
+        'rgba(132, 167, 122, 0.65)',
+    ],
+
+    components: {
+
+        // Main components
+        preview: true,
+        opacity: true,
+        hue: true,
+
+        // Input / output Options
+        interaction: {
+            rgba: true,
+            hex: true,
+            hsla: false,
+            hsva: false,
+            cmyk: false,
+            input: true,
+            clear: false,
+            save: false
+        }
+    }
+});
+
+// On every color change
+pickr.on('change', (color, source, instance) => {
+    // Passes the selected color in HEX format to the setcolor function (in Setcolor.js)
+    setcolor(color.toHEXA())
+})
+
+// On stop color change
+pickr.on('changestop', (source, instance) => {
+    // Passes the selected color in HEX format to setcookie function (in Setcolor.js)
+    setCookie("primaryColor", instance.getColor().toHEXA(), 365);
+})
+
+// On swatch select
+pickr.on('swatchselect', (source, instance) => {
+    // Passes the color selected from swatch to setcookie function
+    setCookie("primaryColor", instance.getColor().toHEXA(), 365);
+})
+
+pickr.on('init', (instance) => {
+    instance.setColor(primaryColor)
+})
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires=" + d.toGMTString();
+  document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}

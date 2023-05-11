@@ -6,16 +6,15 @@
     <meta name="keywords" content="forum, diskusie, komentare, reddit, cekni, cekni.to, www.cekni.to" />
     <meta name="referrer" content="always" />
 
-    <meta name="description" content="{{config.site.lema}}" />
     <meta name="twitter:description" content="{{config.site.lema}}" />
-    <meta name="twitter:image:src" content="https://cekni.to/@{ url_for('static', filename='img/android-chrome-512x512.png') }" />
+    <meta name="twitter:image:src" content="https://cekni.to/{{url_for('static', filename='img/android-chrome-512x512.png')}}" />
     <meta name="twitter:title" content="čekni.to" />
     <meta name="twitter:image:width" content="512" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:image:height" content="512" />
     <meta name="description" content="{{config.site.lema}}" />
     <meta property="og:description" content={{config.site.lema}} />
-    <meta property="og:image" content="https://cekni.to/@{ url_for('static', filename='img/android-chrome-512x512.png') }" />
+    <meta property="og:image" content="https://cekni.to/{{url_for('static', filename='img/android-chrome-512x512.png')}}" />
     <meta property="og:title" content="čekni.to" />
     <meta property="og:image:width" content="512" />
     <meta property="og:image:height" content="512" />
@@ -25,15 +24,25 @@
     <!-- mobile stuff -->
     <meta name="theme-color" content="white" />
     <meta name="msapplication-navbutton-color" content="white" />
+    <meta name="msapplication-TileColor" content="#b91d47" />
+    <meta name="msapplication-config" content="{{ url_for('static', filename='browserconfig.xml') }}" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="white-translucent" />
 
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicon-32x32.png') }}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/favicon-16x16.png') }}" />
+    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}" />
+    <link rel="mask-icon" href="{{ url_for('static', filename='img/safari-pinned-tab.svg') }}" color="#800000" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
     <!--  <link rel="icon" href="{{ url_for('static', filename='img/icon.png') }}?v9"> -->
 
     <title>
       {% block title %}{{config.site.lema}}{% endblock %}</title>
 
     <link rel="stylesheet" type="text/css" href="{{ asset_url_for('main.css') }}">
+
+    <script src="{{url_for('static', filename='/js/Setcolor.js')}}"></script>
 
     {% endblock %}
   </head>
@@ -100,7 +109,11 @@
           <span class="p-icon" data-icon="{%if request.cookies.get( "dayNight")=="dark" %}sun{%else%}moon{%endif%}"></span>
         </div>
         <div class="glyphbutton">
-          <div class="p-icon-color" data-jscolor='{"previewElement":null,"showOnClick":false}'><span data-icon="color"></span></div>
+          <div class="p-icon-color">
+            <div class="color-picker">
+              <span data-icon="color"></span>
+            </div>
+          </div>
         </div>
         <a href="{{url_for('auth.login', next=request.path)}}" class="pure-button pure-button-primary">{{_('Log in')}}</a>
         <a href="{{url_for('auth.register')}}" class="pure-button button-secondary">{{_('Register')}}</a>
@@ -134,7 +147,11 @@
           <span class="p-icon" data-icon="{%if request.cookies.get( "dayNight")=="dark" %}sun{%else%}moon{%endif%}"></span>
         </div>
         <div class="glyphbutton">
-          <div class="p-icon-color" data-jscolor='{"previewElement":null,"showOnClick":false}'><span data-icon="color"></span></div>
+          <div class="p-icon-color">
+            <div class="color-picker">
+              <span data-icon="color"></span>
+            </div>
+          </div>
         </div>
         <form method="POST" action="{{ url_for('do.logout') }}" id="logout">
           {{ logoutform.csrf_token }}
