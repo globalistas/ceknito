@@ -954,10 +954,6 @@ a.slink {
   margin-left: .5em;
 }
 
-a.reply-comment {
-  font-size: 11px;
-}
-
 .links li {
   display: inline-block;
   padding: 0 .25em;
@@ -1185,7 +1181,6 @@ img.block-blur {
   float: right;
   position: relative;
   bottom: 3px;
-  right: 4px;
   border: 1px solid #ccc;
 }
 
@@ -1237,7 +1232,7 @@ img.block-blur {
   width: calc(100% - 2em);
   /*  max-width: 60em;*/
   font-family: verdana, arial, sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.3em;
   background: #fff;
   padding: 5px 10px 5px 5px;
