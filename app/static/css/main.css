@@ -1180,6 +1180,7 @@ img.block-blur {
 .sortcomments {
   float: right;
   position: relative;
+  right: 1px;
   bottom: 3px;
   border: 1px solid #ccc;
 }
@@ -1753,7 +1754,7 @@ input[type=search] {
 }
 
 div.comments {
-  padding-right: 12px;
+  padding-right: 15px;
   padding-bottom: 12px;
 }
 
@@ -2099,7 +2100,7 @@ li.profilebadge {
 }
 
 article.comment {
-  padding: .8em 0 0 0em;
+  padding: .5em 0 0 0em;
   /*  border-radius: 8px 0 0 8px; */
   background-color: #faf9f8;
   margin: 4px 0;

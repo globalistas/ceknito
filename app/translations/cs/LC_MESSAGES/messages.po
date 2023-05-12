@@ -326,7 +326,7 @@ msgstr "V této skupině máš ban."
 #: app/misc.py:2917 app/views/do.py:1288 app/views/do.py:1342
 #: app/views/do.py:2905
 msgid "Post is archived"
-msgstr "Příspěvek byl archivován"
+msgstr "Příspěvek je archivován"
 
 #: app/misc.py:3271
 msgid "Invalid status request"
