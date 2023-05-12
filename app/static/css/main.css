@@ -1148,7 +1148,7 @@ img.block-blur {
 
 .wholepost {
   /*  margin-top: 1.5em;*/
-  background-color: #faf9f8;
+/*  background-color: #faf9f8; */
 }
 
 .comment-form {
@@ -1181,7 +1181,7 @@ img.block-blur {
   float: right;
   position: relative;
   right: 1px;
-  bottom: 3px;
+/*  bottom: 3px; */
   border: 1px solid #ccc;
 }
 
@@ -1205,11 +1205,12 @@ img.block-blur {
 }
 
 .votecomment {
+  display: inline-block;
   float: left;
   width: 1.3em;
   text-align: center;
-  margin-right: .3em;
-  margin-top: 0.01em;
+  margin-right: 0em;
+  margin-top: 0.31em;
 }
 
 .c-upvote svg,
@@ -1238,8 +1239,8 @@ img.block-blur {
   background: #fff;
   margin-top: 3px;
   padding: 5px 10px 5px 5px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+ /* border: 1px solid #ccc;
+  border-radius: 3px;*/
   /*  box-shadow: 0 0px 3px rgb(0 0 0 / 10%);*/
 }
 
@@ -2102,12 +2103,12 @@ li.profilebadge {
 article.comment {
   padding: .5em 0 0 0em;
   /*  border-radius: 8px 0 0 8px; */
-  background-color: #faf9f8;
+ /* background-color: #faf9f8;*/
   margin: 4px 0;
 }
 
 article.comment:nth-child(2n) {
-  background-color: #faf9f8;
+/*  background-color: #faf9f8; */
   /*    -webkit-box-shadow: -3px 2px 4px 0 rgba(0, 0, 0, .1);
     -moz-box-shadow: -3px 2px 4px 0 rgba(0, 0, 0, .1);
     box-shadow: -3px 2px 4px 0 rgba(0, 0, 0, .1);
@@ -2882,7 +2883,7 @@ div.post.admin>div>div>a.authorlink {
 
 div.post.mod>div>div>a.authorlink {
   display: inline-block;
-  background-color: #59cbef70;
+  background-color: #59cbef1f;
   color: black;
   border-radius: 2px;
   padding: .15em;
@@ -2898,7 +2899,7 @@ article.text-post.comment.admin>div>div>div>a.poster {
 
 article.text-post.comment.mod>div>div>div>a.poster {
   display: inline-block;
-  background-color: #59cbef70;
+  background-color: #59cbef1f;
   color: black;
   border-radius: 2px;
   padding: .15em;

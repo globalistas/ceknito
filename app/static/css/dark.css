@@ -139,7 +139,7 @@ body.dark #center-container {
 }
 
 body.dark .wholepost {
-  background-color: transparent;
+  background-color: #373a3f;
 }
 
 body.dark .pbody {
@@ -759,7 +759,7 @@ body.dark .links a.post-open-reports {
 }
 
 body.dark .votecomment {
-  margin-top: 0.21em;
+/*  margin-top: 0.21em;*/
   padding-left: 0.4em;
 }
 
