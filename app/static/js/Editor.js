@@ -75,7 +75,7 @@ function initializeEditor(element) {
     }
   }
 
-  el.appendChild(makeThingy('image', 'Vložiť link na obrázok (ctrl-shift-k)', makeImgLink));
+  el.appendChild(makeThingy('image', _('Insert image link'), makeImgLink));
 
   element.insertBefore(el, element.firstChild);
 

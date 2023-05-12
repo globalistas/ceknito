@@ -508,8 +508,13 @@ re_amention = MentionRegex()
 class PhuksDown(m.SaferHtmlRenderer):
     _allowed_url_re = re.compile(r"^(https?:|gopher:|gemini:|ftp:|magnet:|/|#)", re.I)
 
-    #    def image(self, raw_url, title="", alt=""):
-    #        return False
+    def image(self, raw_url, title="", alt=""):
+        if self.check_url(raw_url):
+            url = self.rewrite_url(raw_url)
+            url = m.escape_html(url)
+            return f'<a href="{url}" target="_blank"><img src="{url}" alt="{alt}" title="{title}"></a>'
+        else:
+            return m.escape_html("[Image: %s](%s)" % (alt, raw_url))
 
     def check_url(self, url, is_image_src=False):
         return bool(self._allowed_url_re.match(url))

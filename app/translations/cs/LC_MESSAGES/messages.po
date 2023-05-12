@@ -4525,3 +4525,7 @@ msgstr "Máme zde"
 #: app/html/index.html:51
 msgid "posts from the domain"
 msgstr "příspěvků z domény"
+
+#: app/static/js/Editor.js:78
+msgid "Insert image link"
+msgstr "Vložit link na obrázek"
