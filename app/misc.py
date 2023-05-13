@@ -1298,7 +1298,6 @@ def getAnnouncementPid():
         return 0
 
 
-@cache.memoize(600)
 def getAnnouncement():
     """Returns sitewide announcement post or False"""
     ann = getAnnouncementPid()
