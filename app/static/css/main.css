@@ -30,7 +30,7 @@ abbr[title] {
 
 code,
 pre {
-  background: #d3d3d3;
+  background: #f3f3f3;
 }
 
 pre {
@@ -1465,9 +1465,9 @@ span.hasmail {
 }
 
 .sidebar h4 {
-  color: #222222;
+  color: #404040;
   margin: 0;
-  padding-top: 3px;
+  padding-top: 5px;
   padding-left: 0.5em;
 }
 

@@ -21,7 +21,7 @@ body.dark .th-toggle .bar {
 }
 
 body.dark a {
-  color: #8f8f8f!important;
+  color: #8f8f8f;
 }
 
 body.dark div.author a {
@@ -189,8 +189,24 @@ body.dark .post .title:visited {
   color: var(--dark-links-visited);
 }
 
+body.dark .expandotxt a,
+body.dark .post-content-container a,
+body.dark .commblock .content a {
+    color: #526a7d;
+}
+
+body.dark .expandotxt a:visited,
+body.dark .post-content-container a:visited,
+body.dark .commblock .content a:visited {
+    color: #7a7a7a;
+}
+
 body.dark .post .author {
   color: #7b7b7b;
+}
+
+body.dark .poster .op-tag {
+    color: #429fc3;
 }
 
 body.dark .thumbnail .placeholder svg path {
