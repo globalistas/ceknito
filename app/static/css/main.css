@@ -52,9 +52,10 @@ blockquote>p:not(:last-child) {
 }
 
 blockquote {
-  border-left: 3px solid gray;
+  border-left: 3px solid #edf1f3;
   margin: .3em 0 .3em 1em;
   padding: .3em 0 .3em .7em;
+  color: #858687;
 }
 
 .pure-control-group .markdown-editor .editbtns {
@@ -263,7 +264,7 @@ blockquote {
 }
 
 a {
-  color: #344c6ae0;
+  color: #293654d4;
   text-decoration: none;
 }
 
@@ -1025,7 +1026,7 @@ img.block-blur {
 
 .postinfo {
   display: inline-block;
-  /*  width: 82%; */
+  width: 85%;
 }
 
 .popup {
@@ -1123,6 +1124,10 @@ img.block-blur {
 
 .poster {
   font-weight: bold;
+}
+
+.poster .op-tag {
+  color: #24a0ed;
 }
 
 .c-downvote {
@@ -1427,7 +1432,7 @@ span.hasmail {
 }
 
 .alldaposts .links a.comments {
-  color: #0f5387;
+  color: #293654d4;
 }
 
 
@@ -1598,6 +1603,10 @@ input[type=search] {
 
 /* /SIDEBAR STYLES */
 
+a.title {
+  color: #4f5156;
+}
+
 /* CREATE POST PAGE STYLES */
 
 @media (max-width: 35.5em) {
@@ -1693,7 +1702,6 @@ input[type=search] {
 .postbar {
   white-space: nowrap;
   min-height: 70px;
-  padding-right: 110px;
 }
 
 .postbar * {
@@ -2621,6 +2629,18 @@ a[href="#toodamncool"] {
 .post-content-container,
 .commblock .content {
   word-wrap: break-word;
+}
+
+.expandotxt a,
+.post-content-container a,
+.commblock .content a {
+  color: #0077d0;
+}
+
+.expandotxt a:visited,
+.post-content-container a:visited,
+.commblock .content a:visited {
+  color: #460068;
 }
 
 .post-content-container img,
