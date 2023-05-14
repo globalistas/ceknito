@@ -25,7 +25,7 @@ abbr[title] {
 .content {
   word-wrap: break-word;
   /*padding-top: 1em;*/
-  padding-left: 7px;
+  /*padding-left: 7px;*/
 }
 
 code,
@@ -1242,7 +1242,7 @@ img.block-blur {
   font-size: 13px;
   line-height: 1.3em;
   background: #fff;
-  margin-top: 3px;
+  margin: 3px 0 0 3px;
   padding: 5px 10px 5px 5px;
  /* border: 1px solid #ccc;
   border-radius: 3px;*/

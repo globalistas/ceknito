@@ -209,6 +209,10 @@ body.dark .poster .op-tag {
     color: #429fc3;
 }
 
+body.dark .bottombar .reply-comment {
+    color: #c1c1c1;
+}
+
 body.dark .thumbnail .placeholder svg path {
   fill: #555;
 }
@@ -657,10 +661,9 @@ body.dark thead a {
 }
 
 body.dark blockquote {
-    border-left: 3px solid #c1c1c1;
+    border-left: 1px solid #858687;
     background: transparent;
     background-color: transparent;
-    color: #c1c1c1;
 }
 /* alldaposts */
 
