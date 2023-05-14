@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2023-05-13 00:15+0200\n"
+"POT-Creation-Date: 2023-05-14 19:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -316,12 +316,12 @@ msgstr ""
 msgid "Max storage for image uploads for subs' stylesheets (in MiB)."
 msgstr ""
 
-#: app/misc.py:1658
+#: app/misc.py:1662
 #, python-format
 msgid "Error in the '%(field)s' field - %(error)s"
 msgstr ""
 
-#: app/misc.py:1846
+#: app/misc.py:1850
 #, python-format
 msgid "Re: %(subject)s"
 msgstr ""
@@ -331,48 +331,48 @@ msgstr ""
 #: app/html/sub/post.html:50 app/html/sub/post.html:125
 #: app/html/sub/post.html:144 app/html/sub/post.html:194
 #: app/html/sub/post.html:203 app/html/sub/postcomments.html:37
-#: app/misc.py:2021 app/misc.py:2779 app/misc.py:2785 app/misc.py:2791
-#: app/misc.py:2796
+#: app/misc.py:2025 app/misc.py:2783 app/misc.py:2789 app/misc.py:2795
+#: app/misc.py:2800
 msgid "[Deleted]"
 msgstr ""
 
-#: app/misc.py:2097
+#: app/misc.py:2101
 msgid "URLs not allowed, uploaded files only"
 msgstr ""
 
-#: app/misc.py:2108
+#: app/misc.py:2112
 msgid "Invalid characters in string."
 msgstr ""
 
-#: app/misc.py:2126
+#: app/misc.py:2130
 msgid "@import token not allowed"
 msgstr ""
 
-#: app/misc.py:2142
+#: app/misc.py:2146
 msgid "Invalid CSS"
 msgstr ""
 
-#: app/html/sub/postcomments.html:50 app/misc.py:2766
+#: app/html/sub/postcomments.html:50 app/misc.py:2770
 msgid "[Blocked]"
 msgstr ""
 
-#: app/misc.py:2854
+#: app/misc.py:2858
 msgid "Already processing previous request."
 msgstr ""
 
-#: app/misc.py:2876
+#: app/misc.py:2880
 msgid "Unknown error. User disappeared"
 msgstr ""
 
-#: app/misc.py:2883
+#: app/misc.py:2887
 msgid "Score balance is negative"
 msgstr ""
 
-#: app/misc.py:2885
+#: app/misc.py:2889
 msgid "Invalid vote value"
 msgstr ""
 
-#: app/misc.py:2901 app/views/do.py:320 app/views/do.py:453 app/views/do.py:820
+#: app/misc.py:2905 app/views/do.py:320 app/views/do.py:453 app/views/do.py:820
 #: app/views/do.py:856 app/views/do.py:1236 app/views/do.py:1342
 #: app/views/do.py:2185 app/views/do.py:2291 app/views/do.py:2444
 #: app/views/do.py:2459 app/views/do.py:2532 app/views/do.py:2617
@@ -382,43 +382,43 @@ msgstr ""
 msgid "Post does not exist"
 msgstr ""
 
-#: app/misc.py:2904
+#: app/misc.py:2908
 msgid "You can't vote on your own posts"
 msgstr ""
 
-#: app/misc.py:2906
+#: app/misc.py:2910
 msgid "You can't vote on deleted posts"
 msgstr ""
 
-#: app/misc.py:2939 app/views/do.py:2582 app/views/do.py:2886
+#: app/misc.py:2943 app/views/do.py:2582 app/views/do.py:2886
 #: app/views/do.py:2934 app/views/do.py:3033 app/views/do.py:4085
 #: app/views/do.py:4198
 msgid "Comment does not exist"
 msgstr ""
 
-#: app/misc.py:2942
+#: app/misc.py:2946
 msgid "You can't vote on your own comments"
 msgstr ""
 
-#: app/misc.py:2944
+#: app/misc.py:2948
 msgid "You can't vote on deleted comments"
 msgstr ""
 
-#: app/misc.py:2956
+#: app/misc.py:2960
 msgid "Invalid target"
 msgstr ""
 
-#: app/misc.py:2959 app/views/do.py:1290 app/views/do.py:2192
+#: app/misc.py:2963 app/views/do.py:1290 app/views/do.py:2192
 #: app/views/do.py:2898
 msgid "You are banned on this sub."
 msgstr ""
 
-#: app/misc.py:2964 app/views/do.py:1293 app/views/do.py:1347
+#: app/misc.py:2968 app/views/do.py:1293 app/views/do.py:1347
 #: app/views/do.py:2909
 msgid "Post is archived"
 msgstr ""
 
-#: app/misc.py:3318
+#: app/misc.py:3322
 msgid "Invalid status request"
 msgstr ""
 
@@ -700,12 +700,12 @@ msgid "Hot"
 msgstr ""
 
 #: app/forms/sub.py:133 app/html/index.html:10 app/html/index.html:14
-#: app/html/sub.html:22 app/html/sub/post.html:446
+#: app/html/sub.html:22 app/html/sub/post.html:449
 msgid "New"
 msgstr ""
 
 #: app/forms/sub.py:133 app/html/index.html:9 app/html/index.html:13
-#: app/html/sub.html:21 app/html/sub/post.html:436
+#: app/html/sub.html:21 app/html/sub/post.html:439
 msgid "Top"
 msgstr ""
 
@@ -785,7 +785,7 @@ msgstr ""
 msgid "Poll closing time"
 msgstr ""
 
-#: app/forms/sub.py:188 app/forms/user.py:115 app/forms/user.py:233
+#: app/forms/sub.py:188 app/forms/user.py:124 app/forms/user.py:242
 #: app/html/sub/createpost.html:119 app/html/user/password_recovery.html:26
 msgid "Captcha"
 msgstr ""
@@ -822,7 +822,7 @@ msgstr[1] ""
 msgid "Field must be between %(min)d and %(max)d characters long."
 msgstr ""
 
-#: app/forms/user.py:83 app/forms/user.py:105 app/forms/user.py:243
+#: app/forms/user.py:83 app/forms/user.py:114 app/forms/user.py:252
 #: app/html/user/login.html:19 app/html/user/password_reset.html:16
 #: app/static/js/main.js:56 app/static/js/main.js:645
 msgid "Password"
@@ -833,132 +833,144 @@ msgstr ""
 msgid "Remember me"
 msgstr ""
 
-#: app/forms/user.py:95 app/forms/user.py:130
+#: app/forms/user.py:95
+msgid "No spaces or diacritics"
+msgstr ""
+
+#: app/forms/user.py:98
+msgid "Used for password reset and notifications"
+msgstr ""
+
+#: app/forms/user.py:101 app/forms/user.py:139
 msgid "Email Address (optional)"
 msgstr ""
 
-#: app/forms/user.py:98 app/forms/user.py:102 app/forms/user.py:124
-#: app/forms/user.py:133 app/forms/user.py:137 app/forms/user.py:231
+#: app/forms/user.py:104 app/forms/user.py:108 app/forms/user.py:133
+#: app/forms/user.py:142 app/forms/user.py:146 app/forms/user.py:240
 msgid "Invalid email address."
 msgstr ""
 
-#: app/forms/user.py:102 app/forms/user.py:137
+#: app/forms/user.py:108 app/forms/user.py:146
 msgid "Email Address (required)"
 msgstr ""
 
-#: app/forms/user.py:108 app/forms/user.py:142 app/forms/user.py:246
+#: app/forms/user.py:111
+msgid "At least 7 characters"
+msgstr ""
+
+#: app/forms/user.py:117 app/forms/user.py:151 app/forms/user.py:255
 msgid "Passwords must match"
 msgstr ""
 
-#: app/forms/user.py:112 app/forms/user.py:147 app/forms/user.py:250
+#: app/forms/user.py:121 app/forms/user.py:156 app/forms/user.py:259
 msgid "Repeat Password"
 msgstr ""
 
-#: app/forms/user.py:113 app/html/user/profile.html:133
+#: app/forms/user.py:122 app/html/user/profile.html:133
 msgid "Invite Code"
 msgstr ""
 
-#: app/forms/user.py:114
+#: app/forms/user.py:123
 msgid "I accept the TOS"
 msgstr ""
 
-#: app/forms/user.py:117
+#: app/forms/user.py:126
 msgid "Security question"
 msgstr ""
 
-#: app/forms/user.py:124 app/forms/user.py:231
+#: app/forms/user.py:133 app/forms/user.py:240
 msgid "Email Address"
 msgstr ""
 
-#: app/forms/user.py:140
+#: app/forms/user.py:149
 msgid "New password"
 msgstr ""
 
-#: app/forms/user.py:150
+#: app/forms/user.py:159
 msgid "Your current password"
 msgstr ""
 
-#: app/forms/user.py:156
+#: app/forms/user.py:165
 msgid "Your password"
 msgstr ""
 
-#: app/forms/user.py:162
+#: app/forms/user.py:171
 msgid "Type 'YES' here"
 msgstr ""
 
-#: app/forms/user.py:169
+#: app/forms/user.py:178
 msgid "Disable custom sub styles"
 msgstr ""
 
-#: app/forms/user.py:171
+#: app/forms/user.py:180
 msgid "NSFW content"
 msgstr ""
 
-#: app/forms/user.py:173
+#: app/forms/user.py:182
 msgid "Hide from lists"
 msgstr ""
 
-#: app/forms/user.py:174
+#: app/forms/user.py:183
 msgid "Show without blur"
 msgstr ""
 
-#: app/forms/user.py:175
+#: app/forms/user.py:184
 msgid "Blur until clicked"
 msgstr ""
 
-#: app/forms/user.py:178
+#: app/forms/user.py:187
 msgid "Enable experimental features"
 msgstr ""
 
-#: app/forms/user.py:179
+#: app/forms/user.py:188
 msgid "Disable infinite scroll"
 msgstr ""
 
-#: app/forms/user.py:180
+#: app/forms/user.py:189
 msgid "Disable chat"
 msgstr ""
 
-#: app/forms/user.py:182
+#: app/forms/user.py:191
 msgid "Global stylesheet (select a sub)"
 msgstr ""
 
-#: app/forms/user.py:184
+#: app/forms/user.py:193
 msgid "Language"
 msgstr ""
 
-#: app/forms/user.py:186
+#: app/forms/user.py:195
 msgid "Send email notifications"
 msgstr ""
 
-#: app/forms/user.py:193
+#: app/forms/user.py:202
 msgid "Hide messages"
 msgstr ""
 
-#: app/forms/user.py:193
+#: app/forms/user.py:202
 msgid "Show messages"
 msgstr ""
 
-#: app/forms/user.py:198
+#: app/forms/user.py:207
 msgid "Hide posts and comments"
 msgstr ""
 
-#: app/forms/user.py:199
+#: app/forms/user.py:208
 msgid "Blur posts and collapse comments"
 msgstr ""
 
-#: app/forms/user.py:200
+#: app/forms/user.py:209
 msgid "Show posts and comments"
 msgstr ""
 
-#: app/forms/user.py:208
+#: app/forms/user.py:217
 msgid "to"
 msgstr ""
 
-#: app/forms/user.py:210
+#: app/forms/user.py:219
 msgid "subject"
 msgstr ""
 
-#: app/forms/user.py:214 app/forms/user.py:223
+#: app/forms/user.py:223 app/forms/user.py:232
 msgid "message"
 msgstr ""
 
@@ -1262,7 +1274,7 @@ msgid "all"
 msgstr ""
 
 #: app/html/errors/layout.html:63 app/html/shared/layout.html:77
-#: app/html/sub/post.html:409 app/templates/layout.html:62
+#: app/html/sub/post.html:412 app/templates/layout.html:62
 msgid "new"
 msgstr ""
 
@@ -1566,7 +1578,7 @@ msgid "Closed all reports related to: "
 msgstr ""
 
 #: app/html/mod/reportdetails.html:288 app/html/shared/post.html:115
-#: app/html/sub/post.html:279 app/html/sub/postcomments.html:128
+#: app/html/sub/post.html:282 app/html/sub/postcomments.html:128
 msgid "report"
 msgstr ""
 
@@ -1738,7 +1750,7 @@ msgstr ""
 msgid "posted %(timeago)s by %(user)s"
 msgstr ""
 
-#: app/html/shared/post.html:100
+#: app/html/shared/post.html:100 app/html/sub/post.html:209
 msgid "sticky"
 msgstr ""
 
@@ -1755,12 +1767,12 @@ msgstr ""
 msgid "comment"
 msgstr ""
 
-#: app/html/shared/post.html:118 app/html/sub/post.html:282
+#: app/html/shared/post.html:118 app/html/sub/post.html:285
 #, python-format
 msgid "open reports (%(num)s)"
 msgstr ""
 
-#: app/html/shared/post.html:121 app/html/sub/post.html:236
+#: app/html/shared/post.html:121 app/html/sub/post.html:239
 #: app/html/sub/postcomments.html:143 app/templates/messages/messages.html:49
 #: app/templates/messages/saved.html:43 app/templates/usercomments.html:80
 msgid "delete"
@@ -2394,7 +2406,7 @@ msgstr ""
 msgid "Submit post"
 msgstr ""
 
-#: app/html/sub/createpost.html:129 app/html/sub/post.html:378
+#: app/html/sub/createpost.html:129 app/html/sub/post.html:381
 #: app/html/user/profile.html:188 app/static/js/Post.js:347
 #: app/static/js/Post.js:402 app/static/js/Post.js:487
 #: app/static/js/Post.js:721 app/templates/messages/reply.html:17
@@ -2713,153 +2725,153 @@ msgstr ""
 msgid "Viewing title history:"
 msgstr ""
 
-#: app/html/sub/post.html:217
+#: app/html/sub/post.html:220
 msgid "unsave"
 msgstr ""
 
-#: app/html/sub/post.html:219 app/templates/messages/messages.html:48
+#: app/html/sub/post.html:222 app/templates/messages/messages.html:48
 msgid "save"
 msgstr ""
 
-#: app/html/sub/post.html:223
+#: app/html/sub/post.html:226
 msgid "flair"
 msgstr ""
 
-#: app/html/sub/post.html:228 app/html/sub/postcomments.html:140
+#: app/html/sub/post.html:231 app/html/sub/postcomments.html:140
 #: app/static/js/Post.js:335 app/static/js/Post.js:338
 #: app/static/js/Post.js:393 app/static/js/Post.js:396
 #: app/templates/usercomments.html:76
 msgid "edit"
 msgstr ""
 
-#: app/html/sub/post.html:231
+#: app/html/sub/post.html:234
 msgid "edit title"
 msgstr ""
 
-#: app/html/sub/post.html:240
+#: app/html/sub/post.html:243
 msgid "tag as nsfw"
 msgstr ""
 
-#: app/html/sub/post.html:242
+#: app/html/sub/post.html:245
 msgid "remove nsfw"
 msgstr ""
 
-#: app/html/sub/post.html:248
+#: app/html/sub/post.html:251
 msgid "close poll"
 msgstr ""
 
-#: app/html/sub/post.html:253 app/html/sub/postcomments.html:136
+#: app/html/sub/post.html:256 app/html/sub/postcomments.html:136
 msgid "unstick"
 msgstr ""
 
-#: app/html/sub/post.html:255 app/html/sub/postcomments.html:136
+#: app/html/sub/post.html:258 app/html/sub/postcomments.html:136
 msgid "make sticky"
 msgstr ""
 
-#: app/html/sub/post.html:260
+#: app/html/sub/post.html:263
 msgid "make announcement"
 msgstr ""
 
-#: app/html/sub/post.html:265
+#: app/html/sub/post.html:268
 msgid "sort by best"
 msgstr ""
 
-#: app/html/sub/post.html:267
+#: app/html/sub/post.html:270
 msgid "sort by top"
 msgstr ""
 
-#: app/html/sub/post.html:269
+#: app/html/sub/post.html:272
 msgid "sort by new"
 msgstr ""
 
-#: app/html/sub/post.html:273
+#: app/html/sub/post.html:276
 msgid "unlock comments"
 msgstr ""
 
-#: app/html/sub/post.html:275
+#: app/html/sub/post.html:278
 msgid "lock comments"
 msgstr ""
 
-#: app/html/sub/post.html:286 app/html/sub/postcomments.html:131
+#: app/html/sub/post.html:289 app/html/sub/postcomments.html:131
 msgid "un-delete"
 msgstr ""
 
-#: app/html/sub/post.html:289 app/html/sub/postcomments.html:134
+#: app/html/sub/post.html:292 app/html/sub/postcomments.html:134
 msgid "undistinguish"
 msgstr ""
 
-#: app/html/sub/post.html:289 app/html/sub/postcomments.html:134
+#: app/html/sub/post.html:292 app/html/sub/postcomments.html:134
 #: app/static/js/Post.js:41
 msgid "distinguish"
 msgstr ""
 
-#: app/html/sub/post.html:301
+#: app/html/sub/post.html:304
 #, python-format
 msgid "Current flair: <span class=\"postflair\">%(flair)s</span>"
 msgstr ""
 
-#: app/html/sub/post.html:303
+#: app/html/sub/post.html:306
 msgid "Remove"
 msgstr ""
 
-#: app/html/sub/post.html:307
+#: app/html/sub/post.html:310
 msgid "Select a new flair"
 msgstr ""
 
-#: app/html/sub/post.html:325
+#: app/html/sub/post.html:328
 msgid "[deleted]"
 msgstr ""
 
-#: app/html/sub/post.html:359 app/html/sub/postcomments.html:107
+#: app/html/sub/post.html:362 app/html/sub/postcomments.html:107
 msgid "Viewing edit history:"
 msgstr ""
 
-#: app/html/sub/post.html:377
+#: app/html/sub/post.html:380
 msgid "Submit comment"
 msgstr ""
 
-#: app/html/sub/post.html:380 app/static/js/Post.js:349
+#: app/html/sub/post.html:383 app/static/js/Post.js:349
 #: app/static/js/Post.js:404 app/static/js/Post.js:723
 #: app/static/js/Post.js:746
 msgid "Comment preview"
 msgstr ""
 
-#: app/html/sub/post.html:387
+#: app/html/sub/post.html:390
 msgid ""
 "This post is closed to new comments.  It has been locked by the "
 "moderators."
 msgstr ""
 
-#: app/html/sub/post.html:391
+#: app/html/sub/post.html:394
 msgid "This post is closed to new comments.  It has been automatically archived."
 msgstr ""
 
-#: app/html/sub/post.html:396
+#: app/html/sub/post.html:399
 msgid "No comments, yet..."
 msgstr ""
 
-#: app/html/sub/post.html:399
+#: app/html/sub/post.html:402
 msgid "Show comments"
 msgstr ""
 
-#: app/html/sub/post.html:408
+#: app/html/sub/post.html:411
 msgid "top"
 msgstr ""
 
-#: app/html/sub/post.html:412
+#: app/html/sub/post.html:415
 msgid "best"
 msgstr ""
 
-#: app/html/sub/post.html:415
+#: app/html/sub/post.html:418
 #, python-format
 msgid "Sort by: <b>%(currsort)s</b>"
 msgstr ""
 
-#: app/html/sub/post.html:425
+#: app/html/sub/post.html:428
 msgid "Best"
 msgstr ""
 
-#: app/html/sub/post.html:455
+#: app/html/sub/post.html:458
 #, python-format
 msgid "%(comments)i comments"
 msgstr ""
