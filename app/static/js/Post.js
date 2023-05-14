@@ -986,9 +986,11 @@ u.addEventForChild(document, 'click', '.show-post-comments', function (e, qelem)
     qelem.classList.add('hide');
 });
 
+const characterEscape = (character) => `&#${character.charCodeAt(0)};`;
+
 u.addEventForChild(document, 'change', '#flairpicker', function (e, qelem) {
     if (qelem.selectedIndex !== 0) {
-        window.location.href = qelem.value;
+        window.location.href = characterEscape(qelem.value);
     }
 });
 

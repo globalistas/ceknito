@@ -100,6 +100,8 @@ function video_expando(link, expando) {
   resizer(expando.querySelector('.expandotxt video'), expando.querySelector('.expandotxt .resize-handle'), expando.querySelector('.expandotxt'))
 }
 
+const characterEscape = (character) => `&#${character.charCodeAt(0)};`;
+
 u.addEventForChild(document, 'click', '.expando', function(e, ematch){
     var th=ematch;
 
@@ -159,7 +161,7 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch){
       }else if(domain == 'vine.co'){
         expando.querySelector('.expandotxt').innerHTML = '<div class="iframewrapper"><iframe width="100%" src="https://vine.co/v/' + vineID(link) +'/embed/simple"></iframe></div>';
       }else if(domain == 'www.bitchute.com'){
-        expando.querySelector('.expandotxt').innerHTML = '<div class="expando-wrapper" style="height: 386px; will-change: height;"><iframe style="height: 360px; width: 640px;" src="https://www.bitchute.com/embed/' + bitchuteID(link) +'"></iframe><div class="resize-handle"><div class="i-icon" data-icon="resizeArrow"</div></div>';
+        expando.querySelector('.expandotxt').innerHTML = characterEscape('<div class="expando-wrapper" style="height: 386px; will-change: height;"><iframe style="height: 360px; width: 640px;" src="https://www.bitchute.com/embed/' + bitchuteID(link) +'"></iframe><div class="resize-handle"><div class="i-icon" data-icon="resizeArrow"</div></div>');
         resizer(expando.querySelector('.expandotxt iframe'), expando.querySelector('.expandotxt .resize-handle'), expando.querySelector('.expandotxt'))
       }else if(/\.(png|jpg|gif|tiff|svg|bmp|jpeg)$/i.test(link)) {
         const img = document.createElement("img");
