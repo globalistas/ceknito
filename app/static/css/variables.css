@@ -41,7 +41,7 @@
     --button-primary-fg: #fff;
 
 
-    /* up/downvote colors */
+    /* Up/downvote colors */
     --upvote-color: var(--primary-color);
     --downvote-color: black;
 
