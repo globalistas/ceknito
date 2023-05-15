@@ -144,10 +144,10 @@
                 @{_('[Deleted]')}
               @end
             </a>
-          </h1>
-          @if post['deleted'] == 0:
+            @if post['deleted'] == 0:
             <a href="/domain/@{func.getDomain(post['link'])}" class="domain">(@{func.getDomain(post['link'])})</a>
-          @end
+            @end
+          </h1>
         @end
         </div>
 
