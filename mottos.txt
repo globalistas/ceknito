@@ -9,4 +9,5 @@
 "vybrali.cekni.to",
 "normálne už bolo",
 "based and #800000pilled",
-"kočkovanie s registráciou"]
+"kočkovanie s registráciou",
+"stredisko malinformácií"]

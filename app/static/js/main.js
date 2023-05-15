@@ -727,20 +727,31 @@ for (var i = 0; i < pbodyElements.length; i++) {
 
 };
 
+function getRandomColor() {
+  // Generate a random number between 0 and 16777215 (0xFFFFFF in decimal)
+  var randomNum = Math.floor(Math.random() * 16777216);
+
+  // Convert the random number to hexadecimal and pad with zeros if necessary
+  var randomColor = "#" + randomNum.toString(16).padStart(6, "0");
+
+  return randomColor;
+}
+
 // Simonwep color picker
+var randomColor = getRandomColor();
 const pickr = Pickr.create({
     el: '.color-picker',
     useAsButton: true,
     theme: 'nano', // or 'monolith', or 'classic'
 
     swatches: [
-        'rgba(70, 88, 110, 1)',
-        'rgba(72, 80, 108, 1)',
-        'rgba(128, 0, 0, 1)',
-        'rgba(116, 2, 9, 1)',
-        'rgba(44, 105, 104, 0.88)',
-        'rgba(20, 102, 149, 0.75)',
-        'rgba(132, 167, 122, 0.65)',
+        '#46586e', // dark blue default
+        '#48506c', // deep purple
+        '#800000', // original cekni.to
+        '#d94f00', // phuks
+        '#5a9ebba1', // /s/Politika blue
+        '#402b44f0', // deep violet
+        randomColor, // the odd one out
     ],
 
     components: {
