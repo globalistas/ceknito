@@ -24,8 +24,7 @@ abbr[title] {
 
 .content {
   word-wrap: break-word;
-  /*padding-top: 1em;*/
-  /*padding-left: 7px;*/
+  margin-bottom: 5px;
 }
 
 code,
