@@ -130,7 +130,12 @@ class EditSubForm(FlaskForm):
     allow_polls = BooleanField(_l("Enable polls"))
     subsort = RadioField(
         _l("Default sub page post sorting"),
-        choices=[("v", _l("Hot")), ("v_two", _l("New")), ("v_three", _l("Top"))],
+        choices=[
+            ("v", _l("Hot")),
+            ("v_two", _l("New")),
+            ("v_three", _l("Top")),
+            ("v_four", _l("Commented")),
+        ],
         validators=[Optional()],
     )
     sidebar = TextAreaField(_l("Sidebar text"), validators=[Length(max=8000)])

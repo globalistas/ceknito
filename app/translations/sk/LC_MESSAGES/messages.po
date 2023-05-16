@@ -4541,3 +4541,7 @@ msgstr "minimálne 7 znakov"
 #: app/forms/user.py:98
 msgid "Used for password reset and notifications"
 msgstr "slúži len na reset hesla a notifikácie"
+
+#: app/html/index.html:11 app/html/index.html:16 app/html/sub.html:23
+msgid "Commented"
+msgstr "Komentované"

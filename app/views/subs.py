@@ -153,7 +153,7 @@ def create_post(ptype, sub):
     if not current_user.is_admin() and not config.site.enable_posting:
         return error_response(_("Posting has been temporarily disabled."))
 
-    if sub.name.lower() in ("all", "new", "hot", "top", "admin", "home"):
+    if sub.name.lower() in ("all", "new", "hot", "top", "commented", "admin", "home"):
         return error_response(_("You cannot post in this sub."))
 
     if current_user.is_subban(sub):
@@ -399,7 +399,15 @@ def create_sub():
             {"error": _("Sub name has invalid characters"), "csubform": form}
         )
 
-    if form.subname.data.lower() in ("all", "new", "hot", "top", "admin", "home"):
+    if form.subname.data.lower() in (
+        "all",
+        "new",
+        "hot",
+        "top",
+        "commented",
+        "admin",
+        "home",
+    ):
         return engine.get_template("sub/create.html").render(
             {"error": _("Invalid sub name"), "csubform": form}
         )

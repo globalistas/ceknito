@@ -80,6 +80,24 @@ def top(page):
     )
 
 
+@bp.route("/commented", defaults={"page": 1})
+@bp.route("/commented/<int:page>")
+def commented(page):
+    """/last commented for subscriptions"""
+    posts = misc.getPostList(misc.postListQueryHome(), "commented", page)
+    return engine.get_template("index.html").render(
+        {
+            "posts": posts,
+            "sort_type": "home.commented",
+            "page": page,
+            "subOfTheDay": misc.getSubOfTheDay(),
+            "changeLog": misc.getChangelog(),
+            "ann": misc.getAnnouncement(),
+            "kw": {},
+        }
+    )
+
+
 @bp.route("/all/new.rss")
 def all_new_rss():
     """RSS feed for /all/new"""
@@ -137,6 +155,10 @@ def all_more(sort, page, pid):
         posts = misc.getPostList(
             misc.postListQueryBase(isSubMod=current_user.can_admin), "hot", page
         )
+    elif sort == "commented":
+        posts = misc.getPostList(
+            misc.postListQueryBase(isSubMod=current_user.can_admin), "commented", page
+        )
     else:
         return abort(404)
 
@@ -158,6 +180,8 @@ def home_more(sort, page, pid):
         posts = misc.getPostList(misc.postListQueryHome(), "top", page)
     elif sort == "hot":
         posts = misc.getPostList(misc.postListQueryHome(), "hot", page)
+    elif sort == "commented":
+        posts = misc.getPostList(misc.postListQueryHome(), "commented", page)
     else:
         return abort(404)
 
@@ -271,6 +295,28 @@ def all_hot(page):
         {
             "posts": posts,
             "sort_type": "home.all_hot",
+            "page": page,
+            "subOfTheDay": misc.getSubOfTheDay(),
+            "changeLog": misc.getChangelog(),
+            "ann": misc.getAnnouncement(),
+            "kw": {},
+        }
+    )
+
+
+@bp.route("/all", defaults={"page": 1})
+@bp.route("/all/commented", defaults={"page": 1})
+@bp.route("/all/commented/<int:page>")
+def all_commented(page):
+    """/last commented for all"""
+    posts = misc.getPostList(
+        misc.postListQueryBase(isSubMod=current_user.can_admin), "commented", page
+    )
+
+    return engine.get_template("index.html").render(
+        {
+            "posts": posts,
+            "sort_type": "home.all_commented",
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),

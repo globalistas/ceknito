@@ -5,41 +5,44 @@
   <div class="content">
     <h2>{{config.site.lema}}</h2>
 
-    <p>Ďakujeme za registráciu! Tu je stručný návod, ako používať tento web:</p>
+    <p>Ďakujeme za registráciu! Tu je zopár základných informácií na úvod:</p>
     <hr>
 
-    <p>Notifikácie, nastavenia profilu a niektoré základné funkcie sú vpravo hore. Ak si na mobile, skrývajú sa pod "hamburgerom".</p>
+    <p>Tvoj profil, notifikácie a nastavenia sú vpravo hore. Ak si na mobile, skrývajú sa pod "hamburgerom".
     <ul>
+      <li>
+        <span class="p-icon hasmail" data-icon="mail"></span>
+        Otvorí tvoju schránku, kam budú chodiť reakcie na tvoje príspevky a komentáre, ako aj súkromné správy
+      </li>
       <li>
         <span class="p-icon hasmail" data-icon="sun"></span>
         <span class="p-icon hasmail" data-icon="moon"></span>
         Prepína denný/nočný režim
       </li>
       <li>
-        <span class="p-icon hasmail" data-icon="mail"></span>
-        Otvorí Tvoju schránku, kam budú chodiť reakcie na Tvoje príspevky a komentáre, ako aj súkromné správy
-      </li>
-      <li>
-        Ak dostaneš novú správu, na ikone schránky sa objaví číslo v čiernom kruhu
+        <div class="glyphbutton p-icon-color"><span data-icon="color"></span></div>
+        Umožňuje zvoliť si základný farebný motív webu
       </li>
     </ul>
     <hr>
-    <p>Web je štrukturovaný na báze <a href="{{url_for('home.view_subs')}}">skupín</a>. Na odber niektorých z nich si prihlásený(á) automaticky (tzv. predvolené skupiny). Ktorúkoľvek skupinu môžeš kedykoľvek buď Blokovať (jej príspevky sa ti nebudú zobrazovať v Tvojom hlavnom kanáli), alebo Odoberať (jej príspevky sa ti budú zobrazovať v hlavnom kanáli, aj keď nejde o predvolenú skupinu). Každá skupina má svoju vlastnú tému, pravidlá, moderátorov a vlastné nastavenia:
-
-  </p>
-    <ul>
-      <li>CSS štýl ovplyvňujúci dizajn (look&feel) skupiny</li>
-      <li>Informácie na bočnom paneli s odkazmi na iné weby, ktoré nemusia byť spojené s týmto webom</li>
-      <li>Predvolené triedenie príspevkov v danej skupine (Teraz/Top/Nové)</li>
-    </ul>
-    <hr>
-      <p>V Tvojom profile nájdeš ďalšie možnosti zobrazenia, ktoré si môžeš nastaviť <span class="p-icon hasmail" data-icon="cog"> </p>
+      <p>V tvojom profile nájdeš ďalšie možnosti zobrazenia, ktoré si môžeš nastaviť <span class="p-icon hasmail" data-icon="cog"> </p>
       <ul>
         <li>Zakázať alebo zakryť "nevhodný" (NSFW - Not Safe For Work) obsah</li>
         <li>Ignorovať špecifické CSS štýly skupín</li>
         <li>Vypnúť chat (áno, vpravo dole máme chat!)</li>
-        <li>a ďalšie</li>
+        <li>Nastaviť si jazyk</li>
+        <li>Zapnúť/vypnúť emailové notifikácie</li>
       </ul>
+    <hr>
+    <p>Web je štrukturovaný na báze <a href="{{url_for('home.view_subs')}}">skupín</a>. Na odber niektorých z nich si prihlásený(á) automaticky (ide o tzv. predvolené skupiny). Ktorúkoľvek skupinu môžeš kedykoľvek buď Blokovať (jej príspevky sa ti nebudú zobrazovať v Tvojom hlavnom kanáli), alebo Odoberať (jej príspevky sa ti budú zobrazovať v hlavnom kanáli, aj keď nejde o predvolenú skupinu). Každá skupina má svoju vlastnú tému, pravidlá, moderátorov a vlastné nastavenia:
+    </p>
+    <ul>
+      <li>CSS štýl ovplyvňujúci dizajn (look&feel) skupiny</li>
+      <li>Informácie na bočnom paneli s odkazmi na iné weby, ktoré nemusia byť spojené s týmto webom</li>
+      <li>Predvolené triedenie príspevkov v danej skupine (Teraz/Top/Nové/Komentované)</li>
+      <li>Povolený typ príspevkov (link/téma/obrázok/anketa)</li>
+      <li>atď.</li>
+    </ul>
     <hr>
     <p>Zopár ďalších "trikov":</p>
     <ul>

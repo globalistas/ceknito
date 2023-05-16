@@ -1258,6 +1258,15 @@ def getPostList(baseQuery, sort, page, page_size=25):
         posts = baseQuery.order_by(SubPost.score.desc()).paginate(page, page_size)
     elif sort == "new":
         posts = baseQuery.order_by(SubPost.pid.desc()).paginate(page, page_size)
+    elif sort == "commented":
+        latest_comments = SubPostComment.select(
+            SubPostComment.pid, fn.MAX(SubPostComment.time).alias("latest_comment_time")
+        ).group_by(SubPostComment.pid)
+        posts = (
+            baseQuery.join(latest_comments, on=(SubPost.pid == latest_comments.c.pid))
+            .order_by(latest_comments.c.latest_comment_time.desc())
+            .paginate(page, page_size)
+        )
     else:
         if "Postgresql" in config.database.engine:
             posted = fn.EXTRACT(NodeList((SQL("EPOCH FROM"), SubPost.posted)))

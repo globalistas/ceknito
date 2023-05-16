@@ -8,10 +8,12 @@
         <a href="@{url_for('home.all_hot')}" class="sbm-post pure-button button-xsmall @{(sort_type == 'home.all_hot') and 'pure-button-primary' or ''} pure-u-md-7-24">@{_('Hot')}</a>
         <a href="@{url_for('home.all_top')}" class="sbm-post pure-button button-xsmall @{(sort_type == 'home.all_top') and 'pure-button-primary' or ''} pure-u-md-7-24">@{_('Top')}</a>
         <a href="@{url_for('home.all_new')}" class="sbm-post pure-button button-xsmall @{(sort_type == 'home.all_new') and 'pure-button-primary' or ''} pure-u-md-7-24">@{_('New')}</a>
+        <a href="@{url_for('home.all_commented')}" class="sbm-post pure-button button-xsmall @{(sort_type == 'home.all_commented') and 'pure-button-primary' or ''} pure-u-md-7-24">@{_('Commented')}</a>
       @elif sort_type.startswith('home'):
         <a href="@{url_for('home.hot')}" class="sbm-post pure-button button-xsmall @{(sort_type == 'home.hot') and 'pure-button-primary' or ''} pure-u-md-7-24">@{_('Hot')}</a>
         <a href="@{url_for('home.top')}" class="sbm-post pure-button button-xsmall @{(sort_type == 'home.top') and 'pure-button-primary' or ''} pure-u-md-7-24">@{_('Top')}</a>
         <a href="@{url_for('home.new')}" class="sbm-post pure-button button-xsmall @{(sort_type == 'home.new') and 'pure-button-primary' or ''} pure-u-md-7-24">@{_('New')}</a>
+        <a href="@{url_for('home.commented')}" class="sbm-post pure-button button-xsmall @{(sort_type == 'home.commented') and 'pure-button-primary' or ''} pure-u-md-7-24">@{_('Commented')}</a>
       @end
   </div>
 </div>

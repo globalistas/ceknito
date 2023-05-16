@@ -72,6 +72,8 @@ def view_sub(sub):
         return redirect(url_for("sub.view_sub_new", sub=sub.name))
     elif x == "v_three":
         return redirect(url_for("sub.view_sub_top", sub=sub.name))
+    elif x == "v_four":
+        return redirect(url_for("sub.view_sub_commented", sub=sub.name))
     else:
         return redirect(url_for("sub.view_sub_hot", sub=sub.name))
 
@@ -503,6 +505,46 @@ def view_sub_hot(sub, page):
             "posts": posts,
             "page": page,
             "sort_type": "sub.view_sub_hot",
+            "subMods": misc.getSubMods(sub["sid"]),
+            "flair": flair,
+        }
+    )
+
+
+@blueprint.route("/<sub>/commented", defaults={"page": 1})
+@blueprint.route("/<sub>/commented/<int:page>")
+def view_sub_commented(sub, page):
+    """The index page, /hot sorting"""
+    if sub.lower() == "all":
+        return redirect(url_for("home.all_hot", page=1))
+
+    flair = request.args.get("flair")
+
+    try:
+        sub = Sub.select().where(fn.Lower(Sub.name) == sub.lower()).dicts().get()
+    except Sub.DoesNotExist:
+        abort(404)
+
+    if sub["status"] != 0 and not current_user.is_admin():
+        return redirect(url_for("sub.view_sub", sub=sub["name"]))
+
+    isSubMod = current_user.is_mod(sub["sid"], 1) or current_user.is_admin()
+
+    posts = misc.getPostList(
+        misc.postListQueryBase(noAllFilter=True, isSubMod=isSubMod, flair=flair).where(
+            Sub.sid == sub["sid"]
+        ),
+        "commented",
+        page,
+    )
+
+    return engine.get_template("sub.html").render(
+        {
+            "sub": sub,
+            "subInfo": misc.getSubData(sub["sid"]),
+            "posts": posts,
+            "page": page,
+            "sort_type": "sub.view_sub_commented",
             "subMods": misc.getSubMods(sub["sid"]),
             "flair": flair,
         }

@@ -248,9 +248,9 @@ body.dark .pure-button.button-transparent:hover {
 
 body.dark .button-secondary,
 body.dark .pure-button {
-  background: #202225;
+  background: #37393f;
   color: #b9bbbe;
-  border: 1px solid transparent;
+  border: 1px solid #303030;
 }
 
 body.dark .inboxside .button-secondary {

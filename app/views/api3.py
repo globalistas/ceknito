@@ -255,7 +255,7 @@ def get_post_list(target):
         sort = request.args.get("sort", default="new")
     page = request.args.get("page", default=1, type=int)
 
-    if sort not in ("hot", "top", "new", "default"):
+    if sort not in ("hot", "top", "new", "commented", "default"):
         return jsonify(msg="Invalid sort"), 400
     if page < 1:
         return jsonify(msg="Invalid page number"), 400
@@ -338,6 +338,8 @@ def get_post_list(target):
                 sort = "new"
             elif sort == "v_three":
                 sort = "top"
+            elif sort == "v_four":
+                sort = "commented"
         base_query = base_query.where(Sub.sid == sub.sid)
 
     base_query = base_query.where(SubPost.deleted == 0)
@@ -1017,7 +1019,7 @@ def create_post():
         return jsonify(msg="Sub does not exist"), 404
 
     # TODO: Make this a blacklist setting in the config file?
-    if sub.name.lower() in ("all", "new", "hot", "top", "admin", "home"):
+    if sub.name.lower() in ("all", "new", "hot", "top", "commented", "admin", "home"):
         return jsonify(msg="You can't post on this sub"), 403
 
     subdata = misc.getSubData(sub.sid, simple=True)
