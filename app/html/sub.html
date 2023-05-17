@@ -7,6 +7,19 @@
   @{sub['title']} |\
 @end
 
+@def sortbuttons():
+  <div class="pure-g-menu">
+    <div id="sortbuttons" role="group" class="pure-button-group">
+      <div class="pure-g">
+            <a href="@{url_for('sub.view_sub_hot', sub=sub['name'], flair=flair)}" class="pure-button button-xsmall @{(sort_type == 'sub.view_sub_hot') and 'pure-button-primary' or ''}">@{_('Hot')}</a>
+            <a href="@{url_for('sub.view_sub_top', sub=sub['name'], flair=flair)}" class="pure-button button-xsmall @{(sort_type == 'sub.view_sub_top') and 'pure-button-primary' or ''}">@{_('Top')}</a>
+            <a href="@{url_for('sub.view_sub_new', sub=sub['name'], flair=flair)}" class="pure-button button-xsmall @{(sort_type == 'sub.view_sub_new') and 'pure-button-primary' or ''}">@{_('New')}</a>
+            <a href="@{url_for('sub.view_sub_commented', sub=sub['name'], flair=flair)}" class="pure-button button-xsmall @{(sort_type == 'sub.view_sub_commented') and 'pure-button-primary' or ''}">@{_('Commented')}</a>
+      </div>
+    </div>
+  </div>
+@end
+
 @def sidebar():
 
 <div id="flair">
@@ -14,14 +27,6 @@
     <span class="postflair">@{flair}</span>
     <a href="@{url_for('sub.view_sub_hot', sub=sub['name'])}">@{_('(show all)')}</a>
   @end
-</div>
-<div id="sortbuttons" role="group" class="pure-button-group">
-  <div class="pure-g">
-    <a href="@{url_for('sub.view_sub_hot', sub=sub['name'], flair=flair)}" class="sbm-post pure-button button-xsmall @{(sort_type == 'sub.view_sub_hot') and 'pure-button-primary' or ''} pure-u-md-7-24">@{_('Hot')}</a>
-    <a href="@{url_for('sub.view_sub_top', sub=sub['name'], flair=flair)}" class="sbm-post pure-button button-xsmall @{(sort_type == 'sub.view_sub_top') and 'pure-button-primary' or ''} pure-u-md-7-24">@{_('Top')}</a>
-    <a href="@{url_for('sub.view_sub_new', sub=sub['name'], flair=flair)}" class="sbm-post pure-button button-xsmall @{(sort_type == 'sub.view_sub_new') and 'pure-button-primary' or ''} pure-u-md-7-24">@{_('New')}</a>
-    <a href="@{url_for('sub.view_sub_commented', sub=sub['name'], flair=flair)}" class="sbm-post pure-button button-xsmall @{(sort_type == 'sub.view_sub_commented') and 'pure-button-primary' or ''} pure-u-md-7-24">@{_('Commented')}</a>
-  </div>
 </div>
 @include('shared/sidebar/sub.html')
 @end

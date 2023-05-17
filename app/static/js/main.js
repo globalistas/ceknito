@@ -749,7 +749,7 @@ const pickr = Pickr.create({
         '#48506c', // deep purple
         '#800000', // original cekni.to
         '#d94f00', // phuks
-        '#5a9ebba1', // /s/Politika blue
+        '#396F86DE', // politics blue
         '#402b44f0', // deep violet
         randomColor, // the odd one out
     ],

@@ -62,10 +62,6 @@ img[src*='#center'] {
   margin: auto;
 }
 
-.pure-button-group .pure-button:last-child {
-  border-right: 1px solid rgba(0, 0, 0, 0.2);
-}
-
 .cscore:before {
     content: "• ";
     margin: 0 2px;
