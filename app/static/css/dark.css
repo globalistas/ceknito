@@ -290,7 +290,7 @@ body.dark .pure-button-group .pure-button:last-child {
     border-right: none;
 }
 
-#hiddensubs li a {
+body.dark #hiddensubs li a {
     color: #cccccc;
 }
 
