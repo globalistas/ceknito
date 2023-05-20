@@ -48,7 +48,7 @@
                 </a></span>
                 {{_('on')}} <a href="{{ url_for('sub.view_sub', sub=comment.sub) }}">{{comment.sub}}</a>
               </div>
-              <div class="commentrow {%if comment.cid == highlight %}highlight{%endif%}" id="comment-{{comment.cid}}">
+              <div class="usercommentrow {%if comment.cid == highlight %}highlight{%endif%}" id="comment-{{comment.cid}}">
                 <div class="commblock">
                   <div class="commenthead">
                       <a href="{{ url_for('user.view', user=user.name) }}" class="poster">{{user.name}}</a> -

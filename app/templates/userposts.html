@@ -20,12 +20,12 @@
     <div class="message" style="margin-top: 2em;">{{_("Please log in to see this user's posts.")}}</div>
 {% else %}
     {% if sort_type == 'user.view_user_posts' %}
-      <h3>{{_('View posts')}}</h3>
+      <h3 class="comments">{{_('View posts')}}</h3>
       {% if user.status == 10 %}
         <div class="helper-text deleted-user">{{_("%(user)s has deleted their account.", user=user.name)}}</div>
       {% endif %}
     {% else %}
-      <h3>{{_('View saved posts')}}</h3>
+      <h3 class="comments">{{_('View saved posts')}}</h3>
     {% endif %}
     {% if not posts %}
       <h3>{{_("There are no posts here, yet.")}}</h3>
