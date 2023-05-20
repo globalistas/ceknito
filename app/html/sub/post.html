@@ -41,10 +41,6 @@
     @end
 @end
 
-@def motto():
-  <span class="motto">@{func.get_motto()}</span>
-@end
-
 @def subtitle():
   <div class="subtitle">
     <a href="@{url_for('sub.view_sub_hot', sub=post['sub'], flair=post['flair'])}">/@{config.site.sub_prefix}/@{sub['title']}</a> \
