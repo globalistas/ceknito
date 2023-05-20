@@ -30,15 +30,15 @@
     <div id="sortbuttons" role="group" class="pure-button-group">
       <div class="pure-g">
           @if sort_type.startswith('home.all_'):
-            <a href="@{url_for('home.all_hot')}" class="pure-button button-xsmall @{(sort_type == 'home.all_hot') and 'pure-button-primary' or ''}">@{_('Hot')}</a>
-            <a href="@{url_for('home.all_top')}" class="pure-button button-xsmall @{(sort_type == 'home.all_top') and 'pure-button-primary' or ''}">@{_('Top')}</a>
-            <a href="@{url_for('home.all_new')}" class="pure-button button-xsmall @{(sort_type == 'home.all_new') and 'pure-button-primary' or ''}">@{_('New')}</a>
-            <a href="@{url_for('home.all_commented')}" class="pure-button button-xsmall @{(sort_type == 'home.all_commented') and 'pure-button-primary' or ''}">@{_('Commented')}</a>
+            <a href="@{url_for('home.all_hot')}" title="@{_('Order by hot posts')}" class="pure-button button-xsmall @{(sort_type == 'home.all_hot') and 'pure-button-primary' or ''}">@{_('Hot')}</a>
+            <a href="@{url_for('home.all_top')}" title="@{_('Order by top posts')}" class="pure-button button-xsmall @{(sort_type == 'home.all_top') and 'pure-button-primary' or ''}">@{_('Top')}</a>
+            <a href="@{url_for('home.all_new')}" title="@{_('Order by latest post')}" class="pure-button button-xsmall @{(sort_type == 'home.all_new') and 'pure-button-primary' or ''}">@{_('New')}</a>
+            <a href="@{url_for('home.all_commented')}" title="@{_('Order by latest comment received')}" class="pure-button button-xsmall @{(sort_type == 'home.all_commented') and 'pure-button-primary' or ''}">@{_('Commented')}</a>
           @elif sort_type.startswith('home'):
-            <a href="@{url_for('home.hot')}" class="pure-button button-xsmall @{(sort_type == 'home.hot') and 'pure-button-primary' or ''}">@{_('Hot')}</a>
-            <a href="@{url_for('home.top')}" class="pure-button button-xsmall @{(sort_type == 'home.top') and 'pure-button-primary' or ''}">@{_('Top')}</a>
-            <a href="@{url_for('home.new')}" class="pure-button button-xsmall @{(sort_type == 'home.new') and 'pure-button-primary' or ''}">@{_('New')}</a>
-            <a href="@{url_for('home.commented')}" class="pure-button button-xsmall @{(sort_type == 'home.commented') and 'pure-button-primary' or ''}">@{_('Commented')}</a>
+            <a href="@{url_for('home.hot')}" title="@{_('Order by hot posts')}" class="pure-button button-xsmall @{(sort_type == 'home.hot') and 'pure-button-primary' or ''}">@{_('Hot')}</a>
+            <a href="@{url_for('home.top')}" title="@{_('Order by top posts')}" class="pure-button button-xsmall @{(sort_type == 'home.top') and 'pure-button-primary' or ''}">@{_('Top')}</a>
+            <a href="@{url_for('home.new')}" title="@{_('Order by latest post')}" class="pure-button button-xsmall @{(sort_type == 'home.new') and 'pure-button-primary' or ''}">@{_('New')}</a>
+            <a href="@{url_for('home.commented')}" title="@{_('Order by latest comment received')}" class="pure-button button-xsmall @{(sort_type == 'home.commented') and 'pure-button-primary' or ''}">@{_('Commented')}</a>
           @end
       </div>
     </div>

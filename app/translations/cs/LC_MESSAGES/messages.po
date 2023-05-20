@@ -4545,3 +4545,19 @@ msgstr "slouží pouze pro reset hesla a notifikace"
 #: app/html/index.html:11 app/html/index.html:16 app/html/sub.html:23
 msgid "Commented"
 msgstr "Komentované"
+
+#: app/html/index.html:33 app/html/index.html:38 app/html/sub.html:20
+msgid "Order by hot posts"
+msgstr "Aktuálně nejlepší příspěvky"
+
+#: app/html/index.html:34 app/html/index.html:39 app/html/sub.html:21
+msgid "Order by top posts"
+msgstr "Nejlepší příspěvky"
+
+#: app/html/index.html:35 app/html/index.html:40 app/html/sub.html:22
+msgid "Order by latest post"
+msgstr "Nejnovější příspěvky"
+
+#: app/html/index.html:36 app/html/index.html:41 app/html/sub.html:23
+msgid "Order by latest comment received"
+msgstr "Příspěvky s nejnovějším komentářem"

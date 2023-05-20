@@ -17,10 +17,10 @@
   <div class="pure-g-menu">
     <div id="sortbuttons" role="group" class="pure-button-group">
       <div class="pure-g">
-            <a href="@{url_for('sub.view_sub_hot', sub=sub['name'], flair=flair)}" class="pure-button button-xsmall @{(sort_type == 'sub.view_sub_hot') and 'pure-button-primary' or ''}">@{_('Hot')}</a>
-            <a href="@{url_for('sub.view_sub_top', sub=sub['name'], flair=flair)}" class="pure-button button-xsmall @{(sort_type == 'sub.view_sub_top') and 'pure-button-primary' or ''}">@{_('Top')}</a>
-            <a href="@{url_for('sub.view_sub_new', sub=sub['name'], flair=flair)}" class="pure-button button-xsmall @{(sort_type == 'sub.view_sub_new') and 'pure-button-primary' or ''}">@{_('New')}</a>
-            <a href="@{url_for('sub.view_sub_commented', sub=sub['name'], flair=flair)}" class="pure-button button-xsmall @{(sort_type == 'sub.view_sub_commented') and 'pure-button-primary' or ''}">@{_('Commented')}</a>
+            <a href="@{url_for('sub.view_sub_hot', sub=sub['name'], flair=flair)}" title="@{_('Order by hot posts')}" class="pure-button button-xsmall @{(sort_type == 'sub.view_sub_hot') and 'pure-button-primary' or ''}">@{_('Hot')}</a>
+            <a href="@{url_for('sub.view_sub_top', sub=sub['name'], flair=flair)}" title="@{_('Order by top posts')}" class="pure-button button-xsmall @{(sort_type == 'sub.view_sub_top') and 'pure-button-primary' or ''}">@{_('Top')}</a>
+            <a href="@{url_for('sub.view_sub_new', sub=sub['name'], flair=flair)}" title="@{_('Order by latest post')}" class="pure-button button-xsmall @{(sort_type == 'sub.view_sub_new') and 'pure-button-primary' or ''}">@{_('New')}</a>
+            <a href="@{url_for('sub.view_sub_commented', sub=sub['name'], flair=flair)}" title="@{_('Order by latest comment received')}" class="pure-button button-xsmall @{(sort_type == 'sub.view_sub_commented') and 'pure-button-primary' or ''}">@{_('Commented')}</a>
       </div>
     </div>
   </div>
