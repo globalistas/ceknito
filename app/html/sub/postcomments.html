@@ -61,9 +61,9 @@
               @if comment['lastedit'] and comment['visibility'] != 'none':
                 <span class="time edited">
                   *
-                  <div class="edited-title">
+                  <span class="edited-title">
                   @{_('Edited %(timeago)s', timeago='<time-ago datetime="' + comment['lastedit'].isoformat() + 'Z"></time-ago>')!!html}
-                  </div>
+                  </span>
                 </span>
               @end
               @if comment['sticky']:

@@ -2172,7 +2172,8 @@ article.comment:nth-child(2n) {
 }
 
 .commtitle {
-  margin: .3em;
+  margin: 7px;
+  font-size: 15px;
 }
 
 .userrow {
@@ -2620,7 +2621,7 @@ table td {
 tr.deletedrow,
 .deletedpost,
 .deletedcomment {
-  background: hsla(0, 100%, 51%, 0.2) !important;
+  background: #a752524a !important;
 }
 
 a[href="#spoiler"]:hover,
