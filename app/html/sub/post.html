@@ -1,4 +1,4 @@
-@extends("shared/layout.html")
+@extends("shared/sub.html")
 @require(post, sub, is_saved, subInfo, pollData, commentform, comments, postmeta, subMods, highlight, content_history, title_history, open_reports, sort, sticky_sort)
 @import "sub/postcomments.html" as pcomm
 @import "sub/postpoll.html" as polls
@@ -39,6 +39,10 @@
     <meta property="og:image:width" content="512">
     <meta property="og:image:height" content="512">
     @end
+@end
+
+@def motto():
+  <span class="motto">@{func.get_motto()}</span>
 @end
 
 @def subtitle():

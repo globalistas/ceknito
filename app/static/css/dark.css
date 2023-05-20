@@ -565,6 +565,13 @@ body.dark .subtitle a {
     color: #cccccc;
 }
 
+body.dark .th-subnavbar {
+  background-color: #2f3136;
+  -webkit-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.75);
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.75);
+}
+
 @keyframes rb2 {
   20% {
     fill: red;

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="@{get_locale()}">
+  <head>
+    @def head():
+    @end
+    @{head()!!html}
+    <meta charset="utf-8">
+    <meta name="keywords" content="forum, social, diskusie, reddit, slovensko, cekni, cekni.to, www.cekni.to" />
+    <meta name="referrer" content="always"/>
+    @def meta_description():
+        <meta name="twitter:description" content="@{config.site.lema}" />
+        <meta name="twitter:image:src" content="https://cekni.to/@{ url_for('static', filename='img/android-chrome-512x512.png') }" />
+        <meta name="twitter:title" content="čekni.to" />
+        <meta name="twitter:image:width" content="512" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:image:height" content="512" />
+        <meta name="description" content="@{config.site.lema}" />
+        <meta property="og:description" content="@{config.site.lema}" />
+        <meta property="og:image" content="https://cekni.to/@{ url_for('static', filename='img/android-chrome-512x512.png') }" />
+        <meta property="og:title" content="čekni.to" />
+        <meta property="og:image:width" content="512" />
+        <meta property="og:image:height" content="512" />
+    @end
+    @{meta_description()!!html}
+    <meta name="robots" content="index, follow"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- mobile stuff -->
+    <meta name="theme-color" content="white"/>
+    <meta name="msapplication-navbutton-color" content="white"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="white-translucent"/>
+
+    <!--    <link rel="icon" href="@{url_for('static', filename='img/icon.png') }"> -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="@{ url_for('static', filename='img/apple-touch-icon.png') }">
+    <link rel="icon" type="image/png" sizes="32x32" href="@{ url_for('static', filename='img/favicon-32x32.png') }">
+    <link rel="icon" type="image/png" sizes="16x16" href="@{ url_for('static', filename='img/favicon-16x16.png') }">
+    <link rel="manifest" href="@{ url_for('static', filename='site.webmanifest') }">
+    <link rel="mask-icon" href="@{ url_for('static', filename='img/safari-pinned-tab.svg') }" color="#800000">
+    <link rel="shortcut icon" href="@{ url_for('static', filename='img/favicon.ico') }">
+    <meta name="msapplication-TileColor" content="#b91d47">
+    <meta name="msapplication-config" content="@{ url_for('static', filename='browserconfig.xml') }">
+    <meta name="theme-color" content="#ffffff">
+
+    <title> \
+      @def title():
+      @end
+      @{title()!!html} \
+      @def lema():
+        @#
+        @{config.site.lema} \
+      @end
+      @{lema()!!html} \
+    </title>
+
+    <link rel="stylesheet" type="text/css" href="@{asset_url_for('main.css') }">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="https://cekni.to/all/new.rss">
+
+    <script src="@{url_for('static', filename='/js/Setcolor.js')}"></script>
+
+  </head>
+<body class="@{(config.site.enable_totp and current_user.admin) and 'body_admin' or ''} @{(request.cookies.get( "dayNight")=="dank") and 'dark dank' or ''} @{(request.cookies.get( "dayNight")=="dark") and 'dark' or ''}">
+  @if (config.site.enable_totp or (config.auth.provider == "KEYCLOAK" and config.auth.keycloak.use_oidc)) and current_user.admin:
+  <div class="admin_alert">@{_('Admin mode is currently enabled.')}
+    <form method="POST" action="/admin/logout" id="adminlogout">
+      @{ form.LogOutForm().csrf_token() !!html }
+      <button type="submit" class="btn_link">@{_('Disable')}</button>
+    </form>
+  </div>
+  @end
+  <div class="th-subbar pure-u-1">
+    <ul id="topbar">
+      <li><a href="/all">@{_('all')}</a></li>
+      <li><a href="/all/new">@{_('new')}</a></li>
+      @if current_user.can_admin:
+        <li><a href="@{url_for('admin.index')}">@{_('admin')}</a></li>
+      @end
+      <li>|</li>
+      @if not current_user.is_anonymous:
+      <li class="editbar"><a href="/settings/subs" title="@{_('Customize this bar')}" class="tx-icon" data-icon="edit"></a></li>
+      @end
+      @for sub in current_user.get_top_bar():
+        <li class="subinthebar"><a href="@{url_for('sub.view_sub', sub=sub['name'])}">@{sub['name']}</a></li>
+      @end
+
+    </ul>
+    <div id="subsdropdown">
+      <div class="dropdown-toggle moremenu">
+        @{_('More')} <span class="tx-icon" data-icon="down"></span>
+      </div>
+      <ul id="hiddensubs"></ul>
+    </div>
+  </div>
+
+  <div id="menu" class="th-subnavbar pure-g">
+    @for sub in current_user.get_top_bar():
+      <a class="banner-link" href="@{url_for('sub.view_sub', sub=sub['name'])}"></a>
+    @end
+    <div class="cw-brand"> <!-- logo -->
+      <div class="pure-menu">
+        <a class="logocont" href="@{url_for('home.index')}">
+          @{THROAT_LOGO!!html}
+        </a>
+      @def motto():
+      @end
+      @{motto()!!html}
+      @if config.site.front_page_submit or (request.view_args and request.view_args.get('sub')):
+        <a href="/submit/link@{(request.view_args and request.view_args.get('sub')) and ('/' + request.view_args['sub']) or ''}"><span id="createPostIcon" class="p-icon" data-icon="edit"></span></a>
+        @end
+        <a id="toggle" href="#" class="th-toggle">
+          <s class="bar"></s>
+          <s class="bar"></s>
+        </a>
+      </div>
+
+      @def subtitle():
+      @end
+      @{subtitle()!!html}
+
+      @def sortbuttons():
+      @end
+      @{sortbuttons()!!html}
+    </div>
+
+    <div id="th-uinfo" class="pure-u-1 pure-u-md-12-24"> <!-- class="pure-u-1 pure-u-md-8-24" -->
+      <div class="cw-items can-transform">
+        @if current_user.is_anonymous:
+        <div id="toggledark" class="glyphbutton">
+          <span class="p-icon" data-icon="@{(request.cookies.get( "dayNight")=="dark") and 'sun' or 'moon'}"></span>
+        </div>
+        <div class="glyphbutton">
+          <div class="p-icon-color">
+            <div class="color-picker">
+              <span data-icon="color"></span>
+            </div>
+          </div>
+        </div>
+        <a href="@{url_for('auth.login', next=request.path)}" class="pure-button pure-button-primary">@{_('Log in')}</a>
+        <a href="@{url_for('auth.register')}" class="pure-button button-secondary">@{_('Register')}</a>
+        @else:
+        <a href="@{ url_for('user.view', user=current_user.name)}" class="smallcaps" id="unameb">@{current_user.name}</a>
+        <span class="separator"></span>
+        <abbr title="@{_('Score')}" class="bold" id="postscore">@{current_user.score}</abbr>
+        <span class="separator"></span>
+        <div class="glyphbutton">
+          <a href="/settings"><span class="p-icon" data-icon="cog"></span></a>
+        </div>
+        <div class="glyphbutton sep ">
+          <a href="@{ url_for('messages.inbox_sort') }">
+            <span class="hasmail">
+              <span class="p-icon @{(current_user.notifications != 0) and 'hasmail' or ''}" data-icon="mail"></span>
+              <span id="mailcount" class="mailcount" @{(current_user.notifications == 0) and 'style="display:none;"' or ''!!html}>@{current_user.notifications}</span>
+            </span>
+          </a>
+        </div>
+        @if current_user.is_a_mod or current_user.can_admin:
+          <div class="glyphbutton">
+          <a href="@{ url_for('mod.index') }">
+            <span class="hasmail">
+                <span class="p-icon" data-icon="shield"></span>
+                <span id="modcount" class="mailcount" data-mod="@{current_user.mod_notifications_json()}" style="display:none"></span>
+              </span>
+            </a>
+          </div>
+        @end
+        <div id="toggledark" class="glyphbutton">
+          <span class="p-icon" data-icon="@{(request.cookies.get( "dayNight")=="dark") and 'sun' or 'moon'}"></span>
+        </div>
+        <div class="glyphbutton">
+          <div class="p-icon-color">
+            <div class="color-picker">
+              <span data-icon="color"></span>
+            </div>
+          </div>
+        </div>
+        <form method="POST" action="@{ url_for('do.logout') }" id="logout">
+          @{ form.LogOutForm().csrf_token() !!html }
+          <button type="submit" class="pure-button button-secondary">@{_('Log out')}</button>
+        </form>
+        @end
+        @{ form.LogOutForm().csrf_token() !!html }
+      </div>
+    </div>
+  </div>
+
+  @def content():
+  <div class="pure-g new-g">
+    @def sidebar():
+    @end
+    @(
+      rendered_sidebar = sidebar()
+    )
+    <div class="pure-u-1 @{ rendered_sidebar and 'pure-u-md-18-24' or '' }"> <!-- main -->
+      @for err in get_flashed_messages(category_filter=["error"]):
+        <div class="error" style="margin-top: 2em;">@{ err }</div>
+      @end
+      @for message in get_flashed_messages(category_filter=["message"]):
+        <div class="message" style="margin-top: 2em;">@{ message }</div>
+      @end
+      @def main():
+      @end
+      @{main()!!html}
+    </div>
+    @if rendered_sidebar:
+      <div id="sidebar" class="sidebar pure-u-1 pure-u-md-6-24"> <!-- sidebar -->
+        @{rendered_sidebar!!html}
+      </div>
+    @end
+  </div>
+  @end
+  @{content()!!html}
+
+  <div class="footer">
+    @def footer():
+      &copy;@{config.site.copyright}
+      <br>
+      @for text,link in config.site.footer.links.items():
+        <a href="@{link}">@{text}</a> |
+      @end
+      <a target="_blank" href="https://discord.gg/8HFrGrzEx2">Discord</a>
+      <br>
+      @{_('Served by %(hostname)s', hostname=hostname)} \
+      @if config.app.debug:
+       | @{_('Page generated in __EXECUTION_TIME__ms with __DB_QUERIES__ queries')}
+      @end
+    @end
+    @{footer()!!html}
+  </div>
+  @if config.site.enable_chat:
+    @def chat():
+      @#...
+      @if not current_user.is_anonymous and 'nochat' not in current_user.prefs:
+      <div id="chpop" class="hydrogen" style="height: 1.65em">
+        <div id="chtitle" hid="true"><span id="cht-text">@{_('Chat')}</span> <div class="glyphbutton"><a href="/chat"><span class="p-icon " data-icon="resize"></span></a></div></div>
+        @if config.matrix.enabled:
+        <div id="chloading">Loading....</div>
+        @else:
+        <div id="chcont"></div>
+        <div id="chbott" style="display: none">
+          <div id="chstatus">&nbsp;</div>
+          <input type="text" id="chsend" maxlength="250" placeholder="@{_('Type here')}"/>
+        </div>
+        @end
+      </div>
+      <label id="throat-chat" name="true" style="display: none;"></label>
+      @if config.matrix.enabled:
+        <label id="matrix-chat" data-value="" style="display: none;"></label>
+        <label id="matrix-roomId" data-value="@{config.matrix.default_room}" style="display: none;"></label>
+        <label id="matrix-homeserver" data-value="@{config.matrix.homeserver}" style="display: none;"></label>
+      @end
+      @end
+    @end
+    @{chat()!!html}
+  @end
+  <script src="@{ asset_url_for('main.js') }"></script>
+  <style>@{current_user.get_global_stylesheet()!!html}</style>
+  @def pagefoot():
+  @end
+  @{pagefoot()!!html}
+  <label id="pagefoot-notifications-icon" data-value="@{config.site.notifications_on_icon}" class="hide"></label>
+</body>
+</html>

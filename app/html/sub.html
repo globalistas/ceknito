@@ -1,4 +1,4 @@
-@extends("shared/layout.html")
+@extends("shared/sub.html")
 @import "shared/post.html" as ipost
 @require(sub, posts, page, sort_type, subInfo, flair)
 
@@ -12,7 +12,7 @@
 @end
 
 @def subtitle():
-  <div class="subtitle">
+  <div id="subtitle" class="subtitle">
     <a href="@{url_for('sub.view_sub_hot', sub=sub['name'], flair=flair)}">/@{config.site.sub_prefix}/@{sub['title']}</a> \
   </div>
 @end
