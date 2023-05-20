@@ -17,7 +17,7 @@ body.dark .profilebadge path:not(.nocolor) {
 }
 
 body.dark .th-toggle .bar {
-  background-color: #666;
+  background-color: #fff;
 }
 
 body.dark a {
@@ -29,7 +29,7 @@ body.dark div.author a {
 }
 
 body.dark div.author a.authorlink {
-  color: #526a7d;
+  color: #cccccc;
 }
 
 body.dark a.poster {
@@ -192,7 +192,7 @@ body.dark .post .title:visited {
 body.dark .expandotxt a,
 body.dark .post-content-container a,
 body.dark .commblock .content a {
-    color: #526a7d;
+    color: #a4b7c7;
 }
 
 body.dark .expandotxt a:visited,
