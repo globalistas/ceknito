@@ -103,8 +103,10 @@
         <a class="logocont" href="@{url_for('home.index')}">
           @{THROAT_LOGO!!html}
         </a>
-        <span class="motto">@{func.get_motto()}</span>
-        @if config.site.front_page_submit or (request.view_args and request.view_args.get('sub')):
+      @def motto():
+      @end
+      @{motto()!!html}
+      @if config.site.front_page_submit or (request.view_args and request.view_args.get('sub')):
         <a href="/submit/link@{(request.view_args and request.view_args.get('sub')) and ('/' + request.view_args['sub']) or ''}"><span id="createPostIcon" class="p-icon" data-icon="edit"></span></a>
         @end
         <a id="toggle" href="#" class="th-toggle">
@@ -112,6 +114,11 @@
           <s class="bar"></s>
         </a>
       </div>
+
+      @def subtitle():
+      @end
+      @{subtitle()!!html}
+
       @def sortbuttons():
       @end
       @{sortbuttons()!!html}

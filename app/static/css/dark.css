@@ -555,6 +555,16 @@ body.dank .th-l-fill {
   animation: rb2 1s infinite;
 }
 
+body.dark .subtitle:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: #cccccc;
+}
+
+body.dark .subtitle a {
+    color: #cccccc;
+}
+
 @keyframes rb2 {
   20% {
     fill: red;

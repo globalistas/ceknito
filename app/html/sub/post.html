@@ -41,6 +41,12 @@
     @end
 @end
 
+@def subtitle():
+  <div class="subtitle">
+    <a href="@{url_for('sub.view_sub_hot', sub=post['sub'], flair=post['flair'])}">/@{config.site.sub_prefix}/@{sub['title']}</a> \
+  </div>
+@end
+
 @def sidebar():
   <div class="author" style="padding:.5em;">
     @(

@@ -71,3 +71,29 @@ img[src*='#center'] {
 .bottombar .reply-comment {
   color: #24a0ed;
 }
+
+/* sub title in Navbar */
+
+.subtitle {
+    display: block;
+    font-size: 1em;
+    font-weight: bold;
+    font-variant: small-caps;
+    letter-spacing: normal;
+    word-spacing: normal;
+    position: absolute;
+    left: 10px;
+    bottom: 0px;
+    width: 200px;
+    text-align: right;
+}
+
+.subtitle:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: #fff;
+}
+
+.subtitle a {
+    color: white;
+}
