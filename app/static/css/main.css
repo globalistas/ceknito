@@ -1785,7 +1785,7 @@ a.title {
   /* 1px margin on botton and top so it respects <p>'s margin */
   font-family: verdana, arial, sans-serif;
   font-size: 14px;
-  line-height: normal;
+  line-height: 20px;
   width: 85%;
 }
 
