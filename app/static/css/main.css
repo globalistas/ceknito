@@ -1301,7 +1301,7 @@ img.block-blur {
   /*  max-width: 60em;*/
   font-family: verdana, arial, sans-serif;
   font-size: 13.5px;
-  line-height: 1.3em;
+  line-height: normal;
   color: #222222;
   background: #fff;
   margin: 0px 0 0 0px;
