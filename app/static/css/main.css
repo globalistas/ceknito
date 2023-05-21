@@ -1317,7 +1317,8 @@ img.block-blur {
 }
 
 .commblock p {
-  margin: 10px 0px 10px 0px;
+  margin: 5px 0px 5px 0px;
+  line-height: 1.4285714285714286em;
 }
 /* /POST PAGE STYLES */
 
@@ -2839,7 +2840,7 @@ button.new-form-one {
 }
 
 .commblock .bottombar.links {
-  margin: -0.3em 0 0 0.25em;
+  margin: 0em 0 0 0.25em;
   font: -webkit-control;
   font-size: 14.5px;
 }
