@@ -398,9 +398,9 @@ u.addEventForChild(document, 'click', '.edit-comment', function (e, qelem) {
     const h = elem.clientHeight + 28;
     elem.innerHTML = '<div class="cwrap markdown-editor" id="ecomm-' + cid + '"><textarea style="height: ' + h + 'px">' +
         document.getElementById('sauce-' + cid).innerHTML + '</textarea></div><div style="display:none" class="error"></div>' +
-        '<button class="pure-button pure-button-primary button-xsmall btn-editcomment" data-cid="' + cid + '">' + _('Save changes') + '</button> ' +
-        '<button class="pure-button button-xsmall btn-preview" data-pvid="ecomm-' + cid + '">' + _('Preview') + '</button>' +
-        '<button class="pure-button button-xsmall btn-rcancel button-transparent" data-pvid="editpost" >' + _('Cancel') + '</button>' +
+        '<button class="pure-button pure-button-primary button-small btn-editcomment" data-cid="' + cid + '">' + _('Save changes') + '</button> ' +
+        '<button class="pure-button button-small btn-preview" data-pvid="ecomm-' + cid + '">' + _('Preview') + '</button>' +
+        '<button class="pure-button button-small btn-rcancel button-transparent" data-pvid="editpost" >' + _('Cancel') + '</button>' +
         '<div class="cmpreview canclose" style="display:none;"><h4>' + _('Comment preview') + '</h4><span class="closemsg">&times;</span>' +
         '<div class="cpreview-content"></div></div>';
     elem.querySelector('.btn-rcancel').onclick = back.onclick;
@@ -716,10 +716,10 @@ u.addEventForChild(document, 'click', '.reply-comment', function (e, qelem) {
     lm.id = 'rblock-' + cid;
     lm.classList.add('replybox');
     lm.innerHTML = '<div class="cwrap markdown-editor" id="rcomm-' + cid + '"><textarea class="exalert" style="height: 8em;"></textarea></div>' +
-        '<div style="display:none" class="error"></div><button class="pure-button pure-button-primary button-xsmall btn-postcomment" ' +
-        'data-pid="' + pid + '" data-cid="' + cid + '">' + _('Post comment') + '</button> <button class="pure-button button-xsmall btn-preview" data-pvid="rcomm-' +
+        '<div style="display:none" class="error"></div><button class="pure-button pure-button-primary button-small btn-postcomment" ' +
+        'data-pid="' + pid + '" data-cid="' + cid + '">' + _('Post comment') + '</button> <button class="pure-button button-small btn-preview" data-pvid="rcomm-' +
         cid + '">' + _('Preview') + '</button>' +
-        '<button class="pure-button button-xsmall btn-rcancel button-transparent" data-pvid="editpost" >' + _('Cancel') + '</button>' +
+        '<button class="pure-button button-small btn-rcancel button-transparent" data-pvid="editpost" >' + _('Cancel') + '</button>' +
         '<div class="cmpreview canclose" style="display:none;"><h4>' + _('Comment preview') + '</h4><span class="closemsg">&times;</span>' +
         '<div class="cpreview-content"></div></div>';
     lm.querySelector('.btn-rcancel').onclick = back.onclick;
