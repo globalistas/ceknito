@@ -4561,3 +4561,13 @@ msgstr "Najnovšie príspevky"
 #: app/html/index.html:36 app/html/index.html:41 app/html/sub.html:23
 msgid "Order by latest comment received"
 msgstr "Príspevky s najnovším komentárom"
+
+#: app/html/sub/postcomments.html:43
+msgid "Post author"
+msgstr "Autor príspevku"
+
+#: app/html/sub/postcomments.html:54
+#, python-format
+msgid ""
+"<span class=\"mcscore\">%(score)i</span> points</b> (+<b>%(upvotes)i</b>|-<b>%(downvotes)i</b>)"
+msgstr "<span class=\"mcscore\">%(score)i bodov</b> (+<b>%(upvotes)i</b>|-<b>%(downvotes)i</b>)"

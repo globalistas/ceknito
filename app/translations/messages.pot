@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2023-05-20 15:16+0200\n"
+"POT-Creation-Date: 2023-05-21 12:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1226,7 +1226,7 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#: app/html/admin/wiki.html:26 app/templates/usercomments.html:61
+#: app/html/admin/wiki.html:26 app/templates/usercomments.html:63
 msgid "Last edited"
 msgstr ""
 
@@ -1803,7 +1803,7 @@ msgstr ""
 
 #: app/html/shared/post.html:121 app/html/sub/post.html:245
 #: app/html/sub/postcomments.html:143 app/templates/messages/messages.html:49
-#: app/templates/messages/saved.html:43 app/templates/usercomments.html:80
+#: app/templates/messages/saved.html:43 app/templates/usercomments.html:83
 msgid "delete"
 msgstr ""
 
@@ -2769,7 +2769,7 @@ msgstr ""
 #: app/html/sub/post.html:237 app/html/sub/postcomments.html:140
 #: app/static/js/Post.js:335 app/static/js/Post.js:338
 #: app/static/js/Post.js:393 app/static/js/Post.js:396
-#: app/templates/usercomments.html:76
+#: app/templates/usercomments.html:79
 msgid "edit"
 msgstr ""
 
@@ -2906,13 +2906,17 @@ msgid "%(comments)i comments"
 msgstr ""
 
 #: app/html/sub/postcomments.html:43
+msgid "Post author"
+msgstr ""
+
+#: app/html/sub/postcomments.html:43
 msgid "[OP]"
 msgstr ""
 
 #: app/html/sub/postcomments.html:54
 #, python-format
 msgid ""
-"<span class=\"cscore\">%(score)i</span> points</b> "
+"<span class=\"mcscore\">%(score)i</span> points</b> "
 "(+<b>%(upvotes)i</b>|-<b>%(downvotes)i</b>)"
 msgstr ""
 
@@ -2943,7 +2947,7 @@ msgstr ""
 
 #: app/html/sub/postcomments.html:125 app/static/js/Post.js:314
 #: app/static/js/Post.js:317 app/static/js/Post.js:369
-#: app/static/js/Post.js:372 app/templates/usercomments.html:83
+#: app/static/js/Post.js:372 app/templates/usercomments.html:86
 msgid "source"
 msgstr ""
 
@@ -2951,7 +2955,7 @@ msgstr ""
 #: app/html/user/messages/notifications.html:106
 #: app/html/user/messages/notifications.html:117 app/static/js/Post.js:697
 #: app/static/js/Post.js:700 app/templates/messages/messages.html:39
-#: app/templates/messages/saved.html:36 app/templates/usercomments.html:74
+#: app/templates/messages/saved.html:36 app/templates/usercomments.html:77
 msgid "reply"
 msgstr ""
 
@@ -3932,12 +3936,12 @@ msgid "No uploads, yet."
 msgstr ""
 
 #: app/templates/messages/nav.html:3 app/templates/uploads.html:41
-#: app/templates/usercomments.html:93 app/templates/userposts.html:41
+#: app/templates/usercomments.html:96 app/templates/userposts.html:41
 msgid "Next"
 msgstr ""
 
 #: app/templates/messages/nav.html:6 app/templates/uploads.html:44
-#: app/templates/usercomments.html:96 app/templates/userposts.html:44
+#: app/templates/usercomments.html:99 app/templates/userposts.html:44
 msgid "Previous"
 msgstr ""
 

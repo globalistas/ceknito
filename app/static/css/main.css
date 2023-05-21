@@ -877,6 +877,15 @@ iframe {
   letter-spacing: normal;
 }
 
+.mscore {
+  font-size: 17px;
+  color: #505050;
+  padding-right: 2px;
+  margin: 5px 0px 5px 0px;
+  text-align: center;
+  letter-spacing: normal;
+}
+
 .score.archived {
   padding-top: 20px;
   padding-left: 3px;
