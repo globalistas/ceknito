@@ -58,7 +58,7 @@ blockquote {
 }
 
 .post-content-container blockquote {
-    background-color: #fff;
+    background-color: #fafafa;
     color: #4f4f4f;
 }
 
@@ -1272,14 +1272,18 @@ img.block-blur {
   width: 1.3em;
   text-align: center;
   margin-right: 0em;
-  margin-top: 0.31em;
+  margin-top: 0.2em;
 }
 
-.c-upvote svg,
-.c-downvote svg,
 .upvote svg,
 .downvote svg {
   fill: #888;
+  block-size: 0.6em;
+}
+
+.c-upvote svg,
+.c-downvote svg {
+  fill: #b6b6b6;
   block-size: 0.6em;
 }
 
@@ -1300,8 +1304,8 @@ img.block-blur {
   line-height: 1.3em;
   color: #222222;
   background: #fff;
-  margin: 0px 0 0 3px;
-  padding: 6px 10px 5px 5px;
+  margin: 0px 0 0 0px;
+  padding: 5px 10px 5px 5px;
 
  /* border: 1px solid #ccc;
   border-radius: 3px;*/
