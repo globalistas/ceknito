@@ -8,7 +8,7 @@
 @def main():
 <div id="center-container">
   <div class="inbox content">
-    <h1>@{_('Notifications')}</h1>
+    <h3>@{_('Notifications')}</h3>
     <div class="user-activity col-12">
       @for msg in notifications:
       <article class="pmessage post @{msg['read'] == None and 'newmsg' or ''}" data-cid="@{msg['cid']}">
