@@ -4532,15 +4532,15 @@ msgstr "Vložit link na obrázek"
 
 #: app/forms/user.py:95
 msgid "No spaces or diacritics"
-msgstr "bez diakritiky a bez mezer"
+msgstr "Bez diakritiky a bez mezer"
 
 #: app/forms/user.py:108
 msgid "At least 7 characters"
-msgstr "minimálně 7 znaků"
+msgstr "Minimálně 7 znaků"
 
 #: app/forms/user.py:98
 msgid "Used for password reset and notifications"
-msgstr "slouží pouze pro reset hesla a notifikace"
+msgstr "Slouží pouze pro reset hesla a notifikace"
 
 #: app/html/index.html:11 app/html/index.html:16 app/html/sub.html:23
 msgid "Commented"
