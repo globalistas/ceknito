@@ -4571,3 +4571,7 @@ msgstr "Autor príspevku"
 msgid ""
 "<span class=\"mcscore\">%(score)i</span> points</b> (+<b>%(upvotes)i</b>|-<b>%(downvotes)i</b>)"
 msgstr "<span class=\"mcscore\">%(score)i bodov</b> (+<b>%(upvotes)i</b>|-<b>%(downvotes)i</b>)"
+
+#: app/html/sub/post.html:73
+msgid "upvoted"
+msgstr "pozitívne"
