@@ -429,10 +429,18 @@ configurable_defaults = {
             "show_votes": {
                 "type": "bool",
                 "doc": _l(
-                    "If enabled, show upvotes and downvotes in addition to total score. "
-                    "Otherwise, only show upvotes and downloads to admins and mods in their own subs."
+                    "If enabled, show upvotes and downvotes in addition to total post score. "
+                    "Otherwise, only show post upvotes and downvotes to admins and mods in their own subs."
                 ),
-                "value": True,
+                "value": False,
+            },
+            "show_comment_votes": {
+                "type": "bool",
+                "doc": _l(
+                    "If enabled, show upvotes and downvotes in addition to total comment score. "
+                    "Otherwise, only show comment upvotes and downvotes to admins and mods in their own subs."
+                ),
+                "value": False,
             },
             "self_voting": {
                 "type": "map",

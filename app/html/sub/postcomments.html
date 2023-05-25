@@ -50,7 +50,7 @@
                   <span class="helper-text">@{_('[Blocked]')}</span>
                 @end
               @end
-              @if config.site.show_votes or current_user.is_admin() or current_user.uid in subMods['all']:
+              @if config.site.show_comment_votes or current_user.is_admin() or current_user.uid in subMods['all']:
                 <b>@{_('<span class="mcscore">%(score)i</span> points</b> (+<b>%(upvotes)i</b>|-<b>%(downvotes)i</b>)', score=comment['score'], upvotes=comment['upvotes'], downvotes=comment['downvotes'])!!html}
               @else:
                 <b>@{_('<span class="cscore">%(score)i</span> points</b>', score=comment['score'])!!html}
