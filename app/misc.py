@@ -252,6 +252,12 @@ class SiteUser(object):
             or self.admin
         )
 
+    def can_post(self):
+        return (
+            config.site.create_post_min_level <= get_user_level(self.uid, self.score)[0]
+            or self.admin
+        )
+
     def __repr__(self):
         return "<SiteUser {0}>".format(self.uid)
 
@@ -418,6 +424,11 @@ class SiteAnon(AnonymousUserMixin):
     @classmethod
     def can_pm_users(cls):
         """Anons may never PM users."""
+        return False
+
+    @classmethod
+    def can_post(cls):
+        """Anons may never create posts."""
         return False
 
     @classmethod

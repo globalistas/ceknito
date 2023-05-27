@@ -153,6 +153,9 @@ def create_post(ptype, sub):
     if not current_user.is_admin() and not config.site.enable_posting:
         return error_response(_("Posting has been temporarily disabled."))
 
+    if not current_user.can_post():
+        return error_response(_("Insufficient user level to create posts."))
+
     if sub.name.lower() in ("all", "new", "hot", "top", "commented", "admin", "home"):
         return error_response(_("You cannot post in this sub."))
 

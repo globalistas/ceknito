@@ -4575,3 +4575,7 @@ msgstr "<span class=\"mcscore\">%(score)i bodů</b> (+<b>%(upvotes)i</b>|-<b>%(d
 #: app/html/sub/post.html:73
 msgid "upvoted"
 msgstr "pozitívní"
+
+#: app/views/subs.py:157
+msgid "Insufficient user level to create posts."
+msgstr "Nemáš dostatečný level pro přidávání příspěvků."

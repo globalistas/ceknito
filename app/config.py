@@ -259,6 +259,14 @@ configurable_defaults = {
                 ),
                 "value": 3,
             },
+            "create_post_min_level": {
+                "type": "int",
+                "doc": _l(
+                    "Minimum level required for a user to be permitted to create posts. "
+                    "Set to zero to allow users of all levels to post."
+                ),
+                "value": 0,
+            },
             "daily_sub_posting_limit": {
                 "type": "int",
                 "doc": _l(

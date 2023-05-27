@@ -1039,7 +1039,10 @@ def create_post():
     if len(title) > 255:
         return jsonify(msg="Post title is too long"), 400
 
-    if misc.get_user_level(uid)[0] < 7:
+    if not uid.can_post():
+        return jsonify(msg="Insufficient user level to create posts."), 403
+
+    if misc.get_user_level(uid)[0] < 10:
         today = datetime.datetime.utcnow() - datetime.timedelta(days=1)
         lposts = (
             SubPost.select()
