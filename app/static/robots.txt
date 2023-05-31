@@ -45,3 +45,6 @@ Disallow: /
 
 User-agent: SEOkicks
 Disallow: /
+
+User-agent: CCBot
+Disallow: /
