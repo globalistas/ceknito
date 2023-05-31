@@ -72,21 +72,13 @@ def create_app(config=None):
         "img-src": ["'self'", "data:", "https:", "blob:"],
         "media-src": ["'self'", "https:"],
         "style-src": ["'self'", "'unsafe-inline'"],
-        "connect-src": ["'self'", "https://uploads.cekni.top"],
+        "connect-src": ["'self'"] + config.site.extra_connect_src,
     }
 
     if "server_name" in config.site.keys():
         csp["connect-src"] += [f"wss://{config.site.server_name}"]
         if not config.app.force_https:
             csp["connect-src"] += [f"ws://{config.site.server_name}"]
-
-    if app.config.get("DEBUG"):
-        webpack_dev_server = app.config.get("FLASK_STATIC_DIGEST_HOST_URL")
-        if webpack_dev_server:
-            webpack_ws = "ws" + webpack_dev_server[len("http") :]
-            csp["script-src-elem"] += ["'unsafe-eval'", webpack_dev_server]
-            csp["style-src"] += [webpack_dev_server]
-            csp["connect-src"] += [webpack_ws]
 
     talisman.init_app(
         app, content_security_policy=csp, force_https=config.app.force_https
