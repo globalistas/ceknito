@@ -267,7 +267,6 @@ def safe_request(
             r.raise_for_status()  # Check if the request was successful
         except requests.exceptions.RequestException as e:
             raise ValueError("Error fetching: " + str(e))
-    r.raise_for_status()
 
     if int(r.headers.get("Content-Length", 1)) > max_size and not partial_read:
         raise ValueError("response too large")
