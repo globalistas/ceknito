@@ -243,6 +243,7 @@ def safe_request(
     if url[0] == "/" and config.storage.server and "server_name" in config.site:
         url = f"http://{config.site.server_name}{url}"
     try:
+        # First attempt with Yahoo! Slurp/Site Explorer user agent
         r = requests.get(
             url,
             stream=True,
@@ -250,8 +251,22 @@ def safe_request(
             headers={"User-Agent": "Yahoo! Slurp/Site Explorer"},
             cookies={"CONSENT": "YES+"},
         )
-    except:  # noqa
-        raise ValueError("error fetching")
+        r.raise_for_status()  # Check if the request was successful
+    except requests.exceptions.RequestException:
+        try:
+            # Second attempt with Mozilla user agent
+            r = requests.get(
+                url,
+                stream=True,
+                timeout=receive_timeout,
+                headers={
+                    "User-Agent": "Mozilla/5.0 (Android 13; Mobile; rv:109.0) Gecko/113.0 Firefox/113.0"
+                },
+                cookies={"CONSENT": "YES+"},
+            )
+            r.raise_for_status()  # Check if the request was successful
+        except requests.exceptions.RequestException as e:
+            raise ValueError("Error fetching: " + str(e))
     r.raise_for_status()
 
     if int(r.headers.get("Content-Length", 1)) > max_size and not partial_read:
