@@ -1471,18 +1471,41 @@ def get_mod_notification_counts(uid):
         .group_by(Sub.sid)
         .dicts()
     )
-    comment_report_counts = dictify(
-        SubPostCommentReport.select(
-            Sub.sid, fn.COUNT(SubPostCommentReport.id).alias("count")
-        )
-        .join(SubPostComment)
-        .join(SubPost)
-        .join(Sub)
-        .join(SubMod)
-        .where((SubMod.user == uid) & SubPostCommentReport.open & ~SubMod.invite)
-        .group_by(Sub.sid)
-        .dicts()
+    # Typically there are only a few open comment reports.  Use CTEs
+    # to help the Postgres query planner narrow the search down to
+    # just the open reports before joining with comments, posts and
+    # mods.
+
+    # This can't be done with a subquery because then the query
+    # planner thinks it's smarter than you and does the joins
+    # on all the reports, making the query run in seconds
+    # instead of milliseconds.
+
+    # Peewee fails to run a query that starts with a CTE object,
+    # complaining that it isn't bound to a database.
+
+    comment_report_count_query = db.execute_sql(
+        """
+        with open_report as (
+            select id, cid from sub_post_comment_report
+            where sub_post_comment_report.open),
+          modded as (
+            select sid from sub_mod
+            where (sub_mod.uid = %s AND NOT sub_mod.invite))
+        SELECT modded.sid, COUNT(open_report.id) AS count
+          FROM open_report
+               INNER JOIN sub_post_comment
+                   ON (sub_post_comment.cid = open_report.cid)
+               INNER JOIN sub_post
+                   ON (sub_post_comment.pid = sub_post.pid)
+               INNER JOIN modded
+                   ON (modded.sid = sub_post.sid)
+         GROUP BY modded.sid
+        """,
+        [uid],
     )
+    comment_report_counts = {sid: count for sid, count in comment_report_count_query}
+
     # Count modmail conversations where the newest message in the
     # thread is unread.
     if not config.site.enable_modmail:
