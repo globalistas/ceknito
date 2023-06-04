@@ -4580,7 +4580,7 @@ msgstr "pozitívní"
 msgid "Insufficient user level to create posts."
 msgstr "Nemáš dostatečný level pro přidávání příspěvků."
 
-#: app/views/auth.py:241
+#: app/templates/welcome.html:2 app/views/auth.py:241
 msgid "Welcome to čekni.to"
 msgstr "Vítej na čekni.to"
 
@@ -4588,3 +4588,111 @@ msgstr "Vítej na čekni.to"
 #, python-format
 msgid "And thanks for registering!\n\nAs a signup bonus, we have granted you the \"Early Adopter\" user badge, increasing your user level to 7. This enables you to create a new sub (among other things), and is only granted to the first 1000 registered users. You can view the badge in your user profile /u/%(user_name)s.\n\nIf you recruit a new user, just let me know and you will be granted the \"Headhunter\" badge as well, increasing your user level even further. And for your first post, you will receive another badge. Active participation is essential for the growth of our community, and we are really grateful for it.\n\nP.S. Here you can find a short primer on how to use this site: https://cekni.to/s/Oznamy/2594/ako-pouzivat-tento-web"
 msgstr "A děkujeme za registraci!\n\nJako bonus od nás dostáváš odznak \"Early Adopter\" (jeden z prvních uživatelů), který zvyšuje tvůj uživatelský level na 7, což ti například umožňuje založit novou skupinu! Tento odznak dostane pouze prvních tisíc registrovaných uživatelů. Můžeš si ho prohlédnout ve svém profilu /u/%(user_name)s.\n\nPokud sem přilákáš dalšího uživatele, dej mi vědět, a dostaneš navíc odznak \"Headhunter\", který ti ještě více navýší level. A za tvůj první příspěvek dostaneš další odznak - aktivní přispívání je základem rostoucí komunity, a budeme za něj velmi vděční.\n\nP.S. Tady najdeš stručné vysvětlení jak používat tento web: https://cekni.to/s/Oznamy/2594/ako-pouzivat-tento-web"
+
+#: app/templates/welcome.html:8
+msgid "Thank you for registering! Here's a few tips to get you started:"
+msgstr "Děkujeme za registraci! Zde je několik základních informací na úvod:"
+
+#: app/templates/welcome.html:11
+msgid "Your profile, notifications and settings are located in the top right corner. If you are on mobile, they are hidden inside the \"hamburger\" menu."
+msgstr "Tvůj profil, notifikace a nastavení jsou vpravo nahoře. Pokud si na mobilu, skrývají se pod \"hamburgerem\"."
+
+#: app/templates/welcome.html:15
+msgid "Opens your inbox, where you will receive replies to your posts and comments, as well as private messages from other users"
+msgstr "Otevře tvou schránku, kam budou chodit reakce na tvé příspěvky a komentáře, jakož i soukromé zprávy"
+
+#: app/templates/welcome.html:20
+msgid "Toggles the night/day mode"
+msgstr "Přepíná denní/noční režim"
+
+#: app/templates/welcome.html:24
+msgid "Allows you to pick the primary site color"
+msgstr "Umožňuje zvolit si základní barevný motiv webu"
+
+#: app/templates/welcome.html:28
+msgid "In your profile, you can find some useful preferences settings"
+msgstr "Ve tvém profilu najdeš další možnosti, které si umíš nastavit"
+
+#: app/templates/welcome.html:30
+msgid "Hide or blur NSFW content"
+msgstr "Zakázat nebo zakrýt \"nevhodný\" (NSFW - Not Safe For Work) obsah"
+
+#: app/templates/welcome.html:31
+msgid "Suppress customized sub styles"
+msgstr "Ignorovat specifické CSS styly skupin"
+
+#: app/templates/welcome.html:32
+msgid "Turn off chat (yes, there is chat in the bottom right corner!)"
+msgstr "Vypnout chat (ano, vpravo dole máme chat!)"
+
+#: app/templates/welcome.html:33
+msgid "Select the site language"
+msgstr "Nastavit si jazyk"
+
+#: app/templates/welcome.html:34
+msgid "Enable/disable email notifications"
+msgstr "Zapnout/vypnout emailové notifikace"
+
+#: app/templates/welcome.html:37
+msgid "The site is structured based on"
+msgstr "Web je strukturován na bázi"
+
+#: app/templates/welcome.html:38
+msgid "subs"
+msgstr "skupin"
+
+#: app/templates/welcome.html:38
+msgid "You are automatically subscribed to a list of so-called \"default\" subs. You can Block a sub (its posts will not be populating your home feed), or Subscribe to a sub (its posts will be shown in your home feed, even if the sub is not one of the default subs). Subs have their own theme, rules, mods and other settings:"
+msgstr "K odběru některých z nich si přihlášen(a) automaticky (jedná se o tzv. výchozí skupiny). Kteroukoli skupinu můžeš buď Blokovat (její příspěvky se ti nebudou zobrazovat ve tvém hlavním kanálu), nebo Odebírat (její příspěvky se ti budou zobrazovat v hlavním kanálu, i když se nejedná o výchozí skupinu). Každá skupina má své vlastní téma, pravidla, moderátory a vlastní nastavení:"
+
+#: app/templates/welcome.html:41
+msgid "CSS style affecting the look&feel of the sub"
+msgstr "CSS styl ovlivňující dizajn (look&feel) skupiny"
+
+#: app/templates/welcome.html:42
+msgid "Information and links in the sidebar"
+msgstr "Informace a linky v postranním panelu"
+
+#: app/templates/welcome.html:43
+msgid "Default sorting of posts (Hot/Top/New/Commented)"
+msgstr "Výchozí řazení příspěvků v dané skupině (Hot/Top/Nové/Komentované)"
+
+#: app/templates/welcome.html:44
+msgid "Allowed posts type (link/Text/Image/Poll)"
+msgstr "Povolený typ příspěvků (link/téma/obrázek/anketa)"
+
+#: app/templates/welcome.html:45
+msgid "etc."
+msgstr "atd."
+
+#: app/templates/welcome.html:48
+msgid "A few more useful \"tricks\":"
+msgstr "Pár dalších \"triků\":"
+
+#: app/templates/welcome.html:50
+msgid "In the sub"
+msgstr "Ve skupině"
+
+#: app/templates/welcome.html:50
+msgid "you will find a chronological list of all the important technical changes on čekni.to"
+msgstr "najdeš seznam všech důležitých technických změn na webu čekni.to"
+
+#: app/templates/welcome.html:51
+msgid "displays the chat on the entire page"
+msgstr "zobrazí chat na celé stránce"
+
+#: app/templates/welcome.html:52
+msgid "allows you to re-define the order of your subscribed subs displayed in the top bar"
+msgstr "umožňuje změnit si pořadí odebíraných skupin v horní liště"
+
+#: app/templates/welcome.html:54
+msgid "Reporting issues"
+msgstr "Hlášení problémů"
+
+#: app/templates/welcome.html:55
+msgid "If you want to contact us about any bugs or other issues, you can find us on"
+msgstr "Pokud náš chceš kontaktovat ohledně jakýchkoli bugů nebo jiných problémů, najdeš nás na"
+
+#: app/templates/welcome.html:55
+msgid "Discord"
+msgstr "Discordu"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2023-06-04 08:22+0200\n"
+"POT-Creation-Date: 2023-06-04 11:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3983,6 +3983,135 @@ msgstr ""
 msgid "Please log in to see this user's posts."
 msgstr ""
 
+#: app/templates/welcome.html:2 app/templates/welcome.html:6
+#: app/views/auth.py:241
+msgid "Welcome to čekni.to"
+msgstr ""
+
+#: app/templates/welcome.html:8
+msgid "Thank you for registering! Here's a few tips to get you started:"
+msgstr ""
+
+#: app/templates/welcome.html:11
+msgid ""
+"Your profile, notifications and settings are located in the top right "
+"corner. If you are on mobile, they are hidden inside the \"hamburger\" "
+"menu."
+msgstr ""
+
+#: app/templates/welcome.html:15
+msgid ""
+"Opens your inbox, where you will receive replies to your posts and "
+"comments, as well as private messages from other users"
+msgstr ""
+
+#: app/templates/welcome.html:20
+msgid "Toggles the night/day mode"
+msgstr ""
+
+#: app/templates/welcome.html:24
+msgid "Allows you to pick the primary site color"
+msgstr ""
+
+#: app/templates/welcome.html:28
+msgid "In your profile, you can find some useful preferences settings"
+msgstr ""
+
+#: app/templates/welcome.html:30
+msgid "Hide or blur NSFW content"
+msgstr ""
+
+#: app/templates/welcome.html:31
+msgid "Suppress customized sub styles"
+msgstr ""
+
+#: app/templates/welcome.html:32
+msgid "Turn off chat (yes, there is chat in the bottom right corner!)"
+msgstr ""
+
+#: app/templates/welcome.html:33
+msgid "Select the site language"
+msgstr ""
+
+#: app/templates/welcome.html:34
+msgid "Enable/disable email notifications"
+msgstr ""
+
+#: app/templates/welcome.html:37
+msgid "The site is structured based on"
+msgstr ""
+
+#: app/templates/welcome.html:38
+msgid "subs"
+msgstr ""
+
+#: app/templates/welcome.html:38
+msgid ""
+"You are automatically subscribed to a list of so-called \"default\" subs."
+" You can Block a sub (its posts will not be populating your home feed), "
+"or Subscribe to a sub (its posts will be shown in your home feed, even if"
+" the sub is not one of the default subs). Subs have their own theme, "
+"rules, mods and other settings:"
+msgstr ""
+
+#: app/templates/welcome.html:41
+msgid "CSS style affecting the look&feel of the sub"
+msgstr ""
+
+#: app/templates/welcome.html:42
+msgid "Information and links in the sidebar"
+msgstr ""
+
+#: app/templates/welcome.html:43
+msgid "Default sorting of posts (Hot/Top/New/Commented)"
+msgstr ""
+
+#: app/templates/welcome.html:44
+msgid "Allowed posts type (link/Text/Image/Poll)"
+msgstr ""
+
+#: app/templates/welcome.html:45
+msgid "etc."
+msgstr ""
+
+#: app/templates/welcome.html:48
+msgid "A few more useful \"tricks\":"
+msgstr ""
+
+#: app/templates/welcome.html:50
+msgid "In the sub"
+msgstr ""
+
+#: app/templates/welcome.html:50
+msgid ""
+"you will find a chronological list of all the important technical changes"
+" on čekni.to"
+msgstr ""
+
+#: app/templates/welcome.html:51
+msgid "displays the chat on the entire page"
+msgstr ""
+
+#: app/templates/welcome.html:52
+msgid ""
+"allows you to re-define the order of your subscribed subs displayed in "
+"the top bar"
+msgstr ""
+
+#: app/templates/welcome.html:54
+msgid "Reporting issues"
+msgstr ""
+
+#: app/templates/welcome.html:55
+msgid ""
+"If you want to contact us about any bugs or other issues, you can find us"
+" on"
+msgstr ""
+
+#: app/templates/welcome.html:55
+msgid "Discord"
+msgstr ""
+
 #: app/templates/admin/invitecodes.html:100
 msgid "Deleted"
 msgstr ""
@@ -4049,10 +4178,6 @@ msgstr ""
 
 #: app/views/auth.py:194 app/views/auth.py:205
 msgid "Invalid invite code."
-msgstr ""
-
-#: app/views/auth.py:241
-msgid "Welcome to čekni.to"
 msgstr ""
 
 #: app/views/auth.py:243

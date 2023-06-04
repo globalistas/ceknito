@@ -1,56 +1,57 @@
 {% extends "layout.html" %}
-{% block title %}Vitaj na čekni.to{%endblock%}
+{% block title %}{{_("Welcome to čekni.to")}}{%endblock%}
 {% block content %}
 {{ super() }}
   <div class="content">
-    <h2>{{config.site.lema}}</h2>
+    <h2>{{_("Welcome to čekni.to")}}</h2>
 
-    <p>Ďakujeme za registráciu! Tu je zopár základných informácií na úvod:</p>
+    <p>{{_("Thank you for registering! Here's a few tips to get you started:")}}</p>
     <hr>
 
-    <p>Tvoj profil, notifikácie a nastavenia sú vpravo hore. Ak si na mobile, skrývajú sa pod "hamburgerom".
+    <p>{{_('Your profile, notifications and settings are located in the top right corner. If you are on mobile, they are hidden inside the "hamburger" menu.')}}
     <ul>
       <li>
         <span class="p-icon hasmail" data-icon="mail"></span>
-        Otvorí tvoju schránku, kam budú chodiť reakcie na tvoje príspevky a komentáre, ako aj súkromné správy
+        {{_('Opens your inbox, where you will receive replies to your posts and comments, as well as private messages from other users')}}
       </li>
       <li>
         <span class="p-icon hasmail" data-icon="sun"></span>
         <span class="p-icon hasmail" data-icon="moon"></span>
-        Prepína denný/nočný režim
+        {{_('Toggles the night/day mode')}}
       </li>
       <li>
         <div class="glyphbutton p-icon-color"><span data-icon="color"></span></div>
-        Umožňuje zvoliť si základný farebný motív webu
+        {{_('Allows you to pick the primary site color')}}
       </li>
     </ul>
     <hr>
-      <p>V tvojom profile nájdeš ďalšie možnosti zobrazenia, ktoré si môžeš nastaviť <span class="p-icon hasmail" data-icon="cog"> </p>
+      <p>{{_('In your profile, you can find some useful preferences settings')}} <span class="p-icon hasmail" data-icon="cog"> </p>
       <ul>
-        <li>Zakázať alebo zakryť "nevhodný" (NSFW - Not Safe For Work) obsah</li>
-        <li>Ignorovať špecifické CSS štýly skupín</li>
-        <li>Vypnúť chat (áno, vpravo dole máme chat!)</li>
-        <li>Nastaviť si jazyk</li>
-        <li>Zapnúť/vypnúť emailové notifikácie</li>
+        <li>{{_('Hide or blur NSFW content')}}</li>
+        <li>{{_('Suppress customized sub styles')}}</li>
+        <li>{{_('Turn off chat (yes, there is chat in the bottom right corner!)')}}</li>
+        <li>{{_('Select the site language')}}</li>
+        <li>{{_('Enable/disable email notifications')}}</li>
       </ul>
     <hr>
-    <p>Web je štrukturovaný na báze <a href="{{url_for('home.view_subs')}}">skupín</a>. Na odber niektorých z nich si prihlásený(á) automaticky (ide o tzv. predvolené skupiny). Ktorúkoľvek skupinu môžeš buď Blokovať (jej príspevky sa ti nebudú zobrazovať v tvojom hlavnom kanáli), alebo Odoberať (jej príspevky sa ti budú zobrazovať v hlavnom kanáli, aj keď nejde o predvolenú skupinu). Každá skupina má svoju vlastnú tému, pravidlá, moderátorov a vlastné nastavenia:
+    <p>{{_('The site is structured based on')}}
+    <a href="{{url_for('home.view_subs')}}">{{_('subs')}}</a>. {{_('You are automatically subscribed to a list of so-called "default" subs. You can Block a sub (its posts will not be populating your home feed), or Subscribe to a sub (its posts will be shown in your home feed, even if the sub is not one of the default subs). Subs have their own theme, rules, mods and other settings:')}}
     </p>
     <ul>
-      <li>CSS štýl ovplyvňujúci dizajn (look&feel) skupiny</li>
-      <li>Informácie a linky v bočnom paneli</li>
-      <li>Predvolené triedenie príspevkov v danej skupine (Teraz/Top/Nové/Komentované)</li>
-      <li>Povolený typ príspevkov (link/téma/obrázok/anketa)</li>
-      <li>atď.</li>
+      <li>{{_('CSS style affecting the look&feel of the sub')}}</li>
+      <li>{{_('Information and links in the sidebar')}}</li>
+      <li>{{_('Default sorting of posts (Hot/Top/New/Commented)')}}</li>
+      <li>{{_('Allowed posts type (link/Text/Image/Poll)')}}</li>
+      <li>{{_('etc.')}}</li>
     </ul>
     <hr>
-    <p>Zopár ďalších "trikov":</p>
+    <p>{{_('A few more useful "tricks":')}}</p>
     <ul>
-      <li>V skupine <a href="/s/changelog">Changelog</a> nájdeš zoznam všetkých dôležitých technických zmien na webe čekni.to</li>
-      <li><a href="{{url_for('site.chat')}}">/chat</a> zobrazí chat na celej stránke</li>
-      <li><span class="tx-icon hasmail" data-icon="edit"></span> umožňuje zmeniť si poradie odoberaných skupín v hornej lište</li>
+      <li>{{_('In the sub')}} <a href="/s/changelog">Changelog</a> {{_('you will find a chronological list of all the important technical changes on čekni.to')}}</li>
+      <li><a href="{{url_for('site.chat')}}">/chat</a> {{_('displays the chat on the entire page')}}</li>
+      <li><span class="tx-icon hasmail" data-icon="edit"></span> {{_('allows you to re-define the order of your subscribed subs displayed in the top bar')}}</li>
     </ul>
-    <h2>Hlásenie problémov</h2>
-    Ak náš chceš kontaktovať ohľadom akýchkoľvek bugov alebo iných problémov, nájdeš nás na <a target="_blank" href="https://discord.gg/8HFrGrzEx2">Discorde</a>.
+    <h2>{{_('Reporting issues')}}</h2>
+    {{_('If you want to contact us about any bugs or other issues, you can find us on')}} <a target="_blank" href="https://discord.gg/8HFrGrzEx2">{{_('Discord')}}</a>.
   </div>
 {%endblock%}
