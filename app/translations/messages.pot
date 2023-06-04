@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2023-05-27 08:06+0200\n"
+"POT-Creation-Date: 2023-06-04 08:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -329,12 +329,12 @@ msgstr ""
 msgid "Max storage for image uploads for subs' stylesheets (in MiB)."
 msgstr ""
 
-#: app/misc.py:1683
+#: app/misc.py:1682
 #, python-format
 msgid "Error in the '%(field)s' field - %(error)s"
 msgstr ""
 
-#: app/misc.py:1871
+#: app/misc.py:1870
 #, python-format
 msgid "Re: %(subject)s"
 msgstr ""
@@ -344,48 +344,48 @@ msgstr ""
 #: app/html/sub/post.html:56 app/html/sub/post.html:132
 #: app/html/sub/post.html:151 app/html/sub/post.html:201
 #: app/html/sub/post.html:210 app/html/sub/postcomments.html:37
-#: app/misc.py:2046 app/misc.py:2804 app/misc.py:2810 app/misc.py:2816
-#: app/misc.py:2821
+#: app/misc.py:2045 app/misc.py:2803 app/misc.py:2809 app/misc.py:2815
+#: app/misc.py:2820
 msgid "[Deleted]"
 msgstr ""
 
-#: app/misc.py:2122
+#: app/misc.py:2121
 msgid "URLs not allowed, uploaded files only"
 msgstr ""
 
-#: app/misc.py:2133
+#: app/misc.py:2132
 msgid "Invalid characters in string."
 msgstr ""
 
-#: app/misc.py:2151
+#: app/misc.py:2150
 msgid "@import token not allowed"
 msgstr ""
 
-#: app/misc.py:2167
+#: app/misc.py:2166
 msgid "Invalid CSS"
 msgstr ""
 
-#: app/html/sub/postcomments.html:50 app/misc.py:2791
+#: app/html/sub/postcomments.html:50 app/misc.py:2790
 msgid "[Blocked]"
 msgstr ""
 
-#: app/misc.py:2879
+#: app/misc.py:2878
 msgid "Already processing previous request."
 msgstr ""
 
-#: app/misc.py:2901
+#: app/misc.py:2900
 msgid "Unknown error. User disappeared"
 msgstr ""
 
-#: app/misc.py:2908
+#: app/misc.py:2907
 msgid "Score balance is negative"
 msgstr ""
 
-#: app/misc.py:2910
+#: app/misc.py:2909
 msgid "Invalid vote value"
 msgstr ""
 
-#: app/misc.py:2926 app/views/do.py:320 app/views/do.py:453 app/views/do.py:820
+#: app/misc.py:2925 app/views/do.py:320 app/views/do.py:453 app/views/do.py:820
 #: app/views/do.py:856 app/views/do.py:1236 app/views/do.py:1342
 #: app/views/do.py:2185 app/views/do.py:2291 app/views/do.py:2444
 #: app/views/do.py:2459 app/views/do.py:2532 app/views/do.py:2617
@@ -395,43 +395,43 @@ msgstr ""
 msgid "Post does not exist"
 msgstr ""
 
-#: app/misc.py:2929
+#: app/misc.py:2928
 msgid "You can't vote on your own posts"
 msgstr ""
 
-#: app/misc.py:2931
+#: app/misc.py:2930
 msgid "You can't vote on deleted posts"
 msgstr ""
 
-#: app/misc.py:2964 app/views/do.py:2582 app/views/do.py:2886
+#: app/misc.py:2963 app/views/do.py:2582 app/views/do.py:2886
 #: app/views/do.py:2934 app/views/do.py:3033 app/views/do.py:4085
 #: app/views/do.py:4198
 msgid "Comment does not exist"
 msgstr ""
 
-#: app/misc.py:2967
+#: app/misc.py:2966
 msgid "You can't vote on your own comments"
 msgstr ""
 
-#: app/misc.py:2969
+#: app/misc.py:2968
 msgid "You can't vote on deleted comments"
 msgstr ""
 
-#: app/misc.py:2981
+#: app/misc.py:2980
 msgid "Invalid target"
 msgstr ""
 
-#: app/misc.py:2984 app/views/do.py:1290 app/views/do.py:2192
+#: app/misc.py:2983 app/views/do.py:1290 app/views/do.py:2192
 #: app/views/do.py:2898
 msgid "You are banned on this sub."
 msgstr ""
 
-#: app/misc.py:2989 app/views/do.py:1293 app/views/do.py:1347
+#: app/misc.py:2988 app/views/do.py:1293 app/views/do.py:1347
 #: app/views/do.py:2909
 msgid "Post is archived"
 msgstr ""
 
-#: app/misc.py:3343
+#: app/misc.py:3342
 msgid "Invalid status request"
 msgstr ""
 
@@ -4052,26 +4052,26 @@ msgid "Invalid invite code."
 msgstr ""
 
 #: app/views/auth.py:241
-msgid "Vitaj na čekni.to"
+msgid "Welcome to čekni.to"
 msgstr ""
 
 #: app/views/auth.py:243
 #, python-format
 msgid ""
-"A ďakujeme za registráciu!\n"
+"And thanks for registering!\n"
 "\n"
-"Ako bonus od nás dostávaš odznak \"Early Adopter\" (jeden z prvých "
-"používateľov), ktorý zvyšuje tvoj používateľský level na 7, čo ti "
-"napríklad umožňuje založiť novú skupinu! Tento odznak dostane iba prvých "
-"tisíc registrovaných používateľov. Môžeš si ho pozrieť vo svojom profile "
-"/u/%(user_name)s.\n"
+"As a signup bonus, we have granted you the \"Early Adopter\" user badge, "
+"increasing your user level to 7. This enables you to create a new sub "
+"(among other things), and is only granted to the first 1000 registered "
+"users. You can view the badge in your user profile /u/%(user_name)s.\n"
 "\n"
-"Ak sem prilákaš ďalšieho používateľa, daj mi vedieť, a dostaneš navyše "
-"odznak \"Headhunter\", ktorý ti ešte viac navýši level. A za Tvoj prvý "
-"príspevok dostaneš ďalší odznak - aktívne prispievanie je základom "
-"rastúcej komunity, a budeme zaň veľmi vďační.\n"
+"If you recruit a new user, just let me know and you will be granted the "
+"\"Headhunter\" badge as well, increasing your user level even further. "
+"And for your first post, you will receive another badge. Active "
+"participation is essential for the growth of our community, and we are "
+"really grateful for it.\n"
 "\n"
-"P.S. Tu nájdeš stručný návod ako používať tento web: "
+"P.S. Here you can find a short primer on how to use this site: "
 "https://cekni.to/s/Oznamy/2594/ako-pouzivat-tento-web"
 msgstr ""
 

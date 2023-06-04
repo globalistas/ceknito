@@ -238,17 +238,17 @@ def register():
         .first()
     )
 
-    subject = _("Vitaj na čekni.to")
+    subject = _("Welcome to čekni.to")
 
     content = _(
-        "A ďakujeme za registráciu!"
-        '\n\nAko bonus od nás dostávaš odznak "Early Adopter" (jeden z prvých používateľov), ktorý zvyšuje tvoj '
-        "používateľský level na 7, čo ti napríklad umožňuje založiť novú skupinu! Tento odznak dostane iba "
-        "prvých tisíc registrovaných používateľov. Môžeš si ho pozrieť vo svojom profile /u/%(user_name)s."
-        '\n\nAk sem prilákaš ďalšieho používateľa, daj mi vedieť, a dostaneš navyše odznak "Headhunter", '
-        "ktorý ti ešte viac navýši level. A za Tvoj prvý príspevok dostaneš ďalší odznak - aktívne "
-        "prispievanie je základom rastúcej komunity, a budeme zaň veľmi vďační."
-        "\n\nP.S. Tu nájdeš stručný návod ako používať tento web: "
+        "And thanks for registering!"
+        '\n\nAs a signup bonus, we have granted you the "Early Adopter" user badge, increasing your user level to 7. '
+        "This enables you to create a new sub (among other things), and is only granted to the first 1000 "
+        "registered users. You can view the badge in your user profile /u/%(user_name)s."
+        '\n\nIf you recruit a new user, just let me know and you will be granted the "Headhunter" badge as well, '
+        "increasing your user level even further. And for your first post, you will receive another badge. Active "
+        "participation is essential for the growth of our community, and we are really grateful for it."
+        "\n\nP.S. Here you can find a short primer on how to use this site: "
         "https://cekni.to/s/Oznamy/2594/ako-pouzivat-tento-web",
         user_name=user.name,
     )

@@ -4579,3 +4579,12 @@ msgstr "pozitívní"
 #: app/views/subs.py:157
 msgid "Insufficient user level to create posts."
 msgstr "Nemáš dostatečný level pro přidávání příspěvků."
+
+#: app/views/auth.py:241
+msgid "Welcome to čekni.to"
+msgstr "Vítej na čekni.to"
+
+#: app/views/auth.py:243
+#, python-format
+msgid "And thanks for registering!\n\nAs a signup bonus, we have granted you the \"Early Adopter\" user badge, increasing your user level to 7. This enables you to create a new sub (among other things), and is only granted to the first 1000 registered users. You can view the badge in your user profile /u/%(user_name)s.\n\nIf you recruit a new user, just let me know and you will be granted the \"Headhunter\" badge as well, increasing your user level even further. And for your first post, you will receive another badge. Active participation is essential for the growth of our community, and we are really grateful for it.\n\nP.S. Here you can find a short primer on how to use this site: https://cekni.to/s/Oznamy/2594/ako-pouzivat-tento-web"
+msgstr "A děkujeme za registraci!\n\nJako bonus od nás dostáváš odznak \"Early Adopter\" (jeden z prvních uživatelů), který zvyšuje tvůj uživatelský level na 7, což ti například umožňuje založit novou skupinu! Tento odznak dostane pouze prvních tisíc registrovaných uživatelů. Můžeš si ho prohlédnout ve svém profilu /u/%(user_name)s.\n\nPokud sem přilákáš dalšího uživatele, dej mi vědět, a dostaneš navíc odznak \"Headhunter\", který ti ještě více navýší level. A za tvůj první příspěvek dostaneš další odznak - aktivní přispívání je základem rostoucí komunity, a budeme za něj velmi vděční.\n\nP.S. Tady najdeš stručné vysvětlení jak používat tento web: https://cekni.to/s/Oznamy/2594/ako-pouzivat-tento-web"
