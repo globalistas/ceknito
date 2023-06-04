@@ -63,9 +63,9 @@ def apply_up_to(fake, dirname, name):
 @migration.command(help="Rolls back a migration")
 @click.argument("name")
 @dirname_option
-def rollback(name, dirname):
+def rollback(dirname):
     router = get_router(dirname)
-    router.rollback(name)
+    router.rollback()
 
 
 @migration.command(help="Creates a new migration")
