@@ -1485,13 +1485,13 @@ def get_mod_notification_counts(uid):
     # complaining that it isn't bound to a database.
 
     comment_report_count_query = db.execute_sql(
-        """
+        f"""
         with open_report as (
             select id, cid from sub_post_comment_report
             where sub_post_comment_report.open),
           modded as (
             select sid from sub_mod
-            where (sub_mod.uid = %s AND NOT sub_mod.invite))
+            where (sub_mod.uid = {db.param} AND NOT sub_mod.invite))
         SELECT modded.sid, COUNT(open_report.id) AS count
           FROM open_report
                INNER JOIN sub_post_comment
