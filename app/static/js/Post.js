@@ -707,8 +707,8 @@ u.addEventForChild(document, 'click', '.reply-comment', function (e, qelem) {
     const cs = window.getSelection().anchorNode;
     let pp = "";
     if (cs) {
-        if (cs.parentNode.parentNode && cs.parentNode.parentNode.classList.contains('content')) {
-            pp = '> ' + window.getSelection().getRangeAt(0).cloneContents().textContent + '\n';
+        if (cs.parentNode.parentNode.parentNode && cs.parentNode.parentNode.parentNode.classList.contains('content')) {
+            pp = '> ' + window.getSelection().getRangeAt(0).cloneContents().textContent + '\n\n';
         }
     }
 
