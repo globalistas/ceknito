@@ -13,6 +13,7 @@ u.sub('.savepost', 'click', function (e) {
     const tg = e.currentTarget;
     u.post('/do/save_post/' + tg.getAttribute('data-pid'), {}, function () {
         tg.innerHTML = _('saved');
+        location.reload();
     });
 });
 
@@ -20,6 +21,7 @@ u.sub('.removesavedpost', 'click', function (e) {
     const tg = e.currentTarget;
     u.post('/do/remove_saved_post/' + tg.getAttribute('data-pid'), {}, function () {
         tg.innerHTML = _('removed');
+        location.reload();
     });
 });
 
