@@ -95,6 +95,7 @@ from .models import (
     SubBan,
     SubPostCommentHistory,
     SubPostMetadata,
+    UserSaved,
 )
 
 from .storage import file_url, thumbnail_url
@@ -1958,6 +1959,67 @@ def getUserComments(uid, page, include_deleted_comments=False):
     return com
 
 
+def getUserSavedComments(uid, page, include_deleted_comments=False):
+    """Returns saved comments of a user.  'include_deleted_comments' may be
+    True, False or a list of subs, in which case deleted comments from
+    those subs will be included in the result."""
+    try:
+        com = (
+            SubPostComment.select(
+                Sub.name.alias("sub"),
+                SubPost.title,
+                SubPostComment.cid,
+                SubPostComment.pid,
+                SubPostComment.uid,
+                SubPostComment.time,
+                SubPostComment.lastedit,
+                SubPostComment.content,
+                SubPostComment.status,
+                SubPostComment.score,
+                SubPostComment.parentcid,
+                SubPost.posted,
+                SubPost.deleted.alias("post_deleted"),
+                SubPost.nsfw.alias("nsfw"),
+                Sub.nsfw.alias("sub_nsfw"),
+                User.name.alias("author"),
+            )
+            .join(SubPost)
+            .switch(SubPostComment)
+            .join(Sub, on=(Sub.sid == SubPost.sid))
+            .join(UserSaved, on=(UserSaved.cid == SubPostComment.cid))
+            .join(User, on=(User.uid == SubPostComment.uid))
+            .where(UserSaved.uid == uid)
+        )
+        if include_deleted_comments:
+            if isinstance(include_deleted_comments, list):
+                com = com.where(
+                    SubPostComment.status.is_null()
+                    | (Sub.sid << include_deleted_comments)
+                )
+            elif not current_user.is_admin():
+                com = com.where(
+                    SubPostComment.status.is_null() | (SubPostComment.status << [0, 2])
+                )
+        else:
+            com = com.where(SubPostComment.status.is_null())
+            com = com.where(Sub.status == 0)
+
+        if "nsfw" not in current_user.prefs:
+            com = com.where(SubPost.nsfw == 0)
+
+        com = com.order_by(UserSaved.xid.desc()).paginate(page, 20).dicts()
+    except SubPostComment.DoesNotExist:
+        return False
+
+    com = list(com)
+    now = datetime.utcnow()
+    limit = timedelta(days=config.site.archive_post_after)
+    for c in com:
+        c["archived"] = now - c["posted"].replace(tzinfo=None) > limit
+        c = add_blur(c)
+    return com
+
+
 def getSubMods(sid):
     modsquery = (
         SubMod.select(User.uid, User.name, SubMod.power_level)
@@ -2738,6 +2800,7 @@ def get_comment_tree(
             ),
             SubMod.sid.alias("user_is_mod"),
             SubPostCommentView.id.alias("already_viewed"),
+            UserSaved.cid.alias("comment_is_saved"),
         ]
     else:
         fields += [
@@ -2789,6 +2852,11 @@ def get_comment_tree(
                     (SubPostCommentView.cid == SubPostComment.cid)
                     & (SubPostCommentView.uid == uid)
                 ),
+            )
+            .join(
+                UserSaved,
+                JOIN.LEFT_OUTER,
+                on=((UserSaved.cid == SubPostComment.cid) & (UserSaved.uid == uid)),
             )
         )
     expcomms = expcomms.where(SubPostComment.cid << cid_list).dicts()

@@ -536,6 +536,7 @@ class UserAuthSource(IntEnum):
 
 class UserSaved(BaseModel):
     pid = IntegerField(null=True)
+    cid = ForeignKeyField(db_column="cid", null=True, model=SubPostComment, field="cid")
     uid = ForeignKeyField(db_column="uid", null=True, model=User, field="uid")
     xid = PrimaryKeyField()
 

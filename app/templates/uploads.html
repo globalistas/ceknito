@@ -8,6 +8,7 @@
 <a href="{{url_for('user.view_user_comments', user=current_user.name)}}" class="sbm-post pure-button">{{_('View comments')}}</a>
 <a href="{{url_for('user.view_user_uploads')}}" class="sbm-post pure-button">{{_('View uploads')}}</a>
 <a href="{{url_for('user.view_user_savedposts', user=current_user.name)}}" class="sbm-post pure-button">{{_('View saved posts')}}</a>
+<a href="{{url_for('user.view_user_savedcomments', user=current_user.name)}}" class="sbm-post pure-button">{{_('View saved comments')}}</a>
 {% endblock %}
 
 {% block content %}

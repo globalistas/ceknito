@@ -229,6 +229,28 @@ def view_user_savedposts(user, page):
         abort(403)
 
 
+@bp.route("/u/<user>/savedcomments", defaults={"page": 1})
+@bp.route("/u/<user>/savedcomments/<int:page>")
+@login_required
+def view_user_savedcomments(user, page):
+    """WIP: View user's saved comments"""
+    if current_user.name.lower() == user.lower():
+        comments = misc.getUserSavedComments(
+            current_user.uid,
+            page,
+        )
+        postmeta = misc.get_postmeta_dicts((c["pid"] for c in comments))
+        return render_template(
+            "usersavedcomments.html",
+            user=current_user,
+            page=page,
+            comments=comments,
+            postmeta=postmeta,
+        )
+    else:
+        abort(403)
+
+
 @bp.route("/u/<user>/comments", defaults={"page": 1})
 @bp.route("/u/<user>/comments/<int:page>")
 def view_user_comments(user, page):

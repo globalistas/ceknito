@@ -11,6 +11,7 @@
     <a href="{{url_for('user.view_user_uploads')}}" class="sbm-post pure-button">{{_('View uploads')}}</a>
   {% endif %}
   <a href="{{url_for('user.view_user_savedposts', user=user.name)}}" class="sbm-post pure-button">{{_('View saved posts')}}</a>
+  <a href="{{url_for('user.view_user_savedcomments', user=user.name)}}" class="sbm-post pure-button">{{_('View saved comments')}}</a>
 {% endif %}
 {% endblock %}
 
@@ -28,7 +29,7 @@
       <h3 class="comments">{{_('View saved posts')}}</h3>
     {% endif %}
     {% if not posts %}
-      <h3>{{_("There are no posts here, yet.")}}</h3>
+      <p class="comments recent">{{_("There are no posts here, yet.")}}</p>
     {% endif %}
 
     <div class="alldaposts">

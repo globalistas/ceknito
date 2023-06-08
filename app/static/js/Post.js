@@ -25,6 +25,23 @@ u.sub('.removesavedpost', 'click', function (e) {
     });
 });
 
+// Saving/unsaving comments.
+u.sub('.savecomment', 'click', function (e) {
+    const tg = e.currentTarget;
+    u.post('/do/save_comment/' + tg.getAttribute('data-cid'), {}, function () {
+        tg.innerHTML = _('saved');
+        location.reload();
+    });
+});
+
+u.sub('.removesavedcomment', 'click', function (e) {
+    const tg = e.currentTarget;
+    u.post('/do/remove_saved_comment/' + tg.getAttribute('data-cid'), {}, function () {
+        tg.innerHTML = _('removed');
+        location.reload();
+    });
+});
+
 u.addEventForChild(document, 'click', '.distinguish', function (e, qelem) {
     function distinguish(admin) {
         u.post('/do/distinguish', {

@@ -1958,7 +1958,7 @@ msgstr "Uploady používateľa"
 
 #: app/html/shared/sidebar/user.html:43
 msgid "View saved posts"
-msgstr "Moje uložené príspevky"
+msgstr "Uložené príspevky"
 
 #: app/html/site/activity.html:12
 msgid "New posts and comments"
@@ -4696,3 +4696,22 @@ msgstr "Ak náš chceš kontaktovať ohľadom akýchkoľvek bugov alebo iných p
 #: app/templates/welcome.html:55
 msgid "Discord"
 msgstr "Discorde"
+
+#: app/html/shared/sidebar/user.html:44 app/templates/uploads.html:11
+#: app/templates/usercomments.html:15 app/templates/userposts.html:14
+#: app/templates/usersavedcomments.html:15
+#: app/templates/usersavedcomments.html:26
+msgid "View saved comments"
+msgstr "Uložené komentáre"
+
+#: app/templates/usercomments.html:2
+msgid "Comments made by"
+msgstr "Komentáre používateľa"
+
+#: app/templates/usersavedcomments.html:30
+msgid "You have not saved any comments, yet."
+msgstr "Nemáš uložené žiadne komentáre."
+
+#: app/views/do.py:2497
+msgid "Comment was not saved"
+msgstr "Komentár nebol uložený"

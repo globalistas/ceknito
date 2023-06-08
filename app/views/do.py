@@ -2466,6 +2466,37 @@ def remove_saved_post(pid):
         return jsonify(status="error", error=[_("Post was not saved")])
 
 
+@do.route("/do/save_comment/<cid>", methods=["POST"])
+def save_comment(cid):
+    """Save a comment to your Saved Comments"""
+    try:
+        SubPostComment.get(SubPostComment.cid == cid)
+    except SubPostComment.DoesNotExist:
+        return jsonify(status="error", error=[_("Comment does not exist")])
+    try:
+        UserSaved.get((UserSaved.uid == current_user.uid) & (UserSaved.cid == cid))
+        return jsonify(status="error", error=[_("Already saved")])
+    except UserSaved.DoesNotExist:
+        UserSaved.create(uid=current_user.uid, cid=cid)
+        return jsonify(status="ok")
+
+
+@do.route("/do/remove_saved_comment/<cid>", methods=["POST"])
+def remove_saved_comment(cid):
+    """Remove a saved comment"""
+    try:
+        SubPostComment.get(SubPostComment.cid == cid)
+    except SubPostComment.DoesNotExist:
+        return jsonify(status="error", error=[_("Comment does not exist")])
+
+    try:
+        sp = UserSaved.get((UserSaved.uid == current_user.uid) & (UserSaved.cid == cid))
+        sp.delete_instance()
+        return jsonify(status="ok")
+    except UserSaved.DoesNotExist:
+        return jsonify(status="error", error=[_("Comment was not saved")])
+
+
 @do.route("/do/useinvitecode", methods=["POST"])
 def use_invite_code():
     """Enable invite code to register"""

@@ -1,5 +1,5 @@
 @require(post, postmeta, comments, subInfo, subMods, highlight, sort)
-@def renderComments(post, postmeta, subInfo, subMods, comments, highlight='', sort='best'):
+@def renderComments(post, postmeta, subInfo, subMods, comments, comment_is_saved, highlight='', sort='best'):
   @(
     if sort == 'best' and not post['best_sort_enabled']:
       sort = 'top'
@@ -124,6 +124,13 @@
               @if comment['visibility'] in ['', 'blur-block']:
                 <li><a class="comment-source" data-cid="@{comment['cid']}">@{_('source')}</a></li>
               @end
+              @if current_user.is_authenticated:
+                @if comment['comment_is_saved']:
+                  <li><a class="removesavedcomment" data-cid="@{comment['cid']}">@{_('unsave')}</a></li>
+                @else:
+                  <li><a class="savecomment" data-cid="@{comment['cid']}">@{_('save')}</a></li>
+                @end
+              @endif
               @if current_user.is_authenticated and comment['visibility'] in ['', 'blur-block'] and comment['uid'] != current_user.uid:
                 <li><a data-ac="report" data-pid="@{comment['pid']}" cid="@{comment['cid']}" class="report-comment">@{_('report')}</a></li>
               @end
