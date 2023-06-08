@@ -782,11 +782,6 @@ body.dark .post-content-container.deleted {
   background-color: #171717;
 }
 
-body.dark .postbar.post.deleted {
-  background-color: #171717;
-  border: 1px solid #6f1818;
-}
-
 body.dark .poll-space.deleted {
   background-color: #171717;
   border: 1px solid #6f1818;
