@@ -81,7 +81,7 @@ function vote(obj, how, comment) {
   if (comment) {
     var kl = 'votecomment';
     var unid = obj.parentNode.parentNode.parentNode.getAttribute('data-cid');
-    var count = obj.parentNode.parentNode.querySelector('.cscore');
+    var count = obj.parentNode.parentNode.querySelector('[class*="cscore"]');
   } else {
     var kl = 'vote';
     var unid = obj.getAttribute('data-pid');
