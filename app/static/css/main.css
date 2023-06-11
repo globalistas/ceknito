@@ -373,6 +373,18 @@ div#sortbuttons {
   width: 100%;
 }
 
+#center-container-savedcomments {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+  top: 5.1em;
+  left: 0;
+  bottom: 4em;
+  width: 100%;
+}
+
 #container {
   padding-top: .5em;
   padding-left: .5em;
