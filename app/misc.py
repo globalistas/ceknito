@@ -2891,7 +2891,7 @@ def get_comment_tree(
                 elif is_mod:
                     comm["visibility"] = "mod-self-del"
                 else:
-                    comm["user"] = _("[Deleted]")
+                    comm["user"] = _("[deleted by user]")
                     comm.update(remove_content)
             elif comm["status"] == 2:
                 if is_admin or is_mod:

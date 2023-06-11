@@ -1327,7 +1327,7 @@ msgstr "[vymazané moderátorem]"
 #: app/html/mod/reportdetails.html:147 app/html/mod/reportdetails.html:160
 #: app/html/sub/postcomments.html:75
 msgid "[post deleted by user]"
-msgstr "[vymazané]"
+msgstr "[vymazáno uživatelem]"
 
 #: app/html/mod/reportdetails.html:157
 msgid "[post preview could not be rendered]"
@@ -1347,7 +1347,7 @@ msgstr "[vymazáno adminem]"
 
 #: app/html/mod/reportdetails.html:179 app/html/mod/reportdetails.html:182
 msgid "[comment deleted by user]"
-msgstr "[uživatel vymazal komentář]"
+msgstr "[komentář vymazaný uživatelem]"
 
 #: app/html/mod/reportdetails.html:191 app/html/mod/reportdetails.html:193
 msgid "Posted"
@@ -4715,3 +4715,7 @@ msgstr "Nemáš uloženy žádné komentáře."
 #: app/views/do.py:2497
 msgid "Comment was not saved"
 msgstr "Komentář nebyl uložen"
+
+#: app/misc.py:2894
+msgid "[deleted by user]"
+msgstr "[vymazáno uživatelem]"

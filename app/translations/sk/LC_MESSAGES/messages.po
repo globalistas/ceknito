@@ -1327,7 +1327,7 @@ msgstr "[vymazané moderátorom]"
 #: app/html/mod/reportdetails.html:147 app/html/mod/reportdetails.html:160
 #: app/html/sub/postcomments.html:75
 msgid "[post deleted by user]"
-msgstr "[vymazané]"
+msgstr "[vymazané používateľom]"
 
 #: app/html/mod/reportdetails.html:157
 msgid "[post preview could not be rendered]"
@@ -1347,7 +1347,7 @@ msgstr "[vymazané adminom]"
 
 #: app/html/mod/reportdetails.html:179 app/html/mod/reportdetails.html:182
 msgid "[comment deleted by user]"
-msgstr "[používateľ vymazal komentár]"
+msgstr "[komentár vymazaný používateľom]"
 
 #: app/html/mod/reportdetails.html:191 app/html/mod/reportdetails.html:193
 msgid "Posted"
@@ -4715,3 +4715,7 @@ msgstr "Nemáš uložené žiadne komentáre."
 #: app/views/do.py:2497
 msgid "Comment was not saved"
 msgstr "Komentár nebol uložený"
+
+#: app/misc.py:2894
+msgid "[deleted by user]"
+msgstr "[vymazané používateľom]"
