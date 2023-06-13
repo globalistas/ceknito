@@ -3190,7 +3190,7 @@ def get_sibling(pid, cid, lim):
     if sub.status != 0 and not current_user.is_admin():
         return jsonify(status="error", error=[_("Sub is disabled")])
 
-    default_sort = "best" if post["best_sort_enabled"] else "top"
+    default_sort = "best" if post["best_sort_enabled"] else "new"
     sort = request.args.get("sort", default=default_sort, type=str)
 
     if cid == "null":

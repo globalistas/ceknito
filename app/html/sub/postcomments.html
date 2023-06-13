@@ -1,8 +1,8 @@
 @require(post, postmeta, comments, subInfo, subMods, highlight, sort)
-@def renderComments(post, postmeta, subInfo, subMods, comments, comment_is_saved, highlight='', sort='best'):
+@def renderComments(post, postmeta, subInfo, subMods, comments, highlight='', sort='best'):
   @(
     if sort == 'best' and not post['best_sort_enabled']:
-      sort = 'top'
+      sort = 'new'
   )
   @#ignore
   @for comment in comments:

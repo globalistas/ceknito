@@ -588,7 +588,7 @@ def view_post(sub, pid, slug=None, comments=False, highlight=None):
     if sort is None:
         sort = sticky_sort
     if sort == "best" and not post["best_sort_enabled"]:
-        sort = "top"
+        sort = "new"
 
     subMods = misc.getSubMods(sub["sid"])
     include_history = current_user.is_mod(sub["sid"], 1) or current_user.is_admin()
