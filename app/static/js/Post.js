@@ -627,6 +627,35 @@ window.addEventListener('load', markCommentsSeen);
 window.addEventListener('scroll', markCommentsSeen);
 window.addEventListener('resize', markCommentsSeen);
 
+// Refresh save button events
+function refresh_save_button_events(text){
+    var elements = document.querySelectorAll('.savecomment');
+    var _u = u;
+    for(var i=0;i<elements.length;i++){
+        var button = elements[i];
+        button.onclick = function(){
+            let _ = this;
+            _u.post('/do/save_comment/' + this.dataset.cid, {}, () => {
+                _.innerHTML = text;
+            });
+        }
+    }
+};
+
+// Refresh removesaved button events
+function refresh_remove_button_events(text){
+    var elements = document.querySelectorAll('.removesavedcomment');
+    var _u = u;
+    for(var i=0;i<elements.length;i++){
+        var button = elements[i];
+        button.onclick = function(){
+            let _ = this;
+            _u.post('/do/remove_saved_comment/' + this.dataset.cid, {}, () => {
+                _.innerHTML = text;
+            });
+        }
+    }
+};
 
 // Load children
 u.addEventForChild(document, 'click', '.loadchildren', function (e, qelem) {
@@ -637,6 +666,8 @@ u.addEventForChild(document, 'click', '.loadchildren', function (e, qelem) {
             qelem.parentNode.innerHTML = data;
             Icons.rendericons();
             markCommentsSeen();
+            refresh_save_button_events(_('saved'));
+            refresh_remove_button_events(_('removed'));
         }, function () {
             qelem.textContent = _("Error.");
         });
@@ -665,10 +696,13 @@ u.addEventForChild(document, 'click', '.loadsibling', function (e, qelem) {
             qelem.outerHTML = data;
             Icons.rendericons();
             markCommentsSeen();
+            refresh_save_button_events(_('saved'));
+            refresh_remove_button_events(_('removed'));
         }, function () {
             qelem.textContent = _("Error.");
         });
 });
+
 
 // collapse/expand comment
 u.addEventForChild(document, 'click', '.togglecomment', function (e, qelem) {
