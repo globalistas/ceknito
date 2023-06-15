@@ -1245,6 +1245,10 @@ img.block-blur {
   margin-left: 1em;
 }
 
+.recent {
+  margin-left: 0px;
+}
+
 .allcomments {
   font-size: 16px;
   position: relative;
@@ -2195,8 +2199,8 @@ article.comment:nth-child(2n) {
 }
 
 .commtitle {
-  margin: 7px;
-  font-size: 15px;
+  margin: 7px 7px 0px 0px;
+  font-size: 14px;
 }
 
 .userrow {

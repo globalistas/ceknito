@@ -4719,3 +4719,7 @@ msgstr "Komentář nebyl uložen"
 #: app/misc.py:2894
 msgid "[deleted by user]"
 msgstr "[vymazáno uživatelem]"
+
+#: app/templates/userposts.html:2
+msgid "Posts made by"
+msgstr "Příspěvky od"

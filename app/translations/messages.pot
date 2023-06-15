@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2023-06-11 17:06+0200\n"
+"POT-Creation-Date: 2023-06-15 09:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -710,22 +710,22 @@ msgstr ""
 msgid "Default sub page post sorting"
 msgstr ""
 
-#: app/forms/sub.py:134 app/html/index.html:33 app/html/index.html:38
+#: app/forms/sub.py:134 app/html/index.html:35 app/html/index.html:40
 #: app/html/sub.html:20
 msgid "Hot"
 msgstr ""
 
-#: app/forms/sub.py:135 app/html/index.html:35 app/html/index.html:40
+#: app/forms/sub.py:135 app/html/index.html:37 app/html/index.html:42
 #: app/html/sub.html:22 app/html/sub/post.html:456
 msgid "New"
 msgstr ""
 
-#: app/forms/sub.py:136 app/html/index.html:34 app/html/index.html:39
+#: app/forms/sub.py:136 app/html/index.html:36 app/html/index.html:41
 #: app/html/sub.html:21 app/html/sub/post.html:446
 msgid "Top"
 msgstr ""
 
-#: app/forms/sub.py:137 app/html/index.html:36 app/html/index.html:41
+#: app/forms/sub.py:137 app/html/index.html:38 app/html/index.html:43
 #: app/html/sub.html:23
 msgid "Commented"
 msgstr ""
@@ -1010,37 +1010,37 @@ msgstr ""
 msgid "Page generated in __EXECUTION_TIME__ms with __DB_QUERIES__ queries"
 msgstr ""
 
-#: app/html/index.html:33 app/html/index.html:38 app/html/sub.html:20
+#: app/html/index.html:35 app/html/index.html:40 app/html/sub.html:20
 msgid "Order by hot posts"
 msgstr ""
 
-#: app/html/index.html:34 app/html/index.html:39 app/html/sub.html:21
+#: app/html/index.html:36 app/html/index.html:41 app/html/sub.html:21
 msgid "Order by top posts"
 msgstr ""
 
-#: app/html/index.html:35 app/html/index.html:40 app/html/sub.html:22
+#: app/html/index.html:37 app/html/index.html:42 app/html/sub.html:22
 msgid "Order by latest post"
 msgstr ""
 
-#: app/html/index.html:36 app/html/index.html:41 app/html/sub.html:23
+#: app/html/index.html:38 app/html/index.html:43 app/html/sub.html:23
 msgid "Order by latest comment received"
 msgstr ""
 
-#: app/html/index.html:60 app/html/sub.html:52 app/templates/indexmulti.html:20
+#: app/html/index.html:62 app/html/sub.html:52 app/templates/indexmulti.html:20
 #: app/templates/userposts.html:32
 msgid "There are no posts here, yet."
 msgstr ""
 
-#: app/html/index.html:63
+#: app/html/index.html:65
 msgid "We have"
 msgstr ""
 
-#: app/html/index.html:63
+#: app/html/index.html:65
 msgid "posts from the domain"
 msgstr ""
 
 #: app/html/admin/reports.html:63 app/html/admin/wiki.html:51
-#: app/html/index.html:74 app/html/mod/closed.html:68
+#: app/html/index.html:76 app/html/mod/closed.html:68
 #: app/html/mod/reports.html:67 app/html/mod/sub_reports.html:68
 #: app/html/mod/sub_reports_closed.html:70 app/html/site/log.html:109
 #: app/html/sub.html:62 app/html/sub/log.html:103 app/html/user/ignores.html:55
@@ -1049,7 +1049,7 @@ msgid "Next page"
 msgstr ""
 
 #: app/html/admin/reports.html:60 app/html/admin/wiki.html:48
-#: app/html/index.html:77 app/html/mod/closed.html:65
+#: app/html/index.html:79 app/html/mod/closed.html:65
 #: app/html/mod/reports.html:64 app/html/mod/sub_reports.html:65
 #: app/html/mod/sub_reports_closed.html:67 app/html/site/log.html:105
 #: app/html/sub.html:65 app/html/sub/log.html:99 app/html/user/ignores.html:52
@@ -1096,8 +1096,8 @@ msgstr ""
 msgid "Saving..."
 msgstr ""
 
-#: app/html/admin/configuration.html:68 app/static/js/Post.js:367
-#: app/static/js/Post.js:422 app/static/js/Post.js:741
+#: app/html/admin/configuration.html:68 app/static/js/Post.js:363
+#: app/static/js/Post.js:418 app/static/js/Post.js:771
 msgid "Cancel"
 msgstr ""
 
@@ -1112,7 +1112,7 @@ msgid ""
 msgstr ""
 
 #: app/html/admin/createwiki.html:37 app/html/mod/reportdetails.html:229
-#: app/static/js/Post.js:861 app/templates/messages/reply.html:16
+#: app/static/js/Post.js:891 app/templates/messages/reply.html:16
 msgid "Submit"
 msgstr ""
 
@@ -1242,8 +1242,8 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#: app/html/admin/wiki.html:26 app/templates/usercomments.html:64
-#: app/templates/usersavedcomments.html:61
+#: app/html/admin/wiki.html:26 app/templates/usercomments.html:74
+#: app/templates/usersavedcomments.html:71
 msgid "Last edited"
 msgstr ""
 
@@ -1682,7 +1682,7 @@ msgid "Disable"
 msgstr ""
 
 #: app/html/shared/layout.html:78 app/html/shared/sub.html:78
-#: app/static/js/Post.js:64
+#: app/static/js/Post.js:60
 msgid "admin"
 msgstr ""
 
@@ -1719,12 +1719,14 @@ msgstr ""
 #: app/html/shared/post.html:7 app/html/sub/post.html:85
 #: app/html/sub/postcomments.html:15
 #: app/html/user/messages/notifications.html:18 app/templates/indexpost.html:5
+#: app/templates/usercomments.html:55 app/templates/usersavedcomments.html:52
 msgid "Upvote"
 msgstr ""
 
 #: app/html/shared/post.html:9 app/html/sub/post.html:87
 #: app/html/sub/postcomments.html:16
 #: app/html/user/messages/notifications.html:19 app/templates/indexpost.html:7
+#: app/templates/usercomments.html:56 app/templates/usersavedcomments.html:53
 msgid "Downvote"
 msgstr ""
 
@@ -1821,8 +1823,8 @@ msgstr ""
 
 #: app/html/shared/post.html:121 app/html/sub/post.html:246
 #: app/html/sub/postcomments.html:150 app/templates/messages/messages.html:49
-#: app/templates/messages/saved.html:43 app/templates/usercomments.html:85
-#: app/templates/usersavedcomments.html:78
+#: app/templates/messages/saved.html:43 app/templates/usercomments.html:95
+#: app/templates/usersavedcomments.html:88
 msgid "delete"
 msgstr ""
 
@@ -2447,7 +2449,7 @@ msgstr ""
 msgid "URL"
 msgstr ""
 
-#: app/html/sub/createpost.html:90 app/static/js/Post.js:564
+#: app/html/sub/createpost.html:90 app/static/js/Post.js:560
 msgid "Grab title"
 msgstr ""
 
@@ -2464,9 +2466,9 @@ msgid "Submit post"
 msgstr ""
 
 #: app/html/sub/createpost.html:129 app/html/sub/post.html:388
-#: app/html/user/profile.html:188 app/static/js/Post.js:366
-#: app/static/js/Post.js:421 app/static/js/Post.js:506
-#: app/static/js/Post.js:740 app/templates/messages/reply.html:17
+#: app/html/user/profile.html:188 app/static/js/Post.js:362
+#: app/static/js/Post.js:417 app/static/js/Post.js:502
+#: app/static/js/Post.js:770 app/templates/messages/reply.html:17
 msgid "Preview"
 msgstr ""
 
@@ -2787,7 +2789,7 @@ msgid "Viewing title history:"
 msgstr ""
 
 #: app/html/sub/post.html:227 app/html/sub/postcomments.html:129
-#: app/templates/usersavedcomments.html:75
+#: app/templates/usersavedcomments.html:85
 msgid "unsave"
 msgstr ""
 
@@ -2801,9 +2803,9 @@ msgid "flair"
 msgstr ""
 
 #: app/html/sub/post.html:238 app/html/sub/postcomments.html:147
-#: app/static/js/Post.js:354 app/static/js/Post.js:357
-#: app/static/js/Post.js:412 app/static/js/Post.js:415
-#: app/templates/usercomments.html:81
+#: app/static/js/Post.js:350 app/static/js/Post.js:353
+#: app/static/js/Post.js:408 app/static/js/Post.js:411
+#: app/templates/usercomments.html:91
 msgid "edit"
 msgstr ""
 
@@ -2864,7 +2866,7 @@ msgid "undistinguish"
 msgstr ""
 
 #: app/html/sub/post.html:299 app/html/sub/postcomments.html:141
-#: app/static/js/Post.js:60
+#: app/static/js/Post.js:56
 msgid "distinguish"
 msgstr ""
 
@@ -2893,9 +2895,9 @@ msgstr ""
 msgid "Submit comment"
 msgstr ""
 
-#: app/html/sub/post.html:390 app/static/js/Post.js:368
-#: app/static/js/Post.js:423 app/static/js/Post.js:742
-#: app/static/js/Post.js:765
+#: app/html/sub/post.html:390 app/static/js/Post.js:364
+#: app/static/js/Post.js:419 app/static/js/Post.js:772
+#: app/static/js/Post.js:795
 msgid "Comment preview"
 msgstr ""
 
@@ -2979,18 +2981,18 @@ msgstr ""
 msgid "permalink"
 msgstr ""
 
-#: app/html/sub/postcomments.html:125 app/static/js/Post.js:333
-#: app/static/js/Post.js:336 app/static/js/Post.js:388
-#: app/static/js/Post.js:391 app/templates/usercomments.html:76
-#: app/templates/usersavedcomments.html:73
+#: app/html/sub/postcomments.html:125 app/static/js/Post.js:329
+#: app/static/js/Post.js:332 app/static/js/Post.js:384
+#: app/static/js/Post.js:387 app/templates/usercomments.html:86
+#: app/templates/usersavedcomments.html:83
 msgid "source"
 msgstr ""
 
 #: app/html/sub/postcomments.html:153
 #: app/html/user/messages/notifications.html:106
-#: app/html/user/messages/notifications.html:117 app/static/js/Post.js:716
-#: app/static/js/Post.js:719 app/templates/messages/messages.html:39
-#: app/templates/messages/saved.html:36 app/templates/usercomments.html:79
+#: app/html/user/messages/notifications.html:117 app/static/js/Post.js:746
+#: app/static/js/Post.js:749 app/templates/messages/messages.html:39
+#: app/templates/messages/saved.html:36 app/templates/usercomments.html:89
 msgid "reply"
 msgstr ""
 
@@ -3082,8 +3084,8 @@ msgid "Sidebar text. Markdown allowed."
 msgstr ""
 
 #: app/html/sub/settings.html:133 app/html/user/ignores.html:39
-#: app/html/user/profile.html:213 app/static/js/Post.js:366
-#: app/static/js/Post.js:420 app/static/js/main.js:623
+#: app/html/user/profile.html:213 app/static/js/Post.js:362
+#: app/static/js/Post.js:416 app/static/js/main.js:623
 msgid "Save changes"
 msgstr ""
 
@@ -3674,7 +3676,7 @@ msgid "Insert image link"
 msgstr ""
 
 #: app/static/js/Messages.js:34 app/static/js/Post.js:15
-#: app/static/js/Post.js:32
+#: app/static/js/Post.js:30 app/static/js/Post.js:669 app/static/js/Post.js:699
 msgid "saved"
 msgstr ""
 
@@ -3693,16 +3695,17 @@ msgstr ""
 
 #: app/static/js/Mod.js:18 app/static/js/Mod.js:33 app/static/js/Mod.js:62
 #: app/static/js/Mod.js:77 app/static/js/Poll.js:85 app/static/js/Poll.js:138
-#: app/static/js/Post.js:266 app/static/js/Post.js:281
-#: app/static/js/Post.js:297 app/static/js/Post.js:312
-#: app/static/js/Post.js:502 app/static/js/Post.js:529
-#: app/static/js/Post.js:551 app/static/js/Sub.js:334
+#: app/static/js/Post.js:262 app/static/js/Post.js:277
+#: app/static/js/Post.js:293 app/static/js/Post.js:308
+#: app/static/js/Post.js:498 app/static/js/Post.js:525
+#: app/static/js/Post.js:547 app/static/js/Sub.js:334
 msgid "Error: %1"
 msgstr ""
 
 #: app/static/js/Mod.js:24 app/static/js/Mod.js:39 app/static/js/Mod.js:68
-#: app/static/js/Mod.js:83 app/static/js/Post.js:448 app/static/js/Post.js:469
-#: app/static/js/Post.js:509 app/static/js/Post.js:984 app/static/js/Util.js:77
+#: app/static/js/Mod.js:83 app/static/js/Post.js:444 app/static/js/Post.js:465
+#: app/static/js/Post.js:505 app/static/js/Post.js:1014
+#: app/static/js/Util.js:77
 msgid "Could not contact the server"
 msgstr ""
 
@@ -3722,151 +3725,152 @@ msgstr ""
 msgid "Working..."
 msgstr ""
 
-#: app/static/js/Post.js:23 app/static/js/Post.js:40 app/static/js/Post.js:92
+#: app/static/js/Post.js:22 app/static/js/Post.js:37 app/static/js/Post.js:88
+#: app/static/js/Post.js:670 app/static/js/Post.js:700
 msgid "removed"
 msgstr ""
 
-#: app/static/js/Post.js:62
+#: app/static/js/Post.js:58
 msgid "distinguish as:"
 msgstr ""
 
-#: app/static/js/Post.js:65
+#: app/static/js/Post.js:61
 msgid "mod"
 msgstr ""
 
-#: app/static/js/Post.js:78 app/static/js/Post.js:521
+#: app/static/js/Post.js:74 app/static/js/Post.js:517
 msgid "Why are you deleting this?"
 msgstr ""
 
-#: app/static/js/Post.js:90 app/static/js/Post.js:109 app/static/js/Post.js:245
-#: app/static/js/Post.js:645 app/static/js/Post.js:673
+#: app/static/js/Post.js:86 app/static/js/Post.js:105 app/static/js/Post.js:241
+#: app/static/js/Post.js:672 app/static/js/Post.js:702
 msgid "Error."
 msgstr ""
 
-#: app/static/js/Post.js:102
+#: app/static/js/Post.js:98
 msgid "Why are you undeleting this?"
 msgstr ""
 
-#: app/static/js/Post.js:111
+#: app/static/js/Post.js:107
 msgid "undeleted"
 msgstr ""
 
-#: app/static/js/Post.js:160
+#: app/static/js/Post.js:156
 msgid "New title"
 msgstr ""
 
-#: app/static/js/Post.js:185 app/static/js/Post.js:215
-#: app/static/js/Post.js:232 app/static/js/Post.js:247
+#: app/static/js/Post.js:181 app/static/js/Post.js:211
+#: app/static/js/Post.js:228 app/static/js/Post.js:243
 msgid "Done"
 msgstr ""
 
-#: app/static/js/Post.js:268 app/static/js/Post.js:283
-#: app/static/js/Post.js:299 app/static/js/Post.js:314 app/static/js/Sub.js:336
+#: app/static/js/Post.js:264 app/static/js/Post.js:279
+#: app/static/js/Post.js:295 app/static/js/Post.js:310 app/static/js/Sub.js:336
 msgid "Done!"
 msgstr ""
 
-#: app/static/js/Post.js:440 app/static/js/Post.js:461
+#: app/static/js/Post.js:436 app/static/js/Post.js:457
 msgid "There was an error while editing: %1"
 msgstr ""
 
-#: app/static/js/Post.js:443 app/static/js/Post.js:464
+#: app/static/js/Post.js:439 app/static/js/Post.js:460
 msgid "Saved."
 msgstr ""
 
-#: app/static/js/Post.js:486 app/static/js/Post.js:637
-#: app/static/js/Post.js:651
+#: app/static/js/Post.js:482 app/static/js/Post.js:662
+#: app/static/js/Post.js:678
 msgid "Loading..."
 msgstr ""
 
-#: app/static/js/Post.js:532
+#: app/static/js/Post.js:528
 msgid "comment removed"
 msgstr ""
 
-#: app/static/js/Post.js:544
+#: app/static/js/Post.js:540
 msgid "Why are you un-deleting this?"
 msgstr ""
 
-#: app/static/js/Post.js:553
+#: app/static/js/Post.js:549
 msgid "comment un-deleted"
 msgstr ""
 
-#: app/static/js/Post.js:562
+#: app/static/js/Post.js:558
 msgid "Couldn't get title"
 msgstr ""
 
-#: app/static/js/Post.js:568
+#: app/static/js/Post.js:564
 msgid "Grab again"
 msgstr ""
 
-#: app/static/js/Post.js:592
+#: app/static/js/Post.js:588
 msgid "Grabbing..."
 msgstr ""
 
-#: app/static/js/Post.js:739
+#: app/static/js/Post.js:769
 msgid "Post comment"
 msgstr ""
 
-#: app/static/js/Post.js:793
+#: app/static/js/Post.js:823
 msgid "1 comment"
 msgstr ""
 
-#: app/static/js/Post.js:801
+#: app/static/js/Post.js:831
 msgid "%1 comments"
 msgstr ""
 
-#: app/static/js/Post.js:828
+#: app/static/js/Post.js:858
 msgid "Could not contact the server "
 msgstr ""
 
-#: app/static/js/Post.js:834
+#: app/static/js/Post.js:864
 msgid "Report post"
 msgstr ""
 
-#: app/static/js/Post.js:835
+#: app/static/js/Post.js:865
 msgid "This report will be forwarded to the site administration"
 msgstr ""
 
-#: app/static/js/Post.js:838
+#: app/static/js/Post.js:868
 msgid "Select a reason to report this post:"
 msgstr ""
 
-#: app/static/js/Post.js:840 app/static/js/Post.js:850
+#: app/static/js/Post.js:870 app/static/js/Post.js:880
 msgid "Select one..."
 msgstr ""
 
-#: app/static/js/Post.js:841
+#: app/static/js/Post.js:871
 msgid "SPAM"
 msgstr ""
 
-#: app/static/js/Post.js:842
+#: app/static/js/Post.js:872
 msgid "TOS violation"
 msgstr ""
 
-#: app/static/js/Post.js:843
+#: app/static/js/Post.js:873
 msgid "Sub Rule violation"
 msgstr ""
 
-#: app/static/js/Post.js:844
+#: app/static/js/Post.js:874
 msgid "Other"
 msgstr ""
 
-#: app/static/js/Post.js:848
+#: app/static/js/Post.js:878
 msgid "Which Sub rule did this post violate?"
 msgstr ""
 
-#: app/static/js/Post.js:852
+#: app/static/js/Post.js:882
 msgid "Other sub rule"
 msgstr ""
 
-#: app/static/js/Post.js:856
+#: app/static/js/Post.js:886
 msgid "Explain why you're reporting this post:"
 msgstr ""
 
-#: app/static/js/Post.js:977
+#: app/static/js/Post.js:1007
 msgid "Error: "
 msgstr ""
 
-#: app/static/js/Post.js:980
+#: app/static/js/Post.js:1010
 msgid "Your report has been sent and will be reviewed by the site administrators."
 msgstr ""
 
@@ -3973,14 +3977,14 @@ msgid "No uploads, yet."
 msgstr ""
 
 #: app/templates/messages/nav.html:3 app/templates/uploads.html:42
-#: app/templates/usercomments.html:97 app/templates/userposts.html:42
-#: app/templates/usersavedcomments.html:89
+#: app/templates/usercomments.html:107 app/templates/userposts.html:42
+#: app/templates/usersavedcomments.html:99
 msgid "Next"
 msgstr ""
 
 #: app/templates/messages/nav.html:6 app/templates/uploads.html:45
-#: app/templates/usercomments.html:100 app/templates/userposts.html:45
-#: app/templates/usersavedcomments.html:92
+#: app/templates/usercomments.html:110 app/templates/userposts.html:45
+#: app/templates/usersavedcomments.html:102
 msgid "Previous"
 msgstr ""
 
@@ -4001,8 +4005,12 @@ msgstr ""
 msgid "This user has not commented on anything, yet."
 msgstr ""
 
-#: app/templates/usercomments.html:56 app/templates/usersavedcomments.html:53
+#: app/templates/usercomments.html:66 app/templates/usersavedcomments.html:63
 msgid "Comment score"
+msgstr ""
+
+#: app/templates/userposts.html:2
+msgid "Posts made by"
 msgstr ""
 
 #: app/templates/userposts.html:21

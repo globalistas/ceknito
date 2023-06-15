@@ -47,6 +47,16 @@
                 {{_('on')}} <a href="{{ url_for('sub.view_sub', sub=comment.sub) }}">{{comment.sub}}</a>
               </div>
               <div class="usercommentrow {%if comment.cid == highlight %}highlight{%endif%}" id="comment-{{comment.cid}}">
+              {% if comment.userstatus != 10 %}
+                <div class="pull left votecomment">
+                  <div title="{{_('Upvote')}}" class="c-upvote {{ (comment.get('positive') == True) and 'upvoted' or '' }}" data-pid="{{comment.pid}}" data-icon="upvote"></div>
+                  <div title="{{_('Downvote')}}" class="c-downvote {{ (comment.get('positive') == False) and 'downvoted' or '' }}" data-pid="{{comment.pid}}" data-icon="downvote"></div>
+                </div>
+              {% else %}
+                <div class="pull left votecomment">
+                    <div title="" data-icon=""></div>
+                </div>
+              {% endif %}
                 <div class="commblock">
                   <div class="commenthead">
                       <a href="{{ url_for('user.view', user=comment.author) }}" class="poster">{{comment.author}}</a>

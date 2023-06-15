@@ -1923,10 +1923,16 @@ def getUserComments(uid, page, include_deleted_comments=False):
                 SubPost.deleted.alias("post_deleted"),
                 SubPost.nsfw.alias("nsfw"),
                 Sub.nsfw.alias("sub_nsfw"),
+                SubPostCommentVote.positive.alias("positive"),
             )
             .join(SubPost)
             .switch(SubPostComment)
             .join(Sub, on=(Sub.sid == SubPost.sid))
+            .join(
+                SubPostCommentVote,
+                JOIN.LEFT_OUTER,
+                on=(SubPostCommentVote.cid == SubPostComment.cid),
+            )
             .where(SubPostComment.uid == uid)
         )
         if include_deleted_comments:
@@ -1982,12 +1988,18 @@ def getUserSavedComments(uid, page, include_deleted_comments=False):
                 SubPost.nsfw.alias("nsfw"),
                 Sub.nsfw.alias("sub_nsfw"),
                 User.name.alias("author"),
+                SubPostCommentVote.positive.alias("positive"),
             )
             .join(SubPost)
             .switch(SubPostComment)
             .join(Sub, on=(Sub.sid == SubPost.sid))
             .join(UserSaved, on=(UserSaved.cid == SubPostComment.cid))
             .join(User, on=(User.uid == SubPostComment.uid))
+            .join(
+                SubPostCommentVote,
+                JOIN.LEFT_OUTER,
+                on=(SubPostCommentVote.cid == SubPostComment.cid),
+            )
             .where(UserSaved.uid == uid)
         )
         if include_deleted_comments:
