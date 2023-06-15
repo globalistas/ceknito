@@ -1931,7 +1931,10 @@ def getUserComments(uid, page, include_deleted_comments=False):
             .join(
                 SubPostCommentVote,
                 JOIN.LEFT_OUTER,
-                on=(SubPostCommentVote.cid == SubPostComment.cid),
+                on=(
+                    (SubPostCommentVote.cid == SubPostComment.cid)
+                    & (SubPostCommentVote.uid == current_user.uid)
+                ),
             )
             .where(SubPostComment.uid == uid)
         )
@@ -1998,7 +2001,10 @@ def getUserSavedComments(uid, page, include_deleted_comments=False):
             .join(
                 SubPostCommentVote,
                 JOIN.LEFT_OUTER,
-                on=(SubPostCommentVote.cid == SubPostComment.cid),
+                on=(
+                    (SubPostCommentVote.cid == SubPostComment.cid)
+                    & (SubPostCommentVote.uid == uid)
+                ),
             )
             .where(UserSaved.uid == uid)
         )
