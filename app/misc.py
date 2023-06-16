@@ -1924,10 +1924,21 @@ def getUserComments(uid, page, include_deleted_comments=False):
                 SubPost.nsfw.alias("nsfw"),
                 Sub.nsfw.alias("sub_nsfw"),
                 SubPostCommentVote.positive.alias("positive"),
+                User.status.alias("userstatus"),
+                UserSaved.cid.alias("comment_is_saved"),
             )
             .join(SubPost)
             .switch(SubPostComment)
             .join(Sub, on=(Sub.sid == SubPost.sid))
+            .join(User, on=(User.uid == SubPostComment.uid))
+            .join(
+                UserSaved,
+                JOIN.LEFT_OUTER,
+                on=(
+                    (UserSaved.cid == SubPostComment.cid)
+                    & (UserSaved.uid == current_user.uid)
+                ),
+            )
             .join(
                 SubPostCommentVote,
                 JOIN.LEFT_OUTER,

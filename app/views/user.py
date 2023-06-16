@@ -272,8 +272,14 @@ def view_user_comments(user, page):
         user.uid, page, include_deleted_comments=include_deleted_comments
     )
     postmeta = misc.get_postmeta_dicts((c["pid"] for c in comments))
-    return render_template(
-        "usercomments.html", user=user, page=page, comments=comments, postmeta=postmeta
+    return engine.get_template("user/comments.html").render(
+        {
+            "user": user,
+            "page": page,
+            "comments": comments,
+            "postmeta": postmeta,
+            "highlight": "",
+        }
     )
 
 
