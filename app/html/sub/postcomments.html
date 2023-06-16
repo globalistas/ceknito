@@ -77,7 +77,7 @@
                   and comment['visibility'] in ['', 'blur-block'] and post['best_sort_enabled'] and not post['is_archived']):
                 unseen = 'unseen-comment'
             )
-            <div class="content @{unseen} @{(comment['visibility'] not in ['', 'mod-del', 'admin-del']) and 'hidden' or ''}" id="content-@{comment['cid']}">
+            <div class="content @{unseen} @{(comment['cid'] == highlight) and 'highlight ' or ''}@{(comment['visibility'] not in ['', 'mod-del', 'admin-del']) and 'hidden' or ''}" id="content-@{comment['cid']}">
               @if comment['visibility'] == 'none':
                 @{comment['user']} \
               @elif comment['visibility'] in ['admin-self-del', 'mod-self-del']:

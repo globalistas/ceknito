@@ -130,6 +130,11 @@ body.dark .comments article.comment.highlight {
   background-color: #40444b;
 }
 */
+
+body.dark .content.highlight {
+  background-color: #202225;
+}
+
 body.dark #container {
   background: #373a3f;
 }

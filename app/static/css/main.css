@@ -2000,9 +2000,13 @@ form#msg-form {
 
 /*
 .comments article.comment.highlight {
-  background-color: rgba(84, 73, 73, 0.16);
+  background-color: #ffc;
 }
 */
+.content.highlight {
+  background-color: #ffc;
+}
+
 #modpop,
 #formpop,
 #blockpop {
