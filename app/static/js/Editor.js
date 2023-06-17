@@ -51,7 +51,7 @@ function initializeEditor(element) {
   el.appendChild(x);
 
   el.appendChild(makeThingy('bulletlist', _('Bullet list'), function (e) { addTags(textarea, '- ', ''); }));
-  el.appendChild(makeThingy('numberlist', _('Number list'), function (e) { addTags(textarea, '1. ', ''); }));
+//  el.appendChild(makeThingy('numberlist', _('Number list'), function (e) { addTags(textarea, '1. ', ''); }));
 
   x = document.createElement('span');
   x.className = 'separator';
