@@ -267,6 +267,11 @@ configurable_defaults = {
                 ),
                 "value": 0,
             },
+            "link_post_text": {
+                "type": "bool",
+                "doc": _l("Enable optional text for link posts."),
+                "value": False,
+            },
             "daily_sub_posting_limit": {
                 "type": "int",
                 "doc": _l(

@@ -3205,6 +3205,11 @@ article.text-post.comment.deleted {
   text-align: left !important;
 }
 
+.ltxcont label {
+  display: block !important;
+  text-align: left !important;
+}
+
 .createpost [type="text"],
 .createpost [type="url"],
 .createpost textarea,

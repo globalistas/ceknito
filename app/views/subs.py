@@ -267,7 +267,7 @@ def create_post(ptype, sub):
         sid=sub.sid,
         uid=current_user.uid,
         title=form.title.data,
-        content=form.content.data if ptype != 1 else "",
+        content=form.content.data if ptype != 1 or config.site.link_post_text else "",
         link=form.link.data if ptype == 1 else None,
         posted=datetime.utcnow(),
         score=self_vote,

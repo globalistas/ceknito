@@ -119,6 +119,14 @@ function onPtypeChange(e) {
     e.style.display = newVal == 'text' ? 'inline-block' : 'none';
   });
 
+  u.each('.ltxcont', function (e) {
+    e.style.display = (newVal == 'link' || newVal == 'text') ? 'block' : 'none';
+  });
+
+  u.each('.ltxicont', function (e) {
+    e.style.display = (newVal == 'link' || newVal == 'text') ? 'inline-block' : 'none';
+  });
+
   u.each('.pocont', function (e) {
     e.style.display = newVal == 'poll' ? 'block' : 'none';
   });

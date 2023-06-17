@@ -234,7 +234,7 @@
             @end
           @end
           @if post['uid'] == current_user.uid:
-            @if post['ptype'] != 1 and not func.is_archived(post):
+            @if post['content'] and not func.is_archived(post):
               <li><a class="edit-post" data-pid="@{post['pid']}">@{_('edit')}</a></li>
             @end
             @if (datetime.datetime.utcnow() - post['posted'].replace(tzinfo=None)) < datetime.timedelta(seconds=config.site.title_edit_timeout):

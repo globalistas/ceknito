@@ -39,11 +39,26 @@
                     @{form.title.label()!!html}@{ form.title(required=True) !!html}
                 </div>
 
+                <div class="pure-control-group lnicont pure-u-sm-20-24" style="display:none">
+                    <label for="link">@{_('Link')}</label>@{form.link(class_="reqlink", type="url", pattern="https?://.+", placeholder=_('URL'))!!html}
+                </div>
+
+                <div class="pure-control-group pure-u-sm-3-24 lnicont" style="display:none">
+                    <button id="graburl" class="pure-button">@{_('Grab title')}</button>
+                </div>
+                @if config.site.link_post_text:
+                <div class="pure-control-group ltxcont" style="display:none">
+                    @{form.content.label()!!html}<div class="markdown-editor">
+                        @{form.content(class_="exalert", placeholder=_('(Optional) Write your post content here. Styling with Markdown format is supported.'), rows="10", style="width: 100%")!!html}
+                    </div>
+                </div>
+                @else:
                 <div class="pure-control-group txcont" style="display:none">
                     @{form.content.label()!!html}<div class="markdown-editor">
                         @{form.content(class_="exalert", placeholder=_('(Optional) Write your post content here. Styling with Markdown format is supported.'), rows="10", style="width: 100%")!!html}
                     </div>
                 </div>
+                @end
 
                 <div class="pure-control-group pocont" style="display:none">
                     <label for="op1">@{_('Options')}</label>
@@ -82,14 +97,6 @@
                     @end
                 </div>
 
-                <div class="pure-control-group lnicont pure-u-sm-20-24" style="display:none">
-                    <label for="link">@{_('Link')}</label>@{form.link(class_="reqlink", type="url", pattern="https?://.+", placeholder=_('URL'))!!html}
-                </div>
-
-                <div class="pure-control-group pure-u-sm-3-24 lnicont" style="display:none">
-                    <button id="graburl" class="pure-button">@{_('Grab title')}</button>
-                </div>
-
                 <div class="pure-control-group pocont" style="display:none">
                     <label for="hideresults">@{_('Hide poll results until poll closes')}</label><input id="hideresults" name="hideresults" type="checkbox" value="y">
                 </div>
@@ -123,11 +130,17 @@
                     <button id="btn-sending" type="submit" class="pure-button pure-button-primary"
                             style="display: inline-block">@{_('Submit post')}
                     </button>
-
+                    @if config.site.link_post_text:
+                    <button type="button" data-pvid="ncme" class="pure-button btn-preview ltxicont" data-txid="content"
+                            style="display:none">
+                        @{_('Preview')}
+                    </button>
+                    @else:
                     <button type="button" data-pvid="ncme" class="pure-button btn-preview txicont" data-txid="content"
                             style="display:none">
                         @{_('Preview')}
                     </button>
+                    @end
                     <div class="cmpreview canclose" style="display:none;">
                         <h4>@{_('Post preview')}</h4>
                         <span class="closemsg">×</span>
