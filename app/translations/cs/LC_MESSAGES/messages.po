@@ -3530,9 +3530,9 @@ msgstr "Nelze se spojit se serverem "
 msgid "Report post"
 msgstr "Nahlásit příspěvek"
 
-#: app/static/js/Post.js:812
+#: app/static/js/Post.js:865
 msgid "This report will be forwarded to the site administration"
-msgstr "Toto nahlášení bude doručeno administraci webu"
+msgstr "Toto nahlášení bude doručeno moderátorům příslušné skupiny"
 
 #: app/static/js/Post.js:815
 msgid "Select a reason to report this post:"
