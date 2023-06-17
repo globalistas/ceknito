@@ -597,6 +597,10 @@ span#notification.fade {
   margin-top: 0;
 }
 
+.inboxside .p-icon path {
+    fill: var(--primary-color);
+}
+
 .i-icon {
   width: 16px;
   height: 16px;

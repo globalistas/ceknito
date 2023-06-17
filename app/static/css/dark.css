@@ -259,7 +259,7 @@ body.dark .pure-button {
 }
 
 body.dark .inboxside .button-secondary {
-  background: rgba(51, 51, 51, 0.2);
+  background: #202225;
 }
 
 body.dark .button-secondary:hover,
@@ -844,7 +844,7 @@ body.dark .sortcomments {
 }
 
 body.dark #sortby {
-  background: #171717;
+  background: #202225;
   color: #b9bbbe;
   font-size: smaller;
   text-align: center;
