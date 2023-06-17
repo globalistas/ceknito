@@ -822,6 +822,7 @@ u.addEventForChild(document, 'click', '.btn-postcomment', function (e, qelem) {
                     a.href = '/p/' + pid;
                     a.innerText = _("1 comment");
                     a.id = 'cmnts';
+                    a.classList.add('allcomments');
                     cmtcount.innerText = '';
                     cmtcount.appendChild(a);
 

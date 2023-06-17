@@ -462,7 +462,7 @@
           </div>
         </div>
         <div id="allcomments">
-          <span id="cmnts" class="allcomments" data-cnt="@{post['comments']}"><b><a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'])}">@{_('%(comments)i comments', comments=post['comments'])}</a></b></span>
+          <span id="cmnts" class="allcomments" data-cnt="@{post['comments']}"><a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'])}">@{_('%(comments)i comments', comments=post['comments'])}</a></span>
         </div>
       @{pcomm.renderComments(post, postmeta, subInfo, subMods, comments, highlight, sort)!!html}
     </div>
