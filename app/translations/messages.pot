@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2023-06-17 09:34+0200\n"
+"POT-Creation-Date: 2023-06-17 23:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -158,166 +158,170 @@ msgid ""
 msgstr ""
 
 #: app/config.py:272
+msgid "Enable optional text for link posts."
+msgstr ""
+
+#: app/config.py:277
 msgid "Maximum amount of posts a user can create in a single sub in a day."
 msgstr ""
 
-#: app/config.py:279
+#: app/config.py:284
 msgid "Maximum amount of posts a user can create in a single day."
 msgstr ""
 
-#: app/config.py:284
+#: app/config.py:289
 msgid "Number of days after which posts will be archived."
 msgstr ""
 
-#: app/config.py:289
+#: app/config.py:294
 msgid ""
 "When enabled, archive sticky posts after 'archive_post_after' days, the "
 "same as regular posts. When disabled, sticky posts will not be archived."
 msgstr ""
 
-#: app/config.py:300
+#: app/config.py:305
 msgid "Enables or disables the recent activity sidebar and the page in /activity."
 msgstr ""
 
-#: app/config.py:307
+#: app/config.py:312
 msgid ""
 "Only show recent activity from default subs in the sidebar (recent "
 "activity for all subs will be shown in /activity)."
 msgstr ""
 
-#: app/config.py:315
+#: app/config.py:320
 msgid "If enabled, only show recent comments (and not posts) in the sidebar."
 msgstr ""
 
-#: app/config.py:322
+#: app/config.py:327
 msgid "Number of entries to display in the recent activity sidebar."
 msgstr ""
 
-#: app/config.py:331
+#: app/config.py:336
 msgid ""
 "Show the 'Contact the Mods' button in sub sidebars, which provides a link"
 " to the modmail server."
 msgstr ""
 
-#: app/config.py:339
+#: app/config.py:344
 msgid "Allow users to make posts and comments."
 msgstr ""
 
-#: app/config.py:344
+#: app/config.py:349
 msgid "Allow new users to register."
 msgstr ""
 
-#: app/config.py:349
+#: app/config.py:354
 msgid ""
 "Allow users to see the usernames of the people they invited or were "
 "invited by."
 msgstr ""
 
-#: app/config.py:356
+#: app/config.py:361
 msgid "Level requirement before a user can generate invite codes."
 msgstr ""
 
-#: app/config.py:361
+#: app/config.py:366
 msgid ""
 "The number of invite codes each user is allowed to generate (see also "
 "site.invite_level)."
 msgstr ""
 
-#: app/config.py:368
+#: app/config.py:373
 msgid "Require the user to solve a captcha to register or post."
 msgstr ""
 
-#: app/config.py:373
+#: app/config.py:378
 msgid "Require an invite code to register."
 msgstr ""
 
-#: app/config.py:378
+#: app/config.py:383
 msgid ""
 "If enabled, show the notification count on the page title icon.  "
 "Otherwise, show the notification count in parentheses in the page title."
 msgstr ""
 
-#: app/config.py:386
+#: app/config.py:391
 msgid ""
 "The maximum length of a user name, applied to new registrations. This "
 "should be set to a number between 2 and 64."
 msgstr ""
 
-#: app/config.py:400
+#: app/config.py:405
 msgid "If enabled, show NSFW content to anonymous users."
 msgstr ""
 
-#: app/config.py:407
+#: app/config.py:412
 msgid ""
 "If enabled, and 'site.nsfw.anon.show' is also enabled, blur NSFW content "
 "when it is shown to anonymous users."
 msgstr ""
 
-#: app/config.py:420
+#: app/config.py:425
 msgid "If enabled, set the NSFW preference of new users to show NSFW content."
 msgstr ""
 
-#: app/config.py:427
+#: app/config.py:432
 msgid ""
 "If enabled, and 'site.nsfw.new_user_default.show' is also enabled, set "
 "the NSFW preference of new users to blur NSFW content."
 msgstr ""
 
-#: app/config.py:439
+#: app/config.py:444
 msgid ""
 "If enabled, show upvotes and downvotes in addition to total post score. "
 "Otherwise, only show post upvotes and downvotes to admins and mods in "
 "their own subs."
 msgstr ""
 
-#: app/config.py:447
+#: app/config.py:452
 msgid ""
 "If enabled, show upvotes and downvotes in addition to total comment "
 "score. Otherwise, only show comment upvotes and downvotes to admins and "
 "mods in their own subs."
 msgstr ""
 
-#: app/config.py:458
+#: app/config.py:463
 msgid ""
 "If enabled, users will automatically upvote their own posts, and are "
 "allowed to change their vote.  If disabled, users cannot upvote or "
 "downvote their own posts."
 msgstr ""
 
-#: app/config.py:467
+#: app/config.py:472
 msgid ""
 "If enabled, users will automatically upvote their own comments, and are "
 "allowed to change their vote.  If disabled, users cannot upvote or "
 "downvote their own comments."
 msgstr ""
 
-#: app/config.py:481
+#: app/config.py:486
 msgid ""
 "If enabled, show the post score next to its title in the list of top "
 "posts in the last 24 hours."
 msgstr ""
 
-#: app/config.py:494
+#: app/config.py:499
 msgid "If enabled, new users have email notifications enabled by default."
 msgstr ""
 
-#: app/config.py:503
+#: app/config.py:508
 msgid ""
 "If enabled, new users get an automated welcome message from the first "
 "admin user."
 msgstr ""
 
-#: app/config.py:510
+#: app/config.py:515
 msgid "If enabled, new users get their Early Adopter badge automatically."
 msgstr ""
 
-#: app/config.py:517
+#: app/config.py:522
 msgid ""
 "If enabled, users get their Ready Steady Check badge after their first "
 "post automatically."
 msgstr ""
 
-#: app/config.py:524
+#: app/config.py:529
 msgid ""
 "If set, and site.enable_modmail is also set, when an admin removes a "
 "user's content, a reply by the user to the notification message will be "
@@ -325,7 +329,7 @@ msgid ""
 "to the modmail of the sub in which the removed content was posted."
 msgstr ""
 
-#: app/config.py:540
+#: app/config.py:545
 msgid "Max storage for image uploads for subs' stylesheets (in MiB)."
 msgstr ""
 
@@ -807,7 +811,7 @@ msgid "Poll closing time"
 msgstr ""
 
 #: app/forms/sub.py:193 app/forms/user.py:120 app/forms/user.py:238
-#: app/html/sub/createpost.html:119 app/html/user/password_recovery.html:26
+#: app/html/sub/createpost.html:127 app/html/user/password_recovery.html:26
 msgid "Captcha"
 msgstr ""
 
@@ -1105,14 +1109,15 @@ msgstr ""
 msgid "Create wiki"
 msgstr ""
 
-#: app/html/admin/createwiki.html:33 app/html/sub/createpost.html:44
+#: app/html/admin/createwiki.html:33 app/html/sub/createpost.html:53
+#: app/html/sub/createpost.html:59
 msgid ""
 "(Optional) Write your post content here. Styling with Markdown format is "
 "supported."
 msgstr ""
 
 #: app/html/admin/createwiki.html:37 app/html/mod/reportdetails.html:229
-#: app/static/js/Post.js:891 app/templates/messages/reply.html:16
+#: app/static/js/Post.js:892 app/templates/messages/reply.html:16
 msgid "Submit"
 msgstr ""
 
@@ -1710,6 +1715,10 @@ msgstr ""
 #: app/html/shared/layout.html:174 app/html/shared/sub.html:178
 #: app/templates/layout.html:158
 msgid "Log out"
+msgstr ""
+
+#: app/html/shared/layout.html:216
+msgid "Contact us"
 msgstr ""
 
 #: app/html/shared/layout.html:230 app/html/shared/sub.html:234
@@ -2311,7 +2320,7 @@ msgstr ""
 msgid "Changed <code>%(setting)s</code> to <code>%(value)s<code>"
 msgstr ""
 
-#: app/html/site/log.html:97 app/html/sub/createpost.html:86
+#: app/html/site/log.html:97 app/html/sub/createpost.html:39
 #: app/html/sub/log.html:90
 msgid "Link"
 msgstr ""
@@ -2429,55 +2438,56 @@ msgstr ""
 msgid "Find a sub..."
 msgstr ""
 
-#: app/html/sub/createpost.html:49
+#: app/html/sub/createpost.html:39
+msgid "URL"
+msgstr ""
+
+#: app/html/sub/createpost.html:43 app/static/js/Post.js:560
+msgid "Grab title"
+msgstr ""
+
+#: app/html/sub/createpost.html:65
 msgid "Options"
 msgstr ""
 
-#: app/html/sub/createpost.html:57 app/html/sub/mods.html:53
+#: app/html/sub/createpost.html:73 app/html/sub/mods.html:53
 #: app/html/sub/mods.html:71 app/static/js/Poll.js:29
 msgid "remove"
 msgstr ""
 
-#: app/html/sub/createpost.html:72
+#: app/html/sub/createpost.html:88
 msgid "Add option"
 msgstr ""
 
-#: app/html/sub/createpost.html:80
+#: app/html/sub/createpost.html:96
 msgid "File"
 msgstr ""
 
-#: app/html/sub/createpost.html:81
+#: app/html/sub/createpost.html:97
 msgid "Upload a file!"
 msgstr ""
 
-#: app/html/sub/createpost.html:86
-msgid "URL"
-msgstr ""
-
-#: app/html/sub/createpost.html:90 app/static/js/Post.js:560
-msgid "Grab title"
-msgstr ""
-
-#: app/html/sub/createpost.html:94
+#: app/html/sub/createpost.html:102
 msgid "Hide poll results until poll closes"
 msgstr ""
 
-#: app/html/sub/createpost.html:98
+#: app/html/sub/createpost.html:106
 msgid "Close the poll at..."
 msgstr ""
 
-#: app/html/sub/createpost.html:124
+#: app/html/sub/createpost.html:132
 msgid "Submit post"
 msgstr ""
 
-#: app/html/sub/createpost.html:129 app/html/sub/post.html:388
-#: app/html/user/profile.html:188 app/static/js/Post.js:362
-#: app/static/js/Post.js:417 app/static/js/Post.js:502
-#: app/static/js/Post.js:770 app/templates/messages/reply.html:17
+#: app/html/sub/createpost.html:137 app/html/sub/createpost.html:142
+#: app/html/sub/post.html:388 app/html/user/profile.html:188
+#: app/static/js/Post.js:362 app/static/js/Post.js:417
+#: app/static/js/Post.js:502 app/static/js/Post.js:770
+#: app/templates/messages/reply.html:17
 msgid "Preview"
 msgstr ""
 
-#: app/html/sub/createpost.html:132
+#: app/html/sub/createpost.html:146
 msgid "Post preview"
 msgstr ""
 
@@ -3728,10 +3738,6 @@ msgstr ""
 msgid "Bullet list"
 msgstr ""
 
-#: app/static/js/Editor.js:54
-msgid "Number list"
-msgstr ""
-
 #: app/static/js/Editor.js:61
 msgid "Quote (ctrl-shift-.)"
 msgstr ""
@@ -3763,13 +3769,13 @@ msgstr ""
 #: app/static/js/Post.js:262 app/static/js/Post.js:277
 #: app/static/js/Post.js:293 app/static/js/Post.js:308
 #: app/static/js/Post.js:498 app/static/js/Post.js:525
-#: app/static/js/Post.js:547 app/static/js/Sub.js:334
+#: app/static/js/Post.js:547 app/static/js/Sub.js:342
 msgid "Error: %1"
 msgstr ""
 
 #: app/static/js/Mod.js:24 app/static/js/Mod.js:39 app/static/js/Mod.js:68
 #: app/static/js/Mod.js:83 app/static/js/Post.js:444 app/static/js/Post.js:465
-#: app/static/js/Post.js:505 app/static/js/Post.js:1014
+#: app/static/js/Post.js:505 app/static/js/Post.js:1015
 #: app/static/js/Util.js:77
 msgid "Could not contact the server"
 msgstr ""
@@ -3830,7 +3836,7 @@ msgid "Done"
 msgstr ""
 
 #: app/static/js/Post.js:264 app/static/js/Post.js:279
-#: app/static/js/Post.js:295 app/static/js/Post.js:310 app/static/js/Sub.js:336
+#: app/static/js/Post.js:295 app/static/js/Post.js:310 app/static/js/Sub.js:344
 msgid "Done!"
 msgstr ""
 
@@ -3879,67 +3885,67 @@ msgstr ""
 msgid "1 comment"
 msgstr ""
 
-#: app/static/js/Post.js:831
+#: app/static/js/Post.js:832
 msgid "%1 comments"
 msgstr ""
 
-#: app/static/js/Post.js:858
+#: app/static/js/Post.js:859
 msgid "Could not contact the server "
 msgstr ""
 
-#: app/static/js/Post.js:864
+#: app/static/js/Post.js:865
 msgid "Report post"
 msgstr ""
 
-#: app/static/js/Post.js:865
+#: app/static/js/Post.js:866
 msgid "This report will be forwarded to the site administration"
 msgstr ""
 
-#: app/static/js/Post.js:868
+#: app/static/js/Post.js:869
 msgid "Select a reason to report this post:"
 msgstr ""
 
-#: app/static/js/Post.js:870 app/static/js/Post.js:880
+#: app/static/js/Post.js:871 app/static/js/Post.js:881
 msgid "Select one..."
 msgstr ""
 
-#: app/static/js/Post.js:871
+#: app/static/js/Post.js:872
 msgid "SPAM"
 msgstr ""
 
-#: app/static/js/Post.js:872
+#: app/static/js/Post.js:873
 msgid "TOS violation"
 msgstr ""
 
-#: app/static/js/Post.js:873
+#: app/static/js/Post.js:874
 msgid "Sub Rule violation"
 msgstr ""
 
-#: app/static/js/Post.js:874
+#: app/static/js/Post.js:875
 msgid "Other"
 msgstr ""
 
-#: app/static/js/Post.js:878
+#: app/static/js/Post.js:879
 msgid "Which Sub rule did this post violate?"
 msgstr ""
 
-#: app/static/js/Post.js:882
+#: app/static/js/Post.js:883
 msgid "Other sub rule"
 msgstr ""
 
-#: app/static/js/Post.js:886
+#: app/static/js/Post.js:887
 msgid "Explain why you're reporting this post:"
 msgstr ""
 
-#: app/static/js/Post.js:1007
+#: app/static/js/Post.js:1008
 msgid "Error: "
 msgstr ""
 
-#: app/static/js/Post.js:1010
+#: app/static/js/Post.js:1011
 msgid "Your report has been sent and will be reviewed by the site administrators."
 msgstr ""
 
-#: app/static/js/Sub.js:319
+#: app/static/js/Sub.js:327
 msgid "No subs found"
 msgstr ""
 

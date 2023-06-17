@@ -217,7 +217,7 @@
       @for text,link in config.site.footer.links.items():
         <a href="@{link}">@{text}</a> |
       @end
-      <a target="_blank" href="https://discord.gg/8HFrGrzEx2">Discord</a>
+      <a target="_blank" href="https://discord.gg/8HFrGrzEx2">@{_('Contact us')}</a>
       <br>
       @{_('Served by %(hostname)s', hostname=hostname)} \
       @if config.app.debug:

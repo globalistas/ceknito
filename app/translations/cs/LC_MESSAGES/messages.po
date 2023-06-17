@@ -4723,3 +4723,7 @@ msgstr "[vymazáno uživatelem]"
 #: app/templates/userposts.html:2
 msgid "Posts made by"
 msgstr "Příspěvky od"
+
+#: app/html/shared/layout.html:216
+msgid "Contact us"
+msgstr "Kontaktujte nás"
