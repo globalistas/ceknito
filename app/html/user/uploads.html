@@ -1,9 +1,8 @@
 @extends("shared/layout.html")
-@import "shared/post.html" as ipost
-@require(page, sort_type, posts, user)
+@require(user, page, uploads)
 
 @def title():
-@{_('View saved posts')} | @{config.site.lema}
+@{_('View uploads')} | @{config.site.lema}
 @end
 
 @def sidebar():
@@ -21,30 +20,39 @@
 
 @def main():
 <div id="container">
-    @if sort_type == 'user.view_user_posts':
-      <h3 class="comments">@{_('View posts')}</h3>
-      @if user.status == 10:
-        <div class="helper-text deleted-user">@{_("%(user)s has deleted their account.", user=user.name)}</div>
-      @end
-    @else:
-      <h3 class="comments">@{_('View saved posts')}</h3>
-    @end
-    @if not posts:
-      <p class="comments recent">@{_("There are no posts here, yet.")}</p>
-    @end
-
-    <div class="alldaposts">
-    @for post in posts:
-      @{ipost.singlePost(post, False)!!html}
-    @end
-    </div>
-
-    @if len(posts) == 25:
-      <a href="@{url_for(sort_type, page=(page+1), user=user.name)}" class="pure-button">@{_('Next')}</a>
-    @end
-    @if page > 1:
-      <a href="@{url_for(sort_type, page=(page-1), user=user.name)}" class="pure-button">@{_('Previous')}</a>
-    @end
-</div>
+@if not uploads:
+  <h3 class="noshit">@{_('No uploads, yet.')}</h3>
 @end
+<div id="center-container">
+  <div class="uploads content">
+      @for item in uploads:
+        <div class="uploaditem">
+          <div class="uploadthumb">
+            @if item.thumbnail == '':
+              <span class="placeholder" data-icon="link"></span>
+            @elif item.thumbnail == 'deferred':
+              <span class="placeholder deferred" data-icon="link"
+                    data-deferred="UserUploads-@{item.xid}"></span>
+            @else:
+              <img class="lazy" src="@{url_for('static', filename='img/1x1.gif')}"
+                   data-src="@{thumbnail_url(item.thumbnail)}"/>
+            @end
+          </div>
+        </div>
+        <div class="uploadlinks">
+          <div class="uploadlink"><a href="@{url_for('site.view_post_inbox', pid=item.pid_id)}">@{_('Post')}</a></div>
+          <div class="uploadlink"><a href="@{file_url(item.fileid)}">Link</a></div>
+        </div>
+      @end
+  </div>
+</div>
+<div class="col-12">
+  @if len(uploads) == 30:
+    <a href="@{url_for('user.view_user_uploads', page=(page+1))}" class="pure-button">@{_('Next')}</a>
+  @end
+  @if page > 1:
+    <a href="@{url_for('user.view_user_uploads', page=(page-1))}" class="pure-button">@{_('Previous')}</a>
+  @end
+</div>
+</div>
 @end

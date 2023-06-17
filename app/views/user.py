@@ -1,6 +1,6 @@
 """ Profile and settings endpoints """
 from peewee import fn, JOIN
-from flask import Blueprint, render_template, abort, redirect, url_for, flash, request
+from flask import Blueprint, abort, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from flask_babel import _, Locale
 from .do import send_password_recovery_email, uid_from_recovery_token
@@ -297,7 +297,13 @@ def view_user_uploads(page):
         .where((UserUploads.uid == current_user.uid) & (SubPost.deleted != 1))
         .paginate(page, 30)
     )
-    return render_template("uploads.html", page=page, uploads=uploads)
+    return engine.get_template("user/uploads.html").render(
+        {
+            "user": current_user,
+            "page": page,
+            "uploads": uploads,
+        }
+    )
 
 
 @bp.route("/settings/invite")

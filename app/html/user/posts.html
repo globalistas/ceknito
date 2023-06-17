@@ -20,10 +20,11 @@
 @end
 
 @def main():
-<div id="container">
+
 @if not current_user.is_authenticated and config.site.block_anon_stalking:
     <div class="message" style="margin-top: 2em;">@{_("Please log in to see this user's posts.")}</div>
 @else:
+<div id="container">
     @if sort_type == 'user.view_user_posts':
       <h3 class="comments">@{_('View posts')}</h3>
       @if user.status == 10:
