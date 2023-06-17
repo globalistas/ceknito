@@ -195,13 +195,13 @@ def view_user_posts(user, page):
         "new",
         page,
     )
-
-    return render_template(
-        "userposts.html",
-        page=page,
-        sort_type="user.view_user_posts",
-        posts=posts,
-        user=user,
+    return engine.get_template("user/posts.html").render(
+        {
+            "page": page,
+            "sort_type": "user.view_user_posts",
+            "posts": posts,
+            "user": user,
+        }
     )
 
 
@@ -218,35 +218,12 @@ def view_user_savedposts(user, page):
             "new",
             page,
         )
-        return render_template(
-            "userposts.html",
-            page=page,
-            sort_type="user.view_user_savedposts",
-            posts=posts,
-            user=current_user,
-        )
-    else:
-        abort(403)
-
-
-@bp.route("/u/<user>/savedcomments", defaults={"page": 1})
-@bp.route("/u/<user>/savedcomments/<int:page>")
-@login_required
-def view_user_savedcomments(user, page):
-    """WIP: View user's saved comments"""
-    if current_user.name.lower() == user.lower():
-        comments = misc.getUserSavedComments(
-            current_user.uid,
-            page,
-        )
-        postmeta = misc.get_postmeta_dicts((c["pid"] for c in comments))
-        return engine.get_template("user/savedcomments.html").render(
+        return engine.get_template("user/savedposts.html").render(
             {
-                "user": current_user,
                 "page": page,
-                "comments": comments,
-                "postmeta": postmeta,
-                "highlight": "",
+                "sort_type": "user.view_user_savedposts",
+                "posts": posts,
+                "user": current_user,
             }
         )
     else:
@@ -283,6 +260,30 @@ def view_user_comments(user, page):
             "highlight": "",
         }
     )
+
+
+@bp.route("/u/<user>/savedcomments", defaults={"page": 1})
+@bp.route("/u/<user>/savedcomments/<int:page>")
+@login_required
+def view_user_savedcomments(user, page):
+    """WIP: View user's saved comments"""
+    if current_user.name.lower() == user.lower():
+        comments = misc.getUserSavedComments(
+            current_user.uid,
+            page,
+        )
+        postmeta = misc.get_postmeta_dicts((c["pid"] for c in comments))
+        return engine.get_template("user/savedcomments.html").render(
+            {
+                "user": current_user,
+                "page": page,
+                "comments": comments,
+                "postmeta": postmeta,
+                "highlight": "",
+            }
+        )
+    else:
+        abort(403)
 
 
 @bp.route("/uploads", defaults={"page": 1})

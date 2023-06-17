@@ -1,0 +1,53 @@
+@extends("shared/layout.html")
+@import "shared/post.html" as ipost
+@require(page, sort_type, posts, user)
+
+@def title():
+@{_('View saved posts')} | @{config.site.lema}
+@end
+
+@def sidebar():
+  <a href="@{url_for('user.view', user=user.name)}" class="sbm-post pure-button @{(request.endpoint == 'user.view') and 'pure-button-primary' or ''}">@{user.name}</a>
+  <a href="@{url_for('user.view_user_posts', user=user.name)}" class="sbm-post pure-button @{(request.endpoint == 'user.view_user_posts') and 'pure-button-primary' or ''}">@{_('View posts')}</a>
+  <a href="@{url_for('user.view_user_comments', user=user.name)}" class="sbm-post pure-button @{(request.endpoint == 'user.view_user_comments') and 'pure-button-primary' or ''}" >@{_('View comments')}</a>
+  @if user.uid == current_user.uid:
+    @if current_user.canupload:
+      <a href="@{url_for('user.view_user_uploads')}" class="sbm-post pure-button @{(request.endpoint == 'user.view_user_uploads') and 'pure-button-primary' or ''}">@{_('View uploads')}</a>
+    @end
+    <a href="@{url_for('user.view_user_savedposts', user=user.name)}" class="sbm-post pure-button @{(request.endpoint == 'user.view_user_savedposts') and 'pure-button-primary' or ''}">@{_('View saved posts')}</a>
+    <a href="@{url_for('user.view_user_savedcomments', user=user.name)}" class="sbm-post pure-button @{(request.endpoint == 'user.view_user_savedcomments') and 'pure-button-primary' or ''}">@{_('View saved comments')}</a>
+  @end
+@end
+
+@def main():
+<div id="container">
+@if not current_user.is_authenticated and config.site.block_anon_stalking:
+    <div class="message" style="margin-top: 2em;">@{_("Please log in to see this user's posts.")}</div>
+@else:
+    @if sort_type == 'user.view_user_posts':
+      <h3 class="comments">@{_('View posts')}</h3>
+      @if user.status == 10:
+        <div class="helper-text deleted-user">@{_("%(user)s has deleted their account.", user=user.name)}</div>
+      @end
+    @else:
+      <h3 class="comments">@{_('View saved posts')}</h3>
+    @end
+    @if not posts:
+      <p class="comments recent">@{_("There are no posts here, yet.")}</p>
+    @end
+
+    <div class="alldaposts">
+    @for post in posts:
+      @{ipost.singlePost(post, False)!!html}
+    @end
+    </div>
+
+    @if len(posts) == 25:
+      <a href="@{url_for(sort_type, page=(page+1), user=user.name)}" class="pure-button">@{_('Next')}</a>
+    @end
+    @if page > 1:
+      <a href="@{url_for(sort_type, page=(page-1), user=user.name)}" class="pure-button">@{_('Previous')}</a>
+    @end
+</div>
+@end
+@end
