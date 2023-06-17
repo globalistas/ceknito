@@ -2003,6 +2003,7 @@ def getUserSavedComments(uid, page, include_deleted_comments=False):
                 Sub.nsfw.alias("sub_nsfw"),
                 User.name.alias("author"),
                 SubPostCommentVote.positive.alias("positive"),
+                User.status.alias("userstatus"),
             )
             .join(SubPost)
             .switch(SubPostComment)

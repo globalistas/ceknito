@@ -240,12 +240,14 @@ def view_user_savedcomments(user, page):
             page,
         )
         postmeta = misc.get_postmeta_dicts((c["pid"] for c in comments))
-        return render_template(
-            "usersavedcomments.html",
-            user=current_user,
-            page=page,
-            comments=comments,
-            postmeta=postmeta,
+        return engine.get_template("user/savedcomments.html").render(
+            {
+                "user": current_user,
+                "page": page,
+                "comments": comments,
+                "postmeta": postmeta,
+                "highlight": "",
+            }
         )
     else:
         abort(403)
