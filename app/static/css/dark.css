@@ -798,8 +798,7 @@ body.dark .uploaditem.deleted {
 }
 
 body.dark .deleted-user {
-  background-color: #171717;
-  border: 1px solid #6f1818;
+  background-color: #36393f;
 }
 
 body.dark .browse-history {

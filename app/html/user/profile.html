@@ -6,9 +6,8 @@
 @end
 
 @def sidebar():
-
+@include('shared/sidebar/user.html')
     @if user.status != 10:
-        @include('shared/sidebar/user.html')
         @if current_user.is_authenticated and current_user.uid != user.uid:
             @if target_user_is_admin or len(owns + mods) > 0 or current_user.can_pm_users() or current_user.is_admin():
                 <hr>
@@ -30,7 +29,7 @@
             <div class="uprofile-top">
                 <h1 style="margin-right: 0; margin-left:0" class="noshit@{' deleted-user' if user.status == 10 else ''}">@{user.name}</h1>
                 @if user.status == 10:
-                    <div>@{_("This user account has been deleted.")}</div>
+                    <div>@{_("%(user)s has deleted their account.", user=user.name)}</div>
                 @end
                 @if user.status != 10 or current_user.is_admin():
                     <div class="pblock level">
