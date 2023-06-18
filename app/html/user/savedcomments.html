@@ -21,7 +21,7 @@
 @def main():
 
 @if not current_user.is_authenticated and config.site.block_anon_stalking:
-    <div class="message" style="margin-top: 2em;">@{_("Please log in to see this user's comments.")}</div>
+    <div class="message">@{_("Please log in to see this user's comments.")}</div>
 @else:
     <div id="center-container-savedcomments">
       <div class="inbox content">

@@ -188,10 +188,10 @@
     )
     <div class="pure-u-1 @{ rendered_sidebar and 'pure-u-md-18-24' or '' }"> <!-- main -->
       @for err in get_flashed_messages(category_filter=["error"]):
-        <div class="error" style="margin-top: 2em;">@{ err }</div>
+        <div class="error">@{ err }</div>
       @end
       @for message in get_flashed_messages(category_filter=["message"]):
-        <div class="message" style="margin-top: 2em;">@{ message }</div>
+        <div class="message">@{ message }</div>
       @end
       @def main():
       @end
