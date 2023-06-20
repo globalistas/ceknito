@@ -933,7 +933,8 @@ iframe {
 
 .expandotxt {
   /*  background-color: #e1e1e1; */
-  padding: 1em;
+  padding: 0.25em 1em 1em 1em;
+  margin-left: 24px;
   position: relative;
 }
 
@@ -1090,6 +1091,10 @@ img.block-blur {
 
   .wholepost .misctainer {
     float: none;
+  }
+
+  .expandotxt {
+    margin-left: 0px;
   }
 }
 
@@ -1777,6 +1782,10 @@ a.title {
 
 .postbar * {
   white-space: normal;
+}
+
+.postbar.post .expandotxt {
+  margin-left: 0px;
 }
 
 .wholepost .title {
