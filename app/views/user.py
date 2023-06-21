@@ -311,8 +311,11 @@ def view_user_uploads(page):
 def invite_codes():
     if not config.site.require_invite_code:
         return redirect("/settings")
-
-    codes = InviteCode.select().where(InviteCode.user == current_user.uid)
+    codes = (
+        InviteCode.select()
+        .where(InviteCode.user == current_user.uid)
+        .order_by(InviteCode.created.desc())
+    )
     maxcodes = int(misc.getMaxCodes(current_user.uid))
     created = codes.count()
     avail = 0
