@@ -2200,6 +2200,12 @@ def getUserGivenScore(uid):
         SubPostVote.select()
         .where(SubPostVote.uid == uid)
         .where(SubPostVote.positive == 1)
+        # here we exclude user's own posts from the count
+        .where(
+            SubPostVote.pid.not_in(
+                SubPost.select(SubPost.pid).where(SubPost.uid == uid)
+            )
+        )
         .count()
     )
     neg = (
