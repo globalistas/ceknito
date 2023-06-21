@@ -69,7 +69,7 @@ defaults = {  # key => default value
         },
         "uploads": {
             "filename_prefix": "",
-            "path": "./app/static/stor",
+            "path": "./app/static/ups",
             "url": "https://useruploads.shitposting.space/",
         },
     },
