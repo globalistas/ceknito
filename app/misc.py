@@ -3448,8 +3448,8 @@ def getReports(view, status, page, *_args, **kwargs):
         open_query = open_sub_comment_reports
         closed_query = closed_sub_comment_reports
     else:
-        open_query = open_sub_post_reports | open_sub_comment_reports
-        closed_query = closed_sub_post_reports | closed_sub_comment_reports
+        open_query = open_sub_post_reports.union_all(open_sub_comment_reports)
+        closed_query = closed_sub_post_reports.union_all(closed_sub_comment_reports)
 
     open_report_count = open_query.count()
     closed_report_count = closed_query.count()
