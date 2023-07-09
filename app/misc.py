@@ -2675,6 +2675,8 @@ def get_comment_query(pid, sort):
     ).where(SubPostComment.pid == pid)
     if sort == "new":
         comments = comments.order_by(SubPostComment.time.desc())
+    elif sort == "old":
+        comments = comments.order_by(SubPostComment.time.asc())
     elif sort == "best":
         comments = comments.order_by(SubPostComment.best_score.desc())
     elif sort == "top":

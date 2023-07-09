@@ -4727,3 +4727,11 @@ msgstr "Príspevky od"
 #: app/html/shared/layout.html:216
 msgid "Contact us"
 msgstr "Kontaktujte nás"
+
+#: app/html/sub/post.html:420
+msgid "old"
+msgstr "staré"
+
+#: app/html/sub/post.html:467
+msgid "Old"
+msgstr "Staré"
