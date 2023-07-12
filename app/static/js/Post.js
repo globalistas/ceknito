@@ -819,7 +819,7 @@ u.addEventForChild(document, 'click', '.btn-postcomment', function (e, qelem) {
                 cmtcount.setAttribute('data-cnt', parseInt(count) + 1);
                 if (cmtcount.getElementsByTagName('a').length === 0) {
                     const a = document.createElement('a');
-                    a.href = '/p/' + find(pid);
+                    a.href = '/p/' + pid;
                     a.innerText = _("1 comment");
                     a.id = 'cmnts';
                     a.classList.add('allcomments');
