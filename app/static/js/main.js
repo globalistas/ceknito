@@ -697,7 +697,7 @@ for (var i = 0; i < pbodyElements.length; i++) {
       //if is link get url and just redirect like a normal link
       var link = event.target.href;
       //check if link is relative or not
-      if (link.indexOf("cekni.to") !== -1 && link.indexOf("flair=") === -1) {
+      if (link.indexOf("cekni.to") !== -1 && link.indexOf("flair=") === -1 && link.indexOf("/domain/") === -1) {
         event.preventDefault();
         var commentsElement = this.querySelector(".comments");
         if (commentsElement !== null && commentsElement.href !== undefined) {
