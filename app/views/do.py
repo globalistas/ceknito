@@ -2787,6 +2787,15 @@ def create_flair(sub):
             status="error", error="Can't have more than 100 flair presets per sub"
         )
 
+    # Check if the text value is a duplicate for the given sid
+    form = CreateSubFlair()
+    if (
+        SubFlair.select()
+        .where(SubFlair.sid == sub.sid, SubFlair.text == form.text.data)
+        .exists()
+    ):
+        return jsonify(status="error", error="Flair with the same text already exists")
+
     form = CreateSubFlair()
     if form.validate():
         SubFlair.create(
