@@ -1217,7 +1217,14 @@ def get_sub(name):
             "posts": sub.posts,
             "postTypes": allowed_post_types,
             "flairs": [
-                {"id": f.xid, "text": f"{Markup.escape(f.text)}"} for f in flairs
+                {
+                    "id": f.xid,
+                    "text": f"{Markup.escape(f.text)}",
+                    "text_color": f.text_color,
+                    "bg_color": f.bg_color,
+                    "border_color": f.border_color,
+                }
+                for f in flairs
             ],
         }
     )

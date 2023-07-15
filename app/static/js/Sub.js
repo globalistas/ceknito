@@ -246,6 +246,9 @@ function updateSubmitPostFormFlairs(flairs) {
     for (let i=0; i < flairs.length; i++) {
       let span = document.createElement('span');
       span.setAttribute('data-id', flairs[i].id);
+      span.style.color = flairs[i].text_color;
+      span.style.backgroundColor = flairs[i].bg_color;
+      span.style.borderColor = flairs[i].border_color;
       span.classList.add('submitflair');
       if (flairs[i].id == flairInput.value) {
         found = true;
