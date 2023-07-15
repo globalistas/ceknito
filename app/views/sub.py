@@ -340,11 +340,15 @@ def view_sub_new(sub, page):
     flair = request.args.get("flair")
 
     try:
+        sub = Sub.select().where(fn.Lower(Sub.name) == sub.lower()).dicts().get()
+    except Sub.DoesNotExist:
+        abort(404)
+
+    try:
         flair_colors = (
-            SubFlair.select(
-                SubFlair,
-            )
+            SubFlair.select()
             .where(SubFlair.text == flair)
+            .where(SubFlair.sid == sub["sid"])
             .dicts()
             .get()
         )
@@ -356,11 +360,6 @@ def view_sub_new(sub, page):
         text_color = None
         bg_color = None
         border_color = None
-
-    try:
-        sub = Sub.select().where(fn.Lower(Sub.name) == sub.lower()).dicts().get()
-    except Sub.DoesNotExist:
-        abort(404)
 
     if sub["status"] != 0 and not current_user.is_admin():
         return redirect(url_for("sub.view_sub", sub=sub["name"]))
@@ -470,11 +469,15 @@ def view_sub_top(sub, page):
     flair = request.args.get("flair")
 
     try:
+        sub = Sub.select().where(fn.Lower(Sub.name) == sub.lower()).dicts().get()
+    except Sub.DoesNotExist:
+        abort(404)
+
+    try:
         flair_colors = (
-            SubFlair.select(
-                SubFlair,
-            )
+            SubFlair.select()
             .where(SubFlair.text == flair)
+            .where(SubFlair.sid == sub["sid"])
             .dicts()
             .get()
         )
@@ -486,11 +489,6 @@ def view_sub_top(sub, page):
         text_color = None
         bg_color = None
         border_color = None
-
-    try:
-        sub = Sub.select().where(fn.Lower(Sub.name) == sub.lower()).dicts().get()
-    except Sub.DoesNotExist:
-        abort(404)
 
     if sub["status"] != 0 and not current_user.is_admin():
         return redirect(url_for("sub.view_sub", sub=sub["name"]))
@@ -531,11 +529,15 @@ def view_sub_hot(sub, page):
     flair = request.args.get("flair")
 
     try:
+        sub = Sub.select().where(fn.Lower(Sub.name) == sub.lower()).dicts().get()
+    except Sub.DoesNotExist:
+        abort(404)
+
+    try:
         flair_colors = (
-            SubFlair.select(
-                SubFlair,
-            )
+            SubFlair.select()
             .where(SubFlair.text == flair)
+            .where(SubFlair.sid == sub["sid"])
             .dicts()
             .get()
         )
@@ -547,11 +549,6 @@ def view_sub_hot(sub, page):
         text_color = None
         bg_color = None
         border_color = None
-
-    try:
-        sub = Sub.select().where(fn.Lower(Sub.name) == sub.lower()).dicts().get()
-    except Sub.DoesNotExist:
-        abort(404)
 
     if sub["status"] != 0 and not current_user.is_admin():
         return redirect(url_for("sub.view_sub", sub=sub["name"]))
@@ -592,11 +589,15 @@ def view_sub_commented(sub, page):
     flair = request.args.get("flair")
 
     try:
+        sub = Sub.select().where(fn.Lower(Sub.name) == sub.lower()).dicts().get()
+    except Sub.DoesNotExist:
+        abort(404)
+
+    try:
         flair_colors = (
-            SubFlair.select(
-                SubFlair,
-            )
+            SubFlair.select()
             .where(SubFlair.text == flair)
+            .where(SubFlair.sid == sub["sid"])
             .dicts()
             .get()
         )
@@ -608,11 +609,6 @@ def view_sub_commented(sub, page):
         text_color = None
         bg_color = None
         border_color = None
-
-    try:
-        sub = Sub.select().where(fn.Lower(Sub.name) == sub.lower()).dicts().get()
-    except Sub.DoesNotExist:
-        abort(404)
 
     if sub["status"] != 0 and not current_user.is_admin():
         return redirect(url_for("sub.view_sub", sub=sub["name"]))
