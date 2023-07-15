@@ -36,7 +36,7 @@
     <div class="pbody">
       <div class="post-heading">
         @if post['flair']:
-          <a class="postflair" href="@{url_for('sub.view_sub_hot', sub=post['sub'], flair=post['flair'])}">@{post['flair']}</a> \
+          <a class="postflair" style="color:@{post['text_color']}; background-color:@{post['bg_color']}; border-color:@{post['border_color']};" href="@{url_for('sub.view_sub_hot', sub=post['sub'], flair=post['flair'])}">@{post['flair']}</a> \
         @end
         @if post['link']:
           @if func.getDomain(post['link'].lower()) in config.site.expando_sites:

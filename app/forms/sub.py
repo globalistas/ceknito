@@ -4,7 +4,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, BooleanField, HiddenField, IntegerField
 from wtforms import RadioField, SelectField, FieldList
 from wtforms.validators import DataRequired, Length, URL
-from wtforms.validators import Optional
+from wtforms.validators import Optional, Regexp
 from flask_babel import lazy_gettext as _l
 
 
@@ -58,6 +58,18 @@ class CreateSubFlair(FlaskForm):
     """Creates a flair"""
 
     text = StringField(_l("Flair text"), validators=[DataRequired(), Length(max=25)])
+    text_color = StringField(
+        _l("Flair text color"),
+        validators=[Length(max=15), Optional(), Regexp(r"^[a-zA-Z0-9#]+$")],
+    )
+    bg_color = StringField(
+        _l("Flair background color"),
+        validators=[Length(max=15), Optional(), Regexp(r"^[a-zA-Z0-9#]+$")],
+    )
+    border_color = StringField(
+        _l("Flair border color"),
+        validators=[Length(max=15), Optional(), Regexp(r"^[a-zA-Z0-9#]+$")],
+    )
 
 
 class EditSubFlair(FlaskForm):
@@ -65,6 +77,18 @@ class EditSubFlair(FlaskForm):
 
     flair = HiddenField()
     text = StringField(_l("Flair text"), validators=[DataRequired(), Length(max=25)])
+    text_color = StringField(
+        _l("Flair text color"),
+        validators=[Length(max=15), Optional(), Regexp(r"^[a-zA-Z0-9#]+$")],
+    )
+    bg_color = StringField(
+        _l("Flair background color"),
+        validators=[Length(max=15), Optional(), Regexp(r"^[a-zA-Z0-9#]+$")],
+    )
+    border_color = StringField(
+        _l("Flair border color"),
+        validators=[Length(max=15), Optional(), Regexp(r"^[a-zA-Z0-9#]+$")],
+    )
 
 
 class EditSubUserFlair(FlaskForm):

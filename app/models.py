@@ -240,6 +240,9 @@ class Sub(BaseModel):
 class SubFlair(BaseModel):
     sid = ForeignKeyField(db_column="sid", null=True, model=Sub, field="sid")
     text = CharField(null=True)
+    text_color = CharField(null=True)
+    bg_color = CharField(null=True)
+    border_color = CharField(null=True)
     xid = PrimaryKeyField()
 
     def __repr__(self):

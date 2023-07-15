@@ -1043,6 +1043,9 @@ def getSinglePost(pid):
         User.status.alias("userstatus"),
         SubPost.deleted,
         SubPost.ptype,
+        SubFlair.text_color.alias("text_color"),
+        SubFlair.bg_color.alias("bg_color"),
+        SubFlair.border_color.alias("border_color"),
         SubUserFlair.flair.alias("user_flair"),
         SubUserFlair.flair_choice.alias("user_flair_id"),
     ]
@@ -1066,6 +1069,11 @@ def getSinglePost(pid):
         posts.join(User, JOIN.LEFT_OUTER)
         .switch(SubPost)
         .join(Sub, JOIN.LEFT_OUTER)
+        .join(
+            SubFlair,
+            JOIN.LEFT_OUTER,
+            on=(SubFlair.text == SubPost.flair),
+        )
         .join(
             SubUserFlair,
             JOIN.LEFT_OUTER,
@@ -1114,6 +1122,9 @@ def postListQueryBase(
         SubPost.comments,
         User.uid,
         User.status.alias("userstatus"),
+        SubFlair.text_color.alias("text_color"),
+        SubFlair.bg_color.alias("bg_color"),
+        SubFlair.border_color.alias("border_color"),
         SubUserFlair.flair.alias("user_flair"),
         SubUserFlair.flair_choice.alias("user_flair_id"),
     ]
@@ -1182,6 +1193,11 @@ def postListQueryBase(
         posts.join(User, JOIN.LEFT_OUTER)
         .switch(SubPost)
         .join(Sub, JOIN.LEFT_OUTER)
+        .join(
+            SubFlair,
+            JOIN.LEFT_OUTER,
+            on=(SubFlair.text == SubPost.flair),
+        )
         .join(
             SubUserFlair,
             JOIN.LEFT_OUTER,

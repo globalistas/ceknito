@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2023-07-09 10:20+0200\n"
+"POT-Creation-Date: 2023-07-15 02:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -333,12 +333,12 @@ msgstr ""
 msgid "Max storage for image uploads for subs' stylesheets (in MiB)."
 msgstr ""
 
-#: app/misc.py:1706
+#: app/misc.py:1722
 #, python-format
 msgid "Error in the '%(field)s' field - %(error)s"
 msgstr ""
 
-#: app/misc.py:1894
+#: app/misc.py:1910
 #, python-format
 msgid "Re: %(subject)s"
 msgstr ""
@@ -348,51 +348,51 @@ msgstr ""
 #: app/html/sub/post.html:56 app/html/sub/post.html:132
 #: app/html/sub/post.html:151 app/html/sub/post.html:201
 #: app/html/sub/post.html:210 app/html/sub/postcomments.html:37
-#: app/misc.py:2160 app/misc.py:2938 app/misc.py:2944 app/misc.py:2949
+#: app/misc.py:2176 app/misc.py:2954 app/misc.py:2960 app/misc.py:2965
 msgid "[Deleted]"
 msgstr ""
 
-#: app/misc.py:2242
+#: app/misc.py:2258
 msgid "URLs not allowed, uploaded files only"
 msgstr ""
 
-#: app/misc.py:2253
+#: app/misc.py:2269
 msgid "Invalid characters in string."
 msgstr ""
 
-#: app/misc.py:2271
+#: app/misc.py:2287
 msgid "@import token not allowed"
 msgstr ""
 
-#: app/misc.py:2287
+#: app/misc.py:2303
 msgid "Invalid CSS"
 msgstr ""
 
-#: app/html/sub/postcomments.html:50 app/misc.py:2919
+#: app/html/sub/postcomments.html:50 app/misc.py:2935
 msgid "[Blocked]"
 msgstr ""
 
-#: app/misc.py:2932
+#: app/misc.py:2948
 msgid "[deleted by user]"
 msgstr ""
 
-#: app/misc.py:3007
+#: app/misc.py:3023
 msgid "Already processing previous request."
 msgstr ""
 
-#: app/misc.py:3029
+#: app/misc.py:3045
 msgid "Unknown error. User disappeared"
 msgstr ""
 
-#: app/misc.py:3036
+#: app/misc.py:3052
 msgid "Score balance is negative"
 msgstr ""
 
-#: app/misc.py:3038
+#: app/misc.py:3054
 msgid "Invalid vote value"
 msgstr ""
 
-#: app/misc.py:3054 app/views/do.py:320 app/views/do.py:453 app/views/do.py:820
+#: app/misc.py:3070 app/views/do.py:320 app/views/do.py:453 app/views/do.py:820
 #: app/views/do.py:856 app/views/do.py:1236 app/views/do.py:1342
 #: app/views/do.py:2185 app/views/do.py:2291 app/views/do.py:2444
 #: app/views/do.py:2459 app/views/do.py:2563 app/views/do.py:2648
@@ -402,43 +402,43 @@ msgstr ""
 msgid "Post does not exist"
 msgstr ""
 
-#: app/misc.py:3057
+#: app/misc.py:3073
 msgid "You can't vote on your own posts"
 msgstr ""
 
-#: app/misc.py:3059
+#: app/misc.py:3075
 msgid "You can't vote on deleted posts"
 msgstr ""
 
-#: app/misc.py:3092 app/views/do.py:2475 app/views/do.py:2490
+#: app/misc.py:3108 app/views/do.py:2475 app/views/do.py:2490
 #: app/views/do.py:2613 app/views/do.py:2917 app/views/do.py:2965
 #: app/views/do.py:3064 app/views/do.py:4116 app/views/do.py:4229
 msgid "Comment does not exist"
 msgstr ""
 
-#: app/misc.py:3095
+#: app/misc.py:3111
 msgid "You can't vote on your own comments"
 msgstr ""
 
-#: app/misc.py:3097
+#: app/misc.py:3113
 msgid "You can't vote on deleted comments"
 msgstr ""
 
-#: app/misc.py:3109
+#: app/misc.py:3125
 msgid "Invalid target"
 msgstr ""
 
-#: app/misc.py:3112 app/views/do.py:1290 app/views/do.py:2192
+#: app/misc.py:3128 app/views/do.py:1290 app/views/do.py:2192
 #: app/views/do.py:2929
 msgid "You are banned on this sub."
 msgstr ""
 
-#: app/misc.py:3117 app/views/do.py:1293 app/views/do.py:1347
+#: app/misc.py:3133 app/views/do.py:1293 app/views/do.py:1347
 #: app/views/do.py:2940
 msgid "Post is archived"
 msgstr ""
 
-#: app/misc.py:3471
+#: app/misc.py:3487
 msgid "Invalid status request"
 msgstr ""
 
@@ -507,7 +507,7 @@ msgstr ""
 msgid "Question"
 msgstr ""
 
-#: app/forms/admin.py:21 app/forms/admin.py:115 app/forms/sub.py:168
+#: app/forms/admin.py:21 app/forms/admin.py:115 app/forms/sub.py:174
 #: app/html/admin/reports.html:24 app/html/mod/closed.html:25
 #: app/html/mod/reportdetails.html:62 app/html/mod/reports.html:24
 #: app/html/mod/sub_reports.html:25 app/html/mod/sub_reports_closed.html:27
@@ -524,7 +524,7 @@ msgstr ""
 msgid "Badge"
 msgstr ""
 
-#: app/forms/admin.py:32 app/forms/sub.py:72 app/forms/sub.py:78
+#: app/forms/admin.py:32 app/forms/sub.py:78 app/forms/sub.py:84
 #: app/forms/user.py:81 app/forms/user.py:92 app/html/user/login.html:15
 #: app/html/user/profile.html:132 app/static/js/main.js:53
 #: app/static/js/main.js:642
@@ -627,7 +627,7 @@ msgstr ""
 msgid "Sub name"
 msgstr ""
 
-#: app/forms/sub.py:23 app/forms/sub.py:116 app/html/admin/wiki.html:24
+#: app/forms/sub.py:23 app/forms/sub.py:122 app/html/admin/wiki.html:24
 msgid "Title"
 msgstr ""
 
@@ -643,195 +643,207 @@ msgstr ""
 msgid "Your comment"
 msgstr ""
 
-#: app/forms/sub.py:60 app/forms/sub.py:67 app/forms/sub.py:73
-#: app/forms/sub.py:84 app/html/sub/flairs.html:21
+#: app/forms/sub.py:60 app/forms/sub.py:70 app/forms/sub.py:79
+#: app/forms/sub.py:90 app/html/sub/flairs.html:21
 #: app/html/sub/user_flairs.html:25 app/html/sub/user_flairs.html:34
 msgid "Flair text"
 msgstr ""
 
-#: app/forms/sub.py:80 app/forms/sub.py:186 app/forms/sub.py:239
+#: app/forms/sub.py:61 app/forms/sub.py:71
+msgid "Flair text color"
+msgstr ""
+
+#: app/forms/sub.py:62 app/forms/sub.py:72
+msgid "Flair background color"
+msgstr ""
+
+#: app/forms/sub.py:63 app/forms/sub.py:73
+msgid "Flair border color"
+msgstr ""
+
+#: app/forms/sub.py:86 app/forms/sub.py:192 app/forms/sub.py:245
 #: app/html/sub/user_flairs.html:24
 msgid "Flair"
 msgstr ""
 
-#: app/forms/sub.py:81
+#: app/forms/sub.py:87
 msgid "Pick one"
 msgstr ""
 
-#: app/forms/sub.py:81
+#: app/forms/sub.py:87
 msgid "Custom"
 msgstr ""
 
-#: app/forms/sub.py:81
+#: app/forms/sub.py:87
 msgid "Remove flair"
 msgstr ""
 
-#: app/forms/sub.py:96 app/forms/sub.py:103 app/html/sub/rules.html:27
+#: app/forms/sub.py:102 app/forms/sub.py:109 app/html/sub/rules.html:27
 msgid "Rule text"
 msgstr ""
 
-#: app/forms/sub.py:119
+#: app/forms/sub.py:125
 msgid "Sub is NSFW"
 msgstr ""
 
-#: app/forms/sub.py:120
+#: app/forms/sub.py:126
 msgid "Only mods can post"
 msgstr ""
 
-#: app/forms/sub.py:121
+#: app/forms/sub.py:127
 msgid "Allow users to flair their own posts"
 msgstr ""
 
-#: app/forms/sub.py:122
+#: app/forms/sub.py:128
 msgid "Require users to flair their own posts"
 msgstr ""
 
-#: app/forms/sub.py:124
+#: app/forms/sub.py:130
 msgid "Allow users to pick from moderator-created user flair options"
 msgstr ""
 
-#: app/forms/sub.py:126
+#: app/forms/sub.py:132
 msgid "Allow users to input their own user flair"
 msgstr ""
 
-#: app/forms/sub.py:127
+#: app/forms/sub.py:133
 msgid "Enable text posts"
 msgstr ""
 
-#: app/forms/sub.py:128
+#: app/forms/sub.py:134
 msgid "Enable link posts"
 msgstr ""
 
-#: app/forms/sub.py:129
+#: app/forms/sub.py:135
 msgid "Enable upload posts"
 msgstr ""
 
-#: app/forms/sub.py:130
+#: app/forms/sub.py:136
 msgid "Enable polls"
 msgstr ""
 
-#: app/forms/sub.py:132
+#: app/forms/sub.py:138
 msgid "Default sub page post sorting"
 msgstr ""
 
-#: app/forms/sub.py:134 app/html/index.html:35 app/html/index.html:40
+#: app/forms/sub.py:140 app/html/index.html:35 app/html/index.html:40
 #: app/html/sub.html:20
 msgid "Hot"
 msgstr ""
 
-#: app/forms/sub.py:135 app/html/index.html:37 app/html/index.html:42
+#: app/forms/sub.py:141 app/html/index.html:37 app/html/index.html:42
 #: app/html/sub.html:22 app/html/sub/post.html:457
 msgid "New"
 msgstr ""
 
-#: app/forms/sub.py:136 app/html/index.html:36 app/html/index.html:41
+#: app/forms/sub.py:142 app/html/index.html:36 app/html/index.html:41
 #: app/html/sub.html:21 app/html/sub/post.html:447
 msgid "Top"
 msgstr ""
 
-#: app/forms/sub.py:137 app/html/index.html:38 app/html/index.html:43
+#: app/forms/sub.py:143 app/html/index.html:38 app/html/index.html:43
 #: app/html/sub.html:23
 msgid "Commented"
 msgstr ""
 
-#: app/forms/sub.py:141 app/html/sub/settings.html:123
+#: app/forms/sub.py:147 app/html/sub/settings.html:123
 msgid "Sidebar text"
 msgstr ""
 
-#: app/forms/sub.py:142
+#: app/forms/sub.py:148
 msgid "Make the sub log private"
 msgstr ""
 
-#: app/forms/sub.py:144
+#: app/forms/sub.py:150
 msgid "Make the list of banned users on this sub private"
 msgstr ""
 
-#: app/forms/sub.py:156
+#: app/forms/sub.py:162
 msgid "New mod username"
 msgstr ""
 
-#: app/forms/sub.py:159
+#: app/forms/sub.py:165
 msgid "Mod level"
 msgstr ""
 
-#: app/forms/sub.py:160 app/html/sub/log.html:15
+#: app/forms/sub.py:166 app/html/sub/log.html:15
 msgid "Moderator"
 msgstr ""
 
-#: app/forms/sub.py:160
+#: app/forms/sub.py:166
 msgid "Janitor"
 msgstr ""
 
-#: app/forms/sub.py:170
+#: app/forms/sub.py:176
 msgid "Post title"
 msgstr ""
 
-#: app/forms/sub.py:172 app/forms/sub.py:201
+#: app/forms/sub.py:178 app/forms/sub.py:207
 msgid "Post content"
 msgstr ""
 
-#: app/forms/sub.py:174
+#: app/forms/sub.py:180
 msgid "Post link"
 msgstr ""
 
-#: app/forms/sub.py:177
+#: app/forms/sub.py:183
 msgid "Post type"
 msgstr ""
 
-#: app/forms/sub.py:179
+#: app/forms/sub.py:185
 msgid "Link post"
 msgstr ""
 
-#: app/forms/sub.py:180
+#: app/forms/sub.py:186
 msgid "Text post"
 msgstr ""
 
-#: app/forms/sub.py:181
+#: app/forms/sub.py:187
 msgid "Upload file"
 msgstr ""
 
-#: app/forms/sub.py:182 app/html/shared/post.html:58
+#: app/forms/sub.py:188 app/html/shared/post.html:58
 msgid "Poll"
 msgstr ""
 
-#: app/forms/sub.py:187 app/forms/sub.py:208
+#: app/forms/sub.py:193 app/forms/sub.py:214
 msgid "NSFW?"
 msgstr ""
 
-#: app/forms/sub.py:189
+#: app/forms/sub.py:195
 msgid "Option"
 msgstr ""
 
-#: app/forms/sub.py:190
+#: app/forms/sub.py:196
 msgid "Hide poll results until it closes"
 msgstr ""
 
-#: app/forms/sub.py:191
+#: app/forms/sub.py:197
 msgid "Poll closing time"
 msgstr ""
 
-#: app/forms/sub.py:193 app/forms/user.py:120 app/forms/user.py:238
+#: app/forms/sub.py:199 app/forms/user.py:120 app/forms/user.py:238
 #: app/html/sub/createpost.html:127 app/html/user/password_recovery.html:26
 msgid "Captcha"
 msgstr ""
 
-#: app/forms/sub.py:218
+#: app/forms/sub.py:224
 msgid "Write your comment here. Styling with Markdown format is supported."
 msgstr ""
 
-#: app/forms/sub.py:227
+#: app/forms/sub.py:233
 msgid "Username to ban"
 msgstr ""
 
-#: app/forms/sub.py:230
+#: app/forms/sub.py:236
 msgid "Reason for the ban"
 msgstr ""
 
-#: app/forms/sub.py:232
+#: app/forms/sub.py:238
 msgid "ban expires"
 msgstr ""
 
-#: app/forms/sub.py:286
+#: app/forms/sub.py:292
 msgid "Comment text"
 msgstr ""
 
@@ -1092,7 +1104,7 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#: app/html/admin/configuration.html:67 app/html/sub/flairs.html:22
+#: app/html/admin/configuration.html:67 app/html/sub/flairs.html:25
 #: app/html/sub/rules.html:28 app/html/sub/settings.html:133
 #: app/html/sub/user_flairs.html:27 app/html/sub/user_flairs.html:35
 #: app/html/user/ignores.html:39 app/html/user/profile.html:212
@@ -1257,7 +1269,7 @@ msgid "Edit"
 msgstr ""
 
 #: app/html/admin/wiki.html:39 app/html/sub/css.html:62
-#: app/html/sub/flairs.html:37 app/html/sub/rules.html:44
+#: app/html/sub/flairs.html:40 app/html/sub/rules.html:44
 #: app/html/sub/user_flairs.html:50
 msgid "Delete"
 msgstr ""
@@ -2496,7 +2508,7 @@ msgstr ""
 msgid "Editing stylesheet for <a href=\"%(url)s\">/%(prefix)s/%(sub)s</a>"
 msgstr ""
 
-#: app/html/sub/css.html:29 app/html/sub/flairs.html:22
+#: app/html/sub/css.html:29 app/html/sub/flairs.html:25
 #: app/html/sub/rules.html:28 app/html/sub/settings.html:133
 #: app/html/sub/user_flairs.html:27 app/html/sub/user_flairs.html:35
 #: app/html/user/ignores.html:39 app/html/user/profile.html:212
@@ -2542,13 +2554,13 @@ msgstr ""
 msgid "Filename: %(filename)s. Size: %(filesize)i KiB."
 msgstr ""
 
-#: app/html/sub/css.html:62 app/html/sub/flairs.html:37
+#: app/html/sub/css.html:62 app/html/sub/flairs.html:40
 #: app/html/sub/rules.html:44 app/html/sub/user_flairs.html:50
 #: app/html/user/settings/delete.html:26
 msgid "Deleting..."
 msgstr ""
 
-#: app/html/sub/css.html:62 app/html/sub/flairs.html:37
+#: app/html/sub/css.html:62 app/html/sub/flairs.html:40
 #: app/html/sub/rules.html:44 app/html/sub/user_flairs.html:50
 msgid "Deleted!"
 msgstr ""
@@ -2573,10 +2585,22 @@ msgid "Editing post flairs of <a href=\"%(url)s\">%(sub)s</a>"
 msgstr ""
 
 #: app/html/sub/flairs.html:19
-msgid "Create new post flair"
+msgid "Create new post flair (flair text only required)"
 msgstr ""
 
-#: app/html/sub/flairs.html:22 app/html/sub/user_flairs.html:35
+#: app/html/sub/flairs.html:22
+msgid "Text color (e.g. #eee)"
+msgstr ""
+
+#: app/html/sub/flairs.html:23
+msgid "Background color"
+msgstr ""
+
+#: app/html/sub/flairs.html:24
+msgid "Border color"
+msgstr ""
+
+#: app/html/sub/flairs.html:25 app/html/sub/user_flairs.html:35
 msgid "Add flair"
 msgstr ""
 
@@ -2887,7 +2911,10 @@ msgstr ""
 
 #: app/html/sub/post.html:311
 #, python-format
-msgid "Current flair: <span class=\"postflair\">%(flair)s</span>"
+msgid ""
+"Current flair: <span class=\"postflair\" style=\"color:%(text_color)s; "
+"background-color:%(bg_color)s; border-"
+"color:%(border_color)s;\">%(flair)s</span>"
 msgstr ""
 
 #: app/html/sub/post.html:313

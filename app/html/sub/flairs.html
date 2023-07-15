@@ -16,10 +16,13 @@
       <h1>@{_('Editing post flairs of <a href="%(url)s">%(sub)s</a>', url=url_for('sub.view_sub', sub=sub.name), sub="/" + config.site.sub_prefix + "/" + sub.name)!!html}</h1>
       <div class="col-12 admin-page-form">
         <form  method="POST" class="ajaxform pure-form" action="@{url_for('do.create_flair', sub=sub.name)}" data-reload="true">
-          <h4>@{_('Create new post flair')}</h4>
+          <h4>@{_('Create new post flair (flair text only required)')}</h4>
           @{createflair.csrf_token()!!html}
           @{createflair.text(placeholder=_("Flair text", maxlength="25"))!!html}
-          <button type="submit" class="pure-button pure-button-primary" id="editsub-btnsubmit" data-prog="@{_('Saving...')}" data-success="@{_('Saved!')}">@{_('Add flair')}</button>
+          <br><br>@{createflair.text_color(placeholder=_("Text color (e.g. #eee)", maxlength="15", pattern="[a-zA-Z0-9]+"))!!html}
+          <br><br>@{createflair.bg_color(placeholder=_("Background color", maxlength="15"))!!html}
+          <br><br>@{createflair.border_color(placeholder=_("Border color", maxlength="15"))!!html}
+          <br><br><button type="submit" class="pure-button pure-button-primary" id="editsub-btnsubmit" data-prog="@{_('Saving...')}" data-success="@{_('Saved!')}">@{_('Add flair')}</button>
           <div class="alert div-error"></div>
         </form>
       </div>
@@ -30,7 +33,7 @@
         <ul>
           @for flair in flairs:
             <li>
-              <span class="postflair">@{flair.text.data}</span>
+              <span class="postflair" style="color:@{flair.text_color.data}; background-color:@{flair.bg_color.data}; border-color:@{flair.border_color.data};">@{flair.text.data}</span>
               <form  method="POST" data-reload="true" action="@{url_for('do.delete_flair', sub=sub.name)}" class="ajaxform st-flair">
                 @{flair.csrf_token()!!html}
                 @{flair.flair!!html}

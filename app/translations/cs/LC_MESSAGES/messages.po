@@ -2353,8 +2353,20 @@ msgid "Editing post flairs of <a href=\"%(url)s\">%(sub)s</a>"
 msgstr "Tagy příspěvků ve skupině <a href=\"%(url)s\">%(sub)s</a>"
 
 #: app/html/sub/flairs.html:19
-msgid "Create new post flair"
-msgstr "Definuj nový tag"
+msgid "Create new post flair (flair text only required)"
+msgstr "Definuj nový tag (stačí pouze text tagu)"
+
+#: app/html/sub/flairs.html:22
+msgid "Text color (e.g. #eee)"
+msgstr "Barva textu (např. #eee)"
+
+#: app/html/sub/flairs.html:23
+msgid "Background color"
+msgstr "Barva pozadí"
+
+#: app/html/sub/flairs.html:24
+msgid "Border color"
+msgstr "Barva okraje"
 
 #: app/html/sub/flairs.html:22 app/html/sub/user_flairs.html:35
 msgid "Add flair"
@@ -2658,10 +2670,13 @@ msgstr "nepřízvukovat"
 msgid "distinguish"
 msgstr "přízvukovat"
 
-#: app/html/sub/post.html:296
+#: app/html/sub/post.html:311
 #, python-format
-msgid "Current flair: <span class=\"postflair\">%(flair)s</span>"
-msgstr "Aktuální tag: <span class=\"postflair\">%(flair)s</span>"
+msgid ""
+"Current flair: <span class=\"postflair\" style=\"color:%(text_color)s; "
+"background-color:%(bg_color)s; border-"
+"color:%(border_color)s;\">%(flair)s</span>"
+msgstr "Aktuální tag: <span class=\"postflair\" style=\"color:%(text_color)s; background-color:%(bg_color)s; border-color:%(border_color)s;\">%(flair)s</span>"
 
 #: app/html/sub/post.html:298
 msgid "Remove"

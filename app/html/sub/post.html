@@ -117,7 +117,7 @@
         @if post['link'] == None:
           <h1>
             @if post['flair']:
-              <a class="postflair" href="@{url_for('sub.view_sub_hot', sub=post['sub'], flair=post['flair'])}">@{post['flair']}</a> \
+              <a class="postflair" style="color:@{post['text_color']}; background-color:@{post['bg_color']}; border-color:@{post['border_color']};" href="@{url_for('sub.view_sub_hot', sub=post['sub'], flair=post['flair'])}">@{post['flair']}</a> \
             @end
             <a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'])}" class="title">
               @if (post['visibility'] == ''):
@@ -136,7 +136,7 @@
         @else:
           <h1>
             @if post['flair']:
-              <a class="postflair" href="@{url_for('sub.view_sub_hot', sub=post['sub'], flair=post['flair'])}">@{post['flair']}</a> \
+              <a class="postflair" style="color:@{post['text_color']}; background-color:@{post['bg_color']}; border-color:@{post['border_color']};" href="@{url_for('sub.view_sub_hot', sub=post['sub'], flair=post['flair'])}">@{post['flair']}</a> \
             @end
             <a rel="noopener nofollow ugc" href="@{((post['visibility'] != 'none') and post['link']) or '#'}" target="@{((post['visibility'] != 'none') and '_blank') or '_self'}" class="title">
               @if (post['visibility'] == ''):
@@ -308,7 +308,7 @@
       <span class="closemsg">×</span>
       @if post['flair']:
         <div>
-	  @{_('Current flair: <span class="postflair">%(flair)s</span>', flair=e(post['flair']))!!html}
+	  @{_('Current flair: <span class="postflair" style="color:%(text_color)s; background-color:%(bg_color)s; border-color:%(border_color)s;">%(flair)s</span>', text_color=e(post['text_color']), bg_color=e(post['bg_color']), border_color=e(post['border_color']), flair=e(post['flair']))!!html}
 	  @if not subInfo.get('umf') == '1' or current_user.uid in subMods['all']:
 	    <a data-sub="@{post['sub']}" data-pid="@{post['pid']}" href="#" id="remove-flair">@{_('Remove')}</a>
 	  @end
@@ -316,7 +316,7 @@
       @end
       <h4>@{_('Select a new flair')}</h4>
       @for ll in func.getSubFlairs(post['sid']):
-        <span class="selflair" data-sub="@{post['sub']}" data-flair="@{ll.xid}" data-pid="@{post['pid']}">@{ll.text}</span>
+        <span class="selflair" style="color:@{ll.text_color}; background-color:@{ll.bg_color}; border-color:@{ll.border_color};" data-sub="@{post['sub']}" data-flair="@{ll.xid}" data-pid="@{post['pid']}">@{ll.text}</span>
       @end
     </div>
   @end

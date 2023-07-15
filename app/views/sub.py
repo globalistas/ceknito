@@ -134,7 +134,15 @@ def edit_sub_flairs(sub):
     flairs = SubFlair.select().where(SubFlair.sid == sub.sid).dicts()
     formflairs = []
     for flair in flairs:
-        formflairs.append(EditSubFlair(flair=flair["xid"], text=flair["text"]))
+        formflairs.append(
+            EditSubFlair(
+                flair=flair["xid"],
+                text=flair["text"],
+                text_color=flair["text_color"],
+                bg_color=flair["bg_color"],
+                border_color=flair["border_color"],
+            )
+        )
 
     return engine.get_template("sub/flairs.html").render(
         {"sub": sub, "flairs": formflairs, "createflair": CreateSubFlair()}
@@ -332,6 +340,24 @@ def view_sub_new(sub, page):
     flair = request.args.get("flair")
 
     try:
+        flair_colors = (
+            SubFlair.select(
+                SubFlair,
+            )
+            .where(SubFlair.text == flair)
+            .dicts()
+            .get()
+        )
+
+        text_color = flair_colors["text_color"]
+        bg_color = flair_colors["bg_color"]
+        border_color = flair_colors["border_color"]
+    except SubFlair.DoesNotExist:
+        text_color = None
+        bg_color = None
+        border_color = None
+
+    try:
         sub = Sub.select().where(fn.Lower(Sub.name) == sub.lower()).dicts().get()
     except Sub.DoesNotExist:
         abort(404)
@@ -358,6 +384,9 @@ def view_sub_new(sub, page):
             "sort_type": "sub.view_sub_new",
             "subMods": misc.getSubMods(sub["sid"]),
             "flair": flair,
+            "text_color": text_color,
+            "bg_color": bg_color,
+            "border_color": border_color,
         }
     )
 
@@ -441,6 +470,24 @@ def view_sub_top(sub, page):
     flair = request.args.get("flair")
 
     try:
+        flair_colors = (
+            SubFlair.select(
+                SubFlair,
+            )
+            .where(SubFlair.text == flair)
+            .dicts()
+            .get()
+        )
+
+        text_color = flair_colors["text_color"]
+        bg_color = flair_colors["bg_color"]
+        border_color = flair_colors["border_color"]
+    except SubFlair.DoesNotExist:
+        text_color = None
+        bg_color = None
+        border_color = None
+
+    try:
         sub = Sub.select().where(fn.Lower(Sub.name) == sub.lower()).dicts().get()
     except Sub.DoesNotExist:
         abort(404)
@@ -467,6 +514,9 @@ def view_sub_top(sub, page):
             "sort_type": "sub.view_sub_top",
             "subMods": misc.getSubMods(sub["sid"]),
             "flair": flair,
+            "text_color": text_color,
+            "bg_color": bg_color,
+            "border_color": border_color,
         }
     )
 
@@ -479,6 +529,24 @@ def view_sub_hot(sub, page):
         return redirect(url_for("home.all_hot", page=1))
 
     flair = request.args.get("flair")
+
+    try:
+        flair_colors = (
+            SubFlair.select(
+                SubFlair,
+            )
+            .where(SubFlair.text == flair)
+            .dicts()
+            .get()
+        )
+
+        text_color = flair_colors["text_color"]
+        bg_color = flair_colors["bg_color"]
+        border_color = flair_colors["border_color"]
+    except SubFlair.DoesNotExist:
+        text_color = None
+        bg_color = None
+        border_color = None
 
     try:
         sub = Sub.select().where(fn.Lower(Sub.name) == sub.lower()).dicts().get()
@@ -507,6 +575,9 @@ def view_sub_hot(sub, page):
             "sort_type": "sub.view_sub_hot",
             "subMods": misc.getSubMods(sub["sid"]),
             "flair": flair,
+            "text_color": text_color,
+            "bg_color": bg_color,
+            "border_color": border_color,
         }
     )
 
@@ -519,6 +590,24 @@ def view_sub_commented(sub, page):
         return redirect(url_for("home.all_hot", page=1))
 
     flair = request.args.get("flair")
+
+    try:
+        flair_colors = (
+            SubFlair.select(
+                SubFlair,
+            )
+            .where(SubFlair.text == flair)
+            .dicts()
+            .get()
+        )
+
+        text_color = flair_colors["text_color"]
+        bg_color = flair_colors["bg_color"]
+        border_color = flair_colors["border_color"]
+    except SubFlair.DoesNotExist:
+        text_color = None
+        bg_color = None
+        border_color = None
 
     try:
         sub = Sub.select().where(fn.Lower(Sub.name) == sub.lower()).dicts().get()
@@ -547,6 +636,9 @@ def view_sub_commented(sub, page):
             "sort_type": "sub.view_sub_commented",
             "subMods": misc.getSubMods(sub["sid"]),
             "flair": flair,
+            "text_color": text_color,
+            "bg_color": bg_color,
+            "border_color": border_color,
         }
     )
 

@@ -50,9 +50,9 @@ body.dark #toggledark i {
 }
 
 body.dark .postflair {
-  background-color: #000;
-  color: #7d7d7d;
-  border: 1px solid #1d1d1d;
+  background-color: #3a5173 !important;
+  border: 1px solid #526a7d !important;
+  color: lightgray !important;
 }
 
 body.dark .user_flair {
@@ -1003,12 +1003,6 @@ body.dark .downvote path {
 
 body.dark .downvoted path {
   fill: #242424;
-}
-
-body.dark .postflair {
-  background-color: #3a5173 !important;
-  border: 1px solid #526a7d !important;
-  color: lightgray;
 }
 
 body.dark td.subsentry.subsubscribed {

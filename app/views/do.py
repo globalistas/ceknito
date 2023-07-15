@@ -2789,7 +2789,13 @@ def create_flair(sub):
 
     form = CreateSubFlair()
     if form.validate():
-        SubFlair.create(sid=sub.sid, text=form.text.data)
+        SubFlair.create(
+            sid=sub.sid,
+            text=form.text.data,
+            text_color=form.text_color.data,
+            bg_color=form.bg_color.data,
+            border_color=form.border_color.data,
+        )
         return jsonify(status="ok")
     return json.dumps({"status": "error", "error": get_errors(form)})
 

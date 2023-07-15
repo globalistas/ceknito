@@ -1,6 +1,6 @@
 @extends("shared/sub.html")
 @import "shared/post.html" as ipost
-@require(sub, posts, page, sort_type, subInfo, flair)
+@require(sub, posts, page, sort_type, subInfo, flair, text_color, bg_color, border_color)
 
 
 @def title():
@@ -30,7 +30,7 @@
 
 <div id="flair">
   @if flair:
-    <span class="postflair">@{flair}</span>
+    <span class="postflair" style="color:@{text_color}; background-color:@{bg_color}; border-color:@{border_color};">@{flair}</span>
     <a href="@{url_for('sub.view_sub_hot', sub=sub['name'])}">@{_('(show all)')}</a>
   @end
 </div>
