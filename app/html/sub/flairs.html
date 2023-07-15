@@ -19,7 +19,7 @@
           <h4>@{_('Create new post flair (flair text only required)')}</h4>
           @{createflair.csrf_token()!!html}
           @{createflair.text(placeholder=_("Flair text", maxlength="25"))!!html}
-          <br><br>@{createflair.text_color(placeholder=_("Text color (e.g. #eee)", maxlength="15", pattern="[a-zA-Z0-9]+"))!!html}
+          <br><br>@{createflair.text_color(placeholder=_("Text color (e.g. #eee)", maxlength="15"))!!html}
           <br><br>@{createflair.bg_color(placeholder=_("Background color", maxlength="15"))!!html}
           <br><br>@{createflair.border_color(placeholder=_("Border color", maxlength="15"))!!html}
           <br><br><button type="submit" class="pure-button pure-button-primary" id="editsub-btnsubmit" data-prog="@{_('Saving...')}" data-success="@{_('Saved!')}">@{_('Add flair')}</button>
