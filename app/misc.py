@@ -1196,7 +1196,7 @@ def postListQueryBase(
         .join(
             SubFlair,
             JOIN.LEFT_OUTER,
-            on=(SubFlair.text == SubPost.flair),
+            on=((SubFlair.text == SubPost.flair) & (SubFlair.sid == SubPost.sid)),
         )
         .join(
             SubUserFlair,
