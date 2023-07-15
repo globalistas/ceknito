@@ -70,7 +70,11 @@
     @else:
       @{_('Score: %(score)i', score=post['score'])!!html}
     @endif
-    (@{round((post['upvotes'] / (post['upvotes'] + post['downvotes']) * 100))!!html}% @{_('upvoted')})
+    @if post['upvotes'] + post['downvotes'] == 0:
+      (0% @{_('upvoted')})
+    @else:
+      (@{round((post['upvotes'] / (post['upvotes'] + post['downvotes']) * 100))!!html}% @{_('upvoted')})
+    @endif
   </div>
 <hr>
   @include('shared/sidebar/sub.html')
