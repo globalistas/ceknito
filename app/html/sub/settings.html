@@ -80,7 +80,7 @@
           </div>
         @end
 
-        <h4>@{_('User flairs')}</h4>
+        <h4>@{_('Post flairs')}</h4>
         <div class="pure-control-group">
           <label for="usercanflair" class="pure-checkbox">
             @{editsubform.usercanflair(checked=True if metadata.get('ucf') else False)!!html}
@@ -95,7 +95,7 @@
           </label>
         </div>
 
-        <h4>@{_('Post flairs')}</h4>
+        <h4>@{_('User flairs')}</h4>
         <div class="pure-control-group">
           <label for="user_can_flair_self" class="pure-checkbox">
             @{editsubform.user_can_flair_self(checked=True if metadata.get('user_can_flair_self') else False)!!html}
