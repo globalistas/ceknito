@@ -177,6 +177,10 @@ body.dark .pchild {
   border-left: 1px dotted #65686b;
 }
 
+body.dark .score {
+  color: #888888;
+}
+
 body.dark .votebuttons {
   fill: #7d7d7d;
   color: #7d7d7d;
@@ -208,6 +212,10 @@ body.dark .commblock .content a:visited {
 
 body.dark .post .author {
   color: #7b7b7b;
+}
+
+body.dark div.post.mod>div>div>a.authorlink {
+  background-color: #888888;
 }
 
 body.dark .poster .op-tag {
