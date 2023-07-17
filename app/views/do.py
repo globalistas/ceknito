@@ -822,8 +822,7 @@ def assign_post_flair(sub, pid, fl):
     form = CsrfTokenOnlyForm()
     if form.validate():
         if current_user.is_mod(sub.sid) or (
-            post.uid_id == current_user.uid
-            and (sub.get_metadata("ucf") != "1" or sub.get_metadata("umf") != "1")
+            post.uid_id == current_user.uid and sub.get_metadata("ucf") == "1"
         ):
             try:
                 flair = SubFlair.get((SubFlair.xid == fl) & (SubFlair.sid == sub.sid))
