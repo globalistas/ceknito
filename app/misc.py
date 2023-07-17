@@ -3129,7 +3129,7 @@ def cast_vote(uid, target_type, pcid, value):
 
     if (datetime.utcnow() - target.posted.replace(tzinfo=None)) > timedelta(
         days=config.site.archive_post_after
-    ):
+    ) and target.id not in getStickyPid(target.sid):
         return jsonify(msg=_("Post is archived")), 400
 
     positive = True if voteValue == 1 else False
