@@ -1145,12 +1145,12 @@ img.block-blur {
 }
 
 .submitflair.selected {
-  color: #fff;
-  background-color: #101010;
+  color: #fff !important;
+  background-color: #101010 !important;
 }
 
 .submitflair.selected:hover {
-  background-color: #808080;
+  background-color: #808080 !important;
 }
 
 #flair-container {
@@ -1187,7 +1187,7 @@ img.block-blur {
 
 .selflair:hover,
 .submitflair:hover {
-  background-color: #d5d5d5;
+  background-color: #d5d5d5 !important;
 }
 
 .commenthead {

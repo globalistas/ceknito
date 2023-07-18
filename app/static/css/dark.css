@@ -885,9 +885,9 @@ body.dark .submitflair {
 }
 
 body.dark .submitflair.selected {
-  color: #ddd;
-  background-color: #161616;
-  border-color: #666;
+  color: #ddd !important;
+  background-color: #161616 !important;
+  border-color: #666 !important;
 }
 
 body.dark .submitflair:hover {

@@ -6,38 +6,38 @@ A link and discussion aggregator with snek (python3)
 
 ## Some major improvements over upstream (phuks.co)
 
-- imrpoved image quality for thumbnails
+- new post sort type (Commented) for all views. Sort buttons in Navbar instead of Sidebar
 - reddit-like comments look&feel
-- improved diacritics support
-- highlighting active sub in top bar
-- clickable sub navbar linking to sub home
+- new comment sort type (Old)
+- save comment functionality
 - expand all comments link
+- highlighting active sub in topbar
+- sub name display in navbar
+- clickable sub navbar linking to sub home
 - image/video expanded by default in sub post
 - support for image embeds in text posts and comments
 - working email notifications (see https://github.com/Phuks-co/throat/issues/525)
-- date in chat timestamps
 - post deletion directly from Home page or Sub page
+- config option for minimum post creation user level
+- config option to enable additional text in link post
 - config option for user badge auto-assignment (Early Adopter and First Post)
 - config option to send automated welcome message from site admin
 - poll options limit increased to 12
 - display of number of posts for a domain
 - alphabetic ordering of default subs
+- improved image quality for thumbnails
 - text posts with no content do not display an empty box
 - Bitchute video expando
 - Recent Activity comments permalinked
 - fixed mp4 uploads
+- improved diacritics support
+- translations support for Welcome page
+- post flair colors
 - primary site color picker
-- new post sort type (Commented) for all views. Sort buttons in Navbar instead of Sidebar
-- sub name display in Navbar
 - post body in post list view links to post
 - post score upovte percentage display
-- admin option for minimum post creation user level
-- translations support for Welcome page
 - fixed auto-quote selected text when replying to comments
-- save comment functionality
-- config option to enable additional text in link post
-- sort comments by oldest
-- post flair colors
+- date in chat timestamps
 
 ## Dependencies:
 
