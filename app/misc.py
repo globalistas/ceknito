@@ -2246,6 +2246,46 @@ def getUserGivenScore(uid):
     return pos + cpos, neg + cneg, (pos + cpos) - (neg + cneg)
 
 
+@cache.memoize(5)
+def getUserPostScore(uid):
+    pcount = SubPost.select().where(SubPost.uid == uid).count()
+    if config.site.self_voting.posts:
+        postscore = (
+            SubPost.select(fn.coalesce(fn.Sum(SubPost.score), 0))
+            .where(SubPost.uid == uid)
+            .scalar()
+            - pcount
+        )
+    else:
+        postscore = (
+            SubPost.select(fn.coalesce(fn.Sum(SubPost.score), 0))
+            .where(SubPost.uid == uid)
+            .scalar()
+        )
+
+    return postscore
+
+
+@cache.memoize(5)
+def getUserCommentScore(uid):
+    ccount = SubPostComment.select().where(SubPostComment.uid == uid).count()
+    if config.site.self_voting.comments:
+        commentscore = (
+            SubPostComment.select(fn.coalesce(fn.Sum(SubPostComment.score), 0))
+            .where(SubPostComment.uid == uid)
+            .scalar()
+            - ccount
+        )
+    else:
+        commentscore = (
+            SubPostComment.select(fn.coalesce(fn.Sum(SubPostComment.score), 0))
+            .where(SubPostComment.uid == uid)
+            .scalar()
+        )
+
+    return commentscore
+
+
 def iter_validate_css(obj, uris):
     for x in obj:
         if isinstance(x, URLToken):

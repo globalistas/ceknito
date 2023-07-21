@@ -1,5 +1,5 @@
 @extends("shared/layout.html")
-@require(user, level, progress, postCount, commentCount, givenScore, invitecodeinfo, badges, owns, mods, habits, msgform, target_user_is_admin, ignform)
+@require(user, level, progress, postCount, commentCount, givenScore, postScore, commentScore, invitecodeinfo, badges, owns, mods, habits, msgform, target_user_is_admin, ignform)
 
 @def title():
 /u/@{user.name} |\
@@ -63,7 +63,7 @@
                             <div>@{_('Phuks given')}</div>
                         </div>
                         <div class="statdiv">
-                            <div class="ucount">@{user.score}</div>
+                            <div class="ucount" title="@{_('Post score: %(postscore)s | Comment score: %(commentscore)s', postscore=postScore, commentscore=commentScore)}">@{user.score}</div>
                             <div>@{_('Total score')}</div>
                         </div>
                     </div>

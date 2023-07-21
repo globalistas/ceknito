@@ -4750,3 +4750,8 @@ msgstr "staré"
 #: app/html/sub/post.html:467
 msgid "Old"
 msgstr "Staré"
+
+#: app/html/user/profile.html:66
+#, python-format
+msgid "Post score: %(postscore)s | Comment score: %(commentscore)s"
+msgstr "Karma příspěvků: %(postscore)s | Karma komentářů: %(commentscore)s"
