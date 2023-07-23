@@ -135,13 +135,15 @@
         <a href="@{url_for('auth.register')}" class="pure-button button-secondary">@{_('Register')}</a>
         @else:
         <a href="@{ url_for('user.view', user=current_user.name)}" class="smallcaps" id="unameb">@{current_user.name}</a>
-        <span class="separator"></span>
-        <abbr title="@{_('Score')}: @{func.getUserPostScore(current_user.uid)} | @{func.getUserCommentScore(current_user.uid)}" class="bold" id="postscore">@{current_user.score}</abbr>
+        <span class="currentuserscore">
+          (<abbr title="@{_('Score')}: @{func.getUserPostScore(current_user.uid)} | @{func.getUserCommentScore(current_user.uid)}" class="bold" id="postscore">@{current_user.score}</abbr>)
+        </span>
         <span class="separator"></span>
         <div class="glyphbutton">
           <a href="/settings"><span class="p-icon" data-icon="cog"></span></a>
         </div>
-        <div class="glyphbutton sep ">
+        <span class="separator"></span>
+        <div class="glyphbutton">
           <a href="@{ url_for('messages.inbox_sort') }">
             <span class="hasmail">
               <span class="p-icon @{(current_user.notifications != 0) and 'hasmail' or ''}" data-icon="mail"></span>
@@ -150,6 +152,7 @@
           </a>
         </div>
         @if current_user.is_a_mod or current_user.can_admin:
+          <span class="separator"></span>
           <div class="glyphbutton">
           <a href="@{ url_for('mod.index') }">
             <span class="hasmail">
@@ -159,6 +162,7 @@
             </a>
           </div>
         @end
+        <span class="separator"></span>
         <div id="toggledark" class="glyphbutton">
           <span class="p-icon" data-icon="@{(request.cookies.get( "dayNight")=="dark") and 'sun' or 'moon'}"></span>
         </div>

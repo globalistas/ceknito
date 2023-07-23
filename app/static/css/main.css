@@ -18,6 +18,10 @@ abbr[title] {
   text-decoration: none;
 }
 
+.currentuserscore {
+  color: #afafaf;
+}
+
 .cw-brand {
   margin-left: 0.8em;
 }
