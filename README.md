@@ -14,7 +14,7 @@ A link and discussion aggregator with snek (python3)
 - highlighting active sub in topbar
 - sub name display in navbar
 - clickable sub navbar linking to sub home
-- image/video expanded by default in sub post
+- image and video posts expanded by default in sub post
 - support for image embeds in text posts and comments
 - working email notifications (see https://github.com/Phuks-co/throat/issues/525)
 - post deletion directly from Home page or Sub page
