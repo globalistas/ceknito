@@ -161,16 +161,21 @@ socket.on('mod-notification', function (d) {
   updateTitleNotifications();
 })
 
+// Using a thousands separator on current user's phuks taken
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 socket.on('uinfo', function (d) {
   updateNotifications(d.ntf);
   modData = d.mod_ntf;
   updateModNotifications(modData);
   updateTitleNotifications();
-  document.getElementById('postscore').innerHTML = d.taken;
+  document.getElementById('postscore').innerHTML = numberWithCommas(d.taken);
 });
 
 socket.on('uscore', function (d) {
-  document.getElementById('postscore').innerHTML = d.score;
+  document.getElementById('postscore').innerHTML = numberWithCommas(d.score);
 })
 
 socket.on('deletion', function (data) {

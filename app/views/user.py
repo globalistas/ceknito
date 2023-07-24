@@ -110,6 +110,8 @@ def view(user):
 
     commentScore = misc.getUserCommentScore(user.uid)
 
+    userScore = f"{user.score:,}"
+
     messages = content = "show"
     if (
         current_user.uid != user.uid
@@ -162,6 +164,7 @@ def view(user):
             "commentCount": ccount,
             "givenScore": givenScore,
             "postScore": postScore,
+            "userScore": userScore,
             "commentScore": commentScore,
             "invitecodeinfo": invitecodeinfo,
             "badges": badges,
