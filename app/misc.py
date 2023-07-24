@@ -2243,7 +2243,7 @@ def getUserGivenScore(uid):
         .count()
     )
 
-    return pos + cpos, neg + cneg, (pos + cpos) - (neg + cneg)
+    return f"{pos + cpos:,}", f"{neg + cneg:,}", f"{(pos + cpos) - (neg + cneg):,}"
 
 
 @cache.memoize(5)
