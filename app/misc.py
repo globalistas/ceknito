@@ -2263,7 +2263,7 @@ def getUserPostScore(uid):
             .scalar()
         )
 
-    return postscore
+    return f"{postscore:,}"
 
 
 @cache.memoize(5)
@@ -2283,7 +2283,7 @@ def getUserCommentScore(uid):
             .scalar()
         )
 
-    return commentscore
+    return f"{commentscore:,}"
 
 
 def iter_validate_css(obj, uris):
