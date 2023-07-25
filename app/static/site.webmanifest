@@ -1,6 +1,7 @@
 {
     "name": "čekni.to",
     "short_name": "čekni.to",
+    "start_url": "/",
     "icons": [
         {
             "src": "/img/android-chrome-192x192.png",
