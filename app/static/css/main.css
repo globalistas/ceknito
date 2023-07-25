@@ -2021,6 +2021,14 @@ form#msg-form {
   background-color: #ffc;
 }
 
+.collapsed-comment {
+    font-style: italic;
+}
+
+.collapsed-comment .togglecomment {
+    font-style: normal;
+}
+
 #modpop,
 #formpop,
 #blockpop {

@@ -707,10 +707,16 @@ u.addEventForChild(document, 'click', '.loadsibling', function (e, qelem) {
 // collapse/expand comment
 u.addEventForChild(document, 'click', '.togglecomment', function (e, qelem) {
     const cid = qelem.getAttribute('data-cid');
-    qelem.innerHTML = '[+]';
+    const commentHead = qelem.closest('.commenthead');
+
     if (qelem.classList.contains('collapse')) {
         qelem.classList.remove('collapse');
         qelem.classList.add('expand');
+        qelem.innerHTML = '[+]';
+
+        // Add CSS class to commenthead when the comment is collapsed
+        commentHead.classList.add('collapsed-comment');
+
         if (document.querySelector('#comment-' + cid + ' .votecomment .c-upvote')) {
             document.querySelector('#comment-' + cid + ' .votecomment .c-upvote').classList.add('hidden');
             document.querySelector('#comment-' + cid + ' .votecomment .c-downvote').classList.add('hidden');
@@ -722,9 +728,13 @@ u.addEventForChild(document, 'click', '.togglecomment', function (e, qelem) {
         document.querySelector('#comment-' + cid + ' .commblock .content').classList.add('hidden');
         document.querySelector('#child-' + cid).classList.add('hidden');
     } else {
-        qelem.innerHTML = '[–]';
         qelem.classList.add('collapse');
         qelem.classList.remove('expand');
+        qelem.innerHTML = '[–]';
+
+        // Remove CSS class from commenthead when the comment is expanded
+        commentHead.classList.remove('collapsed-comment');
+
         if (document.querySelector('#comment-' + cid + ' .votecomment .c-upvote')) {
             document.querySelector('#comment-' + cid + ' .votecomment .c-upvote').classList.remove('hidden');
             document.querySelector('#comment-' + cid + ' .votecomment .c-downvote').classList.remove('hidden');
@@ -737,6 +747,7 @@ u.addEventForChild(document, 'click', '.togglecomment', function (e, qelem) {
         document.querySelector('#child-' + cid).classList.remove('hidden');
     }
 });
+
 
 // reply to comment
 u.addEventForChild(document, 'click', '.reply-comment', function (e, qelem) {
