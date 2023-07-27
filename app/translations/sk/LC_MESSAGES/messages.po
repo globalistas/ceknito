@@ -3274,12 +3274,12 @@ msgstr "<a href=\"/u/%(user)s\">%(user)s</a> obnovil(a) tvoj príspevok v <a hre
 #: app/html/user/messages/notifications.html:86
 #, python-format
 msgid "Your comment. Posted %(timeago)s. <b class='cscore'>%(score)i</b> points."
-msgstr "Tvoj komentár. Zaslaný %(timeago)s. Skóre: <b class='cscore'>%(score)i</b>."
+msgstr "Tvoj komentár. Zaslaný %(timeago)s. Skóre: <b class='cscore'>%(score)i</b>"
 
 #: app/html/user/messages/notifications.html:96
 #, python-format
 msgid "Posted %(timeago)s. <b>%(score)s</b> points. Read %(timeagoread)s"
-msgstr "Pridané %(timeago)s. Skóre: <b>%(score)s</b>. Prečítané %(timeagoread)s"
+msgstr "Pridané %(timeago)s. Skóre: <b>%(score)s</b> . Prečítané %(timeagoread)s"
 
 #: app/html/user/messages/notifications.html:98
 #, python-format
