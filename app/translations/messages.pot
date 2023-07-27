@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2023-07-22 00:38+0200\n"
+"POT-Creation-Date: 2023-07-27 09:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -348,51 +348,51 @@ msgstr ""
 #: app/html/sub/post.html:56 app/html/sub/post.html:136
 #: app/html/sub/post.html:155 app/html/sub/post.html:205
 #: app/html/sub/post.html:214 app/html/sub/postcomments.html:37
-#: app/misc.py:2176 app/misc.py:2976 app/misc.py:2982 app/misc.py:2987
+#: app/misc.py:2176 app/misc.py:2994 app/misc.py:3000 app/misc.py:3005
 msgid "[Deleted]"
 msgstr ""
 
-#: app/misc.py:2280
+#: app/misc.py:2298
 msgid "URLs not allowed, uploaded files only"
 msgstr ""
 
-#: app/misc.py:2291
+#: app/misc.py:2309
 msgid "Invalid characters in string."
 msgstr ""
 
-#: app/misc.py:2309
+#: app/misc.py:2327
 msgid "@import token not allowed"
 msgstr ""
 
-#: app/misc.py:2325
+#: app/misc.py:2343
 msgid "Invalid CSS"
 msgstr ""
 
-#: app/html/sub/postcomments.html:50 app/misc.py:2957
+#: app/html/sub/postcomments.html:50 app/misc.py:2975
 msgid "[Blocked]"
 msgstr ""
 
-#: app/misc.py:2970
+#: app/misc.py:2988
 msgid "[deleted by user]"
 msgstr ""
 
-#: app/misc.py:3045
+#: app/misc.py:3063
 msgid "Already processing previous request."
 msgstr ""
 
-#: app/misc.py:3067
+#: app/misc.py:3085
 msgid "Unknown error. User disappeared"
 msgstr ""
 
-#: app/misc.py:3074
+#: app/misc.py:3092
 msgid "Score balance is negative"
 msgstr ""
 
-#: app/misc.py:3076
+#: app/misc.py:3094
 msgid "Invalid vote value"
 msgstr ""
 
-#: app/misc.py:3092 app/views/do.py:320 app/views/do.py:453 app/views/do.py:820
+#: app/misc.py:3110 app/views/do.py:320 app/views/do.py:453 app/views/do.py:820
 #: app/views/do.py:855 app/views/do.py:1235 app/views/do.py:1341
 #: app/views/do.py:2184 app/views/do.py:2290 app/views/do.py:2443
 #: app/views/do.py:2458 app/views/do.py:2562 app/views/do.py:2647
@@ -402,43 +402,43 @@ msgstr ""
 msgid "Post does not exist"
 msgstr ""
 
-#: app/misc.py:3095
+#: app/misc.py:3113
 msgid "You can't vote on your own posts"
 msgstr ""
 
-#: app/misc.py:3097
+#: app/misc.py:3115
 msgid "You can't vote on deleted posts"
 msgstr ""
 
-#: app/misc.py:3130 app/views/do.py:2474 app/views/do.py:2489
+#: app/misc.py:3148 app/views/do.py:2474 app/views/do.py:2489
 #: app/views/do.py:2612 app/views/do.py:2931 app/views/do.py:2979
 #: app/views/do.py:3078 app/views/do.py:4130 app/views/do.py:4243
 msgid "Comment does not exist"
 msgstr ""
 
-#: app/misc.py:3133
+#: app/misc.py:3151
 msgid "You can't vote on your own comments"
 msgstr ""
 
-#: app/misc.py:3135
+#: app/misc.py:3153
 msgid "You can't vote on deleted comments"
 msgstr ""
 
-#: app/misc.py:3147
+#: app/misc.py:3165
 msgid "Invalid target"
 msgstr ""
 
-#: app/misc.py:3150 app/views/do.py:1289 app/views/do.py:2191
+#: app/misc.py:3168 app/views/do.py:1289 app/views/do.py:2191
 #: app/views/do.py:2943
 msgid "You are banned on this sub."
 msgstr ""
 
-#: app/misc.py:3155 app/views/do.py:1292 app/views/do.py:1346
+#: app/misc.py:3173 app/views/do.py:1292 app/views/do.py:1346
 #: app/views/do.py:2954
 msgid "Post is archived"
 msgstr ""
 
-#: app/misc.py:3509
+#: app/misc.py:3527
 msgid "Invalid status request"
 msgstr ""
 
@@ -1011,8 +1011,8 @@ msgstr ""
 msgid "message"
 msgstr ""
 
-#: app/html/chat.html:12 app/html/shared/layout.html:237
-#: app/html/shared/sub.html:241
+#: app/html/chat.html:12 app/html/shared/layout.html:241
+#: app/html/shared/sub.html:245
 msgid "Type here"
 msgstr ""
 
@@ -1022,7 +1022,7 @@ msgid "Served by %(host)s"
 msgstr ""
 
 #: app/html/errors/layout.html:101 app/html/index.html:18
-#: app/html/shared/layout.html:220 app/html/shared/sub.html:224
+#: app/html/shared/layout.html:224 app/html/shared/sub.html:228
 msgid "Page generated in __EXECUTION_TIME__ms with __DB_QUERIES__ queries"
 msgstr ""
 
@@ -1113,7 +1113,7 @@ msgid "Saving..."
 msgstr ""
 
 #: app/html/admin/configuration.html:68 app/static/js/Post.js:363
-#: app/static/js/Post.js:418 app/static/js/Post.js:771
+#: app/static/js/Post.js:418 app/static/js/Post.js:782
 msgid "Cancel"
 msgstr ""
 
@@ -1129,7 +1129,7 @@ msgid ""
 msgstr ""
 
 #: app/html/admin/createwiki.html:37 app/html/mod/reportdetails.html:229
-#: app/static/js/Post.js:892 app/templates/messages/reply.html:16
+#: app/static/js/Post.js:903 app/templates/messages/reply.html:16
 msgid "Submit"
 msgstr ""
 
@@ -1339,8 +1339,8 @@ msgstr ""
 msgid "License"
 msgstr ""
 
-#: app/html/errors/layout.html:99 app/html/shared/layout.html:218
-#: app/html/shared/sub.html:222
+#: app/html/errors/layout.html:99 app/html/shared/layout.html:222
+#: app/html/shared/sub.html:226
 #, python-format
 msgid "Served by %(hostname)s"
 msgstr ""
@@ -1725,16 +1725,16 @@ msgstr ""
 msgid "Score"
 msgstr ""
 
-#: app/html/shared/layout.html:174 app/html/shared/sub.html:178
-#: app/templates/layout.html:158
+#: app/html/shared/layout.html:178 app/html/shared/sub.html:182
+#: app/templates/layout.html:162
 msgid "Log out"
 msgstr ""
 
-#: app/html/shared/layout.html:216 app/html/shared/sub.html:220
+#: app/html/shared/layout.html:220 app/html/shared/sub.html:224
 msgid "Contact us"
 msgstr ""
 
-#: app/html/shared/layout.html:230 app/html/shared/sub.html:234
+#: app/html/shared/layout.html:234 app/html/shared/sub.html:238
 msgid "Chat"
 msgstr ""
 
@@ -1793,7 +1793,7 @@ msgstr ""
 #: app/html/user/messages/notifications.html:26
 #: app/html/user/messages/notifications.html:31
 #: app/html/user/messages/notifications.html:36
-#: app/html/user/savedcomments.html:46 app/static/js/Socket.js:190
+#: app/html/user/savedcomments.html:46 app/static/js/Socket.js:195
 #: app/templates/indexpost.html:47
 msgid "NSFW"
 msgstr ""
@@ -2495,7 +2495,7 @@ msgstr ""
 #: app/html/sub/createpost.html:137 app/html/sub/createpost.html:142
 #: app/html/sub/post.html:392 app/html/user/profile.html:187
 #: app/static/js/Post.js:362 app/static/js/Post.js:417
-#: app/static/js/Post.js:502 app/static/js/Post.js:770
+#: app/static/js/Post.js:502 app/static/js/Post.js:781
 #: app/templates/messages/reply.html:17
 msgid "Preview"
 msgstr ""
@@ -2939,8 +2939,8 @@ msgid "Submit comment"
 msgstr ""
 
 #: app/html/sub/post.html:394 app/static/js/Post.js:364
-#: app/static/js/Post.js:419 app/static/js/Post.js:772
-#: app/static/js/Post.js:795
+#: app/static/js/Post.js:419 app/static/js/Post.js:783
+#: app/static/js/Post.js:806
 msgid "Comment preview"
 msgstr ""
 
@@ -3041,8 +3041,8 @@ msgstr ""
 
 #: app/html/sub/postcomments.html:153 app/html/user/comments.html:96
 #: app/html/user/messages/notifications.html:106
-#: app/html/user/messages/notifications.html:117 app/static/js/Post.js:746
-#: app/static/js/Post.js:749 app/templates/messages/messages.html:39
+#: app/html/user/messages/notifications.html:117 app/static/js/Post.js:757
+#: app/static/js/Post.js:760 app/templates/messages/messages.html:39
 #: app/templates/messages/saved.html:36
 msgid "reply"
 msgstr ""
@@ -3659,7 +3659,7 @@ msgstr ""
 
 #: app/html/user/messages/notifications.html:86
 #, python-format
-msgid "Your comment. Posted %(timeago)s. <b>%(score)i</b> points."
+msgid "Your comment. Posted %(timeago)s. <b class='cscore'>%(score)i</b> points."
 msgstr ""
 
 #: app/html/user/messages/notifications.html:96
@@ -3812,7 +3812,7 @@ msgstr ""
 
 #: app/static/js/Mod.js:24 app/static/js/Mod.js:39 app/static/js/Mod.js:68
 #: app/static/js/Mod.js:83 app/static/js/Post.js:444 app/static/js/Post.js:465
-#: app/static/js/Post.js:505 app/static/js/Post.js:1015
+#: app/static/js/Post.js:505 app/static/js/Post.js:1026
 #: app/static/js/Util.js:77
 msgid "Could not contact the server"
 msgstr ""
@@ -3914,71 +3914,71 @@ msgstr ""
 msgid "Grabbing..."
 msgstr ""
 
-#: app/static/js/Post.js:769
+#: app/static/js/Post.js:780
 msgid "Post comment"
 msgstr ""
 
-#: app/static/js/Post.js:823
+#: app/static/js/Post.js:834
 msgid "1 comment"
 msgstr ""
 
-#: app/static/js/Post.js:832
+#: app/static/js/Post.js:843
 msgid "%1 comments"
 msgstr ""
 
-#: app/static/js/Post.js:859
+#: app/static/js/Post.js:870
 msgid "Could not contact the server "
 msgstr ""
 
-#: app/static/js/Post.js:865
+#: app/static/js/Post.js:876
 msgid "Report post"
 msgstr ""
 
-#: app/static/js/Post.js:866
+#: app/static/js/Post.js:877
 msgid "This report will be forwarded to the site administration"
 msgstr ""
 
-#: app/static/js/Post.js:869
+#: app/static/js/Post.js:880
 msgid "Select a reason to report this post:"
 msgstr ""
 
-#: app/static/js/Post.js:871 app/static/js/Post.js:881
+#: app/static/js/Post.js:882 app/static/js/Post.js:892
 msgid "Select one..."
 msgstr ""
 
-#: app/static/js/Post.js:872
+#: app/static/js/Post.js:883
 msgid "SPAM"
 msgstr ""
 
-#: app/static/js/Post.js:873
+#: app/static/js/Post.js:884
 msgid "TOS violation"
 msgstr ""
 
-#: app/static/js/Post.js:874
+#: app/static/js/Post.js:885
 msgid "Sub Rule violation"
 msgstr ""
 
-#: app/static/js/Post.js:875
+#: app/static/js/Post.js:886
 msgid "Other"
 msgstr ""
 
-#: app/static/js/Post.js:879
+#: app/static/js/Post.js:890
 msgid "Which Sub rule did this post violate?"
 msgstr ""
 
-#: app/static/js/Post.js:883
+#: app/static/js/Post.js:894
 msgid "Other sub rule"
 msgstr ""
 
-#: app/static/js/Post.js:887
+#: app/static/js/Post.js:898
 msgid "Explain why you're reporting this post:"
 msgstr ""
 
-#: app/static/js/Post.js:1008
+#: app/static/js/Post.js:1019
 msgid "Error: "
 msgstr ""
 
-#: app/static/js/Post.js:1011
+#: app/static/js/Post.js:1022
 msgid "Your report has been sent and will be reviewed by the site administrators."
 msgstr ""
 
@@ -4239,7 +4239,7 @@ msgstr ""
 msgid "User not found or invalid ticket"
 msgstr ""
 
-#: app/views/auth.py:122 app/views/subs.py:150 app/views/user.py:440
+#: app/views/auth.py:122 app/views/subs.py:150 app/views/user.py:443
 msgid "Invalid captcha."
 msgstr ""
 
@@ -5015,19 +5015,19 @@ msgstr ""
 msgid "You cannot own more than %(max)i subs. Try leveling up your account."
 msgstr ""
 
-#: app/views/user.py:401
+#: app/views/user.py:404
 msgid "The link you used is invalid or has expired"
 msgstr ""
 
-#: app/views/user.py:407
+#: app/views/user.py:410
 msgid "Your password recovery email address is now confirmed!"
 msgstr ""
 
-#: app/views/user.py:411
+#: app/views/user.py:414
 msgid "Unable to confirm your new email address. Please try again later."
 msgstr ""
 
-#: app/views/user.py:470
+#: app/views/user.py:473
 msgid "Password reset link was invalid or expired"
 msgstr ""
 
