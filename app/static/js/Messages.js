@@ -59,6 +59,7 @@ u.sub('.deletenotif', 'click', function(e){
       obj.innerHTML = _('deleted');
       obj.classList.remove('deletemsg');
       obj.classList.add('deletedmsg');
+      location.reload();
     }
   });
 });
