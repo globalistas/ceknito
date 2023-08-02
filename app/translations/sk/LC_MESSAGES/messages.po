@@ -4755,3 +4755,7 @@ msgstr "Staré"
 #, python-format
 msgid "Post score: %(postscore)s | Comment score: %(commentscore)s"
 msgstr "Karma príspevkov: %(postscore)s | Karma komentárov: %(commentscore)s"
+
+#: app/html/user/savedposts.html:33
+msgid "You have not saved any posts, yet."
+msgstr "Nemáš uložené žiadne príspevky."
