@@ -39,7 +39,7 @@
 
 @def main():
 
-  @if func.getStickyPid:
+  @if func.getStickyPid and page == 1:
     <div class="stickyposts">
       @for post in func.getStickies(sub['sid']):
         @if flair is None or post['flair'] == flair:
