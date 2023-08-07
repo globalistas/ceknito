@@ -216,7 +216,7 @@
         sublink = '<a href="/' + config.site.sub_prefix + '/' + post['sub'] + '">' + post['sub'] + '</a>'
         )
         @{_('posted %(timeago)s by %(user)s', timeago=timeago, user=user_html)!!html}
-        @if sub and post['pid'] in func.getStickyPid(sub['sid']):
+        @if post['pid'] in func.getStickyPid(sub['sid']):
         - <span class="stick">@{_('sticky')}</span>
         @end
       </div>
