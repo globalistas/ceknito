@@ -1069,7 +1069,12 @@ img.block-blur {
 }
 
 .stick {
-  color: #009300
+  color: #0EA34E;
+}
+
+.stickytitle {
+  color: #0EA34E !important;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 50.999em) {

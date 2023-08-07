@@ -1021,6 +1021,10 @@ body.dark .stick {
   color: #2c8b05;
 }
 
+body.dark .stickytitle {
+    color: #2c8b05 !important;
+}
+
 body.dark .pblock.level .uprofile-level-box .fill {
   clip: rect(0px, 60px, 120px, 0px);
   background-color: #526a7d;
