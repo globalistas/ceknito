@@ -116,7 +116,7 @@
         <div class="current history" data-id="0">
         @if post['link'] == None:
           <h1>
-            @if func.getAnnouncement()['pid'] == post['pid']:
+            @if func.getAnnouncement() and func.getAnnouncement()['pid'] == post['pid']:
               <span class="announcement">@{_('Announcement')}</span>
             @end
             @if post['ptype'] == 3:
