@@ -113,13 +113,15 @@
     </div>
     <div class="postinfo" id="postinfo" pid="@{post['pid']}">
       <div class="post-heading">
-        @if post['nsfw'] or sub['nsfw']:
-          <div class="nsfw" alt="@{_('Not safe for work')}">@{_('NSFW')}</div>
-        @end
-
         <div class="current history" data-id="0">
         @if post['link'] == None:
           <h1>
+            @if func.getAnnouncement()['pid'] == post['pid']:
+              <span class="announcement">@{_('Announcement')}</span>
+            @end
+            @if post['ptype'] == 3:
+              <span class="pollflair">@{_('Poll')}</span> \
+            @end
             @if post['flair']:
               <a class="postflair" style="color:@{post['text_color']}; background-color:@{post['bg_color']}; border-color:@{post['border_color']};" href="@{url_for('sub.view_sub_hot', sub=post['sub'], flair=post['flair'])}">@{post['flair']}</a> \
             @end
@@ -159,6 +161,9 @@
               @if post['deleted'] == 0:
               <a href="/domain/@{func.getDomain(post['link'])}" class="domain">(@{func.getDomain(post['link'])})</a>
               @end
+        @end
+        @if post['nsfw'] or sub['nsfw']:
+          <div class="nsfw" alt="@{_('Not safe for work')}">@{_('NSFW')}</div>
         @end
         </div>
 
