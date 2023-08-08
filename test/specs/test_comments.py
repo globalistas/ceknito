@@ -77,6 +77,7 @@ def test_comment_sort(client, user_info):
         "new": ["newest", "middle", "oldest"],
         "top": ["oldest", "middle", "newest"],
         "best": ["middle", "newest", "oldest"],
+        "old": ["middle", "newest", "oldest"],
     }
 
     for num, user in enumerate(users):
