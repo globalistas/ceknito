@@ -23,7 +23,7 @@
 <div class="subinfo">
   <h3><a href="@{url_for('sub.view_sub', sub=sub['name'])}">/@{config.site.sub_prefix}/@{sub['name']}</a> \
   @if sub['nsfw']:
-    <div class="nsfw" alt="@{_('Not safe for work')}">@{_('NSFW')}</div> \
+    <div class="nsfw" title="@{_('Not safe for work')}">@{_('NSFW')}</div> \
   @end
   </h3>
 </div>

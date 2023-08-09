@@ -46,7 +46,7 @@
                   @endif
                   <span class="@{comment['blur']}">@{comment['title']}</span>
                   @if comment['sub_nsfw'] or comment['nsfw']:
-                    <div class="nsfw" alt="Not safe for work">@{_('NSFW')}</div>
+                    <div class="nsfw" title="@{_('Not safe for work')}">@{_('NSFW')}</div>
                   @end
                 </a></span>
                 @{_('on')} <a href="@{url_for('sub.view_sub', sub=comment['sub'])}">@{comment['sub']}</a>

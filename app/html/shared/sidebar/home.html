@@ -26,7 +26,7 @@
           @end
           <a class="title @{post['blur']}" href="@{url_for('sub.view_post', sub=post['sub'], pid=post['pid'])}">@{post['title']}</a>
           @if post['nsfw'] or post['sub_nsfw']:
-            <span class="nsfw" alt="Not safe for work">@{_('NSFW')}</span>
+            <span class="nsfw" title="@{_('Not safe for work')}">@{_('NSFW')}</span>
           @endif
           <div class="sidelocale">
             @{_("%(timeago)s in %(sub)s", timeago='<time-ago datetime="' + post['posted'].isoformat() + 'Z"></time-ago>', sub='<a href="' + url_for('sub.view_sub', sub=post['sub']) + '">/' + config.site.sub_prefix + '/' + post['sub'] + '</a>') !!html}
@@ -50,7 +50,7 @@
             @{_('%(user)s posted: %(text)s', user='<a href="/u/' + post['user'] + '">' + post['user'] + '</a>', text='<a class="title ' + post['blur'] + '" href="' + url_for('sub.view_post', sub=post['sub'], pid=post['pid']) + '"><br>' + e(func.word_truncate(post['content'], 150)) + '</a>')!!html}
           @end
           @if post['nsfw'] or post['sub_nsfw']:
-            <span class="nsfw smaller" alt="Not safe for work">@{_('NSFW')}</span>
+            <span class="nsfw smaller" title="@{_('Not safe for work')}">@{_('NSFW')}</span>
           @endif
           <div class="sidelocale">
             @{_("%(timeago)s in %(sub)s", timeago='<time-ago datetime="' + post['time'].isoformat() + 'Z"></time-ago>', sub='<a href="' + url_for('sub.view_sub', sub=post['sub']) + '">/' + config.site.sub_prefix + '/' + post['sub'] + '</a>') !!html}
