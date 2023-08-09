@@ -192,7 +192,7 @@ socket.on('comment', function (data) {
     }
     const showNSFWBlur = document.getElementById('pagefoot-nsfw-blur').getAttribute('data-value') == 'True';
     const nsfwClass = (data.nsfw && showNSFWBlur) ? 'nsfw-blur' : '';
-    const nsfwElem = data.nsfw ? ('<span class="nsfw smaller" title="Not safe for work">' + _('NSFW') + '</span>') : '';
+    const nsfwElem = data.nsfw ? ('<span class="nsfw smaller" title="' + _('Not safe for work') + '">' + _('NSFW') + '</span>') : '';
     const content = data.content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     const elem = document.createElement('li');
     elem.innerHTML = _('%1 commented "%2" in %3 %4',
@@ -214,7 +214,7 @@ socket.on('thread', function (data) {
   }
   const showNSFWBlur = document.getElementById('pagefoot-nsfw-blur').getAttribute('data-value') == 'True';
   const nsfwClass = (data.nsfw && showNSFWBlur) ? 'nsfw-blur' : '';
-  const nsfwElem = data.nsfw ? ('<span class="nsfw smaller" title="Not safe for work">' + _('NSFW') + '</span>') : '';
+  const nsfwElem = data.nsfw ? ('<span class="nsfw smaller" title="' + _('Not safe for work') + '">' + _('NSFW') + '</span>') : '';
   const recentActivity = document.getElementById('activity_list');
   const title = data.title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   if (recentActivity) {
