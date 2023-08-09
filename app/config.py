@@ -535,6 +535,13 @@ configurable_defaults = {
                 ),
                 "value": "",
             },
+            "ann_sub": {
+                "type": "string",
+                "doc": _l(
+                    "Sets the sub used for announcements. Default is 'announcements'."
+                ),
+                "value": "announcements",
+            },
         },
     },
     "storage": {
