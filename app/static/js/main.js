@@ -691,7 +691,15 @@ for (var i = 0; i < pbodyElements.length; i++) {
     //check if clicked element is some link or not
     if (elementName == "A") {
       //ignore this script if is clicked on this buttons
-      if (event.target.className == "expando" || event.target.className == "unblk" || event.target.className == "report-post" || event.target.className == "delete-post" || event.target.className == "title nsfw-blur False" || event.target.className == "title nsfw-blur " || event.target.className == "" || event.target.className === undefined) {
+      if (event.target.classList.contains("expando")
+        || event.target.classList.contains("unblk")
+        || event.target.classList.contains("report-post")
+        || event.target.classList.contains("delete-post")
+        || event.target.classList.contains("title")
+        || event.target.classList.contains("nsfw-blur")
+        || event.target.classList.contains("False")
+        || event.target.className == ""
+        || event.target.className === undefined) {
         return false;
       }
       //if is link get url and just redirect like a normal link
@@ -705,7 +713,7 @@ for (var i = 0; i < pbodyElements.length; i++) {
         }
       } else {
         //if clicked link is title open in new tab, otherwise not
-        if (event.target.className == "title  False") {
+        if (event.target.classList.contains("title") || event.target.classList.contains("False")) {
           window.open(link, "_blank");
         } else {
           window.location.href = link;
