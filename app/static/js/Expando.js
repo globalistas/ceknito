@@ -119,6 +119,10 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch){
         if(data.status == 'ok'){
           expando.querySelector('.expandotxt').innerHTML = data.content;
         }
+        const showNSFWBlur = document.getElementById('pagefoot-nsfw-blur').getAttribute('data-value') == 'True';
+        if (showNSFWBlur) {
+          expando.classList.add('nsfw-blur');
+        }
       })
     }else{
       var domain = get_hostname(link);
