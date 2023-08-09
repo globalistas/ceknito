@@ -691,7 +691,7 @@ for (var i = 0; i < pbodyElements.length; i++) {
     //check if clicked element is some link or not
     if (elementName == "A") {
       //ignore this script if is clicked on this buttons
-      if (event.target.className == "expando" || event.target.className == "unblk" || event.target.className == "report-post" || event.target.className == "delete-post" || event.target.className == "title nsfw-blur False" || event.target.className == "title nsfw-blur " || event.target.className == "" || event.target.className === undefined) {
+      if (event.target.className == "expando" || event.target.className == "unblk" || event.target.className == "report-post" || event.target.className == "delete-post" || event.target.className == "" || event.target.className === undefined) {
         return false;
       }
       //if is link get url and just redirect like a normal link
