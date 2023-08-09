@@ -121,7 +121,7 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch){
         }
         const parentDiv = expando.parentElement;
 
-        const showNSFWBlur = parentDiv.querySelector('.nsfw') !== null;
+        const showNSFWBlur = parentDiv.querySelector('.title.nsfw-blur') !== null;
 
         if (showNSFWBlur) {
           expando.classList.add('nsfw-blur');
