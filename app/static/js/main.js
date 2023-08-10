@@ -679,49 +679,32 @@ for (var i = 0; i < subscribeButtons.length; i++) {
 }
 
 // Enable href to post on pbody class
-//get all pbody elements
 var pbodyElements = document.querySelectorAll('.pbody');
-//loop each one of them and attach onclick event
-for (var i = 0; i < pbodyElements.length; i++) {
-	//attach onclick event
-	var pbody = pbodyElements[i];
-	pbody.addEventListener('click', function handleClick(event) {
-		var elementName = event.target.tagName;
-		//check if clicked element is some link or not
-		if (elementName == "A") {
-			//ignore this script if is clicked on this buttons
-			if (event.target.classList.contains("expando") ||
-				event.target.classList.contains("unblk") ||
-				event.target.classList.contains("report-post") ||
-				event.target.classList.contains("delete-post") ||
-				event.target.classList.contains("title") ||
-				event.target.classList.contains("nsfw-blur") ||
-				event.target.classList.contains("False") ||
-				event.target.className == "" ||
-				event.target.className === undefined) {
-				return false;
-			}
-			//if is link get url and just redirect like a normal link
-			var link = event.target.href;
-            //if clicked link is title open in new tab, otherwise not
-            if (event.target.classList.contains("title") || event.target.classList.contains("False")) {
-                window.open(link, "_blank");
-            } else {
-                window.location.href = link;
+pbodyElements.forEach(pbody => {
+    pbody.addEventListener('click', function handleClick(event) {
+        var elementName = event.target.tagName;
+        if (elementName === "A") {
+            var targetClasses = event.target.classList;
+            if (targetClasses.contains("report-post") ||
+                targetClasses.contains("delete-post") ||
+                targetClasses.contains("title") ||
+                targetClasses.contains("nsfw-blur") ||
+                targetClasses.contains("False") ||
+                targetClasses.length === 0 ||
+                targetClasses === undefined) {
+                return false;
             }
-		} else if (event.target.closest('.post-heading') !== null) {
-			//ignore clicks inside post-heading element
-			return false;
-		} else {
-			//if is not link get comment link and redirect
-			event.preventDefault(); //stop html link to work;
-			var commentsElement = this.querySelector(".comments");
-			if (commentsElement !== null && commentsElement.href !== undefined) {
-				window.location.href = commentsElement.href;
-			}
-		}
-	});
-};
+        } else if (event.target.closest('.post-heading')) {
+            return false;
+        } else {
+            event.preventDefault();
+            var commentsElement = this.querySelector(".comments");
+            if (commentsElement && commentsElement.href) {
+                window.location.href = commentsElement.href;
+            }
+        }
+    });
+});
 
 function getRandomColor() {
   // Generate a random number between 0 and 16777215 (0xFFFFFF in decimal)
