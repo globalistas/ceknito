@@ -683,56 +683,44 @@ for (var i = 0; i < subscribeButtons.length; i++) {
 var pbodyElements = document.querySelectorAll('.pbody');
 //loop each one of them and attach onclick event
 for (var i = 0; i < pbodyElements.length; i++) {
-  //attach onclick event
-  var pbody = pbodyElements[i];
-  pbody.addEventListener('click', function handleClick(event) {
-
-    var elementName = event.target.tagName;
-    //check if clicked element is some link or not
-    if (elementName == "A") {
-      //ignore this script if is clicked on this buttons
-      if (event.target.classList.contains("expando")
-        || event.target.classList.contains("unblk")
-        || event.target.classList.contains("report-post")
-        || event.target.classList.contains("delete-post")
-        || event.target.classList.contains("title")
-        || event.target.classList.contains("nsfw-blur")
-        || event.target.classList.contains("False")
-        || event.target.className == ""
-        || event.target.className === undefined) {
-        return false;
-      }
-      //if is link get url and just redirect like a normal link
-      var link = event.target.href;
-      //check if link is relative or not
-      if (link.indexOf("cekni.to") !== -1 && link.indexOf("uploads.cekni.top") !== -1 && link.indexOf("flair=") === -1 && link.indexOf("/domain/") === -1 && link.indexOf("/u/") === -1) {
-        event.preventDefault();
-        var commentsElement = this.querySelector(".comments");
-        if (commentsElement !== null && commentsElement.href !== undefined) {
-          window.location.href = commentsElement.href;
-        }
-      } else {
-        //if clicked link is title open in new tab, otherwise not
-        if (event.target.classList.contains("title") || event.target.classList.contains("False")) {
-          window.open(link, "_blank");
-        } else {
-          window.location.href = link;
-        }
-      }
-    } else if (event.target.closest('.post-heading') !== null) {
-      //ignore clicks inside post-heading element
-      return false;
-    } else {
-      //if is not link get comment link and redirect
-      event.preventDefault();//stop html link to work;
-      var commentsElement = this.querySelector(".comments");
-      if (commentsElement !== null && commentsElement.href !== undefined) {
-        window.location.href = commentsElement.href;
-      }
-    }
-
-  });
-
+	//attach onclick event
+	var pbody = pbodyElements[i];
+	pbody.addEventListener('click', function handleClick(event) {
+		var elementName = event.target.tagName;
+		//check if clicked element is some link or not
+		if (elementName == "A") {
+			//ignore this script if is clicked on this buttons
+			if (event.target.classList.contains("expando") ||
+				event.target.classList.contains("unblk") ||
+				event.target.classList.contains("report-post") ||
+				event.target.classList.contains("delete-post") ||
+				event.target.classList.contains("title") ||
+				event.target.classList.contains("nsfw-blur") ||
+				event.target.classList.contains("False") ||
+				event.target.className == "" ||
+				event.target.className === undefined) {
+				return false;
+			}
+			//if is link get url and just redirect like a normal link
+			var link = event.target.href;
+            //if clicked link is title open in new tab, otherwise not
+            if (event.target.classList.contains("title") || event.target.classList.contains("False")) {
+                window.open(link, "_blank");
+            } else {
+                window.location.href = link;
+            }
+		} else if (event.target.closest('.post-heading') !== null) {
+			//ignore clicks inside post-heading element
+			return false;
+		} else {
+			//if is not link get comment link and redirect
+			event.preventDefault(); //stop html link to work;
+			var commentsElement = this.querySelector(".comments");
+			if (commentsElement !== null && commentsElement.href !== undefined) {
+				window.location.href = commentsElement.href;
+			}
+		}
+	});
 };
 
 function getRandomColor() {
