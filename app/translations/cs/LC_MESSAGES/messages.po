@@ -2294,7 +2294,7 @@ msgstr "Uloženo!"
 #: app/html/user/topbar.html:13 app/static/js/main.js:176
 #: app/static/js/main.js:180
 msgid "Save"
-msgstr "uložit"
+msgstr "Uložit"
 
 #: app/html/sub/css.html:35
 msgid "Upload files"
