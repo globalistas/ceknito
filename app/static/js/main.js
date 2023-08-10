@@ -682,26 +682,33 @@ for (var i = 0; i < subscribeButtons.length; i++) {
 var pbodyElements = document.querySelectorAll('.pbody');
 pbodyElements.forEach(pbody => {
     pbody.addEventListener('click', function handleClick(event) {
-        var elementName = event.target.tagName;
-        if (elementName === "A") {
-            var targetClasses = event.target.classList;
-            if (targetClasses.contains("report-post") ||
-                targetClasses.contains("delete-post") ||
-                targetClasses.contains("title") ||
-                targetClasses.contains("nsfw-blur") ||
-                targetClasses.contains("False") ||
-                targetClasses.length === 0 ||
-                targetClasses === undefined) {
-                return false;
-            }
-        } else if (event.target.closest('.post-heading')) {
-            return false;
-        } else {
+        const redirToPost = () => {
             event.preventDefault();
             var commentsElement = this.querySelector(".comments");
             if (commentsElement && commentsElement.href) {
                 window.location.href = commentsElement.href;
             }
+        }
+
+        var elementName = event.target.tagName;
+        if (elementName === "A") {
+            var targetClasses = event.target.classList;
+            if (targetClasses.contains("report-post") ||
+                targetClasses.contains("delete-post") ||
+                targetClasses.contains("authorlink") ||
+                targetClasses.contains("nsfw-blur") ||
+                targetClasses.contains("domain") ||
+                targetClasses.length === 0 ||
+                targetClasses === undefined) {
+                return false;
+            }
+            if (this.querySelector('[data-icon="image"]')) {
+                redirToPost()
+            }
+        } else if (event.target.closest('.post-heading')) {
+            return false;
+        } else {
+            redirToPost()
         }
     });
 });
