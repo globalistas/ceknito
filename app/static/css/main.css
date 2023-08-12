@@ -19,7 +19,7 @@ abbr[title] {
 }
 
 .currentuserscore {
-  color: #afafaf;
+  color: #bbb;
 }
 
 .cw-brand {
@@ -560,7 +560,7 @@ span#notification.fade {
 }
 
 .editbar path {
-  fill: white;
+  fill: #eee;
 }
 
 .p-icon {
@@ -1429,7 +1429,7 @@ span.hasmail {
 /* SUB BAR STYLES */
 
 .dropdown-toggle.moremenu {
-  color: white;
+  color: #eee;
   text-align: center;
   font-size: smaller;
   cursor: pointer;
@@ -1511,14 +1511,19 @@ span.hasmail {
 }
 
 .th-subbar ul li {
-  color: #fff;
+  color: #eee;
   display: inline-block;
   margin: 0 5px;
 }
 
 .th-subbar ul li a {
+  color: #9e9e9e;
+  font-size: 14px;
+  transition: all .15s ease;
+}
+
+.th-subbar ul li a:hover {
   color: #eee;
-  font-size: .9em;
 }
 
 .th-subbar ul li.editbar {
