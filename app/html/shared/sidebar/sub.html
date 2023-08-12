@@ -145,3 +145,8 @@
 @if config.site.force_sublog_public or (subInfo.get('sub_banned_users_private', 0) != '1') or (current_user.uid in (subMods['all'])) or current_user.can_admin:
   <a href="@{url_for('sub.view_sub_bans', sub=sub['name'])}" class="sbm-post pure-button">@{_('Banned Users')}</a>
 @end
+@if (config.site.sub_creation_admin_only == False and current_user.is_authenticated) or current_user.is_admin():
+  <a href="@{url_for('subs.create_sub')}" class="sbm-post pure-button">@{_('Create a sub')}</a>
+@end
+<a href="@{url_for('subs.random_sub')}" class="sbm-post pure-button">@{_('Go to random sub')}</a>
+<a href="@{url_for('home.view_subs')}" class="sbm-post pure-button">@{_('View all subs')}</a>

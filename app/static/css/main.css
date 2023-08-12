@@ -19,7 +19,7 @@ abbr[title] {
 }
 
 .currentuserscore {
-  color: #afafaf;
+  color: #bbb;
 }
 
 .cw-brand {
@@ -1519,6 +1519,11 @@ span.hasmail {
 .th-subbar ul li a {
   color: #eee;
   font-size: .9em;
+  transition: all .15s ease;
+}
+
+.th-subbar ul li a:hover {
+  color: #c90511;
 }
 
 .th-subbar ul li.editbar {
