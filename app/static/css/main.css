@@ -712,8 +712,8 @@ a.pure-button-primary {
   text-decoration: none;
   line-height: 1.6em;
   font-size: 1em;
-  /* font-weight: bold; */
   word-wrap: break-word;
+  transition: all .15s ease;
 }
 
 .post .title:visited {
@@ -777,7 +777,8 @@ a.pure-button-primary {
 }
 
 .author .expando {
-  top: 5.6px;
+  top: 0px;
+  vertical-align: middle;
 }
 
 .pure-u-1.pure-u-md-13-24.pastebin {
@@ -825,12 +826,19 @@ iframe {
 .post .domain {
   color: #25b2dce8;
   font-size: 0.7em;
+  transition: all .15s ease;
+}
+
+.post .domain:hover {
+  color: #0084ab;
 }
 
 .post .author {
   font-size: 0.7em;
   color: #888;
   margin-top: .4em;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .post .thumbnail {
@@ -1535,6 +1543,9 @@ span.hasmail {
   color: #293654d4;
 }
 
+.alldaposts .links a.comments:hover {
+  color: #64a6ca;
+}
 
 /* SIDEBAR STYLES */
 
@@ -1704,6 +1715,11 @@ input[type=search] {
 
 a.title {
   color: #4f5156;
+  transition: all .15s ease;
+}
+
+a.title:hover {
+  color: var(--post-link-hover);
 }
 
 /* CREATE POST PAGE STYLES */

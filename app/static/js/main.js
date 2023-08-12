@@ -705,7 +705,7 @@ pbodyElements.forEach(pbody => {
             if (this.querySelector('[data-icon="image"]')) {
                 redirToPost()
             }
-        } else if (event.target.closest('.post-heading')) {
+        } else if (event.target.closest('.post-heading') || event.target.closest('.author') ) {
             return false;
         } else {
             redirToPost()

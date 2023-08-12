@@ -38,19 +38,6 @@
         @if post['flair']:
           <a class="postflair" style="color:@{post['text_color']}; background-color:@{post['bg_color']}; border-color:@{post['border_color']};" href="@{url_for('sub.view_sub_hot', sub=post['sub'], flair=post['flair'])}">@{post['flair']}</a> \
         @end
-        @if post['link']:
-          @if func.getDomain(post['link'].lower()) in config.site.expando_sites:
-          <div class="expando" data-pid="@{post['pid']}" data-t="lnk" title="@{_('Embed video')}" data-link="@{post['link']}"><div data-icon="play" class="icon expando-btn"></div></div>
-          @elif post['link'].lower().endswith(('.png', '.jpg', '.gif', '.tiff', '.bmp', '.jpeg')):
-          <div class="expando" data-pid="@{post['pid']}"  data-t="lnk" title="@{_('Show image')}" data-link="@{post['link']}"><div data-icon="image" class="icon expando-btn"></div></div>
-          @elif post['link'].lower().endswith(('.mp4', '.webm', '.gifv')):
-          <div class="expando" data-pid="@{post['pid']}"  data-t="lnk" title="@{_('Play video')}" data-link="@{post['link']}"><div data-icon="play" class="icon expando-btn"></div></div>
-          @end
-        @elif post['ptype'] == 3:
-          <div class="expando" data-pid="@{post['pid']}" data-t="poll" title="@{_('Show poll')}" data-link="None"><div data-icon="text" class="icon expando-btn"></div></div>
-        @elif post['content'] != '':
-          <div class="expando" data-pid="@{post['pid']}" data-t="txt" title="@{_('Show post content')}" data-link="None"><div data-icon="text" class="icon expando-btn"></div></div>
-        @end
         @if announcement:
         <span class="announcement">@{_('Announcement')}</span>
         @end
@@ -68,6 +55,19 @@
       </div>
 
       <div class="author">
+        @if post['link']:
+          @if func.getDomain(post['link'].lower()) in config.site.expando_sites:
+          <div class="expando" data-pid="@{post['pid']}" data-t="lnk" title="@{_('Embed video')}" data-link="@{post['link']}"><div data-icon="play" class="icon expando-btn"></div></div>
+          @elif post['link'].lower().endswith(('.png', '.jpg', '.gif', '.tiff', '.bmp', '.jpeg')):
+          <div class="expando" data-pid="@{post['pid']}"  data-t="lnk" title="@{_('Show image')}" data-link="@{post['link']}"><div data-icon="image" class="icon expando-btn"></div></div>
+          @elif post['link'].lower().endswith(('.mp4', '.webm', '.gifv')):
+          <div class="expando" data-pid="@{post['pid']}"  data-t="lnk" title="@{_('Play video')}" data-link="@{post['link']}"><div data-icon="play" class="icon expando-btn"></div></div>
+          @end
+        @elif post['ptype'] == 3:
+          <div class="expando" data-pid="@{post['pid']}" data-t="poll" title="@{_('Show poll')}" data-link="None"><div data-icon="text" class="icon expando-btn"></div></div>
+        @elif post['content'] != '':
+          <div class="expando" data-pid="@{post['pid']}" data-t="txt" title="@{_('Show post content')}" data-link="None"><div data-icon="text" class="icon expando-btn"></div></div>
+        @end
         @(
         timeago = '<time-ago datetime="' + post['posted'].isoformat() + 'Z"></time-ago>'
         if sub:
