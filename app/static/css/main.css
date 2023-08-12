@@ -1249,6 +1249,7 @@ img.block-blur {
 
 .comment-form {
   margin: 1em 1em 0 1em;
+  max-width: 40em;
 }
 
 .comment-form button {
@@ -1866,7 +1867,7 @@ a.title:hover {
 .post-content-container textarea,
 .commblock textarea,
 .comment-form textarea {
-  resize: vertical;
+  resize: both;
   width: 100%;
   overflow: auto;
 }
@@ -1962,6 +1963,7 @@ article.comment .score {
   padding-top: .3em;
   border-top: none;
   margin-top: 0;
+  height: 6.5em;
   box-shadow: none;
   border-top-left-radius: unset;
   border-top-right-radius: unset;
@@ -2787,6 +2789,7 @@ a[href="#toodamncool"] {
 
 .replybox {
   margin-bottom: 1em;
+      max-width: 48em;
 }
 
 .motto {

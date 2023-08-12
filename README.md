@@ -31,6 +31,7 @@ A link and discussion aggregator with snek (python3)
 - Bitchute video expando
 - Recent Activity comments permalinked
 - fixed mp4 uploads
+- support for webp image uploads
 - improved diacritics support
 - translations support for Welcome page
 - post flair colors

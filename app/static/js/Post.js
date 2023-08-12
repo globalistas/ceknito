@@ -775,7 +775,7 @@ u.addEventForChild(document, 'click', '.reply-comment', function (e, qelem) {
     const lm = document.createElement('div');
     lm.id = 'rblock-' + cid;
     lm.classList.add('replybox');
-    lm.innerHTML = '<div class="cwrap markdown-editor" id="rcomm-' + cid + '"><textarea class="exalert" style="height: 8em;"></textarea></div>' +
+    lm.innerHTML = '<div class="cwrap markdown-editor" id="rcomm-' + cid + '"><textarea class="exalert" style="height: 9em;"></textarea></div>' +
         '<div style="display:none" class="error"></div><button class="pure-button pure-button-primary button-small btn-postcomment" ' +
         'data-pid="' + pid + '" data-cid="' + cid + '">' + _('Post comment') + '</button> <button class="pure-button button-small btn-preview" data-pvid="rcomm-' +
         cid + '">' + _('Preview') + '</button>' +
