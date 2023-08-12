@@ -2792,6 +2792,13 @@ a[href="#toodamncool"] {
       max-width: 48em;
 }
 
+.pure-form input:focus:invalid,
+.pure-form textarea:focus:invalid,
+.pure-form select:focus:invalid {
+    color: #b94a48;
+    border-color: black;
+}
+
 .motto {
     display: block;
     color: white;

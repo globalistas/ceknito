@@ -345,7 +345,7 @@ body.dark input[type="url"],
 body.dark textarea,
 body.dark input[type="password"],
 body.dark select {
-  color: #d7ddde;
+  color: black;
   background-color: #40444b;
   box-shadow: inset 0 1px 3px #303030;
   border-color: #444;
