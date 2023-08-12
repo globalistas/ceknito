@@ -22,6 +22,7 @@ A link and discussion aggregator with snek (python3)
 - config option to enable additional text in link post
 - config option for user badge auto-assignment (Early Adopter and First Post)
 - config option to send automated welcome message from site admin
+- config option to specify announcements sub
 - poll options limit increased to 12
 - display of number of posts for a domain
 - alphabetic ordering of default subs
