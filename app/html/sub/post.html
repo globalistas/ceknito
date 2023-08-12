@@ -198,7 +198,7 @@
           @if post['link']:
             @if func.getDomain(post['link']) in config.site.expando_sites:
               <div class="expando" data-pid="@{post['pid']}" data-t="lnk" data-link="@{post['link']}"><div class="icon expando-btn" data-icon="play"></div></div>
-            @elif post['link'].lower().endswith(('.png', '.jpg', '.gif', '.tiff', '.bmp', '.jpeg')):
+            @elif post['link'].lower().endswith(('.png', '.jpg', '.gif', '.tiff', '.bmp', '.jpeg', '.webp')):
               <div class="expando" data-pid="@{post['pid']}" data-t="lnk" data-link="@{post['link']}"><div class="icon expando-btn" data-icon="image"></div></div>
             @elif post['link'].lower().endswith(('.mp4', '.webm', '.gifv')):
               <div class="expando" data-pid="@{post['pid']}" data-t="lnk" data-link="@{post['link']}"><div class="icon expando-btn" data-icon="play"></div></div>

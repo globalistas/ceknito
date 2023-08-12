@@ -139,7 +139,7 @@ def thumbnail_url(name):
 def clear_metadata(fileobj: FileStorage, mime_type: str):
     resultIO = FileStorage()
     fileobj.seek(0)
-    if mime_type in ("image/jpeg", "image/png"):
+    if mime_type in ("image/jpeg", "image/png", "image/webp"):
         image = Image.open(fileobj)
         if not image.info.get("exif"):
             return fileobj
@@ -211,6 +211,7 @@ EXTENSIONS = {
     "image/gif": ".gif",
     "image/svg+xml": ".svg",
     "image/svg": ".svg",
+    "image/webp": ".webp",
 }
 
 VIDEO_EXTENSIONS = {

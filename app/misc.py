@@ -872,7 +872,7 @@ def getDomain(link):
 @cache.memoize(300)
 def isImage(link):
     """Returns True if link ends with img suffix"""
-    suffix = (".png", ".jpg", ".gif", ".tiff", ".bmp", ".jpeg", ".svg")
+    suffix = (".png", ".jpg", ".gif", ".tiff", ".bmp", ".jpeg", ".svg", ".webp")
     return link.lower().endswith(suffix)
 
 

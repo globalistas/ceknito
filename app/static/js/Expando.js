@@ -170,7 +170,7 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch){
       }else if(domain == 'www.bitchute.com'){
         expando.querySelector('.expandotxt').innerHTML = characterEscape('<div class="expando-wrapper" style="height: 386px; will-change: height;"><iframe style="height: 360px; width: 640px;" src="https://www.bitchute.com/embed/' + bitchuteID(link) +'"></iframe><div class="resize-handle"><div class="i-icon" data-icon="resizeArrow"</div></div>');
         resizer(expando.querySelector('.expandotxt iframe'), expando.querySelector('.expandotxt .resize-handle'), expando.querySelector('.expandotxt'))
-      }else if(/\.(png|jpg|gif|tiff|svg|bmp|jpeg)$/i.test(link)) {
+      }else if(/\.(png|jpg|gif|tiff|svg|bmp|jpeg|webp)$/i.test(link)) {
         const img = document.createElement("img");
         img.src = link;
         img.draggable = false;

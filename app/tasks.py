@@ -87,7 +87,7 @@ def fetch_image_data(link):
         )
         return None, None
     ctype = resp.headers.get("content-type", "").split(";")[0].lower()
-    if ctype in ["image/gif", "image/jpeg", "image/png"]:
+    if ctype in ["image/gif", "image/jpeg", "image/png", "image/webp"]:
         # yay, it's an image!!1
         return "image", data
     elif ctype == "text/html":
