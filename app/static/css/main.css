@@ -1839,7 +1839,7 @@ a.title:hover {
   color: #222222;
   border: 1px solid #cdcdcd;
   border-radius: 7px;
-  margin-left: 2.9em;
+  margin-left: 3.9em;
   margin-right: 1.1em;
   margin-bottom: 2em;
   padding: .4em 1em;
@@ -1847,7 +1847,7 @@ a.title:hover {
   font-family: verdana, arial, sans-serif;
   font-size: 14px;
   line-height: 20px;
-  width: 85%;
+  max-width: 85%;
 }
 
 .post-content-container-nocontent {
