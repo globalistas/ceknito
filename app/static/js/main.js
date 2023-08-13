@@ -698,6 +698,7 @@ pbodyElements.forEach(pbody => {
                 targetClasses.contains("authorlink") ||
                 targetClasses.contains("nsfw-blur") ||
                 targetClasses.contains("domain") ||
+                targetClasses.contains("postflair") ||
                 targetClasses.length === 0 ||
                 targetClasses === undefined) {
                 return false;
@@ -705,7 +706,7 @@ pbodyElements.forEach(pbody => {
             if (this.querySelector('[data-icon="image"]')) {
                 redirToPost()
             }
-        } else if (event.target.closest('.post-heading') || event.target.closest('.author') ) {
+        } else if (event.target.closest('.post-heading') || event.target.closest('.author')) {
             return false;
         } else {
             redirToPost()
