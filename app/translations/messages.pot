@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2023-08-09 11:55+0200\n"
+"POT-Creation-Date: 2023-08-14 12:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -352,7 +352,7 @@ msgstr ""
 #: app/html/sub/post.html:56 app/html/sub/post.html:138
 #: app/html/sub/post.html:157 app/html/sub/post.html:210
 #: app/html/sub/post.html:219 app/html/sub/postcomments.html:37
-#: app/misc.py:2176 app/misc.py:2994 app/misc.py:3000 app/misc.py:3005
+#: app/misc.py:2176 app/misc.py:3002 app/misc.py:3008 app/misc.py:3013
 msgid "[Deleted]"
 msgstr ""
 
@@ -372,31 +372,31 @@ msgstr ""
 msgid "Invalid CSS"
 msgstr ""
 
-#: app/html/sub/postcomments.html:50 app/misc.py:2975
+#: app/html/sub/postcomments.html:50 app/misc.py:2983
 msgid "[Blocked]"
 msgstr ""
 
-#: app/misc.py:2988
+#: app/misc.py:2996
 msgid "[deleted by user]"
 msgstr ""
 
-#: app/misc.py:3063
+#: app/misc.py:3071
 msgid "Already processing previous request."
 msgstr ""
 
-#: app/misc.py:3085
+#: app/misc.py:3093
 msgid "Unknown error. User disappeared"
 msgstr ""
 
-#: app/misc.py:3092
+#: app/misc.py:3100
 msgid "Score balance is negative"
 msgstr ""
 
-#: app/misc.py:3094
+#: app/misc.py:3102
 msgid "Invalid vote value"
 msgstr ""
 
-#: app/misc.py:3110 app/views/do.py:320 app/views/do.py:453 app/views/do.py:820
+#: app/misc.py:3118 app/views/do.py:320 app/views/do.py:453 app/views/do.py:820
 #: app/views/do.py:855 app/views/do.py:1235 app/views/do.py:1341
 #: app/views/do.py:2184 app/views/do.py:2290 app/views/do.py:2443
 #: app/views/do.py:2458 app/views/do.py:2562 app/views/do.py:2647
@@ -406,43 +406,43 @@ msgstr ""
 msgid "Post does not exist"
 msgstr ""
 
-#: app/misc.py:3113
+#: app/misc.py:3121
 msgid "You can't vote on your own posts"
 msgstr ""
 
-#: app/misc.py:3115
+#: app/misc.py:3123
 msgid "You can't vote on deleted posts"
 msgstr ""
 
-#: app/misc.py:3148 app/views/do.py:2474 app/views/do.py:2489
+#: app/misc.py:3156 app/views/do.py:2474 app/views/do.py:2489
 #: app/views/do.py:2612 app/views/do.py:2931 app/views/do.py:2979
 #: app/views/do.py:3078 app/views/do.py:4130 app/views/do.py:4243
 msgid "Comment does not exist"
 msgstr ""
 
-#: app/misc.py:3151
+#: app/misc.py:3159
 msgid "You can't vote on your own comments"
 msgstr ""
 
-#: app/misc.py:3153
+#: app/misc.py:3161
 msgid "You can't vote on deleted comments"
 msgstr ""
 
-#: app/misc.py:3165
+#: app/misc.py:3173
 msgid "Invalid target"
 msgstr ""
 
-#: app/misc.py:3168 app/views/do.py:1289 app/views/do.py:2191
+#: app/misc.py:3176 app/views/do.py:1289 app/views/do.py:2191
 #: app/views/do.py:2943
 msgid "You are banned on this sub."
 msgstr ""
 
-#: app/misc.py:3173 app/views/do.py:1292 app/views/do.py:1346
+#: app/misc.py:3181 app/views/do.py:1292 app/views/do.py:1346
 #: app/views/do.py:2954
 msgid "Post is archived"
 msgstr ""
 
-#: app/misc.py:3527
+#: app/misc.py:3535
 msgid "Invalid status request"
 msgstr ""
 
@@ -806,7 +806,7 @@ msgstr ""
 msgid "Upload file"
 msgstr ""
 
-#: app/forms/sub.py:206 app/html/shared/post.html:58 app/html/sub/post.html:123
+#: app/forms/sub.py:206 app/html/shared/post.html:45 app/html/sub/post.html:123
 msgid "Poll"
 msgstr ""
 
@@ -1062,8 +1062,8 @@ msgstr ""
 #: app/html/admin/reports.html:63 app/html/admin/wiki.html:51
 #: app/html/index.html:76 app/html/mod/closed.html:68
 #: app/html/mod/reports.html:67 app/html/mod/sub_reports.html:68
-#: app/html/mod/sub_reports_closed.html:70 app/html/site/log.html:109
-#: app/html/sub.html:62 app/html/sub/log.html:103 app/html/user/ignores.html:55
+#: app/html/mod/sub_reports_closed.html:70 app/html/site/log.html:123
+#: app/html/sub.html:62 app/html/sub/log.html:115 app/html/user/ignores.html:55
 #: app/templates/indexmulti.html:31
 msgid "Next page"
 msgstr ""
@@ -1071,8 +1071,8 @@ msgstr ""
 #: app/html/admin/reports.html:60 app/html/admin/wiki.html:48
 #: app/html/index.html:79 app/html/mod/closed.html:65
 #: app/html/mod/reports.html:64 app/html/mod/sub_reports.html:65
-#: app/html/mod/sub_reports_closed.html:67 app/html/site/log.html:105
-#: app/html/sub.html:65 app/html/sub/log.html:99 app/html/user/ignores.html:52
+#: app/html/mod/sub_reports_closed.html:67 app/html/site/log.html:119
+#: app/html/sub.html:65 app/html/sub/log.html:111 app/html/user/ignores.html:52
 #: app/templates/indexmulti.html:34
 msgid "Previous page"
 msgstr ""
@@ -1756,36 +1756,16 @@ msgstr ""
 msgid "Downvote"
 msgstr ""
 
-#: app/html/shared/post.html:27 app/html/sub/css.html:53
-#: app/html/sub/css.html:55
+#: app/html/shared/post.html:27 app/html/sub/css.html:54
+#: app/html/sub/css.html:56
 msgid "Thumbnail"
 msgstr ""
 
-#: app/html/shared/post.html:43
-msgid "Embed video"
-msgstr ""
-
-#: app/html/shared/post.html:45
-msgid "Show image"
-msgstr ""
-
-#: app/html/shared/post.html:47
-msgid "Play video"
-msgstr ""
-
-#: app/html/shared/post.html:50
-msgid "Show poll"
-msgstr ""
-
-#: app/html/shared/post.html:52
-msgid "Show post content"
-msgstr ""
-
-#: app/html/shared/post.html:55 app/html/sub/post.html:120
+#: app/html/shared/post.html:42 app/html/sub/post.html:120
 msgid "Announcement"
 msgstr ""
 
-#: app/html/shared/post.html:66 app/html/shared/sidebar/home.html:29
+#: app/html/shared/post.html:53 app/html/shared/sidebar/home.html:29
 #: app/html/shared/sidebar/home.html:53 app/html/shared/sidebar/sub.html:26
 #: app/html/sub/post.html:166 app/html/user/comments.html:49
 #: app/html/user/messages/notifications.html:26
@@ -1795,7 +1775,7 @@ msgstr ""
 msgid "Not safe for work"
 msgstr ""
 
-#: app/html/shared/post.html:66 app/html/shared/sidebar/home.html:29
+#: app/html/shared/post.html:53 app/html/shared/sidebar/home.html:29
 #: app/html/shared/sidebar/home.html:53 app/html/shared/sidebar/sub.html:26
 #: app/html/site/activity.html:17 app/html/site/activity.html:19
 #: app/html/sub/post.html:166 app/html/user/comments.html:49
@@ -1805,6 +1785,26 @@ msgstr ""
 #: app/html/user/savedcomments.html:46 app/static/js/Socket.js:195
 #: app/templates/indexpost.html:47
 msgid "NSFW"
+msgstr ""
+
+#: app/html/shared/post.html:60
+msgid "Embed video"
+msgstr ""
+
+#: app/html/shared/post.html:62
+msgid "Show image"
+msgstr ""
+
+#: app/html/shared/post.html:64
+msgid "Play video"
+msgstr ""
+
+#: app/html/shared/post.html:67
+msgid "Show poll"
+msgstr ""
+
+#: app/html/shared/post.html:69
+msgid "Show post content"
 msgstr ""
 
 #: app/html/shared/post.html:78 app/html/sub/post.html:212
@@ -1917,15 +1917,15 @@ msgstr ""
 msgid "Submit a post"
 msgstr ""
 
-#: app/html/shared/sidebar/home.html:12
+#: app/html/shared/sidebar/home.html:12 app/html/shared/sidebar/sub.html:149
 msgid "Create a sub"
 msgstr ""
 
-#: app/html/shared/sidebar/home.html:14
+#: app/html/shared/sidebar/home.html:14 app/html/shared/sidebar/sub.html:151
 msgid "Go to random sub"
 msgstr ""
 
-#: app/html/shared/sidebar/home.html:15
+#: app/html/shared/sidebar/home.html:15 app/html/shared/sidebar/sub.html:152
 msgid "View all subs"
 msgstr ""
 
@@ -1998,7 +1998,7 @@ msgstr ""
 msgid "All Closed Reports"
 msgstr ""
 
-#: app/html/shared/sidebar/mod.html:11 app/html/shared/sidebar/sub.html:146
+#: app/html/shared/sidebar/mod.html:11 app/html/shared/sidebar/sub.html:144
 msgid "Banned Users"
 msgstr ""
 
@@ -2098,7 +2098,7 @@ msgstr ""
 msgid "Sub Moderation"
 msgstr ""
 
-#: app/html/shared/sidebar/sub.html:143
+#: app/html/shared/sidebar/sub.html:141
 msgid "Sub Log"
 msgstr ""
 
@@ -2230,120 +2230,148 @@ msgstr ""
 msgid "Created a sub"
 msgstr ""
 
-#: app/html/site/log.html:38
-#, python-format
-msgid "Sub was transferred to <a href=\"/u/%(user)s\">%(user)s</a>"
+#: app/html/site/log.html:38 app/html/sub/log.html:38
+msgid "Changed sub settings"
 msgstr ""
 
 #: app/html/site/log.html:40
 #, python-format
-msgid "Sent mod invite to <a href=\"/u/%(user)s\">%(user)s</a>"
+msgid "Sub was transferred to <a href=\"/u/%(user)s\">%(user)s</a>"
 msgstr ""
 
 #: app/html/site/log.html:42
 #, python-format
-msgid "Removed <a href=\"/u/%(user)s\">%(user)s</a> from the mod team"
+msgid "Sent mod invite to <a href=\"/u/%(user)s\">%(user)s</a>"
 msgstr ""
 
 #: app/html/site/log.html:44
+#, python-format
+msgid "Removed <a href=\"/u/%(user)s\">%(user)s</a> from the mod team"
+msgstr ""
+
+#: app/html/site/log.html:46
 #, python-format
 msgid ""
 "Revoked mod invite for <a href=\"/u/%(user)s\">%(user)s</a> from the mod "
 "team"
 msgstr ""
 
-#: app/html/site/log.html:46 app/html/sub/log.html:66
+#: app/html/site/log.html:48 app/html/sub/log.html:66
 #, python-format
 msgid "Deleted a post with reason <code>%(desc)s</code>"
 msgstr ""
 
-#: app/html/site/log.html:48 app/html/sub/log.html:68
+#: app/html/site/log.html:50 app/html/sub/log.html:68
 #, python-format
 msgid "Un-deleted a post with reason <code>%(desc)s</code>"
 msgstr ""
 
-#: app/html/site/log.html:50 app/html/sub/log.html:70
+#: app/html/site/log.html:52 app/html/sub/log.html:70
 #, python-format
 msgid "Deleted a comment with reason <code>%(desc)s</code>"
 msgstr ""
 
-#: app/html/site/log.html:52 app/html/sub/log.html:72
+#: app/html/site/log.html:54 app/html/sub/log.html:72
 #, python-format
 msgid "Un-deleted a comment with reason <code>%(desc)s</code>"
 msgstr ""
 
-#: app/html/site/log.html:54
-msgid "Created an announcement"
-msgstr ""
-
 #: app/html/site/log.html:56
-#, python-format
-msgid "Banned domain <code>%(desc)s</code>"
+msgid "Created an announcement"
 msgstr ""
 
 #: app/html/site/log.html:58
 #, python-format
-msgid "Unbanned domain <code>%(desc)s</code>"
+msgid "Banned domain <code>%(desc)s</code>"
 msgstr ""
 
 #: app/html/site/log.html:60
-msgid "Removed an announcement"
+#, python-format
+msgid "Unbanned domain <code>%(desc)s</code>"
 msgstr ""
 
 #: app/html/site/log.html:62
-msgid "Disabled post creation"
+msgid "Removed an announcement"
 msgstr ""
 
 #: app/html/site/log.html:64
-msgid "Re-enabled post creation"
+msgid "Disabled post creation"
 msgstr ""
 
 #: app/html/site/log.html:66
-msgid "Disabled registration without invite code"
+msgid "Re-enabled post creation"
 msgstr ""
 
 #: app/html/site/log.html:68
-msgid "Re-enabled registration"
+msgid "Disabled registration without invite code"
 msgstr ""
 
 #: app/html/site/log.html:70
-msgid "Disabled new user registration"
+msgid "Re-enabled registration"
 msgstr ""
 
 #: app/html/site/log.html:72
-msgid "Re-enabled new user registration"
+msgid "Disabled new user registration"
 msgstr ""
 
 #: app/html/site/log.html:74
-#, python-format
-msgid "Unbanned <a href=\"/u/%(user)s\">%(user)s</a>"
+msgid "Re-enabled new user registration"
 msgstr ""
 
 #: app/html/site/log.html:76
 #, python-format
-msgid "Banned email domain <code>%(desc)s</code>"
+msgid "Unbanned <a href=\"/u/%(user)s\">%(user)s</a>"
 msgstr ""
 
 #: app/html/site/log.html:78
 #, python-format
-msgid "Unbanned email domain <code>%(desc)s</code>"
+msgid "Banned email domain <code>%(desc)s</code>"
 msgstr ""
 
 #: app/html/site/log.html:80
-msgid "Disabled captchas"
+#, python-format
+msgid "Unbanned email domain <code>%(desc)s</code>"
 msgstr ""
 
 #: app/html/site/log.html:82
-msgid "Enabled captchas"
+msgid "Disabled captchas"
 msgstr ""
 
 #: app/html/site/log.html:84
+msgid "Enabled captchas"
+msgstr ""
+
+#: app/html/site/log.html:86
 #, python-format
 msgid "Changed <code>%(setting)s</code> to <code>%(value)s<code>"
 msgstr ""
 
-#: app/html/site/log.html:97 app/html/sub/createpost.html:39
-#: app/html/sub/log.html:90
+#: app/html/site/log.html:88 app/html/sub/log.html:80
+msgid "Banned a sub"
+msgstr ""
+
+#: app/html/site/log.html:90 app/html/sub/log.html:82
+msgid "Unbanned a sub"
+msgstr ""
+
+#: app/html/site/log.html:92 app/html/sub/log.html:84
+msgid "Quarantined a sub"
+msgstr ""
+
+#: app/html/site/log.html:94 app/html/sub/log.html:86
+msgid "Unquarantined a sub"
+msgstr ""
+
+#: app/html/site/log.html:96 app/html/sub/log.html:88
+msgid "Added sub to default subs"
+msgstr ""
+
+#: app/html/site/log.html:98 app/html/sub/log.html:90
+msgid "Removed sub from default subs"
+msgstr ""
+
+#: app/html/site/log.html:111 app/html/sub/createpost.html:39
+#: app/html/sub/log.html:102
 msgid "Link"
 msgstr ""
 
@@ -2392,7 +2420,7 @@ msgid "Created:"
 msgstr ""
 
 #: app/html/sub/bans.html:81 app/html/sub/bans.html:140
-#: app/html/sub/log.html:83
+#: app/html/sub/log.html:95
 msgid "User:"
 msgstr ""
 
@@ -2555,7 +2583,7 @@ msgstr ""
 msgid "Upload"
 msgstr ""
 
-#: app/html/sub/css.html:47
+#: app/html/sub/css.html:48
 msgid "No files were uploaded, yet."
 msgstr ""
 
@@ -2575,16 +2603,16 @@ msgstr ""
 msgid "Deleted!"
 msgstr ""
 
-#: app/html/sub/css.html:68
+#: app/html/sub/css.html:69
 #, python-format
 msgid "You can use uploaded images with <code>%%imagename%%</code>."
 msgstr ""
 
-#: app/html/sub/css.html:69
+#: app/html/sub/css.html:70
 msgid "Example:"
 msgstr ""
 
-#: app/html/sub/css.html:72
+#: app/html/sub/css.html:73
 #, python-format
 msgid "%%mybackground%%"
 msgstr ""
@@ -2629,10 +2657,6 @@ msgstr ""
 
 #: app/html/sub/log.html:36
 msgid "Created the sub"
-msgstr ""
-
-#: app/html/sub/log.html:38
-msgid "Changed sub settings"
 msgstr ""
 
 #: app/html/sub/log.html:41
@@ -2712,7 +2736,7 @@ msgstr ""
 msgid "Unlocked comments on a post"
 msgstr ""
 
-#: app/html/sub/log.html:80
+#: app/html/sub/log.html:92
 #, python-format
 msgid "[Type %(type)i]"
 msgstr ""
@@ -4914,7 +4938,7 @@ msgstr ""
 msgid "No related reports to close"
 msgstr ""
 
-#: app/views/do.py:4503
+#: app/views/do.py:4505
 msgid "Error: not a number"
 msgstr ""
 

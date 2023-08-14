@@ -4759,3 +4759,27 @@ msgstr "Karma príspevkov: %(postscore)s | Karma komentárov: %(commentscore)s"
 #: app/html/user/savedposts.html:33
 msgid "You have not saved any posts, yet."
 msgstr "Nemáš uložené žiadne príspevky."
+
+#: app/html/site/log.html:88 app/html/sub/log.html:80
+msgid "Banned a sub"
+msgstr "Zabanoval(a) skupinu"
+
+#: app/html/site/log.html:90 app/html/sub/log.html:82
+msgid "Unbanned a sub"
+msgstr "Odbanoval(a) skupinu"
+
+#: app/html/site/log.html:92 app/html/sub/log.html:84
+msgid "Quarantined a sub"
+msgstr "Dal(a) skupinu do karantény"
+
+#: app/html/site/log.html:94 app/html/sub/log.html:86
+msgid "Unquarantined a sub"
+msgstr "Odstránil(a) skupinu z karantény"
+
+#: app/html/site/log.html:96 app/html/sub/log.html:88
+msgid "Added sub to default subs"
+msgstr "Pridal(a) skupinu do predvolených skupín"
+
+#: app/html/site/log.html:98 app/html/sub/log.html:90
+msgid "Removed sub from default subs"
+msgstr "Odstránil(a) skupinu z predvolených skupín"
