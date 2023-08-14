@@ -330,51 +330,60 @@
     </div>
   @end
 
-  <div>
+<div>
   @if post['content'] and not post['link']:
-  <div id="textcontent">
-    @if post['deleted'] == 0:
-      <span class="current history" data-id="0">
-        <div id="postcontent" class="post-content-container @{post['blur']}">@{markdown(post['content'])!!html}</div>
-      </span>
-      <div id="post-source">@{post['content']}</div>
-    @else:
-      @if post['visibility'] in ['none', 'user-self-del']:
-        <div id="postcontent" class="post-content-container @{(post['visibility'] == 'user-self-del') and 'deleted ' or ''}">
-          @{_('[deleted]')}
-        </div>
-      @elif post['visibility'] in ['admin-self-del', 'mod-self-del', 'mod-del', 'admin-del', 'user-mod-del']:
+    <div id="textcontent">
+      @if post['deleted'] == 0:
         <span class="current history" data-id="0">
-          <div id="postcontent" class="post-content-container deleted">@{markdown(post['content'])!!html}</div>
+          <div id="postcontent" class="post-content-container @{post['blur']}">@{markdown(post['content'])!!html}</div>
         </span>
         <div id="post-source">@{post['content']}</div>
+      @else:
+        @if post['visibility'] in ['none', 'user-self-del']:
+          <div id="postcontent" class="post-content-container @{(post['visibility'] == 'user-self-del') and 'deleted ' or ''}">
+            @{_('[deleted]')}
+          </div>
+        @elif post['visibility'] in ['admin-self-del', 'mod-self-del', 'mod-del', 'admin-del', 'user-mod-del']:
+          <span class="current history" data-id="0">
+            <div id="postcontent" class="post-content-container deleted">@{markdown(post['content'])!!html}</div>
+          </span>
+          <div id="post-source">@{post['content']}</div>
+        @end
       @end
-    @end
-  </div>
+    </div>
   @elif post['link']:
-  <div id="linkcontent">
-    @if post['deleted'] == 0:
-      <span class="current history" data-id="0">
-        <div id="postcontent" class="post-content-link-container @{post['blur']}">@{markdown(post['content'])!!html}</div>
-      </span>
-      <div id="post-source">@{post['content']}</div>
-    @else:
-      @if post['visibility'] in ['none', 'user-self-del']:
-        <div id="postcontent" class="post-content-link-container @{(post['visibility'] == 'user-self-del') and 'deleted ' or ''}">
-          @{_('[deleted]')}
-        </div>
-      @elif post['visibility'] in ['admin-self-del', 'mod-self-del', 'mod-del', 'admin-del', 'user-mod-del']:
-        <span class="current history" data-id="0">
-          <div id="postcontent" class="post-content-link-container deleted">@{markdown(post['content'])!!html}</div>
-        </span>
+    <div id="linkcontent">
+      @if post['deleted'] == 0:
+        @if not post['content']:
+          <div id="postcontent" class="post-content-container-nocontent"></div>
+        @else:
+          <span class="current history" data-id="0">
+            <div id="postcontent" class="post-content-link-container @{post['blur']}">@{markdown(post['content'])!!html}</div>
+          </span>
+        @end
         <div id="post-source">@{post['content']}</div>
+      @else:
+        @if post['visibility'] in ['none', 'user-self-del']:
+          <div id="postcontent" class="post-content-link-container @{(post['visibility'] == 'user-self-del') and 'deleted ' or ''}">
+            @{_('[deleted]')}
+          </div>
+        @elif post['visibility'] in ['admin-self-del', 'mod-self-del', 'mod-del', 'admin-del', 'user-mod-del']:
+          @if not post['content']:
+            <div id="postcontent" class="post-content-container-nocontent"></div>
+          @else:
+            <span class="current history" data-id="0">
+              <div id="postcontent" class="post-content-link-container deleted">@{markdown(post['content'])!!html}</div>
+            </span>
+          @end
+          <div id="post-source">@{post['content']}</div>
+        @end
       @end
-    @end
-  </div>
+    </div>
   @elif not post['content'] and not post['link']:
-      <div id="postcontent" class="post-content-container-nocontent"></div>
-      <div id="post-source" class="post-content-container-nocontent"></div>
+    <div id="postcontent" class="post-content-container-nocontent"></div>
+    <div id="post-source" class="post-content-container-nocontent"></div>
   @end
+
 
   @if (post['ptype'] == 3) and (post['deleted'] == 0 or post['visibility'] in ['admin-self-del', 'mod-self-del', 'mod-del', 'user-mod-del']):
     <span class="@{post['blur']}">@{polls.renderPoll(pollData, postmeta, post)!!html}</span>
