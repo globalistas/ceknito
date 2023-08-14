@@ -331,15 +331,8 @@
   @end
 
   <div>
-  @if not post['link']:
-    @if not post['content']:
-      <div id="postcontent" class="post-content-container-nocontent"></div>
-      <div id="post-source" class="post-content-container-nocontent"></div>
-    @else:
-      <div id="postcontent" class="post-content-text-container @{post['blur']}">@{markdown(post['content'])!!html}</div>
-      <div id="post-source" class="post-content-text-container @{post['blur']}">@{post['content']}<</div>
-    @end
-  @elif post['content']:
+  @if post['content']:
+  <div>
     @if post['deleted'] == 0:
       <span class="current history" data-id="0">
         <div id="postcontent" class="post-content-container @{post['blur']}">@{markdown(post['content'])!!html}</div>
@@ -356,6 +349,15 @@
         </span>
         <div id="post-source">@{post['content']}</div>
       @end
+    @end
+  </div>
+  @elif not post['link']:
+    @if not post['content']:
+      <div id="postcontent" class="post-content-container-nocontent"></div>
+      <div id="post-source" class="post-content-container-nocontent"></div>
+    @else:
+      <div id="postcontent" class="post-content-container"></div>
+      <div id="post-source" class="post-content-container"></div>
     @end
   @end
 
