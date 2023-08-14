@@ -1850,6 +1850,22 @@ a.title:hover {
   max-width: 85%;
 }
 
+.post-content-link-container {
+  background: #fafafa;
+  color: #222222;
+  border: 1px solid #cdcdcd;
+  border-radius: 7px;
+  margin-left: 2.9em;
+  margin-right: 1.1em;
+  margin-bottom: 2em;
+  padding: .4em 1em;
+  /* 1px margin on botton and top so it respects <p>'s margin */
+  font-family: verdana, arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  max-width: 85%;
+}
+
 .post-content-container-nocontent {
   margin: 1em 1em 0em 1em;
 }
