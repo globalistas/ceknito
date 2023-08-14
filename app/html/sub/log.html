@@ -76,6 +76,18 @@
               @{_('Locked comments on a post')}
           @elif log.action == 76:
               @{_('Unlocked comments on a post')}
+          @elif log.action == 80:
+            @{_('Banned a sub')}
+          @elif log.action == 81:
+            @{_('Unbanned a sub')}
+          @elif log.action == 82:
+            @{_('Quarantined a sub')}
+          @elif log.action == 83:
+            @{_('Unquarantined a sub')}
+          @elif log.action == 84:
+            @{_('Added sub to default subs')}
+          @elif log.action == 85:
+            @{_('Removed sub from default subs')}
           @else:
             <i>@{_('[Type %(type)i]', type=log.action)!!html}</i> @{log.desc}
           @end
