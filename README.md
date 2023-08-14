@@ -44,7 +44,7 @@ A link and discussion aggregator with snek (python3)
 
 ## Dependencies:
 
- - A database server, MySQL, MariaDB and Postgres have been tested. Sqlite should work for messing locally
+ - A database server - MySQL, MariaDB and Postgres have been tested. Sqlite should work for messing locally
  - Redis
  - Python >= 3.9
  - A recent node/npm
