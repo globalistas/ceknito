@@ -2607,6 +2607,14 @@ LOG_TYPE_STICKY_SORT_TOP_OR_BEST = 74
 LOG_TYPE_ADMIN_CONFIG_CHANGE = 75
 LOG_TYPE_LOCK_COMMENTS = 76
 
+LOG_TYPE_BAN_SUB = 80
+LOG_TYPE_UNBAN_SUB = 81
+LOG_TYPE_QUARANTINE_SUB = 82
+LOG_TYPE_UNQUARANTINE_SUB = 83
+
+LOG_TYPE_DEFAULT_SUB = 84
+LOG_TYPE_UNDEFAULT_SUB = 85
+
 
 def create_sitelog(action, uid, comment="", link=""):
     SiteLog.create(action=action, uid=uid, desc=comment, link=link)

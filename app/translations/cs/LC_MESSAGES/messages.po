@@ -2188,7 +2188,7 @@ msgstr "Odstraněno:"
 #: app/html/sub/blocked.html:8
 #, python-format
 msgid "<a href=\"%(url)s\">/%(prefix)s/%(sub)s</a> is not available."
-msgstr "<a href=\"%(url)s\">Skupina /%(prefix)s/%(sub)s</a> není dostupná."
+msgstr "Skupina <a href=\"%(url)s\">/%(prefix)s/%(sub)s</a> není dostupná."
 
 #: app/html/sub/blocked.html:11
 msgid "The sub has been banned by the administration due to ToS/rule violations."

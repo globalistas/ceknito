@@ -4529,6 +4529,9 @@ def add_default(sub):
         return "Error: Sub is already a default!"
     except SiteMetadata.DoesNotExist:
         SiteMetadata.create(key="default", value=sub.sid)
+        misc.create_sublog(
+            misc.LOG_TYPE_DEFAULT_SUB, uid=current_user.uid, sid=sub.sid, admin=True
+        )
         return "Done."
 
 
@@ -4548,6 +4551,97 @@ def remove_default(sub):
             (SiteMetadata.key == "default") & (SiteMetadata.value == sub.sid)
         )
         metadata.delete_instance()
+        misc.create_sublog(
+            misc.LOG_TYPE_UNDEFAULT_SUB, uid=current_user.uid, sid=sub.sid, admin=True
+        )
         return "Done."
     except SiteMetadata.DoesNotExist:
         return "Error: Sub is not a default"
+
+
+@do.route("/do/ban_sub/<sub>", methods=["POST"])
+@login_required
+def ban_sub(sub):
+    if not current_user.is_admin():
+        abort(403)
+
+    try:
+        sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
+    except Sub.DoesNotExist:
+        return "Error: Sub does not exist"
+
+    if sub.status == 1:
+        return "Error: Sub is already banned!"
+
+    sub.status = 1
+    sub.save()
+    misc.create_sublog(
+        misc.LOG_TYPE_BAN_SUB, uid=current_user.uid, sid=sub.sid, admin=True
+    )
+    return "Done."
+
+
+@do.route("/do/unban_sub/<sub>", methods=["POST"])
+@login_required
+def unban_sub(sub):
+    if not current_user.is_admin():
+        abort(403)
+
+    try:
+        sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
+    except Sub.DoesNotExist:
+        return "Error: Sub does not exist"
+
+    if sub.status != 1:
+        return "Error: Sub is not banned!"
+
+    sub.status = 0
+    sub.save()
+    misc.create_sublog(
+        misc.LOG_TYPE_UNBAN_SUB, uid=current_user.uid, sid=sub.sid, admin=True
+    )
+    return "Done."
+
+
+@do.route("/do/quarantine_sub/<sub>", methods=["POST"])
+@login_required
+def quarantine_sub(sub):
+    if not current_user.is_admin():
+        abort(403)
+
+    try:
+        sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
+    except Sub.DoesNotExist:
+        return "Error: Sub does not exist"
+
+    if sub.status == 2:
+        return "Error: Sub is already quarantined!"
+
+    sub.status = 2
+    sub.save()
+    misc.create_sublog(
+        misc.LOG_TYPE_QUARANTINE_SUB, uid=current_user.uid, sid=sub.sid, admin=True
+    )
+    return "Done."
+
+
+@do.route("/do/unquarantine_sub/<sub>", methods=["POST"])
+@login_required
+def unquarantine_sub(sub):
+    if not current_user.is_admin():
+        abort(403)
+
+    try:
+        sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
+    except Sub.DoesNotExist:
+        return "Error: Sub does not exist"
+
+    if sub.status != 2:
+        return "Error: Sub is not quarantined!"
+
+    sub.status = 0
+    sub.save()
+    misc.create_sublog(
+        misc.LOG_TYPE_UNQUARANTINE_SUB, uid=current_user.uid, sid=sub.sid, admin=True
+    )
+    return "Done."

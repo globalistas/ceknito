@@ -65,6 +65,8 @@
               <th>Subscribers</th>
               <th>Posts</th>
               <th>Default</th>
+              <th>Banned</th>
+              <th>Quarantined</th>
             </tr>
           </thead>
           <tbody>
@@ -93,7 +95,25 @@
                   <button data-ac="add_default" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon"></span>No</button>
                 {%endif%}
                 </div>
-                </td>
+              </td>
+              <td>
+                <div role="group" class="pure-button-group" data-sid="{{sub.name}}" style="display:inline-block;">
+                {% if sub.status == 1 %}
+                  <button data-ac="unban_sub" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon"></span>Yes</button>
+                {%else%}
+                  <button data-ac="ban_sub" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon"></span>No</button>
+                {%endif%}
+                </div>
+              </td>
+              <td>
+                <div role="group" class="pure-button-group" data-sid="{{sub.name}}" style="display:inline-block;">
+                {% if sub.status == 2 %}
+                  <button data-ac="unquarantine_sub" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon"></span>Yes</button>
+                {%else%}
+                  <button data-ac="quarantine_sub" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon"></span>No</button>
+                {%endif%}
+                </div>
+              </td>
             </tr>
             {% endfor %}
           </tbody>

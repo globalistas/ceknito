@@ -11,7 +11,7 @@
                 <th>@{_('Time')}</th>
                 <th>@{_('User')}</th>
                 <th>@{_('Action')}</th>
-                <th></th>
+                <th>Link</th>
             </tr>
             </thead>
             <tbody>
@@ -34,6 +34,8 @@
                         @{_('Banned <a href="/u/%(user)s">%(user)s</a>', user=log.desc)!!html}
                     @elif log.action == 20:
                         @{_('Created a sub')}
+                    @elif log.action == 21:
+                        @{_('Changed sub settings')}
                     @elif log.action == 30:
                         @{_('Sub was transferred to <a href="/u/%(user)s">%(user)s</a>', user=log.desc)!!html}
                     @elif log.action == 24:
@@ -81,7 +83,19 @@
                     @elif log.action == 72:
                       @{_('Enabled captchas')}
                     @elif log.action == 75:
-		      @{_('Changed <code>%(setting)s</code> to <code>%(value)s<code>', setting=e(log.desc[:log.desc.find("/")]), value=e(log.desc[log.desc.find("/")+1:]))!!html}
+		                @{_('Changed <code>%(setting)s</code> to <code>%(value)s<code>', setting=e(log.desc[:log.desc.find("/")]), value=e(log.desc[log.desc.find("/")+1:]))!!html}
+                    @elif log.action == 80:
+                      @{_('Banned a sub')}
+                    @elif log.action == 81:
+                      @{_('Unbanned a sub')}
+                    @elif log.action == 82:
+                      @{_('Quarantined a sub')}
+                    @elif log.action == 83:
+                      @{_('Unquarantined a sub')}
+                    @elif log.action == 84:
+                      @{_('Added sub to default subs')}
+                    @elif log.action == 85:
+                      @{_('Removed sub from default subs')}
                     @else:
                         <i>[Type @{log.action}]</i> @{log.desc}
                     @end
