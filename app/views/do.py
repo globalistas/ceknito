@@ -4471,6 +4471,8 @@ def set_suboftheday():
 
     try:
         sub = Sub.get(Sub.name == form.sub.data)
+        if sub.status in (1, 2):  # Check if status is 1 or 2
+            return jsonify(status="error", error="Sub is banned or quarantined")
     except Sub.DoesNotExist:
         return jsonify(status="error", error="Sub does not exist")
     rconn.delete("daysub")
