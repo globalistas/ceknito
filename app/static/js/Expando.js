@@ -312,12 +312,39 @@ function confResizer(el, pnode, corner) {
 }
 
 // expand expando posts by default
-window.onload = function(){
-  var postPageElement = document.querySelector("div.postbar.post");
-  if(typeof(postPageElement) != 'undefined' && postPageElement != null){
-      var expandoButtons = document.querySelectorAll(".expando");
-      for(var i= 0;i<expandoButtons.length;i++){
-          expandoButtons[i].click();
-      }
-  }
+window.onload = function() {
+    var postPageElement = document.querySelector("div.postbar.post");
+    if (postPageElement) {
+        var expandoButtons = document.querySelectorAll(".expando");
+        for (var i = 0; i < expandoButtons.length; i++) {
+            var expandoBtn = expandoButtons[i].querySelector(".expando-btn");
+            if (expandoBtn) {
+                expandoBtn.setAttribute("data-icon", "remove");
+            }
+            expandoButtons[i].click();
+        }
+    }
+}
+
+// toggle expando icon between origin/remove states
+function updatePostExpandoIcon(iconEl, negate = false) {
+    const postEl = iconEl.closest('.post')
+
+    let isExpanded = !!postEl.querySelector('.expando-master')
+    if (negate) {
+        isExpanded = !isExpanded
+    }
+
+    if (!iconEl.dataset.origIcon) {
+        iconEl.dataset.origIcon = iconEl.dataset.icon
+    }
+
+    iconEl.dataset.icon = isExpanded ? 'remove' : iconEl.dataset.origIcon
+}
+
+for (const iconEl of document.querySelectorAll('.icon.expando-btn')) {
+    iconEl.addEventListener('click', function() {
+        updatePostExpandoIcon(this, true)
+    })
+    updatePostExpandoIcon(iconEl)
 }

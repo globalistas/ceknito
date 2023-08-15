@@ -384,7 +384,6 @@
     <div id="post-source" class="post-content-container-nocontent"></div>
   @end
 
-
   @if (post['ptype'] == 3) and (post['deleted'] == 0 or post['visibility'] in ['admin-self-del', 'mod-self-del', 'mod-del', 'user-mod-del']):
     <span class="@{post['blur']}">@{polls.renderPoll(pollData, postmeta, post)!!html}</span>
   @end
