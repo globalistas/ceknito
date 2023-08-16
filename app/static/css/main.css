@@ -781,6 +781,10 @@ a.pure-button-primary {
   vertical-align: middle;
 }
 
+.expando:hover {
+  background-color: #cbc9c9;
+}
+
 .pure-u-1.pure-u-md-13-24.pastebin {
   width: 80%;
 }
