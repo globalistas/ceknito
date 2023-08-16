@@ -1980,6 +1980,7 @@ article.comment .score {
 }
 
 .markdown-editor textarea {
+  display: block;
   padding-top: .3em;
   border-top: none;
   margin-top: 0;
