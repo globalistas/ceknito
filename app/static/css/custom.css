@@ -60,6 +60,9 @@
 img[src*='#center'] {
   display: block;
   margin: auto;
+  width: 100%;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
 }
 
 .cscore:before {
