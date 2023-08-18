@@ -988,6 +988,9 @@ def subscribe_to_sub(sid):
     if current_user.has_subscribed(sid):
         return jsonify(status="ok", message=_("already subscribed"))
 
+    if sub.name == config.site.ann_sub:
+        return jsonify(status="error", message=_("Sub is announcement sub"))
+
     form = CsrfTokenOnlyForm()
     if form.validate():
         if current_user.has_blocked(sid):
@@ -1018,6 +1021,9 @@ def unsubscribe_from_sub(sid):
     if not current_user.has_subscribed(sid):
         return jsonify(status="ok", message=_("not subscribed"))
 
+    if Sub.name == config.site.ann_sub:
+        return jsonify(status="error", message=_("Sub is announcement sub"))
+
     form = CsrfTokenOnlyForm()
     if form.validate():
         ss = SubSubscriber.get(
@@ -1043,6 +1049,9 @@ def block_sub(sid):
 
     if current_user.has_blocked(sid):
         return jsonify(status="ok", message=_("already blocked"))
+
+    if sub.name == config.site.ann_sub:
+        return jsonify(status="error", message=_("Sub is announcement sub"))
 
     form = CsrfTokenOnlyForm()
     if form.validate():
@@ -1073,6 +1082,9 @@ def unblock_sub(sid):
 
     if not current_user.has_blocked(sid):
         return jsonify(status="ok", message=_("sub not blocked"))
+
+    if sub.name == config.site.ann_sub:
+        return jsonify(status="error", message=_("Sub is announcement sub"))
 
     form = CsrfTokenOnlyForm()
     if form.validate():
