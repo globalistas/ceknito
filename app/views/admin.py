@@ -47,6 +47,7 @@ from ..models import (
     SubPostCommentVote,
     SubPostVote,
     SiteMetadata,
+    SubSubscriber,
 )
 from ..models import UserUploads, InviteCode, Wiki
 from ..misc import engine, getReports
@@ -231,6 +232,40 @@ def users(page):
     users = users.order_by(User.joindate.desc()).paginate(page, 50).dicts()
     return render_template(
         "admin/users.html", users=users, page=page, admin_route="admin.users"
+    )
+
+
+@bp.route("/subsubscribers", defaults={"page": 1})
+@bp.route("/subsubscribers/<sub>/<int:page>")
+@login_required
+def subsubscribers(sub, page):
+    """WIP: View sub subscribers."""
+    if not current_user.is_admin():
+        abort(404)
+
+    try:
+        sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
+    except Sub.DoesNotExist:
+        abort(404)
+
+    subusers = (
+        User.select(User.name)
+        .join(SubSubscriber)
+        .where(
+            (SubSubscriber.sid == sub.sid)
+            & (SubSubscriber.uid == User.uid)
+            & (SubSubscriber.status == 1)
+        )
+        .order_by(User.name.asc())
+        .paginate(page, 50)
+        .dicts()
+    )
+    return render_template(
+        "admin/subsubscribers.html",
+        sub=sub,
+        users=subusers,
+        page=page,
+        admin_route="admin.subsubscribers",
     )
 
 

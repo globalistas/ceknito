@@ -85,7 +85,9 @@
                 {% endfor %}
               </td>
               <td>{{subMods.mods|count}}</td>
-              <td>{{sub.subscribers}}</td>
+              <td>
+                <a href="{{url_for('admin.subsubscribers', sub=sub.name, page=1)}}">{{sub.subscribers}}</a>
+              </td>
               <td>{{sub.posts}}</td>
               <td>
                 <div role="group" class="pure-button-group" data-sid="{{sub.name}}" style="display:inline-block;">
