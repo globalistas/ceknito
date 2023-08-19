@@ -27,6 +27,7 @@ A link and discussion aggregator with snek (python3)
 - display of number of posts for a domain
 - alphabetic ordering of default subs
 - banning, quarantining, defaulting subs directly in admin interface
+- sub subscribers list in admin interface
 - improved image quality for thumbnails
 - text posts with no content do not display an empty box
 - Bitchute video expando
