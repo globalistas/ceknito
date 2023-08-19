@@ -1014,14 +1014,14 @@ def subscribe_to_sub(sid):
 def unsubscribe_from_sub(sid):
     """Unsubscribe from sub"""
     try:
-        Sub.get(Sub.sid == sid)
+        sub = Sub.get(Sub.sid == sid)
     except Sub.DoesNotExist:
         return jsonify(status="error", error=_("sub not found"))
 
     if not current_user.has_subscribed(sid):
         return jsonify(status="ok", message=_("not subscribed"))
 
-    if Sub.name == config.site.ann_sub:
+    if sub.name == config.site.ann_sub:
         return jsonify(status="error", message=_("Sub is announcement sub"))
 
     form = CsrfTokenOnlyForm()
