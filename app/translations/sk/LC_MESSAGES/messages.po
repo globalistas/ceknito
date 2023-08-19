@@ -1810,7 +1810,7 @@ msgstr "Momentálne máš ban na príspevky."
 #: app/html/shared/sidebar/sub.html:27
 #, python-format
 msgid "%(subs)i subscribers"
-msgstr "%(subs)i odberateľov"
+msgstr "%(subs)i členov"
 
 #: app/html/shared/sidebar/sub.html:31
 msgid "Your flair:"
