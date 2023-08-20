@@ -68,7 +68,7 @@
                         </div>
                     </div>
                     <p>@{_('Registered %(timeago)s', timeago='<time-ago datetime="'+ user.joindate.isoformat() + 'Z"></time-ago>')!!html}</p>
-                    @if current_user.is_admin():
+                    @if current_user.can_admin:
                         <p>Email: @{user.email}</p>
                     @end
                 @end
