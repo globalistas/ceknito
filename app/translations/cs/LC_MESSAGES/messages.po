@@ -726,9 +726,7 @@ msgstr "Text komentáře"
 msgid "Field must be exactly %(max)d character long."
 msgid_plural "Field must be exactly %(max)d characters long."
 msgstr[0] "Pole musí mít přesně %(max)d znaků."
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] "Pole musí mít přesně %(max)d znaků."
+msgstr[1] "Pole musí mít přesně %(max)d znaků."
 
 #: app/forms/user.py:71
 #, python-format
@@ -3979,10 +3977,8 @@ msgstr "Moderování: dočasný ban"
 #, python-format
 msgid "You have been banned from %(sublink)s for %(num)d day. Reason: %(reason)s"
 msgid_plural "You have been banned from %(sublink)s for %(num)d days. Reason: %(reason)s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] "Dostal(a) jsi ban ve skupině %(sublink)s na %(num)d dnů. Důvod: %(reason)s"
+msgstr[0] "Dostal(a) jsi ban ve skupině %(sublink)s na %(num)d den. Důvod: %(reason)s"
+msgstr[1] "Dostal(a) jsi ban ve skupině %(sublink)s na %(num)d dnů. Důvod: %(reason)s"
 
 #: app/views/do.py:1659
 #, python-format
