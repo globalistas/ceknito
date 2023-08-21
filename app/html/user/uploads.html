@@ -6,7 +6,7 @@
 @end
 
 @def sidebar():
-  <a href="@{url_for('user.view', user=user.name)}" class="sbm-post pure-button @{(request.endpoint == 'user.view') and 'pure-button-primary' or ''}">@{user.name}</a>
+  <a href="@{url_for('user.view', user=user.name)}" class="sbm-post pure-button @{(request.endpoint == 'user.view') and 'pure-button-primary' or ''}">@{_('Profile')}</a>
   <a href="@{url_for('user.view_user_posts', user=user.name)}" class="sbm-post pure-button @{(request.endpoint == 'user.view_user_posts') and 'pure-button-primary' or ''}">@{_('View posts')}</a>
   <a href="@{url_for('user.view_user_comments', user=user.name)}" class="sbm-post pure-button @{(request.endpoint == 'user.view_user_comments') and 'pure-button-primary' or ''}" >@{_('View comments')}</a>
   @if user.uid == current_user.uid:

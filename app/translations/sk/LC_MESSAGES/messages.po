@@ -4779,3 +4779,15 @@ msgstr "Pridal(a) skupinu do predvolených skupín"
 #: app/html/site/log.html:98 app/html/sub/log.html:90
 msgid "Removed sub from default subs"
 msgstr "Odstránil(a) skupinu z predvolených skupín"
+
+#: app/html/user/posts.html:29
+msgid "Posts by"
+msgstr "Príspevky používateľa"
+
+#: app/html/user/comments.html:28
+msgid "Comments by"
+msgstr "Komentáre používateľa"
+
+#: app/html/user/comments.html:28
+msgid "Comments by"
+msgstr "Komentáre používateľa"

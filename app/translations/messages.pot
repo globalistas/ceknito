@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2023-08-20 09:58+0200\n"
+"POT-Creation-Date: 2023-08-21 21:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2151,21 +2151,20 @@ msgstr ""
 msgid "Invite codes"
 msgstr ""
 
-#: app/html/shared/sidebar/user.html:36
+#: app/html/shared/sidebar/user.html:36 app/html/user/posts.html:10
 msgid "Profile"
 msgstr ""
 
 #: app/html/shared/sidebar/user.html:37 app/html/user/comments.html:10
-#: app/html/user/posts.html:11 app/html/user/posts.html:29
-#: app/html/user/savedcomments.html:10 app/html/user/savedposts.html:11
-#: app/html/user/savedposts.html:25 app/html/user/uploads.html:10
+#: app/html/user/posts.html:11 app/html/user/savedcomments.html:10
+#: app/html/user/savedposts.html:11 app/html/user/savedposts.html:25
+#: app/html/user/uploads.html:10
 msgid "View posts"
 msgstr ""
 
 #: app/html/shared/sidebar/user.html:38 app/html/user/comments.html:11
-#: app/html/user/comments.html:28 app/html/user/posts.html:12
-#: app/html/user/savedcomments.html:11 app/html/user/savedposts.html:12
-#: app/html/user/uploads.html:11
+#: app/html/user/posts.html:12 app/html/user/savedcomments.html:11
+#: app/html/user/savedposts.html:12 app/html/user/uploads.html:11
 msgid "View comments"
 msgstr ""
 
@@ -3236,6 +3235,10 @@ msgstr ""
 msgid "Please log in to see this user's comments."
 msgstr ""
 
+#: app/html/user/comments.html:28
+msgid "Comments by"
+msgstr ""
+
 #: app/html/user/comments.html:30 app/html/user/posts.html:31
 #: app/html/user/profile.html:32 app/html/user/savedposts.html:27
 #, python-format
@@ -3390,6 +3393,10 @@ msgstr ""
 
 #: app/html/user/posts.html:25
 msgid "Please log in to see this user's posts."
+msgstr ""
+
+#: app/html/user/posts.html:29
+msgid "Posts by"
 msgstr ""
 
 #: app/html/user/profile.html:15 app/html/user/profile.html:154

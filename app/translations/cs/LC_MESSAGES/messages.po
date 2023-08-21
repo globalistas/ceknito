@@ -4779,3 +4779,11 @@ msgstr "Přidal(a) skupinu do výchozích skupin"
 #: app/html/site/log.html:98 app/html/sub/log.html:90
 msgid "Removed sub from default subs"
 msgstr "Odstranil(a) skupinu z výchozích skupin"
+
+#: app/html/user/posts.html:29
+msgid "Posts by"
+msgstr "Příspěvky uživatele"
+
+#: app/html/user/comments.html:28
+msgid "Comments by"
+msgstr "Komentáře uživatele""
