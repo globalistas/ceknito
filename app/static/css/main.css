@@ -377,6 +377,17 @@ div#sortbuttons {
   width: 100%;
 }
 
+#center-container-uploads {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+  top: 5.1em;
+  left: 0;
+  bottom: 4em;
+  width: 100%;
+}
+
 #center-container-savedcomments {
   background-color: #fff;
   display: flex;
@@ -1274,6 +1285,10 @@ img.block-blur {
 
 .recent {
   margin-left: 0px;
+}
+
+.norecentposts {
+  margin-left: 19px;
 }
 
 .nosavedposts {

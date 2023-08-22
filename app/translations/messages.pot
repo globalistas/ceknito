@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2023-08-21 21:20+0200\n"
+"POT-Creation-Date: 2023-08-22 07:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1046,9 +1046,8 @@ msgstr ""
 msgid "Order by latest comment received"
 msgstr ""
 
-#: app/html/index.html:62 app/html/sub.html:52 app/html/user/posts.html:37
-#: app/templates/indexmulti.html:20
-msgid "There are no posts here, yet."
+#: app/html/index.html:62
+msgid "No posts were found."
 msgstr ""
 
 #: app/html/index.html:65
@@ -1079,6 +1078,10 @@ msgstr ""
 
 #: app/html/sub.html:34
 msgid "(show all)"
+msgstr ""
+
+#: app/html/sub.html:52 app/templates/indexmulti.html:20
+msgid "There are no posts here, yet."
 msgstr ""
 
 #: app/html/admin/configuration.html:15 app/html/shared/sidebar/admin.html:16
@@ -2151,7 +2154,9 @@ msgstr ""
 msgid "Invite codes"
 msgstr ""
 
-#: app/html/shared/sidebar/user.html:36 app/html/user/posts.html:10
+#: app/html/shared/sidebar/user.html:36 app/html/user/comments.html:9
+#: app/html/user/posts.html:10 app/html/user/savedcomments.html:9
+#: app/html/user/savedposts.html:10 app/html/user/uploads.html:9
 msgid "Profile"
 msgstr ""
 
@@ -3397,6 +3402,10 @@ msgstr ""
 
 #: app/html/user/posts.html:29
 msgid "Posts by"
+msgstr ""
+
+#: app/html/user/posts.html:37
+msgid "This user has not posted anything, yet."
 msgstr ""
 
 #: app/html/user/profile.html:15 app/html/user/profile.html:154

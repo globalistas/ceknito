@@ -889,6 +889,10 @@ msgstr "Page generated in __EXECUTION_TIME__ms with __DB_QUERIES__ queries"
 
 #: app/html/index.html:49 app/html/sub.html:40
 msgid "There are no posts here, yet."
+msgstr "Zatiaľ tu nie sú žiadne príspevky."
+
+#: app/html/index.html:62 app/html/user/posts.html:37
+msgid "No posts were found."
 msgstr "Nenašli sa žiadne príspevky."
 
 #: app/html/admin/reports.html:60 app/html/admin/wiki.html:48
@@ -4523,7 +4527,11 @@ msgstr "Príspevky používateľa vidia iba prihlásení používatelia."
 
 #: app/templates/usercomments.html:32
 msgid "This user has not commented on anything, yet."
-msgstr "Používateľ nemá komentáre."
+msgstr "Používateľ nemá žiadne komentáre."
+
+#: app/html/user/posts.html:37
+msgid "This user has not posted anything, yet."
+msgstr "Používateľ nemá žiadne príspevky."
 
 #: app/templates/usercomments.html:55
 msgid "Comment score"

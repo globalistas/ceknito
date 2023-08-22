@@ -21,9 +21,9 @@
 @def main():
 <div id="container">
 @if not uploads:
-  <h3 class="noshit">@{_('No uploads, yet.')}</h3>
+  <h3 class="noshit norecentposts">@{_('No uploads, yet.')}</h3>
 @end
-<div id="center-container">
+<div id="center-container-uploads">
   <div class="uploads content">
       @for item in uploads:
         <div class="uploaditem">
