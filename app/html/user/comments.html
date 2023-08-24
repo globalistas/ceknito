@@ -64,7 +64,7 @@
               @endif
                 <div class="commblock">
                   <div class="commenthead">
-                      <a href="@{url_for('user.view', user=user.name)}" class="poster">@{user.name}</a> -
+                      <a href="@{url_for('user.view', user=user.name)}" class="poster">@{user.name}</a>
                       <b><span class="cscore">@{comment['score']}</span> @{_('Comment score')}</b>
                       <span class="time">
                          <time-ago datetime="@{comment['time'].isoformat()}Z"></time-ago>
