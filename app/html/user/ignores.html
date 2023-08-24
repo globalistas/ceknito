@@ -36,7 +36,7 @@
               @{ig['form'].csrf_token()!!html}
               @{ig['form'].view_messages(id='ign-msg-' + ig['target'], class_='ignore-form-select')!!html}
               @{ig['form'].view_content(id='ign-con-' + ig['target'], class_='ignore-form-select')!!html}
-              <button id="submit-ignore-@{ig['target']}" type="submit" class="hide pure-button button-xsmall" data-label="@{_('Save changes')}" data-prog="@{_('Saving...')}" data-success="@{_('Saved!')}">@{_('Save changes')}</button>
+              <button id="submit-ignore-@{ig['target']}" type="submit" class="hide pure-button button-small" data-label="@{_('Save changes')}" data-prog="@{_('Saving...')}" data-success="@{_('Saved!')}">@{_('Save changes')}</button>
               <div class="alert div-error"></div>
             </form>
           </td>

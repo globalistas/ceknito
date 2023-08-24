@@ -212,7 +212,7 @@
                           @{ignform.csrf_token()!!html}
                           @{ignform.view_messages(id='ign-msg-' + user.uid, class_='ignore-form-select')!!html}
                           @{ignform.view_content(id='ign-con-' + user.uid, class_='ignore-form-select')!!html}
-                           <button id="submit-ignore-@{user.uid}" type="submit" class="hide pure-button button-xsmall" data-label="@{_('Save changes')}" data-prog="@{_('Saving...')}" data-success="@{_('Saved!')}">@{_('Save changes')}</button>
+                           <button id="submit-ignore-@{user.uid}" type="submit" class="hide pure-button button-small" data-label="@{_('Save changes')}" data-prog="@{_('Saving...')}" data-success="@{_('Saved!')}">@{_('Save changes')}</button>
                            <div class="alert div-error"></div>
                         </form>
                     </div>
