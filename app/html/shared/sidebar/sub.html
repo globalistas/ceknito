@@ -14,7 +14,7 @@
     <div style="text-align: center;"><h3>@{_('You are currently banned from posting.')}</h3></div>
   @end
 @else:
-  @if subInfo.get('restricted', 0) == '0':
+  @if not subInfo.get('restricted', 0) == '1':
     <a href="@{url_for('subs.submit', ptype='link', sub=sub['name'])}" class="sbm-post-grad sbm-post pure-button">@{_('Submit a post')}</a>
   @else:
     <div style="text-align: center;"><h3>@{_('Only mods can post.')}</h3></div>
