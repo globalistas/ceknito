@@ -321,6 +321,12 @@ window.onload = function() {
                 expandoBtn.setAttribute("data-icon", "remove");
             }
             expandoButtons[i].click();
+
+        const showNSFWBlur = document.querySelector('.nsfw-blur') !== null;
+        const expandotxt = document.querySelector('.expandotxt');
+        if (showNSFWBlur) {
+          expandotxt.classList.add('nsfw-blur');
+        }
         }
     }
 }
