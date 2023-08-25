@@ -119,13 +119,6 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch){
         if(data.status == 'ok'){
           expando.querySelector('.expandotxt').innerHTML = data.content;
         }
-        const parentDiv = expando.parentElement;
-
-        const showNSFWBlur = parentDiv.querySelector('.title.nsfw-blur') !== null;
-
-        if (showNSFWBlur) {
-          expando.classList.add('nsfw-blur');
-        }
       })
     }else{
       var domain = get_hostname(link);
@@ -185,6 +178,12 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch){
     }
     th.querySelector('.expando-btn').innerHTML = icon.close;
     document.querySelector('div.post[pid="'+pid+'"]').appendChild(expando);
+
+    const parentDiv = expando.parentElement;
+    const showNSFWBlur = parentDiv.querySelector('.title.nsfw-blur') !== null;
+       if (showNSFWBlur) {
+          expando.classList.add('nsfw-blur');
+        }
     icon.rendericons();
 })
 
