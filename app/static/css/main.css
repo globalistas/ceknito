@@ -844,9 +844,9 @@ iframe {
   transition: all .15s ease;
 }
 
-.post .domain:hover {
+/*.post .domain:hover {
   color: #0084ab;
-}
+}*/
 
 .post .author {
   font-size: 0.7em;
