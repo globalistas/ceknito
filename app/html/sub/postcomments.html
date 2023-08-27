@@ -58,7 +58,7 @@
               <span class="time ">
                   <time-ago datetime="@{comment['time'].isoformat()}Z"></time-ago>
               </span>
-              @if comment['lastedit'] and comment['visibility'] != 'none':
+              @if comment['lastedit'] and comment['visibility'] != 'none' and (comment['lastedit'] - comment['time']).total_seconds() >= 30:
                 <span class="time edited">
                   *
                   <span class="edited-title">

@@ -91,7 +91,7 @@
                 <div title="Downvote" class="c-downvote@{(msg.get('comment_positive') == 0) and ' downvoted' or ''}" data-icon="downvote"></div>
               </div>
             @end
-            <p class="author" style="margin-top: 0;">
+            <p class="author" style="width: auto;">
               @if msg['read']:
                 @{_("Posted %(timeago)s. <b>%(score)s</b> points. Read %(timeagoread)s", timeago='<time-ago datetime="' + msg['created'].isoformat() + 'Z"></time-ago>', score='<span class="cscore">' + str(msg['comment_score']) + '</span>', timeagoread='<time-ago datetime="' + msg['read'].isoformat() + 'Z"></time-ago>')!!html}
               @else:
