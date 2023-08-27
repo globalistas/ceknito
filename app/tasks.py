@@ -199,6 +199,7 @@ def send_title_grab_async(app, url, token):
     result = grab_title_async(app, url)
     result.update(target=token)
     with app.app_context():
+        logger.info("Grabbed title: %s", result)
         send_deferred_event("grab_title", token, result)
 
 

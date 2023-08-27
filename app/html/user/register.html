@@ -16,8 +16,7 @@
             <fieldset>
                 @if config.site.require_invite_code:
                 <div class="pure-control-group">
-                    <label for="invitecode">@{regform.invitecode.label.text}</label>
-                    @{regform.invitecode(autocomplete="off", required=True)!!html}
+                    <label for="invitecode">@{regform.invitecode.label.text}</label>@{regform.invitecode(autocomplete="off", required=True)!!html}
                 </div>
                 @end
                 <div class="pure-control-group">

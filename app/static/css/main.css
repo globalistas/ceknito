@@ -1920,6 +1920,7 @@ div.comments {
 
 .show-post-comments {
   margin-left: 15px;
+  font-size: 16px;
 }
 
 .pchild {
@@ -3335,6 +3336,7 @@ article.text-post.comment.deleted {
   }
 }
 
+input[name="invitecode"],
 input[name="username"],
 input[name="password"],
 input[name="confirm"],
