@@ -103,6 +103,7 @@ u.sub('#ban_timepick', 'change', function(e){
 // selected radio button.
 function onPtypeChange(e) {
   const newVal = e.value;
+  const linkInput = document.querySelector('.reqlink');
   u.each('.lncont', function (e) {
     e.style.display = newVal == 'link' ? 'block' : 'none';
   });
@@ -145,9 +146,11 @@ function onPtypeChange(e) {
 
   u.each('.reqlink', function (e) {
     if(newVal == 'link'){
-      e.setAttribute('required', '1');
+      linkInput.setAttribute('required', '1');
     }else{
-      e.removeAttribute('required');
+      linkInput.removeAttribute('required');
+      linkInput.value = '';
+      linkInput.classList.remove('is-invalid');
     }
   });
 
