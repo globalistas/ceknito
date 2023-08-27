@@ -2745,7 +2745,7 @@ def create_user_flair(sub):
         > 100
     ):
         return jsonify(
-            status="error", error="Can't have more than 100 flair presets per sub"
+            status="error", error=[_("Can't have more than 100 flair presets per sub")]
         )
 
     if form.validate():
@@ -2795,19 +2795,19 @@ def create_flair(sub):
 
     if SubFlair.select().where(SubFlair.sid == sub.sid).count() > 100:
         return jsonify(
-            status="error", error="Can't have more than 100 flair presets per sub"
+            status="error", error=[_("Can't have more than 100 flair presets per sub")]
         )
 
-    # Check if the text value is a duplicate for the given sid
     form = CreateSubFlair()
     if (
         SubFlair.select()
         .where(SubFlair.sid == sub.sid, SubFlair.text == form.text.data)
         .exists()
     ):
-        return jsonify(status="error", error="Flair with the same text already exists")
+        return jsonify(
+            status="error", error=[_("Flair with the same text already exists")]
+        )
 
-    form = CreateSubFlair()
     if form.validate():
         SubFlair.create(
             sid=sub.sid,
@@ -3700,7 +3700,7 @@ def unban_user(username):
         return abort(404)
 
     if user.status != 5:
-        return jsonify(status="error", error=_("User is not banned"))
+        return jsonify(status="error", error=[_("User is not banned")])
 
     auth_provider.change_user_status(user, 0)
     misc.create_sitelog(
@@ -3738,7 +3738,7 @@ def unban_user(username):
 def edit_top_bar():
     form = CsrfTokenOnlyForm()
     if not form.validate():
-        return jsonify(status="error", error="no CSRF")
+        return jsonify(status="error", error=[_("no CSRF")])
 
     data = request.get_json()
     if not data.get("sids"):
@@ -4484,9 +4484,9 @@ def set_suboftheday():
     try:
         sub = Sub.get(Sub.name == form.sub.data)
         if sub.status in (1, 2):  # Check if status is 1 or 2
-            return jsonify(status="error", error="Sub is banned or quarantined")
+            return jsonify(status="error", error=[_("Sub is banned or quarantined")])
     except Sub.DoesNotExist:
-        return jsonify(status="error", error="Sub does not exist")
+        return jsonify(status="error", error=_("Sub does not exist"))
     rconn.delete("daysub")
     misc.set_sub_of_the_day(sub.sid)
     misc.cache.delete_memoized(misc.getSubOfTheDay)

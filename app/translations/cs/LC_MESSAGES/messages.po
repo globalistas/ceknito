@@ -4795,3 +4795,19 @@ msgstr "Příspěvky uživatele"
 #: app/html/user/comments.html:28
 msgid "Comments by"
 msgstr "Komentáře uživatele""
+
+#: app/views/do.py:2748 app/views/do.py:2798
+msgid "Can't have more than 100 flair presets per sub"
+msgstr "Nelze mít více než 100 tagů v jedné skupině"
+
+#: app/views/do.py:2808
+msgid "Flair with the same text already exists"
+msgstr "Tag s tímto textem již existuje"
+
+#: app/views/do.py:3740
+msgid "no CSRF"
+msgstr "žádný CSRF"
+
+#: app/views/do.py:4486
+msgid "Sub is banned or quarantined"
+msgstr "Skupina je zabanována nebo v karanténě"
