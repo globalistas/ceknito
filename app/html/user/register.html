@@ -41,7 +41,7 @@
                 @if config.site.enable_security_question:
                 <div class="pure-control-group">
                     <label for="email">@{regform.securityanswer.label.text}</label>
-                    <div style="display: inline-block;">
+                    <div>
                         <b>@{func.pick_random_security_question()}</b> <br/>
                         @{regform.securityanswer()!!html}
                     </div>
