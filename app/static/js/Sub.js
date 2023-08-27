@@ -150,7 +150,6 @@ function onPtypeChange(e) {
     }else{
       linkInput.removeAttribute('required');
       linkInput.value = '';
-      linkInput.classList.remove('is-invalid');
     }
   });
 
