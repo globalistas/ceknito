@@ -12,7 +12,7 @@
         @end
       </div>
       <div class="thcontainer">
-        @if post['link'] == None:
+        @if post['link'] == None or post['link'].lower().endswith(('.png', '.jpg', '.gif', '.tiff', '.bmp', '.jpeg', '.webp')):
         <a href="/@{config.site.sub_prefix}/@{post['sub']}/@{post['pid']}/@{func.slugify(post['title'])}">
         @else:
           <a target="_blank" rel="noopener nofollow ugc" href="@{post['link']}">

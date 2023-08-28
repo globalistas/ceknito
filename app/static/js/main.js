@@ -703,7 +703,7 @@ pbodyElements.forEach(pbody => {
                 targetClasses === undefined) {
                 return false;
             }
-            if (this.querySelector('[data-icon="image"]')) {
+            if (this.querySelector('[data-icon="image"], [data-icon="remove"]'))  {
                 redirToPost()
             }
         } else if (event.target.closest('.post-heading') || event.target.closest('.author')) {
