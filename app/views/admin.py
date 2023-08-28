@@ -624,7 +624,9 @@ def post_voting(page, term):
         votes = votes.switch(SubPost).join(
             User, JOIN.LEFT_OUTER, on=SubPost.uid == User.uid
         )
-        votes = votes.where(SubPostVote.uid == user.uid).dicts()
+        votes = votes.where(
+            (SubPostVote.uid == user.uid) & (SubPost.uid != user.uid)
+        ).dicts()
     except User.DoesNotExist:
         votes = []
         msg = "user not found"
