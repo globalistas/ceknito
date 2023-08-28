@@ -982,7 +982,11 @@ def getSubOfTheDay():
         try:
             daysub = (
                 Sub.select(Sub.sid, Sub.name, Sub.title)
-                .where(Sub.status == 0)
+                .where(
+                    Sub.status == 0
+                    and Sub.name != config.site.ann_sub
+                    and Sub.sid != config.site.changelog_sub
+                )
                 .order_by(db.random())
                 .get()
             )
