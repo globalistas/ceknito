@@ -52,6 +52,9 @@
         @if post['nsfw']:
           <div class="nsfw" title="@{_('Not safe for work')}">@{_('NSFW')}</div> \
         @end
+        @if current_user.is_admin() and post['deleted'] in [1, 2, 3]:
+          <span>@{_('[Deleted Post]')}</span>
+        @end
       </div>
 
       <div class="author">
