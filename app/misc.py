@@ -1026,6 +1026,7 @@ def getChangelog():
 def getSinglePost(pid):
     fields = [
         SubPost.nsfw,
+        SubPost.noreplies,
         SubPost.sid,
         SubPost.content,
         SubPost.pid,

@@ -277,6 +277,7 @@ def create_post(ptype, sub):
         comments=0,
         ptype=ptype,
         nsfw=form.nsfw.data if not sub.nsfw else 1,
+        noreplies=form.noreplies.data,
         thumbnail=img,
         flair=flair,
     )
@@ -326,6 +327,7 @@ def create_post(ptype, sub):
             "sid": sub.sid,
             "title": post.title,
             "nsfw": post.nsfw,
+            "noreplies": post.noreplies,
             "post_url": url_for("sub.view_post", sub=sub.name, pid=post.pid),
             "sub_url": url_for("sub.view_sub", sub=sub.name),
             "html": engine.get_template("shared/post.html").render(

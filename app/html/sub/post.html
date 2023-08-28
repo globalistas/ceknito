@@ -249,6 +249,11 @@
             @if (datetime.datetime.utcnow() - post['posted'].replace(tzinfo=None)) < datetime.timedelta(seconds=config.site.title_edit_timeout):
               <li><a class="edit-title" data-pid="@{post['pid']}">@{_('edit title')}</a></li>
             @end
+            @if not post['noreplies']:
+              <li><a class="noreplies-post"> @{_('disable notifications')} </a></li>
+            @else:
+              <li><a class="noreplies-post"> @{_('enable notifications')} </a></li>
+            @end
           @end
 
           @if post['uid'] == current_user.uid or current_user.is_admin() or current_user.uid in subMods['all']:

@@ -1466,7 +1466,7 @@ def create_comment(pid):
         else:
             to = post.uid.uid
             ntype = "POST_REPLY"
-        if to != current_user.uid:
+        if to != current_user.uid and post.noreplies != 1:
             notifications.send(
                 ntype,
                 sub=post.sid,
@@ -3334,6 +3334,27 @@ def toggle_nsfw():
             or current_user.is_mod(post.sid)
         ):
             post.nsfw = 1 if post.nsfw == 0 else 0
+            post.save()
+            return json.dumps({"status": "ok"})
+        else:
+            return json.dumps({"status": "error", "error": _("Not authorized")})
+    return json.dumps({"status": "error", "error": get_errors(form)})
+
+
+@do.route("/do/noreplies", methods=["POST"])
+@login_required
+def toggle_noreplies():
+    """Toggles notifications on posts"""
+    form = DeletePost()
+
+    if form.validate():
+        try:
+            post = SubPost.get(SubPost.pid == form.post.data)
+        except SubPost.DoesNotExist:
+            return json.dumps({"status": "error", "error": _("Post does not exist")})
+
+        if current_user.uid == post.uid_id:
+            post.noreplies = 1 if post.noreplies is None or post.noreplies == 0 else 0
             post.save()
             return json.dumps({"status": "ok"})
         else:

@@ -4811,3 +4811,15 @@ msgstr "žádný CSRF"
 #: app/views/do.py:4486
 msgid "Sub is banned or quarantined"
 msgstr "Skupina je zabanována nebo v karanténě"
+
+#: app/forms/sub.py:212
+msgid "Disable notifications?"
+msgstr "Vypnout notifikace?"
+
+#: app/html/sub/post.html:253
+msgid "disable notifications"
+msgstr "vypnout notifikace"
+
+#: app/html/sub/post.html:255
+msgid "enable notifications"
+msgstr "zapnout notifikace"

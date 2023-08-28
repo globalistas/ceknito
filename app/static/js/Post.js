@@ -299,6 +299,21 @@ u.addEventForChild(document, 'click', '.nsfw-post', function (e, qelem) {
     });
 });
 
+u.addEventForChild(document, 'click', '.noreplies-post', function (e, qelem) {
+    const tg = e.currentTarget;
+    TextConfirm(qelem, function () {
+        u.post('/do/noreplies', { post: document.getElementById('postinfo').getAttribute('pid') },
+            function (data) {
+                if (data.status != "ok") {
+                    tg.innerHTML = _('Error: %1', data.error);
+                } else {
+                    tg.innerHTML = _('Done!');
+                    document.location.reload();
+                }
+            });
+    });
+});
+
 u.addEventForChild(document, 'click', '.poll-close', function (e, qelem) {
     const tg = e.currentTarget;
     TextConfirm(qelem, function () {

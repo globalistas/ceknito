@@ -305,6 +305,7 @@ class SubPost(BaseModel):
     distinguish = IntegerField(null=True)  # 1=mod, 2=admin, 0 or null = normal
     link = CharField(null=True)
     nsfw = BooleanField(null=True)
+    noreplies = BooleanField(null=True)
     pid = PrimaryKeyField()
     posted = DateTimeField(default=datetime.datetime.utcnow)
     edited = DateTimeField(null=True)

@@ -209,6 +209,7 @@ class CreateSubPostForm(FlaskForm):
     )
     flair = HiddenField(_l("Flair"))
     nsfw = BooleanField(_l("NSFW?"))
+    noreplies = BooleanField(_l("Disable notifications?"))
     # for polls.
     options = FieldList(StringField(_l("Option")), max_entries=12)
     hideresults = BooleanField(_l("Hide poll results until it closes"))
