@@ -1264,7 +1264,7 @@ def toggle_lock_comments(post):
             smd.value = "0" if smd.value == "1" else "1"
             smd.save()
         except SubPostMetadata.DoesNotExist:
-            smd = SubPostMetadata.create(pid=post.pid, key="lock-comments", value="")
+            smd = SubPostMetadata.create(pid=post.pid, key="lock-comments", value="1")
 
         misc.create_sublog(
             misc.LOG_TYPE_LOCK_COMMENTS,
