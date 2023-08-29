@@ -3249,9 +3249,10 @@ article.text-post.comment.deleted {
 }
 
 .edited-title {
-  position: absolute;
-  top: 21px;
-  left: 13px;
+  opacity: 0;
+}
+
+.edited:hover>.edited-title {
   width: max-content;
   border: 1px solid #4d4c4c;
   padding: 6px 6px 6px 6px;
@@ -3259,11 +3260,10 @@ article.text-post.comment.deleted {
   background-color: white;
   font-size: 11px;
   color: #4d4c4c;
-  opacity: 0;
-}
-
-.edited:hover>.edited-title {
   opacity: 1;
+  position: absolute;
+  top: 21px;
+  left: 13px;
   transition: opacity;
   transition-delay: .6s;
 }
