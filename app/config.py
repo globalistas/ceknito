@@ -540,6 +540,13 @@ configurable_defaults = {
                 "doc": _l("Sets the sub used for announcement posts. Case sensitive."),
                 "value": "announcements",
             },
+            "contactus_link": {
+                "type": "string",
+                "doc": _l(
+                    "Sets the link for the Contact us in footer (e.g. https://example.com)."
+                ),
+                "value": "",
+            },
         },
     },
     "storage": {

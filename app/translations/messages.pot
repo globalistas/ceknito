@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2023-08-29 12:39+0200\n"
+"POT-Creation-Date: 2023-08-29 22:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -333,7 +333,13 @@ msgstr ""
 msgid "Sets the sub used for announcement posts. Case sensitive."
 msgstr ""
 
-#: app/config.py:550
+#: app/config.py:545
+msgid ""
+"Sets the link for the Contact us in footer (e.g. https://example.com). "
+"Can be email address."
+msgstr ""
+
+#: app/config.py:555
 msgid "Max storage for image uploads for subs' stylesheets (in MiB)."
 msgstr ""
 
@@ -1249,7 +1255,7 @@ msgstr ""
 #: app/html/user/login.html:5 app/html/user/login.html:29
 #: app/html/user/password_recovery.html:36 app/html/user/register.html:67
 #: app/html/user/resend_confirmation.html:24 app/static/js/main.js:62
-#: app/static/js/main.js:651 app/templates/layout.html:118
+#: app/static/js/main.js:651
 msgid "Log in"
 msgstr ""
 
@@ -1335,13 +1341,12 @@ msgid ""
 msgstr ""
 
 #: app/html/errors/layout.html:62 app/html/shared/layout.html:75
-#: app/html/shared/sub.html:75 app/templates/layout.html:61
+#: app/html/shared/sub.html:75
 msgid "all"
 msgstr ""
 
 #: app/html/errors/layout.html:63 app/html/shared/layout.html:76
 #: app/html/shared/sub.html:76 app/html/sub/post.html:458
-#: app/templates/layout.html:62
 msgid "new"
 msgstr ""
 
@@ -1714,29 +1719,25 @@ msgid "admin"
 msgstr ""
 
 #: app/html/shared/layout.html:82 app/html/shared/sub.html:82
-#: app/templates/layout.html:68
 msgid "Customize this bar"
 msgstr ""
 
 #: app/html/shared/layout.html:91 app/html/shared/sub.html:91
-#: app/templates/layout.html:76
 msgid "More"
 msgstr ""
 
 #: app/html/shared/layout.html:135 app/html/shared/sub.html:139
 #: app/html/user/register.html:5 app/html/user/register.html:15
 #: app/html/user/register.html:63 app/html/user/registration_disabled.html:4
-#: app/html/user/registration_disabled.html:10 app/templates/layout.html:119
+#: app/html/user/registration_disabled.html:10
 msgid "Register"
 msgstr ""
 
 #: app/html/shared/layout.html:139 app/html/shared/sub.html:143
-#: app/templates/layout.html:123
 msgid "Score"
 msgstr ""
 
 #: app/html/shared/layout.html:178 app/html/shared/sub.html:182
-#: app/templates/layout.html:162
 msgid "Log out"
 msgstr ""
 
@@ -4259,13 +4260,11 @@ msgid "Reporting issues"
 msgstr ""
 
 #: app/templates/welcome.html:55
-msgid ""
-"If you want to contact us about any bugs or other issues, you can find us"
-" on"
+msgid "If you want to contact us about any bugs or other issues, you can find us"
 msgstr ""
 
 #: app/templates/welcome.html:55
-msgid "Discord"
+msgid "here"
 msgstr ""
 
 #: app/templates/admin/invitecodes.html:100

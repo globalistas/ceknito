@@ -4718,12 +4718,12 @@ msgid "Reporting issues"
 msgstr "Hlášení problémů"
 
 #: app/templates/welcome.html:55
-msgid "If you want to contact us about any bugs or other issues, you can find us on"
-msgstr "Pokud náš chceš kontaktovat ohledně jakýchkoli bugů nebo jiných problémů, najdeš nás na"
+msgid "If you want to contact us about any bugs or other issues, you can find us"
+msgstr "Pokud náš chceš kontaktovat ohledně jakýchkoli bugů nebo jiných problémů, najdeš nás"
 
 #: app/templates/welcome.html:55
-msgid "Discord"
-msgstr "Discordu"
+msgid "here"
+msgstr "zde"
 
 #: app/html/shared/sidebar/user.html:44 app/templates/uploads.html:11
 #: app/templates/usercomments.html:15 app/templates/userposts.html:14
