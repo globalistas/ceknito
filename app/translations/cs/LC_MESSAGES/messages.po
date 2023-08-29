@@ -1072,7 +1072,7 @@ msgstr "Jednorázové heslo"
 #: app/html/user/register.html:68 app/html/user/resend_confirmation.html:24
 #: app/static/js/main.js:61
 msgid "Log in"
-msgstr "Přihlásit"
+msgstr "Přihlásit se"
 
 #: app/html/admin/totp_setup.html:11
 msgid "TOTP setup"

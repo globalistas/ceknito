@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2023-08-29 23:02+0200\n"
+"POT-Creation-Date: 2023-08-30 00:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1092,7 +1092,7 @@ msgstr ""
 msgid "There are no posts here, yet."
 msgstr ""
 
-#: app/html/admin/configuration.html:15 app/html/shared/sidebar/admin.html:16
+#: app/html/admin/configuration.html:15 app/html/shared/sidebar/admin.html:17
 msgid "Site configuration"
 msgstr ""
 
@@ -1891,35 +1891,39 @@ msgstr ""
 msgid "User Badges"
 msgstr ""
 
-#: app/html/shared/sidebar/admin.html:7 app/templates/subs.html:10
+#: app/html/shared/sidebar/admin.html:6
+msgid "Invite Codes"
+msgstr ""
+
+#: app/html/shared/sidebar/admin.html:8 app/templates/subs.html:10
 msgid "Subs"
 msgstr ""
 
-#: app/html/shared/sidebar/admin.html:8
+#: app/html/shared/sidebar/admin.html:9
 msgid "Posts"
 msgstr ""
 
-#: app/html/shared/sidebar/admin.html:9
+#: app/html/shared/sidebar/admin.html:10
 msgid "Reports"
 msgstr ""
 
-#: app/html/shared/sidebar/admin.html:11
+#: app/html/shared/sidebar/admin.html:12
 msgid "Uploads"
 msgstr ""
 
-#: app/html/shared/sidebar/admin.html:12
+#: app/html/shared/sidebar/admin.html:13
 msgid "Wikis"
 msgstr ""
 
-#: app/html/shared/sidebar/admin.html:13 app/views/admin.py:749
+#: app/html/shared/sidebar/admin.html:14 app/views/admin.py:749
 msgid "Banned Domains"
 msgstr ""
 
-#: app/html/shared/sidebar/admin.html:14 app/views/admin.py:746
+#: app/html/shared/sidebar/admin.html:15 app/views/admin.py:746
 msgid "Banned Email Domains"
 msgstr ""
 
-#: app/html/shared/sidebar/admin.html:17
+#: app/html/shared/sidebar/admin.html:18
 msgid "Site log"
 msgstr ""
 
@@ -3327,8 +3331,8 @@ msgid "Sign up"
 msgstr ""
 
 #: app/html/user/fix_registration_email.html:27 app/html/user/login.html:33
-#: app/html/user/register.html:69 app/html/user/resend_confirmation.html:26
-#: app/static/js/main.js:66 app/static/js/main.js:655
+#: app/html/user/resend_confirmation.html:26 app/static/js/main.js:66
+#: app/static/js/main.js:655
 msgid "Forgot your password?"
 msgstr ""
 
@@ -3384,7 +3388,7 @@ msgid "Alphanumeric characters plus '-' and '_'"
 msgstr ""
 
 #: app/html/user/login.html:35 app/html/user/password_recovery.html:39
-#: app/html/user/register.html:71
+#: app/html/user/register.html:70
 msgid "Didn't get confirmation instructions?"
 msgstr ""
 
