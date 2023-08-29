@@ -1093,7 +1093,16 @@ msgstr "Vydaný"
 
 #: app/html/admin/wiki.html:26
 msgid "Last edited"
+msgstr "Naposledy upravené"
+
+#: app/html/user/comments.html:76 app/html/user/savedcomments.html:73
+msgid "last edited"
 msgstr "naposledy upravené"
+
+#: app/html/sub/postcomments.html:65
+#, python-format
+msgid "last edited %(timeago)s"
+msgstr "naposledy upravené %(timeago)s"
 
 #: app/html/admin/wiki.html:38
 msgid "Edit"
@@ -2761,7 +2770,7 @@ msgstr "<span class=\"cscore\">%(score)i</span> bodov</b>"
 #: app/html/sub/postcomments.html:57
 #, python-format
 msgid "Edited %(timeago)s"
-msgstr "(upravené %(timeago)s)"
+msgstr "upravené %(timeago)s"
 
 #: app/html/sub/postcomments.html:84
 #, python-format

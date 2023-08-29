@@ -3245,25 +3245,27 @@ article.text-post.comment.deleted {
 
 .edited {
   position: relative;
-  cursor: pointer;
+  cursor: default;
 }
 
 .edited-title {
   position: absolute;
-  top: 0px;
-  left: 10px;
-  width: 200px;
-  border: 1px solid gray;
-  border-radius: 5px;
-  padding: 3px;
+  top: 21px;
+  left: 13px;
+  width: max-content;
+  border: 1px solid #4d4c4c;
+  padding: 6px 6px 6px 6px;
   text-align: center;
   background-color: white;
-  display: none;
-  transition: all 1s ease-in;
+  font-size: 11px;
+  color: #4d4c4c;
+  opacity: 0;
 }
 
 .edited:hover>.edited-title {
-  display: block;
+  opacity: 1;
+  transition: opacity;
+  transition-delay: .6s;
 }
 
 .banner-text-link {

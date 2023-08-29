@@ -62,7 +62,7 @@
                 <span class="time edited">
                   *
                   <span class="edited-title">
-                  @{_('Edited %(timeago)s', timeago='<time-ago datetime="' + comment['lastedit'].isoformat() + 'Z"></time-ago>')!!html}
+                  @{_('last edited %(timeago)s', timeago='<time-ago datetime="' + comment['lastedit'].isoformat() + 'Z"></time-ago>')!!html}
                   </span>
                 </span>
               @end
