@@ -3347,6 +3347,12 @@ input[name="email_optional"] {
   width: 300px !important;
 }
 
+.inviteq {
+  font-size: 14px;
+  text-align: right;
+  margin-top: 2px;
+}
+
 input[name="captcha"] {
   display: block !important;
   width: 250px !important;

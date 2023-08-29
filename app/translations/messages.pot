@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2023-08-29 22:00+0200\n"
+"POT-Creation-Date: 2023-08-29 23:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -334,12 +334,10 @@ msgid "Sets the sub used for announcement posts. Case sensitive."
 msgstr ""
 
 #: app/config.py:545
-msgid ""
-"Sets the link for the Contact us in footer (e.g. https://example.com). "
-"Can be email address."
+msgid "Sets the link for the Contact us in footer (e.g. https://example.com)."
 msgstr ""
 
-#: app/config.py:555
+#: app/config.py:557
 msgid "Max storage for image uploads for subs' stylesheets (in MiB)."
 msgstr ""
 
@@ -1253,9 +1251,9 @@ msgstr ""
 #: app/html/mod/totp.html:21 app/html/shared/layout.html:134
 #: app/html/shared/sub.html:138 app/html/user/fix_registration_email.html:25
 #: app/html/user/login.html:5 app/html/user/login.html:29
-#: app/html/user/password_recovery.html:36 app/html/user/register.html:67
+#: app/html/user/password_recovery.html:36 app/html/user/register.html:68
 #: app/html/user/resend_confirmation.html:24 app/static/js/main.js:62
-#: app/static/js/main.js:651
+#: app/static/js/main.js:651 app/templates/layout.html:118
 msgid "Log in"
 msgstr ""
 
@@ -1341,12 +1339,13 @@ msgid ""
 msgstr ""
 
 #: app/html/errors/layout.html:62 app/html/shared/layout.html:75
-#: app/html/shared/sub.html:75
+#: app/html/shared/sub.html:75 app/templates/layout.html:61
 msgid "all"
 msgstr ""
 
 #: app/html/errors/layout.html:63 app/html/shared/layout.html:76
 #: app/html/shared/sub.html:76 app/html/sub/post.html:458
+#: app/templates/layout.html:62
 msgid "new"
 msgstr ""
 
@@ -1719,29 +1718,34 @@ msgid "admin"
 msgstr ""
 
 #: app/html/shared/layout.html:82 app/html/shared/sub.html:82
+#: app/templates/layout.html:68
 msgid "Customize this bar"
 msgstr ""
 
 #: app/html/shared/layout.html:91 app/html/shared/sub.html:91
+#: app/templates/layout.html:76
 msgid "More"
 msgstr ""
 
 #: app/html/shared/layout.html:135 app/html/shared/sub.html:139
 #: app/html/user/register.html:5 app/html/user/register.html:15
-#: app/html/user/register.html:63 app/html/user/registration_disabled.html:4
-#: app/html/user/registration_disabled.html:10
+#: app/html/user/register.html:64 app/html/user/registration_disabled.html:4
+#: app/html/user/registration_disabled.html:10 app/templates/layout.html:119
 msgid "Register"
 msgstr ""
 
 #: app/html/shared/layout.html:139 app/html/shared/sub.html:143
+#: app/templates/layout.html:123
 msgid "Score"
 msgstr ""
 
 #: app/html/shared/layout.html:178 app/html/shared/sub.html:182
+#: app/templates/layout.html:162
 msgid "Log out"
 msgstr ""
 
 #: app/html/shared/layout.html:220 app/html/shared/sub.html:224
+#: app/templates/layout.html:204
 msgid "Contact us"
 msgstr ""
 
@@ -3323,7 +3327,7 @@ msgid "Sign up"
 msgstr ""
 
 #: app/html/user/fix_registration_email.html:27 app/html/user/login.html:33
-#: app/html/user/register.html:68 app/html/user/resend_confirmation.html:26
+#: app/html/user/register.html:69 app/html/user/resend_confirmation.html:26
 #: app/static/js/main.js:66 app/static/js/main.js:655
 msgid "Forgot your password?"
 msgstr ""
@@ -3380,7 +3384,7 @@ msgid "Alphanumeric characters plus '-' and '_'"
 msgstr ""
 
 #: app/html/user/login.html:35 app/html/user/password_recovery.html:39
-#: app/html/user/register.html:70
+#: app/html/user/register.html:71
 msgid "Didn't get confirmation instructions?"
 msgstr ""
 
@@ -3532,14 +3536,18 @@ msgid ""
 "they moderate."
 msgstr ""
 
-#: app/html/user/register.html:23
+#: app/html/user/register.html:20
+msgid "Don't have an invite?"
+msgstr ""
+
+#: app/html/user/register.html:24
 #, python-format
 msgid ""
 "Alphanumeric characters plus '-' and '_'; between 2 and %(num)d "
 "characters long"
 msgstr ""
 
-#: app/html/user/register.html:61
+#: app/html/user/register.html:62
 msgid "I accept the <a href=\"/wiki/tos\">Terms of Use</a>"
 msgstr ""
 

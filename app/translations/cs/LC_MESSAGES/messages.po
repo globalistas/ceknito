@@ -4832,3 +4832,7 @@ msgstr "vypnout notifikace"
 #: app/html/sub/post.html:255
 msgid "enable notifications"
 msgstr "zapnout notifikace"
+
+#: app/html/user/register.html:20
+msgid "Don't have an invite?"
+msgstr "Nemáš pozvánku?"
