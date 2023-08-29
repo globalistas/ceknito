@@ -2994,7 +2994,7 @@ msgstr "Na blokovanie používateľov použi odkaz „blokovať“ v ich užíva
 
 #: app/html/user/login.html:12
 msgid "Login"
-msgstr "Prihlásenie"
+msgstr "Prihlásiť sa"
 
 #: app/html/user/login.html:15 app/static/js/main.js:52
 msgid "Alphanumeric characters plus '-' and '_'"
