@@ -250,7 +250,7 @@ def safe_request(
             stream=True,
             timeout=receive_timeout,
             headers={"User-Agent": "Yahoo! Slurp/Site Explorer"},
-            cookies={"CONSENT": "YES+"},
+            cookies={"CONSENT": "PENDING+999"},
         )
         r.raise_for_status()  # Check if the request was successful
     except requests.exceptions.RequestException:
@@ -263,7 +263,7 @@ def safe_request(
                 headers={
                     "User-Agent": "Mozilla/5.0 (Android 13; Mobile; rv:109.0) Gecko/113.0 Firefox/113.0"
                 },
-                cookies={"CONSENT": "YES+"},
+                cookies={"CONSENT": "PENDING+999"},
             )
             r.raise_for_status()  # Check if the request was successful
         except requests.exceptions.RequestException as e:
