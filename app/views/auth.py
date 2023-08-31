@@ -209,14 +209,14 @@ def register():
             )
 
         InviteCode.update(uses=InviteCode.uses + 1).where(
-            InviteCode.code == form.invitecode.data
+            InviteCode.code == form.invitecode.data.strip()
         ).execute()
 
     user = create_user(
         form.username.data,
         form.password.data,
         email,
-        form.invitecode.data,
+        form.invitecode.data.strip(),
         existing_user,
     )
 
