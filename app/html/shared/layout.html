@@ -217,7 +217,7 @@
       @for text,link in config.site.footer.links.items():
         <a href="@{link}">@{text}</a> |
       @end
-      <a target="_blank" href="@{config.site.contactus_link}">@{_('Contact us')}</a>
+      <a target="_blank" rel="noopener nofollow ugc" href="@{config.site.contactus_link}">@{_('Contact us')}</a>
       <br>
       @{_('Served by %(hostname)s', hostname=hostname)} \
       @if config.app.debug:

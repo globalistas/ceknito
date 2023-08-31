@@ -17,7 +17,7 @@
                 @if config.site.require_invite_code:
                 <div class="pure-control-group">
                     <label for="invitecode">@{regform.invitecode.label.text}</label>@{regform.invitecode(autocomplete="off", required=True)!!html}
-                    <div class="inviteq"><a target="_blank" href="@{config.site.contactus_link}">@{_("Don't have an invite?")}</a></div>
+                    <div class="inviteq"><a target="_blank" rel="noopener nofollow ugc" href="@{config.site.contactus_link}">@{_("Don't have an invite?")}</a></div>
                 </div>
                 @end
                 <div class="pure-control-group">
