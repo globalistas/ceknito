@@ -403,6 +403,7 @@ def invitecodes(page):
             & (UserMetadata.value << set([x["code"] for x in invite_codes]))
         )
         .join(User)
+        .order_by(User.joindate)
         .dicts()
     )
 
