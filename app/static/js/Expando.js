@@ -165,10 +165,10 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch){
         resizer(expando.querySelector('.expandotxt iframe'), expando.querySelector('.expandotxt .resize-handle'), expando.querySelector('.expandotxt'))
       }else if(/\.(png|jpg|gif|tiff|svg|bmp|jpeg|webp)$/i.test(link)) {
         const img = document.createElement("img");
-        img.src = link;
+        img.setAttribute("src", encodeURI(link));
         img.draggable = false;
         const anchor = document.createElement("a");
-        anchor.href = link;
+        anchor.setAttribute("href", encodeURI(link));
         anchor.target = "_blank";
         anchor.appendChild(img);
         confResizer(anchor, expando.querySelector('.expandotxt'));
