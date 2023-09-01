@@ -1539,7 +1539,6 @@ span.hasmail {
 .th-subbar ul li a {
   color: #eee;
   font-size: .9em;
-  transition: all .15s ease;
 }
 
 .th-subbar ul li a:hover {

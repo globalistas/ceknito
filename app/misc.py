@@ -734,6 +734,7 @@ def getInviteCodeInfo(uid):
                 ),
             )
             .join(User)
+            .order_by(User.joindate)
             .dicts()
         )
         info["invitedTo"] = list(user_codes)
