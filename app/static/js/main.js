@@ -158,28 +158,31 @@ u.ready(function () {
     });
   }
 
-  u.sub('.save-top_bar', 'click', function (e) {
-    var btn = this;
-    btn.setAttribute('disabled', true);
-    btn.innerHTML = _("Saving...");
-    var subs = []
-    u.each('.subsort_item', function (e) {
-      subs.push(e.getAttribute('sid'))
-    });
-    u.post('/do/edit_top_bar', { sids: subs }, function (d) {
-      if (d.status == "ok") {
-
-      } else {
-        alert(_('There was an error while saving your settings. Please try again in a few minutes.'));
-      }
-      btn.removeAttribute('disabled');
-      btn.innerHTML = _("Save");
-    }, function () {
+u.sub('.save-top_bar', 'click', function (e) {
+  var btn = this;
+  btn.setAttribute('disabled', true);
+  btn.innerHTML = _("Saving...");
+  var subs = []
+  u.each('.subsort_item', function (e) {
+    subs.push(e.getAttribute('sid'))
+  });
+  u.post('/do/edit_top_bar', { sids: subs }, function (d) {
+    if (d.status == "ok") {
+      setTimeout(function() {
+        document.location.reload();
+      }, 500); // Wait for 0.5 seconds before reloading
+    } else {
       alert(_('There was an error while saving your settings. Please try again in a few minutes.'));
-      btn.removeAttribute('disabled');
-      btn.innerHTML = _("Save");
-    })
+    }
+    btn.removeAttribute('disabled');
+    btn.innerHTML = _("Save");
+  }, function () {
+    alert(_('There was an error while saving your settings. Please try again in a few minutes.'));
+    btn.removeAttribute('disabled');
+    btn.innerHTML = _("Save");
   })
+})
+
 
   document.querySelectorAll(".ajaxform").forEach((element) => {
     element.onSubmit = (event, target) => {
@@ -622,6 +625,16 @@ u.addEventForChild(document, 'input', '.ignore-form-select', function (e, qelem)
   saveButton.classList.remove('hide');
   saveButton.innerHTML = _('Save changes')
 })
+
+// Reload user prefs page on submit
+u.ready(function () {
+  u.addEventForChild(document.body, 'click', '#edituser-btnsubmit', function (event) {
+    setTimeout(function() {
+      document.location.reload();
+    }, 500); // Wait for 0.5 seconds before reloading
+  });
+});
+
 
 // Popup login/register box when anons click Subscribe button
 function handleSubscriptionClick(event) {
