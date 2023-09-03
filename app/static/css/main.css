@@ -724,7 +724,6 @@ a.pure-button-primary {
   line-height: 1.6em;
   font-size: 1em;
   word-wrap: break-word;
-  transition: all .15s ease;
 }
 
 .post .title:visited {
