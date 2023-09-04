@@ -1541,7 +1541,7 @@ span.hasmail {
 }
 
 .th-subbar ul li a:hover {
-  color: #c90511;
+  text-decoration: underline;
 }
 
 .th-subbar ul li.editbar {
@@ -1633,11 +1633,9 @@ span.hasmail {
 .sbm-post-grad {
 /*  background-color: #cdcdcd; */
   border: 1px solid #ccc;
-  /* border-radius: 2px;*/
   box-sizing: border-box;
   color: #2e2e2e;
   font-size: 17px;
-  letter-spacing: -.022em;
   line-height: 1.47059;
   padding: 4px 15px;
   text-align: center;
