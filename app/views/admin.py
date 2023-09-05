@@ -185,12 +185,12 @@ def index():
 
     return render_template(
         "admin/admin.html",
-        subs=subs,
-        posts=posts,
-        ups=ups,
-        downs=downs,
-        users=users,
-        comms=comms,
+        subs=f"{subs:,}",
+        posts=f"{posts:,}",
+        ups=f"{ups:,}",
+        downs=f"{downs:,}",
+        users=f"{users:,}",
+        comms=f"{comms:,}",
         subOfTheDay=subOfTheDay,
         useinvitecodeform=invite,
         csrf_form=CsrfTokenOnlyForm(),
