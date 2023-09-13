@@ -546,7 +546,7 @@ def edit_sub_css(sub):
     if sub.status != 0 and not current_user.is_admin():
         return jsonify(status="error", error=[_("Sub is disabled")])
 
-    if not current_user.is_mod(sub.sid, 1) and not current_user.is_admin():
+    if not current_user.is_admin():
         return jsonify(status="error", error=[_("Not authorized")])
 
     form = EditSubCSSForm()
