@@ -243,11 +243,11 @@ class Notifications(object):
         ignore = None
 
         target_email_notify = (
-            UserMetadata.select(UserMetadata.value).where(
-                (UserMetadata.uid == target & UserMetadata.key == "email_notify")
-            )
-            == "1"
-        )
+            UserMetadata.select(UserMetadata.value)
+            .where((UserMetadata.uid == target) & (UserMetadata.key == "email_notify"))
+            .scalar()  # Use scalar() to get the actual value
+        ) == "1"
+
         if target_email_notify and notification_type in ["POST_REPLY", "COMMENT_REPLY"]:
             email = self.email_template(
                 notification_type,

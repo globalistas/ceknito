@@ -1466,7 +1466,9 @@ def create_comment(pid):
         else:
             to = post.uid.uid
             ntype = "POST_REPLY"
-        if to != current_user.uid and post.noreplies != 1:
+        if (
+            to != current_user.uid and post.noreplies != 1
+        ):  # TODO: Make this not affect target's comments in the post
             notifications.send(
                 ntype,
                 sub=post.sid,
