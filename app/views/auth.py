@@ -212,11 +212,16 @@ def register():
             InviteCode.code == form.invitecode.data.strip()
         ).execute()
 
+    if form.invitecode.data is not None:
+        invitecode = form.invitecode.data.strip()
+    else:
+        invitecode = form.invitecode.data
+
     user = create_user(
         form.username.data,
         form.password.data,
         email,
-        form.invitecode.data.strip(),
+        invitecode,
         existing_user,
     )
 
