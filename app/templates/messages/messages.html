@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block title %}Moje správy | {{config.site.lema}}{% endblock %}
+{% block title %}{{_("My messages")}} | {{config.site.lema}}{% endblock %}
 
 {% block navbar %}
 {% endblock %}
@@ -35,7 +35,7 @@
               {% endif %}
             </p>
             <p class="container">
-              {% if message.username or (message.sub and config.site.enable_modmail) %}
+              {% if message.username and not message.sub or config.site.enable_modmail %}
                 <a href="#msg-form" data-mid="{{message.mid}}" class="replymsg">{{_("reply")}}</a>
               {% endif %}
               {% if not message.read %}

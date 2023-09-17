@@ -4840,3 +4840,8 @@ msgstr "zapnúť notifikácie"
 #: app/html/user/register.html:20
 msgid "Don't have an invite?"
 msgstr "Nemáš pozvánku?"
+
+#: app/templates/messages/messages.html:2 app/templates/messages/saved.html:2
+#: app/templates/messages/sent.html:2
+msgid "My messages"
+msgstr "Moje správy"
