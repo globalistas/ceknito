@@ -1933,6 +1933,7 @@ def getUserComments(uid, page, include_deleted_comments=False):
                 Sub.name.alias("sub"),
                 SubPost.title,
                 SubPostComment.cid,
+                SubPostComment.noreplies,
                 SubPostComment.pid,
                 SubPostComment.uid,
                 SubPostComment.time,

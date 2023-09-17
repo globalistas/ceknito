@@ -85,7 +85,9 @@
                   <ul class="bottombar links">
                     <!-- TODO needs peewee <li><a href="{# url_for('sub.view_perm', sub=sub.name, cid=comment.cid, pid=post.pid) #}">permalink</a></li>-->
                     <li><a href="@{url_for('sub.view_perm', sub=comment['sub'], pid=comment['pid'], cid=comment['cid'])}">permalink</a></li>
+                    @if comment['uid'] != current_user.uid:
                     <li><a class="comment-source" data-cid="@{comment['cid']}">@{_("source")}</a></li>
+                    @end
                     @if current_user.is_authenticated:
                       @if comment['comment_is_saved']:
                         <li><a class="removesavedcomment" data-cid="@{comment['cid']}">@{_('unsave')}</a></li>
@@ -96,6 +98,11 @@
                         <li><a class="reply-comment" data-pid="@{comment['pid']}" data-to="@{comment['cid']}">@{_("reply")}</a></li>
                         @if comment['uid'] == current_user.uid:
                           <li><a class="edit-comment" data-cid="@{comment['cid']}">@{_("edit")}</a></li>
+                          @if not comment['noreplies']:
+                          <li><a class="noreplies-comment" data-cid="@{comment['cid']}">@{_('disable notifications')}</a></li>
+                          @else:
+                          <li><a class="noreplies-comment" data-cid="@{comment['cid']}">@{_('enable notifications')}</a></li>
+                          @end
                         @end
                       @end
                       @if comment['uid'] == current_user.uid or current_user.is_admin() and comment['status'] not in [1, 2, 3]:
