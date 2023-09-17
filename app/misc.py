@@ -2881,6 +2881,7 @@ def get_comment_tree(
     # 4 - Populate the tree (get all the data and cram it into the tree)
     fields = [
         SubPostComment.cid,
+        SubPostComment.noreplies,
         SubPostComment.content,
         SubPostComment.lastedit,
         SubPostComment.score,

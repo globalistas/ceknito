@@ -23,7 +23,14 @@ from ..auth import (
     AuthError,
     normalize_email,
 )
-from ..forms import LogOutForm, CreateSubFlair, CsrfTokenOnlyForm, CreateSubRule
+from ..forms import (
+    LogOutForm,
+    CreateSubFlair,
+    CsrfTokenOnlyForm,
+    CreateSubRule,
+    NoReplyCommentForm,
+    NoReplyPostForm,
+)
 from ..forms import EditSubForm, EditUserForm, EditIgnoreForm, EditSubCSSForm
 from ..forms import EditModForm, BanUserSubForm, DeleteAccountForm, EditAccountForm
 from ..forms import EditSubTextPostForm, AssignUserBadgeForm
@@ -1463,18 +1470,39 @@ def create_comment(pid):
             parent = SubPostComment.get(SubPostComment.cid == form.parent.data)
             to = parent.uid.uid
             ntype = "COMMENT_REPLY"
+            # Check if notifications are disabled for the parent comment
+            if parent.noreplies == 1:
+                # Notifications are disabled, so don't send a notification to the comment author
+                to = None
         else:
             to = post.uid.uid
             ntype = "POST_REPLY"
-        if to != current_user.uid and (ntype == "COMMENT_REPLY" or post.noreplies != 1):
-            notifications.send(
-                ntype,
-                sub=post.sid,
-                post=post.pid,
-                comment=comment.cid,
-                sender=current_user.uid,
-                target=to,
-            )
+            # Check if notifications are disabled for the post
+            if post.noreplies == 1:
+                # Notifications are disabled, so don't send a notification to the post author
+                to = None
+
+        if to and to != current_user.uid:
+            # Check if the recipient is not the current user and if either the notification type is "COMMENT_REPLY"
+            # or the comment doesn't have notifications disabled
+            if ntype == "COMMENT_REPLY":
+                notifications.send(
+                    ntype,
+                    sub=post.sid,
+                    post=post.pid,
+                    comment=comment.cid,
+                    sender=current_user.uid,
+                    target=to,
+                )
+            elif ntype == "POST_REPLY":
+                notifications.send(
+                    ntype,
+                    sub=post.sid,
+                    post=post.pid,
+                    comment=comment.cid,
+                    sender=current_user.uid,
+                    target=to,
+                )
 
         subMods = misc.getSubMods(sub.sid)
         include_history = current_user.is_mod(sub.sid, 1) or current_user.is_admin()
@@ -3345,7 +3373,7 @@ def toggle_nsfw():
 @login_required
 def toggle_noreplies():
     """Toggles notifications on posts"""
-    form = DeletePost()
+    form = NoReplyPostForm()
 
     if form.validate():
         try:
@@ -3359,6 +3387,31 @@ def toggle_noreplies():
             return json.dumps({"status": "ok"})
         else:
             return json.dumps({"status": "error", "error": _("Not authorized")})
+    return json.dumps({"status": "error", "error": get_errors(form)})
+
+
+@do.route("/do/noreplies_comment", methods=["POST"])
+@login_required
+def toggle_noreplies_comment():
+    """Toggles notifications on comment"""
+    form = NoReplyCommentForm()
+
+    if form.validate():
+        try:
+            comment = SubPostComment.get(SubPostComment.cid == form.cid.data)
+        except SubPostComment.DoesNotExist:
+            return jsonify(status="error", error=[_("Comment does not exist")])
+
+        if comment.uid_id != current_user.uid:
+            return jsonify(status="error", error=[_("Not authorized")])
+
+        else:
+            comment.noreplies = (
+                1 if comment.noreplies is None or comment.noreplies == 0 else 0
+            )
+            comment.save()
+            return json.dumps({"status": "ok"})
+
     return json.dumps({"status": "error", "error": get_errors(form)})
 
 

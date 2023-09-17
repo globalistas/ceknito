@@ -113,7 +113,7 @@
               @end
             </div>
 
-            @if comment['visibility'] != 'none':
+            @if comment['visibility'] != 'none' and comment['uid'] != current_user.uid:
               <div hidden id="sauce-@{comment['cid']}">@{comment['source']}</div>
             @end
             <ul class="bottombar links @{(comment['visibility'] not in ['', 'admin-del', 'mod-del']) and 'hidden' or ''}">
@@ -121,7 +121,7 @@
                 <li><a href="@{url_for('user.view_ignores', menu='user')}">@{_('blocked users')}</a></li>
               @end
               <li><a href="@{url_for('sub.view_perm', sub=post['sub'], cid=comment['cid'], pid=post['pid'], slug=post['slug'])}#comment-@{comment['cid']}">@{_('permalink')}</a></li>
-              @if comment['visibility'] in ['', 'blur-block']:
+              @if comment['visibility'] in ['', 'blur-block'] and comment['uid'] != current_user.uid:
                 <li><a class="comment-source" data-cid="@{comment['cid']}">@{_('source')}</a></li>
               @end
               @if current_user.is_authenticated:
@@ -145,6 +145,11 @@
               @end
               @if current_user.is_authenticated and comment['visibility'] in ['', 'blur-block'] and comment['uid'] == current_user.uid:
                 <li><a class="edit-comment" data-cid="@{comment['cid']}">@{_('edit')}</a></li>
+                @if not comment['noreplies']:
+                <li><a class="noreplies-comment" data-cid="@{comment['cid']}">@{_('disable notifications')}</a></li>
+                @else:
+                <li><a class="noreplies-comment" data-cid="@{comment['cid']}">@{_('enable notifications')}</a></li>
+                @end
               @end
               @if current_user.is_authenticated and comment['visibility'] == '' and (comment['uid'] == current_user.uid or current_user.is_admin() or current_user.uid in subMods['all']):
                 <li><a @{(comment['uid'] == current_user.uid) and 'selfdel="true"' or ''!!html} class="delete-comment" data-cid="@{comment['cid']}">@{_('delete')}</a></li>

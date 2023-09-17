@@ -38,6 +38,12 @@ class DeleteCommentForm(FlaskForm):
     reason = StringField()
 
 
+class NoReplyCommentForm(FlaskForm):
+    """Set noreply status on a comment"""
+
+    cid = HiddenField()  # comment id
+
+
 class UndeleteCommentForm(FlaskForm):
     """Un-deletes a comment in a post"""
 
@@ -278,6 +284,12 @@ class DeletePost(FlaskForm):
     post = HiddenField()
     reason = StringField()
     send_to_admin = BooleanField()
+
+
+class NoReplyPostForm(FlaskForm):
+    """Post noreply form."""
+
+    post = HiddenField()
 
 
 class UndeletePost(FlaskForm):

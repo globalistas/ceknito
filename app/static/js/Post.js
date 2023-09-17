@@ -522,6 +522,22 @@ u.addEventForChild(document, 'click', '.btn-preview', function (e, qelem) {
         });
 });
 
+// Noreply comment
+u.addEventForChild(document, 'click', '.noreplies-comment', function (e, qelem) {
+    const cid = qelem.getAttribute('data-cid'), tg = qelem.parentNode.parentNode;
+    TextConfirm(qelem, function () {
+        u.post('/do/noreplies_comment', { cid: cid },
+            function (data) {
+                if (data.status != "ok") {
+                    tg.innerHTML = _('Error: %1', data.error);
+                } else {
+                    tg.innerHTML = _('Done!');
+                    document.location.reload();
+                }
+            });
+    });
+});
+
 // Delete comment
 u.addEventForChild(document, 'click', '.delete-comment', function (e, qelem) {
     // confirmation
