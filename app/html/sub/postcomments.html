@@ -113,7 +113,7 @@
               @end
             </div>
 
-            @if comment['visibility'] != 'none' and comment['uid'] != current_user.uid:
+            @if comment['visibility'] != 'none':
               <div hidden id="sauce-@{comment['cid']}">@{comment['source']}</div>
             @end
             <ul class="bottombar links @{(comment['visibility'] not in ['', 'admin-del', 'mod-del']) and 'hidden' or ''}">
