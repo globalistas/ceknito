@@ -143,7 +143,7 @@
                   <li><a class="stick-comment" data-cid="@{comment['cid']}">@{comment['sticky'] and _('unstick') or _('make sticky')}</a></li>
                 @end
               @end
-              @if current_user.is_authenticated and comment['visibility'] in ['', 'blur-block'] and comment['uid'] == current_user.uid:
+              @if current_user.is_authenticated and comment['visibility'] in ['', 'blur-block'] and comment['uid'] == current_user.uid and not postmeta.get('lock-comments') and post['deleted'] == 0 and not post['is_archived']:
                 <li><a class="edit-comment" data-cid="@{comment['cid']}">@{_('edit')}</a></li>
                 @if not comment['noreplies']:
                 <li><a class="noreplies-comment" data-cid="@{comment['cid']}">@{_('disable notifications')}</a></li>
