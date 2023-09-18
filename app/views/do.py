@@ -1845,21 +1845,37 @@ def inv_mod(sub):
                 return jsonify(
                     status="error", error=[_("User can't mod more than 20 subs")]
                 )
+            target_language = user.language
+            if target_language == "sk":
+                locale_language = "sk_SK"
+            elif target_language == "cs":
+                locale_language = "cs_CZ"
+            elif target_language == "en":
+                locale_language = "en_US"
+            elif target_language == "es":
+                locale_language = "es_ES"
+            elif target_language == "ru":
+                locale_language = "ru_RU"
+            else:
+                locale_language = (
+                    "en_US"  # Default language if no target language found
+                )
 
-            misc.create_notification_message(
-                mfrom=current_user.uid,
-                as_admin=not is_owner,
-                sub=sub.sid,
-                to=user.uid,
-                subject=_("Invitation to become a moderator"),
-                content=_(
-                    "%(userlink)s invited you to moderate %(sublink)s. "
-                    "Please [click here](%(invitelink)s) to accept or reject the invitation.",
-                    userlink=misc.user_markdown_link(current_user.name),
-                    sublink=misc.sub_markdown_link(sub.name),
-                    invitelink=url_for("sub.edit_sub_mods", sub=sub.name),
-                ),
-            )
+            with force_locale(locale_language):
+                misc.create_notification_message(
+                    mfrom=current_user.uid,
+                    as_admin=not is_owner,
+                    sub=sub.sid,
+                    to=user.uid,
+                    subject=_("Invitation to become a moderator"),
+                    content=_(
+                        "%(userlink)s invited you to moderate %(sublink)s. "
+                        "Please [click here](%(invitelink)s) to accept or reject the invitation.",
+                        userlink=misc.user_markdown_link(current_user.name),
+                        sublink=misc.sub_markdown_link(sub.name),
+                        invitelink=url_for("sub.edit_sub_mods", sub=sub.name),
+                    ),
+                )
 
             SubMod.create(
                 sid=sub.sid, user=user.uid, power_level=power_level, invite=True
@@ -2077,19 +2093,35 @@ def revoke_mod2inv(sub, user):
                     status="error",
                     error=[_("User has not been invited to moderate the sub")],
                 )
+            target_language = user.language
+            if target_language == "sk":
+                locale_language = "sk_SK"
+            elif target_language == "cs":
+                locale_language = "cs_CZ"
+            elif target_language == "en":
+                locale_language = "en_US"
+            elif target_language == "es":
+                locale_language = "es_ES"
+            elif target_language == "ru":
+                locale_language = "ru_RU"
+            else:
+                locale_language = (
+                    "en_US"  # Default language if no target language found
+                )
 
-            misc.create_notification_message(
-                mfrom=current_user.uid,
-                as_admin=not isTopMod,
-                sub=sub.sid,
-                to=user.uid,
-                subject=_("Moderation invitation revoked"),
-                content=_(
-                    "%(userlink)s cancelled your invitation to moderate %(sublink)s.",
-                    userlink=misc.user_markdown_link(current_user.name),
-                    sublink=misc.sub_markdown_link(sub.name),
-                ),
-            )
+            with force_locale(locale_language):
+                misc.create_notification_message(
+                    mfrom=current_user.uid,
+                    as_admin=not isTopMod,
+                    sub=sub.sid,
+                    to=user.uid,
+                    subject=_("Moderation invitation revoked"),
+                    content=_(
+                        "%(userlink)s cancelled your invitation to moderate %(sublink)s.",
+                        userlink=misc.user_markdown_link(current_user.name),
+                        sublink=misc.sub_markdown_link(sub.name),
+                    ),
+                )
             submod.delete_instance()
 
             misc.create_sublog(
