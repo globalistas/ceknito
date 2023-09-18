@@ -10,7 +10,7 @@ from collections import defaultdict
 from flask import Blueprint, redirect, url_for, session, abort, jsonify, current_app
 from flask import request, flash, Markup
 from flask_login import login_user, login_required, logout_user, current_user
-from flask_babel import _, ngettext
+from flask_babel import _, ngettext, force_locale
 from itsdangerous import URLSafeTimedSerializer
 from itsdangerous.exc import SignatureExpired, BadSignature
 from bs4 import BeautifulSoup
@@ -350,33 +350,50 @@ def delete_post():
                 )
             as_admin = not current_user.is_mod(post.sid)
             postlink, sublink = misc.post_and_sub_markdown_links(post)
-            if as_admin:
-                deletion = 3
-                content = _(
-                    "The site administrators deleted your post %(postlink)s from %(sublink)s. "
-                    "Reason: %(reason)s",
-                    sublink=sublink,
-                    postlink=postlink,
-                    reason=form.reason.data,
-                )
+            target_language = User.get_by_id(pk=post.uid.get_id()).language
+            if target_language == "sk":
+                locale_language = "sk_SK"
+            elif target_language == "cs":
+                locale_language = "cs_CZ"
+            elif target_language == "en":
+                locale_language = "en_US"
+            elif target_language == "es":
+                locale_language = "es_ES"
+            elif target_language == "ru":
+                locale_language = "ru_RU"
             else:
-                deletion = 2
-                content = _(
-                    "The moderators of %(sublink)s deleted your post %(postlink)s. "
-                    "Reason: %(reason)s",
-                    sublink=sublink,
-                    postlink=postlink,
-                    reason=form.reason.data,
+                locale_language = (
+                    "en_US"  # Default language if no target language found
                 )
 
-            misc.create_notification_message(
-                mfrom=current_user.uid,
-                as_admin=as_admin,
-                sub=post.sid.get_id(),
-                to=post.uid.get_id(),
-                subject=_("Moderation action: post deleted"),
-                content=content,
-            )
+            with force_locale(locale_language):
+                if as_admin:
+                    deletion = 3
+                    content = _(
+                        "The site administrators deleted your post %(postlink)s from %(sublink)s. "
+                        "Reason: %(reason)s",
+                        sublink=sublink,
+                        postlink=postlink,
+                        reason=form.reason.data,
+                    )
+                else:
+                    deletion = 2
+                    content = _(
+                        "The moderators of %(sublink)s deleted your post %(postlink)s. "
+                        "Reason: %(reason)s",
+                        sublink=sublink,
+                        postlink=postlink,
+                        reason=form.reason.data,
+                    )
+
+                misc.create_notification_message(
+                    mfrom=current_user.uid,
+                    as_admin=as_admin,
+                    sub=post.sid.get_id(),
+                    to=post.uid.get_id(),
+                    subject=_("Moderation action: post deleted"),
+                    content=content,
+                )
             misc.create_sublog(
                 misc.LOG_TYPE_SUB_DELETE_POST,
                 current_user.uid,
@@ -483,32 +500,46 @@ def undelete_post():
         deletion = 0
         as_admin = not current_user.is_mod(post.sid)
         postlink, sublink = misc.post_and_sub_markdown_links(post)
-
-        if as_admin:
-            content = _(
-                "The site administrators restored your post %(postlink)s to %(sublink)s. "
-                "Reason: %(reason)s",
-                sublink=sublink,
-                postlink=postlink,
-                reason=form.reason.data,
-            )
+        target_language = User.get_by_id(pk=post.uid.get_id()).language
+        if target_language == "sk":
+            locale_language = "sk_SK"
+        elif target_language == "cs":
+            locale_language = "cs_CZ"
+        elif target_language == "en":
+            locale_language = "en_US"
+        elif target_language == "es":
+            locale_language = "es_ES"
+        elif target_language == "ru":
+            locale_language = "ru_RU"
         else:
-            content = _(
-                "The moderators of %(sublink)s restored your post %(postlink)s. "
-                "Reason: %(reason)s",
-                sublink=sublink,
-                postlink=postlink,
-                reason=form.reason.data,
-            )
+            locale_language = "en_US"  # Default language if no target language found
 
-        misc.create_notification_message(
-            mfrom=current_user.uid,
-            as_admin=as_admin,
-            sub=post.sid.get_id(),
-            to=post.uid.get_id(),
-            subject=_("Moderation action: post restored"),
-            content=content,
-        )
+        with force_locale(locale_language):
+            if as_admin:
+                content = _(
+                    "The site administrators restored your post %(postlink)s to %(sublink)s. "
+                    "Reason: %(reason)s",
+                    sublink=sublink,
+                    postlink=postlink,
+                    reason=form.reason.data,
+                )
+            else:
+                content = _(
+                    "The moderators of %(sublink)s restored your post %(postlink)s. "
+                    "Reason: %(reason)s",
+                    sublink=sublink,
+                    postlink=postlink,
+                    reason=form.reason.data,
+                )
+
+            misc.create_notification_message(
+                mfrom=current_user.uid,
+                as_admin=as_admin,
+                sub=post.sid.get_id(),
+                to=post.uid.get_id(),
+                subject=_("Moderation action: post restored"),
+                content=content,
+            )
 
         misc.create_sublog(
             misc.LOG_TYPE_SUB_UNDELETE_POST,
@@ -1637,35 +1668,51 @@ def ban_user_sub(sub):
             return jsonify(status="error", error=[_("Already banned")])
 
         sublink = misc.sub_markdown_link(sub.name)
-        if expires is None:
-            if not current_user.is_mod(sub.sid, 1):
-                return jsonify(
-                    status="error", error=[_("Janitors may only create temporary bans")]
-                )
-            subject = _("Moderation action: permanent ban")
-            content = _(
-                "You have been permanently banned from %(sublink)s. Reason: %(reason)s",
-                sublink=sublink,
-                reason=form.reason.data,
-            )
+        target_language = user.language
+        if target_language == "sk":
+            locale_language = "sk_SK"
+        elif target_language == "cs":
+            locale_language = "cs_CZ"
+        elif target_language == "en":
+            locale_language = "en_US"
+        elif target_language == "es":
+            locale_language = "es_ES"
+        elif target_language == "ru":
+            locale_language = "ru_RU"
         else:
-            subject = _("Moderation action: temporary ban")
-            content = ngettext(
-                "You have been banned from %(sublink)s for %(num)d day. Reason: %(reason)s",
-                "You have been banned from %(sublink)s for %(num)d days. Reason: %(reason)s",
-                days,
-                sublink=sublink,
-                reason=form.reason.data,
-            )
+            locale_language = "en_US"  # Default language if no target language found
 
-        misc.create_notification_message(
-            mfrom=current_user.uid,
-            as_admin=False,
-            sub=sub.sid,
-            to=user.uid,
-            subject=subject,
-            content=content,
-        )
+        with force_locale(locale_language):
+            if expires is None:
+                if not current_user.is_mod(sub.sid, 1):
+                    return jsonify(
+                        status="error",
+                        error=[_("Janitors may only create temporary bans")],
+                    )
+                subject = _("Moderation action: permanent ban")
+                content = _(
+                    "You have been permanently banned from %(sublink)s. Reason: %(reason)s",
+                    sublink=sublink,
+                    reason=form.reason.data,
+                )
+            else:
+                subject = _("Moderation action: temporary ban")
+                content = ngettext(
+                    "You have been banned from %(sublink)s for %(num)d day. Reason: %(reason)s",
+                    "You have been banned from %(sublink)s for %(num)d days. Reason: %(reason)s",
+                    days,
+                    sublink=sublink,
+                    reason=form.reason.data,
+                )
+
+            misc.create_notification_message(
+                mfrom=current_user.uid,
+                as_admin=False,
+                sub=sub.sid,
+                to=user.uid,
+                subject=subject,
+                content=content,
+            )
         SubBan.create(
             sid=sub.sid,
             uid=user.uid,
@@ -1878,18 +1925,34 @@ def remove_sub_ban(sub, user):
             sb.expires = datetime.datetime.utcnow()
             sb.save()
             as_admin = not current_user.is_mod(sub.sid, 1) and current_user.is_admin()
+            target_language = user.language
+            if target_language == "sk":
+                locale_language = "sk_SK"
+            elif target_language == "cs":
+                locale_language = "cs_CZ"
+            elif target_language == "en":
+                locale_language = "en_US"
+            elif target_language == "es":
+                locale_language = "es_ES"
+            elif target_language == "ru":
+                locale_language = "ru_RU"
+            else:
+                locale_language = (
+                    "en_US"  # Default language if no target language found
+                )
 
-            misc.create_notification_message(
-                mfrom=current_user.uid,
-                as_admin=as_admin,
-                sub=sub.sid,
-                to=user.uid,
-                subject=_("Moderation action: ban removed"),
-                content=_(
-                    "You are no longer banned from posting in %(sublink)s.",
-                    sublink=misc.sub_markdown_link(sub.name),
-                ),
-            )
+            with force_locale(locale_language):
+                misc.create_notification_message(
+                    mfrom=current_user.uid,
+                    as_admin=as_admin,
+                    sub=sub.sid,
+                    to=user.uid,
+                    subject=_("Moderation action: ban removed"),
+                    content=_(
+                        "You are no longer banned from posting in %(sublink)s.",
+                        sublink=misc.sub_markdown_link(sub.name),
+                    ),
+                )
 
             misc.create_sublog(
                 misc.LOG_TYPE_SUB_UNBAN,
@@ -3045,31 +3108,49 @@ def delete_comment():
             current_user.is_admin() or current_user.is_mod(sid)
         ):
             as_admin = not current_user.is_mod(sid)
-            if as_admin:
-                comment.status = 3
-                content = _(
-                    "The site administrators deleted a comment you made on the post %(postlink)s. Reason: %(reason)s",
-                    postlink=postlink,
-                    reason=form.reason.data,
-                )
+            target_language = User.get_by_id(pk=comment.uid_id).language
+            if target_language == "sk":
+                locale_language = "sk_SK"
+            elif target_language == "cs":
+                locale_language = "cs_CZ"
+            elif target_language == "en":
+                locale_language = "en_US"
+            elif target_language == "es":
+                locale_language = "es_ES"
+            elif target_language == "ru":
+                locale_language = "ru_RU"
             else:
-                comment.status = 2
-                content = _(
-                    "The moderators of %(sublink)s deleted a comment you made on the post %(postlink)s. "
-                    "Reason: %(reason)s",
-                    sublink=sublink,
-                    postlink=postlink,
-                    reason=form.reason.data,
+                locale_language = (
+                    "en_US"  # Default language if no target language found
                 )
 
-            misc.create_notification_message(
-                mfrom=current_user.uid,
-                as_admin=as_admin,
-                sub=sid,
-                to=comment.uid.get_id(),
-                subject=_("Moderation action: comment deleted"),
-                content=content,
-            )
+            with force_locale(locale_language):
+                if as_admin:
+                    comment.status = 3
+                    content = _(
+                        "The site administrators deleted a comment you made on the post %(postlink)s. Reason: %("
+                        "reason)s",
+                        postlink=postlink,
+                        reason=form.reason.data,
+                    )
+                else:
+                    comment.status = 2
+                    content = _(
+                        "The moderators of %(sublink)s deleted a comment you made on the post %(postlink)s. "
+                        "Reason: %(reason)s",
+                        sublink=sublink,
+                        postlink=postlink,
+                        reason=form.reason.data,
+                    )
+
+                misc.create_notification_message(
+                    mfrom=current_user.uid,
+                    as_admin=as_admin,
+                    sub=sid,
+                    to=comment.uid.get_id(),
+                    subject=_("Moderation action: comment deleted"),
+                    content=content,
+                )
             misc.create_sublog(
                 misc.LOG_TYPE_SUB_DELETE_COMMENT,
                 current_user.uid,
@@ -3146,31 +3227,46 @@ def undelete_comment():
 
         postlink, sublink = misc.post_and_sub_markdown_links(post)
         as_admin = not current_user.is_mod(sid)
-        if as_admin:
-            content = _(
-                "The site administrators restored a comment you made on the post %(postlink)s in %(sublink)s. "
-                "Reason: %(reason)s",
-                sublink=sublink,
-                postlink=postlink,
-                reason=form.reason.data,
-            )
+        target_language = User.get_by_id(pk=comment.uid_id).language
+        if target_language == "sk":
+            locale_language = "sk_SK"
+        elif target_language == "cs":
+            locale_language = "cs_CZ"
+        elif target_language == "en":
+            locale_language = "en_US"
+        elif target_language == "es":
+            locale_language = "es_ES"
+        elif target_language == "ru":
+            locale_language = "ru_RU"
         else:
-            content = _(
-                "The moderators of %(sublink)s restored a comment you made on the post %(postlink)s. "
-                "Reason: %(reason)s",
-                sublink=sublink,
-                postlink=postlink,
-                reason=form.reason.data,
-            )
+            locale_language = "en_US"  # Default language if no target language found
 
-        misc.create_notification_message(
-            mfrom=current_user.uid,
-            as_admin=as_admin,
-            sub=sid,
-            to=comment.uid.get_id(),
-            subject=_("Moderation action: comment restored"),
-            content=content,
-        )
+        with force_locale(locale_language):
+            if as_admin:
+                content = _(
+                    "The site administrators restored a comment you made on the post %(postlink)s in %(sublink)s. "
+                    "Reason: %(reason)s",
+                    sublink=sublink,
+                    postlink=postlink,
+                    reason=form.reason.data,
+                )
+            else:
+                content = _(
+                    "The moderators of %(sublink)s restored a comment you made on the post %(postlink)s. "
+                    "Reason: %(reason)s",
+                    sublink=sublink,
+                    postlink=postlink,
+                    reason=form.reason.data,
+                )
+
+            misc.create_notification_message(
+                mfrom=current_user.uid,
+                as_admin=as_admin,
+                sub=sid,
+                to=comment.uid.get_id(),
+                subject=_("Moderation action: comment restored"),
+                content=content,
+            )
         misc.create_sublog(
             misc.LOG_TYPE_SUB_UNDELETE_COMMENT,
             current_user.uid,
