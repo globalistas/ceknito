@@ -466,7 +466,7 @@ msgid ""
 msgstr ""
 
 #: app/notifications.py:260 app/notifications.py:315
-msgid "New notification."
+msgid "New notification"
 msgstr ""
 
 #: app/notifications.py:312

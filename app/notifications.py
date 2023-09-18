@@ -1,7 +1,7 @@
 """ Manages notifications """
 from datetime import datetime, timedelta
 from peewee import JOIN
-from flask_babel import _
+from flask_babel import _, force_locale
 from pyfcm import FCMNotification
 from .config import config
 from .models import (
@@ -249,18 +249,35 @@ class Notifications(object):
         ) == "1"
 
         if target_email_notify and notification_type in ["POST_REPLY", "COMMENT_REPLY"]:
-            email = self.email_template(
-                notification_type,
-                User.get_by_id(pk=sender),
-                SubPost.get_by_id(pk=post),
-                Sub.get_by_id(pk=sub),
-            )
-            send_email(
-                User.get_by_id(pk=target).email,
-                subject=_("New notification."),
-                text_content="",
-                html_content=email,
-            )
+            target_language = User.get_by_id(pk=target).language
+            if target_language == "sk":
+                locale_language = "sk_SK"
+            elif target_language == "cs":
+                locale_language = "cs_CZ"
+            elif target_language == "en":
+                locale_language = "en_US"
+            elif target_language == "es":
+                locale_language = "es_ES"
+            elif target_language == "ru":
+                locale_language = "ru_RU"
+            else:
+                locale_language = (
+                    "sk_SK"  # Default language if no target language found
+                )
+
+            with force_locale(locale_language):
+                email = self.email_template(
+                    notification_type,
+                    User.get_by_id(pk=sender),
+                    SubPost.get_by_id(pk=post),
+                    Sub.get_by_id(pk=sub),
+                )
+                send_email(
+                    User.get_by_id(pk=target).email,
+                    subject=_("New notification"),
+                    text_content="",
+                    html_content=email,
+                )
         try:
             TargetSubMod = SubMod.alias()
             ignore = (

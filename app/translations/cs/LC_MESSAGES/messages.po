@@ -355,7 +355,7 @@ msgid "Looks like nobody bothered to code the message for this notification :("
 msgstr "Vypadá to, že se nikdo neobtěžoval naprogramovat zprávu pro toto oznámení :("
 
 #: app/notifications.py:275
-msgid "New notification."
+msgid "New notification"
 msgstr "Nová notifikace z čekni.to"
 
 #: app/notifications.py:277
