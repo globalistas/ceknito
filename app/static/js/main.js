@@ -543,6 +543,16 @@ u.ready(function () {
       document.getElementById('unbanuser').submit();
     }
   })
+  u.addEventForChild(document, 'click', '#shadowbanuser-button', function (e, target) {
+    if (confirm(_('Are you sure you want to shadow-ban this user?'))) {
+      document.getElementById('shadowbanuser').submit();
+    }
+  })
+  u.addEventForChild(document, 'click', '#unshadowbanuser-button', function (e, target) {
+    if (confirm(_('Are you sure you want to un-shadowban this user?'))) {
+      document.getElementById('unshadowbanuser').submit();
+    }
+  })
 })
 
 

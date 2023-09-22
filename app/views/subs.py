@@ -303,7 +303,11 @@ def create_post(ptype, sub):
     Sub.update(posts=Sub.posts + 1).where(Sub.sid == sub.sid).execute()
     addr = url_for("sub.view_post", sub=sub.name, pid=post.pid)
     posts = misc.getPostList(
-        misc.postListQueryBase(nofilter=True).where(SubPost.pid == post.pid), "new", 1
+        misc.postListQueryBase(nofilter=True, filter_shadowbanned=True).where(
+            SubPost.pid == post.pid
+        ),
+        "new",
+        1,
     )
 
     # Set it up so socketio recipient can use their own NSFW setting on NSFW content.

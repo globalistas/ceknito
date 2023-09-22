@@ -7,7 +7,7 @@
 
 @def sidebar():
 @include('shared/sidebar/user.html')
-    @if user.status != 10:
+    @if user.status not in (10, 6) or current_user.can_admin:
         @if current_user.is_authenticated and current_user.uid != user.uid:
             @if target_user_is_admin or len(owns + mods) > 0 or current_user.can_pm_users() or current_user.is_admin():
                 <hr>

@@ -109,7 +109,7 @@
       <div class="links" data-sid="@{post['sid']}">
         <a class="comments" href="/@{config.site.sub_prefix}/@{post['sub']}/@{post['pid']}/@{func.slugify(post['title'])}">
           @if post['comments']>0:
-            @{_('comments (%(comments)i)', comments=post['comments'])} \
+            @{_('comments (%(comments)i)', comments=func.get_comment_query(post['pid'], sort=None, filter_shadowbanned=True).count())} \
           @else:
             @{_('comment')} \
           @end

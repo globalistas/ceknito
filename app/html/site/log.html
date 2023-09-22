@@ -30,7 +30,11 @@
                     @end
                 </td>
                 <td>
-                    @if log.action == 19:
+                    @if log.action == 15:
+                        @{_('Shadowbanned <a href="/u/%(user)s">%(user)s</a>', user=log.desc)!!html}
+                    @elif log.action == 16:
+                        @{_('Un-shadowbanned <a href="/u/%(user)s">%(user)s</a>', user=log.desc)!!html}
+                    @elif log.action == 19:
                         @{_('Banned <a href="/u/%(user)s">%(user)s</a>', user=log.desc)!!html}
                     @elif log.action == 20:
                         @{_('Created a sub')}

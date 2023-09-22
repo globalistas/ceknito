@@ -1513,7 +1513,7 @@ def create_comment(pid):
                 # Notifications are disabled, so don't send a notification to the post author
                 to = None
 
-        if to and to != current_user.uid:
+        if to and to != current_user.uid and not current_user.is_shadowbanned:
             # Check if the recipient is not the current user and if either the notification type is "COMMENT_REPLY"
             # or the comment doesn't have notifications disabled
             if ntype == "COMMENT_REPLY":
@@ -1552,6 +1552,7 @@ def create_comment(pid):
                     [{"cid": str(comment.cid), "parentcid": None}],
                     uid=current_user.uid,
                     include_history=include_history,
+                    filter_shadowbanned=True,
                 ),
                 "subInfo": misc.getSubData(sub.sid),
                 "subMods": subMods,
@@ -3388,7 +3389,7 @@ def get_sibling(pid, cid, lim):
     postmeta = misc.metadata_to_dict(
         SubPostMetadata.select().where(SubPostMetadata.pid == pid)
     )
-    comments = misc.get_comment_query(pid, sort=sort)
+    comments = misc.get_comment_query(pid, sort=sort, filter_shadowbanned=True)
 
     if not comments.count():
         return engine.get_template("sub/postcomments.html").render(
@@ -3415,6 +3416,7 @@ def get_sibling(pid, cid, lim):
             uid=current_user.uid,
             include_history=include_history,
             postmeta=postmeta,
+            filter_shadowbanned=True,
         )
     elif cid != "0":
         comment_tree = misc.get_comment_tree(
@@ -3426,6 +3428,7 @@ def get_sibling(pid, cid, lim):
             uid=current_user.uid,
             include_history=include_history,
             postmeta=postmeta,
+            filter_shadowbanned=True,
         )
     else:
         return engine.get_template("sub/postcomments.html").render(
@@ -3886,6 +3889,55 @@ def ban_user(username):
     return redirect(request.referrer)
 
 
+@do.route("/do/admin/shadowban_user/<username>", methods=["POST"])
+@login_required
+def shadowban_user(username):
+    if not current_user.is_admin():
+        return abort(403)
+
+    form = CsrfTokenOnlyForm()
+    if not form.validate():
+        return abort(403)
+
+    try:
+        user = User.get(fn.Lower(User.name) == username.lower())
+    except User.DoesNotExist:
+        return abort(404)
+
+    if user.uid == current_user.uid:
+        return abort(403)
+
+    auth_provider.change_user_status(user, 6)
+    misc.create_sitelog(
+        misc.LOG_TYPE_USER_SHADOWBAN, uid=current_user.uid, comment=user.name
+    )
+
+    related_post_reports = (
+        SubPostReport.select().join(SubPost).where(SubPost.uid == user.uid)
+    )
+    related_comment_reports = (
+        SubPostCommentReport.select()
+        .join(SubPostComment)
+        .where(SubPostComment.uid == user.uid)
+    )
+    for report in related_post_reports:
+        misc.create_reportlog(
+            misc.LOG_TYPE_REPORT_USER_SITE_SHADOWBANNED,
+            current_user.uid,
+            report.id,
+            log_type="post",
+        )
+    for report in related_comment_reports:
+        misc.create_reportlog(
+            misc.LOG_TYPE_REPORT_USER_SITE_SHADOWBANNED,
+            current_user.uid,
+            report.id,
+            log_type="comment",
+        )
+
+    return redirect(request.referrer)
+
+
 @do.route("/do/admin/unban_user/<username>", methods=["POST"])
 @login_required
 def unban_user(username):
@@ -3927,6 +3979,55 @@ def unban_user(username):
     for report in related_comment_reports:
         misc.create_reportlog(
             misc.LOG_TYPE_REPORT_USER_SITE_UNBANNED,
+            current_user.uid,
+            report.id,
+            log_type="comment",
+        )
+
+    return redirect(request.referrer)
+
+
+@do.route("/do/admin/unshadowban_user/<username>", methods=["POST"])
+@login_required
+def unshadowban_user(username):
+    if not current_user.is_admin():
+        return abort(403)
+
+    form = CsrfTokenOnlyForm()
+    if not form.validate():
+        return abort(403)
+
+    try:
+        user = User.get(fn.Lower(User.name) == username.lower())
+    except User.DoesNotExist:
+        return abort(404)
+
+    if user.status != 6:
+        return jsonify(status="error", error=[_("User is not shadowbanned")])
+
+    auth_provider.change_user_status(user, 0)
+    misc.create_sitelog(
+        misc.LOG_TYPE_USER_UNSHADOWBAN, uid=current_user.uid, comment=user.name
+    )
+
+    related_post_reports = (
+        SubPostReport.select().join(SubPost).where(SubPost.uid == user.uid)
+    )
+    related_comment_reports = (
+        SubPostCommentReport.select()
+        .join(SubPostComment)
+        .where(SubPostComment.uid == user.uid)
+    )
+    for report in related_post_reports:
+        misc.create_reportlog(
+            misc.LOG_TYPE_REPORT_USER_SITE_UNSHADOWBANNED,
+            current_user.uid,
+            report.id,
+            log_type="post",
+        )
+    for report in related_comment_reports:
+        misc.create_reportlog(
+            misc.LOG_TYPE_REPORT_USER_SITE_UNSHADOWBANNED,
             current_user.uid,
             report.id,
             log_type="comment",

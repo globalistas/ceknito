@@ -321,7 +321,11 @@ def sub_new_rss(sub):
     fg.link(href=request.url, rel="self")
 
     posts = misc.getPostList(
-        misc.postListQueryBase(noAllFilter=True).where(Sub.sid == sub.sid), "new", 1
+        misc.postListQueryBase(noAllFilter=True, filter_shadowbanned=True).where(
+            Sub.sid == sub.sid
+        ),
+        "new",
+        1,
     )
 
     return Response(
@@ -367,9 +371,9 @@ def view_sub_new(sub, page):
     isSubMod = current_user.is_mod(sub["sid"], 1) or current_user.is_admin()
 
     posts = misc.getPostList(
-        misc.postListQueryBase(noAllFilter=True, isSubMod=isSubMod, flair=flair).where(
-            Sub.sid == sub["sid"]
-        ),
+        misc.postListQueryBase(
+            noAllFilter=True, isSubMod=isSubMod, filter_shadowbanned=True, flair=flair
+        ).where(Sub.sid == sub["sid"]),
         "new",
         page,
     )
@@ -496,9 +500,9 @@ def view_sub_top(sub, page):
     isSubMod = current_user.is_mod(sub["sid"], 1) or current_user.is_admin()
 
     posts = misc.getPostList(
-        misc.postListQueryBase(noAllFilter=True, isSubMod=isSubMod, flair=flair).where(
-            Sub.sid == sub["sid"]
-        ),
+        misc.postListQueryBase(
+            noAllFilter=True, isSubMod=isSubMod, filter_shadowbanned=True, flair=flair
+        ).where(Sub.sid == sub["sid"]),
         "top",
         page,
     )
@@ -556,9 +560,9 @@ def view_sub_hot(sub, page):
     isSubMod = current_user.is_mod(sub["sid"], 1) or current_user.is_admin()
 
     posts = misc.getPostList(
-        misc.postListQueryBase(noAllFilter=True, isSubMod=isSubMod, flair=flair).where(
-            Sub.sid == sub["sid"]
-        ),
+        misc.postListQueryBase(
+            noAllFilter=True, isSubMod=isSubMod, filter_shadowbanned=True, flair=flair
+        ).where(Sub.sid == sub["sid"]),
         "hot",
         page,
     )
@@ -616,9 +620,9 @@ def view_sub_commented(sub, page):
     isSubMod = current_user.is_mod(sub["sid"], 1) or current_user.is_admin()
 
     posts = misc.getPostList(
-        misc.postListQueryBase(noAllFilter=True, isSubMod=isSubMod, flair=flair).where(
-            Sub.sid == sub["sid"]
-        ),
+        misc.postListQueryBase(
+            noAllFilter=True, isSubMod=isSubMod, filter_shadowbanned=True, flair=flair
+        ).where(Sub.sid == sub["sid"]),
         "commented",
         page,
     )
@@ -697,7 +701,9 @@ def view_post(sub, pid, slug=None, comments=False, highlight=None):
         is_saved = False
 
     if not comments:
-        comments = misc.get_comment_query(post["pid"], sort=sort)
+        comments = misc.get_comment_query(
+            post["pid"], sort=sort, filter_shadowbanned=True
+        )
 
         if not comments.count():
             comments = []
@@ -709,6 +715,7 @@ def view_post(sub, pid, slug=None, comments=False, highlight=None):
                 uid=current_user.uid,
                 include_history=include_history,
                 postmeta=postmeta,
+                filter_shadowbanned=True,
             )
 
     if config.site.edit_history and include_history:
@@ -821,6 +828,10 @@ def view_post(sub, pid, slug=None, comments=False, highlight=None):
     else:
         post["blur"] = ""
 
+    comment_count = misc.get_comment_query(
+        post["pid"], sort=sort, filter_shadowbanned=True
+    ).count()
+
     return engine.get_template("sub/post.html").render(
         {
             "post": post,
@@ -831,6 +842,7 @@ def view_post(sub, pid, slug=None, comments=False, highlight=None):
             "postmeta": postmeta,
             "commentform": PostComment(),
             "comments": comments,
+            "comment_count": comment_count,
             "subMods": subMods,
             "highlight": highlight,
             "content_history": content_history,
@@ -884,7 +896,7 @@ def view_perm(sub, pid, slug, cid):
 
     include_history = current_user.is_mod(post["sid"], 1) or current_user.is_admin()
     sort = "best" if post["posted"] > misc.get_best_comment_sort_init_date() else "top"
-    comments = misc.get_comment_query(pid, sort=sort)
+    comments = misc.get_comment_query(pid, sort=sort, filter_shadowbanned=True)
     comment_tree = misc.get_comment_tree(
         pid,
         post["sid"],
@@ -892,6 +904,7 @@ def view_perm(sub, pid, slug, cid):
         cid,
         uid=current_user.uid,
         include_history=include_history,
+        filter_shadowbanned=True,
     )
     return view_post(post["name"], pid, slug, comment_tree, cid)
 

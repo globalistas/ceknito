@@ -524,7 +524,11 @@ def login():
             {"error": _("Invalid username or password."), "loginform": form}
         )
 
-    if user.status not in (UserStatus.PROBATION, UserStatus.OK):
+    if user.status not in (
+        UserStatus.PROBATION,
+        UserStatus.OK,
+        UserStatus.SHADOWBANNED,
+    ):
         return engine.get_template("user/login.html").render(
             {"error": _("Invalid username or password."), "loginform": form}
         )

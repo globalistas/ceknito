@@ -63,6 +63,30 @@ def view_deleted_user(user):
     )
 
 
+def view_shadownbanned_user(user):
+    return engine.get_template("user/profile.html").render(
+        {
+            "user": user,
+            "level": 0,
+            "progress": 0,
+            "postCount": 0,
+            "commentCount": 0,
+            "postScore": 0,
+            "commentScore": 0,
+            "userScore": 0,
+            "givenScore": [0, 0, 0],
+            "invitecodeinfo": "",
+            "badges": "",
+            "owns": "",
+            "mods": "",
+            "habits": "",
+            "target_user_is_admin": None,
+            "msgform": CreateUserMessageForm(),
+            "ignform": EditIgnoreForm(view_messages=None, view_content=None),
+        }
+    )
+
+
 @bp.route("/u/<user>")
 def view(user):
     """WIP: View user's profile, posts, comments, badges, etc"""
@@ -73,6 +97,13 @@ def view(user):
 
     if user.status == 10 and not current_user.is_admin():
         return view_deleted_user(user)
+
+    if (
+        user.status == 6
+        and not current_user.can_admin
+        and not user.uid == current_user.uid
+    ):
+        return view_shadownbanned_user(user)
 
     modsquery = (
         SubMod.select(Sub.name, SubMod.power_level)
@@ -203,6 +234,7 @@ def view_user_posts(user, page):
             include_deleted_posts=include_deleted_posts,
             noAllFilter=not current_user.is_admin(),
             noUserFilter=True,
+            filter_shadowbanned=True,
         ).where(User.uid == user.uid),
         "new",
         page,
@@ -260,7 +292,10 @@ def view_user_comments(user, page):
             include_deleted_comments = modded_subs
 
     comments = misc.getUserComments(
-        user.uid, page, include_deleted_comments=include_deleted_comments
+        user.uid,
+        page,
+        include_deleted_comments=include_deleted_comments,
+        filter_shadowbanned=True,
     )
     postmeta = misc.get_postmeta_dicts((c["pid"] for c in comments))
     return engine.get_template("user/comments.html").render(

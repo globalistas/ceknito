@@ -592,12 +592,16 @@ def get_post_comments(_sub, pid):
         return jsonify(msg="Post does not exist"), 404
 
     # 1 - Fetch all comments (only cid and parentcid)
-    comments = misc.get_comment_query(post.pid, sort="top")
+    comments = misc.get_comment_query(post.pid, sort="top", filter_shadowbanned=True)
     if not comments.count():
         return jsonify(comments=[])
 
     comment_tree = misc.get_comment_tree(
-        post.pid, post.sid.get_id(), comments, uid=current_user
+        post.pid,
+        post.sid.get_id(),
+        comments,
+        uid=current_user,
+        filter_shadowbanned=True,
     )
     return jsonify(comments=comment_tree)
 
@@ -919,16 +923,20 @@ def get_post_comment_children(_sub, pid, cid):
         except SubPostComment.DoesNotExist:
             return jsonify(msg="Post does not exist"), 404
 
-    comments = misc.get_comment_query(pid, sort="top")
+    comments = misc.get_comment_query(pid, sort="top", filter_shadowbanned=True)
     if not comments.count():
         return jsonify(comments=[])
 
     if lim:
         if cid == "0":
             cid = None
-        comment_tree = misc.get_comment_tree(pid, post.sid.get_id(), comments, cid, lim)
+        comment_tree = misc.get_comment_tree(
+            pid, post.sid.get_id(), comments, cid, lim, filter_shadowbanned=True
+        )
     elif cid != "0":
-        comment_tree = misc.get_comment_tree(pid, post.sid.get_id(), comments, cid)
+        comment_tree = misc.get_comment_tree(
+            pid, post.sid.get_id(), comments, cid, filter_shadowbanned=True
+        )
     else:
         return jsonify(msg="Illegal comment id"), 400
     return jsonify(comments=comment_tree)
@@ -1118,7 +1126,11 @@ def create_post():
     Sub.update(posts=Sub.posts + 1).where(Sub.sid == sub.sid).execute()
     addr = url_for("sub.view_post", sub=sub.name, pid=post.pid)
     posts = misc.getPostList(
-        misc.postListQueryBase(nofilter=True).where(SubPost.pid == post.pid), "new", 1
+        misc.postListQueryBase(nofilter=True, filter_shadowbanned=True).where(
+            SubPost.pid == post.pid
+        ),
+        "new",
+        1,
     )
 
     defaults = [

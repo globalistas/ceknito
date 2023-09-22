@@ -208,13 +208,13 @@ class SiteUser(object):
         self.score = self.user["score"]
         self.given = self.user["given"]
         # If status is not 0, user is banned
-        if self.user["status"] != 0:
+        if self.user["status"] not in (0, 6):
             self.is_active = False
         else:
             self.is_active = True
-        self.is_active = True if self.user["status"] == 0 else False
-
-        self.is_anonymous = True if self.user["status"] != 0 else False
+        self.is_active = True if self.user["status"] in (0, 6) else False
+        self.is_shadowbanned = True if self.user["status"] == 6 else False
+        self.is_anonymous = True if self.user["status"] not in (0, 6) else False
         # True if the user is an admin, even without authing with TOTP
 
         self.subs_modded = [
@@ -285,7 +285,7 @@ class SiteUser(object):
     def is_authenticated(self):
         if not self._check_keycloak_auth():
             return False
-        return True if self.user["status"] == 0 else False
+        return True if self.user["status"] in (0, 6) else False
 
     @cache.memoize(1)
     def is_mod(self, sid, power_level=2):
@@ -400,6 +400,7 @@ class SiteAnon(AnonymousUserMixin):
     subs_modded = []
     is_a_mod = False
     can_admin = False
+    is_shadowbanned = False
 
     def get_id(self):
         return False
@@ -908,11 +909,12 @@ def get_user_level(uid, score=None):
 
 
 @cache.memoize(300)
-def fetchTodaysTopPosts(uid, include_nsfw):
+def fetchTodaysTopPosts(uid, include_nsfw, filter_shadowbanned=False):
     """Returns top posts in the last 24 hours"""
     td = datetime.utcnow() - timedelta(days=1)
     query = SubPost.select(
         SubPost.pid,
+        SubPost.uid,
         Sub.name.alias("sub"),
         Sub.sid,
         SubPost.title,
@@ -955,13 +957,25 @@ def fetchTodaysTopPosts(uid, include_nsfw):
             )
         )
     query = query.where(SubPost.posted > td).where(SubPost.deleted == 0)
+    if filter_shadowbanned:
+        if current_user.can_admin:
+            pass
+        else:
+            query = query.join(
+                User,
+                JOIN.LEFT_OUTER,
+                on=((User.uid == SubPost.uid)),
+            ).where((User.status != 6) | (User.uid == current_user.uid))
+
     if not include_nsfw:
         query = query.where(SubPost.nsfw == 0)
     return list(query.order_by(SubPost.score.desc()).limit(5).dicts())
 
 
 def getTodaysTopPosts():
-    top_posts = fetchTodaysTopPosts(current_user.uid, "nsfw" in current_user.prefs)
+    top_posts = fetchTodaysTopPosts(
+        current_user.uid, "nsfw" in current_user.prefs, filter_shadowbanned=True
+    )
     return [add_blur(p) for p in top_posts]
 
 
@@ -1104,6 +1118,7 @@ def postListQueryBase(
     # include_deleted_posts is either True, False or a list of
     # subs to include deleted posts from.
     include_deleted_posts=False,
+    filter_shadowbanned=False,
     isSubMod=False,
     flair=None,  # if set, return only posts with this flair.
 ):
@@ -1265,6 +1280,15 @@ def postListQueryBase(
     else:
         posts = posts.where((SubPost.deleted == 0) & (Sub.status == 0))
 
+    if filter_shadowbanned:
+        if current_user.can_admin:
+            pass
+        else:
+            posts = posts.where(
+                (SubPost.deleted == 0) & (Sub.status == 0) & (User.status != 6)
+                | (User.uid == current_user.uid)
+            )
+
     if not noAllFilter and not nofilter:
         if current_user.is_authenticated and current_user.blocksid:
             posts = posts.where(SubPost.sid.not_in(current_user.blocksid))
@@ -1277,11 +1301,16 @@ def postListQueryBase(
 def postListQueryHome(noDetail=False, nofilter=False):
     if current_user.is_authenticated:
         return postListQueryBase(
-            noDetail=noDetail, nofilter=nofilter, isSubMod=current_user.can_admin
+            noDetail=noDetail,
+            nofilter=nofilter,
+            filter_shadowbanned=True,
+            isSubMod=current_user.can_admin,
         ).where(SubPost.sid << current_user.subsid)
     else:
         return (
-            postListQueryBase(noDetail=noDetail, nofilter=nofilter)
+            postListQueryBase(
+                noDetail=noDetail, nofilter=nofilter, filter_shadowbanned=True
+            )
             .join(SiteMetadata, JOIN.LEFT_OUTER, on=(SiteMetadata.key == "default"))
             .where(SubPost.sid == SiteMetadata.value)
         )
@@ -1923,7 +1952,9 @@ def process_msgs(msgs):
 # user comments
 
 
-def getUserComments(uid, page, include_deleted_comments=False):
+def getUserComments(
+    uid, page, include_deleted_comments=False, filter_shadowbanned=False
+):
     """Returns comments for a user.  'include_deleted_comments' may be
     True, False or a list of subs, in which case deleted comments from
     those subs will be included in the result."""
@@ -1988,6 +2019,12 @@ def getUserComments(uid, page, include_deleted_comments=False):
 
         if "nsfw" not in current_user.prefs:
             com = com.where(SubPost.nsfw == 0)
+
+        if filter_shadowbanned:
+            if current_user.can_admin:
+                pass
+            else:
+                com = com.where((User.status != 6) | (User.uid == current_user.uid))
 
         com = com.order_by(SubPostComment.time.desc()).paginate(page, 20).dicts()
     except SubPostComment.DoesNotExist:
@@ -2561,6 +2598,10 @@ def get_postmeta_dicts(pids):
 
 # Log types
 LOG_TYPE_USER = 10
+LOG_TYPE_USER_SHADOWBAN = 15
+LOG_TYPE_USER_UNSHADOWBAN = 16
+LOG_TYPE_REPORT_USER_SITE_SHADOWBANNED = 17
+LOG_TYPE_REPORT_USER_SITE_UNSHADOWBANNED = 18
 LOG_TYPE_USER_BAN = 19
 
 LOG_TYPE_SUB_CREATE = 20
@@ -2740,7 +2781,7 @@ def validate_captcha(token, response):
     return False
 
 
-def get_comment_query(pid, sort):
+def get_comment_query(pid, sort, filter_shadowbanned=False):
     comments = SubPostComment.select(
         SubPostComment.cid, SubPostComment.parentcid
     ).where(SubPostComment.pid == pid)
@@ -2754,6 +2795,15 @@ def get_comment_query(pid, sort):
         comments = comments.order_by(
             SubPostComment.score.desc(), SubPostComment.time.desc()
         )
+    if filter_shadowbanned:
+        if current_user.can_admin:
+            pass
+        else:
+            comments = comments.join(
+                User,
+                JOIN.LEFT_OUTER,
+                on=(User.uid == SubPostComment.uid),
+            ).where((User.status != 6) | (User.uid == current_user.uid))
     comments = comments.dicts()
     return comments
 
@@ -2768,6 +2818,7 @@ def get_comment_tree(
     provide_context=True,
     include_history=False,
     postmeta=None,
+    filter_shadowbanned=False,
 ):
     """Returns a fully paginated and expanded comment tree.
 
@@ -2781,6 +2832,7 @@ def get_comment_tree(
     @param uid:
     @param provide_context:
     @param postmeta: SubPostMetadata dict if it has already been fetched
+    @param filter_shadowbanned: This filters out comments from shadowbanned uers
     """
 
     if postmeta is None:
@@ -2969,6 +3021,14 @@ def get_comment_tree(
                 on=((UserSaved.cid == SubPostComment.cid) & (UserSaved.uid == uid)),
             )
         )
+    if filter_shadowbanned:
+        if current_user.can_admin:
+            pass
+        else:
+            expcomms = expcomms.where(
+                (User.status != 6) | (User.uid == current_user.uid)
+            )
+
     expcomms = expcomms.where(SubPostComment.cid << cid_list).dicts()
 
     commdata = {}
@@ -3048,9 +3108,18 @@ def get_comment_tree(
             if not i["cid"]:
                 populated_tree.append(i)
                 continue
-            comment = commdata[i["cid"]]
-            comment["source"] = comment["content"]
-            comment["content"] = our_markdown(comment["content"])
+            cid = i["cid"]
+            comment = commdata.get(
+                cid, {}
+            )  # Use the get method with a default value of an empty dictionary
+            if not comment:
+                continue  # Skip this element if the comment is not found in commdata
+            comment["source"] = comment.get(
+                "content", ""
+            )  # Set "source" to the original content
+            comment["content"] = our_markdown(
+                comment.get("content", "")
+            )  # Apply markdown
             comment["children"] = recursive_populate(i["children"])
             populated_tree.append(comment)
         return populated_tree
@@ -3654,7 +3723,7 @@ def where_user_not_blocked(query, model):
     )
 
 
-def recent_activity(sidebar=True):
+def recent_activity(sidebar=True, filter_shadowbanned=False):
     if not config.site.recent_activity.enabled:
         return []
 
@@ -3699,6 +3768,17 @@ def recent_activity(sidebar=True):
         .order_by(SubPostComment.time.desc())
         .limit(50)
     )
+
+    if filter_shadowbanned:
+        if current_user.can_admin:
+            pass
+        else:
+            post_activity = post_activity.where(
+                (User.status != 6) | (User.uid == current_user.uid)
+            )
+            comment_activity = comment_activity.where(
+                (User.status != 6) | (User.uid == current_user.uid)
+            )
 
     if sidebar and config.site.recent_activity.defaults_only:
         defaults = [

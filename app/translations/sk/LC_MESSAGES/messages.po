@@ -4845,3 +4845,33 @@ msgstr "Nemáš pozvánku?"
 #: app/templates/messages/sent.html:2
 msgid "My messages"
 msgstr "Moje správy"
+
+#: app/html/shared/sidebar/user.html:18
+msgid "Shadowban user"
+msgstr "Shadowbanovať používateľa"
+
+#: app/html/shared/sidebar/user.html:23
+msgid "Un-shadowban user"
+msgstr "Odshadowbanovať používateľa"
+
+#: app/html/site/log.html:34
+#, python-format
+msgid "Shadowbanned <a href=\"/u/%(user)s\">%(user)s</a>"
+msgstr "Shadowbanoval(a) <a href=\"/u/%(user)s\">%(user)s</a>"
+
+#: app/html/site/log.html:36
+#, python-format
+msgid "Un-shadowbanned <a href=\"/u/%(user)s\">%(user)s</a>"
+msgstr "Odshadowbanoval(a) <a href=\"/u/%(user)s\">%(user)s</a>"
+
+#: app/static/js/main.js:547
+msgid "Are you sure you want to shadow-ban this user?"
+msgstr "Naozaj chceš shadowbanovať tohoto používateľa?"
+
+#: app/static/js/main.js:552
+msgid "Are you sure you want to un-shadowban this user?"
+msgstr "Naozaj chceš odshadowbanovať tohoto používateľa?"
+
+#: app/views/do.py:4004
+msgid "User is not shadowbanned"
+msgstr "Používateľ nie je shadowbanovaný(á)"

@@ -110,6 +110,7 @@ class UserStatus(IntEnum):
     OK = 0
     PROBATION = 1  # New, with email not yet confirmed.
     BANNED = 5  # site-ban
+    SHADOWBANNED = 6
     DELETED = 10
 
 

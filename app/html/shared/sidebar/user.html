@@ -12,6 +12,17 @@
         <a id="unbanuser-button" class="sbm-post pure-button pure-button-primary">@{_('Un-ban user')}</a>
       </form>
     @end
+    @if user.status in (0, 1):
+      <form method="POST" data-reload="true" id="shadowbanuser" action="@{url_for('do.shadowban_user', username=user.name)}">
+          @{form.CsrfTokenOnlyForm().csrf_token()!!html}
+        <a id="shadowbanuser-button" class="sbm-post pure-button pure-button-primary">@{_('Shadowban user')}</a>
+      </form>
+    @elif user.status == 6:
+      <form method="POST" data-reload="true" id="unshadowbanuser" action="@{url_for('do.unshadowban_user', username=user.name)}">
+        @{form.CsrfTokenOnlyForm().csrf_token()!!html}
+        <a id="unshadowbanuser-button" class="sbm-post pure-button pure-button-primary">@{_('Un-shadowban user')}</a>
+      </form>
+    @end
     <form  method="POST" data-reload="true" id="wipevotes" action="@{url_for('do.admin_undo_votes', uid=user.uid)}">
         @{form.CsrfTokenOnlyForm().csrf_token()!!html}
       <a id="wipevotes-button" class="sbm-post pure-button pure-button-primary">@{_('Remove votes')}</a>

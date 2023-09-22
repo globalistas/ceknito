@@ -44,6 +44,7 @@ A link and discussion aggregator with snek (python3)
 - post score upovte percentage display
 - fixed auto-quote selected text when replying to comments
 - date in chat timestamps
+- shadowban functionality
 
 ## Dependencies:
 

@@ -445,6 +445,8 @@ class AuthProvider:
             payload = {"enabled": False}
         elif user.status != 10 and new_status == 0:
             payload = {"enabled": True}
+        elif user.status != 10 and new_status == 6:
+            payload = {"enabled": True}
         else:
             raise RuntimeError("Invalid user status")
 

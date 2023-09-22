@@ -101,7 +101,7 @@ def commented(page):
 @bp.route("/all/new.rss")
 def all_new_rss():
     """RSS feed for /all/new"""
-    posts = misc.getPostList(misc.postListQueryBase(), "new", 1)
+    posts = misc.getPostList(misc.postListQueryBase(filter_shadowbanned=True), "new", 1)
     fg = FeedGenerator()
     fg.id(request.url)
     fg.title("čekni.to")
@@ -119,7 +119,11 @@ def all_new_rss():
 def all_new(page):
     """The index page, all posts sorted as most recent posted first"""
     posts = misc.getPostList(
-        misc.postListQueryBase(isSubMod=current_user.can_admin), "new", page
+        misc.postListQueryBase(
+            isSubMod=current_user.can_admin, filter_shadowbanned=True
+        ),
+        "new",
+        page,
     )
     return engine.get_template("index.html").render(
         {
@@ -141,23 +145,35 @@ def all_more(sort, page, pid):
     # XXX: Our pagination is very slow
     if sort == "new":
         posts = misc.getPostList(
-            misc.postListQueryBase(isSubMod=current_user.can_admin).where(
-                SubPost.pid < pid
-            ),
+            misc.postListQueryBase(
+                isSubMod=current_user.can_admin, filter_shadowbanned=True
+            ).where(SubPost.pid < pid),
             "new",
             1,
         )
     elif sort == "top":
         posts = misc.getPostList(
-            misc.postListQueryBase(isSubMod=current_user.can_admin), "top", page
+            misc.postListQueryBase(
+                isSubMod=current_user.can_admin, filter_shadowbanned=True
+            ),
+            "top",
+            page,
         )
     elif sort == "hot":
         posts = misc.getPostList(
-            misc.postListQueryBase(isSubMod=current_user.can_admin), "hot", page
+            misc.postListQueryBase(
+                isSubMod=current_user.can_admin, filter_shadowbanned=True
+            ),
+            "hot",
+            page,
         )
     elif sort == "commented":
         posts = misc.getPostList(
-            misc.postListQueryBase(isSubMod=current_user.can_admin), "commented", page
+            misc.postListQueryBase(
+                isSubMod=current_user.can_admin, filter_shadowbanned=True
+            ),
+            "commented",
+            page,
         )
     else:
         return abort(404)
@@ -196,13 +212,13 @@ def all_domain_new(domain, page):
     """The index page, all posts sorted as most recent posted first"""
     domain = re.sub(r"[^A-Za-z0-9.\-_]+", "", domain)
     posts = misc.getPostList(
-        misc.postListQueryBase(noAllFilter=True).where(
+        misc.postListQueryBase(noAllFilter=True, filter_shadowbanned=True).where(
             SubPost.link % ("%://" + domain + "/%") | SubPost.link % ("%://" + domain)
         ),
         "new",
         page,
     )
-    count = misc.postListQueryBase(noAllFilter=True).where(
+    count = misc.postListQueryBase(noAllFilter=True, filter_shadowbanned=True).where(
         SubPost.link % ("%://" + domain + "/%") | SubPost.link % ("%://" + domain)
     )
     post_count = len(count)
@@ -226,7 +242,11 @@ def search(page, term):
     """The index page, with basic title search"""
     term = re.sub(r'[^A-Za-zÁ-ž0-9.,\-_\'" ]+', "", term)
     posts = misc.getPostList(
-        misc.postListQueryBase().where(SubPost.title ** ("%" + term + "%")), "new", page
+        misc.postListQueryBase(filter_shadowbanned=True).where(
+            SubPost.title ** ("%" + term + "%")
+        ),
+        "new",
+        page,
     )
     return engine.get_template("index.html").render(
         {
@@ -248,9 +268,13 @@ def search_and_build_feed(page, term):
         return
     term = re.sub(r'[^A-Za-zÁ-ž0-9.,\-_\'" ]+', "", term)
     posts = misc.getPostList(
-        misc.postListQueryBase().where(SubPost.title ** ("%" + term + "%")), "new", page
+        misc.postListQueryBase(filter_shadowbanned=True).where(
+            SubPost.title ** ("%" + term + "%")
+        ),
+        "new",
+        page,
     )
-    posts = misc.getPostList(misc.postListQueryBase(), "new", 1)
+    posts = misc.getPostList(misc.postListQueryBase(filter_shadowbanned=True), "new", 1)
     fg = FeedGenerator()
     fg.id(request.url)
     fg.title(f"Search results matching {term}")
@@ -267,7 +291,11 @@ def search_and_build_feed(page, term):
 def all_top(page):
     """The index page, all posts sorted as most recent posted first"""
     posts = misc.getPostList(
-        misc.postListQueryBase(isSubMod=current_user.can_admin), "top", page
+        misc.postListQueryBase(
+            isSubMod=current_user.can_admin, filter_shadowbanned=True
+        ),
+        "top",
+        page,
     )
     return engine.get_template("index.html").render(
         {
@@ -288,7 +316,11 @@ def all_top(page):
 def all_hot(page):
     """The index page, all posts sorted as most recent posted first"""
     posts = misc.getPostList(
-        misc.postListQueryBase(isSubMod=current_user.can_admin), "hot", page
+        misc.postListQueryBase(
+            isSubMod=current_user.can_admin, filter_shadowbanned=True
+        ),
+        "hot",
+        page,
     )
 
     return engine.get_template("index.html").render(
@@ -310,7 +342,11 @@ def all_hot(page):
 def all_commented(page):
     """/last commented for all"""
     posts = misc.getPostList(
-        misc.postListQueryBase(isSubMod=current_user.can_admin), "commented", page
+        misc.postListQueryBase(
+            isSubMod=current_user.can_admin, filter_shadowbanned=True
+        ),
+        "commented",
+        page,
     )
 
     return engine.get_template("index.html").render(
