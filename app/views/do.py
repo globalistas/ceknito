@@ -289,12 +289,6 @@ def edit_user():
     """Edit user endpoint"""
     form = EditUserForm()
     if form.validate():
-        if form.subtheme.data != "":
-            try:
-                Sub.get(fn.Lower(Sub.name) == form.subtheme.data.lower())
-            except Sub.DoesNotExist:
-                return jsonify(status="error", error=[_("Sub does not exist")])
-
         usr = User.get(User.uid == current_user.uid)
         usr.language = form.language.data
         session["language"] = form.language.data
@@ -305,10 +299,7 @@ def edit_user():
         current_user.update_prefs("nsfw_blur", form.show_nsfw.data == "blur")
         current_user.update_prefs("noscroll", form.noscroll.data)
         current_user.update_prefs("nochat", form.nochat.data)
-        current_user.update_prefs("subtheme", form.subtheme.data, False)
         current_user.update_prefs("email_notify", form.email_notify.data)
-
-        cache.delete_memoized(current_user.get_global_stylesheet)
 
         return json.dumps({"status": "ok"})
     return json.dumps({"status": "error", "error": get_errors(form)})

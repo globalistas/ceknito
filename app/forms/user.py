@@ -183,11 +183,7 @@ class EditUserForm(FlaskForm):
     experimental = BooleanField(_l("Enable experimental features"))
     noscroll = BooleanField(_l("Disable infinite scroll"))
     nochat = BooleanField(_l("Disable chat"))
-
-    subtheme = StringField(_l("Global stylesheet (select a sub)"))
-
     language = SelectField(_l("Language"), choices=[], validate_choice=False)
-
     email_notify = BooleanField(_l("Send email notifications"))
 
 

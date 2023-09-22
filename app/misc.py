@@ -183,9 +183,6 @@ class SiteUser(object):
         self.uid = self.user["uid"]
         self.prefs = [x["key"] for x in prefs]
 
-        self.subtheme = [x["value"] for x in prefs if x["key"] == "subtheme"]
-        self.subtheme = self.subtheme[0] if self.subtheme else ""
-
         self.language = self.user["language"]
         self.resets = self.user["resets"]
 
@@ -358,21 +355,6 @@ class SiteUser(object):
         except UserMetadata.DoesNotExist:
             UserMetadata.create(uid=self.uid, key=key, value=value)
 
-    @cache.memoize(30)
-    def get_global_stylesheet(self):
-        if self.subtheme:
-            try:
-                css = (
-                    SubStylesheet.select()
-                    .join(Sub)
-                    .where(fn.Lower(Sub.name) == self.subtheme.lower())
-                    .get()
-                )
-            except SubStylesheet.DoesNotExist:
-                return ""
-            return css.content
-        return ""
-
 
 def is_target_user_admin(uid):
     try:
@@ -470,10 +452,6 @@ class SiteAnon(AnonymousUserMixin):
     @classmethod
     def get_user_level(cls):
         return 0, 0
-
-    @classmethod
-    def get_global_stylesheet(cls):
-        return ""
 
 
 def get_ip():
@@ -1463,9 +1441,7 @@ def load_user(user_id):
         prefs = UserMetadata.select(UserMetadata.key, UserMetadata.value).where(
             UserMetadata.uid == user_id
         )
-        prefs = prefs.where(
-            (UserMetadata.value == "1") | (UserMetadata.key == "subtheme")
-        ).dicts()
+        prefs = prefs.where((UserMetadata.value == "1")).dicts()
 
         try:
             subs = (

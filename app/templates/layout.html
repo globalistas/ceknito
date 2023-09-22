@@ -208,7 +208,6 @@
     {% endblock %}
   </div>
   <script src="{{ asset_url_for('main.js') }}"></script>
-  <style>{{current_user.get_global_stylesheet()|safe}}</style>
   {%block pagefoot%}{%endblock%}
   <label id="pagefoot-notifications-icon" data-value="{{config.site.notifications_on_icon}}" class="hide"></label>
 </body>

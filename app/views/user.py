@@ -407,7 +407,6 @@ def edit_user():
         experimental=exp,
         noscroll=noscroll,
         nochat=nochat,
-        subtheme=current_user.subtheme,
         language=current_user.language,
         email_notify=email_notify,
     )
