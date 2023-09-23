@@ -17,7 +17,7 @@ A link and discussion aggregator with snek (python3)
 - image and video posts expanded by default in sub post
 - support for image embeds in text posts and comments
 - working email notifications (see https://github.com/Phuks-co/throat/issues/525)
-- ability for users to disable notifications on a per-post basis
+- ability for users to disable notifications on a per-post/comment basis
 - post deletion directly from Home page or Sub page
 - config option for minimum post creation user level
 - config option to enable additional text in link post
