@@ -28,7 +28,6 @@ from flask import (
     has_request_context,
     has_app_context,
     g,
-    abort,
 )
 from flask import url_for, request, jsonify, session
 from flask.signals import before_render_template, template_rendered
@@ -1295,30 +1294,7 @@ def postListQueryHome(noDetail=False, nofilter=False):
         )
 
 
-def limit_pagination(func):
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        # Check if the user is authenticated
-        if (
-            not current_user.is_authenticated
-        ):  # You should set g.user_authenticated based on your authentication logic
-            try:
-                if int(kwargs.get("page", 1) <= 10):
-                    return func(*args, **kwargs)
-                else:
-                    abort(
-                        404
-                    )  # Raise a 404 error for unauthenticated users who exceed the limit
-            except ValueError:
-                pass
-        else:
-            return func(*args, **kwargs)  # Allow authenticated users to proceed
-
-    return wrapper
-
-
 def getPostList(baseQuery, sort, page, page_size=25):
-    page = min(page, 10)
     if sort == "top":
         posts = baseQuery.order_by(SubPost.score.desc()).paginate(page, page_size)
     elif sort == "new":

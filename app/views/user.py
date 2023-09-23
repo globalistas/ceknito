@@ -9,7 +9,7 @@ from .. import misc
 from ..config import config
 from ..auth import auth_provider, AuthError, normalize_email
 from ..misc import engine, gevent_required
-from ..misc import ratelimit, AUTH_LIMIT, SIGNUP_LIMIT, limit_pagination
+from ..misc import ratelimit, AUTH_LIMIT, SIGNUP_LIMIT
 from ..forms import (
     CsrfTokenOnlyForm,
     EditUserForm,
@@ -214,7 +214,6 @@ def view(user):
 
 @bp.route("/u/<user>/posts", defaults={"page": 1})
 @bp.route("/u/<user>/posts/<int:page>")
-@limit_pagination
 def view_user_posts(user, page):
     """WIP: View user's recent posts"""
     try:
@@ -277,7 +276,6 @@ def view_user_savedposts(user, page):
 
 @bp.route("/u/<user>/comments", defaults={"page": 1})
 @bp.route("/u/<user>/comments/<int:page>")
-@limit_pagination
 def view_user_comments(user, page):
     """WIP: View user's recent comments"""
     try:

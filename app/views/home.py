@@ -13,7 +13,7 @@ from flask import (
 from flask_login import current_user
 from .. import misc
 from ..config import config
-from ..misc import engine, limit_pagination
+from ..misc import engine
 from ..misc import ratelimit, POSTING_LIMIT
 from ..models import SubPost, Sub
 
@@ -28,7 +28,6 @@ def index():
 
 @bp.route("/hot", defaults={"page": 1})
 @bp.route("/hot/<int:page>")
-@limit_pagination
 def hot(page):
     """/hot for subscriptions"""
     posts = misc.getPostList(misc.postListQueryHome(), "hot", page)
@@ -47,7 +46,6 @@ def hot(page):
 
 @bp.route("/new", defaults={"page": 1})
 @bp.route("/new/<int:page>")
-@limit_pagination
 def new(page):
     """/new for subscriptions"""
     posts = misc.getPostList(misc.postListQueryHome(), "new", page)
@@ -66,7 +64,6 @@ def new(page):
 
 @bp.route("/top", defaults={"page": 1})
 @bp.route("/top/<int:page>")
-@limit_pagination
 def top(page):
     """/top for subscriptions"""
     posts = misc.getPostList(misc.postListQueryHome(), "top", page)
@@ -85,7 +82,6 @@ def top(page):
 
 @bp.route("/commented", defaults={"page": 1})
 @bp.route("/commented/<int:page>")
-@limit_pagination
 def commented(page):
     """/last commented for subscriptions"""
     posts = misc.getPostList(misc.postListQueryHome(), "commented", page)
@@ -120,7 +116,6 @@ def all_new_rss():
 
 @bp.route("/all/new", defaults={"page": 1})
 @bp.route("/all/new/<int:page>")
-@limit_pagination
 def all_new(page):
     """The index page, all posts sorted as most recent posted first"""
     posts = misc.getPostList(
@@ -145,7 +140,6 @@ def all_new(page):
 
 @bp.route("/all/<sort>/more", defaults={"pid": None})
 @bp.route("/all/<sort>/more/<int:page>/<int:pid>")
-@limit_pagination
 def all_more(sort, page, pid):
     """Infinite scroll pagination for /all"""
     # XXX: Our pagination is very slow
@@ -191,7 +185,6 @@ def all_more(sort, page, pid):
 
 @bp.route("/home/<sort>/more", defaults={"pid": None})
 @bp.route("/home/<sort>/more/<int:page>/<int:pid>")
-@limit_pagination
 def home_more(sort, page, pid):
     """Infinite scroll pagination for /all"""
     # XXX: Our pagination is very slow
@@ -215,7 +208,6 @@ def home_more(sort, page, pid):
 
 @bp.route("/domain/<domain>", defaults={"page": 1})
 @bp.route("/domain/<domain>/<int:page>")
-@limit_pagination
 def all_domain_new(domain, page):
     """The index page, all posts sorted as most recent posted first"""
     domain = re.sub(r"[^A-Za-z0-9.\-_]+", "", domain)
@@ -246,7 +238,6 @@ def all_domain_new(domain, page):
 @bp.route("/search/<term>", defaults={"page": 1})
 @bp.route("/search/<term>/<int:page>")
 @ratelimit(POSTING_LIMIT)
-@limit_pagination
 def search(page, term):
     """The index page, with basic title search"""
     term = re.sub(r'[^A-Za-zÁ-ž0-9.,\-_\'" ]+', "", term)
@@ -297,7 +288,6 @@ def search_and_build_feed(page, term):
 
 @bp.route("/all/top", defaults={"page": 1})
 @bp.route("/all/top/<int:page>")
-@limit_pagination
 def all_top(page):
     """The index page, all posts sorted as most recent posted first"""
     posts = misc.getPostList(
@@ -323,7 +313,6 @@ def all_top(page):
 @bp.route("/all", defaults={"page": 1})
 @bp.route("/all/hot", defaults={"page": 1})
 @bp.route("/all/hot/<int:page>")
-@limit_pagination
 def all_hot(page):
     """The index page, all posts sorted as most recent posted first"""
     posts = misc.getPostList(
@@ -350,7 +339,6 @@ def all_hot(page):
 @bp.route("/all", defaults={"page": 1})
 @bp.route("/all/commented", defaults={"page": 1})
 @bp.route("/all/commented/<int:page>")
-@limit_pagination
 def all_commented(page):
     """/last commented for all"""
     posts = misc.getPostList(

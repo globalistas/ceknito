@@ -1687,7 +1687,8 @@ msgstr "Uživatelé"
 msgid "User Badges"
 msgstr "Odznaky"
 
-#: app/html/shared/sidebar/admin.html:7
+#: app/html/shared/sidebar/admin.html:8 app/templates/subs.html:2
+#: app/templates/subs.html:10
 msgid "Subs"
 msgstr "Skupiny"
 
