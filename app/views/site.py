@@ -4,7 +4,7 @@ from flask import Blueprint, redirect, url_for, abort, render_template
 from flask_login import login_required, current_user
 from .. import misc
 from ..models import SiteLog, SubPost, SubLog, Sub, SubPostComment
-from ..misc import engine
+from ..misc import engine, limit_pagination
 from ..config import config
 
 bp = Blueprint("site", __name__)
@@ -81,6 +81,7 @@ def view_comment_inbox(cid):
 
 @bp.route("/m/<sublist>", defaults={"page": 1})
 @bp.route("/m/<sublist>/<int:page>")
+@limit_pagination
 def view_multisub_new(sublist, page=1):
     """The multi index page, sorted as most recent posted first"""
     names = sublist.split("+")

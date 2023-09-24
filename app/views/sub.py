@@ -6,7 +6,7 @@ from flask_login import login_required, current_user
 from feedgen.feed import FeedGenerator
 from peewee import fn, JOIN
 from ..config import config
-from ..misc import engine
+from ..misc import engine, limit_pagination
 from ..models import (
     Sub,
     SubMetadata,
@@ -336,6 +336,7 @@ def sub_new_rss(sub):
 
 @blueprint.route("/<sub>/new", defaults={"page": 1})
 @blueprint.route("/<sub>/new/<int:page>")
+@limit_pagination
 def view_sub_new(sub, page):
     """The index page, all posts sorted as most recent posted first"""
     if sub.lower() == "all":
@@ -465,6 +466,7 @@ def view_sub_bans(sub):
 
 @blueprint.route("/<sub>/top", defaults={"page": 1})
 @blueprint.route("/<sub>/top/<int:page>")
+@limit_pagination
 def view_sub_top(sub, page):
     """The index page, /top sorting"""
     if sub.lower() == "all":
@@ -525,6 +527,7 @@ def view_sub_top(sub, page):
 
 @blueprint.route("/<sub>/hot", defaults={"page": 1})
 @blueprint.route("/<sub>/hot/<int:page>")
+@limit_pagination
 def view_sub_hot(sub, page):
     """The index page, /hot sorting"""
     if sub.lower() == "all":
@@ -585,6 +588,7 @@ def view_sub_hot(sub, page):
 
 @blueprint.route("/<sub>/commented", defaults={"page": 1})
 @blueprint.route("/<sub>/commented/<int:page>")
+@limit_pagination
 def view_sub_commented(sub, page):
     """The index page, /hot sorting"""
     if sub.lower() == "all":
