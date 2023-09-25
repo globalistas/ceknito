@@ -41,7 +41,7 @@ A link and discussion aggregator with snek (python3)
 - post flair colors
 - primary site color picker
 - post body in post list view links to post
-- post score upovte percentage display
+- post score upvote percentage display
 - fixed auto-quote selected text when replying to comments
 - date in chat timestamps
 - shadowban functionality

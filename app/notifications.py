@@ -1,5 +1,7 @@
 """ Manages notifications """
 from datetime import datetime, timedelta
+
+from flask_login import current_user
 from peewee import JOIN
 from flask_babel import _, force_locale
 from pyfcm import FCMNotification
@@ -16,6 +18,7 @@ from .models import (
     SubPostCommentVote,
     SubPostCommentView,
     SubPostVote,
+    UserSaved,
 )
 from .socketio import socketio
 from .misc import get_notification_count, send_email
@@ -65,6 +68,7 @@ class Notifications(object):
                 ParentComment.score.alias("comment_context_score"),
                 ParentComment.cid.alias("comment_context_cid"),
                 SubPost.content.alias("post_content"),
+                UserSaved.cid.alias("comment_is_saved"),
             )
             .join(Sub, JOIN.LEFT_OUTER)
             .switch(Notification)
@@ -111,6 +115,14 @@ class Notifications(object):
                 ParentComment,
                 JOIN.LEFT_OUTER,
                 on=(SubPostComment.parentcid == ParentComment.cid),
+            )
+            .join(
+                UserSaved,
+                JOIN.LEFT_OUTER,
+                on=(
+                    (UserSaved.cid == SubPostComment.cid)
+                    & (UserSaved.uid == current_user.uid)
+                ),
             )
             .where(
                 (Notification.target == uid)

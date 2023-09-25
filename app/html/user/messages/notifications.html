@@ -101,7 +101,12 @@
             <div class="container @{msg['unseen']} @{msg['blur']}" id="content-@{msg['cid']}">@{markdown(msg['comment_content'])!!html}</div>
             <ul class="bottombar links">
               <li><a href="@{url_for('sub.view_perm', sub=msg['sub_name'], cid=msg['cid'], pid=msg['pid'])}#comment-@{msg['cid']}">@{_('permalink')}</a></li>
-                <li><a class="deletenotif" data-mid="@{msg['id']}">@{_('delete notification')}</a></li>
+              <li><a class="deletenotif" data-mid="@{msg['id']}">@{_('delete notification')}</a></li>
+              @if msg['comment_is_saved']:
+                <li><a class="removesavedcomment" data-cid="@{msg['cid']}">@{_('unsave')}</a></li>
+              @else:
+                <li><a class="savecomment" data-cid="@{msg['cid']}">@{_('save')}</a></li>
+              @end
               @if not postmeta[msg['pid']].get('lock-comments') and not msg['archived']:
                 <li><a class="reply-comment" data-pid="@{msg['pid']}" data-to="@{msg['cid']}">@{_('reply')}</a></li>
               @end
@@ -113,10 +118,10 @@
             <div class="container">@{markdown(msg['post_content'])!!html}</div>
             <ul class="bottombar links">
               <li><a href="@{url_for('sub.view_post', sub=msg['sub_name'], pid=msg['pid'])}">@{_('permalink')}</a></li>
+              <li><a class="deletenotif" data-mid="@{msg['id']}">@{_('delete notification')}</a></li>
               @if not postmeta[msg['pid']].get('lock-comments') and not msg['archived']:
                 <li><a class="reply-comment" data-pid="@{msg['pid']}" data-to="-@{msg['pid']}">@{_('reply')}</a></li>
               @end
-              <li><a class="deletenotif" data-mid="@{msg['id']}">@{_('delete notification')}</a></li>
             </ul>
           @else:
             @if msg['content']:
