@@ -524,15 +524,14 @@ u.addEventForChild(document, 'click', '.btn-preview', function (e, qelem) {
 
 // Noreply comment
 u.addEventForChild(document, 'click', '.noreplies-comment', function (e, qelem) {
-    const cid = qelem.getAttribute('data-cid'), tg = qelem.parentNode.parentNode;
+    const cid = qelem.getAttribute('data-cid');
     TextConfirm(qelem, function () {
         u.post('/do/noreplies_comment', { cid: cid },
             function (data) {
                 if (data.status != "ok") {
-                    tg.innerHTML = _('Error: %1', data.error);
+                    document.querySelector('#comment-'+ cid +' > div.commblock > ul > li:nth-child(4) > a').innerHTML = _('Error: %1', data.error);
                 } else {
-                    tg.innerHTML = _('Done!');
-                    document.location.reload();
+                    document.querySelector('#comment-'+ cid +' > div.commblock > ul > li:nth-child(4) > a').innerHTML = _('Done!');
                 }
             });
     });

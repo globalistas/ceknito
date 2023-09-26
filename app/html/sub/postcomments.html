@@ -137,18 +137,18 @@
               @if ((current_user.is_admin() or current_user.uid in subMods['all']) and comment['status'] == 2) or (current_user.is_admin() and comment['status'] == 3):
                 <li><a class="undelete-comment" data-cid="@{comment['cid']}">@{_('un-delete')}</a></li>
               @end
-              @if (current_user.uid == comment['uid'] and (current_user.is_admin() or current_user.uid in subMods['all'])):
-                <li><a class="distinguish" data-cid="@{comment['cid']}">@{comment['distinguish'] and _('undistinguish') or _('distinguish')}</a></li>
-                @if comment['parentcid'] is None:
-                  <li><a class="stick-comment" data-cid="@{comment['cid']}">@{comment['sticky'] and _('unstick') or _('make sticky')}</a></li>
-                @end
-              @end
               @if current_user.is_authenticated and comment['visibility'] in ['', 'blur-block'] and comment['uid'] == current_user.uid and not postmeta.get('lock-comments') and post['deleted'] == 0 and not post['is_archived']:
                 <li><a class="edit-comment" data-cid="@{comment['cid']}">@{_('edit')}</a></li>
                 @if not comment['noreplies']:
                 <li><a class="noreplies-comment" data-cid="@{comment['cid']}">@{_('disable notifications')}</a></li>
                 @else:
                 <li><a class="noreplies-comment" data-cid="@{comment['cid']}">@{_('enable notifications')}</a></li>
+                @end
+              @end
+              @if (current_user.uid == comment['uid'] and (current_user.is_admin() or current_user.uid in subMods['all'])):
+                <li><a class="distinguish" data-cid="@{comment['cid']}">@{comment['distinguish'] and _('undistinguish') or _('distinguish')}</a></li>
+                @if comment['parentcid'] is None:
+                  <li><a class="stick-comment" data-cid="@{comment['cid']}">@{comment['sticky'] and _('unstick') or _('make sticky')}</a></li>
                 @end
               @end
               @if current_user.is_authenticated and comment['visibility'] == '' and (comment['uid'] == current_user.uid or current_user.is_admin() or current_user.uid in subMods['all']):

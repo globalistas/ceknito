@@ -95,7 +95,6 @@
                         <li><a class="savecomment" data-cid="@{comment['cid']}">@{_('save')}</a></li>
                       @endif
                       @if not postmeta[comment['pid']].get('lock-comments') and not comment['archived'] and comment['status'] not in [1, 2, 3] and comment['post_deleted'] == 0:
-                        <li><a class="reply-comment" data-pid="@{comment['pid']}" data-to="@{comment['cid']}">@{_("reply")}</a></li>
                         @if comment['uid'] == current_user.uid:
                           <li><a class="edit-comment" data-cid="@{comment['cid']}">@{_("edit")}</a></li>
                           @if not comment['noreplies']:
@@ -104,9 +103,10 @@
                           <li><a class="noreplies-comment" data-cid="@{comment['cid']}">@{_('enable notifications')}</a></li>
                           @end
                         @end
-                      @end
-                      @if comment['uid'] == current_user.uid or current_user.is_admin() and comment['status'] not in [1, 2, 3]:
-                        <li><a @{((comment['uid'] == current_user.uid) and 'selfdel="true"' or '')!!html} class="delete-comment" data-cid="@{comment['cid']}">@{_("delete")}</a></li>
+                        @if comment['uid'] == current_user.uid or current_user.is_admin():
+                          <li><a @{((comment['uid'] == current_user.uid) and 'selfdel="true"' or '')!!html} class="delete-comment" data-cid="@{comment['cid']}">@{_("delete")}</a></li>
+                        @end
+                        <li><a class="reply-comment" data-pid="@{comment['pid']}" data-to="@{comment['cid']}">@{_("reply")}</a></li>
                       @end
                     @end
                   </ul>
