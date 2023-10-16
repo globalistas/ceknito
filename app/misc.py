@@ -980,6 +980,7 @@ def getSubOfTheDay():
                     (Sub.status == 0)
                     & (Sub.name != config.site.ann_sub)
                     & (Sub.sid != config.site.changelog_sub)
+                    & (Sub.posts > 0)
                 )
                 .order_by(db.random())
                 .get()
