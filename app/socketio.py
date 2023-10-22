@@ -17,7 +17,7 @@ from engineio.payload import Payload
 Payload.max_decode_packets = 50
 
 
-# Time in seconds for the expiration of the Redis keys used to decide
+# Time in seconds for purging items from the Redis set used to decide
 # which instance should do the socketio.emit for messages received via
 # Redis subscription.  This should be somewhere in between the longest
 # time the gevent loop might get blocked and the acceptable time for
@@ -31,8 +31,7 @@ class SocketIOWithLogging(SocketIO):
         super(SocketIOWithLogging, self).init_app(app, **kwargs)
         self.__logger = logging.getLogger(app.logger.name + ".socketio")
         if monkey.is_module_patched("os"):
-            self.instance_name_prefix = "throat-socketio-instance-name-"
-            self.instance_name = self.instance_name_prefix + "".join(
+            self.instance_name = "".join(
                 [chr(random.randrange(0, 26) + ord("a")) for i in range(6)]
             )
             gevent.spawn(self.refresh_name_key)
@@ -60,17 +59,19 @@ class SocketIOWithLogging(SocketIO):
     def refresh_name_key(self):
         """Keep a key set to expire in a few seconds alive on Redis."""
         while True:
-            rconn.setex(
-                name=self.instance_name,
-                value="true",
-                time=NAME_KEY_KEEPALIVE,
+            now = time.time()
+            rconn.zadd(
+                name="throat-socketio-instances", mapping={self.instance_name: now}
+            )
+            rconn.zremrangebyscore(
+                name="throat-socketio-instances", min=0, max=now - NAME_KEY_KEEPALIVE
             )
             gevent.sleep(NAME_KEY_KEEPALIVE * 0.9)
 
     def emitting_instance(self):
         """Return True if this is the first instance in alphabetical order by
         instance name."""
-        keys = rconn.keys(self.instance_name_prefix + "*")
+        keys = rconn.zrange(name="throat-socketio-instances", start=0, end=-1)
         names = sorted([k.decode("utf-8") for k in keys])
         return len(names) == 0 or names[0] == self.instance_name
 
