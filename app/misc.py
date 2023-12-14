@@ -591,6 +591,12 @@ def sub_markdown_link(sub_name):
     return sublink
 
 
+def comment_markdown_link(sub_name, pid, cid):
+    """Construct a comment direct link in markdown format."""
+    comment_url = url_for("sub.view_perm", sub=sub_name, pid=pid, cid=cid, slug="_")
+    return _("[a comment](%(url)s)", url=comment_url)
+
+
 def user_markdown_link(user_name):
     """Construct a link to a user in markdown format, given the name."""
     userurl = url_for("user.view", user=user_name)

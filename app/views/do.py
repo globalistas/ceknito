@@ -3127,6 +3127,7 @@ def delete_comment():
             return jsonify(status="error", error=_("Not authorized"))
 
         postlink, sublink = misc.post_and_sub_markdown_links(post)
+        commentlink = misc.comment_markdown_link(sub_name, post.pid, comment.cid)
 
         if comment.uid_id != current_user.uid and (
             current_user.is_admin() or current_user.is_mod(sid)
@@ -3152,17 +3153,19 @@ def delete_comment():
                 if as_admin:
                     comment.status = 3
                     content = _(
-                        "The site administrators deleted a comment you made on the post %(postlink)s. Reason: %("
-                        "reason)s",
+                        "The site administrators deleted %(commentlink)s you made on the post %(postlink)s. "
+                        "Reason: %(reason)s",
+                        commentlink=commentlink,
                         postlink=postlink,
                         reason=form.reason.data,
                     )
                 else:
                     comment.status = 2
                     content = _(
-                        "The moderators of %(sublink)s deleted a comment you made on the post %(postlink)s. "
+                        "The moderators of %(sublink)s deleted %(commentlink)s you made on the post %(postlink)s. "
                         "Reason: %(reason)s",
                         sublink=sublink,
+                        commentlink=commentlink,
                         postlink=postlink,
                         reason=form.reason.data,
                     )

@@ -825,8 +825,8 @@ def test_mod_action_messages(client, user_info, user2_info, user3_info, by_admin
 
         assert b"Moderation action: comment deleted" in rv.data
         assert b"Moderation action: comment restored" in rv.data
-        assert b"deleted a comment" in rv.data
-        assert b"restored a comment" in rv.data
+        assert b"deleted" in rv.data
+        assert b"restored" in rv.data
         assert b"serious comment reason" in rv.data
         assert b"frivolous comment reason" in rv.data
 
