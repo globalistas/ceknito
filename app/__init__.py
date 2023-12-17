@@ -174,6 +174,9 @@ def create_app(config=None):
     @app.after_request
     def after_request(response):
         """Called after the request is processed. Used to time the request"""
+        if request.path.startswith("/static/gen/") and not app.debug:
+            response.headers["Cache-Control"] = "public, max-age=604800, immutable"
+
         if hasattr(g, "start"):
             diff = int((time.time() - float(g.start)) * 1000)
         else:
