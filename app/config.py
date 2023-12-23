@@ -38,7 +38,7 @@ defaults = {  # key => default value
             "links": {
                 "Podmienky používania": "/wiki/tos",
                 "Ochrana osobných údajov": "/wiki/privacy",
-                "Canary": "/wiki/canary",
+                # "Canary": "/wiki/canary",
                 "RSS": "/all/new.rss",
                 "Changelog": "/s/changelog",
                 "Podporte nás": "/wiki/donate",
