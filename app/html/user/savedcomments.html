@@ -41,7 +41,11 @@
                   @elif comment['status'] == 2 or comment['status'] == 3:
                     @{_('[Deleted by Mod or Admin]')}
                   @endif
-                  <span class="@{comment['blur']}">@{comment['title']}</span>
+                  @if comment['post_deleted'] == 0 or current_user.is_admin() or comment['sid'] in current_user.subs_modded:
+                    <span class="@{comment['blur']}">@{comment['title']}</span>
+                  @else:
+                    @{_('[Deleted]')}
+                  @endif
                   @if comment['sub_nsfw'] or comment['nsfw']:
                     <div class="nsfw" title="@{_('Not safe for work')}">@{_('NSFW')}</div>
                   @end
