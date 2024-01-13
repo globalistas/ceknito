@@ -316,10 +316,16 @@ def view_user_comments(user, page):
 @login_required
 def view_user_savedcomments(user, page):
     """WIP: View user's saved comments"""
+    include_deleted_comments = User.uid == current_user.uid or current_user.is_admin()
+    if not include_deleted_comments and current_user.is_a_mod:
+        modded_subs = [s.sid for s in misc.getModSubs(current_user.uid, 2)]
+        if modded_subs:
+            include_deleted_comments = modded_subs
     if current_user.name.lower() == user.lower():
         comments = misc.getUserSavedComments(
             current_user.uid,
             page,
+            include_deleted_comments=include_deleted_comments,
         )
         postmeta = misc.get_postmeta_dicts((c["pid"] for c in comments))
         return engine.get_template("user/savedcomments.html").render(
