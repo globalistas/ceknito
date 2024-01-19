@@ -1,14 +1,14 @@
 # Translations template for Throat.
-# Copyright (C) 2023 Phuks LLC
+# Copyright (C) 2024 Phuks LLC
 # This file is distributed under the same license as the Throat project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2023-12-14 16:37+0100\n"
+"POT-Creation-Date: 2024-01-20 00:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -360,52 +360,54 @@ msgstr ""
 #: app/html/site/log.html:28 app/html/sub/log.html:30 app/html/sub/post.html:54
 #: app/html/sub/post.html:56 app/html/sub/post.html:138
 #: app/html/sub/post.html:157 app/html/sub/post.html:210
-#: app/html/sub/post.html:219 app/html/sub/postcomments.html:37
-#: app/misc.py:2226 app/misc.py:3076 app/misc.py:3082 app/misc.py:3087
-msgid "[Deleted]"
+#: app/html/sub/post.html:219 app/html/sub/post.html:351
+#: app/html/sub/post.html:375 app/html/user/comments.html:50
+#: app/html/user/savedcomments.html:47 app/misc.py:2228 app/misc.py:3078
+#: app/misc.py:3084 app/misc.py:3089
+msgid "[deleted]"
 msgstr ""
 
-#: app/misc.py:2348
+#: app/misc.py:2350
 msgid "URLs not allowed, uploaded files only"
 msgstr ""
 
-#: app/misc.py:2359
+#: app/misc.py:2361
 msgid "Invalid characters in string."
 msgstr ""
 
-#: app/misc.py:2377
+#: app/misc.py:2379
 msgid "@import token not allowed"
 msgstr ""
 
-#: app/misc.py:2393
+#: app/misc.py:2395
 msgid "Invalid CSS"
 msgstr ""
 
-#: app/html/sub/postcomments.html:50 app/misc.py:3057
+#: app/html/sub/postcomments.html:50 app/misc.py:3059
 msgid "[Blocked]"
 msgstr ""
 
-#: app/misc.py:3070
+#: app/misc.py:3072
 msgid "[deleted by user]"
 msgstr ""
 
-#: app/misc.py:3154
+#: app/misc.py:3156
 msgid "Already processing previous request."
 msgstr ""
 
-#: app/misc.py:3176
+#: app/misc.py:3178
 msgid "Unknown error. User disappeared"
 msgstr ""
 
-#: app/misc.py:3183
+#: app/misc.py:3185
 msgid "Score balance is negative"
 msgstr ""
 
-#: app/misc.py:3185
+#: app/misc.py:3187
 msgid "Invalid vote value"
 msgstr ""
 
-#: app/misc.py:3201 app/views/do.py:318 app/views/do.py:468 app/views/do.py:849
+#: app/misc.py:3203 app/views/do.py:318 app/views/do.py:468 app/views/do.py:849
 #: app/views/do.py:884 app/views/do.py:1276 app/views/do.py:1382
 #: app/views/do.py:2311 app/views/do.py:2417 app/views/do.py:2570
 #: app/views/do.py:2585 app/views/do.py:2689 app/views/do.py:2774
@@ -415,44 +417,44 @@ msgstr ""
 msgid "Post does not exist"
 msgstr ""
 
-#: app/misc.py:3204
+#: app/misc.py:3206
 msgid "You can't vote on your own posts"
 msgstr ""
 
-#: app/misc.py:3206
+#: app/misc.py:3208
 msgid "You can't vote on deleted posts"
 msgstr ""
 
-#: app/misc.py:3239 app/views/do.py:2601 app/views/do.py:2616
+#: app/misc.py:3241 app/views/do.py:2601 app/views/do.py:2616
 #: app/views/do.py:2739 app/views/do.py:3058 app/views/do.py:3106
 #: app/views/do.py:3226 app/views/do.py:3528 app/views/do.py:4439
 #: app/views/do.py:4552
 msgid "Comment does not exist"
 msgstr ""
 
-#: app/misc.py:3242
+#: app/misc.py:3244
 msgid "You can't vote on your own comments"
 msgstr ""
 
-#: app/misc.py:3244
+#: app/misc.py:3246
 msgid "You can't vote on deleted comments"
 msgstr ""
 
-#: app/misc.py:3256
+#: app/misc.py:3258
 msgid "Invalid target"
 msgstr ""
 
-#: app/misc.py:3259 app/views/do.py:1330 app/views/do.py:2318
+#: app/misc.py:3261 app/views/do.py:1330 app/views/do.py:2318
 #: app/views/do.py:3070
 msgid "You are banned on this sub."
 msgstr ""
 
-#: app/misc.py:3264 app/views/do.py:1333 app/views/do.py:1387
+#: app/misc.py:3266 app/views/do.py:1333 app/views/do.py:1387
 #: app/views/do.py:3081
 msgid "Post is archived"
 msgstr ""
 
-#: app/misc.py:3618
+#: app/misc.py:3620
 msgid "Invalid status request"
 msgstr ""
 
@@ -1760,16 +1762,16 @@ msgid "Chat"
 msgstr ""
 
 #: app/html/shared/post.html:7 app/html/sub/post.html:89
-#: app/html/sub/postcomments.html:15 app/html/user/comments.html:57
+#: app/html/sub/postcomments.html:15 app/html/user/comments.html:61
 #: app/html/user/messages/notifications.html:18
-#: app/html/user/savedcomments.html:54 app/templates/indexpost.html:5
+#: app/html/user/savedcomments.html:58 app/templates/indexpost.html:5
 msgid "Upvote"
 msgstr ""
 
 #: app/html/shared/post.html:9 app/html/sub/post.html:91
-#: app/html/sub/postcomments.html:16 app/html/user/comments.html:58
+#: app/html/sub/postcomments.html:16 app/html/user/comments.html:62
 #: app/html/user/messages/notifications.html:19
-#: app/html/user/savedcomments.html:55 app/templates/indexpost.html:7
+#: app/html/user/savedcomments.html:59 app/templates/indexpost.html:7
 msgid "Downvote"
 msgstr ""
 
@@ -1784,22 +1786,22 @@ msgstr ""
 
 #: app/html/shared/post.html:53 app/html/shared/sidebar/home.html:29
 #: app/html/shared/sidebar/home.html:53 app/html/shared/sidebar/sub.html:27
-#: app/html/sub/post.html:166 app/html/user/comments.html:49
+#: app/html/sub/post.html:166 app/html/user/comments.html:53
 #: app/html/user/messages/notifications.html:26
 #: app/html/user/messages/notifications.html:31
 #: app/html/user/messages/notifications.html:36
-#: app/html/user/savedcomments.html:46 app/static/js/Socket.js:195
+#: app/html/user/savedcomments.html:50 app/static/js/Socket.js:195
 msgid "Not safe for work"
 msgstr ""
 
 #: app/html/shared/post.html:53 app/html/shared/sidebar/home.html:29
 #: app/html/shared/sidebar/home.html:53 app/html/shared/sidebar/sub.html:27
 #: app/html/site/activity.html:17 app/html/site/activity.html:19
-#: app/html/sub/post.html:166 app/html/user/comments.html:49
+#: app/html/sub/post.html:166 app/html/user/comments.html:53
 #: app/html/user/messages/notifications.html:26
 #: app/html/user/messages/notifications.html:31
 #: app/html/user/messages/notifications.html:36
-#: app/html/user/savedcomments.html:46 app/static/js/Socket.js:195
+#: app/html/user/savedcomments.html:50 app/static/js/Socket.js:195
 #: app/templates/indexpost.html:47
 msgid "NSFW"
 msgstr ""
@@ -1875,8 +1877,8 @@ msgid "open reports (%(num)s)"
 msgstr ""
 
 #: app/html/shared/post.html:124 app/html/sub/post.html:262
-#: app/html/sub/postcomments.html:155 app/html/user/comments.html:107
-#: app/html/user/savedcomments.html:88 app/templates/messages/messages.html:49
+#: app/html/sub/postcomments.html:155 app/html/user/comments.html:113
+#: app/html/user/savedcomments.html:92 app/templates/messages/messages.html:49
 #: app/templates/messages/saved.html:43
 msgid "delete"
 msgstr ""
@@ -2903,13 +2905,13 @@ msgid "Viewing title history:"
 msgstr ""
 
 #: app/html/sub/post.html:236 app/html/sub/postcomments.html:129
-#: app/html/user/comments.html:93 app/html/user/messages/notifications.html:106
-#: app/html/user/savedcomments.html:86
+#: app/html/user/comments.html:97 app/html/user/messages/notifications.html:106
+#: app/html/user/savedcomments.html:90
 msgid "unsave"
 msgstr ""
 
 #: app/html/sub/post.html:238 app/html/sub/postcomments.html:131
-#: app/html/user/comments.html:95 app/html/user/messages/notifications.html:108
+#: app/html/user/comments.html:99 app/html/user/messages/notifications.html:108
 #: app/templates/messages/messages.html:48
 msgid "save"
 msgstr ""
@@ -2919,7 +2921,7 @@ msgid "flair"
 msgstr ""
 
 #: app/html/sub/post.html:247 app/html/sub/postcomments.html:141
-#: app/html/user/comments.html:99 app/static/js/Post.js:365
+#: app/html/user/comments.html:103 app/static/js/Post.js:365
 #: app/static/js/Post.js:368 app/static/js/Post.js:423
 #: app/static/js/Post.js:426
 msgid "edit"
@@ -2930,12 +2932,12 @@ msgid "edit title"
 msgstr ""
 
 #: app/html/sub/post.html:254 app/html/sub/postcomments.html:143
-#: app/html/user/comments.html:101
+#: app/html/user/comments.html:105
 msgid "disable notifications"
 msgstr ""
 
 #: app/html/sub/post.html:256 app/html/sub/postcomments.html:145
-#: app/html/user/comments.html:103
+#: app/html/user/comments.html:107
 msgid "enable notifications"
 msgstr ""
 
@@ -3012,10 +3014,6 @@ msgstr ""
 msgid "Select a new flair"
 msgstr ""
 
-#: app/html/sub/post.html:351 app/html/sub/post.html:375
-msgid "[deleted]"
-msgstr ""
-
 #: app/html/sub/post.html:408 app/html/sub/postcomments.html:107
 msgid "Viewing edit history:"
 msgstr ""
@@ -3078,6 +3076,10 @@ msgstr ""
 msgid "%(comments)i comments"
 msgstr ""
 
+#: app/html/sub/postcomments.html:37
+msgid "[dEEEeleted]"
+msgstr ""
+
 #: app/html/sub/postcomments.html:43
 msgid "Post author"
 msgstr ""
@@ -3118,14 +3120,14 @@ msgstr ""
 msgid "permalink"
 msgstr ""
 
-#: app/html/sub/postcomments.html:125 app/html/user/comments.html:89
-#: app/html/user/savedcomments.html:84 app/static/js/Post.js:344
+#: app/html/sub/postcomments.html:125 app/html/user/comments.html:93
+#: app/html/user/savedcomments.html:88 app/static/js/Post.js:344
 #: app/static/js/Post.js:347 app/static/js/Post.js:399
 #: app/static/js/Post.js:402
 msgid "source"
 msgstr ""
 
-#: app/html/sub/postcomments.html:158 app/html/user/comments.html:109
+#: app/html/sub/postcomments.html:158 app/html/user/comments.html:110
 #: app/html/user/messages/notifications.html:111
 #: app/html/user/messages/notifications.html:123 app/static/js/Post.js:787
 #: app/static/js/Post.js:790 app/templates/messages/messages.html:39
@@ -3308,27 +3310,27 @@ msgstr ""
 msgid "[Deleted by Mod or Admin]"
 msgstr ""
 
-#: app/html/user/comments.html:52 app/html/user/savedcomments.html:49
+#: app/html/user/comments.html:56 app/html/user/savedcomments.html:53
 #: app/templates/indexpost.html:82
 msgid "on"
 msgstr ""
 
-#: app/html/user/comments.html:68 app/html/user/savedcomments.html:65
+#: app/html/user/comments.html:72 app/html/user/savedcomments.html:69
 msgid "Comment score"
 msgstr ""
 
-#: app/html/user/comments.html:76 app/html/user/savedcomments.html:73
+#: app/html/user/comments.html:80 app/html/user/savedcomments.html:77
 msgid "last edited"
 msgstr ""
 
-#: app/html/user/comments.html:121 app/html/user/posts.html:47
-#: app/html/user/savedcomments.html:100 app/html/user/savedposts.html:43
+#: app/html/user/comments.html:125 app/html/user/posts.html:47
+#: app/html/user/savedcomments.html:104 app/html/user/savedposts.html:43
 #: app/html/user/uploads.html:51 app/templates/messages/nav.html:3
 msgid "Next"
 msgstr ""
 
-#: app/html/user/comments.html:124 app/html/user/posts.html:50
-#: app/html/user/savedcomments.html:103 app/html/user/savedposts.html:46
+#: app/html/user/comments.html:128 app/html/user/posts.html:50
+#: app/html/user/savedcomments.html:107 app/html/user/savedposts.html:46
 #: app/html/user/uploads.html:54 app/templates/messages/nav.html:6
 msgid "Previous"
 msgstr ""
@@ -4362,7 +4364,7 @@ msgstr ""
 msgid "User not found or invalid ticket"
 msgstr ""
 
-#: app/views/auth.py:122 app/views/subs.py:150 app/views/user.py:482
+#: app/views/auth.py:122 app/views/subs.py:150 app/views/user.py:488
 msgid "Invalid captcha."
 msgstr ""
 
@@ -5164,19 +5166,19 @@ msgstr ""
 msgid "You cannot own more than %(max)i subs. Try leveling up your account."
 msgstr ""
 
-#: app/views/user.py:443
+#: app/views/user.py:449
 msgid "The link you used is invalid or has expired"
 msgstr ""
 
-#: app/views/user.py:449
+#: app/views/user.py:455
 msgid "Your password recovery email address is now confirmed!"
 msgstr ""
 
-#: app/views/user.py:453
+#: app/views/user.py:459
 msgid "Unable to confirm your new email address. Please try again later."
 msgstr ""
 
-#: app/views/user.py:512
+#: app/views/user.py:518
 msgid "Password reset link was invalid or expired"
 msgstr ""
 

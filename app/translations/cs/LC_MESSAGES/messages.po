@@ -243,8 +243,8 @@ msgstr "Re: %(subject)s"
 #: app/html/sub/post.html:199 app/html/sub/postcomments.html:31
 #: app/misc.py:1976 app/misc.py:2732 app/misc.py:2738 app/misc.py:2744
 #: app/misc.py:2749
-msgid "[Deleted]"
-msgstr "[Vymazané]"
+msgid "[deleted]"
+msgstr "[vymazané]"
 
 #: app/misc.py:2052
 msgid "URLs not allowed, uploaded files only"

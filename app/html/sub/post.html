@@ -26,7 +26,7 @@
     @end
 
     <meta property="og:site_name" content="@{config.site.lema}">
-    <meta property="og:description" content="@{_('Posted in %(prefix)s/%(sub)s by %(username)s', prefix=config.site.sub_prefix, sub=sub['name'], username=post['user'] if post['userstatus'] != 10 else _('[Deleted]'))}">
+    <meta property="og:description" content="@{_('Posted in %(prefix)s/%(sub)s by %(username)s', prefix=config.site.sub_prefix, sub=sub['name'], username=post['user'] if post['userstatus'] != 10 else _('[deleted]'))}">
     <meta property="og:title" content="@{post['title']}">
     @if post['thumbnail'] != '' and post['thumbnail'] != 'deferred' and post['link'] != None and post['visibility'] != 'none':
     <meta property="og:image" content="@{thumbnail_url(post['thumbnail'])}">
@@ -51,9 +51,9 @@
   <div class="author" style="padding:.5em;">
     @(
     timeago = '<time-ago datetime="' + post['posted'].isoformat() + 'Z"></time-ago>'
-    deleted_if_admin_view = ' ' + _('[Deleted]') if post['userstatus'] == 10 and current_user.is_admin() else ''
+    deleted_if_admin_view = ' ' + _('[deleted]') if post['userstatus'] == 10 and current_user.is_admin() else ''
     flair = '' if post['user_flair'] else ''
-    deleted_link = '<a class="authorlink deleted">' + _('[Deleted]') + '</a>'
+    deleted_link = '<a class="authorlink deleted">' + _('[deleted]') + '</a>'
     user_link = ('<a class="authorlink" href="/u/' + post['user'] + '">' + post['user'] + deleted_if_admin_view + '</a>' + flair)
     if post['userstatus'] != 10 or current_user.is_admin():
         user_html = user_link
@@ -135,7 +135,7 @@
               @elif (post['visibility'] == 'admin-del'):
                 @{_('[Deleted by Admin]')} <span class="@{post['blur']}">@{post['title']}</span>
               @elif (post['visibility'] == 'none'):
-                @{_('[Deleted]')}
+                @{_('[deleted]')}
               @end
             </a>
           </h1>
@@ -154,7 +154,7 @@
               @elif (post['visibility'] == 'admin-del'):
                 @{_('[Deleted by Admin]')} <span class="@{post['blur']}">@{post['title']}</span>
               @elif (post['visibility'] == 'none'):
-                @{_('[Deleted]')}
+                @{_('[deleted]')}
               @end
             </a>
           </h1>
@@ -207,7 +207,7 @@
         @end
         @(
         timeago = '<time-ago datetime="' + post['posted'].isoformat() + 'Z"></time-ago>'
-        deleted_if_admin_view = ' ' + _('[Deleted]') if post['userstatus'] == 10 and current_user.is_admin() else ''
+        deleted_if_admin_view = ' ' + _('[deleted]') if post['userstatus'] == 10 and current_user.is_admin() else ''
         if post['distinguish'] == 1:
             distinguish_text = _(' [speaking as mod]')
         elif post['distinguish'] == 2:
@@ -216,7 +216,7 @@
             distinguish_text = ''
         flair = ' <span class="user_flair" data-flair-id="' + str(post['user_flair_id']) + '">' + e(post['user_flair']) + '</span>' if post['user_flair'] else ''
         user_link = '<a class="authorlink" href="/u/' + post['user'] + '">' + post['user'] + deleted_if_admin_view + distinguish_text + '</a>' + flair
-        deleted_link = '<a class="authorlink deleted">' + _('[Deleted]') + '</a>'
+        deleted_link = '<a class="authorlink deleted">' + _('[deleted]') + '</a>'
         user_html = user_link if (post['userstatus'] != 10 or current_user.is_admin()) else deleted_link
         sublink = '<a href="/' + config.site.sub_prefix + '/' + post['sub'] + '">' + post['sub'] + '</a>'
         )

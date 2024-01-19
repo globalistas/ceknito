@@ -2225,7 +2225,7 @@ def getSubData(sid, simple=False, extra=False):
         data["creator"] = (
             creator
             if creator.get("status", None) == 0
-            else {"uid": "0", "name": _("[Deleted]")}
+            else {"uid": "0", "name": _("[deleted]")}
         )
 
         data["flairs"] = [
@@ -3075,18 +3075,18 @@ def get_comment_tree(
                 if is_admin or is_mod:
                     comm["visibility"] = "mod-del"
                 else:
-                    comm["user"] = _("[Deleted]")
+                    comm["user"] = _("[deleted]")
                     comm.update(remove_content)
             elif comm["status"] == 3:
                 if is_admin or is_mod:
                     comm["visibility"] = "admin-del"
                 else:
-                    comm["user"] = _("[Deleted]")
+                    comm["user"] = _("[deleted]")
                     comm.update(remove_content)
 
         if comm["userstatus"] == 10:
             if not current_user.is_admin():
-                comm["user"] = _("[Deleted]")
+                comm["user"] = _("[deleted]")
             comm["uid"] = None
             if comm["status"] == 1:
                 comm.update(remove_content)

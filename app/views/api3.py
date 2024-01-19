@@ -349,7 +349,7 @@ def get_post_list(target):
     postList = []
     for post in posts:
         if post["userstatus"] == 10:  # account deleted
-            post["user"] = "[Deleted]"
+            post["user"] = "[deleted]"
         post["archived"] = misc.is_archived(post)
         del post["userstatus"]
         del post["uid"]
@@ -414,7 +414,7 @@ def get_post(sub, pid):
         post["content"] = None
         post["link"] = None
         post["uid"] = None
-        post["user"] = "[Deleted]"
+        post["user"] = "[deleted]"
         post["thumbnail"] = None
         post["edited"] = None
 
@@ -423,7 +423,7 @@ def get_post(sub, pid):
         post["content"] = misc.our_markdown(post["content"])
 
     if post["userstatus"] == 10:
-        post["user"] = "[Deleted]"
+        post["user"] = "[deleted]"
 
     post["archived"] = misc.is_archived(post)
 
