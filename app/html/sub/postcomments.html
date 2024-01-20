@@ -25,9 +25,15 @@
           @end
           <div class="commblock">
             <div class="commenthead @{(comment['visibility'] == 'none') and 'collapsed-comment' or ''}">
-              <a class="togglecomment @{(comment['visibility'] != '') and 'expand' or 'collapse'}" data-cid="@{comment['cid']}">
-                @{(comment['visibility'] != '') and '[+]' or '[–]'} \
-              </a>
+              @if comment['visibility'] == '':
+                <a class="togglecomment @{(comment['visibility'] != '') and 'expand' or 'collapse'}" data-cid="@{comment['cid']}">
+                  @{(comment['visibility'] != '') and '[+]' or '[–]'} \
+                </a>
+              @else:
+                <span class="togglecomment @{(comment['visibility'] != '') and 'expand' or 'collapse'}" data-cid="@{comment['cid']}">
+                  @{(comment['visibility'] != '') and '[+]' or '[–]'} \
+                </span>
+              @end
               @if comment['visibility'] == 'none':
                 @{comment['user']}
               @else:
