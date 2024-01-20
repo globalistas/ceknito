@@ -24,12 +24,12 @@
             </div>
           @end
           <div class="commblock">
-            <div class="commenthead">
+            <div class="commenthead @{(comment['visibility'] == 'none') and 'collapsed-comment' or ''}">
               <a class="togglecomment @{(comment['visibility'] != '') and 'expand' or 'collapse'}" data-cid="@{comment['cid']}">
                 @{(comment['visibility'] != '') and '[+]' or '[–]'} \
               </a>
               @if comment['visibility'] == 'none':
-                <a class="poster deleted">@{comment['user']}</a>
+                @{comment['user']}
               @else:
                 <a href="@{'/u/' + comment['user'] if current_user.is_admin() or comment['userstatus'] != 10 else '#'}" class="poster">
                   @{comment['user']}
@@ -53,7 +53,9 @@
               @if config.site.show_comment_votes or current_user.is_admin() or current_user.uid in subMods['all']:
                 <b>@{_('<span class="mcscore">%(score)i</span> points</b> (+<b>%(upvotes)i</b>|-<b>%(downvotes)i</b>)', score=comment['score'], upvotes=comment['upvotes'], downvotes=comment['downvotes'])!!html}
               @else:
+                @if comment['visibility'] == '':
                 <b>@{_('<span class="cscore">%(score)i</span> points</b>', score=comment['score'])!!html}
+                @end
               @endif
               <span class="time ">
                   <time-ago datetime="@{comment['time'].isoformat()}Z"></time-ago>
@@ -79,7 +81,9 @@
             )
             <div class="content @{unseen} @{(comment['cid'] == highlight) and 'highlight ' or ''}@{(comment['visibility'] not in ['', 'mod-del', 'admin-del']) and 'hidden' or ''}" id="content-@{comment['cid']}">
               @if comment['visibility'] == 'none':
+              <div class="deleted-comment">
                 @{comment['user']} \
+              </div>
               @elif comment['visibility'] in ['admin-self-del', 'mod-self-del']:
                 <p class="helper-text">@{_('[post deleted by user]')}</p>
                 <span class="current history" data-id="0">@{comment['content']!!html}</span>

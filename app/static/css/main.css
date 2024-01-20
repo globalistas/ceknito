@@ -2085,6 +2085,13 @@ form#msg-form {
   background-color: #ffc;
 }
 
+.deleted-comment {
+  background-color: #f0f0f0;
+  padding-left: 5px;
+  padding-right: 5px;
+  display: inline-block;
+}
+
 .collapsed-comment {
     font-style: italic;
 }
