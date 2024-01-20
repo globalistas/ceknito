@@ -130,11 +130,13 @@
               @if comment['visibility'] in ['blur-block', 'hide-block'] and comment['userstatus'] != 10:
                 <li><a href="@{url_for('user.view_ignores', menu='user')}">@{_('blocked users')}</a></li>
               @end
+              @if comment['visibility'] != 'none':
               <li><a href="@{url_for('sub.view_perm', sub=post['sub'], cid=comment['cid'], pid=post['pid'], slug=post['slug'])}#comment-@{comment['cid']}">@{_('permalink')}</a></li>
+              @end
               @if comment['visibility'] in ['', 'blur-block'] and comment['uid'] != current_user.uid:
                 <li><a class="comment-source" data-cid="@{comment['cid']}">@{_('source')}</a></li>
               @end
-              @if current_user.is_authenticated:
+              @if current_user.is_authenticated and comment['visibility'] != 'none':
                 @if comment['comment_is_saved']:
                   <li><a class="removesavedcomment" data-cid="@{comment['cid']}">@{_('unsave')}</a></li>
                 @else:
