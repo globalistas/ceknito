@@ -59,12 +59,12 @@
                     </div>
                     <div class="pblock">
                         <div class="statdiv">
-                            <abbr class="ucount" title="+@{givenScore[0]}, -@{givenScore[1]}">@{givenScore[2]}</abbr>
-                            <div>@{_('Phuks given')}</div>
+                            <div class="ucount" title="@{_('Post score: %(postscore)s | Comment score: %(commentscore)s', postscore=postScore, commentscore=commentScore)}">@{userScore}</div>
+                            <div>@{_('karma received')}</div>
                         </div>
                         <div class="statdiv">
-                            <div class="ucount" title="@{_('Post score: %(postscore)s | Comment score: %(commentscore)s', postscore=postScore, commentscore=commentScore)}">@{userScore}</div>
-                            <div>@{_('Total score')}</div>
+                            <abbr class="ucount" title="+@{givenScore[0]}, -@{givenScore[1]}">@{givenScore[2]}</abbr>
+                            <div>@{_('karma given')}</div>
                         </div>
                     </div>
                     <p>@{_('Registered %(timeago)s', timeago='<time-ago datetime="'+ user.joindate.isoformat() + 'Z"></time-ago>')!!html}</p>

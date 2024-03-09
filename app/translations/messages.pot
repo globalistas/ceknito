@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2024-01-20 00:43+0100\n"
+"POT-Creation-Date: 2024-03-09 17:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -361,9 +361,9 @@ msgstr ""
 #: app/html/sub/post.html:56 app/html/sub/post.html:138
 #: app/html/sub/post.html:157 app/html/sub/post.html:210
 #: app/html/sub/post.html:219 app/html/sub/post.html:351
-#: app/html/sub/post.html:375 app/html/user/comments.html:50
-#: app/html/user/savedcomments.html:47 app/misc.py:2228 app/misc.py:3078
-#: app/misc.py:3084 app/misc.py:3089
+#: app/html/sub/post.html:375 app/html/sub/postcomments.html:43
+#: app/html/user/comments.html:50 app/html/user/savedcomments.html:47
+#: app/misc.py:2228 app/misc.py:3078 app/misc.py:3084 app/misc.py:3089
 msgid "[deleted]"
 msgstr ""
 
@@ -383,7 +383,7 @@ msgstr ""
 msgid "Invalid CSS"
 msgstr ""
 
-#: app/html/sub/postcomments.html:50 app/misc.py:3059
+#: app/html/sub/postcomments.html:56 app/misc.py:3059
 msgid "[Blocked]"
 msgstr ""
 
@@ -1518,16 +1518,16 @@ msgstr ""
 msgid "Post Preview:"
 msgstr ""
 
-#: app/html/mod/reportdetails.html:143 app/html/sub/postcomments.html:90
+#: app/html/mod/reportdetails.html:143 app/html/sub/postcomments.html:100
 msgid "[post deleted by admin]"
 msgstr ""
 
-#: app/html/mod/reportdetails.html:145 app/html/sub/postcomments.html:87
+#: app/html/mod/reportdetails.html:145 app/html/sub/postcomments.html:97
 msgid "[post deleted by mod]"
 msgstr ""
 
 #: app/html/mod/reportdetails.html:147 app/html/mod/reportdetails.html:160
-#: app/html/sub/postcomments.html:84
+#: app/html/sub/postcomments.html:94
 msgid "[post deleted by user]"
 msgstr ""
 
@@ -1658,7 +1658,7 @@ msgid "Closed all reports related to: "
 msgstr ""
 
 #: app/html/mod/reportdetails.html:288 app/html/shared/post.html:118
-#: app/html/sub/post.html:305 app/html/sub/postcomments.html:135
+#: app/html/sub/post.html:305 app/html/sub/postcomments.html:147
 msgid "report"
 msgstr ""
 
@@ -1831,12 +1831,12 @@ msgid "Show post content"
 msgstr ""
 
 #: app/html/shared/post.html:81 app/html/sub/post.html:212
-#: app/html/sub/postcomments.html:40
+#: app/html/sub/postcomments.html:46
 msgid " [speaking as mod]"
 msgstr ""
 
 #: app/html/shared/post.html:83 app/html/sub/post.html:214
-#: app/html/sub/postcomments.html:40
+#: app/html/sub/postcomments.html:46
 msgid " [speaking as admin]"
 msgstr ""
 
@@ -1877,7 +1877,7 @@ msgid "open reports (%(num)s)"
 msgstr ""
 
 #: app/html/shared/post.html:124 app/html/sub/post.html:262
-#: app/html/sub/postcomments.html:155 app/html/user/comments.html:113
+#: app/html/sub/postcomments.html:167 app/html/user/comments.html:113
 #: app/html/user/savedcomments.html:92 app/templates/messages/messages.html:49
 #: app/templates/messages/saved.html:43
 msgid "delete"
@@ -2904,13 +2904,13 @@ msgstr ""
 msgid "Viewing title history:"
 msgstr ""
 
-#: app/html/sub/post.html:236 app/html/sub/postcomments.html:129
+#: app/html/sub/post.html:236 app/html/sub/postcomments.html:141
 #: app/html/user/comments.html:97 app/html/user/messages/notifications.html:106
 #: app/html/user/savedcomments.html:90
 msgid "unsave"
 msgstr ""
 
-#: app/html/sub/post.html:238 app/html/sub/postcomments.html:131
+#: app/html/sub/post.html:238 app/html/sub/postcomments.html:143
 #: app/html/user/comments.html:99 app/html/user/messages/notifications.html:108
 #: app/templates/messages/messages.html:48
 msgid "save"
@@ -2920,7 +2920,7 @@ msgstr ""
 msgid "flair"
 msgstr ""
 
-#: app/html/sub/post.html:247 app/html/sub/postcomments.html:141
+#: app/html/sub/post.html:247 app/html/sub/postcomments.html:153
 #: app/html/user/comments.html:103 app/static/js/Post.js:365
 #: app/static/js/Post.js:368 app/static/js/Post.js:423
 #: app/static/js/Post.js:426
@@ -2931,12 +2931,12 @@ msgstr ""
 msgid "edit title"
 msgstr ""
 
-#: app/html/sub/post.html:254 app/html/sub/postcomments.html:143
+#: app/html/sub/post.html:254 app/html/sub/postcomments.html:155
 #: app/html/user/comments.html:105
 msgid "disable notifications"
 msgstr ""
 
-#: app/html/sub/post.html:256 app/html/sub/postcomments.html:145
+#: app/html/sub/post.html:256 app/html/sub/postcomments.html:157
 #: app/html/user/comments.html:107
 msgid "enable notifications"
 msgstr ""
@@ -2953,11 +2953,11 @@ msgstr ""
 msgid "close poll"
 msgstr ""
 
-#: app/html/sub/post.html:279 app/html/sub/postcomments.html:151
+#: app/html/sub/post.html:279 app/html/sub/postcomments.html:163
 msgid "unstick"
 msgstr ""
 
-#: app/html/sub/post.html:281 app/html/sub/postcomments.html:151
+#: app/html/sub/post.html:281 app/html/sub/postcomments.html:163
 msgid "make sticky"
 msgstr ""
 
@@ -2985,15 +2985,15 @@ msgstr ""
 msgid "lock comments"
 msgstr ""
 
-#: app/html/sub/post.html:312 app/html/sub/postcomments.html:138
+#: app/html/sub/post.html:312 app/html/sub/postcomments.html:150
 msgid "un-delete"
 msgstr ""
 
-#: app/html/sub/post.html:315 app/html/sub/postcomments.html:149
+#: app/html/sub/post.html:315 app/html/sub/postcomments.html:161
 msgid "undistinguish"
 msgstr ""
 
-#: app/html/sub/post.html:315 app/html/sub/postcomments.html:149
+#: app/html/sub/post.html:315 app/html/sub/postcomments.html:161
 #: app/static/js/Post.js:56
 msgid "distinguish"
 msgstr ""
@@ -3014,7 +3014,7 @@ msgstr ""
 msgid "Select a new flair"
 msgstr ""
 
-#: app/html/sub/post.html:408 app/html/sub/postcomments.html:107
+#: app/html/sub/post.html:408 app/html/sub/postcomments.html:117
 msgid "Viewing edit history:"
 msgstr ""
 
@@ -3076,58 +3076,54 @@ msgstr ""
 msgid "%(comments)i comments"
 msgstr ""
 
-#: app/html/sub/postcomments.html:37
-msgid "[dEEEeleted]"
-msgstr ""
-
-#: app/html/sub/postcomments.html:43
+#: app/html/sub/postcomments.html:49
 msgid "Post author"
 msgstr ""
 
-#: app/html/sub/postcomments.html:43
+#: app/html/sub/postcomments.html:49
 msgid "[OP]"
 msgstr ""
 
-#: app/html/sub/postcomments.html:54
+#: app/html/sub/postcomments.html:60
 #, python-format
 msgid ""
 "<span class=\"mcscore\">%(score)i</span> points</b> "
 "(+<b>%(upvotes)i</b>|-<b>%(downvotes)i</b>)"
 msgstr ""
 
-#: app/html/sub/postcomments.html:56
+#: app/html/sub/postcomments.html:63
 #, python-format
 msgid "<span class=\"cscore\">%(score)i</span> points</b>"
 msgstr ""
 
-#: app/html/sub/postcomments.html:65
+#: app/html/sub/postcomments.html:73
 #, python-format
 msgid "last edited %(timeago)s"
 msgstr ""
 
-#: app/html/sub/postcomments.html:93
+#: app/html/sub/postcomments.html:103
 #, python-format
 msgid "[You have blocked <a href=\"%(link)s\">%(name)s</a>]"
 msgstr ""
 
-#: app/html/sub/postcomments.html:121
+#: app/html/sub/postcomments.html:131
 msgid "blocked users"
 msgstr ""
 
-#: app/html/sub/postcomments.html:123
+#: app/html/sub/postcomments.html:134
 #: app/html/user/messages/notifications.html:103
 #: app/html/user/messages/notifications.html:120
 msgid "permalink"
 msgstr ""
 
-#: app/html/sub/postcomments.html:125 app/html/user/comments.html:93
+#: app/html/sub/postcomments.html:137 app/html/user/comments.html:93
 #: app/html/user/savedcomments.html:88 app/static/js/Post.js:344
 #: app/static/js/Post.js:347 app/static/js/Post.js:399
 #: app/static/js/Post.js:402
 msgid "source"
 msgstr ""
 
-#: app/html/sub/postcomments.html:158 app/html/user/comments.html:110
+#: app/html/sub/postcomments.html:170 app/html/user/comments.html:110
 #: app/html/user/messages/notifications.html:111
 #: app/html/user/messages/notifications.html:123 app/static/js/Post.js:787
 #: app/static/js/Post.js:790 app/templates/messages/messages.html:39
@@ -3135,12 +3131,12 @@ msgstr ""
 msgid "reply"
 msgstr ""
 
-#: app/html/sub/postcomments.html:172
+#: app/html/sub/postcomments.html:184
 #, python-format
 msgid "Load more (%(amt)i comments)"
 msgstr ""
 
-#: app/html/sub/postcomments.html:174
+#: app/html/sub/postcomments.html:186
 msgid "Load more (1 comment)"
 msgstr ""
 
@@ -3480,7 +3476,7 @@ msgid "comments"
 msgstr ""
 
 #: app/html/user/profile.html:63
-msgid "Phuks given"
+msgid "karma given"
 msgstr ""
 
 #: app/html/user/profile.html:66
@@ -3489,7 +3485,7 @@ msgid "Post score: %(postscore)s | Comment score: %(commentscore)s"
 msgstr ""
 
 #: app/html/user/profile.html:67
-msgid "Total score"
+msgid "karma received"
 msgstr ""
 
 #: app/html/user/profile.html:70

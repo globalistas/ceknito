@@ -3050,12 +3050,12 @@ msgstr "príspevkov"
 msgid "comments"
 msgstr "komentárov"
 
-#: app/html/user/profile.html:64
-msgid "Phuks given"
+#: app/html/user/profile.html:63
+msgid "karma given"
 msgstr "rozdaná karma"
 
-#: app/html/user/profile.html:68
-msgid "Total score"
+#: app/html/user/profile.html:67
+msgid "karma received"
 msgstr "vlastná karma"
 
 #: app/html/user/profile.html:71
