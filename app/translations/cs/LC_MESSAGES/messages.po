@@ -4529,11 +4529,11 @@ msgstr "Nemáš žádné uploady."
 
 #: app/templates/usercomments.html:21
 msgid "Please log in to see this user's comments."
-msgstr "Komentáře uživatele vidí pouze přihlášení uživatelé."
+msgstr "Na tuto stránku mají přístup pouze přihlášení uživatelé."
 
 #: app/templates/userposts.html:20
 msgid "Please log in to see this user's posts."
-msgstr "Příspěvky uživatele vidí pouze přihlášení uživatelé."
+msgstr "Na tuto stránku mají přístup pouze přihlášení uživatelé."
 
 #: app/templates/usercomments.html:32
 msgid "This user has not commented on anything, yet."
