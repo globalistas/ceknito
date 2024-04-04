@@ -83,7 +83,11 @@
           </p>
           @if msg['cid']:
             @if msg['comment_context']:
+              @if msg['type'] == 'COMMENT_REPLY':
             <p class="author">@{_("Your comment. Posted %(timeago)s. <b class='cscore'>%(score)i</b> points.", timeago='<time-ago datetime="' + msg['comment_context_posted'].isoformat() + 'Z"></time-ago>', score=msg['comment_context_score'])!!html}</p>
+              @else:
+            <p class="author">@{_("Comment. Posted %(timeago)s. <b class='cscore'>%(score)i</b> points.", timeago='<time-ago datetime="' + msg['comment_context_posted'].isoformat() + 'Z"></time-ago>', score=msg['comment_context_score'])!!html}</p>
+              @end
             <div class="container @{msg['blur']}">@{markdown(msg['comment_context'])!!html}</div>
             <div class="pchild" style="padding-left: 5px;">
               <div class="pull left votecomment" style="margin-right: 10px;">

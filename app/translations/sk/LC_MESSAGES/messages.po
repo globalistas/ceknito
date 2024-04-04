@@ -3211,7 +3211,7 @@ msgstr "<a href=\"/u/%(user)s\">%(user)s</a> odpovedal(a) na tvoj príspevok <a 
 #: app/html/user/messages/notifications.html:29
 #, python-format
 msgid "<a href=\"/u/%(user)s\">%(user)s</a> replied to your comment in the post titled <a class=\"%(cls)s\" href=\"%(link)s\">%(title)s</a> in <a href=\"%(sublink)s\">%(sub)s</a>"
-msgstr "<a href=\"/u/%(user)s\">%(user)s</a> odpovedal(a) na tvoj komentár <a class=\"%(cls)s\" href=\"%(link)s\">%(title)s</a> v skupine <a href=\"%(sublink)s\">%(sub)s</a>"
+msgstr "<a href=\"/u/%(user)s\">%(user)s</a> odpovedal(a) na tvoj komentár k príspevku <a class=\"%(cls)s\" href=\"%(link)s\">%(title)s</a> v skupine <a href=\"%(sublink)s\">%(sub)s</a>"
 
 #: app/html/user/messages/notifications.html:34
 #, python-format
@@ -3287,6 +3287,11 @@ msgstr "<a href=\"/u/%(user)s\">%(user)s</a> obnovil(a) tvoj príspevok v <a hre
 #, python-format
 msgid "Your comment. Posted %(timeago)s. <b class='cscore'>%(score)i</b> points."
 msgstr "Tvoj komentár. Zaslaný %(timeago)s. Skóre: <b class='cscore'>%(score)i</b>"
+
+#: app/html/user/messages/notifications.html:89
+#, python-format
+msgid "Comment. Posted %(timeago)s. <b class='cscore'>%(score)i</b> points."
+msgstr "Komentár. Zaslaný %(timeago)s. Skóre: <b class='cscore'>%(score)i</b>"
 
 #: app/html/user/messages/notifications.html:96
 #, python-format

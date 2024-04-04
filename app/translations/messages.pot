@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2024-03-09 17:28+0100\n"
+"POT-Creation-Date: 2024-04-04 06:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2905,13 +2905,13 @@ msgid "Viewing title history:"
 msgstr ""
 
 #: app/html/sub/post.html:236 app/html/sub/postcomments.html:141
-#: app/html/user/comments.html:97 app/html/user/messages/notifications.html:106
+#: app/html/user/comments.html:97 app/html/user/messages/notifications.html:110
 #: app/html/user/savedcomments.html:90
 msgid "unsave"
 msgstr ""
 
 #: app/html/sub/post.html:238 app/html/sub/postcomments.html:143
-#: app/html/user/comments.html:99 app/html/user/messages/notifications.html:108
+#: app/html/user/comments.html:99 app/html/user/messages/notifications.html:112
 #: app/templates/messages/messages.html:48
 msgid "save"
 msgstr ""
@@ -3111,8 +3111,8 @@ msgid "blocked users"
 msgstr ""
 
 #: app/html/sub/postcomments.html:134
-#: app/html/user/messages/notifications.html:103
-#: app/html/user/messages/notifications.html:120
+#: app/html/user/messages/notifications.html:107
+#: app/html/user/messages/notifications.html:124
 msgid "permalink"
 msgstr ""
 
@@ -3124,8 +3124,8 @@ msgid "source"
 msgstr ""
 
 #: app/html/sub/postcomments.html:170 app/html/user/comments.html:110
-#: app/html/user/messages/notifications.html:111
-#: app/html/user/messages/notifications.html:123 app/static/js/Post.js:787
+#: app/html/user/messages/notifications.html:115
+#: app/html/user/messages/notifications.html:127 app/static/js/Post.js:787
 #: app/static/js/Post.js:790 app/templates/messages/messages.html:39
 #: app/templates/messages/saved.html:36
 msgid "reply"
@@ -3475,17 +3475,17 @@ msgstr ""
 msgid "comments"
 msgstr ""
 
-#: app/html/user/profile.html:63
-msgid "karma given"
-msgstr ""
-
-#: app/html/user/profile.html:66
+#: app/html/user/profile.html:62
 #, python-format
 msgid "Post score: %(postscore)s | Comment score: %(commentscore)s"
 msgstr ""
 
-#: app/html/user/profile.html:67
+#: app/html/user/profile.html:63
 msgid "karma received"
+msgstr ""
+
+#: app/html/user/profile.html:67
+msgid "karma given"
 msgstr ""
 
 #: app/html/user/profile.html:70
@@ -3765,28 +3765,33 @@ msgid ""
 "href=\"%(sublink)s\">%(sub)s</a>"
 msgstr ""
 
-#: app/html/user/messages/notifications.html:86
+#: app/html/user/messages/notifications.html:87
 #, python-format
 msgid "Your comment. Posted %(timeago)s. <b class='cscore'>%(score)i</b> points."
 msgstr ""
 
-#: app/html/user/messages/notifications.html:96
+#: app/html/user/messages/notifications.html:89
+#, python-format
+msgid "Comment. Posted %(timeago)s. <b class='cscore'>%(score)i</b> points."
+msgstr ""
+
+#: app/html/user/messages/notifications.html:100
 #, python-format
 msgid "Posted %(timeago)s. <b>%(score)s</b> points. Read %(timeagoread)s"
 msgstr ""
 
-#: app/html/user/messages/notifications.html:98
+#: app/html/user/messages/notifications.html:102
 #, python-format
 msgid "Posted %(timeago)s. <b>%(score)s</b> points."
 msgstr ""
 
-#: app/html/user/messages/notifications.html:104
-#: app/html/user/messages/notifications.html:121
-#: app/html/user/messages/notifications.html:134
+#: app/html/user/messages/notifications.html:108
+#: app/html/user/messages/notifications.html:125
+#: app/html/user/messages/notifications.html:138
 msgid "delete notification"
 msgstr ""
 
-#: app/html/user/messages/notifications.html:131
+#: app/html/user/messages/notifications.html:135
 #, python-format
 msgid "Please visit %(link)s to accept or reject the invitation"
 msgstr ""
