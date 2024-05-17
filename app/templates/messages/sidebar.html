@@ -11,7 +11,7 @@
   <hr>
   <div>
     <a class="sbm-post pure-button{% if box_route=='messages.view_messages' %} button-secondary{% endif %}" href="{{ url_for('messages.view_messages') }}">
-      Inbox
+      {{_('Inbox')}}
       {% if func.get_unread_count() > 0 %}
         <span class="newmsgcount"><span class="p-icon" data-icon="mail" style="display: inline-block;"></span> {{func.get_unread_count()}}</span>
       {% endif %}
