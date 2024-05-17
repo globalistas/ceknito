@@ -1775,7 +1775,7 @@ msgstr "Záznamy"
 
 #: app/html/shared/sidebar/messages.html:5
 msgid "Inbox"
-msgstr "Inbox"
+msgstr "Prijaté správy"
 
 #: app/html/shared/sidebar/messages.html:13
 #: app/html/user/messages/notifications.html:11
