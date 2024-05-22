@@ -47,7 +47,7 @@
     "messageformat": "^2.3.0",
     "messageformat-po-loader": "^0.3.0",
     "purecss": "^2.0.1",
-    "sanitize-html": "^2.3.2",
+    "sanitize-html": "^2.13.0",
     "socket.io-client": "^4.6.0",
     "sortablejs": "^1.7.0",
     "time-elements": "^3.0.0",
