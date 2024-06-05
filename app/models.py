@@ -585,7 +585,7 @@ class SubUploads(BaseModel):
 class SubPostReport(BaseModel):
     pid = ForeignKeyField(db_column="pid", model=SubPost, field="pid")
     uid = ForeignKeyField(db_column="uid", model=User, field="uid")
-    datetime = DateTimeField(default=datetime.datetime.now)
+    datetime = DateTimeField(default=datetime.datetime.utcnow)
     reason = CharField(max_length=128)
     open = BooleanField(default=True)
     send_to_admin = BooleanField(default=True)
@@ -617,7 +617,7 @@ class PostReportLog(BaseModel):
 class SubPostCommentReport(BaseModel):
     cid = ForeignKeyField(db_column="cid", model=SubPostComment, field="cid")
     uid = ForeignKeyField(db_column="uid", model=User, field="uid")
-    datetime = DateTimeField(default=datetime.datetime.now)
+    datetime = DateTimeField(default=datetime.datetime.utcnow)
     reason = CharField(max_length=128)
     open = BooleanField(default=True)
     send_to_admin = BooleanField(default=True)
@@ -648,7 +648,7 @@ class CommentReportLog(BaseModel):
 
 class SubPostCommentHistory(BaseModel):
     cid = ForeignKeyField(db_column="cid", model=SubPostComment, field="cid")
-    datetime = DateTimeField(default=datetime.datetime.now)
+    datetime = DateTimeField(default=datetime.datetime.utcnow)
     content = TextField(null=True)
 
     def __repr__(self):
@@ -660,7 +660,7 @@ class SubPostCommentHistory(BaseModel):
 
 class SubPostContentHistory(BaseModel):
     pid = ForeignKeyField(db_column="pid", model=SubPost, field="pid")
-    datetime = DateTimeField(default=datetime.datetime.now)
+    datetime = DateTimeField(default=datetime.datetime.utcnow)
     content = TextField(null=True)
 
     def __repr__(self):
@@ -672,7 +672,7 @@ class SubPostContentHistory(BaseModel):
 
 class SubPostTitleHistory(BaseModel):
     pid = ForeignKeyField(db_column="pid", model=SubPost, field="pid")
-    datetime = DateTimeField(default=datetime.datetime.now)
+    datetime = DateTimeField(default=datetime.datetime.utcnow)
     title = TextField(null=True)
 
     def __repr__(self):
@@ -685,7 +685,7 @@ class SubPostTitleHistory(BaseModel):
 class UserMessageBlock(BaseModel):
     uid = ForeignKeyField(db_column="uid", model=User, field="uid")
     target = CharField(max_length=40)
-    date = DateTimeField(default=datetime.datetime.now)
+    date = DateTimeField(default=datetime.datetime.utcnow)
 
     def __repr__(self):
         return f'<UserMessageBlock "{self.id}">'
@@ -705,7 +705,7 @@ class UserContentBlockMethod(IntEnum):
 class UserContentBlock(BaseModel):
     uid = ForeignKeyField(db_column="uid", model=User, field="uid")
     target = CharField(max_length=40)
-    date = DateTimeField(default=datetime.datetime.now)
+    date = DateTimeField(default=datetime.datetime.utcnow)
     method = IntegerField()  # 0=hide, 1=blur
 
     def __repr__(self):

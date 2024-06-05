@@ -63,7 +63,7 @@ def migrate(migrator, database, fake=False, **kwargs):
         mid = pw.ForeignKeyField(db_column="mid", model=Message, field="mid")
         uid = pw.ForeignKeyField(db_column="uid", model=User, field="uid")
         mailbox = pw.IntegerField()
-        updated = pw.DateTimeField(default=dt.datetime.now)
+        updated = pw.DateTimeField(default=dt.datetime.utcnow)
 
         class Meta:
             table_name = "sub_message_log"

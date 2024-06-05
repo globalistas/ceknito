@@ -47,7 +47,7 @@ Mod |\
                 <a href="@{ url_for('user.view', user=report['reported']) }">@{ report['reported'] }</a>
               </div>
               <div data-name="@{_('Time:')}" class="elem pure-u-1 pure-u-md-3-24">
-                <time-ago datetime="@{report['datetime'].isoformat()}"></time-ago>
+                <time-ago datetime="@{report['datetime'].isoformat()}Z"></time-ago>
               </div>
               <div class="close-elem close-report-button pure-u-1 pure-u-md-3-24">
                 <a data-type="@{report['type']}" data-id="@{report['id']}" data-action="close" class="close-report">@{_('[x]')}</a>

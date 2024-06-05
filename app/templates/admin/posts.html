@@ -40,17 +40,19 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>+</th>
+              <th>Posted</th>
+              <th>Score</th>
               <th>Title</th>
               <th>User</th>
               <th>Sub</th>
-              <th>Del</th>
+              <th>Deleted</th>
             </tr>
           </thead>
           <tbody>
             {% for post in posts %}
               <tr class="{% if post.deleted != 0 %}deletedrow{% endif %}">
                 <td><a href="{{url_for('admin.post_search', term=post.pid)}}">{{post.pid}}</a></td>
+                <td><time-ago datetime="{{post.posted.isoformat()}}Z"></time-ago></td>
                 <td>{{post.score}}</td>
                 <td><a href="{{url_for('site.view_post_inbox', pid=post.pid)}}">{{post.title|truncate(30, True)}}</a></td>
                 <td><a href="{{url_for('user.view', user=post.user)}}">{{post.user}}</a></td>

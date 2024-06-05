@@ -66,7 +66,7 @@ Mod |\
                 <a href="@{ url_for('user.view', user=report['reported']) }">@{report['reported'] }</a>
               </p>
               <p class="report-details-item"><span class="label">@{_('Time')}:</span>
-                <time-ago datetime="@{report['datetime'].isoformat()}"></time-ago>
+                <time-ago datetime="@{report['datetime'].isoformat()}Z"></time-ago>
               </p>
             </div>
             <div class="pure-u-1-1 pure-u-md-1-2">
@@ -322,9 +322,9 @@ Mod |\
                 <li class="mod-table-row pure-g">
                   <div data-name="@{_('Time:')}" class="elem sub pure-u-1 pure-u-md-4-24">
                     @if related_report['type'] == 'comment':
-                    <a href="@{url_for('mod.report_details', sub=related_report['sub'], report_type=related_report['type'], report_id=related_report['id'])}"><time-ago datetime="@{related_report['datetime'].isoformat()}"></time-ago></a>
+                    <a href="@{url_for('mod.report_details', sub=related_report['sub'], report_type=related_report['type'], report_id=related_report['id'])}"><time-ago datetime="@{related_report['datetime'].isoformat()}Z"></time-ago></a>
                     @else:
-                    <a href="@{url_for('mod.report_details', sub=related_report['sub'], report_type=related_report['type'], report_id=related_report['id'])}"><time-ago datetime="@{related_report['datetime'].isoformat()}"></time-ago></a>
+                    <a href="@{url_for('mod.report_details', sub=related_report['sub'], report_type=related_report['type'], report_id=related_report['id'])}"><time-ago datetime="@{related_report['datetime'].isoformat()}Z"></time-ago></a>
                     @end
                   </div>
                   <div data-name="@{_('Reporter:')}" class="elem sub pure-u-1 pure-u-md-4-24"><a href="@{ url_for('user.view', user=related_report['reporter']) }">@{ related_report['reporter'] }</a></div>
