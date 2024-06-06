@@ -495,6 +495,38 @@ u.ready(function () {
   })
 });
 
+
+// Convert time-ago datetime to more readable format for convert-date class elements
+u.ready(function () {
+  var elements = document.querySelectorAll('.convert-date time-ago[datetime]');
+
+  elements.forEach(function (timeAgoEl) {
+    var datetime = timeAgoEl.getAttribute('datetime');
+    var d = new Date(datetime);
+    // Format the date as 'YYYY-MM-DD HH:MM:SS'
+    function formatDate(date) {
+        var d = new Date(date);
+        var year = d.getFullYear();
+        var month = ('0' + (d.getMonth() + 1)).slice(-2);
+        var day = ('0' + d.getDate()).slice(-2);
+        var hour = ('0' + d.getHours()).slice(-2);
+        var minute = ('0' + d.getMinutes()).slice(-2);
+        var second = ('0' + d.getSeconds()).slice(-2);
+        return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+    }
+
+var formattedDate = formatDate(d);
+
+
+    // Set the title attribute to the original time-ago format
+    timeAgoEl.setAttribute('title', timeAgoEl.innerHTML);
+
+    // Update the inner HTML to show the formatted date
+    timeAgoEl.innerHTML = formattedDate;
+  });
+});
+
+
 new Konami(function () {
   var d = new Date();
   d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days

@@ -60,7 +60,7 @@
                 <td>{{func.get_user_level(user.uid)[0]}}</td>
                 <td>{{func.get_user_level(user.uid)[1]}}</td>
                 <td>{{user.status}}</td>
-                <td>{{user.joindate.isoformat()}}</td>
+                <td class="convert-date"><time-ago datetime="{{user.joindate.isoformat()}}Z"></time-ago></td>
                 <td>{{user.email}}</td>
               </tr>
             {% endfor %}
