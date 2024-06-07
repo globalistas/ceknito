@@ -32,30 +32,30 @@
         <tr>
           <th>
             {% if sort == 'name_asc' %}
-              <a href="{{cp_uri}}/name_desc">{{_('Sub')}} <span class="tx-icon" data-icon="downvote"></span></a>
+              <a href="{{cp_uri}}/name_desc">{{_('Sub')}} <span class="tx-icon" data-icon="upvote"></span></a>
             {%elif sort == 'name_desc' %}
-              <a href="{{cp_uri}}/name_asc">{{_('Sub')}} <span class="tx-icon" data-icon="upvote"></span></a>
+              <a href="{{cp_uri}}/name_asc">{{_('Sub')}} <span class="tx-icon" data-icon="downvote"></span></a>
             {%else%}
-              <a href="{{cp_uri}}/name_asc">{{_('Sub')}} <span class="tx-icon" data-icon="updown"></span></a>
+              <a href="{{cp_uri}}/name_asc">{{_('Sub')}}</a>
             {%endif %}
             </th>
      <!--     <th>Vytvorená</th> -->
           <th>
             {% if sort == 'subs_asc' %}
-              <a href="{{cp_uri}}/subs_desc">{{_('Number of subscribers')}} <span class="tx-icon" data-icon="downvote"></span></a>
+              <a href="{{cp_uri}}/subs_desc">{{_('Number of subscribers')}} <span class="tx-icon" data-icon="upvote"></span></a>
             {%elif sort == 'subs_desc' %}
-              <a href="{{cp_uri}}/subs_asc">{{_('Number of subscribers')}} <span class="tx-icon" data-icon="upvote"></span></a>
+              <a href="{{cp_uri}}/subs_asc">{{_('Number of subscribers')}} <span class="tx-icon" data-icon="downvote"></span></a>
             {%else%}
-            <a href="{{cp_uri}}/subs_desc">{{_('Number of subscribers')}} <span class="i-icon" data-icon="updown"></span></a>
+            <a href="{{cp_uri}}/subs_desc">{{_('Number of subscribers')}}</a>
             {%endif %}
           </th>
           <th>
             {% if sort == 'posts_asc' %}
-              <a href="{{cp_uri}}/posts_desc">{{_('Number of posts')}} <span class="tx-icon" data-icon="downvote"></span></a>
+              <a href="{{cp_uri}}/posts_desc">{{_('Number of posts')}} <span class="tx-icon" data-icon="upvote"></span></a>
             {%elif sort == 'posts_desc' %}
-              <a href="{{cp_uri}}/posts_asc">{{_('Number of posts')}} <span class="tx-icon" data-icon="upvote"></span></a>
+              <a href="{{cp_uri}}/posts_asc">{{_('Number of posts')}} <span class="tx-icon" data-icon="downvote"></span></a>
             {%else%}
-              <a href="{{cp_uri}}/posts_desc">{{_('Number of posts')}} <span class="i-icon" data-icon="updown"></span></a>
+              <a href="{{cp_uri}}/posts_desc">{{_('Number of posts')}}</span></a>
             {%endif %}
           </th>
 		  <th>
