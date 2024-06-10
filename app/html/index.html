@@ -71,8 +71,16 @@
       @end
     @end
   </div>
-  @if not current_user.likes_scroll() or sort_type in ('home.search', 'home.all_domain_new'):
-    @if len(posts) == 25:
+  @if sort_type in ('home.search'):
+    @if len(posts) == 25 and kw['search_count'] > 25:
+      <a href="@{url_for(sort_type, page=(page+1), **kw)}" class="pure-button">@{_('Next page')}</a>
+    @end
+    @if page > 1:
+      <a href="@{url_for(sort_type, page=(page-1), **kw)}" class="pure-button">@{_('Previous page')}</a>
+    @end
+  @end
+  @if sort_type in ('home.all_domain_new'):
+    @if len(posts) == 25 and kw['post_count'] > 25:
       <a href="@{url_for(sort_type, page=(page+1), **kw)}" class="pure-button">@{_('Next page')}</a>
     @end
     @if page > 1:

@@ -257,6 +257,11 @@ def search(page, term):
         "new",
         page,
     )
+    # Query to get the total count of matching posts
+    count = misc.postListQueryBase(filter_shadowbanned=True).where(
+        SubPost.title ** ("%" + term + "%")
+    )
+    search_count = len(count)
     return engine.get_template("index.html").render(
         {
             "posts": posts,
@@ -265,7 +270,7 @@ def search(page, term):
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
             "ann": misc.getAnnouncement(),
-            "kw": {"term": term},
+            "kw": {"term": term, "search_count": search_count},
         }
     )
 
