@@ -58,7 +58,7 @@
     @end
   @end
 
-  @if not posts:
+  @if not posts and sort_type in ('home.search'):
     <h3 class="notfound">@{_('No posts were found for the search term')} "@kw['term']". </h3>
   @end
   @if sort_type in ('home.all_domain_new'):
