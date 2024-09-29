@@ -892,8 +892,8 @@ msgid "There are no posts here, yet."
 msgstr "Zatiaľ tu nie sú žiadne príspevky."
 
 #: app/html/index.html:62 app/html/user/posts.html:37
-msgid "No posts were found."
-msgstr "Nenašli sa žiadne príspevky."
+msgid "No posts were found for the search term"
+msgstr "Nenašli sa žiadne príspevky ktoré majú v názve"
 
 #: app/html/admin/reports.html:60 app/html/admin/wiki.html:48
 #: app/html/index.html:60 app/html/mod/closed.html:65

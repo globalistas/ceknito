@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2024-04-04 06:53+0200\n"
+"POT-Creation-Date: 2024-09-29 10:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -547,7 +547,7 @@ msgstr ""
 #: app/forms/admin.py:32 app/forms/sub.py:102 app/forms/sub.py:108
 #: app/forms/user.py:81 app/forms/user.py:92 app/html/user/login.html:15
 #: app/html/user/profile.html:144 app/static/js/main.js:53
-#: app/static/js/main.js:665
+#: app/static/js/main.js:697
 msgid "Username"
 msgstr ""
 
@@ -885,12 +885,12 @@ msgstr ""
 
 #: app/forms/user.py:83 app/forms/user.py:110 app/forms/user.py:244
 #: app/html/user/login.html:19 app/html/user/password_reset.html:16
-#: app/static/js/main.js:56 app/static/js/main.js:668
+#: app/static/js/main.js:56 app/static/js/main.js:700
 msgid "Password"
 msgstr ""
 
 #: app/forms/user.py:85 app/html/user/login.html:24 app/static/js/main.js:60
-#: app/static/js/main.js:672
+#: app/static/js/main.js:704
 msgid "Remember me"
 msgstr ""
 
@@ -1063,7 +1063,7 @@ msgid "Order by latest comment received"
 msgstr ""
 
 #: app/html/index.html:62
-msgid "No posts were found."
+msgid "No posts were found for the search term"
 msgstr ""
 
 #: app/html/index.html:65
@@ -1075,20 +1075,20 @@ msgid "posts from the domain"
 msgstr ""
 
 #: app/html/admin/reports.html:63 app/html/admin/wiki.html:51
-#: app/html/index.html:76 app/html/mod/closed.html:68
-#: app/html/mod/reports.html:67 app/html/mod/sub_reports.html:68
-#: app/html/mod/sub_reports_closed.html:70 app/html/site/log.html:127
-#: app/html/sub.html:62 app/html/sub/log.html:115 app/html/user/ignores.html:55
-#: app/templates/indexmulti.html:31
+#: app/html/index.html:76 app/html/index.html:83 app/html/index.html:90
+#: app/html/mod/closed.html:68 app/html/mod/reports.html:67
+#: app/html/mod/sub_reports.html:68 app/html/mod/sub_reports_closed.html:70
+#: app/html/site/log.html:127 app/html/sub.html:62 app/html/sub/log.html:115
+#: app/html/user/ignores.html:55 app/templates/indexmulti.html:31
 msgid "Next page"
 msgstr ""
 
 #: app/html/admin/reports.html:60 app/html/admin/wiki.html:48
-#: app/html/index.html:79 app/html/mod/closed.html:65
-#: app/html/mod/reports.html:64 app/html/mod/sub_reports.html:65
-#: app/html/mod/sub_reports_closed.html:67 app/html/site/log.html:123
-#: app/html/sub.html:65 app/html/sub/log.html:111 app/html/user/ignores.html:52
-#: app/templates/indexmulti.html:34
+#: app/html/index.html:79 app/html/index.html:86 app/html/index.html:93
+#: app/html/mod/closed.html:65 app/html/mod/reports.html:64
+#: app/html/mod/sub_reports.html:65 app/html/mod/sub_reports_closed.html:67
+#: app/html/site/log.html:123 app/html/sub.html:65 app/html/sub/log.html:111
+#: app/html/user/ignores.html:52 app/templates/indexmulti.html:34
 msgid "Previous page"
 msgstr ""
 
@@ -1261,7 +1261,7 @@ msgstr ""
 #: app/html/user/login.html:5 app/html/user/login.html:29
 #: app/html/user/password_recovery.html:36 app/html/user/register.html:68
 #: app/html/user/resend_confirmation.html:24 app/static/js/main.js:62
-#: app/static/js/main.js:674 app/templates/layout.html:118
+#: app/static/js/main.js:706 app/templates/layout.html:118
 msgid "Log in"
 msgstr ""
 
@@ -1990,13 +1990,14 @@ msgid "Site logs"
 msgstr ""
 
 #: app/html/shared/sidebar/messages.html:5
-msgid "Inbox"
+#: app/html/user/messages/notifications.html:11
+#: app/templates/messages/sidebar.html:5
+msgid "Notifications"
 msgstr ""
 
-#: app/html/shared/sidebar/messages.html:13
-#: app/html/user/messages/notifications.html:11
-#: app/templates/messages/sidebar.html:13
-msgid "Notifications"
+#: app/html/shared/sidebar/messages.html:14
+#: app/templates/messages/sidebar.html:14
+msgid "Inbox"
 msgstr ""
 
 #: app/html/shared/sidebar/messages.html:21 app/templates/messages/sent.html:17
@@ -2009,8 +2010,8 @@ msgstr ""
 msgid "Saved Messages"
 msgstr ""
 
-#: app/html/shared/sidebar/messages.html:28
-#: app/html/shared/sidebar/user.html:39 app/templates/messages/sidebar.html:28
+#: app/html/shared/sidebar/messages.html:29
+#: app/html/shared/sidebar/user.html:39 app/templates/messages/sidebar.html:29
 msgid "Blocked users"
 msgstr ""
 
@@ -3220,7 +3221,7 @@ msgstr ""
 
 #: app/html/sub/settings.html:133 app/html/user/ignores.html:39
 #: app/html/user/profile.html:224 app/static/js/Post.js:377
-#: app/static/js/Post.js:431 app/static/js/main.js:636
+#: app/static/js/Post.js:431 app/static/js/main.js:668
 msgid "Save changes"
 msgstr ""
 
@@ -3359,7 +3360,7 @@ msgstr ""
 
 #: app/html/user/fix_registration_email.html:27 app/html/user/login.html:33
 #: app/html/user/resend_confirmation.html:26 app/static/js/main.js:66
-#: app/static/js/main.js:678
+#: app/static/js/main.js:710
 msgid "Forgot your password?"
 msgstr ""
 
@@ -3410,7 +3411,7 @@ msgid "Login"
 msgstr ""
 
 #: app/html/user/login.html:16 app/static/js/main.js:53
-#: app/static/js/main.js:665
+#: app/static/js/main.js:697
 msgid "Alphanumeric characters plus '-' and '_'"
 msgstr ""
 
@@ -4101,15 +4102,15 @@ msgstr ""
 msgid "No subs found"
 msgstr ""
 
-#: app/static/js/main.js:46 app/static/js/main.js:658
+#: app/static/js/main.js:46 app/static/js/main.js:690
 msgid "Log in or register to continue"
 msgstr ""
 
-#: app/static/js/main.js:72 app/static/js/main.js:684
+#: app/static/js/main.js:72 app/static/js/main.js:716
 msgid "Don't have an account?"
 msgstr ""
 
-#: app/static/js/main.js:73 app/static/js/main.js:685
+#: app/static/js/main.js:73 app/static/js/main.js:717
 msgid "Register now!"
 msgstr ""
 
@@ -4135,23 +4136,23 @@ msgstr ""
 msgid "Are you sure you want to PERMANENTLY delete your account?"
 msgstr ""
 
-#: app/static/js/main.js:532
+#: app/static/js/main.js:564
 msgid "Are you sure you want to ban this user?"
 msgstr ""
 
-#: app/static/js/main.js:537
+#: app/static/js/main.js:569
 msgid "Are you sure you want to remove all the votes issued by this user?"
 msgstr ""
 
-#: app/static/js/main.js:542
+#: app/static/js/main.js:574
 msgid "Are you sure you want to unban this user?"
 msgstr ""
 
-#: app/static/js/main.js:547
+#: app/static/js/main.js:579
 msgid "Are you sure you want to shadow-ban this user?"
 msgstr ""
 
-#: app/static/js/main.js:552
+#: app/static/js/main.js:584
 msgid "Are you sure you want to un-shadowban this user?"
 msgstr ""
 
