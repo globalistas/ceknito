@@ -45,6 +45,7 @@ A link and discussion aggregator with snek (python3)
 - fixed auto-quote selected text when replying to comments
 - date in chat timestamps
 - shadowban functionality
+- proxy support for metadata scraper
 
 ## Dependencies:
 

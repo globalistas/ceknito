@@ -2490,7 +2490,7 @@ msgstr "Moderátoři skupiny <a href=\"%(url)s\">%(sub)s</a>"
 
 #: app/html/sub/mods.html:20
 msgid "You currently have an invite for this sub pending."
-msgstr "Stále máš otevřenou pozvánku do této skupiny."
+msgstr "Máš otevřenou pozvánku moderovat do této skupiny."
 
 #: app/html/sub/mods.html:21
 msgid "Accept"

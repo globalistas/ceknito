@@ -233,42 +233,67 @@ def grab_title_async(app, url):
             return {"status": "error"}
 
 
-def safe_request(
-    url, receive_timeout=10, max_size=25000000, mimetypes=None, partial_read=False
-):
-    """Gets stuff from the internet, with timeouts, content type and size
-    restrictions.  If partial_read is True it will return approximately
-    the first max_size bytes, otherwise it will raise an error if
-    max_size is exceeded."""
-    # Returns (Response, File)
-    if url[0] == "/" and config.storage.server and "server_name" in config.site:
-        url = f"http://{config.site.server_name}{url}"
+def make_request(url, receive_timeout, user_agent, proxies):
+    """Helper function to make the request, retrying without proxy if needed."""
     try:
-        # First attempt with Yahoo! Slurp/Site Explorer user agent
         r = requests.get(
             url,
             stream=True,
             timeout=receive_timeout,
-            headers={"User-Agent": "Yahoo! Slurp/Site Explorer"},
+            headers={"User-Agent": user_agent},
             cookies={"CONSENT": "PENDING+999"},
+            proxies=proxies,
         )
         r.raise_for_status()  # Check if the request was successful
-    except requests.exceptions.RequestException:
+        return r
+    except (requests.exceptions.ProxyError, requests.exceptions.ConnectionError) as e:
+        print(f"ProxyError: {e}. Retrying without proxy.")
+        proxies = None  # Reset proxy to None to make the request without proxy
         try:
-            # Second attempt with Mozilla user agent
             r = requests.get(
                 url,
                 stream=True,
                 timeout=receive_timeout,
-                headers={
-                    "User-Agent": "Mozilla/5.0 (Android 13; Mobile; rv:109.0) Gecko/113.0 Firefox/113.0"
-                },
+                headers={"User-Agent": user_agent},
                 cookies={"CONSENT": "PENDING+999"},
+                proxies=proxies,
             )
             r.raise_for_status()  # Check if the request was successful
+            return r
         except requests.exceptions.RequestException as e:
-            raise ValueError("Error fetching: " + str(e))
+            raise ValueError("Error fetching without proxy: " + str(e))
+    except requests.exceptions.RequestException as e:
+        raise ValueError("Error fetching with proxy: " + str(e))
 
+
+def safe_request(
+    url, receive_timeout=10, max_size=25000000, mimetypes=None, partial_read=False
+):
+    """Gets stuff from the internet, with timeouts, content type, and size
+    restrictions. If partial_read is True, it will return approximately
+    the first max_size bytes; otherwise, it will raise an error if
+    max_size is exceeded."""
+
+    # Returns (Response, File)
+    if url[0] == "/" and config.storage.server and "server_name" in config.site:
+        url = f"http://{config.site.server_name}{url}"
+
+    # Retrieve proxy configuration
+    proxies = config.site.proxy
+
+    # Attempt with Yahoo! Slurp user agent
+    r = make_request(url, receive_timeout, "Yahoo! Slurp/Site Explorer", proxies)
+
+    # If the first attempt fails, retry with Mozilla user agent
+    if not r:
+        r = make_request(
+            url,
+            receive_timeout,
+            "Mozilla/5.0 (Android 13; Mobile; rv:109.0) Gecko/113.0 Firefox/113.0",
+            proxies,
+        )
+
+    # Check for content size restrictions
     if int(r.headers.get("Content-Length", 1)) > max_size and not partial_read:
         raise ValueError("response too large")
 
@@ -277,6 +302,7 @@ def safe_request(
         if mtype not in mimetypes:
             raise ValueError("wrong content type")
 
+    # Read the content
     size = 0
     start = time.time()
     f = b""
@@ -292,4 +318,5 @@ def safe_request(
                 return r, f
             else:
                 raise ValueError("response too large")
+
     return r, f

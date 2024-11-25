@@ -26,6 +26,12 @@ site:
   #    Donate: '/wiki/donate'
   #    Bugs: 'https://github.com/globalistas/ceknito/issues'
 
+  # Optional proxy server to be used for the scraper
+  # proxy:
+  #   http: 'http://proxyserver.com:8080'
+  #   https: 'http://proxyserver.com:8080'
+
+
   # Number of trusted proxies which set the X-Forwarded-For header
   # ahead of the application.  If you run the application behind
   # a load balancer, this should be set to 1 or more.

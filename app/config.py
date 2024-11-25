@@ -44,6 +44,7 @@ defaults = {  # key => default value
                 "Podporte nás": "/wiki/donate",
             }
         },
+        "proxy": None,
         "trusted_proxy_count": 0,
         "custom_hot_sort": False,
         "icon_url": None,
