@@ -210,19 +210,34 @@ def grab_title_async(app, url):
                 url, max_size=500000, mimetypes={"text/html"}, partial_read=True
             )
 
-            # Truncate the HTML so less parsing work will be required.
+            # Truncate the HTML to minimize parsing workload
             end_title_pos = data.find(b"</title>")
-            if end_title_pos == -1:
-                raise ValueError
-            data = data[:end_title_pos] + b"</title></head><body></body>"
+            if end_title_pos != -1:
+                data = data[:end_title_pos] + b"</title></head><body></body>"
 
             _, options = cgi.parse_header(resp.headers.get("Content-Type", ""))
             charset = options.get("charset", "utf-8")
             og = BeautifulSoup(data, "lxml", from_encoding=charset)
-            title = og("title")[0].text
-            title = title.strip(WHITESPACE)
-            title = re.sub(" - YouTube$", "", title)
-            return {"status": "ok", "title": title}
+
+            # Attempt to fetch the <title> tag content
+            title = None
+            if og.title:
+                title = og.title.string.strip(WHITESPACE)
+
+            # Fallback: Check for <meta property="og:title">
+            if not title:
+                og_meta_title = og.find("meta", property="og:title")
+                if og_meta_title and og_meta_title.get("content"):
+                    title = og_meta_title["content"].strip(WHITESPACE)
+
+            # Final title processing
+            if title:
+                title = re.sub(" - YouTube$", "", title)
+                return {"status": "ok", "title": title}
+
+            # No title found
+            raise ValueError("No title or og:title found.")
+
         except (
             requests.exceptions.RequestException,
             ValueError,
