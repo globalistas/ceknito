@@ -45,6 +45,7 @@ defaults = {  # key => default value
             }
         },
         "proxy": None,
+        "proxydomains": [],
         "trusted_proxy_count": 0,
         "custom_hot_sort": False,
         "icon_url": None,

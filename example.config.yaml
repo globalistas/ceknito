@@ -29,8 +29,12 @@ site:
   # Optional proxy server to be used for the scraper
   # proxy:
   #   http: 'http://proxyserver.com:8080'
-  #   https: 'http://proxyserver.com:8080'
+  #   https: 'https://proxyserver.com:8080'
 
+  # List of domains to be handled by the scraper proxy
+  proxydomains:
+    - example.com
+    - example2.com
 
   # Number of trusted proxies which set the X-Forwarded-For header
   # ahead of the application.  If you run the application behind

@@ -4,7 +4,7 @@ from io import BytesIO
 import math
 import re
 import time
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 import uuid
 
 from bs4 import BeautifulSoup
@@ -233,90 +233,104 @@ def grab_title_async(app, url):
             return {"status": "error"}
 
 
-def make_request(url, receive_timeout, user_agent, proxies):
-    """Helper function to make the request, retrying without proxy if needed."""
-    try:
-        r = requests.get(
+def should_use_proxy(url):
+    """
+    Check if the URL's domain matches one in the config.site.proxydomains list.
+    """
+    domain = urlparse(url).netloc
+    proxy_domains = config.site.proxydomains  # Load domains from configuration
+    return any(proxy_domain in domain for proxy_domain in proxy_domains)
+
+
+def make_request(url, timeout, user_agent, proxies=None):
+    """
+    Helper function to make a request.
+    Retries without proxy if a proxy error occurs and the domain is not in the proxy list.
+    """
+    headers = {"User-Agent": user_agent}
+    cookies = {"CONSENT": "PENDING+999"}
+
+    def fetch(proxies_to_use):
+        """
+        Inner function to perform the actual HTTP request.
+        """
+        return requests.get(
             url,
             stream=True,
-            timeout=receive_timeout,
-            headers={"User-Agent": user_agent},
-            cookies={"CONSENT": "PENDING+999"},
-            proxies=proxies,
+            timeout=timeout,
+            headers=headers,
+            cookies=cookies,
+            proxies=proxies_to_use,
         )
-        r.raise_for_status()  # Check if the request was successful
-        return r
+
+    # Determine if we should use a proxy based on the domain
+    use_proxy = should_use_proxy(url)
+    current_proxies = proxies if use_proxy else None
+
+    try:
+        response = fetch(
+            current_proxies
+        )  # Pass the outer variable to the inner function
+        response.raise_for_status()
+        return response
     except (requests.exceptions.ProxyError, requests.exceptions.ConnectionError) as e:
-        print(f"ProxyError: {e}. Retrying without proxy.")
-        proxies = None  # Reset proxy to None to make the request without proxy
-        try:
-            r = requests.get(
-                url,
-                stream=True,
-                timeout=receive_timeout,
-                headers={"User-Agent": user_agent},
-                cookies={"CONSENT": "PENDING+999"},
-                proxies=proxies,
-            )
-            r.raise_for_status()  # Check if the request was successful
-            return r
-        except requests.exceptions.RequestException as e:
-            raise ValueError("Error fetching without proxy: " + str(e))
-    except requests.exceptions.RequestException as e:
-        raise ValueError("Error fetching with proxy: " + str(e))
+        if use_proxy:  # Retry without proxy only if the proxy was initially used
+            print(f"ProxyError: {e}. Retrying without proxy.")
+            return fetch(None)
+        raise ValueError(f"Error fetching URL: {e}")
 
 
 def safe_request(
     url, receive_timeout=10, max_size=25000000, mimetypes=None, partial_read=False
 ):
-    """Gets stuff from the internet, with timeouts, content type, and size
-    restrictions. If partial_read is True, it will return approximately
-    the first max_size bytes; otherwise, it will raise an error if
-    max_size is exceeded."""
-
-    # Returns (Response, File)
-    if url[0] == "/" and config.storage.server and "server_name" in config.site:
+    """
+    Fetches data with constraints on size, type, and timeout.
+    """
+    # Modify the URL if it's a relative path
+    if url.startswith("/") and config.storage.server and "server_name" in config.site:
         url = f"http://{config.site.server_name}{url}"
 
-    # Retrieve proxy configuration
-    proxies = config.site.proxy
+    proxies = config.site.proxy  # Proxy configuration
+    user_agents = [
+        "Yahoo! Slurp/Site Explorer",
+        "Mozilla/5.0 (Android 13; Mobile; rv:109.0) Gecko/113.0 Firefox/113.0",
+    ]
 
-    # Attempt with Yahoo! Slurp user agent
-    r = make_request(url, receive_timeout, "Yahoo! Slurp/Site Explorer", proxies)
+    # Attempt to fetch data with different user agents
+    for user_agent in user_agents:
+        try:
+            response = make_request(url, receive_timeout, user_agent, proxies)
+            break  # Exit loop on success
+        except ValueError as e:
+            print(f"Retrying with a different user agent: {e}")
+    else:
+        raise ValueError("Failed to fetch URL with all user agents.")
 
-    # If the first attempt fails, retry with Mozilla user agent
-    if not r:
-        r = make_request(
-            url,
-            receive_timeout,
-            "Mozilla/5.0 (Android 13; Mobile; rv:109.0) Gecko/113.0 Firefox/113.0",
-            proxies,
-        )
+    # Check content length
+    content_length = int(response.headers.get("Content-Length", 1))
+    if content_length > max_size and not partial_read:
+        raise ValueError("Response too large.")
 
-    # Check for content size restrictions
-    if int(r.headers.get("Content-Length", 1)) > max_size and not partial_read:
-        raise ValueError("response too large")
+    # Check content type if mimetypes are specified
+    if mimetypes:
+        content_type, _ = cgi.parse_header(response.headers.get("Content-Type", ""))
+        if content_type not in mimetypes:
+            raise ValueError(f"Invalid content type: {content_type}")
 
-    if mimetypes is not None:
-        mtype, _ = cgi.parse_header(r.headers.get("Content-Type", ""))
-        if mtype not in mimetypes:
-            raise ValueError("wrong content type")
-
-    # Read the content
+    # Read the response content
     size = 0
-    start = time.time()
-    f = b""
-    for chunk in r.iter_content(1024):
-        if time.time() - start > receive_timeout:
-            raise ValueError("timeout reached")
-        gevent.sleep(0)  # Otherwise this loop can block other greenlets for > 0.5s
+    start_time = time.time()
+    content = b""  # Use immutable bytes for simplicity
+    for chunk in response.iter_content(1024):
+        if time.time() - start_time > receive_timeout:
+            raise ValueError("Timeout reached while reading response.")
+        gevent.sleep(0)  # Yield to other greenlets
 
         size += len(chunk)
-        f += chunk
+        content += chunk
         if size > max_size:
             if partial_read:
-                return r, f
-            else:
-                raise ValueError("response too large")
+                return response, content
+            raise ValueError("Response too large.")
 
-    return r, f
+    return response, content
