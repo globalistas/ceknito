@@ -2061,6 +2061,11 @@ article.pmessage.post.newmsg {
   border-left: 5px solid var(--primary-color);
 }
 
+.newmsgbg {
+  background-color: #5a82950d;
+  margin-left: 31px;
+}
+
 .inbox.content {
   width: 96%;
 }

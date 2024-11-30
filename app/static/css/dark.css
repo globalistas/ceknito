@@ -529,6 +529,10 @@ body.dark article.comment:nth-child(2n) {
   /*  background-color: #393c42;*/
 }
 
+body.dark .newmsgbg {
+  background-color: #13181a;
+}
+
 /* /USER PAGE */
 
 /* misc */
