@@ -66,6 +66,9 @@
               <span class="time ">
                   <time-ago datetime="@{comment['time'].isoformat()}Z"></time-ago>
               </span>
+              @if comment['sticky']:
+                - <span class="stick">sticky</span>
+              @end
               @if comment['lastedit'] and comment['visibility'] != 'none' and (comment['lastedit'] - comment['time']).total_seconds() >= 30:
                 <span class="time edited">
                   *
@@ -73,9 +76,6 @@
                   @{_('last edited %(timeago)s', timeago='<time-ago datetime="' + comment['lastedit'].isoformat() + 'Z"></time-ago>')!!html}
                   </span>
                 </span>
-              @end
-              @if comment['sticky']:
-                - <span class="stick">sticky</span>
               @end
               <br/>
             </div>
