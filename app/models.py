@@ -366,6 +366,7 @@ class SubPostPollVote(BaseModel):
 class SubPostComment(BaseModel):
     cid = CharField(primary_key=True, max_length=40)
     noreplies = BooleanField(null=True)
+    locked = BooleanField(null=True)
     content = TextField(null=True)
     lastedit = DateTimeField(null=True)
     parentcid = ForeignKeyField(

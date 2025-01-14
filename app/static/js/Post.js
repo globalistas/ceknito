@@ -537,6 +537,21 @@ u.addEventForChild(document, 'click', '.noreplies-comment', function (e, qelem) 
     });
 });
 
+// Lock comment
+u.addEventForChild(document, 'click', '.lock-comment', function (e, qelem) {
+    const cid = qelem.getAttribute('data-cid');
+    TextConfirm(qelem, function () {
+        u.post('/do/lock_comment', { cid: cid },
+            function (data) {
+                if (data.status != "ok") {
+                    document.querySelector('#comment-'+ cid +' > div.commblock > ul > li:nth-child(7) > a').innerHTML = _('Error: %1', data.error);
+                } else {
+                    document.querySelector('#comment-'+ cid +' > div.commblock > ul > li:nth-child(7) > a').innerHTML = _('Done!');
+                }
+            });
+    });
+});
+
 // Delete comment
 u.addEventForChild(document, 'click', '.delete-comment', function (e, qelem) {
     // confirmation

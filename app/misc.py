@@ -2943,6 +2943,7 @@ def get_comment_tree(
     fields = [
         SubPostComment.cid,
         SubPostComment.noreplies,
+        SubPostComment.locked,
         SubPostComment.content,
         SubPostComment.lastedit,
         SubPostComment.score,

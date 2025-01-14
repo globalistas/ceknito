@@ -44,6 +44,12 @@ class NoReplyCommentForm(FlaskForm):
     cid = HiddenField()  # comment id
 
 
+class LockCommentForm(FlaskForm):
+    """Set noreply status on a comment"""
+
+    cid = HiddenField()  # comment id
+
+
 class UndeleteCommentForm(FlaskForm):
     """Un-deletes a comment in a post"""
 

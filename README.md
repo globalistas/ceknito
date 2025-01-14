@@ -46,6 +46,7 @@ A link and discussion aggregator with snek (python3)
 - date in chat timestamps
 - shadowban functionality
 - proxy support for metadata scraper
+- support for locking stickied comments
 
 ## Dependencies:
 

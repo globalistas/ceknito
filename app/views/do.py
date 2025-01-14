@@ -29,6 +29,7 @@ from ..forms import (
     CsrfTokenOnlyForm,
     CreateSubRule,
     NoReplyCommentForm,
+    LockCommentForm,
     NoReplyPostForm,
 )
 from ..forms import EditSubForm, EditUserForm, EditIgnoreForm, EditSubCSSForm
@@ -3534,6 +3535,39 @@ def toggle_noreplies_comment():
             comment.noreplies = (
                 1 if comment.noreplies is None or comment.noreplies == 0 else 0
             )
+            comment.save()
+            return json.dumps({"status": "ok"})
+
+    return json.dumps({"status": "error", "error": get_errors(form)})
+
+
+@do.route("/do/lock_comment", methods=["POST"])
+@login_required
+def lock_comment():
+    """Toggles lock on a comment. Used for sticky comments."""
+    form = LockCommentForm()
+
+    if form.validate():
+        try:
+            comment = SubPostComment.get(SubPostComment.cid == form.cid.data)
+        except SubPostComment.DoesNotExist:
+            return jsonify(status="error", error=[_("Comment does not exist")])
+
+        post = (
+            SubPost.select(SubPost.pid, SubPost.title, Sub.sid, Sub.name)
+            .join(Sub)
+            .where(SubPost.pid == comment.pid)
+            .get()
+        )
+        sid = post.sid.get_id()
+
+        if comment.uid_id != current_user.uid and not (
+            current_user.is_admin() or current_user.is_mod(sid)
+        ):
+            return jsonify(status="error", error=_("Not authorized"))
+
+        else:
+            comment.locked = 1 if comment.locked is None or comment.locked == 0 else 0
             comment.save()
             return json.dumps({"status": "ok"})
 

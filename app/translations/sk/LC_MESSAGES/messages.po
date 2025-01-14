@@ -2801,6 +2801,14 @@ msgstr "permalink"
 msgid "source"
 msgstr "formát"
 
+#: app/html/sub/postcomments.html:166
+msgid "unlock"
+msgstr "odomknúť"
+
+#: app/html/sub/postcomments.html:166
+msgid "lock"
+msgstr "zamknúť"
+
 #: app/html/sub/postcomments.html:151
 #, python-format
 msgid "Load more (%(amt)i comments)"
