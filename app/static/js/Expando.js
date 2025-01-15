@@ -164,16 +164,16 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch){
         expando.querySelector('.expandotxt').innerHTML = characterEscape('<div class="expando-wrapper" style="height: 386px; will-change: height;"><iframe style="height: 360px; width: 640px;" src="https://www.bitchute.com/embed/' + bitchuteID(link) +'"></iframe><div class="resize-handle"><div class="i-icon" data-icon="resizeArrow"</div></div>');
         resizer(expando.querySelector('.expandotxt iframe'), expando.querySelector('.expandotxt .resize-handle'), expando.querySelector('.expandotxt'))
       }else if(/\.(png|jpg|gif|tiff|svg|bmp|jpeg|webp)$/i.test(link)) {
-        const img = document.createElement("img");
-        img.setAttribute("src", encodeURI(link));
-        img.draggable = false;
-        const anchor = document.createElement("a");
-        anchor.setAttribute("href", encodeURI(link));
-        anchor.target = "_blank";
-        anchor.appendChild(img);
-        confResizer(anchor, expando.querySelector('.expandotxt'));
-        expando.querySelector('.expandotxt').appendChild(anchor);
-      }else if (/\.(mp4|webm)$/i.test(link)) {
+    const img = document.createElement("img");
+    img.setAttribute("src", link);
+    img.draggable = false;
+    const anchor = document.createElement("a");
+    anchor.setAttribute("href", link);
+    anchor.target = "_blank";
+    anchor.appendChild(img);
+    confResizer(anchor, expando.querySelector('.expandotxt'));
+    expando.querySelector('.expandotxt').appendChild(anchor);
+}else if (/\.(mp4|webm)$/i.test(link)) {
         video_expando(link, expando)
       }else if(domain == 'i.imgur.com' && /\.gifv$/i.test(link)){
         video_expando('https://i.imgur.com/' + imgurID(link) + '.mp4', expando)
