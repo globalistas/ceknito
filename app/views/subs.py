@@ -311,7 +311,7 @@ def create_post(ptype, sub):
     )
 
     # Set it up so socketio recipient can use their own NSFW setting on NSFW content.
-    if posts[0]["nsfw"]:
+    if posts and posts[0]["nsfw"]:
         posts[0]["blur"] = "placeholder-nsfw-blur"
 
     defaults = [
