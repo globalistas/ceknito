@@ -108,7 +108,7 @@ def view(user):
     modsquery = (
         SubMod.select(Sub.name, SubMod.power_level)
         .join(Sub)
-        .where((SubMod.uid == user.uid) & (~SubMod.invite))
+        .where((SubMod.uid == user.uid) & (~SubMod.invite) & (Sub.private != 1))
     )
     owns = [x.sub.name for x in modsquery if x.power_level == 0]
     mods = [x.sub.name for x in modsquery if 1 <= x.power_level <= 2]
@@ -121,7 +121,9 @@ def view(user):
         SubPost, JOIN.LEFT_OUTER, on=(SubPost.sid == Sub.sid)
     )
     habit = (
-        habit.where(SubPost.uid == user.uid)
+        habit.where(
+            (SubPost.uid == user.uid) & (Sub.private == 0)  # Exclude private subs
+        )
         .group_by(Sub.sid)
         .order_by(fn.Count(SubPost.pid).desc())
         .limit(10)
@@ -225,14 +227,21 @@ def view_user_posts(user, page):
         return view_deleted_user(user)
 
     include_deleted_posts = user.uid == current_user.uid or current_user.is_admin()
-    if not include_deleted_posts and current_user.is_a_mod:
+    # filter_private_posts = user.uid == current_user.uid or current_user.is_admin()
+
+    if current_user.is_a_mod:
         modded_subs = [s.sid for s in misc.getModSubs(current_user.uid, 2)]
         if modded_subs:
-            include_deleted_posts = modded_subs
+            if not include_deleted_posts:
+                include_deleted_posts = modded_subs
+            #  TODO Make this work
+            # if not filter_private_posts:
+            #     filter_private_posts = modded_subs
 
     posts = misc.getPostList(
         misc.postListQueryBase(
             include_deleted_posts=include_deleted_posts,
+            filter_private_posts=True,
             noAllFilter=not current_user.is_admin(),
             noUserFilter=True,
             filter_shadowbanned=True,
@@ -297,6 +306,7 @@ def view_user_comments(user, page):
         user.uid,
         page,
         include_deleted_comments=include_deleted_comments,
+        filter_private_comments=True,
         filter_shadowbanned=True,
     )
     postmeta = misc.get_postmeta_dicts((c["pid"] for c in comments))

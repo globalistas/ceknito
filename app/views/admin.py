@@ -594,7 +594,11 @@ def posts(page):
     if not current_user.is_admin():
         abort(404)
     posts = misc.getPostList(
-        misc.postListQueryBase(include_deleted_posts=True, filter_shadowbanned=True),
+        misc.postListQueryBase(
+            include_deleted_posts=True,
+            filter_private_posts=False,
+            filter_shadowbanned=False,
+        ),
         "new",
         page,
         page_size=50,

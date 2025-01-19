@@ -19,6 +19,7 @@ A link and discussion aggregator with snek (python3)
 - working email notifications (see https://github.com/Phuks-co/throat/issues/525)
 - ability for users to disable notifications on a per-post/comment basis
 - post deletion directly from Home page or Sub page
+- config option to enable private subs
 - config option for minimum post creation user level
 - config option to enable additional text in link post
 - config option for user badge auto-assignment (Early Adopter and First Post)

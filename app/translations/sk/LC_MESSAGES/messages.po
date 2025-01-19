@@ -523,6 +523,10 @@ msgid "Title"
 msgstr "Popis"
 
 #: app/forms/sub.py:25
+msgid "Sub is private?"
+msgstr "Je skupina súkromná?"
+
+#: app/forms/sub.py:27
 msgid "Sub is NSFW?"
 msgstr "Je skupina NSFW?"
 
@@ -1819,6 +1823,14 @@ msgstr "Prispievať môžu iba moderátori"
 msgid "You are currently banned from posting."
 msgstr "Momentálne máš ban na príspevky."
 
+#: app/html/shared/sidebar/sub.html:30 app/html/sub/settings.html:18
+msgid "This sub is private."
+msgstr "Táto skupina je súkromná."
+
+#: app/html/shared/sidebar/sub.html:30 app/html/sub/settings.html:18
+msgid "PRIVATE"
+msgstr "PRIVATE"
+
 #: app/html/shared/sidebar/sub.html:27
 #, python-format
 msgid "%(subs)i subscribers"
@@ -1898,6 +1910,12 @@ msgstr "Vzhľad skupiny"
 #: app/html/shared/sidebar/sub.html:127
 msgid "Sub Moderation"
 msgstr "Moderovanie skupiny"
+
+#: app/html/shared/sidebar/sub.html:143
+#: app/html/shared/sidebar/sub_member.html:3
+#: app/html/shared/sidebar/sub_mod.html:9
+msgid "Members"
+msgstr "Členovia"
 
 #: app/html/shared/sidebar/sub.html:136
 msgid "Sub Log"
@@ -2459,12 +2477,36 @@ msgid "Sub was transferred to <a href=\"/u/%(username)s\">%(username)s</a>"
 msgstr "Skupina zmenila vlastníka na <a href=\"/u/%(username)s\">%(username)s</a>"
 
 #: app/html/sub/log.html:62
+#, python-format
+msgid "Revoked member invite for <a href=\"/u/%(username)s\">%(username)s</a>"
+msgstr "Zrušil(a) členskú pozvánku pre <a href=\"/u/%(username)s\">%(username)s</a>"
+
+#: app/html/sub/log.html:64
+#, python-format
+msgid "<a href=\"/u/%(username)s\">%(username)s</a> accepted member invite"
+msgstr "<a href=\"/u/%(username)s\">%(username)s</a> prijal(a) členskú pozvánku"
+
+#: app/html/sub/log.html:66
+#, python-format
+msgid "<a href=\"/u/%(username)s\">%(username)s</a> refused member invite"
+msgstr "<a href=\"/u/%(username)s\">%(username)s</a> odmietol(a) členskú pozvánku"
+
+#: app/html/sub/log.html:68
+#, python-format
+msgid "<a href=\"/u/%(username)s\">%(username)s</a> was removed from sub"
+msgstr "<a href=\"/u/%(username)s\">%(username)s</a> bol(a) vylúčený(á) zo skupiny"
+
+#: app/html/sub/log.html:70
 msgid "Stickied a post"
 msgstr "Prilepil(a) príspevok"
 
 #: app/html/sub/log.html:64
 msgid "Unstickied a post"
 msgstr "Odlepil(a) príspevok"
+
+#: app/html/sub/log.html:104
+msgid "Invited member"
+msgstr "Pozval(a) člena"
 
 #: app/html/sub/log.html:74
 msgid "Changed the comment sort order of a sticky post"
@@ -2482,6 +2524,55 @@ msgstr "Odomknutie komentárov k príspevku"
 #, python-format
 msgid "[Type %(type)i]"
 msgstr "[Napíš %(type)i]"
+
+#: app/html/sub/members.html:22
+#, python-format
+msgid "Members of <a href=\"%(url)s\">%(sub)s</a>"
+msgstr "Členovia skupiny <a href=\"%(url)s\">%(sub)s</a>"
+
+#: app/html/sub/members.html:25 app/html/sub/mods.html:28
+msgid "Owner:"
+msgstr "Vlastník:"
+
+#: app/html/sub/members.html:29 app/html/sub/mods.html:32
+msgid "Owners:"
+msgstr "Vlastníci:"
+
+#: app/html/sub/members.html:39
+msgid "You currently have a member invite for this sub pending."
+msgstr "Máš otvorenú pozvánku do tejto skupiny."
+
+#: app/html/sub/members.html:40 app/html/sub/mods.html:21
+msgid "Accept"
+msgstr "Prijať"
+
+#: app/html/sub/members.html:41 app/html/sub/mods.html:22
+msgid "No thanks"
+msgstr "Nie, ďakujem"
+
+#: app/html/sub/members.html:53
+msgid "Invite new member:"
+msgstr "Pozvať nového člena"
+
+#: app/html/sub/members.html:55
+msgid "Invite member"
+msgstr "Pozvať člena"
+
+#: app/html/sub/members.html:60
+msgid "Pending Member Invites:"
+msgstr "Otvorené členské pozvánky"
+
+#: app/html/sub/members.html:66 app/html/sub/mods.html:101
+msgid "revoke"
+msgstr "zrušiť"
+
+#: app/html/sub/members.html:76
+msgid "Active members: none"
+msgstr "Aktívni členovia: žiadni"
+
+#: app/html/sub/members.html:78
+msgid "Aktívni členovia:"
+msgstr ""
 
 #: app/html/sub/mods.html:17
 #, python-format
@@ -2858,6 +2949,11 @@ msgstr "(<span class=\"poll-opt-votecount\">%(votes)i</span> hlasov)"
 msgid "Withdraw vote"
 msgstr "Stiahni hlas"
 
+#: app/html/sub/private.html:10
+#, python-format
+msgid "This sub is private. Try messaging the <a href=\"/u/%(owner)s\">owner</a>."
+msgstr "Táto skupina je súkromná. Skús kontaktovať <a href=\"/u/%(owner)s\">vlastníka</a>."
+
 #: app/html/sub/rules.html:16
 #, python-format
 msgid "Editing rules of <a href=\"%(url)s\">%(sub)s</a>"
@@ -2883,6 +2979,14 @@ msgstr "Pridať pravidlo"
 #, python-format
 msgid "Editing settings of <a href=\"%(url)s\">%(sub)s</a>"
 msgstr "Nastavenia skupiny <a href=\"%(url)s\">%(sub)s</a>"
+
+#: app/html/sub/settings.html:25
+msgid "Make sub public"
+msgstr "Zmeniť na verejnú"
+
+#: app/html/sub/settings.html:27
+msgid "Make sub private"
+msgstr "Zmeniť na súkromnú"
 
 #: app/html/sub/settings.html:113
 msgid "Default post sort"
@@ -4042,6 +4146,23 @@ msgstr "Pozvanie moderovať"
 msgid "%(userlink)s invited you to moderate %(sublink)s. Please [click here](%(invitelink)s) to accept or reject the invitation."
 msgstr "%(userlink)s ťa pozval(a) moderovať skupinu %(sublink)s. [Kliknutím sem](%(invitelink)s) môžeš pozvanie prijať alebo odmietnuť."
 
+#: app/views/do.py:1928
+msgid "User is already a member"
+msgstr "Používateľ už je členom"
+
+#: app/views/do.py:1964
+msgid "Invitation to become a member"
+msgstr "Členská pozvánka"
+
+#: app/views/do.py:1970
+#, python-format
+msgid ""
+"%(userlink)s invited you to become a member of %(sublink)s. Please [click"
+" here](%(invitelink)s) to accept or reject the invitation."
+msgstr ""
+"%(userlink)s ťa pozval do skupiny %(sublink)s. Po kliknutí"
+" [sem](%(invitelink)s) môžeš prijať alebo odmietnuť túto pozvánku."
+
 #: app/views/do.py:1822 app/views/do.py:3640
 msgid "User is not banned"
 msgstr "Používateľ nie je zabanovaný"
@@ -4084,6 +4205,36 @@ msgstr "Pozvánka moderovať zamietnutá"
 msgid "%(userlink)s cancelled your invitation to moderate %(sublink)s."
 msgstr "%(userlink)s zrušil(a) tvoje pozvanie moderovať %(sublink)s."
 
+#: app/views/do.py:2296
+msgid "Invitation to become a member revoked"
+msgstr "Členská pozvánka bola zrušená"
+
+#: app/views/do.py:2300
+#, python-format
+msgid "%(userlink)s revoked your invitation to become a member of %(sublink)s."
+msgstr "%(userlink)s zrušil(a) tvoju členskú pozvánku do skupiny %(sublink)s."
+
+#: app/views/do.py:2317
+msgid "User does not have a pending invite for membership"
+msgstr "Používateľ nemá otvorenú členskú pozvánku"
+
+#: app/views/do.py:2369
+msgid "User is not a member"
+msgstr "Používateľ nie je členom"
+
+#: app/views/do.py:2398
+msgid "You are no longer subscribed"
+msgstr "Už nie si členom"
+
+#: app/views/do.py:2402
+#, python-format
+msgid "%(userlink)s removed you from %(sublink)s."
+msgstr "%(userlink)s ťa vylúčil zo skupiny %(sublink)s."
+
+#: app/views/do.py:2418
+msgid "An unexpected error occurred"
+msgstr "Došlo k neočakávanej chybe"
+
 #: app/views/do.py:2026 app/views/do.py:2081
 msgid "You have not been invited to mod this sub"
 msgstr "Nebol(a) si pozvaný(á) moderovať túto skupinu"
@@ -4091,6 +4242,10 @@ msgstr "Nebol(a) si pozvaný(á) moderovať túto skupinu"
 #: app/views/do.py:2039
 msgid "You can't mod more than 20 subs"
 msgstr "Nemôžeš moderovať viac ako 20 skupín"
+
+#: app/views/do.py:2541 app/views/do.py:2599
+msgid "You have not been invited to become a member of this sub"
+msgstr "Nemáš členskú pozvánku do tejto skupiny"
 
 #: app/views/do.py:2102
 msgid "Message not found"
@@ -4349,6 +4504,10 @@ msgstr "Tento typ príspevku nie je v tejto skupine povolený."
 #: app/views/subs.py:153
 msgid "Posting has been temporarily disabled."
 msgstr "Prispievať teraz nie je možné."
+
+#: app/views/subs.py:158
+msgid "You are not allowed to post here."
+msgstr "Nenôžeš sem prispievať."
 
 #: app/views/subs.py:156
 msgid "You cannot post in this sub."
@@ -4810,6 +4969,14 @@ msgstr "Pridal(a) skupinu do predvolených skupín"
 #: app/html/site/log.html:98 app/html/sub/log.html:90
 msgid "Removed sub from default subs"
 msgstr "Odstránil(a) skupinu z predvolených skupín"
+
+#: app/html/site/log.html:104 app/html/sub/log.html:100
+msgid "Set sub private"
+msgstr "Nastavil(a) skupinu na súkromnú"
+
+#: app/html/site/log.html:106 app/html/sub/log.html:102
+msgid "Set sub public"
+msgstr "Nastavil(a) skupinu na verejnú"
 
 #: app/html/user/posts.html:29
 msgid "Posts by"

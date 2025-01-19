@@ -13,7 +13,22 @@
   @end
 <div id="center-container">
   <div class="content mw-75">
-    <h1>@{_('Editing settings of <a href="%(url)s">%(sub)s</a>', url=url_for('sub.view_sub', sub=sub.name), sub="/" + config.site.sub_prefix + "/" + sub.name)!!html} </h1>
+    <h1>@{_('Editing settings of <a href="%(url)s">%(sub)s</a>', url=url_for('sub.view_sub', sub=sub.name), sub="/" + config.site.sub_prefix + "/" + sub.name)!!html}
+    @if sub.private:
+      <span class="private" title="@{_('This sub is private.')}">@{_('PRIVATE')}</span>
+    @end
+
+    </h1>
+    @if config.site.private_subs and (current_user.is_mod(sub.sid, 0) or current_user.is_admin()):
+      <div role="group" class="pure-button-group" data-sid="@{sub.name}">
+      @if sub.private:
+        <button data-ac="unprivate_sub" class="sub pure-button button-small"><span class="sbm-icon"></span>@{_('Make sub public')}</button>
+      @else:
+        <button data-ac="private_sub" class="sub pure-button button-small"><span class="sbm-icon"></span>@{_('Make sub private')}</button>
+      @end
+      </div>
+    @end
+  <hr/>
     <form data-redir="true"  method="POST" id="edit-sub-form" action="@{url_for('do.edit_sub', sub=sub.name)}" class="pure-form ajaxform">
       @{editsubform.csrf_token()!!html}
       <fieldset>
@@ -21,6 +36,21 @@
           <label for="title">@{editsubform.title.label.text}</label>
           @{editsubform.title(required=True, class_="pure-u-12-24")!!html}
         </div>
+        @if not config.site.force_sublog_public:
+          <div class="pure-control-group">
+            <label for="sublogprivate" class="pure-checkbox">
+              @{editsubform.sublogprivate(checked=True if metadata.get('sublog_private') else False)!!html}
+              @{editsubform.sublogprivate.label.text}
+            </label>
+          </div>
+
+          <div class="pure-control-group">
+            <label for="subbannedusersprivate" class="pure-checkbox">
+              @{editsubform.subbannedusersprivate(checked=True if metadata.get('sub_banned_users_private') else False)!!html}
+              @{editsubform.subbannedusersprivate.label.text}
+            </label>
+          </div>
+        @end
 
         <div class="pure-control-group">
           <label for="nsfw" class="pure-checkbox">
@@ -63,22 +93,6 @@
             @{editsubform.allow_polls.label.text}
           </label>
         </div>
-
-        @if not config.site.force_sublog_public:
-          <div class="pure-control-group">
-            <label for="sublogprivate" class="pure-checkbox">
-              @{editsubform.sublogprivate(checked=True if metadata.get('sublog_private') else False)!!html}
-              @{editsubform.sublogprivate.label.text}
-            </label>
-          </div>
-
-          <div class="pure-control-group">
-            <label for="subbannedusersprivate" class="pure-checkbox">
-              @{editsubform.subbannedusersprivate(checked=True if metadata.get('sub_banned_users_private') else False)!!html}
-              @{editsubform.subbannedusersprivate.label.text}
-            </label>
-          </div>
-        @end
 
         <h4>@{_('Post flairs')}</h4>
         <div class="pure-control-group">

@@ -1,0 +1,14 @@
+@extends("shared/sub.html")
+@require(sub, owner)
+
+
+@def main():
+<div id="center-container">
+    <div class="content createpost">
+        <h2>@{_('<a href="%(url)s">/%(prefix)s/%(sub)s</a> is not available.', url=url_for('sub.view_sub', sub=sub.name), prefix=config.site.sub_prefix, sub=sub.name)!!html}</h2>
+            <p>
+                @{_('This sub is private. Try messaging the <a href="/u/%(owner)s">owner</a>.', owner=owner)!!html}
+            </p>
+    </div>
+</div>
+@end

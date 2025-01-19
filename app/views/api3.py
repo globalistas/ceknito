@@ -716,6 +716,7 @@ def create_comment(sub, pid):
             "user": user.name,
             "pid": post.pid,
             "sid": sub.sid,
+            "private": sub.private,
             "nsfw": post.nsfw or sub.nsfw,
             "content": comment_res,
             "post_url": url_for("sub.view_post", sub=sub.name, pid=post.pid),
@@ -1188,7 +1189,7 @@ def search_sub():
     query = "%" + query + "%"
     subs = (
         Sub.select(Sub.name)
-        .where((Sub.name**query) & (Sub.status == 0))
+        .where((Sub.name**query) & (Sub.status == 0) & (Sub.private == 0))
         .limit(10)
         .dicts()
     )

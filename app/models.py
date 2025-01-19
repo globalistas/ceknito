@@ -198,6 +198,7 @@ class SiteMetadata(BaseModel):
 
 class Sub(BaseModel):
     name = CharField(unique=True, max_length=32)
+    private = BooleanField(default=False)
     nsfw = BooleanField(default=False)
     sid = CharField(primary_key=True, max_length=40)
     sidebar = TextField(default="")

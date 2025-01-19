@@ -6,6 +6,7 @@
   <div><a class="sbm-post pure-button @{curr_endpoint=='rules' and 'button-secondary' or ''}" href="@{ url_for('sub.edit_sub_rules', sub=sub) }">@{_('Rules')}</a></div>
   <div><a class="sbm-post pure-button @{curr_endpoint=='stylesheet' and 'button-secondary' or ''}" href="@{ url_for('sub.edit_sub_css', sub=sub) }">@{_('Stylesheet')}</a></div>
   <hr/>
+  <div><a class="sbm-post pure-button @{curr_endpoint=='members' and 'button-secondary' or ''}" href="@{ url_for('sub.edit_sub_members', sub=sub) }">@{_('Members')}</a></div>
   <div><a class="sbm-post pure-button @{curr_endpoint=='mods' and 'button-secondary' or ''}" href="@{ url_for('sub.edit_sub_mods', sub=sub) }">@{_('Moderators')}</a></div>
   <div><a class="sbm-post pure-button @{curr_endpoint=='bans' and 'button-secondary' or ''}" href="@{ url_for('sub.view_sub_bans', sub=sub) }">@{_('Bans')}</a></div>
   <hr/>

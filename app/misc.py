@@ -313,6 +313,19 @@ class SiteUser(object):
         except SubMod.DoesNotExist:
             return False
 
+    def is_memberinv(self, sub):
+        """Returns True if the current user is invited to a 'sub'"""
+        try:
+            # Convert uid to string since value in SubMetadata is stored as string
+            SubMetadata.get(
+                (SubMetadata.sid == sub)
+                & (SubMetadata.key == "member_invite")
+                & (SubMetadata.value == self.uid)  # Convert uid to string
+            )
+            return True
+        except SubMetadata.DoesNotExist:
+            return False
+
     def is_admin(self):
         """Returns true if the current user is a site admin."""
         return self.admin
@@ -443,6 +456,11 @@ class SiteAnon(AnonymousUserMixin):
     @classmethod
     def is_modinv(cls):
         """Anons dont get see submod page."""
+        return False
+
+    @classmethod
+    def is_memberinv(cls):
+        """Anons dont get see submember page."""
         return False
 
     @classmethod
@@ -905,6 +923,7 @@ def fetchTodaysTopPosts(uid, include_nsfw, filter_shadowbanned=False):
         SubPost.title,
         SubPost.posted,
         SubPost.score,
+        Sub.private.alias("sub_private"),
         Sub.nsfw.alias("sub_nsfw"),
         SubPost.nsfw,
         *(
@@ -917,6 +936,10 @@ def fetchTodaysTopPosts(uid, include_nsfw, filter_shadowbanned=False):
             else [Value(None).alias("blur_content")]
         ),
     ).join(Sub, JOIN.LEFT_OUTER)
+
+    # Add a condition to exclude posts from private subs
+    query = query.where(Sub.private == 0)
+
     if uid:
         query = (
             query.join(
@@ -1105,6 +1128,7 @@ def postListQueryBase(
     # subs to include deleted posts from.
     include_deleted_posts=False,
     filter_shadowbanned=False,
+    filter_private_posts=False,
     isSubMod=False,
     flair=None,  # if set, return only posts with this flair.
 ):
@@ -1125,6 +1149,7 @@ def postListQueryBase(
         SubPost.flair,
         SubPost.edited,
         Sub.sid,
+        Sub.private.alias("sub_private"),
         Sub.nsfw.alias("sub_nsfw"),
         SubPost.comments,
         User.uid,
@@ -1253,6 +1278,34 @@ def postListQueryBase(
 
     if flair:
         posts = posts.where(SubPost.flair == flair)
+
+    if filter_private_posts:
+        if current_user.can_admin or isSubMod:
+            pass
+        elif isinstance(filter_private_posts, list):
+            # Handle case where user is mod of specific subs
+            posts = posts.join(
+                SubSubscriber,
+                JOIN.LEFT_OUTER,
+                on=(
+                    (SubSubscriber.uid == current_user.uid)
+                    & (SubSubscriber.sid == Sub.sid)
+                ),
+            ).where(
+                (Sub.private != 1)
+                | (Sub.sid << filter_private_posts)
+                | (SubSubscriber.uid.is_null(False))
+            )
+        else:
+            # Regular case for non-mod users
+            posts = posts.join(
+                SubSubscriber,
+                JOIN.LEFT_OUTER,
+                on=(
+                    (SubSubscriber.uid == current_user.uid)
+                    & (SubSubscriber.sid == Sub.sid)
+                ),
+            ).where((Sub.private != 1) | (SubSubscriber.uid.is_null(False)))
 
     if include_deleted_posts:
         if isinstance(include_deleted_posts, list):
@@ -1959,7 +2012,11 @@ def process_msgs(msgs):
 
 
 def getUserComments(
-    uid, page, include_deleted_comments=False, filter_shadowbanned=False
+    uid,
+    page,
+    include_deleted_comments=False,
+    filter_private_comments=False,
+    filter_shadowbanned=False,
 ):
     """Returns comments for a user.  'include_deleted_comments' may be
     True, False or a list of subs, in which case deleted comments from
@@ -1984,6 +2041,7 @@ def getUserComments(
                 SubPost.deleted.alias("post_deleted"),
                 SubPost.nsfw.alias("nsfw"),
                 Sub.nsfw.alias("sub_nsfw"),
+                Sub.private.alias("sub_private"),
                 SubPostCommentVote.positive.alias("positive"),
                 User.status.alias("userstatus"),
                 UserSaved.cid.alias("comment_is_saved"),
@@ -2026,6 +2084,13 @@ def getUserComments(
 
         if "nsfw" not in current_user.prefs:
             com = com.where(SubPost.nsfw == 0)
+
+        if filter_private_comments:
+            #  TODO: pass for subsubscribers and sub mods too
+            if current_user.can_admin:
+                pass
+            else:
+                com = com.where((Sub.private == 0) | (User.uid == current_user.uid))
 
         if filter_shadowbanned:
             if current_user.can_admin:
@@ -2146,6 +2211,28 @@ def getSubMods(sid):
         "janitors": janitors,
         "all": owner_uids + janitor_uids + mod_uids,
     }
+
+
+def getSubMembers(sid):
+    """Get all members of a sub including their subscription status, ordered by newest first"""
+    try:
+        submembers = list(
+            User.select(User.name)
+            .join(SubSubscriber)
+            .where(
+                (SubSubscriber.sid == sid)
+                & (SubSubscriber.uid == User.uid)
+                & (SubSubscriber.status == 1)
+            )
+            .order_by(
+                SubSubscriber.xid.desc(), SubSubscriber.time.desc()
+            )  # First by time desc, then alphabetically
+            .dicts()
+        )
+        return {"members": submembers}
+    except Exception as e:
+        print("Error in getSubMembers:", str(e))
+        return {"members": []}
 
 
 def notify_mods(sid):
@@ -2625,6 +2712,11 @@ LOG_TYPE_SUB_CSS_CHANGE = 29
 
 LOG_TYPE_SUB_TRANSFER = 30
 
+LOG_TYPE_SUB_MEMBER_INV_CANCEL = 35
+LOG_TYPE_SUB_MEMBER_ACCEPT = 36
+LOG_TYPE_SUB_MEMBER_REFUSE = 37
+LOG_TYPE_SUB_MEMBER_REMOVE = 38
+
 LOG_TYPE_ANNOUNCEMENT = 41
 LOG_TYPE_DOMAIN_BAN = 42
 LOG_TYPE_DOMAIN_UNBAN = 43
@@ -2670,6 +2762,11 @@ LOG_TYPE_UNQUARANTINE_SUB = 83
 
 LOG_TYPE_DEFAULT_SUB = 84
 LOG_TYPE_UNDEFAULT_SUB = 85
+
+LOG_TYPE_PRIVATE_SUB = 86
+LOG_TYPE_UNPRIVATE_SUB = 87
+
+LOG_TYPE_SUB_MEMBER_INVITE = 88
 
 
 def create_sitelog(action, uid, comment="", link=""):
@@ -3732,7 +3829,7 @@ def where_user_not_blocked(query, model):
     )
 
 
-def recent_activity(sidebar=True, filter_shadowbanned=False):
+def recent_activity(sidebar=True, filter_shadowbanned=False, filter_private=False):
     if not config.site.recent_activity.enabled:
         return []
 
@@ -3789,6 +3886,14 @@ def recent_activity(sidebar=True, filter_shadowbanned=False):
                 (User.status != 6) | (User.uid == current_user.uid)
             )
 
+    if filter_private:
+        post_activity = post_activity.join(Sub, on=(SubPost.sid == Sub.sid))
+        comment_activity = comment_activity.join(Sub, on=(SubPost.sid == Sub.sid))
+        # TODO: Show recents also for sub mods and sub subscribers?
+        if not current_user.can_admin:
+            post_activity = post_activity.where((Sub.private == 0))
+            comment_activity = comment_activity.where((Sub.private == 0))
+
     if sidebar and config.site.recent_activity.defaults_only:
         defaults = [
             x.value for x in SiteMetadata.select().where(SiteMetadata.key == "default")
@@ -3813,6 +3918,7 @@ def recent_activity(sidebar=True, filter_shadowbanned=False):
         activity.c.nsfw,
         activity.c.cid,
         Sub.name.alias("sub"),
+        Sub.private.alias("sub_private"),
         Sub.nsfw.alias("sub_nsfw"),
     )
     data = data.join(Sub, on=Sub.sid == activity.c.sid)

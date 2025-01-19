@@ -211,6 +211,11 @@ configurable_defaults = {
                 ),
                 "value": 300,
             },
+            "private_subs": {
+                "type": "bool",
+                "doc": _l("Enable sub owners to set sub to private."),
+                "value": False,
+            },
             "sub_creation_min_level": {
                 "type": "int",
                 "doc": _l(

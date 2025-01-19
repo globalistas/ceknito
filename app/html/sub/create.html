@@ -24,6 +24,12 @@
                     <label for="description">@{_('Description')}</label>
                     @{ csubform.title(placeholder=csubform.title.label.text, required=True)!!html }
                 </div>
+                <div class="pure-control-group">
+                    @{ csubform.nsfw.label()!!html}@{ csubform.nsfw()!!html}
+                </div>
+                <div class="pure-control-group">
+                    @{ csubform.private.label()!!html}@{ csubform.private()!!html}
+                </div>
                 <div class="pure-controls">
                     <div class="alert div-error"></div>
                     <button type="submit" id="csub-btnsubmit" class="pure-button pure-button-primary">@{_('Create sub')}</button>

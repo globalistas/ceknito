@@ -1,0 +1,5 @@
+@def render_sidebar(curr_endpoint, sub):
+<div class="row buttons inboxside">
+  <div><a class="sbm-post pure-button @{curr_endpoint=='members' and 'button-secondary' or ''}" href="@{ url_for('sub.edit_sub_members', sub=sub) }">@{_('Members')}</a></div>
+</div>
+@end

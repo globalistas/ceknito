@@ -153,6 +153,12 @@ def create_post(ptype, sub):
     if not current_user.is_admin() and not config.site.enable_posting:
         return error_response(_("Posting has been temporarily disabled."))
 
+    isSubMod = current_user.is_mod(sub.sid, 2) or current_user.is_admin()
+    if sub.private == 1 and not (
+        current_user.can_admin or isSubMod or (current_user.has_subscribed(sub.name))
+    ):
+        return error_response(_("You are not allowed to post here."))
+
     if not current_user.can_post():
         return error_response(_("Insufficient user level to create posts."))
 
@@ -303,9 +309,9 @@ def create_post(ptype, sub):
     Sub.update(posts=Sub.posts + 1).where(Sub.sid == sub.sid).execute()
     addr = url_for("sub.view_post", sub=sub.name, pid=post.pid)
     posts = misc.getPostList(
-        misc.postListQueryBase(nofilter=True, filter_shadowbanned=True).where(
-            SubPost.pid == post.pid
-        ),
+        misc.postListQueryBase(
+            nofilter=True, filter_shadowbanned=True, filter_private_posts=True
+        ).where(SubPost.pid == post.pid),
         "new",
         1,
     )
@@ -481,7 +487,13 @@ def create_sub():
                 }
             )
 
-    sub = Sub.create(sid=uuid.uuid4(), name=form.subname.data, title=form.title.data)
+    sub = Sub.create(
+        sid=uuid.uuid4(),
+        name=form.subname.data,
+        title=form.title.data,
+        nsfw=form.nsfw.data,
+        private=form.private.data,
+    )
 
     smd = [dict(sid=sub.sid, key="mod", value=current_user.uid)]
     for key in ["allow_text_posts", "allow_link_posts", "allow_upload_posts"]:

@@ -15,6 +15,7 @@ from ..models import (
     SubPostComment,
     SubPost,
     SubPostPollOption,
+    SubSubscriber,
 )
 from ..models import (
     SubPostPollVote,
@@ -33,7 +34,14 @@ from ..models import (
     SubPostReport,
     SubUserFlairChoice,
 )
-from ..forms import EditSubFlair, EditSubForm, EditSubCSSForm, EditMod2Form, EditSubRule
+from ..forms import (
+    EditSubFlair,
+    EditSubForm,
+    EditSubCSSForm,
+    EditMod2Form,
+    EditMemberForm,
+    EditSubRule,
+)
 from ..forms import (
     BanUserSubForm,
     CreateSubFlair,
@@ -59,8 +67,24 @@ def view_sub(sub):
     except Sub.DoesNotExist:
         abort(404)
 
-    if sub.status != 0 and not current_user.is_admin():
+    if sub.status != 0 and not current_user.can_admin:
         return engine.get_template("sub/blocked.html").render({"sub": sub})
+
+    sub_mods = misc.getSubMods(sub.sid)
+    owner = None
+    if sub_mods["owners"]:
+        owner = list(sub_mods["owners"].values())[0]  # Get the first owner if available
+    if not owner:
+        owner = config.site.placeholder_account  # Use placeholder if no owner found
+
+    if sub.private == 1 and not (
+        current_user.can_admin
+        or current_user.is_mod(sub.sid, 2)
+        or (current_user.has_subscribed(sub.name))
+    ):
+        return engine.get_template("sub/private.html").render(
+            {"sub": sub, "owner": owner}
+        )
 
     try:
         x = SubMetadata.select().where(SubMetadata.sid == sub.sid)
@@ -306,6 +330,50 @@ def edit_sub_mods(sub):
         abort(403)
 
 
+@blueprint.route("/<sub>/members")
+@login_required
+def edit_sub_members(sub):
+    """Here we can edit members for a sub"""
+    try:
+        sub = Sub.get((fn.Lower(Sub.name) == sub.lower()) & (Sub.status == 0))
+    except Sub.DoesNotExist:
+        abort(404)
+
+    if (
+        current_user.is_mod(sub.sid, 2)
+        or current_user.is_memberinv(sub.sid)
+        or current_user.is_admin()
+    ):
+        subMods = misc.getSubMods(sub.sid)
+        subMembers = misc.getSubMembers(sub.sid)
+        memberInvites = (
+            SubMetadata.select(
+                User.name, SubMetadata.value
+            )  # Select user name and invite value (uid)
+            .join(
+                User, on=(User.uid == SubMetadata.value)
+            )  # Join with User based on User.uid matching SubMetadata.value
+            .where(
+                (SubMetadata.sid == sub.sid)
+                & (
+                    SubMetadata.key == "member_invite"
+                )  # Only fetch records with key "member_invite"
+            )
+        )
+
+        return engine.get_template("sub/members.html").render(
+            {
+                "sub": sub,
+                "editmemberform": EditMemberForm(),
+                "subMods": subMods,
+                "subMembers": subMembers,
+                "memberInvites": memberInvites,
+            }
+        )
+    else:
+        abort(403)
+
+
 @blueprint.route("/<sub>/new.rss")
 def sub_new_rss(sub):
     """RSS feed for /sub/new"""
@@ -321,9 +389,9 @@ def sub_new_rss(sub):
     fg.link(href=request.url, rel="self")
 
     posts = misc.getPostList(
-        misc.postListQueryBase(noAllFilter=True, filter_shadowbanned=True).where(
-            Sub.sid == sub.sid
-        ),
+        misc.postListQueryBase(
+            noAllFilter=True, filter_shadowbanned=True, filter_private_posts=True
+        ).where(Sub.sid == sub.sid),
         "new",
         1,
     )
@@ -371,9 +439,18 @@ def view_sub_new(sub, page):
 
     isSubMod = current_user.is_mod(sub["sid"], 1) or current_user.is_admin()
 
+    if sub["private"] == 1 and not (
+        current_user.can_admin or isSubMod or (current_user.has_subscribed(sub["name"]))
+    ):
+        return redirect(url_for("sub.view_sub", sub=sub["name"]))
+
     posts = misc.getPostList(
         misc.postListQueryBase(
-            noAllFilter=True, isSubMod=isSubMod, filter_shadowbanned=True, flair=flair
+            noAllFilter=True,
+            isSubMod=isSubMod,
+            filter_shadowbanned=True,
+            filter_private_posts=True,
+            flair=flair,
         ).where(Sub.sid == sub["sid"]),
         "new",
         page,
@@ -501,9 +578,18 @@ def view_sub_top(sub, page):
 
     isSubMod = current_user.is_mod(sub["sid"], 1) or current_user.is_admin()
 
+    if sub["private"] == 1 and not (
+        current_user.can_admin or isSubMod or (current_user.has_subscribed(sub["name"]))
+    ):
+        return redirect(url_for("sub.view_sub", sub=sub["name"]))
+
     posts = misc.getPostList(
         misc.postListQueryBase(
-            noAllFilter=True, isSubMod=isSubMod, filter_shadowbanned=True, flair=flair
+            noAllFilter=True,
+            isSubMod=isSubMod,
+            filter_shadowbanned=True,
+            filter_private_posts=True,
+            flair=flair,
         ).where(Sub.sid == sub["sid"]),
         "top",
         page,
@@ -562,9 +648,18 @@ def view_sub_hot(sub, page):
 
     isSubMod = current_user.is_mod(sub["sid"], 1) or current_user.is_admin()
 
+    if sub["private"] == 1 and not (
+        current_user.can_admin or isSubMod or (current_user.has_subscribed(sub["name"]))
+    ):
+        return redirect(url_for("sub.view_sub", sub=sub["name"]))
+
     posts = misc.getPostList(
         misc.postListQueryBase(
-            noAllFilter=True, isSubMod=isSubMod, filter_shadowbanned=True, flair=flair
+            noAllFilter=True,
+            isSubMod=isSubMod,
+            filter_shadowbanned=True,
+            filter_private_posts=True,
+            flair=flair,
         ).where(Sub.sid == sub["sid"]),
         "hot",
         page,
@@ -623,9 +718,18 @@ def view_sub_commented(sub, page):
 
     isSubMod = current_user.is_mod(sub["sid"], 1) or current_user.is_admin()
 
+    if sub["private"] == 1 and not (
+        current_user.can_admin or isSubMod or (current_user.has_subscribed(sub["name"]))
+    ):
+        return redirect(url_for("sub.view_sub", sub=sub["name"]))
+
     posts = misc.getPostList(
         misc.postListQueryBase(
-            noAllFilter=True, isSubMod=isSubMod, filter_shadowbanned=True, flair=flair
+            noAllFilter=True,
+            isSubMod=isSubMod,
+            filter_shadowbanned=True,
+            filter_private_posts=True,
+            flair=flair,
         ).where(Sub.sid == sub["sid"]),
         "commented",
         page,
@@ -831,6 +935,24 @@ def view_post(sub, pid, slug=None, comments=False, highlight=None):
         post["blur"] = "nsfw-blur"
     else:
         post["blur"] = ""
+
+    if sub["private"]:  # Private sub
+        # Check if user is an admin or mod for the sub
+        is_admin_or_mod = current_user.can_admin or current_user.is_mod(sub["sid"], 2)
+
+        # Check if user is a subscriber to the private sub
+        is_subscriber = (
+            SubSubscriber.select()
+            .where(
+                (SubSubscriber.uid == current_user.uid)
+                & (SubSubscriber.sid == sub["sid"])
+            )
+            .exists()
+        )
+
+        # If the user is neither admin, mod, nor subscriber, deny access
+        if not (is_admin_or_mod or is_subscriber):
+            return abort(403)  # Forbidden access
 
     comment_count = misc.get_comment_query(
         post["pid"], sort=sort, filter_shadowbanned=True

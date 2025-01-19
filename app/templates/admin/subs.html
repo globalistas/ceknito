@@ -67,6 +67,7 @@
               <th>Default</th>
               <th>Banned</th>
               <th>Quarantined</th>
+              <th>Private</th>
             </tr>
           </thead>
           <tbody>
@@ -113,6 +114,15 @@
                   <button data-ac="unquarantine_sub" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon"></span>Yes</button>
                 {%else%}
                   <button data-ac="quarantine_sub" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon"></span>No</button>
+                {%endif%}
+                </div>
+              </td>
+              <td>
+                <div role="group" class="pure-button-group" data-sid="{{sub.name}}" style="display:inline-block;">
+                {% if sub.private == 1 %}
+                  <button data-ac="unprivate_sub" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon"></span>Yes</button>
+                {%else%}
+                  <button data-ac="private_sub" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon"></span>No</button>
                 {%endif%}
                 </div>
               </td>

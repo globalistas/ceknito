@@ -37,7 +37,13 @@ from ..forms import EditModForm, BanUserSubForm, DeleteAccountForm, EditAccountF
 from ..forms import EditSubTextPostForm, AssignUserBadgeForm
 from ..forms import PostComment, CreateUserMessageForm, CreateUserMessageReplyForm
 from ..forms import DeletePost, UndeletePost
-from ..forms import SearchForm, EditMod2Form, SetSubOfTheDayForm, AssignSubUserFlair
+from ..forms import (
+    SearchForm,
+    EditMod2Form,
+    EditMemberForm,
+    SetSubOfTheDayForm,
+    AssignSubUserFlair,
+)
 from ..forms import DeleteSubFlair, DeleteSubRule, CreateReportNote
 from ..forms import UseInviteCodeForm, SecurityQuestionForm, DistinguishForm
 from ..forms import BanDomainForm, SetOwnUserFlairForm, ChangeConfigSettingForm
@@ -1480,6 +1486,7 @@ def create_comment(pid):
                 "pid": post.pid,
                 "sid": sub.sid,
                 "nsfw": post.nsfw or sub.nsfw,
+                "private": sub.private,
                 "content": comment_res,
                 "post_url": url_for("sub.view_post", sub=sub.name, pid=post.pid),
                 "sub_url": url_for("sub.view_sub", sub=sub.name),
@@ -1888,6 +1895,103 @@ def inv_mod(sub):
         abort(403)
 
 
+@do.route("/do/inv_member/<sub>", methods=["POST"])
+@login_required
+def inv_member(sub):
+    """User PM for member invite endpoint"""
+    try:
+        sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
+    except Sub.DoesNotExist:
+        return jsonify(status="error", error=[_("Sub does not exist")])
+
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
+
+    try:
+        SubMod.get(
+            (SubMod.sid == sub.sid)
+            & (SubMod.uid == current_user.uid)
+            & (SubMod.power_level == 0)
+            & (~SubMod.invite)
+        )
+        is_owner = True
+    except SubMod.DoesNotExist:
+        is_owner = False
+
+    if is_owner or current_user.is_admin():
+        form = EditMemberForm()
+        if form.validate():
+            try:
+                user = User.get(fn.Lower(User.name) == form.user.data.lower())
+            except User.DoesNotExist:
+                return jsonify(status="error", error=[_("User does not exist")])
+
+            try:
+                SubSubscriber.get(
+                    (SubSubscriber.sid == sub.sid) & (SubSubscriber.uid == user.uid)
+                )
+                return jsonify(status="error", error=[_("User is already a member")])
+            except SubSubscriber.DoesNotExist:
+                pass
+
+            try:
+                SubMetadata.get(
+                    (SubMetadata.sid == sub.sid)
+                    & (SubMetadata.key == "member_invite")
+                    & (SubMetadata.value == user.uid)
+                )
+                return jsonify(status="error", error=[_("User has a pending invite")])
+            except SubMetadata.DoesNotExist:
+                pass
+
+            target_language = user.language
+            if target_language == "sk":
+                locale_language = "sk_SK"
+            elif target_language == "cs":
+                locale_language = "cs_CZ"
+            elif target_language == "en":
+                locale_language = "en_US"
+            elif target_language == "es":
+                locale_language = "es_ES"
+            elif target_language == "ru":
+                locale_language = "ru_RU"
+            else:
+                locale_language = (
+                    "en_US"  # Default language if no target language found
+                )
+
+            with force_locale(locale_language):
+                misc.create_notification_message(
+                    mfrom=current_user.uid,
+                    as_admin=not is_owner,
+                    sub=sub.sid,
+                    to=user.uid,
+                    subject=_("Invitation to become a member"),
+                    content=_(
+                        "%(userlink)s invited you to become a member of %(sublink)s. "
+                        "Please [click here](%(invitelink)s) to accept or reject the invitation.",
+                        userlink=misc.user_markdown_link(current_user.name),
+                        sublink=misc.sub_markdown_link(sub.name),
+                        invitelink=url_for("sub.edit_sub_members", sub=sub.name),
+                    ),
+                )
+
+            SubMetadata.create(key="member_invite", value=user.uid, sid=sub.sid)
+
+            misc.create_sublog(
+                misc.LOG_TYPE_SUB_MEMBER_INVITE,
+                current_user.uid,
+                sub.sid,
+                target=user.uid,
+                admin=True if (not is_owner and current_user.is_admin()) else False,
+            )
+
+            return jsonify(status="ok")
+        return json.dumps({"status": "error", "error": get_errors(form)})
+    else:
+        abort(403)
+
+
 @do.route("/do/remove_sub_ban/<sub>/<user>", methods=["POST"])
 @login_required
 def remove_sub_ban(sub, user):
@@ -2131,6 +2235,203 @@ def revoke_mod2inv(sub, user):
     return json.dumps({"status": "error", "error": get_errors(form)})
 
 
+@do.route("/do/revoke_memberinv/<sub>/<user>", methods=["POST"])
+@login_required
+def revoke_memberinv(sub, user):
+    """Revoke the invite for a user to become a member of a subreddit"""
+    try:
+        user = User.get(fn.Lower(User.name) == user.lower())
+    except User.DoesNotExist:
+        return jsonify(status="error", error=[_("User does not exist")])
+
+    try:
+        sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
+    except Sub.DoesNotExist:
+        return jsonify(status="error", error=[_("Sub does not exist")])
+
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
+
+    try:
+        SubMod.get(
+            (SubMod.sid == sub.sid)
+            & (SubMod.uid == current_user.uid)
+            & (SubMod.power_level == 0)
+            & (~SubMod.invite)
+        )
+        is_owner = True
+    except SubMod.DoesNotExist:
+        is_owner = False
+
+    if is_owner or current_user.is_admin():
+        form = CsrfTokenOnlyForm()
+        if form.validate():
+            try:
+                # Check if the user has a pending invite for membership
+                sub_metadata = SubMetadata.get(
+                    (SubMetadata.sid == sub.sid)
+                    & (SubMetadata.key == "member_invite")
+                    & (SubMetadata.value == user.uid)
+                )
+
+                # Revoke the invite by deleting the SubMetadata entry
+                sub_metadata.delete_instance()
+
+                # Send notification that the invite has been revoked
+                target_language = user.language
+                if target_language == "sk":
+                    locale_language = "sk_SK"
+                elif target_language == "cs":
+                    locale_language = "cs_CZ"
+                elif target_language == "en":
+                    locale_language = "en_US"
+                elif target_language == "es":
+                    locale_language = "es_ES"
+                elif target_language == "ru":
+                    locale_language = "ru_RU"
+                else:
+                    locale_language = "en_US"  # Default if no target language
+
+                with force_locale(locale_language):
+                    misc.create_notification_message(
+                        mfrom=current_user.uid,
+                        as_admin=not is_owner,
+                        sub=sub.sid,
+                        to=user.uid,
+                        subject=_("Invitation to become a member revoked"),
+                        content=_(
+                            "%(userlink)s revoked your invitation to become a member of %(sublink)s.",
+                            userlink=misc.user_markdown_link(current_user.name),
+                            sublink=misc.sub_markdown_link(sub.name),
+                        ),
+                    )
+
+                # Create a sub log for this action
+                misc.create_sublog(
+                    misc.LOG_TYPE_SUB_MEMBER_INV_CANCEL,
+                    current_user.uid,
+                    sub.sid,
+                    target=user.uid,
+                    admin=not is_owner,
+                )
+
+                return jsonify(status="ok")
+            except SubMetadata.DoesNotExist:
+                return jsonify(
+                    status="error",
+                    error=[_("User does not have a pending invite for membership")],
+                )
+        return json.dumps({"status": "error", "error": get_errors(form)})
+    else:
+        abort(403)
+
+
+@do.route("/do/remove_member/<sub>/<user>", methods=["POST"])
+@login_required
+def remove_member(sub, user):
+    """
+    Remove a member of a subreddit (unsubscribe them).
+    """
+    try:
+        # Fetch user by name (case-insensitive)
+        user = User.get(fn.Lower(User.name) == user.lower())
+    except User.DoesNotExist:
+        return jsonify(status="error", error=[_("User does not exist")])
+
+    try:
+        # Fetch sub by name (case-insensitive)
+        sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
+    except Sub.DoesNotExist:
+        return jsonify(status="error", error=[_("Sub does not exist")])
+
+    # Check if the sub is disabled and current user is not an admin
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
+
+    # Determine if the current user is the owner
+    is_owner = (
+        SubMod.select()
+        .where(
+            (SubMod.sid == sub.sid)
+            & (SubMod.uid == current_user.uid)
+            & (SubMod.power_level == 0)
+            & (~SubMod.invite)
+        )
+        .exists()
+        or current_user.is_admin()
+    )
+
+    if not is_owner:
+        abort(403)
+
+    form = CsrfTokenOnlyForm()
+    if not form.validate():
+        return jsonify(status="error", error=get_errors(form))
+
+    # Check if the user is subscribed to the sub
+    is_subscribed = (
+        SubSubscriber.select()
+        .where(
+            (SubSubscriber.uid == user.uid)
+            & (SubSubscriber.sid == sub.sid)
+            & (SubSubscriber.status == 1)
+        )
+        .exists()
+    )
+
+    if not is_subscribed:
+        return jsonify(status="error", error=[_("User is not a member")])
+
+    try:
+        # Fetch and delete the subscription instance
+        ss = SubSubscriber.get(
+            (SubSubscriber.uid == user.uid)
+            & (SubSubscriber.sid == sub.sid)
+            & (SubSubscriber.status == 1)
+        )
+        ss.delete_instance()
+
+        # Update sub's subscriber count
+        Sub.update(subscribers=Sub.subscribers - 1).where(Sub.sid == sub.sid).execute()
+
+        # Send notification
+        locale_language = {
+            "sk": "sk_SK",
+            "cs": "cs_CZ",
+            "en": "en_US",
+            "es": "es_ES",
+            "ru": "ru_RU",
+        }.get(user.language, "en_US")
+
+        with force_locale(locale_language):
+            misc.create_notification_message(
+                mfrom=current_user.uid,
+                as_admin=not is_owner,
+                sub=sub.sid,
+                to=user.uid,
+                subject=_("You are no longer subscribed"),
+                content=_(
+                    "%(userlink)s removed you from %(sublink)s.",
+                    userlink=misc.user_markdown_link(current_user.name),
+                    sublink=misc.sub_markdown_link(sub.name),
+                ),
+            )
+
+        # Create a sub log entry
+        misc.create_sublog(
+            misc.LOG_TYPE_SUB_MEMBER_REMOVE,
+            current_user.uid,
+            sub.sid,
+            target=user.uid,
+            admin=not is_owner,
+        )
+
+        return jsonify(status="ok")
+    except Exception as e:
+        print(f"Error removing member: {e}")
+        return jsonify(status="error", error=[_("An unexpected error occurred")])
+
+
 @do.route("/do/accept_modinv/<sub>/<user>", methods=["POST"])
 @login_required
 def accept_modinv(sub, user):
@@ -2220,6 +2521,111 @@ def refuse_mod2inv(sub):
             sub.sid,
             target=current_user.uid,
         )
+        return jsonify(status="ok")
+    return json.dumps({"status": "error", "error": get_errors(form)})
+
+
+@do.route("/do/accept_memberinv/<sub>/<user>", methods=["POST"])
+@login_required
+def accept_memberinv(sub, user):
+    """Accept member invite"""
+    try:
+        # Fetch the user (case-insensitive)
+        user = User.get(fn.Lower(User.name) == user.lower())
+    except User.DoesNotExist:
+        return jsonify(status="error", error=[_("User does not exist")])
+
+    try:
+        # Fetch the sub (case-insensitive)
+        sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
+    except Sub.DoesNotExist:
+        return jsonify(status="error", error=[_("Sub does not exist")])
+
+    # Check if the sub is active or if the user is an admin
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
+
+    # Validate CSRF token
+    form = CsrfTokenOnlyForm()
+    if form.validate():
+        # Check if the current user was invited to the sub
+        if not current_user.is_memberinv(sub.sid):
+            return jsonify(
+                status="error",
+                error=_("You have not been invited to become a member of this sub"),
+            )
+
+        # Remove the invitation
+        SubMetadata.delete().where(
+            (SubMetadata.sid == sub.sid)
+            & (SubMetadata.key == "member_invite")
+            & (SubMetadata.value == user.uid)
+        ).execute()
+
+        # Log the acceptance in sub logs
+        misc.create_sublog(
+            misc.LOG_TYPE_SUB_MEMBER_ACCEPT, current_user.uid, sub.sid, target=user.uid
+        )
+
+        # Handle subscription if the user is not already subscribed
+        if not current_user.has_subscribed(sub.name):
+            SubSubscriber.create(uid=current_user.uid, sid=sub.sid, status=1)
+            Sub.update(subscribers=Sub.subscribers + 1).where(
+                Sub.sid == sub.sid
+            ).execute()
+
+        # Generate URL for the sub page
+        addr = url_for("sub.view_sub", sub=sub.name)
+
+        # Return success response with redirect address
+        return jsonify(status="ok", addr=addr)
+
+    # Handle form validation errors
+    return jsonify(status="error", error=get_errors(form))
+
+
+@do.route("/do/refuse_memberinv/<sub>/<user>", methods=["POST"])
+@login_required
+def refuse_memberinv(sub, user):
+    """refuse member invite"""
+    try:
+        # Fetch the user (case-insensitive)
+        user = User.get(fn.Lower(User.name) == user.lower())
+    except User.DoesNotExist:
+        return jsonify(status="error", error=[_("User does not exist")])
+
+    try:
+        # Fetch the sub (case-insensitive)
+        sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
+    except Sub.DoesNotExist:
+        return jsonify(status="error", error=[_("Sub does not exist")])
+
+    # Check if the sub is active or if the user is an admin
+    if sub.status != 0 and not current_user.is_admin():
+        return jsonify(status="error", error=[_("Sub is disabled")])
+
+    # Validate CSRF token
+    form = CsrfTokenOnlyForm()
+    if form.validate():
+        # Check if the current user was invited to the sub
+        if not current_user.is_memberinv(sub.sid):
+            return jsonify(
+                status="error",
+                error=_("You have not been invited to become a member of this sub"),
+            )
+
+        # Remove the invitation
+        SubMetadata.delete().where(
+            (SubMetadata.sid == sub.sid)
+            & (SubMetadata.key == "member_invite")
+            & (SubMetadata.value == user.uid)
+        ).execute()
+
+        # Log the acceptance in sub logs
+        misc.create_sublog(
+            misc.LOG_TYPE_SUB_MEMBER_REFUSE, current_user.uid, sub.sid, target=user.uid
+        )
+
         return jsonify(status="ok")
     return json.dumps({"status": "error", "error": get_errors(form)})
 
@@ -4877,7 +5283,7 @@ def add_default(sub):
         misc.create_sublog(
             misc.LOG_TYPE_DEFAULT_SUB, uid=current_user.uid, sid=sub.sid, admin=True
         )
-        return "Done."
+        return jsonify(status="ok", addr=url_for("sub.view_sub", sub=sub.name))
 
 
 @do.route("/do/remove_default/<sub>", methods=["POST"])
@@ -4899,7 +5305,7 @@ def remove_default(sub):
         misc.create_sublog(
             misc.LOG_TYPE_UNDEFAULT_SUB, uid=current_user.uid, sid=sub.sid, admin=True
         )
-        return "Done."
+        return jsonify(status="ok", addr=url_for("sub.view_sub", sub=sub.name))
     except SiteMetadata.DoesNotExist:
         return "Error: Sub is not a default"
 
@@ -4923,7 +5329,7 @@ def ban_sub(sub):
     misc.create_sublog(
         misc.LOG_TYPE_BAN_SUB, uid=current_user.uid, sid=sub.sid, admin=True
     )
-    return "Done."
+    return jsonify(status="ok", addr=url_for("sub.view_sub", sub=sub.name))
 
 
 @do.route("/do/unban_sub/<sub>", methods=["POST"])
@@ -4945,7 +5351,7 @@ def unban_sub(sub):
     misc.create_sublog(
         misc.LOG_TYPE_UNBAN_SUB, uid=current_user.uid, sid=sub.sid, admin=True
     )
-    return "Done."
+    return jsonify(status="ok", addr=url_for("sub.view_sub", sub=sub.name))
 
 
 @do.route("/do/quarantine_sub/<sub>", methods=["POST"])
@@ -4967,7 +5373,7 @@ def quarantine_sub(sub):
     misc.create_sublog(
         misc.LOG_TYPE_QUARANTINE_SUB, uid=current_user.uid, sid=sub.sid, admin=True
     )
-    return "Done."
+    return jsonify(status="ok", addr=url_for("sub.view_sub", sub=sub.name))
 
 
 @do.route("/do/unquarantine_sub/<sub>", methods=["POST"])
@@ -4989,4 +5395,62 @@ def unquarantine_sub(sub):
     misc.create_sublog(
         misc.LOG_TYPE_UNQUARANTINE_SUB, uid=current_user.uid, sid=sub.sid, admin=True
     )
-    return "Done."
+    return jsonify(status="ok", addr=url_for("sub.view_sub", sub=sub.name))
+
+
+@do.route("/do/private_sub/<sub>", methods=["POST"])
+@login_required
+def private_sub(sub):
+    try:
+        sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
+    except Sub.DoesNotExist:
+        return "Error: Sub does not exist"
+
+    if not current_user.is_admin() and not current_user.is_mod(sub.sid, 0):
+        abort(403)
+    # Ensure the sub is not a default sub
+    try:
+        SiteMetadata.get(
+            (SiteMetadata.key == "default") & (SiteMetadata.value == sub.sid)
+        )
+        response = jsonify({"error": "Default subs cannot be made private!"})
+        print(f"{response.json}")  # Debug log
+        return response, 400
+    except SiteMetadata.DoesNotExist:
+        pass
+
+    if sub.private == 1:
+        return "Error: Sub is already private!"
+
+    sub.private = 1
+    #  we are automatically setting sub logs to private too, just in case
+    sub.update_metadata("sublog_private", True)
+    sub.update_metadata("sub_banned_users_private", True)
+    sub.save()
+
+    misc.create_sublog(
+        misc.LOG_TYPE_PRIVATE_SUB, uid=current_user.uid, sid=sub.sid, admin=False
+    )
+    return jsonify(status="ok", addr=url_for("sub.view_sub", sub=sub.name))
+
+
+@do.route("/do/unprivate_sub/<sub>", methods=["POST"])
+@login_required
+def unprivate_sub(sub):
+    try:
+        sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
+    except Sub.DoesNotExist:
+        return "Error: Sub does not exist"
+
+    if not current_user.is_admin() and not current_user.is_mod(sub.sid, 0):
+        abort(403)
+
+    if sub.private != 1:
+        return "Error: Sub is not private!"
+
+    sub.private = 0
+    sub.save()
+    misc.create_sublog(
+        misc.LOG_TYPE_UNPRIVATE_SUB, uid=current_user.uid, sid=sub.sid, admin=False
+    )
+    return jsonify(status="ok", addr=url_for("sub.view_sub", sub=sub.name))

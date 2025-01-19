@@ -13,7 +13,11 @@ Mod |\
 @def main():
 <div id="container" class="mod-container">
   <div class="content">
-    <h1>@{_('Closed Reports for ')}<a href="@{ url_for('sub.view_sub', sub=sub.name) }">@{config.site.sub_prefix}/@{sub.name}</a></h1>
+    <h1>@{_('Closed Reports for ')}<a href="@{ url_for('sub.view_sub', sub=sub.name) }">@{config.site.sub_prefix}/@{sub.name}</a>
+    @if sub.private:
+      <span class="private" title="@{_('This sub is private.')}">@{_('PRIVATE')}</span>
+    @end
+    </h1>
     <p class="helper-text">@{_('Includes all closed reports for this sub.')}</p>
 
     <div class="admin section">

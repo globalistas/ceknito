@@ -100,6 +100,10 @@
                       @{_('Added sub to default subs')}
                     @elif log.action == 85:
                       @{_('Removed sub from default subs')}
+                    @elif log.action == 86:
+                      @{_('Set sub private')}
+                    @elif log.action == 87:
+                      @{_('Set sub public')}
                     @else:
                         <i>[Type @{log.action}]</i> @{log.desc}
                     @end

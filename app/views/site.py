@@ -92,7 +92,9 @@ def view_multisub_new(sublist, page=1):
     sids = [x.sid for x in subs]
 
     posts = misc.getPostList(
-        misc.postListQueryBase(filter_shadowbanned=True).where(Sub.sid << sids),
+        misc.postListQueryBase(
+            filter_shadowbanned=True, filter_private_posts=True
+        ).where(Sub.sid << sids),
         "new",
         page,
     )
@@ -114,6 +116,8 @@ def view_activity():
             # 'page': page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
-            "activity": misc.recent_activity(sidebar=False, filter_shadowbanned=True),
+            "activity": misc.recent_activity(
+                sidebar=False, filter_shadowbanned=True, filter_private=True
+            ),
         }
     )

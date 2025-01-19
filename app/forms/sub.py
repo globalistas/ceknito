@@ -22,6 +22,8 @@ class CreateSubForm(FlaskForm):
     )
     title = StringField(_l("Title"), validators=[DataRequired(), Length(min=2, max=50)])
 
+    private = BooleanField(_l("Sub is private?"))
+
     nsfw = BooleanField(_l("Sub is NSFW?"))
 
 
@@ -195,6 +197,14 @@ class EditMod2Form(FlaskForm):
         _l("Mod level"),
         choices=[("1", _l("Moderator")), ("2", _l("Janitor"))],
         validators=[DataRequired()],
+    )
+
+
+class EditMemberForm(FlaskForm):
+    """Edit members of sub (admin/owner)"""
+
+    user = StringField(
+        _l("New member username"), validators=[DataRequired(), Length(min=1, max=128)]
     )
 
 

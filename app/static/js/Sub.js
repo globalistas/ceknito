@@ -15,6 +15,17 @@ u.sub('.revoke-mod2inv', 'click', function(e){
   });
 });
 
+u.sub('.revoke-memberinv', 'click', function(e){
+  var user=this.getAttribute('data-user');
+  var nsub=this.getAttribute('data-sub');
+  u.post('/do/revoke_memberinv/'+nsub+'/'+user, {},
+  function(data){
+    if (data.status == "ok") {
+      document.location.reload();
+    }
+  });
+});
+
 u.sub('#accept-mod2-inv', 'click', function(e){
   var user=this.getAttribute('data-user');
   var nsub=this.getAttribute('data-sub');
@@ -37,11 +48,56 @@ u.sub('#refuse-mod2-inv', 'click', function(e){
   });
 });
 
+u.sub('#accept-member-inv', 'click', function(e) {
+  var user = this.getAttribute('data-user');
+  var nsub = this.getAttribute('data-sub');
+  u.post('/do/accept_memberinv/' + nsub + '/' + user, {}, function(data) {
+    if (data.status == "ok") {
+      if (data.addr) {
+        document.location.href = data.addr; // Redirect to the sub's page
+      } else {
+        document.location.reload(); // Fallback: reload the current page
+      }
+    } else {
+      alert(data.error || "An error occurred while accepting the invite."); // Handle errors
+    }
+  });
+});
+
+u.sub('#refuse-member-inv', 'click', function(e) {
+  var user = this.getAttribute('data-user');
+  var nsub = this.getAttribute('data-sub');
+
+  u.post('/do/refuse_memberinv/' + nsub + '/' + user, {}, function(data) {
+    // Callback function to handle the response data
+    if (data.status == "ok") {
+      document.location = '/messages'; // Redirect to messages page
+    }
+  });
+});
+
 u.sub('.revoke-mod2', 'click', function(e){
   var user=this.getAttribute('data-user');
   var nsub=this.getAttribute('data-sub');
   TextConfirm(this, function(){
     u.post('/do/remove_mod2/'+nsub+'/'+user, {},
+    function(data){
+      if (data.status == "ok") {
+        if(!data.resign){
+          document.location.reload();
+        }else{
+          document.location = '/s/' + nsub;
+        }
+      }
+    });
+  });
+});
+
+u.sub('.remove-member', 'click', function(e){
+  var user=this.getAttribute('data-user');
+  var nsub=this.getAttribute('data-sub');
+  TextConfirm(this, function(){
+    u.post('/do/remove_member/'+nsub+'/'+user, {},
     function(data){
       if (data.status == "ok") {
         if(!data.resign){
