@@ -84,7 +84,9 @@
               <span class="editmodbtn col-4">
                 <li>
                   <a href="@{url_for('user.view', user=member['name'])}">@{member['name']}</a>
-                  (<a data-sub="@{sub.name}" data-user="@{member['name']}" class="slink remove-member">@{_('remove')}</a>)
+                  @if sub.private:
+                    (<a data-sub="@{sub.name}" data-user="@{member['name']}" class="slink remove-member">@{_('remove')}</a>)
+                  @end
                 </li>
               </span>
             @end
