@@ -1283,7 +1283,6 @@ def postListQueryBase(
         if current_user.can_admin or isSubMod:
             pass
         elif isinstance(filter_private_posts, list):
-            # Handle case where user is mod of specific subs
             posts = posts.join(
                 SubSubscriber,
                 JOIN.LEFT_OUTER,
@@ -1297,7 +1296,6 @@ def postListQueryBase(
                 | (SubSubscriber.uid.is_null(False))
             )
         else:
-            # Regular case for non-mod users
             posts = posts.join(
                 SubSubscriber,
                 JOIN.LEFT_OUTER,
@@ -1305,7 +1303,11 @@ def postListQueryBase(
                     (SubSubscriber.uid == current_user.uid)
                     & (SubSubscriber.sid == Sub.sid)
                 ),
-            ).where((Sub.private != 1) | (SubSubscriber.uid.is_null(False)))
+            ).where(
+                (Sub.private == 0)
+                | (SubSubscriber.uid.is_null(False))
+                | (User.uid == current_user.uid)
+            )
 
     if include_deleted_posts:
         if isinstance(include_deleted_posts, list):
@@ -2066,6 +2068,14 @@ def getUserComments(
                     & (SubPostCommentVote.uid == current_user.uid)
                 ),
             )
+            .join(
+                SubSubscriber,
+                JOIN.LEFT_OUTER,
+                on=(
+                    (SubSubscriber.sid == Sub.sid)
+                    & (SubSubscriber.uid == current_user.uid)
+                ),
+            )
             .where(SubPostComment.uid == uid)
         )
         if include_deleted_comments:
@@ -2086,11 +2096,15 @@ def getUserComments(
             com = com.where(SubPost.nsfw == 0)
 
         if filter_private_comments:
-            #  TODO: pass for subsubscribers and sub mods too
             if current_user.can_admin:
                 pass
             else:
-                com = com.where((Sub.private == 0) | (User.uid == current_user.uid))
+                # Remove the join here, just keep the where clause
+                com = com.where(
+                    (Sub.private == 0)  # public subs
+                    | (SubPostComment.uid == current_user.uid)  # user's own comments
+                    | (SubSubscriber.uid.is_null(False))  # user is a sub member
+                )
 
         if filter_shadowbanned:
             if current_user.can_admin:

@@ -227,16 +227,12 @@ def view_user_posts(user, page):
         return view_deleted_user(user)
 
     include_deleted_posts = user.uid == current_user.uid or current_user.is_admin()
-    # filter_private_posts = user.uid == current_user.uid or current_user.is_admin()
 
     if current_user.is_a_mod:
         modded_subs = [s.sid for s in misc.getModSubs(current_user.uid, 2)]
         if modded_subs:
             if not include_deleted_posts:
                 include_deleted_posts = modded_subs
-            #  TODO Make this work
-            # if not filter_private_posts:
-            #     filter_private_posts = modded_subs
 
     posts = misc.getPostList(
         misc.postListQueryBase(
