@@ -2571,8 +2571,12 @@ msgid "Active members: none"
 msgstr "Aktívni členovia: žiadni"
 
 #: app/html/sub/members.html:78
-msgid "Aktívni členovia:"
-msgstr ""
+msgid "Active members:"
+msgstr "Aktívni členovia:"
+
+#: app/forms/sub.py:207
+msgid "New member username"
+msgstr "Meno používateľa"
 
 #: app/html/sub/mods.html:17
 #, python-format
