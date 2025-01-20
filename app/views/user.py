@@ -108,7 +108,11 @@ def view(user):
     modsquery = (
         SubMod.select(Sub.name, SubMod.power_level)
         .join(Sub)
-        .where((SubMod.uid == user.uid) & (~SubMod.invite) & (Sub.private != 1))
+        .where(
+            (SubMod.uid == user.uid)
+            & (~SubMod.invite)
+            & ((Sub.private == 0) | current_user.can_admin)
+        )
     )
     owns = [x.sub.name for x in modsquery if x.power_level == 0]
     mods = [x.sub.name for x in modsquery if 1 <= x.power_level <= 2]
