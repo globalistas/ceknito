@@ -9,18 +9,37 @@
 <div id="center-container">
   <div class="content" style="margin-left: 1em">
     <h1>@{_("Recent activity")}</h1>
-    <b>@{_("New posts and comments")}</b>
-    <ul id="activity_list">
+    <ol class="mod-table">
+    <li class="mod-table-header pure-g">
+      <div class="header pure-u-1 pure-u-md-4-24">@{_('Time')}</div>
+      <div class="header pure-u-1 pure-u-md-3-24">@{_('User')}</div>
+      <div class="header pure-u-1 pure-u-md-13-24">@{_('Content')}</div>
+      <div class="header pure-u-1 pure-u-md-4-24">@{_('Sub')}</div>
+    </li>
     @for it in activity:
-      <li>
-        @if it['type'] == 'post':
-        @{_('%(user)s posted "%(title)s"%(nsfw)s to %(sub)s %(timeago)s', user='<a href="/u/' + it['user'] + '">' + it['user'] + '</a>', title='<a class="' + it['blur'] + '" href="' + url_for('sub.view_post', sub=it['sub'], pid=it['pid']) + '">' + e(it['content']) + '</a>', sub='<a href="' + url_for('sub.view_sub', sub=it['sub']) + '">' + config.site.sub_prefix + '/' + it['sub'] + '</a>', timeago='<time-ago datetime="' + it['time'].isoformat() + 'Z" class="sidebarlists"></time-ago>', nsfw=('<span class="nsfw" title="Not safe for work">' + _('NSFW') + '</span>') if it['nsfw'] or it['sub_nsfw'] else '')!!html}
+    <li class="mod-table-row pure-g">
+      <div data-name="@{_('Time:')}" class="elem sub pure-u-1 pure-u-md-4-24">
+        <time-ago datetime="@{it['time'].isoformat()}Z" class="sidebarlists"></time-ago>
+      </div>
+      <div data-name="@{_('Sub:')}" class="elem sub pure-u-1 pure-u-md-3-24">
+        <a href="/u/@{it['user']}">@{it['user']}</a>
+      </div>
+      <div data-name="@{_('Action:')}" class="elem sub pure-u-1 pure-u-md-13-24">
+        @if it['type'] == 'comment':
+          @{_('commented: %(text)s', text='<a class="' + it['blur'] + '" href="' + url_for('sub.view_perm', sub=it['sub'], cid=it['cid'], pid=it['pid'], slug=func.slugify(it['content'])) + '#comment-' + it['cid'] + '">' + e(func.word_truncate(it['content'], 100)) + '</a>')!!html}
         @else:
-        @{_('%(user)s commented "%(comment)s"%(nsfw)s in %(sub)s %(timeago)s', user='<a href="/u/' + it['user'] + '">' + it['user'] + '</a>', comment='<a class="' + it['blur'] + '" href="' + url_for('sub.view_post', sub=it['sub'], pid=it['pid']) + '">' + e(it['content']).replace('\n', ' ') + '</a>', sub='<a href="' + url_for('sub.view_sub', sub=it['sub']) + '">' + config.site.sub_prefix + '/' + it['sub'] + '</a>', timeago='<time-ago datetime="' + it['time'].isoformat() + 'Z" class="sidebarlists"></time-ago>', nsfw=('<span class="nsfw" title="Not safe for work">' + _('NSFW') + '</span>') if it['nsfw'] or it['sub_nsfw'] else '')!!html}
+          @{_('posted: %(text)s', text='<a class="' + it['blur'] + '" href="' + url_for('sub.view_post', sub=it['sub'], pid=it['pid']) + '">' + e(func.word_truncate(it['content'], 100)) + '</a>')!!html}
         @end
-      </li>
+        @if it['nsfw'] or it['sub_nsfw']:
+          <span class="nsfw smaller" alt="Not safe for work">@{_('NSFW')}</span>
+        @endif
+      </div>
+      <div data-name="@{_('Sub:')}" class="elem sub pure-u-1 pure-u-md-4-24">
+        <a href="@{url_for('sub.view_sub', sub=it['sub'])}">@{config.site.sub_prefix}/@{it['sub']}</a>
+      </div>
+    </li>
     @end
-    </ul>
+   </ol>
   </div>
 </div>
 @end

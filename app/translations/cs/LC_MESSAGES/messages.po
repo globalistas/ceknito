@@ -1764,10 +1764,20 @@ msgstr "Poslední aktivita"
 msgid "%(user)s commented: %(text)s"
 msgstr "%(user)s přidal(a) komentář: %(text)s"
 
+#: app/html/shared/sidebar/home.html:50
+#, python-format
+msgid "commented: %(text)s"
+msgstr "komentář: %(text)s"
+
 #: app/html/shared/sidebar/home.html:52
 #, python-format
 msgid "%(user)s posted: %(text)s"
 msgstr "%(user)s přidal(a) příspěvek: %(text)s"
+
+#: app/html/shared/sidebar/home.html:52
+#, python-format
+msgid "posted: %(text)s"
+msgstr "příspěvek: %(text)s"
 
 #: app/html/shared/sidebar/home.html:69
 msgid "Sub of the day"
@@ -1935,7 +1945,7 @@ msgstr "Pravidla"
 
 #: app/html/shared/sidebar/sub_mod.html:7
 msgid "Stylesheet"
-msgstr "Stylesheet"
+msgstr "Vzhled skupiny"
 
 #: app/html/shared/sidebar/sub_mod.html:10
 msgid "Bans"
