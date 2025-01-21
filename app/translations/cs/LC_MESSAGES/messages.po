@@ -1769,6 +1769,11 @@ msgstr "%(user)s přidal(a) komentář: %(text)s"
 msgid "commented: %(text)s"
 msgstr "komentář: %(text)s"
 
+#: app/html/shared/sidebar/home.html:50
+#, python-format
+msgid "commented:"
+msgstr "komentář:"
+
 #: app/html/shared/sidebar/home.html:52
 #, python-format
 msgid "%(user)s posted: %(text)s"
@@ -1778,6 +1783,11 @@ msgstr "%(user)s přidal(a) příspěvek: %(text)s"
 #, python-format
 msgid "posted: %(text)s"
 msgstr "příspěvek: %(text)s"
+
+#: app/html/shared/sidebar/home.html:52
+#, python-format
+msgid "posted:"
+msgstr "příspěvek:"
 
 #: app/html/shared/sidebar/home.html:69
 msgid "Sub of the day"

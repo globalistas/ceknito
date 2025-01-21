@@ -1073,6 +1073,15 @@ a.slink {
   border: 1px solid #e22;
 }
 
+.activity-tag {
+  display: inline-block;
+  background-color: transparent;
+  color: #888;
+  font-size: 12px;
+  line-height: 12px;
+  margin-right: .3em;
+}
+
 .nsfw-blur {
   -webkit-filter: blur(4px);
   filter: blur(4px);
@@ -3393,19 +3402,31 @@ input[name="captcha"] {
 }
 
 .gray {
-  color: gray
+  color: gray;
 }
 
 .red {
-  color: red
+  color: red;
+}
+
+.bigger {
+  font-size: bigger;
+}
+
+.normal {
+  font-size: normal;
+}
+
+.medium {
+  font-size: medium;
 }
 
 .small {
-  font-size: small
+  font-size: small;
 }
 
 .smaller {
-  font-size: smaller
+  font-size: smaller;
 }
 
 .attention {
@@ -3511,6 +3532,13 @@ li.mod-table-header {
   font-weight: bold;
   padding: 0.5em;
   content: attr(data-name);
+}
+
+.mod-table .elem-content {
+  background-color: #f7f7f7;
+  border: 1px solid #cbcbcb;
+  padding: 0em .5em .5em .5em;
+  vertical-align: bottom;
 }
 
 .mod-table .close-button {

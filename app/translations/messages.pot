@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2025-01-21 01:39+0100\n"
+"POT-Creation-Date: 2025-01-21 11:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -631,7 +631,7 @@ msgstr ""
 msgid "Page title"
 msgstr ""
 
-#: app/forms/admin.py:104 app/html/site/activity.html:16
+#: app/forms/admin.py:104
 msgid "Content"
 msgstr ""
 
@@ -1405,7 +1405,7 @@ msgstr ""
 
 #: app/html/mod/closed.html:35 app/html/mod/reports.html:34
 #: app/html/mod/sub_reports.html:39 app/html/mod/sub_reports_closed.html:41
-#: app/html/site/activity.html:24 app/html/site/activity.html:37
+#: app/html/site/activity.html:39
 msgid "Sub:"
 msgstr ""
 
@@ -1828,7 +1828,7 @@ msgstr ""
 
 #: app/html/shared/post.html:53 app/html/shared/sidebar/home.html:29
 #: app/html/shared/sidebar/home.html:53 app/html/shared/sidebar/sub.html:27
-#: app/html/site/activity.html:34 app/html/sub/post.html:166
+#: app/html/site/activity.html:36 app/html/sub/post.html:166
 #: app/html/user/comments.html:53 app/html/user/messages/notifications.html:26
 #: app/html/user/messages/notifications.html:31
 #: app/html/user/messages/notifications.html:36
@@ -2274,18 +2274,26 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: app/html/site/activity.html:27 app/html/sub/log.html:38
-msgid "Action:"
+#: app/html/site/activity.html:24 app/html/sub/bans.html:85
+#: app/html/sub/bans.html:144 app/html/sub/log.html:113
+msgid "User:"
+msgstr ""
+
+#: app/html/site/activity.html:27
+msgid "Content:"
 msgstr ""
 
 #: app/html/site/activity.html:29
-#, python-format
-msgid "commented: %(text)s"
+msgid "commented:"
 msgstr ""
 
-#: app/html/site/activity.html:31
+#: app/html/site/activity.html:30 app/html/site/activity.html:33
 #, python-format
-msgid "posted: %(text)s"
+msgid "%(text)s"
+msgstr ""
+
+#: app/html/site/activity.html:32
+msgid "posted:"
 msgstr ""
 
 #: app/html/site/license.html:9
@@ -2514,11 +2522,6 @@ msgstr ""
 msgid "Created:"
 msgstr ""
 
-#: app/html/sub/bans.html:85 app/html/sub/bans.html:144
-#: app/html/sub/log.html:113
-msgid "User:"
-msgstr ""
-
 #: app/html/sub/bans.html:89
 msgid "Expires:"
 msgstr ""
@@ -2744,6 +2747,10 @@ msgstr ""
 
 #: app/html/sub/log.html:29
 msgid "Moderator:"
+msgstr ""
+
+#: app/html/sub/log.html:38
+msgid "Action:"
 msgstr ""
 
 #: app/html/sub/log.html:40

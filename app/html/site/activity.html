@@ -11,24 +11,26 @@
     <h1>@{_("Recent activity")}</h1>
     <ol class="mod-table">
     <li class="mod-table-header pure-g">
-      <div class="header pure-u-1 pure-u-md-4-24">@{_('Time')}</div>
+      <div class="header pure-u-1 pure-u-md-3-24">@{_('Time')}</div>
       <div class="header pure-u-1 pure-u-md-3-24">@{_('User')}</div>
-      <div class="header pure-u-1 pure-u-md-13-24">@{_('Content')}</div>
+      <div class="header pure-u-1 pure-u-md-14-24" style="text-align: center;"></div>
       <div class="header pure-u-1 pure-u-md-4-24">@{_('Sub')}</div>
     </li>
     @for it in activity:
     <li class="mod-table-row pure-g">
-      <div data-name="@{_('Time:')}" class="elem sub pure-u-1 pure-u-md-4-24">
+      <div data-name="@{_('Time:')}" class="elem sub pure-u-1 pure-u-md-3-24">
         <time-ago datetime="@{it['time'].isoformat()}Z" class="sidebarlists"></time-ago>
       </div>
-      <div data-name="@{_('Sub:')}" class="elem sub pure-u-1 pure-u-md-3-24">
+      <div data-name="@{_('User:')}" class="elem sub pure-u-1 pure-u-md-3-24">
         <a href="/u/@{it['user']}">@{it['user']}</a>
       </div>
-      <div data-name="@{_('Action:')}" class="elem sub pure-u-1 pure-u-md-13-24">
+      <div data-name="@{_('Content:')}" id="activity_list_sidebar" class="elem-content sub pure-u-1 pure-u-md-14-24">
         @if it['type'] == 'comment':
-          @{_('commented: %(text)s', text='<a class="' + it['blur'] + '" href="' + url_for('sub.view_perm', sub=it['sub'], cid=it['cid'], pid=it['pid'], slug=func.slugify(it['content'])) + '#comment-' + it['cid'] + '">' + e(func.word_truncate(it['content'], 100)) + '</a>')!!html}
+        <span class="activity-tag medium" alt="Commented">@{_('commented:')}</span>
+        <span>@{_('%(text)s', text='<a class="title ' + it['blur'] + '" href="' + url_for('sub.view_perm', sub=it['sub'], cid=it['cid'], pid=it['pid'], slug=func.slugify(it['content'])) + '#comment-' + it['cid'] + '"><br>' + e(func.word_truncate(''.join(BeautifulSoup(markdown(it['content']), features='lxml').findAll(text=True)).replace('\n', ' '), 150)) + '</a>')!!html}</span>
         @else:
-          @{_('posted: %(text)s', text='<a class="' + it['blur'] + '" href="' + url_for('sub.view_post', sub=it['sub'], pid=it['pid']) + '">' + e(func.word_truncate(it['content'], 100)) + '</a>')!!html}
+        <span class="activity-tag medium" alt="Posted">@{_('posted:')}</span>
+        <span>@{_('%(text)s', text='<a class="title ' + it['blur'] + '" href="' + url_for('sub.view_post', sub=it['sub'], pid=it['pid']) + '"><br>' + e(func.word_truncate(it['content'], 150)) + '</a>')!!html}</span>
         @end
         @if it['nsfw'] or it['sub_nsfw']:
           <span class="nsfw smaller" alt="Not safe for work">@{_('NSFW')}</span>

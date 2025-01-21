@@ -1769,6 +1769,11 @@ msgstr "%(user)s pridal(a) komentár: %(text)s"
 msgid "commented: %(text)s"
 msgstr "komentár: %(text)s"
 
+#: app/html/shared/sidebar/home.html:50
+#, python-format
+msgid "commented:"
+msgstr "komentár:"
+
 #: app/html/shared/sidebar/home.html:52
 #, python-format
 msgid "%(user)s posted: %(text)s"
@@ -1778,6 +1783,11 @@ msgstr "%(user)s pridal(a) príspevok: %(text)s"
 #, python-format
 msgid "posted: %(text)s"
 msgstr "príspevok: %(text)s"
+
+#: app/html/shared/sidebar/home.html:52
+#, python-format
+msgid "posted:"
+msgstr "príspevok:"
 
 #: app/html/shared/sidebar/home.html:69
 msgid "Sub of the day"
