@@ -11,10 +11,10 @@
     <h1>@{_("Recent activity")}</h1>
     <ol class="mod-table">
     <li class="mod-table-header pure-g">
-      <div class="header pure-u-1 pure-u-md-3-24"></div>
+      <div class="header pure-u-1 pure-u-md-3-24">@{_('Time')}</div>
       <div class="header pure-u-1 pure-u-md-3-24">@{_('User')}</div>
-      <div class="header pure-u-1 pure-u-md-3-24">@{_('Sub')}</div>
-      <div class="header pure-u-1 pure-u-md-15-24" style="text-align: center;"></div>
+      <div class="header pure-u-1 pure-u-md-14-24" style="text-align: center;"></div>
+      <div class="header pure-u-1 pure-u-md-4-24">@{_('Sub')}</div>
     </li>
     @for it in activity:
     <li class="mod-table-row pure-g">
@@ -24,10 +24,7 @@
       <div data-name="@{_('User:')}" class="elem sub pure-u-1 pure-u-md-3-24">
         <a href="/u/@{it['user']}">@{it['user']}</a>
       </div>
-      <div data-name="@{_('Sub:')}" class="elem sub pure-u-1 pure-u-md-3-24">
-        <a href="@{url_for('sub.view_sub', sub=it['sub'])}">/@{config.site.sub_prefix}/@{it['sub']}</a>
-      </div>
-      <div data-name="@{_('Content:')}" id="activity_list_sidebar" class="elem-content sub pure-u-1 pure-u-md-15-24">
+      <div data-name="@{_('Content:')}" id="activity_list_sidebar" class="elem-content sub pure-u-1 pure-u-md-14-24">
         @if it['type'] == 'comment':
         <span class="activity-tag medium" alt="Commented">@{_('commented:')}</span>
         <span>@{_('%(text)s', text='<a class="title ' + it['blur'] + '" href="' + url_for('sub.view_perm', sub=it['sub'], cid=it['cid'], pid=it['pid'], slug=func.slugify(it['content'])) + '#comment-' + it['cid'] + '"><br>' + e(func.word_truncate(''.join(BeautifulSoup(markdown(it['content']), features='lxml').findAll(text=True)).replace('\n', ' '), 150)) + '</a>')!!html}</span>
@@ -38,6 +35,9 @@
         @if it['nsfw'] or it['sub_nsfw']:
           <span class="nsfw smaller" alt="Not safe for work">@{_('NSFW')}</span>
         @endif
+      </div>
+      <div data-name="@{_('Sub:')}" class="elem sub pure-u-1 pure-u-md-4-24">
+        <a href="@{url_for('sub.view_sub', sub=it['sub'])}">/@{config.site.sub_prefix}/@{it['sub']}</a>
       </div>
     </li>
     @end

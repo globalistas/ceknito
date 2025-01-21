@@ -15,7 +15,7 @@ from .. import misc
 from ..config import config
 from ..misc import engine, limit_pagination
 from ..misc import ratelimit, POSTING_LIMIT
-from ..models import SubPost, Sub
+from ..models import SubPost, Sub, SubSubscriber
 
 bp = Blueprint("home", __name__)
 
@@ -418,7 +418,11 @@ def view_subs(page, sort):
         Sub.sid, Sub.name, Sub.title, Sub.nsfw, Sub.creation, Sub.subscribers, Sub.posts
     )
     if not current_user.can_admin:
-        c = c.where(Sub.private == 0)
+        user_subs = SubSubscriber.select(SubSubscriber.sid).where(
+            (SubSubscriber.uid == current_user.uid) & (SubSubscriber.status == 1)
+        )
+
+        c = c.where((Sub.private == 0) | (Sub.sid.in_(user_subs)))
 
     # sorts...
     if sort == "name_desc":

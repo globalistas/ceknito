@@ -1291,7 +1291,7 @@ def postListQueryBase(
                     & (SubSubscriber.sid == Sub.sid)
                 ),
             ).where(
-                (Sub.private != 1)
+                (Sub.private == 0)
                 | (Sub.sid << filter_private_posts)
                 | (SubSubscriber.uid.is_null(False))
             )
@@ -3903,10 +3903,19 @@ def recent_activity(sidebar=True, filter_shadowbanned=False, filter_private=Fals
     if filter_private:
         post_activity = post_activity.join(Sub, on=(SubPost.sid == Sub.sid))
         comment_activity = comment_activity.join(Sub, on=(SubPost.sid == Sub.sid))
-        # TODO: Show recents also for sub mods and sub subscribers?
+
         if not current_user.can_admin:
-            post_activity = post_activity.where((Sub.private == 0))
-            comment_activity = comment_activity.where((Sub.private == 0))
+            user_subs = SubSubscriber.select(SubSubscriber.sid).where(
+                (SubSubscriber.uid == current_user.uid) & (SubSubscriber.status == 1)
+            )
+
+            post_activity = post_activity.where(
+                (Sub.private == 0) | (Sub.sid.in_(user_subs))
+            )
+
+            comment_activity = comment_activity.where(
+                (Sub.private == 0) | (Sub.sid.in_(user_subs))
+            )
 
     if sidebar and config.site.recent_activity.defaults_only:
         defaults = [
