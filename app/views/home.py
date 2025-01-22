@@ -415,7 +415,14 @@ def all_commented(page):
 def view_subs(page, sort):
     """Here we can view available subs"""
     c = Sub.select(
-        Sub.sid, Sub.name, Sub.title, Sub.nsfw, Sub.creation, Sub.subscribers, Sub.posts
+        Sub.sid,
+        Sub.name,
+        Sub.title,
+        Sub.nsfw,
+        Sub.private,
+        Sub.creation,
+        Sub.subscribers,
+        Sub.posts,
     )
     if not current_user.can_admin:
         user_subs = SubSubscriber.select(SubSubscriber.sid).where(

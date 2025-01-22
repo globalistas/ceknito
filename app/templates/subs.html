@@ -67,11 +67,10 @@
         <tr>
         <td  class="subsentry{% if current_user.has_subscribed(sub.name) %} subsubscribed{% endif %}{% if current_user.has_blocked(sub.sid) %} blocked{% endif %}" data-sid="{{sub.sid}}">
             <div class="subname" title="{{sub.title}}">
-
-              {% if sub.nsfw  %}<span style="color:white;background:red">nsfw</span>{% endif %}
               <a href="{{url_for('sub.view_sub', sub=sub.name)}}">{{sub.name}}</a>
+              {% if sub.nsfw  %}<div class="nsfw">NSFW</div>{% endif %}
+              {% if sub.private  %}<div class="nsfw">PRIVATE</div>{% endif %}
             </div>
-
         </td>
     <!--  <td><time-ago datetime="{{sub.creation}}"></time-ago></td> -->
           <td>
