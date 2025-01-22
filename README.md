@@ -6,19 +6,19 @@ A link and discussion aggregator with snek (python3)
 
 ## Some major improvements over upstream (phuks.co)
 
-- new post sort type (Commented) for all views. Sort buttons in Navbar instead of Sidebar
+- new post sort type (Commented)
 - reddit-like comments look&feel
 - new comment sort type (Old)
-- save comment functionality
-- expand all comments link
-- highlighting active sub in topbar
-- sub name display in navbar
-- clickable sub navbar linking to sub home
-- image and video posts expanded by default in sub post
-- support for image embeds in text posts and comments
+- save comment
+- expand all comments
+- active sub highlighted in topbar
+- sub name displayed in navbar
+- sub navbar linking to sub home
+- image and video posts expanded by default
+- support for image embeds
 - working email notifications (see https://github.com/Phuks-co/throat/issues/525)
-- ability for users to disable notifications on a per-post/comment basis
-- post deletion directly from Home page or Sub page
+- disable notifications on a per-post/comment basis
+- delete post directly from Home page or Sub page
 - config option to enable private subs
 - config option for minimum post creation user level
 - config option to enable additional text in link post
@@ -29,23 +29,22 @@ A link and discussion aggregator with snek (python3)
 - poll options limit increased to 12
 - display of number of posts for a domain
 - alphabetic ordering of default subs
-- banning, quarantining, defaulting subs directly in admin interface
+- banning, quarantining, defaulting subs from admin interface
 - sub subscribers list in admin interface
 - improved image quality for thumbnails
-- text posts with no content do not display an empty box
 - Bitchute video expando
-- Recent Activity comments permalinked
+- Recent Activity comments permalink
 - fixed mp4 uploads
-- support for webp image uploads
+- webp image uploads
 - improved diacritics support
 - translations support for Welcome page
 - post flair colors
-- primary site color picker
+- site color picker
 - post body in post list view links to post
 - post score upvote percentage display
 - fixed auto-quote selected text when replying to comments
 - date in chat timestamps
-- shadowban functionality
+- shadowban support
 - proxy support for metadata scraper
 - support for locking stickied comments
 

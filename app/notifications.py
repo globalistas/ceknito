@@ -210,7 +210,7 @@ class Notifications(object):
         elif notification_type == "COMMENT_REPLY":
             return _(
                 'User %(user_name)s <a href="%(url)s">replied</a> to your comment '
-                "in the post titled<br><br><i>%(post_title)s<i><br><br>in <i>%(sub_name)s</i>",
+                "in the post titled<br><br><i>%(post_title)s</i><br><br>in <i>%(sub_name)s</i>",
                 user_name=user.name,
                 post_title=post.title,
                 sub_name=sub.name,

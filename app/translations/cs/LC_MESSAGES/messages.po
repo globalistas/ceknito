@@ -345,10 +345,10 @@ msgstr ""
 #, python-format
 msgid ""
 "User %(user_name)s <a href=\"%(url)s\">replied</a> to your comment in the"
-" post titled<br><br><i>%(post_title)s<i><br><br>in <i>%(sub_name)s</i>"
+" post titled<br><br><i>%(post_title)s</i><br><br>in <i>%(sub_name)s</i>"
 msgstr ""
 "Uživatel %(user_name)s <a href=\"%(url)s\">odpověděl(a)</a> na tvůj komentář k"
-" příspěvku<br><br><i>%(post_title)s<i><br><br>v skupine <i>%(sub_name)s</i>"
+" příspěvku<br><br><i>%(post_title)s</i><br><br>v skupine <i>%(sub_name)s</i>"
 
 #: app/notifications.py:272
 msgid "Looks like nobody bothered to code the message for this notification :("

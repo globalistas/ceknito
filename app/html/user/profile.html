@@ -11,7 +11,7 @@
         @if not current_user.is_authenticated:
                <hr>
                 <div class="pmessage">
-                    <a href="@{url_for('auth.login')}" class="sbm-post pure-button">@{_('Send a message')}</a>
+                    <a href="@{url_for('auth.login')}" class="unsub sbm-post pure-button">@{_('Send a message')}</a>
                 </div>
         @end
         @if current_user.is_authenticated and current_user.uid != user.uid:

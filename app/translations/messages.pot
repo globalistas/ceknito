@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2025-01-21 11:05+0100\n"
+"POT-Creation-Date: 2025-01-22 21:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -473,7 +473,7 @@ msgstr ""
 #, python-format
 msgid ""
 "User %(user_name)s <a href=\"%(url)s\">replied</a> to your comment in the"
-" post titled<br><br><i>%(post_title)s<i><br><br>in <i>%(sub_name)s</i>"
+" post titled<br><br><i>%(post_title)s</i><br><br>in <i>%(sub_name)s</i>"
 msgstr ""
 
 #: app/notifications.py:289
@@ -550,7 +550,7 @@ msgstr ""
 
 #: app/forms/admin.py:32 app/forms/sub.py:110 app/forms/sub.py:116
 #: app/forms/user.py:81 app/forms/user.py:92 app/html/user/login.html:15
-#: app/html/user/profile.html:144 app/static/js/main.js:53
+#: app/html/user/profile.html:150 app/static/js/main.js:53
 #: app/static/js/main.js:697
 msgid "Username"
 msgstr ""
@@ -939,7 +939,7 @@ msgstr ""
 msgid "Repeat Password"
 msgstr ""
 
-#: app/forms/user.py:118 app/html/user/profile.html:144
+#: app/forms/user.py:118 app/html/user/profile.html:150
 msgid "Invite Code"
 msgstr ""
 
@@ -1142,7 +1142,7 @@ msgstr ""
 #: app/html/admin/configuration.html:67 app/html/sub/flairs.html:29
 #: app/html/sub/rules.html:32 app/html/sub/settings.html:147
 #: app/html/sub/user_flairs.html:31 app/html/sub/user_flairs.html:39
-#: app/html/user/ignores.html:39 app/html/user/profile.html:224
+#: app/html/user/ignores.html:39 app/html/user/profile.html:230
 #: app/static/js/main.js:164
 msgid "Saving..."
 msgstr ""
@@ -2075,19 +2075,19 @@ msgstr ""
 msgid "%(subs)i subscribers"
 msgstr ""
 
-#: app/html/shared/sidebar/sub.html:41 app/templates/subs.html:85
+#: app/html/shared/sidebar/sub.html:41 app/templates/subs.html:84
 msgid "Subscribed"
 msgstr ""
 
-#: app/html/shared/sidebar/sub.html:43 app/templates/subs.html:89
+#: app/html/shared/sidebar/sub.html:43 app/templates/subs.html:88
 msgid "Subscribe"
 msgstr ""
 
-#: app/html/shared/sidebar/sub.html:46 app/templates/subs.html:87
+#: app/html/shared/sidebar/sub.html:46 app/templates/subs.html:86
 msgid "Blocked"
 msgstr ""
 
-#: app/html/shared/sidebar/sub.html:48 app/html/user/profile.html:20
+#: app/html/shared/sidebar/sub.html:48 app/html/user/profile.html:26
 msgid "Block"
 msgstr ""
 
@@ -2270,7 +2270,7 @@ msgstr ""
 #: app/html/site/activity.html:15 app/html/site/log.html:12
 #: app/html/sub/bans.html:61 app/html/sub/bans.html:123
 #: app/html/sub/log.html:21 app/html/sub/user_flairs.html:26
-#: app/html/user/profile.html:187
+#: app/html/user/profile.html:193
 msgid "User"
 msgstr ""
 
@@ -2628,7 +2628,7 @@ msgid "Submit post"
 msgstr ""
 
 #: app/html/sub/createpost.html:140 app/html/sub/createpost.html:145
-#: app/html/sub/post.html:427 app/html/user/profile.html:199
+#: app/html/sub/post.html:427 app/html/user/profile.html:205
 #: app/static/js/Post.js:377 app/static/js/Post.js:432
 #: app/static/js/Post.js:517 app/static/js/Post.js:826
 #: app/templates/messages/reply.html:17
@@ -2647,7 +2647,7 @@ msgstr ""
 #: app/html/sub/css.html:33 app/html/sub/flairs.html:29
 #: app/html/sub/rules.html:32 app/html/sub/settings.html:147
 #: app/html/sub/user_flairs.html:31 app/html/sub/user_flairs.html:39
-#: app/html/user/ignores.html:39 app/html/user/profile.html:224
+#: app/html/user/ignores.html:39 app/html/user/profile.html:230
 #: app/html/user/settings/account.html:37
 #: app/html/user/settings/preferences.html:54
 msgid "Saved!"
@@ -3344,7 +3344,7 @@ msgid "Sidebar text. Markdown allowed."
 msgstr ""
 
 #: app/html/sub/settings.html:147 app/html/user/ignores.html:39
-#: app/html/user/profile.html:224 app/static/js/Post.js:377
+#: app/html/user/profile.html:230 app/static/js/Post.js:377
 #: app/static/js/Post.js:431 app/static/js/main.js:668
 msgid "Save changes"
 msgstr ""
@@ -3417,7 +3417,7 @@ msgid "Comments by"
 msgstr ""
 
 #: app/html/user/comments.html:30 app/html/user/posts.html:31
-#: app/html/user/profile.html:32 app/html/user/savedposts.html:27
+#: app/html/user/profile.html:38 app/html/user/savedposts.html:27
 #, python-format
 msgid "%(user)s has deleted their account."
 msgstr ""
@@ -3501,13 +3501,13 @@ msgid ""
 "“block sender” link on their messages."
 msgstr ""
 
-#: app/html/user/ignores.html:24 app/html/user/profile.html:219
+#: app/html/user/ignores.html:24 app/html/user/profile.html:225
 msgid ""
 "Blocking other users does not prevent them from seeing the content that "
 "you post."
 msgstr ""
 
-#: app/html/user/ignores.html:26 app/html/user/profile.html:215
+#: app/html/user/ignores.html:26 app/html/user/profile.html:221
 msgid ""
 "Posts and comments from blocked users will be shown normally in the subs "
 "which you moderate, and if you block someone who is a moderator, the "
@@ -3584,108 +3584,109 @@ msgstr ""
 msgid "This user has not posted anything, yet."
 msgstr ""
 
-#: app/html/user/profile.html:15 app/html/user/profile.html:163
+#: app/html/user/profile.html:14 app/html/user/profile.html:21
+#: app/html/user/profile.html:169
 msgid "Send a message"
 msgstr ""
 
-#: app/html/user/profile.html:45
+#: app/html/user/profile.html:51
 msgid "Level"
 msgstr ""
 
-#: app/html/user/profile.html:53
+#: app/html/user/profile.html:59
 msgid "posts"
 msgstr ""
 
-#: app/html/user/profile.html:57
+#: app/html/user/profile.html:63
 msgid "comments"
 msgstr ""
 
-#: app/html/user/profile.html:62
+#: app/html/user/profile.html:68
 #, python-format
 msgid "Post score: %(postscore)s | Comment score: %(commentscore)s"
 msgstr ""
 
-#: app/html/user/profile.html:63
+#: app/html/user/profile.html:69
 msgid "karma received"
 msgstr ""
 
-#: app/html/user/profile.html:67
+#: app/html/user/profile.html:73
 msgid "karma given"
 msgstr ""
 
-#: app/html/user/profile.html:70
+#: app/html/user/profile.html:76
 #, python-format
 msgid "Registered %(timeago)s"
 msgstr ""
 
-#: app/html/user/profile.html:80
+#: app/html/user/profile.html:86
 msgid "Badges"
 msgstr ""
 
-#: app/html/user/profile.html:93
+#: app/html/user/profile.html:99
 msgid "Owns"
 msgstr ""
 
-#: app/html/user/profile.html:103 app/html/user/profile.html:112
+#: app/html/user/profile.html:109 app/html/user/profile.html:118
 msgid "Mods"
 msgstr ""
 
-#: app/html/user/profile.html:123
+#: app/html/user/profile.html:129
 msgid "Posting habits"
 msgstr ""
 
-#: app/html/user/profile.html:134
+#: app/html/user/profile.html:140
 msgid "Invite Info"
 msgstr ""
 
-#: app/html/user/profile.html:142
+#: app/html/user/profile.html:148
 msgid "Invited Users"
 msgstr ""
 
-#: app/html/user/profile.html:164
+#: app/html/user/profile.html:170
 msgid "Please send all sub-related messages to the moderators of that sub."
 msgstr ""
 
-#: app/html/user/profile.html:168
+#: app/html/user/profile.html:174
 #, python-format
 msgid "Contact the mods of %(mod)s"
 msgstr ""
 
-#: app/html/user/profile.html:171
+#: app/html/user/profile.html:177
 #, python-format
 msgid "Send a private message to %(name)s"
 msgstr ""
 
-#: app/html/user/profile.html:184
+#: app/html/user/profile.html:190
 msgid "Send message"
 msgstr ""
 
-#: app/html/user/profile.html:191
+#: app/html/user/profile.html:197
 msgid "Subject"
 msgstr ""
 
-#: app/html/user/profile.html:195
+#: app/html/user/profile.html:201
 msgid "Styling with Markdown format is supported."
 msgstr ""
 
-#: app/html/user/profile.html:198
+#: app/html/user/profile.html:204
 msgid "Sending..."
 msgstr ""
 
-#: app/html/user/profile.html:198
+#: app/html/user/profile.html:204
 msgid "Send Message"
 msgstr ""
 
-#: app/html/user/profile.html:201 app/templates/messages/reply.html:19
+#: app/html/user/profile.html:207 app/templates/messages/reply.html:19
 msgid "Message preview"
 msgstr ""
 
-#: app/html/user/profile.html:213
+#: app/html/user/profile.html:219
 #, python-format
 msgid "Block %(user)s"
 msgstr ""
 
-#: app/html/user/profile.html:217
+#: app/html/user/profile.html:223
 #, python-format
 msgid ""
 "Posts and comments by %(user)s will be shown normally in the subs which "
