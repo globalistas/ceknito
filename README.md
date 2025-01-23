@@ -21,6 +21,7 @@ A link and discussion aggregator with snek (python3)
 - delete post directly from Home page or Sub page
 - config option to enable private subs
 - config option for minimum post creation user level
+- config option to enable live updates of recent activity sidebar
 - config option to enable additional text in link post
 - config option for user badge auto-assignment (Early Adopter and First Post)
 - config option to send automated welcome message from site admin
