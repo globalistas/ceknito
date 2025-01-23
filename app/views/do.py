@@ -1471,29 +1471,34 @@ def create_comment(pid):
         comment_text = BeautifulSoup(
             misc.our_markdown(comment.content.decode()), features="lxml"
         ).findAll(string=True)
-        comment_res = misc.word_truncate("".join(comment_text).replace("\n", " "), 250)
+        comment_res = misc.word_truncate("".join(comment_text).replace("\n", " "), 150)
         defaults = [
             x.value for x in SiteMetadata.select().where(SiteMetadata.key == "default")
         ]
-        socketio.emit(
-            "comment",
-            {
-                "sub": sub.name,
-                "show_sidebar": (
-                    sub.sid in defaults or config.site.recent_activity.defaults_only
-                ),
-                "user": current_user.name,
-                "pid": post.pid,
-                "sid": sub.sid,
-                "nsfw": post.nsfw or sub.nsfw,
-                "private": sub.private,
-                "content": comment_res,
-                "post_url": url_for("sub.view_post", sub=sub.name, pid=post.pid),
-                "sub_url": url_for("sub.view_sub", sub=sub.name),
-            },
-            namespace="/snt",
-            room="/all/new",
-        )
+        if config.site.recent_activity.live:
+            socketio.emit(
+                "comment",
+                {
+                    "sub": sub.name,
+                    "show_sidebar": (
+                        sub.sid in defaults or config.site.recent_activity.defaults_only
+                    ),
+                    "user": current_user.name,
+                    "pid": post.pid,
+                    "sid": sub.sid,
+                    "nsfw": post.nsfw or sub.nsfw,
+                    "private": sub.private,
+                    "content": comment_res,
+                    "post_url": url_for(
+                        "sub.view_perm", sub=sub.name, cid=comment.cid, pid=pid
+                    )
+                    + "#comment-"
+                    + str(comment.cid),
+                    "sub_url": url_for("sub.view_sub", sub=sub.name),
+                },
+                namespace="/snt",
+                # room=post.pid,
+            )
 
         # 5 - send pm to parent
         if form.parent.data != "0":

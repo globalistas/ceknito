@@ -941,6 +941,11 @@ body.dark .mod-table .last-elem {
   background-color: #222;
 }
 
+body.dark .mod-table .elem-content {
+  background-color: #222;
+  border-color: #4e4e4e;
+}
+
 body.dark .RoomView .Timeline_messageBody {
   color: #dddddd;
 }

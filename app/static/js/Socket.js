@@ -184,7 +184,7 @@ socket.on('deletion', function (data) {
 })
 
 socket.on('comment', function (data) {
-  const recentActivity = document.getElementById('activity_list');
+  const recentActivity = document.getElementById('activity_list_sidebar');
   if (recentActivity) {
     const showNSFW = document.getElementById('pagefoot-nsfw').getAttribute('data-value') == 'True';
     if (data.nsfw && !showNSFW) {
@@ -195,12 +195,13 @@ socket.on('comment', function (data) {
     const nsfwElem = data.nsfw ? ('<span class="nsfw smaller" title="' + _('Not safe for work') + '">' + _('NSFW') + '</span>') : '';
     const content = data.content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     const elem = document.createElement('li');
-    elem.innerHTML = _('%1 commented "%2" in %3 %4',
-      '<a href="/u/' + data.user + '">' + data.user + '</a>',
-      '<a class="' + nsfwClass + '" href="' + data.post_url + '">' + content + '</a>' + nsfwElem,
-      '<a href="' + data.sub_url + '">' + data.sub_url + '</a>',
-      '<time-ago datetime="' + new Date().toISOString() + '" class="sidebarlists"></time-ago>');
+    elem.innerHTML = _('%1 commented:<br>%2<br>%3 in %4',
+        '<a href="/u/' + data.user + '">' + data.user + '</a>',
+        '<a class="' + nsfwClass + '" href="' + data.post_url + '">' + data.content + '</a>' + nsfwElem,
+        '<time-ago datetime="' + new Date().toISOString() + '" class="sidebarlists"></time-ago>',
+        '<a href="' + data.sub_url + '">' + decodeURIComponent(data.sub_url) + '</a>');
     recentActivity.prepend(elem);
+    recentActivity.removeChild(recentActivity.lastElementChild);
   }
 });
 
@@ -215,31 +216,34 @@ socket.on('thread', function (data) {
   const showNSFWBlur = document.getElementById('pagefoot-nsfw-blur').getAttribute('data-value') == 'True';
   const nsfwClass = (data.nsfw && showNSFWBlur) ? 'nsfw-blur' : '';
   const nsfwElem = data.nsfw ? ('<span class="nsfw smaller" title="' + _('Not safe for work') + '">' + _('NSFW') + '</span>') : '';
-  const recentActivity = document.getElementById('activity_list');
+  const recentActivity = document.getElementById('activity_list_sidebar');
   const title = data.title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   if (recentActivity) {
     const elem = document.createElement('li');
-    elem.innerHTML = _('%1 posted "%2" to %3 %4',
+    elem.innerHTML = _('%1 posted:<br>%2<br>%3 in %4',
       '<a href="/u/' + data.user + '">' + data.user + '</a>',
       '<a class="' + nsfwClass + '" href="' + data.post_url + '">' + title + '</a>' + nsfwElem,
-      '<a href="' + data.sub_url + '">' + data.sub_url + '</a>',
-      '<time-ago datetime="' + new Date().toISOString() + '" class="sidebarlists"></time-ago>')
+        '<time-ago datetime="' + new Date().toISOString() + '" class="sidebarlists"></time-ago>',
+        '<a href="' + data.sub_url + '">' + decodeURIComponent(data.sub_url) + '</a>');
     recentActivity.prepend(elem);
+    recentActivity.removeChild(recentActivity.lastElementChild);
     return;
   }
-  const recentActivitySidebar = document.getElementById('activity_list_sidebar');
-  if (recentActivitySidebar && data.show_sidebar) {
-    const elem = document.createElement('li');
-    let html = _('%1 posted: %2',
-      '<a href="/u/' + data.user + '">' + data.user + '</a>',
-      '<a class="title ' + nsfwClass + '" href="' + data.post_url + '">' + title + '</a>' + nsfwElem);
-    html += '<div class="sidelocale">' +
-      _("%1 in %2", '<time-ago datetime="' + new Date().toISOString() + '"></time-ago>', '<a href="' + data.sub_url + '">' + data.sub_url + '</a>') +
-      '</div>';
-    elem.innerHTML = html;
-    recentActivitySidebar.prepend(elem);
-    recentActivitySidebar.removeChild(recentActivitySidebar.lastChild);
-  }
+//  who knows what this does?
+//
+//  const recentActivitySidebar = document.getElementById('activity_list_sidebar');
+//  if (recentActivitySidebar && data.show_sidebar) {
+//    const elem = document.createElement('li');
+//    let html = _('%1 posted: %2',
+//      '<a href="/u/' + data.user + '">' + data.user + '</a>',
+//      '<a class="title ' + nsfwClass + '" href="' + data.post_url + '">' + title + '</a>' + nsfwElem);
+//    html += '<div class="sidelocale">' +
+//      _("%1 in %2", '<time-ago datetime="' + new Date().toISOString() + '"></time-ago>', '<a href="' + data.sub_url + '">' + data.sub_url + '</a>') +
+//      '</div>';
+//    elem.innerHTML = html;
+//    recentActivitySidebar.prepend(elem);
+//    recentActivitySidebar.removeChild(recentActivitySidebar.lastChild);
+//  }
   socket.emit('subscribe', { target: data.pid })
   const ndata = document.createElement("div");
   ndata.innerHTML = data.html;

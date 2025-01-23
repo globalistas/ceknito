@@ -1073,6 +1073,19 @@ a.slink {
   border: 1px solid #e22;
 }
 
+.live-activity-tag {
+  display: inline-block;
+  padding: 3px;
+  background-color: transparent;
+  border-radius: 4px;
+  color: var(--primary-color);
+  font-size: 12px;
+  line-height: 12px;
+  margin-right: .3em;
+  vertical-align: bottom;
+  border: 1px solid var(--primary-color);
+}
+
 .activity-tag {
   display: inline-block;
   background-color: transparent;

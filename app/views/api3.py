@@ -706,25 +706,31 @@ def create_comment(sub, pid):
         250,
     )
     sub = Sub.get(Sub.name == sub)
-    socketio.emit(
-        "comment",
-        {
-            "sub": sub.name,
-            "show_sidebar": (
-                sub.sid in defaults or config.site.recent_activity.defaults_only
-            ),
-            "user": user.name,
-            "pid": post.pid,
-            "sid": sub.sid,
-            "private": sub.private,
-            "nsfw": post.nsfw or sub.nsfw,
-            "content": comment_res,
-            "post_url": url_for("sub.view_post", sub=sub.name, pid=post.pid),
-            "sub_url": url_for("sub.view_sub", sub=sub.name),
-        },
-        namespace="/snt",
-        room="/all/new",
-    )
+
+    if config.site.recent_activity.live:
+        socketio.emit(
+            "comment",
+            {
+                "sub": sub.name,
+                "show_sidebar": (
+                    sub.sid in defaults or config.site.recent_activity.defaults_only
+                ),
+                "user": user.name,
+                "pid": post.pid,
+                "sid": sub.sid,
+                "private": sub.private,
+                "nsfw": post.nsfw or sub.nsfw,
+                "content": comment_res,
+                "post_url": url_for(
+                    "sub.view_perm", sub=sub.name, cid=comment.cid, pid=pid
+                )
+                + "#comment-"
+                + str(comment.cid),
+                "sub_url": url_for("sub.view_sub", sub=sub.name),
+            },
+            namespace="/snt",
+            # room="/all/new",
+        )
 
     # 5 - send pm to parent
     if parentcid:
@@ -1138,28 +1144,30 @@ def create_post():
         x.value for x in SiteMetadata.select().where(SiteMetadata.key == "default")
     ]
     ss_default = sub.sid in defaults or not config.site.recent_activity.defaults_only
-    socketio.emit(
-        "thread",
-        {
-            "addr": addr,
-            "sub": sub.name,
-            "type": post_type,
-            "show_sidebar": ss_default
-            and not config.site.recent_activity.comments_only,
-            "user": user.name,
-            "pid": post.pid,
-            "sid": sub.sid,
-            "title": post.title,
-            "nsfw": post.nsfw,
-            "post_url": url_for("sub.view_post", sub=sub.name, pid=post.pid),
-            "sub_url": url_for("sub.view_sub", sub=sub.name),
-            "html": misc.engine.get_template("shared/post.html").render(
-                {"posts": posts, "sub": False}
-            ),
-        },
-        namespace="/snt",
-        room="/all/new",
-    )
+
+    if config.site.recent_activity.live:
+        socketio.emit(
+            "thread",
+            {
+                "addr": addr,
+                "sub": sub.name,
+                "type": post_type,
+                "show_sidebar": ss_default
+                and not config.site.recent_activity.comments_only,
+                "user": user.name,
+                "pid": post.pid,
+                "sid": sub.sid,
+                "title": post.title,
+                "nsfw": post.nsfw,
+                "post_url": url_for("sub.view_post", sub=sub.name, pid=post.pid),
+                "sub_url": url_for("sub.view_sub", sub=sub.name),
+                "html": misc.engine.get_template("shared/post.html").render(
+                    {"posts": posts, "sub": False}
+                ),
+            },
+            namespace="/snt",
+            # room="/all/new",
+        )
 
     if config.site.self_voting.posts:
         SubPostVote.create(uid=uid, pid=post.pid, positive=True)

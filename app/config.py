@@ -314,6 +314,13 @@ configurable_defaults = {
                         ),
                         "value": False,
                     },
+                    "live": {
+                        "type": "bool",
+                        "doc": _l(
+                            "Enables or disables live updates in the recent activity sidebar."
+                        ),
+                        "value": False,
+                    },
                     "defaults_only": {
                         "type": "bool",
                         "doc": _l(
