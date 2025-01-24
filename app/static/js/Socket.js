@@ -200,7 +200,9 @@ socket.on('comment', function (data) {
         '<a class="' + nsfwClass + '" href="' + data.post_url + '">' + data.content + '</a>' + nsfwElem,
         '<time-ago datetime="' + new Date().toISOString() + '" class="sidebarlists"></time-ago>',
         '<a href="' + data.sub_url + '">' + decodeURIComponent(data.sub_url) + '</a>');
+    elem.classList.add('new-item');
     recentActivity.prepend(elem);
+    setTimeout(() => elem.classList.remove('new-item'), 2500);
     recentActivity.removeChild(recentActivity.lastElementChild);
   }
 });
@@ -225,7 +227,9 @@ socket.on('thread', function (data) {
       '<a class="' + nsfwClass + '" href="' + data.post_url + '">' + title + '</a>' + nsfwElem,
         '<time-ago datetime="' + new Date().toISOString() + '" class="sidebarlists"></time-ago>',
         '<a href="' + data.sub_url + '">' + decodeURIComponent(data.sub_url) + '</a>');
+    elem.classList.add('new-item');
     recentActivity.prepend(elem);
+    setTimeout(() => elem.classList.remove('new-item'), 2500);
     recentActivity.removeChild(recentActivity.lastElementChild);
     return;
   }

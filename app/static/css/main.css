@@ -1777,6 +1777,20 @@ a.title:hover {
   color: var(--post-link-hover);
 }
 
+@keyframes highlightFade {
+  0% {
+    background-color: #fff;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+li.new-item {
+  animation: highlightFade 2.5s ease-out;
+}
+
+
 /* CREATE POST PAGE STYLES */
 
 @media (max-width: 35.5em) {
