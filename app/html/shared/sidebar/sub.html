@@ -6,7 +6,7 @@
     <input type="hidden" name="sub_name" value="@{sub['name']}" />
     <div class="pure-control-group" style="position: relative; left: 7px; letter-spacing: normal; width: 100%">
       <input type="checkbox" name="subonlysearch" id="subonlysearch" value="y" @{' checked' if form.subonlysearch.data else ''}>
-      <label for="subonlysearch">@{form.subonlysearch.label()!!html}</label> /@{config.site.sub_prefix}/@{sub['name']}
+      <label for="subonlysearch">@{form.subonlysearch.label()!!html} /@{config.site.sub_prefix}/@{sub['name']}</label>
     </div>
   </form>
 <br>
