@@ -721,7 +721,7 @@ def create_comment(sub, pid):
                 "private": sub.private,
                 "nsfw": post.nsfw or sub.nsfw,
                 "content": comment_res,
-                "post_url": url_for(
+                "comment_url": url_for(
                     "sub.view_perm", sub=sub.name, cid=comment.cid, pid=pid
                 )
                 + "#comment-"

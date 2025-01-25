@@ -416,10 +416,14 @@ def delete_post():
 
         # time limited to prevent socket spam
         if (
-            datetime.datetime.utcnow() - post.posted.replace(tzinfo=None)
-        ).seconds < 86400:
+            (
+                datetime.datetime.utcnow() - post.posted.replace(tzinfo=None)
+            ).total_seconds()
+        ) < 86400:
             socketio.emit(
-                "deletion", {"pid": post.pid}, namespace="/snt", room="/all/new"
+                "deletion",
+                {"pid": post.pid},
+                namespace="/snt",
             )
 
         # check if the post is an announcement. Unannounce if it is.
@@ -1489,7 +1493,7 @@ def create_comment(pid):
                     "nsfw": post.nsfw or sub.nsfw,
                     "private": sub.private,
                     "content": comment_res,
-                    "post_url": url_for(
+                    "comment_url": url_for(
                         "sub.view_perm", sub=sub.name, cid=comment.cid, pid=pid
                     )
                     + "#comment-"
@@ -3620,7 +3624,26 @@ def delete_comment():
                 )
         else:
             comment.status = 1
-
+        if config.site.recent_activity.live:
+            # time limited to prevent socket spam
+            if (
+                (
+                    datetime.datetime.utcnow() - comment.time.replace(tzinfo=None)
+                ).total_seconds()
+            ) < 86400:
+                socketio.emit(
+                    "comment-deletion",
+                    {
+                        "cid": comment.cid,
+                        "comment_url": url_for(
+                            "sub.view_perm", sub=sub.name, cid=comment.cid, pid=post.pid
+                        )
+                        + "#comment-"
+                        + str(comment.cid),
+                    },
+                    namespace="/snt",
+                    # room=post.pid,
+                )
         comment.save()
         return jsonify(status="ok")
     return json.dumps({"status": "error", "error": get_errors(form)})

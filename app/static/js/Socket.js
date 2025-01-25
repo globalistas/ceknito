@@ -178,11 +178,40 @@ socket.on('uscore', function (d) {
   document.getElementById('postscore').innerHTML = numberWithCommas(d.score);
 })
 
-socket.on('deletion', function (data) {
-  var post = document.querySelector('div.post[pid="' + data.pid + '"]');
-  post.parentNode.removeChild(post);
-})
+// Track removed RA items in a queue to maintain order
+let removedItems = [];
 
+// Recent activity post deletions
+socket.on('deletion', function (data) {
+  const item = document.querySelector(`li[data-pid="${data.pid}"]`);
+  if (item) {
+    item.remove();
+
+    // Ensure we have 5 items by replacing the deleted one (if there are removed items stored)
+    const recentActivity = document.getElementById('activity_list_sidebar');
+    if (removedItems.length > 0) {
+      const replacement = removedItems.shift(); // Get the oldest removed item
+      recentActivity.appendChild(replacement); // Add it to the bottom of the list
+    }
+  }
+});
+
+// Recent activity comment deletions
+socket.on('comment-deletion', function (data) {
+  const item = document.querySelector(`li[data-cid="${data.comment_url}"]`);
+  if (item) {
+    item.remove();
+
+    // Ensure we have 5 items by replacing the deleted one (if there are removed items stored)
+    const recentActivity = document.getElementById('activity_list_sidebar');
+    if (removedItems.length > 0) {
+      const replacement = removedItems.shift(); // Get the oldest removed item
+      recentActivity.appendChild(replacement); // Add it to the bottom of the list
+    }
+  }
+});
+
+// Recent activity comment updates
 socket.on('comment', function (data) {
   const recentActivity = document.getElementById('activity_list_sidebar');
   if (recentActivity) {
@@ -193,20 +222,31 @@ socket.on('comment', function (data) {
     const showNSFWBlur = document.getElementById('pagefoot-nsfw-blur').getAttribute('data-value') == 'True';
     const nsfwClass = (data.nsfw && showNSFWBlur) ? 'nsfw-blur' : '';
     const nsfwElem = data.nsfw ? ('<span class="nsfw smaller" title="' + _('Not safe for work') + '">' + _('NSFW') + '</span>') : '';
-    const content = data.content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    const content = data.content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     const elem = document.createElement('li');
+    elem.setAttribute('data-cid', data.comment_url);
     elem.innerHTML = _('%1 commented:<br>%2<br>%3 in %4',
-        '<a href="/u/' + data.user + '">' + data.user + '</a>',
-        '<a class="' + nsfwClass + '" href="' + data.post_url + '">' + data.content + '</a>' + nsfwElem,
-        '<time-ago datetime="' + new Date().toISOString() + '" class="sidebarlists"></time-ago>',
-        '<a href="' + data.sub_url + '">' + decodeURIComponent(data.sub_url) + '</a>');
+      '<a href="/u/' + data.user + '">' + data.user + '</a>',
+      '<a class="' + nsfwClass + '" href="' + data.comment_url + '">' + content + '</a>' + nsfwElem,
+      '<time-ago datetime="' + new Date().toISOString() + '" class="sidebarlists"></time-ago>',
+      '<a href="' + data.sub_url + '">' + decodeURIComponent(data.sub_url) + '</a>');
     elem.classList.add('new-item');
-    recentActivity.prepend(elem);
+
+    // Check if there are already 5 items
+    if (recentActivity.children.length >= 5) {
+      // Move the last element to the removedItems queue
+      removedItems.push(recentActivity.lastElementChild);
+      recentActivity.removeChild(recentActivity.lastElementChild); // Remove the last item
+    }
+
+    recentActivity.prepend(elem); // Add the new comment as the first item
+
+    // Remove 'new-item' class after animation
     setTimeout(() => elem.classList.remove('new-item'), 2500);
-    recentActivity.removeChild(recentActivity.lastElementChild);
   }
 });
 
+// Recent activity post updates
 socket.on('thread', function (data) {
   if (window.blocked) {
     if (window.blocked.indexOf(data.sid) >= 0) { return; }
@@ -219,19 +259,28 @@ socket.on('thread', function (data) {
   const nsfwClass = (data.nsfw && showNSFWBlur) ? 'nsfw-blur' : '';
   const nsfwElem = data.nsfw ? ('<span class="nsfw smaller" title="' + _('Not safe for work') + '">' + _('NSFW') + '</span>') : '';
   const recentActivity = document.getElementById('activity_list_sidebar');
-  const title = data.title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  const title = data.title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   if (recentActivity) {
     const elem = document.createElement('li');
+    elem.setAttribute('data-pid', data.pid);
     elem.innerHTML = _('%1 posted:<br>%2<br>%3 in %4',
       '<a href="/u/' + data.user + '">' + data.user + '</a>',
       '<a class="' + nsfwClass + '" href="' + data.post_url + '">' + title + '</a>' + nsfwElem,
-        '<time-ago datetime="' + new Date().toISOString() + '" class="sidebarlists"></time-ago>',
-        '<a href="' + data.sub_url + '">' + decodeURIComponent(data.sub_url) + '</a>');
+      '<time-ago datetime="' + new Date().toISOString() + '" class="sidebarlists"></time-ago>',
+      '<a href="' + data.sub_url + '">' + decodeURIComponent(data.sub_url) + '</a>');
     elem.classList.add('new-item');
-    recentActivity.prepend(elem);
+
+    // Check if there are already 5 items
+    if (recentActivity.children.length >= 5) {
+      // Move the last element to the removedItems queue
+      removedItems.push(recentActivity.lastElementChild);
+      recentActivity.removeChild(recentActivity.lastElementChild); // Remove the last item
+    }
+
+    recentActivity.prepend(elem); // Add the new thread as the first item
+
+    // Remove 'new-item' class after animation
     setTimeout(() => elem.classList.remove('new-item'), 2500);
-    recentActivity.removeChild(recentActivity.lastElementChild);
-    return;
   }
 //  who knows what this does?
 //
