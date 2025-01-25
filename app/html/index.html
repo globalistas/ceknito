@@ -1,6 +1,6 @@
 @extends("shared/layout.html")
 @import "shared/post.html" as ipost
-@require(sort_type, ann, page, posts, kw)
+@require(sort_type, subname, ann, page, posts, kw)
 
 @def sidebar():
 @include('shared/sidebar/home.html')
@@ -59,7 +59,12 @@
   @end
 
   @if not posts and sort_type == 'home.search':
+    @if not subname:
     <h3 class="notfound">@{_('No posts were found for the search term')} "@kw['term']". </h3>
+    @else:
+    <h3 class="notfound">@{_('No posts were found in this sub for the search term')} "@kw['term']". </h3>
+    <h4 style="margin-left: 21px;"><a href="@{url_for('sub.view_sub', sub=subname)}">@{_('Go back')}</a></h4>
+    @end
   @end
   @if sort_type == 'home.all_domain_new':
     <h4 class="notfound">@{_('We have')} @{kw['post_count']} @{_('posts from the domain')} <a href="https://@{kw['domain']}" target="_blank">@{kw['domain']}</a></h4>
