@@ -899,6 +899,23 @@ msgstr "Zatiaľ tu nie sú žiadne príspevky."
 msgid "No posts were found for the search term"
 msgstr "Nenašli sa žiadne príspevky ktoré majú v názve"
 
+#: app/html/index.html:65
+#, python-format
+msgid ""
+"No posts were found in <a href=\"%(link)s\">/%(prefix)s/%(sub)s</a> for "
+"the search term"
+msgstr ""
+"V skupine <a href=\"%(link)s\">/%(prefix)s/%(sub)s</a> sa nenašli sa žiadne príspevky  "
+"ktoré majú v názve"
+
+#: app/html/index.html:66
+msgid "Go back"
+msgstr "Naspäť"
+
+#: app/forms/sub.py:16
+msgid "Limit my search to"
+msgstr "Hľadať iba v skupine"
+
 #: app/html/admin/reports.html:60 app/html/admin/wiki.html:48
 #: app/html/index.html:60 app/html/mod/closed.html:65
 #: app/html/mod/reports.html:64 app/html/mod/sub_reports.html:65

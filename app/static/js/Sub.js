@@ -391,7 +391,7 @@ if(sa){
 
 u.sub('#change_user_flair', 'click', function(e) {
   e.preventDefault()
-  document.getElementById('userflair').style.display = 'block';
+  document.getElementById('userflair').style.display = 'table';
 })
 
 u.sub('#userflair .selflair', 'click', function () {

@@ -9,6 +9,7 @@ from flask import (
     abort,
     render_template,
     redirect,
+    session,
 )
 from flask_login import current_user
 from .. import misc
@@ -36,6 +37,7 @@ def hot(page):
         {
             "posts": posts,
             "sort_type": "home.hot",
+            "subname": None,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
@@ -55,6 +57,7 @@ def new(page):
         {
             "posts": posts,
             "sort_type": "home.new",
+            "subname": None,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
@@ -74,6 +77,7 @@ def top(page):
         {
             "posts": posts,
             "sort_type": "home.top",
+            "subname": None,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
@@ -93,6 +97,7 @@ def commented(page):
         {
             "posts": posts,
             "sort_type": "home.commented",
+            "subname": None,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
@@ -140,6 +145,7 @@ def all_new(page):
         {
             "posts": posts,
             "sort_type": "home.all_new",
+            "subname": None,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
@@ -250,6 +256,7 @@ def all_domain_new(domain, page):
         {
             "posts": posts,
             "sort_type": "home.all_domain_new",
+            "subname": None,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
@@ -266,22 +273,36 @@ def all_domain_new(domain, page):
 def search(page, term):
     """The index page, with basic title search"""
     term = re.sub(r'[^A-Za-zÁ-ž0-9.,\-_\'" ]+', "", term)
+
+    search_context = session.get("search_context", {})
+    sub = search_context.get("sub")
+    sub_name = search_context.get("sub_name")
+    subonlysearch = search_context.get("subonlysearch") == "y"
+
+    posts_query = misc.postListQueryBase(
+        filter_shadowbanned=True, filter_private_posts=True
+    ).where(SubPost.title ** ("%" + term + "%"))
+
+    if subonlysearch and sub:
+        posts_query = posts_query.where(SubPost.sid == sub)
     posts = misc.getPostList(
-        misc.postListQueryBase(
-            filter_shadowbanned=True, filter_private_posts=True
-        ).where(SubPost.title ** ("%" + term + "%")),
+        posts_query,
         "new",
         page,
     )
-    # Query to get the total count of matching posts
-    count = misc.postListQueryBase(
+
+    count_query = misc.postListQueryBase(
         filter_shadowbanned=True, filter_private_posts=True
     ).where(SubPost.title ** ("%" + term + "%"))
-    search_count = len(count)
+    if subonlysearch and sub:
+        count_query = count_query.where(SubPost.sid == sub)
+    search_count = len(count_query)
+
     return engine.get_template("index.html").render(
         {
             "posts": posts,
             "sort_type": "home.search",
+            "subname": sub_name,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
@@ -338,6 +359,7 @@ def all_top(page):
         {
             "posts": posts,
             "sort_type": "home.all_top",
+            "subname": None,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
@@ -367,6 +389,7 @@ def all_hot(page):
         {
             "posts": posts,
             "sort_type": "home.all_hot",
+            "subname": None,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
@@ -396,6 +419,7 @@ def all_commented(page):
         {
             "posts": posts,
             "sort_type": "home.all_commented",
+            "subname": None,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),

@@ -14,6 +14,7 @@ A link and discussion aggregator with snek (python3)
 - active sub highlighted in topbar
 - sub name displayed in navbar
 - sub navbar linking to sub home
+- sub-specific search
 - image and video posts expanded by default
 - support for image embeds
 - working email notifications (see https://github.com/Phuks-co/throat/issues/525)

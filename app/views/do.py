@@ -167,6 +167,12 @@ def search(stype):
         abort(403)
     form = SearchForm()
     term = re.sub(r'[^A-Za-zÁ-ž0-9.,\-_\'" ]+', "", form.term.data)
+    # Store search context in session
+    session["search_context"] = {
+        "sub": request.form.get("sub"),
+        "sub_name": request.form.get("sub_name"),
+        "subonlysearch": request.form.get("subonlysearch"),
+    }
     return redirect(url_for(stype, term=term))
 
 
