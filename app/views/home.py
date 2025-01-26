@@ -9,7 +9,6 @@ from flask import (
     abort,
     render_template,
     redirect,
-    session,
 )
 from flask_login import current_user
 from .. import misc
@@ -37,7 +36,6 @@ def hot(page):
         {
             "posts": posts,
             "sort_type": "home.hot",
-            "subname": None,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
@@ -57,7 +55,6 @@ def new(page):
         {
             "posts": posts,
             "sort_type": "home.new",
-            "subname": None,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
@@ -77,7 +74,6 @@ def top(page):
         {
             "posts": posts,
             "sort_type": "home.top",
-            "subname": None,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
@@ -97,7 +93,6 @@ def commented(page):
         {
             "posts": posts,
             "sort_type": "home.commented",
-            "subname": None,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
@@ -145,7 +140,6 @@ def all_new(page):
         {
             "posts": posts,
             "sort_type": "home.all_new",
-            "subname": None,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
@@ -256,7 +250,6 @@ def all_domain_new(domain, page):
         {
             "posts": posts,
             "sort_type": "home.all_domain_new",
-            "subname": None,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
@@ -273,44 +266,22 @@ def all_domain_new(domain, page):
 def search(page, term):
     """The index page, with basic title search"""
     term = re.sub(r'[^A-Za-zÁ-ž0-9.,\-_\'" ]+', "", term)
-
-    # Retrieve search context from session
-    search_context = session.get("search_context", {})
-    sub = search_context.get("sub")
-    sub_name = search_context.get("sub_name")
-    subonlysearch = search_context.get("subonlysearch") == "y"
-
-    # Base query for posts
-    posts_query = misc.postListQueryBase(
-        filter_shadowbanned=True, filter_private_posts=True
-    ).where(SubPost.title ** ("%" + term + "%"))
-
-    # If subonlysearch is True and a sub is specified, filter by that sub
-    if subonlysearch and sub:
-        posts_query = posts_query.where(SubPost.sid == sub)
-
-    # Get the posts
     posts = misc.getPostList(
-        posts_query,
+        misc.postListQueryBase(
+            filter_shadowbanned=True, filter_private_posts=True
+        ).where(SubPost.title ** ("%" + term + "%")),
         "new",
         page,
     )
-
-    # Similar modification for count query
-    count_query = misc.postListQueryBase(
+    # Query to get the total count of matching posts
+    count = misc.postListQueryBase(
         filter_shadowbanned=True, filter_private_posts=True
     ).where(SubPost.title ** ("%" + term + "%"))
-
-    if subonlysearch and sub:
-        count_query = count_query.where(SubPost.sid == sub)
-
-    search_count = len(count_query)
-
+    search_count = len(count)
     return engine.get_template("index.html").render(
         {
             "posts": posts,
             "sort_type": "home.search",
-            "subname": sub_name,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
@@ -367,7 +338,6 @@ def all_top(page):
         {
             "posts": posts,
             "sort_type": "home.all_top",
-            "subname": None,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
@@ -397,7 +367,6 @@ def all_hot(page):
         {
             "posts": posts,
             "sort_type": "home.all_hot",
-            "subname": None,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
@@ -427,7 +396,6 @@ def all_commented(page):
         {
             "posts": posts,
             "sort_type": "home.all_commented",
-            "subname": None,
             "page": page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),

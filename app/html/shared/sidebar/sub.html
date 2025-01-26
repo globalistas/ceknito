@@ -1,15 +1,8 @@
-@require(sub, form, subInfo, subMods)
-  <form class="pure-g search" action="@{url_for('do.search')}" method="post">
-    <div class="icon" data-icon="search"> </div>
-    <input aria-label="Search" name="term" placeholder="@{_('Title search...')}" type="search" class="pure-u-1" >
-    <input type="hidden" name="sub" value="@{sub['sid']}" />
-    <input type="hidden" name="sub_name" value="@{sub['name']}" />
-    <div class="pure-control-group" style="position: relative; left: 7px; letter-spacing: normal; width: 100%">
-      <input type="checkbox" name="subonlysearch" id="subonlysearch" value="y" @{' checked' if form.subonlysearch.data else ''}>
-      <label for="subonlysearch">@{form.subonlysearch.label()!!html}</label> /@{config.site.sub_prefix}/@{sub['name']}
-    </div>
-  </form>
-<br>
+@require(sub, subInfo, subMods)
+<form class="pure-g search" action="@{ url_for('do.search') }" method="post">
+  <div class="icon" data-icon="search"> </div>
+  <input aria-label="Search" name="term" placeholder="@{_('Title search...')}" type="search" class="pure-u-1">
+</form>
 <hr>
 
 @if current_user.is_authenticated:

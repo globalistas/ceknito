@@ -41,7 +41,6 @@ from ..forms import (
     EditMod2Form,
     EditMemberForm,
     EditSubRule,
-    SearchForm,
 )
 from ..forms import (
     BanUserSubForm,
@@ -457,15 +456,12 @@ def view_sub_new(sub, page):
         page,
     )
 
-    form = SearchForm()
-
     return engine.get_template("sub.html").render(
         {
             "sub": sub,
             "subInfo": misc.getSubData(sub["sid"]),
             "posts": posts,
             "page": page,
-            "form": form,
             "sort_type": "sub.view_sub_new",
             "subMods": misc.getSubMods(sub["sid"]),
             "flair": flair,
@@ -599,15 +595,12 @@ def view_sub_top(sub, page):
         page,
     )
 
-    form = SearchForm()
-
     return engine.get_template("sub.html").render(
         {
             "sub": sub,
             "subInfo": misc.getSubData(sub["sid"]),
             "posts": posts,
             "page": page,
-            "form": form,
             "sort_type": "sub.view_sub_top",
             "subMods": misc.getSubMods(sub["sid"]),
             "flair": flair,
@@ -672,15 +665,12 @@ def view_sub_hot(sub, page):
         page,
     )
 
-    form = SearchForm()
-
     return engine.get_template("sub.html").render(
         {
             "sub": sub,
             "subInfo": misc.getSubData(sub["sid"]),
             "posts": posts,
             "page": page,
-            "form": form,
             "sort_type": "sub.view_sub_hot",
             "subMods": misc.getSubMods(sub["sid"]),
             "flair": flair,
@@ -745,15 +735,12 @@ def view_sub_commented(sub, page):
         page,
     )
 
-    form = SearchForm()
-
     return engine.get_template("sub.html").render(
         {
             "sub": sub,
             "subInfo": misc.getSubData(sub["sid"]),
             "posts": posts,
             "page": page,
-            "form": form,
             "sort_type": "sub.view_sub_commented",
             "subMods": misc.getSubMods(sub["sid"]),
             "flair": flair,
@@ -971,13 +958,10 @@ def view_post(sub, pid, slug=None, comments=False, highlight=None):
         post["pid"], sort=sort, filter_shadowbanned=True
     ).count()
 
-    form = SearchForm()
-
     return engine.get_template("sub/post.html").render(
         {
             "post": post,
             "sub": sub,
-            "form": form,
             "subInfo": subInfo,
             "is_saved": is_saved,
             "pollData": pollData,

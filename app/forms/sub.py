@@ -13,8 +13,6 @@ class SearchForm(FlaskForm):
 
     term = StringField(_l("Search"))
 
-    subonlysearch = BooleanField(_l("Limit my search to"), default=True)
-
 
 class CreateSubForm(FlaskForm):
     """Sub creation form"""
