@@ -1485,7 +1485,7 @@ def create_comment(pid):
         defaults = [
             x.value for x in SiteMetadata.select().where(SiteMetadata.key == "default")
         ]
-        if config.site.recent_activity.live:
+        if config.site.recent_activity.live and sub.private == 0:
             socketio.emit(
                 "comment",
                 {
@@ -3630,7 +3630,7 @@ def delete_comment():
                 )
         else:
             comment.status = 1
-        if config.site.recent_activity.live:
+        if config.site.recent_activity.live and sub.private == 0:
             # time limited to prevent socket spam
             if (
                 (

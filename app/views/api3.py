@@ -707,7 +707,7 @@ def create_comment(sub, pid):
     )
     sub = Sub.get(Sub.name == sub)
 
-    if config.site.recent_activity.live:
+    if config.site.recent_activity.live and sub.private == 0:
         socketio.emit(
             "comment",
             {
@@ -1145,7 +1145,7 @@ def create_post():
     ]
     ss_default = sub.sid in defaults or not config.site.recent_activity.defaults_only
 
-    if config.site.recent_activity.live:
+    if config.site.recent_activity.live and sub.private == 0:
         socketio.emit(
             "thread",
             {

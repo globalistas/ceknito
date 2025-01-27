@@ -326,7 +326,7 @@ def create_post(ptype, sub):
     show_sidebar = sub.sid in defaults or not config.site.recent_activity.defaults_only
     show_sidebar = show_sidebar and not config.site.recent_activity.comments_only
 
-    if config.site.recent_activity.live:
+    if config.site.recent_activity.live and sub.private == 0:
         socketio.emit(
             "thread",
             {
