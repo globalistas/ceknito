@@ -646,6 +646,7 @@ def edit_sub(sub):
             sub.title = form.title.data
             sub.sidebar = form.sidebar.data
             sub.nsfw = form.nsfw.data
+            sub.commentscore_delay = form.commentscore_delay.data
             sub.save()
 
             sub.update_metadata("restricted", form.restricted.data)
@@ -1569,6 +1570,7 @@ def create_comment(pid):
                     filter_shadowbanned=True,
                 ),
                 "subInfo": misc.getSubData(sub.sid),
+                "commentscore_delay": sub.commentscore_delay,
                 "subMods": subMods,
                 "highlight": str(comment.cid),
                 "sort": "new",

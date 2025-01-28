@@ -605,6 +605,19 @@ msgstr "Povolit upload příspěvky"
 msgid "Enable polls"
 msgstr "Povolit ankety"
 
+#: app/forms/sub.py:176
+msgid "Show comment score only after"
+msgstr "Skóre komentářů zobrazit až po"
+
+#: app/forms/sub.py:179
+msgid "That number isn't in the right range (0 to 1440)"
+msgstr "Číslo musí být v rozsahu 0 až 1440"
+
+#: app/html/sub/postcomments.html:64
+msgid "[score hidden]"
+msgstr "[skóre skryté]"
+
+
 #: app/forms/sub.py:132
 msgid "Default sub page post sorting"
 msgstr "Defaultní řazení příspěvků"
@@ -1112,6 +1125,10 @@ msgstr "Slug"
 #: app/html/sub/bans.html:118 app/html/user/settings/invitecode.html:24
 msgid "Created"
 msgstr "Vydaný"
+
+#: app/html/user/comments.html:75 app/html/user/savedcomments.html:72
+msgid "points"
+msgstr "bodů"
 
 #: app/html/admin/wiki.html:26
 msgid "Last edited"
@@ -3451,24 +3468,44 @@ msgstr "Jeden z tvých příspěvků ve skupině <a href=\"%(sublink)s\">%(sub)s
 msgid "<a href=\"/u/%(user)s\">%(user)s</a> un-deleted one of your posts in <a href=\"%(sublink)s\">%(sub)s</a>"
 msgstr "<a href=\"/u/%(user)s\">%(user)s</a> obnovil(a) tvůj příspěvek v <a href=\"%(sublink)s\">%(sub)s</a>"
 
+#: app/html/user/messages/notifications.html:89
+#, python-format
+msgid "Your comment. Posted %(timeago)s. [score hidden]"
+msgstr "Tvůj komentář. Zasláno %(timeago)s. [skóre skryté]"
+
+#: app/html/user/messages/notifications.html:95
+#, python-format
+msgid "Comment. Posted %(timeago)s. [score hidden]"
+msgstr "Komentář. Zasláno %(timeago)s. [skóre skryté]"
+
+#: app/html/user/messages/notifications.html:110
+#, python-format
+msgid "Posted %(timeago)s. [score hidden] (read %(timeagoread)s)"
+msgstr "Přidáno %(timeago)s. [skóre skryté] (přečteno %(timeagoread)s)"
+
+#: app/html/user/messages/notifications.html:116
+#, python-format
+msgid "Posted %(timeago)s. [score hidden]"
+msgstr "Přidáno %(timeago)s. [skóre skryté]"
+
 #: app/html/user/messages/notifications.html:86
 #, python-format
-msgid "Your comment. Posted %(timeago)s. <b class='cscore'>%(score)i</b> points."
+msgid "Your comment. Posted %(timeago)s. <b class='cscore'>%(score)i</b> points"
 msgstr "Tvůj komentář. Zasláno %(timeago)s. Skóre: <b class='cscore'>%(score)i</b>"
 
 #: app/html/user/messages/notifications.html:89
 #, python-format
-msgid "Comment. Posted %(timeago)s. <b class='cscore'>%(score)i</b> points."
+msgid "Comment. Posted %(timeago)s. <b class='cscore'>%(score)i</b> points"
 msgstr "Komentář. Zasláno %(timeago)s. Skóre: <b class='cscore'>%(score)i</b>"
 
 #: app/html/user/messages/notifications.html:96
 #, python-format
-msgid "Posted %(timeago)s. <b>%(score)s</b> points. Read %(timeagoread)s"
-msgstr "Přidáno %(timeago)s. Skóre: <b>%(score)s</b> . Přečteno %(timeagoread)s"
+msgid "Posted %(timeago)s. <b>%(score)s</b> points (read %(timeagoread)s)"
+msgstr "Přidáno %(timeago)s. Skóre: <b>%(score)s</b> (přečteno %(timeagoread)s)"
 
 #: app/html/user/messages/notifications.html:98
 #, python-format
-msgid "Posted %(timeago)s. <b>%(score)s</b> points."
+msgid "Posted %(timeago)s. <b>%(score)s</b> points"
 msgstr "Přidáno %(timeago)s. Skóre: <b>%(score)s</b> ."
 
 #: app/html/user/messages/notifications.html:107

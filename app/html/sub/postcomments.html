@@ -1,5 +1,5 @@
-@require(post, postmeta, comments, subInfo, subMods, highlight, sort)
-@def renderComments(post, postmeta, subInfo, subMods, comments, highlight='', sort='best'):
+@require(post, postmeta, comments, commentscore_delay, subInfo, subMods, highlight, sort)
+@def renderComments(post, postmeta, commentscore_delay, subInfo, subMods, comments, highlight='', sort='best'):
   @(
     if sort == 'best' and not post['best_sort_enabled']:
       sort = 'new'
@@ -56,12 +56,15 @@
                   <span class="helper-text">@{_('[Blocked]')}</span>
                 @end
               @end
+<!--              @{commentscore_delay}-->
               @if config.site.show_comment_votes or current_user.is_admin() or current_user.uid in subMods['all']:
                 <b>@{_('<span class="mcscore">%(score)i</span> points</b> (+<b>%(upvotes)i</b>|-<b>%(downvotes)i</b>)', score=comment['score'], upvotes=comment['upvotes'], downvotes=comment['downvotes'])!!html}
               @else:
-                @if comment['visibility'] == '':
-                <b>@{_('<span class="cscore">%(score)i</span> points</b>', score=comment['score'])!!html}
-                @end
+                @if (comment['time'] and (datetime.datetime.utcnow() - comment['time']).total_seconds() < (commentscore_delay * 60)):
+                    <span>@{_('[score hidden]')}</span>
+                @else:
+                    <b>@{_('<span class="cscore">%(score)i</span> points</b>', score=comment['score'])!!html}</b>
+                @endif
               @endif
               <span class="time ">
                   <time-ago datetime="@{comment['time'].isoformat()}Z"></time-ago>
@@ -177,7 +180,7 @@
         </div>
         <div id="child-@{comment['cid']}" class="pchild@{(comment['visibility'] != '') and ' hidden' or ''}">
           @if comment['children']:
-            @{renderComments(post, postmeta, subInfo, subMods, comment['children'], highlight, sort)!!html}
+            @{renderComments(post, postmeta, commentscore_delay, subInfo, subMods, comment['children'], highlight, sort)!!html}
           @end
         </div>
       </article>
@@ -193,4 +196,4 @@
   @end
 @end
 
-@{renderComments(post, postmeta, subInfo, subMods, comments, highlight, sort)!!html}
+@{renderComments(post, postmeta, commentscore_delay, subInfo, subMods, comments, highlight, sort)!!html}

@@ -255,6 +255,7 @@ def edit_sub(sub):
     form = EditSubForm()
     # pre-populate the form.
     form.subsort.data = submeta.get("sort")
+    form.commentscore_delay.data = sub.commentscore_delay
     form.sidebar.data = sub.sidebar
     form.title.data = sub.title
 
@@ -880,9 +881,9 @@ def view_post(sub, pid, slug=None, comments=False, highlight=None):
     if post["userstatus"] == 10 and post["deleted"] == 1:
         post["visibility"] = "none"
 
-    postmeta = misc.metadata_to_dict(
-        SubPostMetadata.select().where(SubPostMetadata.pid == pid)
-    )
+    # postmeta = misc.metadata_to_dict(
+    #     SubPostMetadata.select().where(SubPostMetadata.pid == pid)
+    # )
 
     pollData = {"has_voted": False}
     if post["ptype"] == 3:
@@ -962,6 +963,7 @@ def view_post(sub, pid, slug=None, comments=False, highlight=None):
         {
             "post": post,
             "sub": sub,
+            "commentscore_delay": sub["commentscore_delay"],
             "subInfo": subInfo,
             "is_saved": is_saved,
             "pollData": pollData,

@@ -208,6 +208,7 @@ class Sub(BaseModel):
     creation = DateTimeField(default=datetime.datetime.utcnow)
     subscribers = IntegerField(default=1)
     posts = IntegerField(default=0)
+    commentscore_delay = IntegerField(default=0)
 
     def __repr__(self):
         return f"<Sub {self.name}>"

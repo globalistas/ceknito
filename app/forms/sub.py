@@ -3,7 +3,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, BooleanField, HiddenField, IntegerField
 from wtforms import RadioField, SelectField, FieldList
-from wtforms.validators import DataRequired, Length, URL
+from wtforms.validators import DataRequired, Length, URL, NumberRange
 from wtforms.validators import Optional, Regexp
 from flask_babel import lazy_gettext as _l
 
@@ -172,6 +172,17 @@ class EditSubForm(FlaskForm):
     allow_link_posts = BooleanField(_l("Enable link posts"))
     allow_upload_posts = BooleanField(_l("Enable upload posts"))
     allow_polls = BooleanField(_l("Enable polls"))
+    commentscore_delay = IntegerField(
+        _l("Show comment score only after"),
+        validators=[
+            NumberRange(
+                min=0,
+                max=1440,
+                message=_l("That number isn't in the right range (0 to 1440)"),
+            ),
+        ],
+        render_kw={"maxlength": "10"},
+    )
     subsort = RadioField(
         _l("Default sub page post sorting"),
         choices=[

@@ -59,6 +59,7 @@ class Notifications(object):
                 SubPost.nsfw,
                 SubPostComment.content.alias("comment_content"),
                 SubPostComment.score.alias("comment_score"),
+                Sub.commentscore_delay.alias("commentscore_delay"),
                 SubPostComment.content.alias("post_comment"),
                 SubPostCommentView.id.alias("already_viewed"),
                 SubPost.score.alias("post_score"),
