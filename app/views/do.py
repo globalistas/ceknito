@@ -3833,6 +3833,7 @@ def get_sibling(pid, cid, lim):
             {
                 "post": post,
                 "postmeta": postmeta,
+                "commentscore_delay": sub.commentscore_delay,
                 "comments": [],
                 "subInfo": {},
                 "highlight": "",
@@ -3872,6 +3873,7 @@ def get_sibling(pid, cid, lim):
             {
                 "post": post,
                 "postmeta": postmeta,
+                "commentscore_delay": sub.commentscore_delay,
                 "comments": [],
                 "subInfo": {},
                 "highlight": "",
@@ -3888,6 +3890,7 @@ def get_sibling(pid, cid, lim):
         {
             "post": post,
             "postmeta": postmeta,
+            "commentscore_delay": sub.commentscore_delay,
             "comments": comment_tree,
             "subInfo": subInfo,
             "subMods": subMods,
