@@ -228,8 +228,8 @@ socket.on('comment', function (data) {
     elem.innerHTML = _('%1 commented:<br>%2<br>%3 in %4',
       '<a href="/u/' + data.user + '">' + data.user + '</a>',
       '<a class="' + nsfwClass + '" href="' + data.comment_url + '">' + content + '</a>' + nsfwElem,
-      '<time-ago datetime="' + new Date().toISOString() + '" class="sidebarlists"></time-ago>',
-      '<a href="' + data.sub_url + '">' + decodeURIComponent(data.sub_url) + '</a>');
+      '<div class="sidelocale"><time-ago datetime="' + new Date().toISOString() + '" class="sidebarlists"></time-ago>',
+      '<a href="' + data.sub_url + '">' + decodeURIComponent(data.sub_url) + '</a></div>');
     elem.classList.add('new-item');
 
     // Check if there are already 5 items
@@ -266,8 +266,8 @@ socket.on('thread', function (data) {
     elem.innerHTML = _('%1 posted:<br>%2<br>%3 in %4',
       '<a href="/u/' + data.user + '">' + data.user + '</a>',
       '<a class="' + nsfwClass + '" href="' + data.post_url + '">' + title + '</a>' + nsfwElem,
-      '<time-ago datetime="' + new Date().toISOString() + '" class="sidebarlists"></time-ago>',
-      '<a href="' + data.sub_url + '">' + decodeURIComponent(data.sub_url) + '</a>');
+      '<div class="sidelocale"><time-ago datetime="' + new Date().toISOString() + '" class="sidebarlists"></time-ago>',
+      '<a href="' + data.sub_url + '">' + decodeURIComponent(data.sub_url) + '</a></div>');
     elem.classList.add('new-item');
 
     // Check if there are already 5 items

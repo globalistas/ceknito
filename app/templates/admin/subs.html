@@ -64,6 +64,7 @@
               <th>Mods</th>
               <th>Subscribers</th>
               <th>Posts</th>
+              <th>Delay</th>
               <th>Default</th>
               <th>Banned</th>
               <th>Quarantined</th>
@@ -90,6 +91,7 @@
                 <a href="{{url_for('admin.subsubscribers', sub=sub.name, page=1)}}">{{sub.subscribers}}</a>
               </td>
               <td>{{sub.posts}}</td>
+              <td>{{sub.commentscore_delay}}</td>
               <td>
                 <div role="group" class="pure-button-group" data-sid="{{sub.name}}" style="display:inline-block;">
                 {% if sub.name in default_subs|map(attribute='name') %}
