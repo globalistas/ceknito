@@ -297,33 +297,33 @@ socket.on('thread', function (data) {
 //    recentActivitySidebar.prepend(elem);
 //    recentActivitySidebar.removeChild(recentActivitySidebar.lastChild);
 //  }
-  socket.emit('subscribe', { target: data.pid })
-  const ndata = document.createElement("div");
-  ndata.innerHTML = data.html;
-  const x = document.getElementsByClassName('alldaposts')[0];
-
-  while (ndata.firstChild) {
-    const k = x.insertBefore(ndata.firstChild, x.children[0]);
-    if (window.expandall && k.getElementsByClassName) {
-      const q = k.getElementsByClassName('expando-btn')[0];
-      if (q && q.getAttribute('data-icon') == "image") {
-        q.click()
-      }
-    }
-
-  }
-
-  const blurredElems = document.querySelectorAll('.placeholder-nsfw-blur');
-  for (var i = 0; i < blurredElems.length; i++) {
-    blurredElems[i].classList.remove('placeholder-nsfw-blur');
-    if (showNSFWBlur) {
-      blurredElems[i].classList.add('nsfw-blur');
-    }
-  }
-
-  loadLazy();
-  subscribeDeferred();
-  icon.rendericons();
+//  socket.emit('subscribe', { target: data.pid })
+//  const ndata = document.createElement("div");
+//  ndata.innerHTML = data.html;
+//  const x = document.getElementsByClassName('alldaposts')[0];
+//
+//  while (ndata.firstChild) {
+//    const k = x.insertBefore(ndata.firstChild, x.children[0]);
+//    if (window.expandall && k.getElementsByClassName) {
+//      const q = k.getElementsByClassName('expando-btn')[0];
+//      if (q && q.getAttribute('data-icon') == "image") {
+//        q.click()
+//      }
+//    }
+//
+//  }
+//
+//  const blurredElems = document.querySelectorAll('.placeholder-nsfw-blur');
+//  for (var i = 0; i < blurredElems.length; i++) {
+//    blurredElems[i].classList.remove('placeholder-nsfw-blur');
+//    if (showNSFWBlur) {
+//      blurredElems[i].classList.add('nsfw-blur');
+//    }
+//  }
+//
+//  loadLazy();
+//  subscribeDeferred();
+//  icon.rendericons();
 })
 
 socket.on('threadscore', function (data) {
