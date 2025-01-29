@@ -59,10 +59,10 @@
     @end
   </div>
   @if len(posts) == 25 and sub['posts'] > 25:
-  <a href="@{url_for(sort_type, sub=sub['name'], page=(page+1), flair=flair)}" class="pure-button">@{_('Next page')}</a>
+  <a href="@{url_for(sort_type, sub=sub['name'], page=(page+1), flair=flair)}" class="pure-button">⮜ @{_('Next page')}</a>
   @end
   @if page > 1:
-  <a href="@{url_for(sort_type, sub=sub['name'], page=(page-1), flair=flair)}" class="pure-button">@{_('Previous page')}</a>
+  <a href="@{url_for(sort_type, sub=sub['name'], page=(page-1), flair=flair)}" class="pure-button alldarightprev">@{_('Previous page')} ⮞</a>
   @end
 
 @end

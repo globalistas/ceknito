@@ -126,10 +126,10 @@
         </div>
 
         @if len(comments) == 20:
-        <a href="@{url_for('user.view_user_comments', user=user.name, page=(page+1))}" class="pure-button">@{_('Next')}</a>
+        <a href="@{url_for('user.view_user_comments', user=user.name, page=(page+1))}" class="pure-button">⮜ @{_('Next')}</a>
         @end
         @if page > 1:
-        <a href="@{url_for('user.view_user_comments', user=user.name, page=(page-1))}" class="pure-button">@{_('Previous')}</a>
+        <a href="@{url_for('user.view_user_comments', user=user.name, page=(page-1))}" class="pure-button alldarightcomments">@{_('Previous')} ⮞</a>
         @end
 
       </div>

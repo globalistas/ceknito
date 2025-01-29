@@ -1605,6 +1605,45 @@ span.hasmail {
   color: #64a6ca;
 }
 
+a.pure-button.alldaright {
+  display: inline-block;
+  float: right;
+  right: 21px;
+  position: relative;
+}
+
+a.pure-button.alldarightprev {
+  display: inline-block;
+  float: right;
+  right: 14px;
+  position: relative;
+}
+
+a.pure-button.alldarightinbox {
+  display: inline-block;
+  float: right;
+  position: relative;
+}
+
+a.pure-button.alldaleftposts {
+  display: inline-block;
+  left: 14px;
+  position: relative;
+}
+
+a.pure-button.alldarightposts {
+  display: inline-block;
+  float: right;
+  right: 14px;
+  position: relative;
+}
+a.pure-button.alldarightcomments {
+  display: inline-block;
+  float: right;
+  right: 20px;
+  position: relative;
+}
+
 /* SIDEBAR STYLES */
 
 .sidebar {
