@@ -749,6 +749,9 @@ def getInviteCodeInfo(uid):
 
 
 def send_email(to, subject, text_content, html_content, sender=None):
+    if not config.site.send_email:
+        return
+
     if "server" in config.mail:
         if sender is None:
             sender = config.mail.default_from

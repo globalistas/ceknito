@@ -1114,7 +1114,7 @@ msgid "TOTP setup"
 msgstr "TOTP nastavení"
 
 #: app/html/admin/wiki.html:15
-msgid "Site wiki"
+msgid "Site wikis"
 msgstr "Wiki stránky"
 
 #: app/html/admin/wiki.html:23

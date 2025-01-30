@@ -505,6 +505,11 @@ configurable_defaults = {
                     },
                 },
             },
+            "send_email": {
+                "type": "bool",
+                "doc": _l("Globally disables/enables the send_email function."),
+                "value": True,
+            },
             "email_notify": {
                 "type": "map",
                 "value": {

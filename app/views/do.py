@@ -2942,6 +2942,28 @@ def enable_posting():
     return redirect(url_for("admin.index"))
 
 
+@do.route("/do/admin/enable_sendemails", methods=["POST"])
+@login_required
+def enable_sendemails():
+    """Emergency Mode: disable posting"""
+    if not current_user.is_admin():
+        abort(404)
+
+    form = LiteralBooleanForm()
+    if not form.validate():
+        abort(400)
+    state = form.value.data
+
+    config.update_value("site.send_email", state)
+    misc.create_sitelog(
+        misc.LOG_TYPE_ADMIN_CONFIG_CHANGE,
+        current_user.uid,
+        comment=f"site.send_email/{state}",
+    )
+
+    return redirect(url_for("admin.index"))
+
+
 @do.route("/do/admin/enable_registration", methods=["POST"])
 @login_required
 def enable_registration():

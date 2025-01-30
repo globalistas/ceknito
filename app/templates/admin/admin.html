@@ -125,6 +125,27 @@
         </div>
       </div>
       <hr>
+      <div class="col-12"><h2>Email sending</h2>
+      </div>
+      <div class="col-12 admin-page-form">
+        <div>
+          {% if config.site.send_email %}
+          <form method="POST" id="disableemails" action="{{ url_for('do.enable_sendemails') }}">
+            {{ csrf_form.csrf_token() }}
+            <input type="hidden" name="value" value="False">
+            <div><label for="disableemails-button">Disable email sending globally</label></div>
+            <input type="submit" id="disableemails-button" class="pure-button button-warning" value="Disable Emails">
+          </form>
+          {% else %}
+          <form method="POST" id="enablebleemails" action="{{ url_for('do.enable_sendemails') }}">
+            {{ csrf_form.csrf_token() }}
+            <input type="hidden" name="value" value="True">
+            <div><label for="enablebleemails-button">Enable email sending globally</label></div>
+            <input type="submit" id="enablebleemails-button" class="pure-button button-error" value="Enable Emails">
+          </form>
+          {% endif %}
+        </div>
+      </div>
     </div>
     <hr/>
     <h2>Sub of the Day</h2>
