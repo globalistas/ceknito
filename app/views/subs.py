@@ -330,21 +330,21 @@ def create_post(ptype, sub):
         socketio.emit(
             "thread",
             {
-                "addr": addr,
-                "sub": sub.name,
-                "type": form.ptype.data,
-                "show_sidebar": show_sidebar,
+                # "addr": addr,
+                # "sub": sub.name,
+                # "type": form.ptype.data,
+                # "show_sidebar": show_sidebar,
                 "user": current_user.name,
                 "pid": post.pid,
                 "sid": sub.sid,
                 "title": post.title,
                 "nsfw": post.nsfw,
-                "noreplies": post.noreplies,
+                # "noreplies": post.noreplies,
                 "post_url": url_for("sub.view_post", sub=sub.name, pid=post.pid),
                 "sub_url": url_for("sub.view_sub", sub=sub.name),
-                "html": engine.get_template("shared/post.html").render(
-                    {"posts": posts, "sub": False}
-                ),
+                # "html": engine.get_template("shared/post.html").render(
+                #     {"posts": posts, "sub": False}
+                # ),
             },
             namespace="/snt",
             # room="/all/new",

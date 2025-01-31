@@ -694,9 +694,9 @@ def create_comment(sub, pid):
         room=post.pid,
     )
 
-    defaults = [
-        x.value for x in SiteMetadata.select().where(SiteMetadata.key == "default")
-    ]
+    # defaults = [
+    #     x.value for x in SiteMetadata.select().where(SiteMetadata.key == "default")
+    # ]
     comment_res = misc.word_truncate(
         "".join(
             BeautifulSoup(misc.our_markdown(comment.content), features="lxml").findAll(
@@ -711,14 +711,14 @@ def create_comment(sub, pid):
         socketio.emit(
             "comment",
             {
-                "sub": sub.name,
-                "show_sidebar": (
-                    sub.sid in defaults or config.site.recent_activity.defaults_only
-                ),
+                # "sub": sub.name,
+                # "show_sidebar": (
+                #     sub.sid in defaults or config.site.recent_activity.defaults_only
+                # ),
                 "user": user.name,
-                "pid": post.pid,
-                "sid": sub.sid,
-                "private": sub.private,
+                # "pid": post.pid,
+                # "sid": sub.sid,
+                # "private": sub.private,
                 "nsfw": post.nsfw or sub.nsfw,
                 "content": comment_res,
                 "comment_url": url_for(
@@ -1131,29 +1131,29 @@ def create_post():
         tasks.create_thumbnail_external(link, [(SubPost, "pid", post.pid)])
 
     Sub.update(posts=Sub.posts + 1).where(Sub.sid == sub.sid).execute()
-    addr = url_for("sub.view_post", sub=sub.name, pid=post.pid)
-    posts = misc.getPostList(
-        misc.postListQueryBase(nofilter=True, filter_shadowbanned=True).where(
-            SubPost.pid == post.pid
-        ),
-        "new",
-        1,
-    )
+    # addr = url_for("sub.view_post", sub=sub.name, pid=post.pid)
+    # posts = misc.getPostList(
+    #     misc.postListQueryBase(nofilter=True, filter_shadowbanned=True).where(
+    #         SubPost.pid == post.pid
+    #     ),
+    #     "new",
+    #     1,
+    # )
 
-    defaults = [
-        x.value for x in SiteMetadata.select().where(SiteMetadata.key == "default")
-    ]
-    ss_default = sub.sid in defaults or not config.site.recent_activity.defaults_only
+    # defaults = [
+    #     x.value for x in SiteMetadata.select().where(SiteMetadata.key == "default")
+    # ]
+    # ss_default = sub.sid in defaults or not config.site.recent_activity.defaults_only
 
     if config.site.recent_activity.live and sub.private == 0:
         socketio.emit(
             "thread",
             {
-                "addr": addr,
-                "sub": sub.name,
-                "type": post_type,
-                "show_sidebar": ss_default
-                and not config.site.recent_activity.comments_only,
+                # "addr": addr,
+                # "sub": sub.name,
+                # "type": post_type,
+                # "show_sidebar": ss_default
+                # and not config.site.recent_activity.comments_only,
                 "user": user.name,
                 "pid": post.pid,
                 "sid": sub.sid,
@@ -1161,9 +1161,9 @@ def create_post():
                 "nsfw": post.nsfw,
                 "post_url": url_for("sub.view_post", sub=sub.name, pid=post.pid),
                 "sub_url": url_for("sub.view_sub", sub=sub.name),
-                "html": misc.engine.get_template("shared/post.html").render(
-                    {"posts": posts, "sub": False}
-                ),
+                # "html": misc.engine.get_template("shared/post.html").render(
+                #     {"posts": posts, "sub": False}
+                # ),
             },
             namespace="/snt",
             # room="/all/new",

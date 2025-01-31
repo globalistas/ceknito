@@ -1483,22 +1483,22 @@ def create_comment(pid):
             misc.our_markdown(comment.content.decode()), features="lxml"
         ).findAll(string=True)
         comment_res = misc.word_truncate("".join(comment_text).replace("\n", " "), 150)
-        defaults = [
-            x.value for x in SiteMetadata.select().where(SiteMetadata.key == "default")
-        ]
+        # defaults = [
+        #     x.value for x in SiteMetadata.select().where(SiteMetadata.key == "default")
+        # ]
         if config.site.recent_activity.live and sub.private == 0:
             socketio.emit(
                 "comment",
                 {
-                    "sub": sub.name,
-                    "show_sidebar": (
-                        sub.sid in defaults or config.site.recent_activity.defaults_only
-                    ),
+                    # "sub": sub.name,
+                    # "show_sidebar": (
+                    #     sub.sid in defaults or config.site.recent_activity.defaults_only
+                    # ),
                     "user": current_user.name,
-                    "pid": post.pid,
-                    "sid": sub.sid,
+                    # "pid": post.pid,
+                    # "sid": sub.sid,
                     "nsfw": post.nsfw or sub.nsfw,
-                    "private": sub.private,
+                    # "private": sub.private,
                     "content": comment_res,
                     "comment_url": url_for(
                         "sub.view_perm", sub=sub.name, cid=comment.cid, pid=pid
