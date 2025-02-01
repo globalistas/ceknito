@@ -1336,11 +1336,15 @@ img.block-blur {
   top: 5px;
 }
 
+.allcmnts {
+  border-bottom: 1px dotted gray;
+  padding-bottom: 5px;
+}
+
 .sortcomments {
   float: right;
   position: relative;
-  right: 1px;
-/*  bottom: 3px; */
+  top: 7px;
   border: 1px solid #ccc;
 }
 
@@ -1939,33 +1943,33 @@ li.new-item {
 .post-content-container {
   background: #fafafa;
   color: #222222;
-  border: 1px solid #cdcdcd;
+  border: 1px solid #369;
   border-radius: 7px;
   margin-left: 3.9em;
   margin-right: 1.1em;
   margin-bottom: 2em;
-  padding: .4em 1em;
+  padding: 5px 10px;
   /* 1px margin on botton and top so it respects <p>'s margin */
   font-family: verdana, arial, sans-serif;
   font-size: 14px;
   line-height: 20px;
-  max-width: 85%;
+  max-width: 65em;
 }
 
 .post-content-link-container {
   background: #fafafa;
   color: #222222;
-  border: 1px solid #cdcdcd;
+  border: 1px solid #369;
   border-radius: 7px;
   margin-left: 2.9em;
   margin-right: 1.1em;
   margin-bottom: 2em;
-  padding: .4em 1em;
+  padding: 5px 10px;
   /* 1px margin on botton and top so it respects <p>'s margin */
   font-family: verdana, arial, sans-serif;
   font-size: 14px;
   line-height: 20px;
-  max-width: 85%;
+  max-width: 65em;
 }
 
 .post-content-container-nocontent {
@@ -1973,7 +1977,7 @@ li.new-item {
 }
 
 .poll-space {
-  padding: 0em 1em 1em 1em;
+  padding: 0em 1em 1em 3.7em;
   margin-left: .2em;
   margin-right: 1.1em;
   margin-top: 1.1em;

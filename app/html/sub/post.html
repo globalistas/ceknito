@@ -511,7 +511,7 @@
             </ul>
           </div>
         </div>
-        <div id="allcomments">
+        <div id="allcomments" class="allcmnts">
           <span id="cmnts" class="allcomments" data-cnt="@{comment_count}"><a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'])}">@{_('%(comments)i comments', comments=comment_count)}</a></span>
         </div>
       @{pcomm.renderComments(post, postmeta, commentscore_delay, subInfo, subMods, comments, highlight, sort)!!html}
