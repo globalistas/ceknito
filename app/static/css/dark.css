@@ -24,6 +24,12 @@ body.dark a {
   color: #8f8f8f;
 }
 
+body.dark .sbpostauthor {
+    border: 1px solid #8f8f8f;
+    background: #41444b;
+    color: #b9bbbe;
+}
+
 body.dark div.author a {
   color: var(--dark-links-a);
 }

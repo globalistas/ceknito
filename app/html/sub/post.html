@@ -20,7 +20,9 @@
 @def meta_description():
 
     @if post['content'] and post['deleted'] == 0:
-        <meta name="description" content="@{func.word_truncate(''.join(BeautifulSoup(markdown(post['content']), features='lxml').findAll(string=True)).replace('\n', ' '), 250)}"/>
+<meta name="description"
+      content="@{func.word_truncate(''.join(BeautifulSoup(markdown(post['content']), features='lxml').findAll(string=True)).replace('\n', ' '), 250)}"
+      xmlns="http://www.w3.org/1999/html"/>
     @else:
         <meta name="description" content="@{sub['title']}" />
     @end
@@ -48,7 +50,7 @@
 @end
 
 @def sidebar():
-  <div class="author" style="padding:.5em;">
+  <div class="sbpostauthor">
     @(
     timeago = '<time-ago datetime="' + post['posted'].isoformat() + 'Z"></time-ago>'
     deleted_if_admin_view = ' ' + _('[deleted]') if post['userstatus'] == 10 and current_user.is_admin() else ''
@@ -60,21 +62,25 @@
     else:
         user_html = deleted_link
     )
-    @{_('Posted %(timeago)s by %(user)s', timeago=timeago, user=user_html)!!html}
+    @{_('Posted %(timeago)s by %(user)s', timeago=post['posted'].strftime("%-d.%-m.%Y"), user=user_html)!!html}
     <br/>
     @if post['edited']:
-      @{_('edited %(timeago)s', timeago='<time-ago datetime="' + post['edited'].isoformat() + 'Z"></time-ago>')!!html}<br/>
+    <span style="font-size: 12px;">@{_('edited %(timeago)s', timeago='<time-ago datetime="' + post['edited'].isoformat() + 'Z"></time-ago>')!!html}</span><br/>
     @end
     @if config.site.show_votes or current_user.is_admin() or current_user.uid in subMods['all']:
       @{_('Score: %(score)i <b>(+%(upvotes)i|-%(downvotes)i)</b>', score=post['score'], upvotes=post['upvotes'], downvotes=post['downvotes'])!!html}
     @else:
+    <span style="font-weight: bold; font-size: 16px;">
       @{_('Score: %(score)i', score=post['score'])!!html}
+    </span>
     @endif
+    <span style="font-size: 12px;">
     @if post['upvotes'] + post['downvotes'] == 0:
       (0% @{_('upvoted')})
     @else:
       (@{round((post['upvotes'] / (post['upvotes'] + post['downvotes']) * 100))!!html}% @{_('upvoted')})
     @endif
+    </span>
   </div>
 <hr>
   @include('shared/sidebar/sub.html')

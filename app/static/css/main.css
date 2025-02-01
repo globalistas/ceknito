@@ -786,6 +786,15 @@ a.pure-button-primary {
   position: relative;
 }
 
+.sbpostauthor {
+    padding: 6px;
+    margin: 0px 4px 10px 3px;
+    border: 1px solid #cfc7c7;
+    border-radius: 3px;
+    background: #fff;
+    font-size: 14px;
+}
+
 .author .expando {
   top: 0px;
   vertical-align: middle;
@@ -853,6 +862,7 @@ iframe {
   margin-top: .4em;
   width: -moz-fit-content;
   width: fit-content;
+  line-height: 1.7em;
 }
 
 .post .thumbnail {
@@ -1780,7 +1790,7 @@ input[type=search] {
 }
 
 .search {
-  margin: 0 15px 0 20px;
+  /** margin: 0 15px 0 20px; **/
   position: relative;
   color: #000;
   font-size: 16px;
@@ -1847,10 +1857,6 @@ li.new-item {
   input#subject,
   form#msg-form .editbtns {
     width: 100%;
-  }
-
-  .post .author {
-    line-height: 1.7em;
   }
 
   .misctainer {
