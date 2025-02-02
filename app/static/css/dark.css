@@ -870,6 +870,7 @@ body.dark .allcomments {
   top: 0px;
 }
 
+/*
 body.dark .sortcomments {
   border: 1px solid #b9bbbe;
 }
@@ -881,6 +882,7 @@ body.dark #sortby {
   text-align: center;
   cursor: pointer;
 }
+*/
 
 body.dark .pure-menu-item a {
   background: #202225;
