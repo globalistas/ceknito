@@ -894,11 +894,21 @@ u.addEventForChild(document, 'click', '.btn-postcomment', function (e, qelem) {
                 if (cid == '0') {
                     qelem.removeAttribute('disabled');
                     document.querySelector('#rcomm-' + cid + ' textarea').value = '';
-                    if (cmtcount.nextSibling && cmtcount.nextSibling.nextSibling && cmtcount.nextSibling.nextSibling.tagName == 'DIV') {
-                        cmtcount.parentNode.insertBefore(div.firstChild, cmtcount.nextSibling.nextSibling.nextSibling);
+                // Find #allcomments div and insert the new comment **after** it
+                const allCommentsDiv = document.getElementById('allcomments');
+
+                if (allCommentsDiv) {
+                    // Insert below #allcomments
+                    allCommentsDiv.parentNode.insertBefore(div.firstChild, allCommentsDiv.nextSibling);
+                } else {
+                    // Fallback: Insert inside .comments if #allcomments is missing
+                    const commentsContainer = document.querySelector('.comments');
+                    if (commentsContainer) {
+                        commentsContainer.appendChild(div.firstChild);
                     } else {
-                        cmtcount.parentNode.insertBefore(div.firstChild, cmtcount.nextSibling);
+                        console.error("Could not find '.comments' container to insert the comment.");
                     }
+                }
                     //document.getElementById(data.cid).scrollIntoView();
                 } else {
                     document.querySelector('.reply-comment[data-to="' + cid + '"] s').click();

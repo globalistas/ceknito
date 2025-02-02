@@ -1343,19 +1343,22 @@ img.block-blur {
   font-size: 16px;
   font-weight: bold;
   position: relative;
-  top: 5px;
+  top: 3px;
+  left: 1px;
 }
 
 .allcmnts {
   border-bottom: 1px dotted gray;
   padding-bottom: 5px;
+  margin-bottom: 40px;
 }
 
 .sortcomments {
-  float: right;
-  position: relative;
-  top: 7px;
-  border: 1px solid #ccc;
+    display: inline-block;
+    position: relative;
+    top: 54px;
+    right: 13px;
+   /* border: 1px solid #ccc; */
 }
 
 .loadsibling {
@@ -1990,6 +1993,14 @@ li.new-item {
   font-family: verdana, arial, sans-serif;
   font-size: 14px;
   line-height: 1.5em;
+}
+
+.expandotxt .poll-space {
+  padding: 0em 1em 1em .7em;
+}
+
+.expandotxt p {
+  margin-left: .7em;
 }
 
 .post-content-container textarea,
@@ -3303,11 +3314,11 @@ article.text-post.comment.deleted {
 }
 
 #sortby {
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   font-size: 14px;
   text-align: center;
   cursor: pointer;
-  box-shadow: 0 0px 3px rgb(0 0 0 / 10%);
+  /* box-shadow: 0 0px 3px rgb(0 0 0 / 10%); */
 }
 
 .pure-menu-children {

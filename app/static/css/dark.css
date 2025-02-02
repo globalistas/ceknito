@@ -871,8 +871,6 @@ body.dark .allcomments {
 }
 
 body.dark .sortcomments {
-  bottom: 15px;
-  right: 0px;
   border: 1px solid #b9bbbe;
 }
 
