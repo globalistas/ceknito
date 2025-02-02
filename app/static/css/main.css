@@ -1717,7 +1717,7 @@ a.pure-button.alldarightcomments {
 
 .sbm-post {
   display: block;
-  margin: 4px 23px 5px 28px;
+  margin: 4px 6px 5px 6px;
   border: 1px solid #ccc;
 }
 
@@ -1801,7 +1801,7 @@ input[type=search] {
 
 .search .icon {
   position: absolute;
-  top: .5em;
+  top: .7em;
   left: .8em;
   height: 24px;
   width: 24px;

@@ -6,7 +6,7 @@
     <input type="hidden" name="sub_name" value="@{sub['name']}" />
     <div class="pure-control-group" style="position: relative; left: 7px; letter-spacing: normal; width: 100%">
       <input type="checkbox" name="subonlysearch" id="subonlysearch" value="y" @{' checked' if form.SubOnlySearchForm.data else ''}>
-      <label for="subonlysearch">@{form.SubOnlySearchForm()!!html} @_("Limit my search to") /@{config.site.sub_prefix}/@{sub['name']}</label>
+      <label for="subonlysearch">@{form.SubOnlySearchForm().csrf_token()!!html} @_("Limit my search to") /@{config.site.sub_prefix}/@{sub['name']}</label>
     </div>
 </form>
 <hr>
