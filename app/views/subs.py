@@ -396,7 +396,7 @@ def create_post(ptype, sub):
 @bp.route("/random")
 def random_sub():
     """Here we get a random sub"""
-    rsub = Sub.select(Sub.name).order_by(pdb.random()).limit(1)
+    rsub = Sub.select(Sub.name).where(Sub.private == 0).order_by(pdb.random()).limit(1)
     return redirect(url_for("sub.view_sub", sub=rsub.get().name))
 
 
