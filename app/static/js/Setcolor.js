@@ -27,7 +27,7 @@ function setcolor(color) {
     }
 
 // if cookie exists, its value is primary color. if not, choose a random one from the array and set it in cookie
-const primaryColors = ['#46586e', '#48506c', '#800000', "#d94f00", "#396F86DE", "#402b44f0"];
+const primaryColors = ['#46586e', '#48506c', '#800000', "#d94f00", "#5a8295", "#4a384e"];
 let primaryColor = getCookie("primaryColor");
 
 if (!primaryColor) {
