@@ -48,6 +48,9 @@
     <ul class="top5" id="activity_list_sidebar">
       @for post in func.recent_activity(sidebar=True, filter_shadowbanned=True, filter_private=True):
         <li>
+          <div class="sidelocale">
+            @{_("%(timeago)s in %(sub)s", timeago='<time-ago datetime="' + post['time'].isoformat() + 'Z"></time-ago>', sub='<a href="' + url_for('sub.view_sub', sub=post['sub']) + '">/' + config.site.sub_prefix + '/' + post['sub'] + '</a>') !!html}
+          </div>
           @if post['type'] == 'comment':
             @{_('%(user)s commented: %(text)s', user='<a href="/u/' + post['user'] + '">' + post['user'] + '</a>', text='<a class="title ' + post['blur'] + '" href="' + url_for('sub.view_perm', sub=post['sub'], cid=post['cid'], pid=post['pid'], slug=func.slugify(post['content'])) + '#comment-' + post['cid'] + '"><br>' + e(func.word_truncate(''.join(BeautifulSoup(markdown(post['content']), features='lxml').findAll(text=True)).replace('\n', ' '), 150)) + '</a>')!!html}
           @else:
@@ -56,9 +59,6 @@
           @if post['nsfw'] or post['sub_nsfw']:
             <span class="nsfw smaller" title="@{_('Not safe for work')}">@{_('NSFW')}</span>
           @endif
-          <div class="sidelocale">
-            @{_("%(timeago)s in %(sub)s", timeago='<time-ago datetime="' + post['time'].isoformat() + 'Z"></time-ago>', sub='<a href="' + url_for('sub.view_sub', sub=post['sub']) + '">/' + config.site.sub_prefix + '/' + post['sub'] + '</a>') !!html}
-          </div>
         </li>
       @end
     </ul>

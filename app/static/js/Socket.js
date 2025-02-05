@@ -225,7 +225,7 @@ socket.on('comment', function (data) {
     const content = data.content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     const elem = document.createElement('li');
     elem.setAttribute('data-cid', data.comment_url);
-    elem.innerHTML = _('%1 commented:<br>%2<br>%3 in %4',
+    elem.innerHTML = _('%3 in %4 %1 commented:<br>%2',
       '<a href="/u/' + data.user + '">' + data.user + '</a>',
       '<a class="' + nsfwClass + '" href="' + data.comment_url + '">' + content + '</a>' + nsfwElem,
       '<div class="sidelocale"><time-ago datetime="' + new Date().toISOString() + '" class="sidebarlists"></time-ago>',
@@ -263,7 +263,7 @@ socket.on('thread', function (data) {
   if (recentActivity) {
     const elem = document.createElement('li');
     elem.setAttribute('data-pid', data.pid);
-    elem.innerHTML = _('%1 posted:<br>%2<br>%3 in %4',
+    elem.innerHTML = _('%3 in %4 %1 posted:<br>%2',
       '<a href="/u/' + data.user + '">' + data.user + '</a>',
       '<a class="' + nsfwClass + '" href="' + data.post_url + '">' + title + '</a>' + nsfwElem,
       '<div class="sidelocale"><time-ago datetime="' + new Date().toISOString() + '" class="sidebarlists"></time-ago>',

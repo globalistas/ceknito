@@ -1797,7 +1797,7 @@ msgstr "Poslední aktivita"
 #: app/html/shared/sidebar/home.html:50
 #, python-format
 msgid "%(user)s commented: %(text)s"
-msgstr "%(user)s přidal(a) komentář: %(text)s"
+msgstr "%(user)s přidal(a) komentář %(text)s"
 
 #: app/html/shared/sidebar/home.html:50
 #, python-format
@@ -1816,17 +1816,17 @@ msgstr "update v reálném čase"
 #: app/html/shared/sidebar/home.html:52
 #, python-format
 msgid "%(user)s posted: %(text)s"
-msgstr "%(user)s přidal(a) příspěvek: %(text)s"
+msgstr "%(user)s přidal(a) příspěvek %(text)s"
 
 #: app/static/js/Socket.js:223
 #, python-format
-msgid "%1 posted:<br>%2<br>%3 in %4"
-msgstr "%1 přidal(a) příspěvek:<br>%2<br>%3 v %4"
+msgid "%3 in %4 %1 posted:<br>%2"
+msgstr "%3 in %4 %1 přidal(a) příspěvek<br>%2"
 
 #: app/static/js/Socket.js:198
 #, python-format
-msgid "%1 commented:<br>%2<br>%3 in %4"
-msgstr "%1 přidal(a) komentář:<br>%2<br>%3 v %4"
+msgid "%3 in %4 %1 commented:<br>%2"
+msgstr "%3 v %4 %1 přidal(a) komentář<br>%2"
 
 #: app/html/shared/sidebar/home.html:52
 #, python-format
