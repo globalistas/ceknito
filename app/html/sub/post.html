@@ -472,7 +472,7 @@
                 <ul class="pure-menu-children">
                   @if post['best_sort_enabled']:
                     <li class="pure-menu-item">
-                      <a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'], sort='best')}" class="pure-menu-link">
+                      <a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'], sort='best')}" class="pure-menu-link pure-menu-link-sort">
                         @if sort == 'best':
                           ✓
                         @else:
@@ -483,7 +483,7 @@
                     </li>
                   @end
                   <li class="pure-menu-item">
-                    <a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'], sort='top')}" class="pure-menu-link">
+                    <a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'], sort='top')}" class="pure-menu-link pure-menu-link-sort">
                       @if sort == 'top':
                         ✓
                       @else:
@@ -493,7 +493,7 @@
                     </a>
                   </li>
                   <li class="pure-menu-item">
-                    <a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'], sort='new')}" class="pure-menu-link">
+                    <a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'], sort='new')}" class="pure-menu-link pure-menu-link-sort">
                       @if sort == 'new':
                         ✓
                       @else:
@@ -503,7 +503,7 @@
                     </a>
                   </li>
                   <li class="pure-menu-item">
-                    <a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'], sort='old')}" class="pure-menu-link">
+                    <a href="@{url_for('sub.view_post', sub=sub['name'], pid=post['pid'], sort='old')}" class="pure-menu-link pure-menu-link-sort">
                       @if sort == 'old':
                         ✓
                       @else:

@@ -3331,9 +3331,20 @@ article.text-post.comment.deleted {
   /* box-shadow: 0 0px 3px rgb(0 0 0 / 10%); */
 }
 
+.pure-menu-link-sort {
+    color: black;
+    font-size: 14px;
+}
+
 .pure-menu-children {
-  min-width: 100%;
-  border: 1px solid #ccc;
+  min-width: 65%;
+  border: 1px solid gray;
+}
+
+.pure-menu-horizontal .pure-menu-children {
+    left: 5.6em;
+    top: auto;
+    width: inherit;
 }
 
 .invitecode-users {
