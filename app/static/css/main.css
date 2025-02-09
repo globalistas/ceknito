@@ -3327,7 +3327,7 @@ article.text-post.comment.deleted {
   /* background-color: #ffffff; */
   font-size: 14px;
   text-align: center;
-  cursor: pointer;
+  cursor: default;
   /* box-shadow: 0 0px 3px rgb(0 0 0 / 10%); */
 }
 

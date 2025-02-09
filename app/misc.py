@@ -47,7 +47,7 @@ from tinycss2.ast import (
 
 from .config import config
 from flask_login import AnonymousUserMixin, current_user, logout_user
-from flask_babel import Babel, _
+from flask_babel import Babel, _, force_locale
 from flask_talisman import Talisman
 from .caching import cache
 from .socketio import socketio
@@ -2540,6 +2540,42 @@ def create_message(mfrom, to, subject, content, mtype):
         namespace="/snt",
         room="user" + to,
     )
+
+    target_email_notify = (
+        UserMetadata.select(UserMetadata.value)
+        .where((UserMetadata.uid == to) & (UserMetadata.key == "email_notify"))
+        .scalar()  # Use scalar() to get the actual value
+    ) == "1"
+
+    if target_email_notify:
+        target_language = User.get_by_id(pk=to).language
+        if target_language == "sk":
+            locale_language = "sk_SK"
+        elif target_language == "cs":
+            locale_language = "cs_CZ"
+        elif target_language == "en":
+            locale_language = "en_US"
+        elif target_language == "es":
+            locale_language = "es_ES"
+        elif target_language == "ru":
+            locale_language = "ru_RU"
+        else:
+            locale_language = "sk_SK"  # Default language if no target language found
+        email = _(
+            'User %(user_name)s sent you a <a href="%(url)s">private message</a>',
+            user_name=current_user.name,
+            post_title=None,
+            sub_name=None,
+            url=url_for("messages.view_messages", _external=True),
+        )
+
+        with force_locale(locale_language):
+            send_email(
+                User.get_by_id(pk=to).email,
+                subject=_("New notification"),
+                text_content="",
+                html_content=email,
+            )
     return msg
 
 
@@ -2608,6 +2644,46 @@ def create_message_reply(message, content):
             namespace="/snt",
             room="user" + recipient,
         )
+
+        target_email_notify = (
+            UserMetadata.select(UserMetadata.value)
+            .where(
+                (UserMetadata.uid == recipient) & (UserMetadata.key == "email_notify")
+            )
+            .scalar()  # Use scalar() to get the actual value
+        ) == "1"
+
+        if target_email_notify:
+            target_language = User.get_by_id(pk=recipient).language
+            if target_language == "sk":
+                locale_language = "sk_SK"
+            elif target_language == "cs":
+                locale_language = "cs_CZ"
+            elif target_language == "en":
+                locale_language = "en_US"
+            elif target_language == "es":
+                locale_language = "es_ES"
+            elif target_language == "ru":
+                locale_language = "ru_RU"
+            else:
+                locale_language = (
+                    "sk_SK"  # Default language if no target language found
+                )
+            email = _(
+                'User %(user_name)s <a href="%(url)s">replied</a> to your private message',
+                user_name=current_user.name,
+                post_title=None,
+                sub_name=None,
+                url=url_for("messages.view_messages", _external=True),
+            )
+
+            with force_locale(locale_language):
+                send_email(
+                    User.get_by_id(pk=recipient).email,
+                    subject=_("New notification"),
+                    text_content="",
+                    html_content=email,
+                )
     else:
         SubMessageMailbox.update(mailbox=MessageMailbox.INBOX).where(
             SubMessageMailbox.mtid == thread

@@ -262,6 +262,19 @@ msgstr "@import token není povolen"
 msgid "Invalid CSS"
 msgstr "Neplatné CSS"
 
+#: app/misc.py:2571
+#, python-format
+msgid "User %(user_name)s sent you a <a href=\"%(url)s\">private message</a>"
+msgstr "Uživatel %(user_name)s ti poslal(a) <a href=\"%(url)s\">soukromou zprávu</a>"
+
+#: app/misc.py:2676
+#, python-format
+msgid ""
+"User %(user_name)s <a href="%(url)s">replied</a> to your private "
+"message"
+msgstr "Uživatel %(user_name)s <a href="%(url)s">odpověděl(a)</a> na tvou soukromou "
+"zprávu"
+
 #: app/html/sub/postcomments.html:44 app/misc.py:2719
 msgid "[Blocked]"
 msgstr "[blokované]"

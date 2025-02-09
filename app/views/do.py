@@ -1529,18 +1529,7 @@ def create_comment(pid):
                 to = None
 
         if to and to != current_user.uid and not current_user.is_shadowbanned:
-            # Check if the recipient is not the current user and if either the notification type is "COMMENT_REPLY"
-            # or the comment doesn't have notifications disabled
-            if ntype == "COMMENT_REPLY":
-                notifications.send(
-                    ntype,
-                    sub=post.sid,
-                    post=post.pid,
-                    comment=comment.cid,
-                    sender=current_user.uid,
-                    target=to,
-                )
-            elif ntype == "POST_REPLY":
+            if ntype in {"COMMENT_REPLY", "POST_REPLY"}:
                 notifications.send(
                     ntype,
                     sub=post.sid,
