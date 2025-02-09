@@ -468,7 +468,7 @@
                   default_sort = sorts['best'] = _('best')
                 currsort = sorts.get(sort, default_sort)
                 )
-                <span id="sortby" class="pure-menu-link">@{_('Sort by: <b>%(currsort)s</b>', currsort=currsort)!!html}</span>
+                <span id="sortby" class="pure-menu-link">@{_('sorted by: <b><u>%(currsort)s</u></b>', currsort=currsort)!!html}</span>
                 <ul class="pure-menu-children">
                   @if post['best_sort_enabled']:
                     <li class="pure-menu-item">

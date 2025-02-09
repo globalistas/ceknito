@@ -2911,8 +2911,8 @@ msgstr "nej"
 
 #: app/html/sub/post.html:403
 #, python-format
-msgid "Sort by: <b>%(currsort)s</b>"
-msgstr "řadit podle: <b>%(currsort)s</b>"
+msgid "sorted by: <b><u>%(currsort)s</u></b>
+msgstr "řadit podle: <b><u>%(currsort)s</u></b>"
 
 #: app/html/sub/post.html:413
 msgid "Best"

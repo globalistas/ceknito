@@ -2910,8 +2910,8 @@ msgstr "naj"
 
 #: app/html/sub/post.html:403
 #, python-format
-msgid "Sort by: <b>%(currsort)s</b>"
-msgstr "radiť podľa: <b>%(currsort)s</b>"
+msgid "sorted by: <b><u>%(currsort)s</u></b>"
+msgstr "radiť podľa: <b><u>%(currsort)s</u></b>"
 
 #: app/html/sub/post.html:413
 msgid "Best"

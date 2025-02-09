@@ -1366,7 +1366,7 @@ img.block-blur {
 .sortcomments {
     display: inline-block;
     position: relative;
-    top: 54px;
+    top: 50px;
     right: 13px;
    /* border: 1px solid #ccc; */
 }
@@ -3343,8 +3343,18 @@ article.text-post.comment.deleted {
 
 .pure-menu-horizontal .pure-menu-children {
     left: 5.6em;
-    top: auto;
+    top: 1.7em;
     width: inherit;
+}
+
+.pure-menu-horizontal .pure-menu-has-children > .pure-menu-link:after {
+    content: "\25BC";
+}
+
+.pure-menu-has-children > .pure-menu-link:after {
+    padding-left: 0em;
+    margin-left: 0.2em;
+    font-size: smaller;
 }
 
 .invitecode-users {
