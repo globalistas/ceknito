@@ -2609,7 +2609,7 @@ def create_notification_message(mfrom, as_admin, sub, to, subject, content):
         .scalar()  # Use scalar() to get the actual value
     ) == "1"
 
-    if target_email_notify:
+    if target_email_notify and current_user.uid != to:
         target_language = User.get_by_id(pk=to).language
         if target_language == "sk":
             locale_language = "sk_SK"
