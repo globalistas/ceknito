@@ -783,13 +783,16 @@ def user_uploads(page):
         UserUploads.select(
             UserUploads.thumbnail,
             UserUploads.xid,
+            UserUploads.uid,
             UserUploads.pid,
             UserUploads.fileid,
             SubPost.deleted,
+            User.name,  # Include User.name
         )
         .join(SubPost)
+        .join(User, on=(User.uid == UserUploads.uid))  # Join User table
         .order_by(UserUploads.pid.desc())
-        .paginate(page, 60)
+        .paginate(page, 30)
         .dicts()
     )
     users = (

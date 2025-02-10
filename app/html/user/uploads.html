@@ -23,29 +23,38 @@
 @if not uploads:
   <h3 class="noshit norecentposts">@{_('No uploads, yet.')}</h3>
 @end
+
 <div id="center-container-uploads">
-  <div class="uploads content">
-      @for item in uploads:
-        <div class="uploaditem">
-          <div class="uploadthumb">
-            @if item.thumbnail == '':
-              <span class="placeholder" data-icon="link"></span>
-            @elif item.thumbnail == 'deferred':
-              <span class="placeholder deferred" data-icon="link"
-                    data-deferred="UserUploads-@{item.xid}"></span>
-            @else:
-              <img class="lazy" src="@{url_for('static', filename='img/1x1.gif')}"
-                   data-src="@{thumbnail_url(item.thumbnail)}"/>
-            @end
-          </div>
-        </div>
-        <div class="uploadlinks">
-          <div class="uploadlink"><a href="@{url_for('site.view_post_inbox', pid=item.pid_id)}">@{_('Post')}</a></div>
-          <div class="uploadlink"><a href="@{file_url(item.fileid)}">Link</a></div>
-        </div>
-      @end
-  </div>
+  <table class="uploads-table">
+      <thead>
+          <tr>
+          </tr>
+      </thead>
+      <tbody>
+          @for item in uploads:
+          <tr>
+              <td>
+                  <a href="@{file_url(item.fileid)}" class="upload-thumb">
+                      @if item.thumbnail == '':
+                          <span class="placeholder" data-icon="link"></span>
+                      @elif item.thumbnail == 'deferred':
+                          <span class="placeholder deferred" data-icon="link"
+                                data-deferred="UserUploads-@{item.xid}"></span>
+                      @else:
+                          <img class="lazy" src="@{url_for('static', filename='img/1x1.gif')}"
+                               data-src="@{thumbnail_url(item.thumbnail)}"/>
+                      @end
+                  </a>
+              </td>
+              <td>
+                  <a href="@{url_for('site.view_post_inbox', pid=item.pid_id)}">@{_('Post')}</a>
+              </td>
+          </tr>
+          @end
+      </tbody>
+  </table>
 </div>
+
 <div class="col-12">
   @if len(uploads) == 30:
     <a href="@{url_for('user.view_user_uploads', page=(page+1))}" class="pure-button">@{_('Next')}</a>

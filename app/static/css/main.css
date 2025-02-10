@@ -388,6 +388,47 @@ div#sortbuttons {
   width: 100%;
 }
 
+.uploads-table {
+  width: auto;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.uploads-table th, .uploads-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.uploads-table th {
+  background: #f4f4f4;
+  font-weight: bold;
+}
+
+.uploads-table tbody tr:hover {
+  background: #f9f9f9;
+}
+
+.upload-thumb {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eee;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.upload-thumb img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 6px;
+}
+
 #center-container-savedcomments {
   background-color: #fff;
   display: flex;
