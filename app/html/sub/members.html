@@ -48,7 +48,7 @@
       <hr/>
 
       <!-- Pending Member Invites Section -->
-      @if current_user.is_admin() or current_user.is_mod(sub.sid, 0):
+      @if (current_user.is_admin() or current_user.is_mod(sub.sid, 0)) and sub.private:
         <div class="editmoderators col-12">
           <form data-reload="true" action="@{url_for('do.inv_member', sub=sub.name)}" id="edit-member-form" data-sub="@{sub.name}" class="pure-form ajaxform">
             @{editmemberform.csrf_token()!!html}
