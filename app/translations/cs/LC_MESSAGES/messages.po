@@ -5177,3 +5177,7 @@ msgid ""
 "The moderators of %(sublink)s deleted %(commentlink)s you made on the "
 "post %(postlink)s. Reason: %(reason)s"
 msgstr "Moderátor skupiny %(sublink)s vymazal(a) tvůj %(commentlink)s k příspěvku %(postlink)s. Důvod: %(reason)s"
+
+#: app/html/shared/sidebar/home.html:81
+msgid "Changelog"
+msgstr "Poslední změny"

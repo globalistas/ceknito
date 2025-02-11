@@ -78,12 +78,12 @@
 @if changeLog:
   <hr>
   <div class="sidebarlists">
-    <h4 class="center">Changelog</h4>
+    <h4 class="center"><a href="@{url_for('sub.view_sub', sub=changeLog['sub'])}" style="text-decoration: none; color: inherit;">@{_('Changelog')}</a></h4>
     <ul>
       <li><a class="title" href="@{url_for('sub.view_post', sub=changeLog['sub'], pid=changeLog['pid'])}">@{changeLog['title']}</a><br>
-      <span class="sidelocale">
-        @{_("%(timeago)s in %(sub)s", timeago='<time-ago datetime="' + changeLog['posted'].isoformat() + 'Z"></time-ago>', sub='<a href="' + url_for('sub.view_sub', sub=changeLog['sub']) + '">/' + config.site.sub_prefix + '/' + changeLog['sub'] + '</a>') !!html}
-      </span>
+<!--      <span class="sidelocale">-->
+<!--        @{_("%(timeago)s in %(sub)s", timeago='<time-ago datetime="' + changeLog['posted'].isoformat() + 'Z"></time-ago>', sub='<a href="' + url_for('sub.view_sub', sub=changeLog['sub']) + '">/' + config.site.sub_prefix + '/' + changeLog['sub'] + '</a>') !!html}-->
+<!--      </span>-->
     </ul>
   </div>
 @end

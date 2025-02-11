@@ -413,20 +413,17 @@ div#sortbuttons {
 }
 
 .upload-thumb {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 85px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #eee;
-  border-radius: 6px;
   overflow: hidden;
 }
 
 .upload-thumb img {
   max-width: 100%;
   max-height: 100%;
-  border-radius: 6px;
 }
 
 #center-container-savedcomments {
@@ -2537,7 +2534,6 @@ table th {
 table thead {
   background-color: #e0e0e0;
   color: #000;
-  text-align: left;
   vertical-align: bottom;
 }
 
@@ -3596,8 +3592,8 @@ input[name="captcha"] {
 }
 
 .admin-config {
-  table-layout: fixed;
-  width: 95%;
+    max-width: 682px;
+    text-align-last: left;
 }
 
 .admin-config-name {

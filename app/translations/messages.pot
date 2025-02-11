@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2025-02-09 21:49+0100\n"
+"POT-Creation-Date: 2025-02-11 22:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -375,7 +375,7 @@ msgstr ""
 #: app/html/sub/post.html:225 app/html/sub/post.html:357
 #: app/html/sub/post.html:381 app/html/sub/postcomments.html:43
 #: app/html/user/comments.html:50 app/html/user/savedcomments.html:47
-#: app/misc.py:2334 app/misc.py:3270 app/misc.py:3276 app/misc.py:3281
+#: app/misc.py:2334 app/misc.py:3306 app/misc.py:3312 app/misc.py:3317
 msgid "[deleted]"
 msgstr ""
 
@@ -395,47 +395,45 @@ msgstr ""
 msgid "Invalid CSS"
 msgstr ""
 
-#: app/misc.py:2571
+#: app/misc.py:2569 app/misc.py:2631
 #, python-format
 msgid "User %(user_name)s sent you a <a href=\"%(url)s\">private message</a>"
 msgstr ""
 
-#: app/misc.py:2577 app/misc.py:2682 app/notifications.py:290
+#: app/misc.py:2575 app/misc.py:2637 app/misc.py:2718 app/notifications.py:290
 msgid "New notification"
 msgstr ""
 
-#: app/misc.py:2676
+#: app/misc.py:2712
 #, python-format
-msgid ""
-"User %(user_name)s <a href="%(url)s">replied</a> to your private "
-"message"
+msgid "User %(user_name)s <a href=\"%(url)s\">replied</a> to your private message"
 msgstr ""
 
-#: app/html/sub/postcomments.html:56 app/misc.py:3251
+#: app/html/sub/postcomments.html:56 app/misc.py:3287
 msgid "[Blocked]"
 msgstr ""
 
-#: app/misc.py:3264
+#: app/misc.py:3300
 msgid "[deleted by user]"
 msgstr ""
 
-#: app/misc.py:3348
+#: app/misc.py:3384
 msgid "Already processing previous request."
 msgstr ""
 
-#: app/misc.py:3370
+#: app/misc.py:3406
 msgid "Unknown error. User disappeared"
 msgstr ""
 
-#: app/misc.py:3377
+#: app/misc.py:3413
 msgid "Score balance is negative"
 msgstr ""
 
-#: app/misc.py:3379
+#: app/misc.py:3415
 msgid "Invalid vote value"
 msgstr ""
 
-#: app/misc.py:3395 app/views/do.py:331 app/views/do.py:485 app/views/do.py:867
+#: app/misc.py:3431 app/views/do.py:331 app/views/do.py:485 app/views/do.py:867
 #: app/views/do.py:902 app/views/do.py:1294 app/views/do.py:1400
 #: app/views/do.py:2724 app/views/do.py:2830 app/views/do.py:3005
 #: app/views/do.py:3020 app/views/do.py:3124 app/views/do.py:3209
@@ -445,44 +443,44 @@ msgstr ""
 msgid "Post does not exist"
 msgstr ""
 
-#: app/misc.py:3398
+#: app/misc.py:3434
 msgid "You can't vote on your own posts"
 msgstr ""
 
-#: app/misc.py:3400
+#: app/misc.py:3436
 msgid "You can't vote on deleted posts"
 msgstr ""
 
-#: app/misc.py:3433 app/views/do.py:3036 app/views/do.py:3051
+#: app/misc.py:3469 app/views/do.py:3036 app/views/do.py:3051
 #: app/views/do.py:3174 app/views/do.py:3493 app/views/do.py:3541
 #: app/views/do.py:3680 app/views/do.py:3985 app/views/do.py:4010
 #: app/views/do.py:4929 app/views/do.py:5042
 msgid "Comment does not exist"
 msgstr ""
 
-#: app/misc.py:3436
+#: app/misc.py:3472
 msgid "You can't vote on your own comments"
 msgstr ""
 
-#: app/misc.py:3438
+#: app/misc.py:3474
 msgid "You can't vote on deleted comments"
 msgstr ""
 
-#: app/misc.py:3450
+#: app/misc.py:3486
 msgid "Invalid target"
 msgstr ""
 
-#: app/misc.py:3453 app/views/do.py:1348 app/views/do.py:2731
+#: app/misc.py:3489 app/views/do.py:1348 app/views/do.py:2731
 #: app/views/do.py:3505
 msgid "You are banned on this sub."
 msgstr ""
 
-#: app/misc.py:3458 app/views/do.py:1351 app/views/do.py:1405
+#: app/misc.py:3494 app/views/do.py:1351 app/views/do.py:1405
 #: app/views/do.py:3516
 msgid "Post is archived"
 msgstr ""
 
-#: app/misc.py:3812
+#: app/misc.py:3848
 msgid "Invalid status request"
 msgstr ""
 
@@ -1155,7 +1153,7 @@ msgstr ""
 msgid "There are no posts here, yet."
 msgstr ""
 
-#: app/html/admin/configuration.html:15 app/html/shared/sidebar/admin.html:17
+#: app/html/admin/configuration.html:15 app/html/shared/sidebar/admin.html:2
 msgid "Site configuration"
 msgstr ""
 
@@ -1278,7 +1276,7 @@ msgstr ""
 
 #: app/html/admin/reports.html:41 app/html/mod/closed.html:40
 #: app/html/mod/reports.html:39 app/html/mod/sub_reports.html:44
-#: app/html/mod/sub_reports_closed.html:46 app/html/user/uploads.html:43
+#: app/html/mod/sub_reports_closed.html:46 app/html/user/uploads.html:50
 msgid "Post"
 msgstr ""
 
@@ -1961,48 +1959,48 @@ msgstr ""
 msgid "Admin panel"
 msgstr ""
 
-#: app/html/shared/sidebar/admin.html:3
+#: app/html/shared/sidebar/admin.html:4
 msgid "Admins"
 msgstr ""
 
-#: app/html/shared/sidebar/admin.html:4
+#: app/html/shared/sidebar/admin.html:5
 msgid "Users"
 msgstr ""
 
-#: app/html/shared/sidebar/admin.html:5
+#: app/html/shared/sidebar/admin.html:6
 msgid "User Badges"
 msgstr ""
 
-#: app/html/shared/sidebar/admin.html:6
+#: app/html/shared/sidebar/admin.html:7
 msgid "Invite Codes"
 msgstr ""
 
-#: app/html/shared/sidebar/admin.html:8 app/templates/subs.html:2
+#: app/html/shared/sidebar/admin.html:9 app/templates/subs.html:2
 #: app/templates/subs.html:10
 msgid "Subs"
 msgstr ""
 
-#: app/html/shared/sidebar/admin.html:9
+#: app/html/shared/sidebar/admin.html:10
 msgid "Posts"
 msgstr ""
 
-#: app/html/shared/sidebar/admin.html:10
+#: app/html/shared/sidebar/admin.html:11
 msgid "Reports"
 msgstr ""
 
-#: app/html/shared/sidebar/admin.html:12
+#: app/html/shared/sidebar/admin.html:13
 msgid "Uploads"
 msgstr ""
 
-#: app/html/shared/sidebar/admin.html:13
+#: app/html/shared/sidebar/admin.html:14
 msgid "Wikis"
 msgstr ""
 
-#: app/html/shared/sidebar/admin.html:14 app/views/admin.py:757
+#: app/html/shared/sidebar/admin.html:15 app/views/admin.py:757
 msgid "Banned Domains"
 msgstr ""
 
-#: app/html/shared/sidebar/admin.html:15 app/views/admin.py:754
+#: app/html/shared/sidebar/admin.html:16 app/views/admin.py:754
 msgid "Banned Email Domains"
 msgstr ""
 
@@ -2065,6 +2063,10 @@ msgstr ""
 
 #: app/html/shared/sidebar/home.html:71
 msgid "Sub of the day"
+msgstr ""
+
+#: app/html/shared/sidebar/home.html:81
+msgid "Changelog"
 msgstr ""
 
 #: app/html/shared/sidebar/home.html:92 app/html/site/log.html:7
@@ -3496,13 +3498,13 @@ msgstr ""
 
 #: app/html/user/comments.html:129 app/html/user/posts.html:47
 #: app/html/user/savedcomments.html:108 app/html/user/savedposts.html:43
-#: app/html/user/uploads.html:51 app/templates/messages/nav.html:3
+#: app/html/user/uploads.html:60 app/templates/messages/nav.html:3
 msgid "Next"
 msgstr ""
 
 #: app/html/user/comments.html:132 app/html/user/posts.html:50
 #: app/html/user/savedcomments.html:111 app/html/user/savedposts.html:46
-#: app/html/user/uploads.html:54 app/templates/messages/nav.html:6
+#: app/html/user/uploads.html:63 app/templates/messages/nav.html:6
 msgid "Previous"
 msgstr ""
 
