@@ -239,7 +239,12 @@ socket.on('comment', function (data) {
       recentActivity.removeChild(recentActivity.lastElementChild); // Remove the last item
     }
 
-    recentActivity.prepend(elem); // Add the new comment as the first item
+    const header = recentActivity.querySelector('h4');
+    if (header) {
+      header.after(elem); // Inserts the new element after the <h4>
+    } else {
+      recentActivity.prepend(elem); // Fallback if no <h4> exists
+    }
 
     // Remove 'new-item' class after animation
     setTimeout(() => elem.classList.remove('new-item'), 2500);
@@ -277,7 +282,12 @@ socket.on('thread', function (data) {
       recentActivity.removeChild(recentActivity.lastElementChild); // Remove the last item
     }
 
-    recentActivity.prepend(elem); // Add the new thread as the first item
+    const header = recentActivity.querySelector('h4');
+    if (header) {
+      header.after(elem); // Inserts the new element after the <h4>
+    } else {
+      recentActivity.prepend(elem); // Fallback if no <h4> exists
+    }
 
     // Remove 'new-item' class after animation
     setTimeout(() => elem.classList.remove('new-item'), 2500);

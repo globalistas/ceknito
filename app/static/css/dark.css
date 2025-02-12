@@ -414,6 +414,14 @@ body.dark .sidebar {
 
 }
 
+body.dark .sidebarlists .sidelocale.top5 {
+    color: #b9bbbe;
+}
+
+body.dark  .sidebarlists.top5 {
+    color: #b9bbbe;
+}
+
 body.dark .sidebar p {
   color: #8f8f8f !important;
 }

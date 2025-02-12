@@ -1760,7 +1760,31 @@ a.pure-button.alldarightcomments {
 }
 
 .sidebarlists {
-  color: #888;
+  color: #404040;
+}
+
+.sidebarlists h4.top5 {
+    color: #404040;
+    margin: 0px 0px 0px 0px;
+    padding: 10px 0px 0px 0px;
+    font-size: 16px;
+    position: relative;
+    right: 5px;
+}
+
+.sidebarlists.top5 {
+  color: #404040;
+}
+
+.sidebarlists ul.top5 {
+    padding: 0px 8px 10px 24px;
+    margin: 12px 5px 12px 5px;
+    font-weight: normal;
+    text-align: left;
+    font-size: 14px;
+    background: #e6e6e6;
+    border-radius: 2px;
+    border: 1px solid #ccc;
 }
 
 .sbm-post {
