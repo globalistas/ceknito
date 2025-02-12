@@ -78,7 +78,7 @@ body.dark div#sortbuttons {
   color: #526a7d;
 }
 
-body.dark a:hover,
+body.dark a:hover, body.dark .sidebar ul.top5 li a:hover,
 body.dark #sortbuttons a:hover {
   color: #697e8b;
 }
@@ -418,8 +418,13 @@ body.dark .sidebarlists .sidelocale.top5 {
     color: #b9bbbe;
 }
 
-body.dark  .sidebarlists.top5 {
-    color: #b9bbbe;
+body.dark  .sidebarlists {
+    color: #898989;
+}
+
+body.dark .sidebarlists ul.top5 {
+    background: #313338;
+    border: 1px solid #303030;
 }
 
 body.dark .sidebar p {
@@ -427,7 +432,7 @@ body.dark .sidebar p {
 }
 
 body.dark .sidebar h4 {
-  color: #ccc;
+  color: #898989;
 }
 
 body.dark input[type="search"] {
