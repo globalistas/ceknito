@@ -130,8 +130,8 @@ function getCursorSelection(textarea) {
 }
 
 function setSelection(textarea, begin, end) {
+  const scrollPos = textarea.scrollTop; // Store current scroll position
   if (textarea.setSelectionRange) {
-    textarea.focus();
     textarea.setSelectionRange(begin, end);
   } else if (textarea.createTextRange) {
     var tra = textarea.createTextRange();
@@ -140,6 +140,7 @@ function setSelection(textarea, begin, end) {
     tra.moveStart('character', begin);
     tra.select();
   }
+  textarea.scrollTop = scrollPos; // Restore scroll position after selection update
 }
 
 export default initializeEditor;
