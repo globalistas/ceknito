@@ -20,7 +20,7 @@ A link and discussion aggregator with snek (python3)
 - support for image embeds
 - working email notifications (see https://github.com/Phuks-co/throat/issues/525)
 - disable notifications on a per-post/comment basis
-- delete post directly from Home page or Sub page
+- delete posts directly from Home page or Sub page
 - config option to enable private subs
 - config option for minimum post creation user level
 - config option to enable live updates of recent activity sidebar
