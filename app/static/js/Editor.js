@@ -65,7 +65,7 @@ function initializeEditor(element) {
   el.appendChild(x);
 
   var makeImgLink = function (e) {
-    var uri = prompt('Vložiť link na obrázok');
+    var uri = prompt(_('Insert image link'));
     if (uri) {
       if (getCursorSelection(textarea)[1] == '') {
         addTags(textarea, '![', _('Link Title'), '](' + uri + ')');

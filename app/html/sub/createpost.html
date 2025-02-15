@@ -49,14 +49,68 @@
 
                 @if config.site.link_post_text:
                 <div class="pure-control-group ltxcont" style="display:none">
-                    @{form.content.label()!!html}<div class="markdown-editor">
+                    @{form.content.label()!!html}
+                    <div class="markdown-editor">
                         @{form.content(class_="exalert", placeholder=_('(Optional) Write your post content here. Styling with Markdown format is supported.'), rows="10", style="width: 100%")!!html}
+                        <div class="bottom-area">
+                            <span class="help-toggle toggle">
+                                <a class="option active" href="#" tabindex="100">@{_('formatting help')}</a>
+                                <a class="option" href="#">@{_('hide help')}</a>
+                            </span>
+                            <div class="markhelp">
+                                <p>@{_('This site uses a slightly-customized version of <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> for formatting. See below for some basics, or check <a href="https://support.reddithelp.com/hc/en-us/articles/360043033952-Formatting-Guide">this commenting guide</a> for more details.')!!html}</p>
+                                <table class="md">
+                                    <tbody>
+                                        <tr style="background-color: #ffff99; text-align: center">
+                                            <td><em>@{_('you type:')}</em></td>
+                                            <td><em>@{_('you see:')}</em></td>
+                                        </tr>
+                                        <tr><td>*@{_('italics')}*</td><td><em>@{_('italics')}</em></td></tr>
+                                        <tr><td>**@{_('bold')}**</td><td><b>@{_('bold')}</b></td></tr>
+                                        <tr><td>[link](https://cekni.to)</td><td><a href="https://cekni.to">link</a></td></tr>
+                                        <tr><td style="vertical-align: top;">* @{_('item')} 1<br>* @{_('item')} 2<br>* @{_('item')} 3</td><td><ul style="margin: 0px 16px 0px 16px;"><li>@{_('item')} 1</li><li>@{_('item')} 2</li><li>@{_('item')} 3</li></ul></td></tr>
+                                        <tr><td>&gt; @{_('quoted text')} </td><td><blockquote>@{_('quoted text')}</blockquote></td></tr>
+                                        <tr><td>@{_('Lines starting with four spaces<br>are treated like code:')!!html}<br><br><span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>if 1 * 2 < 3:<br><span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>print "hello, world!"<br></td>
+                                            <td>@{_('Lines starting with four spaces<br>are treated like code:')!!html}<br><pre>if 1 * 2 &lt; 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;print "hello, world!"</pre></td></tr>
+                                        <tr><td>~~@{_('strikethrough')}~~</td><td><strike>@{_('strikethrough')}</strike></td></tr>
+                                        <tr><td>super^script</td><td>super<sup>script</sup></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 @else:
                 <div class="pure-control-group txcont" style="display:none">
-                    @{form.content.label()!!html}<div class="markdown-editor">
+                    @{form.content.label()!!html}
+                    <div class="markdown-editor">
                         @{form.content(class_="exalert", placeholder=_('(Optional) Write your post content here. Styling with Markdown format is supported.'), rows="10", style="width: 100%")!!html}
+                        <div class="bottom-area">
+                            <span class="help-toggle toggle">
+                                <a class="option active" href="#" tabindex="100">@{_('formatting help')}</a>
+                                <a class="option" href="#">@{_('hide help')}</a>
+                            </span>
+                            <div class="markhelp">
+                                <p>@{_('This site uses a slightly-customized version of <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> for formatting. See below for some basics, or check <a href="https://support.reddithelp.com/hc/en-us/articles/360043033952-Formatting-Guide">this commenting guide</a> for more details.')!!html}</p>
+                                <table class="md">
+                                    <tbody>
+                                        <tr style="background-color: #ffff99; text-align: center">
+                                            <td><em>@{_('you type:')}</em></td>
+                                            <td><em>@{_('you see:')}</em></td>
+                                        </tr>
+                                        <tr><td>*@{_('italics')}*</td><td><em>@{_('italics')}</em></td></tr>
+                                        <tr><td>**@{_('bold')}**</td><td><b>@{_('bold')}</b></td></tr>
+                                        <tr><td>[link](https://cekni.to)</td><td><a href="https://cekni.to">link</a></td></tr>
+                                        <tr><td style="vertical-align: top;">* @{_('item')} 1<br>* @{_('item')} 2<br>* @{_('item')} 3</td><td><ul style="margin: 0px 16px 0px 16px;"><li>@{_('item')} 1</li><li>@{_('item')} 2</li><li>@{_('item')} 3</li></ul></td></tr>
+                                        <tr><td>&gt; @{_('quoted text')} </td><td><blockquote>@{_('quoted text')}</blockquote></td></tr>
+                                        <tr><td>@{_('Lines starting with four spaces<br>are treated like code:')!!html}<br><br><span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>if 1 * 2 < 3:<br><span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>print "hello, world!"<br></td>
+                                            <td>@{_('Lines starting with four spaces<br>are treated like code:')!!html}<br><pre>if 1 * 2 &lt; 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;print "hello, world!"</pre></td></tr>
+                                        <tr><td>~~@{_('strikethrough')}~~</td><td><strike>@{_('strikethrough')}</strike></td></tr>
+                                        <tr><td>super^script</td><td>super<sup>script</sup></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 @end

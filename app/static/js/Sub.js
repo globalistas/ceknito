@@ -408,3 +408,47 @@ u.sub('#userflair .selflair', 'click', function () {
         }
     );
 });
+
+// formatting help text
+document.addEventListener("DOMContentLoaded", function () {
+    function setupToggle(container) {
+        const showHelp = container.querySelector(".help-toggle .option:nth-child(1)");
+        const hideHelp = container.querySelector(".help-toggle .option:nth-child(2)");
+        const helpDiv = container.querySelector(".markhelp");
+
+        if (!showHelp || !hideHelp || !helpDiv) {
+            return;
+        }
+
+        hideHelp.style.display = "none";
+
+        showHelp.addEventListener("click", function (event) {
+            event.preventDefault();
+            showHelp.style.display = "none";
+            hideHelp.style.display = "inline";
+            helpDiv.style.display = "block";
+        });
+
+        hideHelp.addEventListener("click", function (event) {
+            event.preventDefault();
+            hideHelp.style.display = "none";
+            showHelp.style.display = "inline";
+            helpDiv.style.display = "none";
+        });
+    }
+
+    // Apply to existing instance on page load
+    setupToggle(document);
+
+    // Listen for dynamically added reply boxes and apply toggle
+    document.addEventListener("click", function (event) {
+        if (event.target.matches(".reply-comment")) {
+            setTimeout(() => {
+                const newReplyBox = document.querySelector(".replybox:last-child");
+                if (newReplyBox) {
+                    setupToggle(newReplyBox);
+                }
+            }, 100);
+        }
+    });
+});

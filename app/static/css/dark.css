@@ -1087,3 +1087,15 @@ body.dark .commblock {
   border: none;
   background-color: transparent;
 }
+
+body.dark .markhelp {
+    color: #d5d5d5;
+}
+
+body.dark .markhelp table {
+    color: #a0a0a0;
+}
+
+body.dark .markhelp tr {
+    background-color: #202225 !important;
+}

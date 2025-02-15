@@ -820,13 +820,40 @@ u.addEventForChild(document, 'click', '.reply-comment', function (e, qelem) {
     const lm = document.createElement('div');
     lm.id = 'rblock-' + cid;
     lm.classList.add('replybox');
-    lm.innerHTML = '<div class="cwrap markdown-editor" id="rcomm-' + cid + '"><textarea class="exalert" style="height: 9em;"></textarea></div>' +
-        '<div style="display:none" class="error"></div><button class="pure-button pure-button-primary button-small btn-postcomment" ' +
-        'data-pid="' + pid + '" data-cid="' + cid + '">' + _('Post comment') + '</button> <button class="pure-button button-small btn-preview" data-pvid="rcomm-' +
-        cid + '">' + _('Preview') + '</button>' +
-        '<button class="pure-button button-small btn-rcancel button-transparent" data-pvid="editpost" >' + _('Cancel') + '</button>' +
-        '<div class="cmpreview canclose" style="display:none;"><h4>' + _('Comment preview') + '</h4><span class="closemsg">&times;</span>' +
-        '<div class="cpreview-content"></div></div>';
+    lm.innerHTML = '<div class="cwrap markdown-editor" id="rcomm-' + cid + '">'
+        + '<textarea class="exalert" style="height: 9em;"></textarea>'
+        + '<div class="bottom-area">'
+        + '<span class="help-toggle toggle">'
+        + '<a class="option active" href="#" tabindex="100">' + _('formatting help') + '</a>'
+        + '<a class="option" href="#">' + _('hide help') + '</a>'
+        + '</span>'
+        + '<div class="markhelp" style="display: none;">'
+        + '<p>' + _('This site uses a slightly-customized version of <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> for formatting. See below for some basics, or check <a href="https://support.reddithelp.com/hc/en-us/articles/360043033952-Formatting-Guide">this commenting guide</a> for more details.') + '</p>'
+        + '<table class="md">'
+        + '<tbody>'
+        + '<tr style="background-color: #ffff99; text-align: center">'
+        + '<td><em>' + _('you type:') + '</em></td>'
+        + '<td><em>' + _('you see:') + '</em></td>'
+        + '</tr>'
+        + '<tr><td>*' + _('italics') + '*</td><td><em>' + _('italics') + '</em></td></tr>'
+        + '<tr><td>**' + _('bold') + '**</td><td><b>' + _('bold') + '</b></td></tr>'
+        + '<tr><td>[link](https://cekni.to)</td><td><a href="https://cekni.to">link</a></td></tr>'
+        + '<tr><td style="vertical-align: top;">* ' + _('item') + ' 1<br>* ' + _('item') + ' 2<br>* ' + _('item') + ' 3</td>'
+        + '<td><ul style="margin: 0px 16px 0px 16px;"><li>' + _('item') + ' 1</li><li>' + _('item') + ' 2</li><li>' + _('item') + ' 3</li></ul></td></tr>'
+        + '<tr><td>&gt; ' + _('quoted text') + '</td><td><blockquote>' + _('quoted text') + '</blockquote></td></tr>'
+        + '<tr><td>' + _('Lines starting with four spaces<br>are treated like code:') + '<br><br><span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>if 1 * 2 < 3:<br>'
+        + '<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>print "hello, world!"<br></td>'
+        + '<td>' + _('Lines starting with four spaces<br>are treated like code:') + '<br><pre>if 1 * 2 &lt; 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;print "hello, world!"</pre></td></tr>'
+        + '<tr><td>~~' + _('strikethrough') + '~~</td><td><strike>' + _('strikethrough') + '</strike></td></tr>'
+        + '<tr><td>super^script</td><td>super<sup>script</sup></td></tr>'
+        + '</tbody></table>'
+        + '</div></div></div>'
+        + '<div style="display:none" class="error"></div><button class="pure-button pure-button-primary button-small btn-postcomment" '
+        + 'data-pid="' + pid + '" data-cid="' + cid + '">' + _('Post comment') + '</button> <button class="pure-button button-small btn-preview" data-pvid="rcomm-'
+        + cid + '">' + _('Preview') + '</button>'
+        + '<button class="pure-button button-small btn-rcancel button-transparent" data-pvid="editpost" >' + _('Cancel') + '</button>'
+        + '<div class="cmpreview canclose" style="display:none;"><h4>' + _('Comment preview') + '</h4><span class="closemsg">&times;</span>'
+        + '<div class="cpreview-content"></div></div>';
     lm.querySelector('.btn-rcancel').onclick = back.onclick;
     pN.parentNode.parentNode.appendChild(lm);
     initializeEditor(document.querySelector('#rcomm-' + cid));

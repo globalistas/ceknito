@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2025-02-11 22:38+0100\n"
+"POT-Creation-Date: 2025-02-15 20:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -889,7 +889,7 @@ msgid "Poll closing time"
 msgstr ""
 
 #: app/forms/sub.py:257 app/forms/user.py:120 app/forms/user.py:234
-#: app/html/sub/createpost.html:130 app/html/user/password_recovery.html:26
+#: app/html/sub/createpost.html:184 app/html/user/password_recovery.html:26
 msgid "Captcha"
 msgstr ""
 
@@ -1189,7 +1189,7 @@ msgid "Saving..."
 msgstr ""
 
 #: app/html/admin/configuration.html:68 app/static/js/Post.js:378
-#: app/static/js/Post.js:433 app/static/js/Post.js:827
+#: app/static/js/Post.js:433 app/static/js/Post.js:854
 msgid "Cancel"
 msgstr ""
 
@@ -1197,15 +1197,88 @@ msgstr ""
 msgid "Create wiki"
 msgstr ""
 
-#: app/html/admin/createwiki.html:33 app/html/sub/createpost.html:53
-#: app/html/sub/createpost.html:59
+#: app/html/admin/createwiki.html:33 app/html/sub/createpost.html:54
+#: app/html/sub/createpost.html:87
 msgid ""
 "(Optional) Write your post content here. Styling with Markdown format is "
 "supported."
 msgstr ""
 
-#: app/html/admin/createwiki.html:37 app/html/mod/reportdetails.html:229
-#: app/static/js/Post.js:958 app/templates/messages/reply.html:16
+#: app/html/admin/createwiki.html:36 app/html/sub/createpost.html:57
+#: app/html/sub/createpost.html:90 app/html/sub/post.html:432
+#: app/static/js/Post.js:827
+msgid "formatting help"
+msgstr ""
+
+#: app/html/admin/createwiki.html:37 app/html/sub/createpost.html:58
+#: app/html/sub/createpost.html:91 app/html/sub/post.html:433
+#: app/static/js/Post.js:828
+msgid "hide help"
+msgstr ""
+
+#: app/html/admin/createwiki.html:40 app/html/sub/createpost.html:61
+#: app/html/sub/createpost.html:94 app/html/sub/post.html:436
+#: app/static/js/Post.js:831
+msgid ""
+"This site uses a slightly-customized version of <a "
+"href=\"http://daringfireball.net/projects/markdown/syntax\">Markdown</a> "
+"for formatting. See below for some basics, or check <a "
+"href=\"https://support.reddithelp.com/hc/en-us/articles/360043033952"
+"-Formatting-Guide\">this commenting guide</a> for more details."
+msgstr ""
+
+#: app/html/admin/createwiki.html:44 app/html/sub/createpost.html:65
+#: app/html/sub/createpost.html:98 app/html/sub/post.html:440
+#: app/static/js/Post.js:835
+msgid "you type:"
+msgstr ""
+
+#: app/html/admin/createwiki.html:45 app/html/sub/createpost.html:66
+#: app/html/sub/createpost.html:99 app/html/sub/post.html:441
+#: app/static/js/Post.js:836
+msgid "you see:"
+msgstr ""
+
+#: app/html/admin/createwiki.html:47 app/html/sub/createpost.html:68
+#: app/html/sub/createpost.html:101 app/html/sub/post.html:443
+#: app/static/js/Post.js:838
+msgid "italics"
+msgstr ""
+
+#: app/html/admin/createwiki.html:48 app/html/sub/createpost.html:69
+#: app/html/sub/createpost.html:102 app/html/sub/post.html:444
+#: app/static/js/Post.js:839
+msgid "bold"
+msgstr ""
+
+#: app/html/admin/createwiki.html:50 app/html/sub/createpost.html:71
+#: app/html/sub/createpost.html:104 app/html/sub/post.html:446
+#: app/static/js/Post.js:841 app/static/js/Post.js:842
+msgid "item"
+msgstr ""
+
+#: app/html/admin/createwiki.html:51 app/html/sub/createpost.html:72
+#: app/html/sub/createpost.html:105 app/html/sub/post.html:447
+#: app/static/js/Post.js:843
+msgid "quoted text"
+msgstr ""
+
+#: app/html/admin/createwiki.html:52 app/html/admin/createwiki.html:53
+#: app/html/sub/createpost.html:73 app/html/sub/createpost.html:74
+#: app/html/sub/createpost.html:106 app/html/sub/createpost.html:107
+#: app/html/sub/post.html:448 app/html/sub/post.html:449
+#: app/static/js/Post.js:844 app/static/js/Post.js:846
+msgid "Lines starting with four spaces<br>are treated like code:"
+msgstr ""
+
+#: app/html/admin/createwiki.html:54 app/html/sub/createpost.html:75
+#: app/html/sub/createpost.html:108 app/html/sub/post.html:450
+#: app/static/js/Post.js:847
+msgid "strikethrough"
+msgstr ""
+
+#: app/html/admin/createwiki.html:63 app/html/mod/reportdetails.html:229
+#: app/static/js/Post.js:985 app/templates/messages/reply.html:16
 msgid "Submit"
 msgstr ""
 
@@ -1406,8 +1479,8 @@ msgid "all"
 msgstr ""
 
 #: app/html/errors/layout.html:63 app/html/shared/layout.html:76
-#: app/html/shared/sub.html:76 app/html/sub/post.html:464
-#: app/html/sub/post.html:502 app/templates/layout.html:62
+#: app/html/shared/sub.html:76 app/html/sub/post.html:490
+#: app/html/sub/post.html:528 app/templates/layout.html:62
 msgid "new"
 msgstr ""
 
@@ -2029,7 +2102,7 @@ msgstr ""
 msgid "View all subs"
 msgstr ""
 
-#: app/html/shared/sidebar/home.html:20
+#: app/html/shared/sidebar/home.html:21
 msgid "Top posts in the last 24 hours"
 msgstr ""
 
@@ -2039,15 +2112,15 @@ msgstr ""
 msgid "%(timeago)s in %(sub)s"
 msgstr ""
 
-#: app/html/shared/sidebar/home.html:43 app/html/site/activity.html:11
+#: app/html/shared/sidebar/home.html:44 app/html/site/activity.html:11
 msgid "Recent activity"
 msgstr ""
 
-#: app/html/shared/sidebar/home.html:45
+#: app/html/shared/sidebar/home.html:46
 msgid "live updates"
 msgstr ""
 
-#: app/html/shared/sidebar/home.html:45
+#: app/html/shared/sidebar/home.html:46
 msgid "LIVE"
 msgstr ""
 
@@ -2061,11 +2134,11 @@ msgstr ""
 msgid "%(user)s posted: %(text)s"
 msgstr ""
 
-#: app/html/shared/sidebar/home.html:71
+#: app/html/shared/sidebar/home.html:72
 msgid "Sub of the day"
 msgstr ""
 
-#: app/html/shared/sidebar/home.html:81
+#: app/html/shared/sidebar/home.html:82
 msgid "Changelog"
 msgstr ""
 
@@ -2647,48 +2720,48 @@ msgstr ""
 msgid "Grab title"
 msgstr ""
 
-#: app/html/sub/createpost.html:65
+#: app/html/sub/createpost.html:119
 msgid "Options"
 msgstr ""
 
-#: app/html/sub/createpost.html:73 app/html/sub/members.html:88
+#: app/html/sub/createpost.html:127 app/html/sub/members.html:88
 #: app/html/sub/mods.html:57 app/html/sub/mods.html:75 app/static/js/Poll.js:29
 msgid "remove"
 msgstr ""
 
-#: app/html/sub/createpost.html:88
+#: app/html/sub/createpost.html:142
 msgid "Add option"
 msgstr ""
 
-#: app/html/sub/createpost.html:96
+#: app/html/sub/createpost.html:150
 msgid "File"
 msgstr ""
 
-#: app/html/sub/createpost.html:97
+#: app/html/sub/createpost.html:151
 msgid "Upload a file!"
 msgstr ""
 
-#: app/html/sub/createpost.html:102
+#: app/html/sub/createpost.html:156
 msgid "Hide poll results until poll closes"
 msgstr ""
 
-#: app/html/sub/createpost.html:106
+#: app/html/sub/createpost.html:160
 msgid "Close the poll at..."
 msgstr ""
 
-#: app/html/sub/createpost.html:135
+#: app/html/sub/createpost.html:189
 msgid "Submit post"
 msgstr ""
 
-#: app/html/sub/createpost.html:140 app/html/sub/createpost.html:145
-#: app/html/sub/post.html:433 app/html/user/profile.html:205
+#: app/html/sub/createpost.html:194 app/html/sub/createpost.html:199
+#: app/html/sub/post.html:459 app/html/user/profile.html:205
 #: app/static/js/Post.js:377 app/static/js/Post.js:432
-#: app/static/js/Post.js:517 app/static/js/Post.js:826
+#: app/static/js/Post.js:517 app/static/js/Post.js:853
 #: app/templates/messages/reply.html:17
 msgid "Preview"
 msgstr ""
 
-#: app/html/sub/createpost.html:149
+#: app/html/sub/createpost.html:203
 msgid "Post preview"
 msgstr ""
 
@@ -3177,52 +3250,52 @@ msgstr ""
 msgid "Viewing edit history:"
 msgstr ""
 
-#: app/html/sub/post.html:432
+#: app/html/sub/post.html:458
 msgid "Submit comment"
 msgstr ""
 
-#: app/html/sub/post.html:435 app/static/js/Post.js:379
-#: app/static/js/Post.js:434 app/static/js/Post.js:828
-#: app/static/js/Post.js:851
+#: app/html/sub/post.html:461 app/static/js/Post.js:379
+#: app/static/js/Post.js:434 app/static/js/Post.js:855
+#: app/static/js/Post.js:878
 msgid "Comment preview"
 msgstr ""
 
-#: app/html/sub/post.html:442
+#: app/html/sub/post.html:468
 msgid ""
 "This post is closed to new comments.  It has been locked by the "
 "moderators."
 msgstr ""
 
-#: app/html/sub/post.html:446
+#: app/html/sub/post.html:472
 msgid "This post is closed to new comments.  It has been automatically archived."
 msgstr ""
 
-#: app/html/sub/post.html:451
+#: app/html/sub/post.html:477
 msgid "No comments, yet..."
 msgstr ""
 
-#: app/html/sub/post.html:454
+#: app/html/sub/post.html:480
 msgid "Show comments"
 msgstr ""
 
-#: app/html/sub/post.html:463 app/html/sub/post.html:492
+#: app/html/sub/post.html:489 app/html/sub/post.html:518
 msgid "top"
 msgstr ""
 
-#: app/html/sub/post.html:465 app/html/sub/post.html:512
+#: app/html/sub/post.html:491 app/html/sub/post.html:538
 msgid "old"
 msgstr ""
 
-#: app/html/sub/post.html:468 app/html/sub/post.html:481
+#: app/html/sub/post.html:494 app/html/sub/post.html:507
 msgid "best"
 msgstr ""
 
-#: app/html/sub/post.html:471
+#: app/html/sub/post.html:497
 #, python-format
 msgid "sorted by: <b><u>%(currsort)s</u></b>"
 msgstr ""
 
-#: app/html/sub/post.html:521
+#: app/html/sub/post.html:547
 #, python-format
 msgid "%(comments)i comments"
 msgstr ""
@@ -4090,7 +4163,7 @@ msgstr ""
 msgid "Quote (ctrl-shift-.)"
 msgstr ""
 
-#: app/static/js/Editor.js:78
+#: app/static/js/Editor.js:68 app/static/js/Editor.js:78
 msgid "Insert image link"
 msgstr ""
 
@@ -4124,7 +4197,7 @@ msgstr ""
 
 #: app/static/js/Mod.js:24 app/static/js/Mod.js:39 app/static/js/Mod.js:68
 #: app/static/js/Mod.js:83 app/static/js/Post.js:459 app/static/js/Post.js:480
-#: app/static/js/Post.js:520 app/static/js/Post.js:1081
+#: app/static/js/Post.js:520 app/static/js/Post.js:1108
 #: app/static/js/Util.js:77
 msgid "Could not contact the server"
 msgstr ""
@@ -4228,71 +4301,71 @@ msgstr ""
 msgid "Grabbing..."
 msgstr ""
 
-#: app/static/js/Post.js:825
+#: app/static/js/Post.js:852
 msgid "Post comment"
 msgstr ""
 
-#: app/static/js/Post.js:879
+#: app/static/js/Post.js:906
 msgid "1 comment"
 msgstr ""
 
-#: app/static/js/Post.js:888
+#: app/static/js/Post.js:915
 msgid "%1 comments"
 msgstr ""
 
-#: app/static/js/Post.js:925
+#: app/static/js/Post.js:952
 msgid "Could not contact the server "
 msgstr ""
 
-#: app/static/js/Post.js:931
+#: app/static/js/Post.js:958
 msgid "Report post"
 msgstr ""
 
-#: app/static/js/Post.js:932
+#: app/static/js/Post.js:959
 msgid "This report will be forwarded to the site administration"
 msgstr ""
 
-#: app/static/js/Post.js:935
+#: app/static/js/Post.js:962
 msgid "Select a reason to report this post:"
 msgstr ""
 
-#: app/static/js/Post.js:937 app/static/js/Post.js:947
+#: app/static/js/Post.js:964 app/static/js/Post.js:974
 msgid "Select one..."
 msgstr ""
 
-#: app/static/js/Post.js:938
+#: app/static/js/Post.js:965
 msgid "SPAM"
 msgstr ""
 
-#: app/static/js/Post.js:939
+#: app/static/js/Post.js:966
 msgid "TOS violation"
 msgstr ""
 
-#: app/static/js/Post.js:940
+#: app/static/js/Post.js:967
 msgid "Sub Rule violation"
 msgstr ""
 
-#: app/static/js/Post.js:941
+#: app/static/js/Post.js:968
 msgid "Other"
 msgstr ""
 
-#: app/static/js/Post.js:945
+#: app/static/js/Post.js:972
 msgid "Which Sub rule did this post violate?"
 msgstr ""
 
-#: app/static/js/Post.js:949
+#: app/static/js/Post.js:976
 msgid "Other sub rule"
 msgstr ""
 
-#: app/static/js/Post.js:953
+#: app/static/js/Post.js:980
 msgid "Explain why you're reporting this post:"
 msgstr ""
 
-#: app/static/js/Post.js:1074
+#: app/static/js/Post.js:1101
 msgid "Error: "
 msgstr ""
 
-#: app/static/js/Post.js:1077
+#: app/static/js/Post.js:1104
 msgid "Your report has been sent and will be reviewed by the site administrators."
 msgstr ""
 

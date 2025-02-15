@@ -2184,6 +2184,46 @@ article.comment .score {
   box-shadow: 0 0px 3px rgb(0 0 0 / 10%);
 }
 
+.bottom-area {
+    overflow: hidden;
+    width: 100%;
+}
+
+.help-toggle a {
+    float: right;
+    margin-top: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #369;
+    font-size: smaller;
+}
+
+.markhelp {
+    display: none;
+    padding: 4px;
+    margin: 24px 0px 5px 0px;
+    border-top: 1px dotted #c0c0c0;
+}
+
+.markhelp table {
+    width: 100%;
+    margin: 5px 0px;
+    color: #222222;
+}
+
+.markhelp tr, .markhelp td {
+    width: 50%;
+    border: 1px solid #c0c0c0;
+    text-align: left;
+    padding: 4px 9px;
+    vertical-align: baseline;
+}
+
+.spaces {
+    background-color: #c0c0c0;
+}
+
 /* /EDITOR STYLES */
 
 /* MESSAGES STYLES */
@@ -3521,7 +3561,8 @@ article.text-post.comment.deleted {
 .createpost [type="text"],
 .createpost [type="url"],
 .createpost textarea,
-.createpost .editbtns {
+.createpost .editbtns,
+.createpost .bottom-area {
   display: block !important;
   width: 600px !important;
 }
@@ -3540,7 +3581,8 @@ article.text-post.comment.deleted {
   .createpost [type="text"],
   .createpost [type="url"],
   .createpost textarea,
-  .createpost .editbtns {
+  .createpost .editbtns,
+  .createpost .bottom-area {
     display: block !important;
     width: 300px !important;
   }
