@@ -2563,7 +2563,7 @@ def create_message(mfrom, to, subject, content, mtype):
             locale_language = "sk_SK"  # Default language if no target language found
         email = _(
             'User %(user_name)s sent you a <a href="%(url)s">private message</a>',
-            user_name=current_user.name,
+            user_name=getattr(current_user, "name", "Admin"),
             post_title=None,
             sub_name=None,
             url=url_for("messages.view_messages", _external=True),
@@ -2625,7 +2625,7 @@ def create_notification_message(mfrom, as_admin, sub, to, subject, content):
             locale_language = "sk_SK"  # Default language if no target language found
         email = _(
             'User %(user_name)s sent you a <a href="%(url)s">private message</a>',
-            user_name=current_user.name,
+            user_name=getattr(current_user, "name", "Admin"),
             post_title=None,
             sub_name=None,
             url=url_for("messages.view_messages", _external=True),
@@ -2706,7 +2706,7 @@ def create_message_reply(message, content):
                 )
             email = _(
                 'User %(user_name)s <a href="%(url)s">replied</a> to your private message',
-                user_name=current_user.name,
+                user_name=getattr(current_user, "name", "Admin"),
                 post_title=None,
                 sub_name=None,
                 url=url_for("messages.view_messages", _external=True),
