@@ -6,7 +6,7 @@ from flask import Blueprint, abort, request, redirect, url_for
 from flask_login import login_required, current_user
 from flask_babel import _
 from .. import misc
-from ..badges import Badges
+from ..badges import Badges, badges
 from ..config import config
 from ..misc import engine, ratelimit, POSTING_LIMIT, gevent_required
 from ..socketio import socketio
@@ -385,10 +385,14 @@ def create_post(ptype, sub):
     # We check if automatic "Ready Steady Check" badge assignment is enabled in config
     # Then we assign the badge only if the user does not already have it
     if config.site.auto_rsc:
-        user_badges = Badges.badges_for_user(current_user.uid)
-        badge_ids = [badge.bid for badge in user_badges]
-        if 5 not in badge_ids:
-            Badges.assign_userbadge(current_user.uid, 5)
+        # Find the badge with the first_post trigger
+        first_post_badge = next((b for b in badges if b.trigger == "first post"), None)
+        if first_post_badge:
+            user_badges = Badges.badges_for_user(current_user.uid)
+            badge_ids = [badge.bid for badge in user_badges]
+
+            if first_post_badge.bid not in badge_ids:
+                Badges.assign_userbadge(current_user.uid, first_post_badge.bid)
 
     return redirect(addr)
 

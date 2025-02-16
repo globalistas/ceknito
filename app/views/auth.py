@@ -26,7 +26,7 @@ from .. import misc
 from ..config import config
 from ..auth import auth_provider, email_validation_is_required
 from ..auth import normalize_email, create_user
-from ..badges import Badges
+from ..badges import Badges, badges
 from ..forms import LoginForm, RegistrationForm, ResendConfirmationForm, is_safe_url
 from ..misc import engine, send_email, is_domain_banned, gevent_required, create_message
 from ..misc import ratelimit, AUTH_LIMIT, SIGNUP_LIMIT
@@ -236,7 +236,12 @@ def register():
 
     # Automatically assign the Early Adopter badge
     if config.site.auto_adopter:
-        Badges.assign_userbadge(user.uid, 3)
+        # Find the badge with the early_adopter trigger
+        early_adopter_badge = next(
+            (b for b in badges if b.trigger == "user registers"), None
+        )
+        if early_adopter_badge:
+            Badges.assign_userbadge(user.uid, early_adopter_badge.bid)
 
     # Automatically send a welcome message
     admin_primary = (

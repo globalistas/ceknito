@@ -155,8 +155,26 @@ def mod(bid):
         badges.assign_userbadge(user.uid, bid)
 
 
-# TODO actually hook these up
+def user_registers(bid):
+    """
+    Auto assigns badges to users who register.
+    This will be called when a badge with this trigger is created.
+    """
+    pass
+
+
+def first_post(bid):
+    """
+    Auto assigns badges for first post.
+    This will be called when a badge with this trigger is created.
+    """
+    pass
+
+
+# TODO actually hook admin and mod up
 triggers = {
     "admin": admin,
     "mod": mod,
+    "user registers": user_registers,
+    "first post": first_post,
 }

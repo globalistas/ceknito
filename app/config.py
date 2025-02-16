@@ -532,14 +532,16 @@ configurable_defaults = {
             "auto_adopter": {
                 "type": "bool",
                 "doc": _l(
-                    "If enabled, new users get their Early Adopter badge automatically."
+                    "If enabled, new users get their Early Adopter badge automatically. Badge trigger used: 'user "
+                    "registers'."
                 ),
                 "value": False,
             },
             "auto_rsc": {
                 "type": "bool",
                 "doc": _l(
-                    "If enabled, users get their Ready Steady Check badge after their first post automatically."
+                    "If enabled, users get their Ready Steady Check badge after their first post automatically. "
+                    "Badge trigger used: 'first post'."
                 ),
                 "value": False,
             },
