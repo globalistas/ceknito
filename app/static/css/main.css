@@ -3061,6 +3061,7 @@ a[href="#toodamncool"] {
 .pure-form select:focus:invalid {
     color: #b94a48;
     border-color: black;
+    outline: -webkit-focus-ring-color auto 1px;
 }
 
 .motto {

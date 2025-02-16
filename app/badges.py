@@ -15,14 +15,14 @@ class Badges:
 
     We also want to be able to create badges.
 
-    For backwards compatability we will allow "fetching" of old_badges but only by ID.
+    For backwards compatibility we will allow "fetching" of old_badges but only by ID.
 
-    This will also create an interfact for Triggers, as Badges and Triggers are interlinked.
+    This will also create an interface for Triggers, as Badges and Triggers are interlinked.
     """
 
     def __iter__(self):
         """
-        Returns a list of all bagdes in the database.
+        Returns a list of all badges in the database.
         """
         badge_query = Badge.select(
             Badge.bid,
@@ -155,20 +155,28 @@ def mod(bid):
         badges.assign_userbadge(user.uid, bid)
 
 
-def user_registers(bid):
+def user_registers(uid):
     """
-    Auto assigns badges to users who register.
-    This will be called when a badge with this trigger is created.
+    Assigns the 'Early Adopter' badge to a newly registered user.
     """
-    pass
+    early_adopter_badge = next(
+        (b for b in badges if b.trigger == "user registers"), None
+    )
+    if early_adopter_badge:
+        badges.assign_userbadge(uid, early_adopter_badge.bid)
 
 
-def first_post(bid):
+def first_post(uid):
     """
-    Auto assigns badges for first post.
-    This will be called when a badge with this trigger is created.
+    Assigns the 'First Post' badge to a user when they make their first post.
     """
-    pass
+    first_post_badge = next((b for b in badges if b.trigger == "first post"), None)
+    if first_post_badge:
+        user_badges = Badges.badges_for_user(uid)
+        badge_ids = {badge.bid for badge in user_badges}  # Use a set for efficiency
+
+        if first_post_badge.bid not in badge_ids:
+            badges.assign_userbadge(uid, first_post_badge.bid)
 
 
 # TODO actually hook admin and mod up
