@@ -291,6 +291,13 @@ configurable_defaults = {
                 "doc": _l("Maximum amount of posts a user can create in a single day."),
                 "value": 25,
             },
+            "daily_site_upload_limit": {
+                "type": "int",
+                "doc": _l(
+                    "Maximum amount of post/comment image uploads a user can perform in a single day."
+                ),
+                "value": 10,
+            },
             "archive_post_after": {
                 "type": "int",
                 "doc": _l("Number of days after which posts will be archived."),

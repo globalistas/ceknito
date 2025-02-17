@@ -179,7 +179,6 @@ def first_post(uid):
             badges.assign_userbadge(uid, first_post_badge.bid)
 
 
-# TODO actually hook admin and mod up
 triggers = {
     "admin": admin,
     "mod": mod,

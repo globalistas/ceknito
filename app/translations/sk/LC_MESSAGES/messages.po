@@ -4249,6 +4249,47 @@ msgstr "Nadradený komentár neexistuje"
 msgid "Message does not exist"
 msgstr "Správa neexistuje"
 
+#: app/views/do.py:1588
+msgid "You do not have sufficient level to upload images"
+msgstr "Nemáš dostatočný level na upload obrázkov"
+
+#: app/views/do.py:1599
+msgid "You have uploaded too many images today"
+msgstr "Dnes si už nahral(a) príliš veľa obrázkov"
+
+#: app/views/do.py:1607
+msgid "Invalid post ID"
+msgstr "Neplatné ID príspevku"
+
+#: app/views/do.py:1634
+msgid "Failed to process upload"
+msgstr "Nepodarilo sa spracovať upload"
+
+#: app/static/js/Editor.js:83 app/static/js/Editor.js:136
+msgid "Only 1 image allowed"
+msgstr "Maximálne 1 obrázok"
+
+#: app/static/js/Editor.js:103
+msgid "Image must be smaller than 5MB"
+msgstr "Súbor musí byť menší ako 5MB"
+
+#: app/static/js/Editor.js:109
+msgid "Invalid file type. Please select an image."
+msgstr "Neplatný typ súboru. Prosím zvoliť obrázok."
+
+#: app/static/js/Editor.js:139
+msgid "Error uploading image: "
+msgstr "Chyba pri nahrávaní obrázku: "
+
+#: app/static/js/Editor.js:145 app/static/js/Editor.js:157
+#: app/static/js/Editor.js:166
+msgid "Upload image"
+msgstr "Nahrať obrázok"
+
+#: app/static/js/Editor.js:151
+msgid "Error uploading image"
+msgstr "Chyba pri nahrávaní obrázku"
+
 #: app/views/do.py:1537
 msgid "Invalid message"
 msgstr "Neplatná správa"

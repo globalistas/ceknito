@@ -1579,6 +1579,64 @@ def create_comment(pid):
     return json.dumps({"status": "error", "error": get_errors(form)}), 400
 
 
+@do.route("/do/upload_image", methods=["POST"])
+@ratelimit(POSTING_LIMIT)
+@login_required
+def upload_image():
+    # Early return if user can't upload
+    if not current_user.canupload:
+        return jsonify(
+            status="error", error=_("You do not have sufficient level to upload images")
+        )
+    # Check daily upload limit
+    if not current_user.is_admin():
+        today = datetime.datetime.utcnow() - datetime.timedelta(days=1)
+        daily_uploads = (
+            UserUploads.select()
+            .where(UserUploads.uid == current_user.uid)
+            .where(UserUploads.timestamp > today)
+            .count()
+        )
+
+        if daily_uploads >= config.site.daily_site_upload_limit:
+            return jsonify(
+                status="error", error=_("You have uploaded too many images today")
+            )
+
+    # Get pid first to avoid unnecessary file processing if invalid
+    pid = request.form.get("pid")
+    if pid:
+        # Check if pid exists and is valid
+        post = SubPost.get_or_none(SubPost.pid == pid)
+        if not post:
+            return jsonify(status="error", error=_("Invalid post ID"))
+
+    filename, success = storage.upload_file()
+    if not success:
+        return jsonify(status="error", error=filename)
+
+    try:
+        # Create a UserUploads record
+        upload = UserUploads.create(
+            uid=current_user.uid,
+            fileid=filename,
+            status=1,
+            pid=pid if pid else None,
+            thumbnail=None,
+            timestamp=datetime.datetime.utcnow(),
+        )
+
+        # Spawn thumbnail creation task
+        create_thumbnail(filename, [(UserUploads, "xid", upload.xid)])
+
+        image_url = storage.file_url(filename)
+        return jsonify(status="ok", image_url=image_url)
+
+    except Exception as e:
+        print(f"Error processing upload: {e}")
+        return jsonify(status="error", error=_("Failed to process upload"))
+
+
 @do.route("/do/sendmsg", methods=["POST"])
 @ratelimit(POSTING_LIMIT)
 @login_required

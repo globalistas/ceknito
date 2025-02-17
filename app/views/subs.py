@@ -370,6 +370,7 @@ def create_post(ptype, sub):
             fileid=fileid,
             thumbnail=img if img else "",
             status=0,
+            timestamp=datetime.utcnow(),
         )
         thumbnail_store.append((UserUploads, "xid", upload.xid))
 

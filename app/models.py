@@ -563,6 +563,7 @@ class UserUploads(BaseModel):
     fileid = CharField(null=True)
     thumbnail = CharField(null=True)
     status = IntegerField()
+    timestamp = DateTimeField(default=datetime.datetime.utcnow)
 
     def __repr__(self):
         return f"<UserUploads {self.fileid}>"

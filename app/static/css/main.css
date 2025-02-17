@@ -74,6 +74,10 @@ blockquote {
   display: inline-block;
 }
 
+.editbtns div[data-icon="image"] {
+    transition: opacity 0.3s ease;
+}
+
 .announcement {
   padding: 3px;
   margin-right: .5em;
