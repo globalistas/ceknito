@@ -6,7 +6,8 @@ import u from './Util';
 import initializeEditor from './Editor';
 import Tingle from 'tingle.js';
 import _ from './utils/I18n';
-import socket from './Socket.js'
+import socket from './Socket.js';
+import { escape } from 'lodash';
 
 // Saving/unsaving posts.
 u.sub('.savepost', 'click', function (e) {
@@ -820,7 +821,7 @@ u.addEventForChild(document, 'click', '.reply-comment', function (e, qelem) {
     const lm = document.createElement('div');
     lm.id = 'rblock-' + cid;
     lm.classList.add('replybox');
-    lm.innerHTML = '<div class="cwrap markdown-editor" id="rcomm-' + cid + '">'
+    lm.innerHTML = '<div class="cwrap markdown-editor" id="rcomm-' + escape(cid) + '">'
         + '<textarea class="exalert" style="height: 9em;"></textarea>'
         + '<div class="bottom-area">'
         + '<span class="help-toggle toggle">'
