@@ -79,11 +79,20 @@
   <hr>
   <div class="sidebarlists">
     <ul class="top5">
-      <h4 class="center top5"><a href="@{url_for('sub.view_sub', sub=changeLog['sub'])}" style="text-decoration: none; color: inherit;">@{_('Changelog')}</a></h4>
-      <li><a class="title" href="@{url_for('sub.view_post', sub=changeLog['sub'], pid=changeLog['pid'])}">@{changeLog['title']}</a><br>
-<!--      <span class="sidelocale">-->
-<!--        @{_("%(timeago)s in %(sub)s", timeago='<time-ago datetime="' + changeLog['posted'].isoformat() + 'Z"></time-ago>', sub='<a href="' + url_for('sub.view_sub', sub=changeLog['sub']) + '">/' + config.site.sub_prefix + '/' + changeLog['sub'] + '</a>') !!html}-->
-<!--      </span>-->
+      <h4 class="center top5">
+        <a href="@{url_for('sub.view_sub', sub=changeLog[0]['sub'])}"
+           style="text-decoration: none; color: inherit;">
+          @{_('Changelog')}
+        </a>
+      </h4>
+
+      @for changepost in changeLog:
+      <li>
+        <a class="title" href="@{url_for('sub.view_post', sub=changepost['sub'], pid=changepost['pid'])}">
+          @{changepost['title']}
+        </a><br>
+      </li>
+      @end
     </ul>
   </div>
 @end

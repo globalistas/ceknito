@@ -1037,17 +1037,14 @@ def getChangelog():
         SubPost.select(
             Sub.name.alias("sub"), SubPost.pid, SubPost.title, SubPost.posted
         )
-        .where(SubPost.posted > td)
+        .where((SubPost.posted > td) & (SubPost.deleted == 0))
         .where(SubPost.sid == config.site.changelog_sub)
         .join(Sub, JOIN.LEFT_OUTER)
         .order_by(SubPost.pid.desc())
         .dicts()
     )
 
-    try:
-        return changepost.get()
-    except SubPost.DoesNotExist:
-        return None
+    return list(changepost)
 
 
 def getSinglePost(pid):
