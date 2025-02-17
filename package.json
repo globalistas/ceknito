@@ -54,6 +54,7 @@
     "tingle.js": "^0.14.0",
     "tinycon": "^0.6.8",
     "url-loader": "^1.1.2",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "dompurify": "^3.2.4"
   }
 }
