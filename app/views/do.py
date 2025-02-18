@@ -4428,7 +4428,7 @@ def ban_user(username):
             log_type="comment",
         )
 
-    return redirect(request.referrer)
+    return redirect(url_for("user.view", user=user.name))
 
 
 @do.route("/do/admin/shadowban_user/<username>", methods=["POST"])
@@ -4477,7 +4477,7 @@ def shadowban_user(username):
             log_type="comment",
         )
 
-    return redirect(request.referrer)
+    return redirect(url_for("user.view", user=user.name))
 
 
 @do.route("/do/admin/unban_user/<username>", methods=["POST"])
@@ -4526,7 +4526,7 @@ def unban_user(username):
             log_type="comment",
         )
 
-    return redirect(request.referrer)
+    return redirect(url_for("user.view", user=user.name))
 
 
 @do.route("/do/admin/unshadowban_user/<username>", methods=["POST"])
@@ -4575,7 +4575,7 @@ def unshadowban_user(username):
             log_type="comment",
         )
 
-    return redirect(request.referrer)
+    return redirect(url_for("user.view", user=user.name))
 
 
 @do.route("/do/edit_top_bar", methods=["POST"])

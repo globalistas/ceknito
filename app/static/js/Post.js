@@ -828,7 +828,7 @@ u.addEventForChild(document, 'click', '.reply-comment', function (e, qelem) {
         + '<a class="option" href="#">' + _('hide help') + '</a>'
         + '</span>'
         + '<div class="markhelp" style="display: none;">'
-        + '<p>' + _('This site uses a slightly-customized version of <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> for formatting. See below for some basics, or check <a href="https://support.reddithelp.com/hc/en-us/articles/360043033952-Formatting-Guide">this commenting guide</a> for more details.') + '</p>'
+        + '<p>' + _('This site uses a slightly-customized version of <a href="https://daringfireball.net/projects/markdown/syntax">Markdown</a> for formatting. See below for some basics, or check <a href="https://support.reddithelp.com/hc/en-us/articles/360043033952-Formatting-Guide">this commenting guide</a> for more details.') + '</p>'
         + '<table class="md">'
         + '<tbody>'
         + '<tr style="background-color: #ffff99; text-align: center">'
