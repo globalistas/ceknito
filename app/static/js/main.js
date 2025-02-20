@@ -137,13 +137,13 @@ u.ready(function () {
     }
   })
   // initialize all date pickers
-  flatpickr(".date-picker-future", {
-    enableTime: true,
-    dateFormat: 'Z',
-    altInput: true,
-    altFormat: 'Y-m-d H:i',
-    time_24hr: true,
-  });
+    flatpickr(".date-picker-future", {
+      enableTime: true,
+      dateFormat: 'Y-m-d H:i',
+      altInput: true,
+      altFormat: 'Y-m-d H:i',
+      time_24hr: true,
+    });
   // Hide the Submit a post poll flatpickr initially.
   var cb = document.getElementById('closetime_date');
   if (cb && cb.nextElementSibling) {
@@ -481,18 +481,36 @@ u.ready(function () {
   });
 })
 
+
 u.ready(function () {
   u.each('*[data-timefmt]', function (el, i) {
     var fmt = el.getAttribute('data-timefmt');
-    if (el.innerHTML == 'None') {
+    var rawTime = el.innerHTML.trim(); // Get raw time string
+
+    if (rawTime === 'None') {
       el.innerHTML = _("Never");
-    } else {
-      var d = new Date(el.innerHTML);
-      if (fmt == 'datetime') {
-        el.innerHTML = d.toISOString().replace(/T/, ' ').replace(/\..+/, '');
-      }
+      return;
     }
-  })
+
+    // Ensure the date is properly parsed as UTC
+    var d = new Date(rawTime);
+
+    if (!isNaN(d.getTime())) { // Valid date check
+      if (fmt === 'datetime') {
+        // Manually format YYYY-MM-DD HH:MM:SS
+        var formattedDate = d.getFullYear() + "-" +
+          String(d.getMonth() + 1).padStart(2, "0") + "-" +
+          String(d.getDate()).padStart(2, "0") + " " +
+          String(d.getHours()).padStart(2, "0") + ":" +
+          String(d.getMinutes()).padStart(2, "0") + ":" +
+          String(d.getSeconds()).padStart(2, "0");
+
+        el.innerHTML = formattedDate;
+      }
+    } else {
+      console.error("Invalid date format:", rawTime);
+    }
+  });
 });
 
 

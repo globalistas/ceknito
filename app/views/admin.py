@@ -14,12 +14,12 @@ from flask import (
     redirect,
     url_for,
     session,
-    render_template,
     request,
     send_file,
 )
 from flask_login import login_required, current_user
 from flask_babel import _
+
 from .. import misc, auth_provider
 from ..config import config
 from ..forms import (
@@ -50,7 +50,7 @@ from ..models import (
     SubSubscriber,
 )
 from ..models import UserUploads, InviteCode, Wiki
-from ..misc import engine, getReports
+from ..misc import engine, getReports, getSubMods
 from ..badges import badges
 
 bp = Blueprint("admin", __name__)
@@ -183,17 +183,19 @@ def index():
 
     subOfTheDay = SetSubOfTheDayForm()
 
-    return render_template(
-        "admin/admin.html",
-        subs=f"{subs:,}",
-        posts=f"{posts:,}",
-        ups=f"{ups:,}",
-        downs=f"{downs:,}",
-        users=f"{users:,}",
-        comms=f"{comms:,}",
-        subOfTheDay=subOfTheDay,
-        useinvitecodeform=invite,
-        csrf_form=CsrfTokenOnlyForm(),
+    return engine.get_template("admin/admin.html").render(
+        {
+            "subs": subs,
+            "posts": posts,
+            "ups": ups,
+            "downs": downs,
+            "users": users,
+            "comms": comms,
+            "subOfTheDay": subOfTheDay,
+            "useinvitecodeform": invite,
+            "csrf_form": CsrfTokenOnlyForm(),
+            "ann": misc.getAnnouncement(),
+        }
     )
 
 
@@ -230,8 +232,14 @@ def users(page):
     users = users.join(postcount, JOIN.LEFT_OUTER, on=User.uid == postcount.c.uid)
     users = users.join(commcount, JOIN.LEFT_OUTER, on=User.uid == commcount.c.uid)
     users = users.order_by(User.joindate.desc()).paginate(page, 50).dicts()
-    return render_template(
-        "admin/users.html", users=users, page=page, admin_route="admin.users"
+
+    return engine.get_template("admin/users.html").render(
+        {
+            "users": users,
+            "page": page,
+            "term": None,
+            "admin_route": "admin.users",
+        }
     )
 
 
@@ -248,7 +256,7 @@ def subsubscribers(sub, page):
     except Sub.DoesNotExist:
         abort(404)
 
-    subusers = (
+    users = (
         User.select(User.name)
         .join(SubSubscriber)
         .where(
@@ -260,12 +268,13 @@ def subsubscribers(sub, page):
         .paginate(page, 50)
         .dicts()
     )
-    return render_template(
-        "admin/subsubscribers.html",
-        sub=sub,
-        users=subusers,
-        page=page,
-        admin_route="admin.subsubscribers",
+    return engine.get_template("admin/subsubscribers.html").render(
+        {
+            "sub": sub,
+            "users": users,
+            "page": page,
+            "admin_route": "admin.subsubscribers",
+        }
     )
 
 
@@ -279,12 +288,14 @@ def userbadges():
     form = AssignUserBadgeForm()
     form.badge.choices = [(badge.bid, badge.name) for badge in badges]
     ct = UserMetadata.select().where(UserMetadata.key == "badge").count()
-    return render_template(
-        "admin/userbadges.html",
-        badges=badges,
-        assignuserbadgeform=form,
-        ct=ct,
-        admin_route="admin.userbadges",
+
+    return engine.get_template("admin/userbadges.html").render(
+        {
+            "badges": badges,
+            "assignuserbadgeform": form,
+            "ct": ct,
+            "admin_route": "admin.userbadges",
+        }
     )
 
 
@@ -310,7 +321,13 @@ def newbadge():
             icon=icon,
         )
         return redirect(url_for("admin.userbadges"))
-    return render_template("admin/editbadge.html", form=form, badge=None, new=True)
+    return engine.get_template("admin/editbadge.html").render(
+        {
+            "form": form,
+            "badge": None,
+            "new": True,
+        }
+    )
 
 
 @bp.route("/userbadges/edit/<int:badge>", methods=["GET", "POST"])
@@ -343,7 +360,13 @@ def editbadge(badge):
     form.score.data = badge.score
     form.trigger.data = badge.trigger
     form.rank.data = badge.rank
-    return render_template("admin/editbadge.html", form=form, badge=badge, new=False)
+    return engine.get_template("admin/editbadge.html").render(
+        {
+            "form": form,
+            "badge": badge,
+            "new": False,
+        }
+    )
 
 
 @bp.route("/userbadges/delete/<int:badge>", methods=["POST"])
@@ -383,13 +406,13 @@ def invitecodes(page):
             InviteCode.id,
             InviteCode.code,
             User.name.alias("created_by"),
-            InviteCode.created,
+            InviteCode.created.alias("created"),
             InviteCode.expires,
             InviteCode.uses,
             InviteCode.max_uses,
         )
         .join(User)
-        .order_by(InviteCode.uses.desc(), InviteCode.created.desc())
+        .order_by(InviteCode.created.desc())
         .paginate(page, 50)
         .dicts()
     )
@@ -461,14 +484,15 @@ def invitecodes(page):
             InviteCode.update(expires=expires).where(InviteCode.id << ids).execute()
         return redirect(url_for("admin.invitecodes", page=page))
 
-    return render_template(
-        "admin/invitecodes.html",
-        useinvitecodeform=invite_form,
-        invite_codes=invite_codes,
-        page=page,
-        error=misc.get_errors(form, True),
-        form=form,
-        update_form=update_form,
+    return engine.get_template("admin/invitecodes.html").render(
+        {
+            "useinvitecodeform": invite_form,
+            "invite_codes": invite_codes,
+            "page": page,
+            "error": misc.get_errors(form, True),
+            "form": form,
+            "update_form": update_form,
+        }
     )
 
 
@@ -510,7 +534,14 @@ def view():
         .dicts()
     )
 
-    return render_template("admin/users.html", users=users, admin_route="admin.view")
+    return engine.get_template("admin/users.html").render(
+        {
+            "users": users,
+            "admin_route": "admin.view",
+            "page": None,
+            "term": None,
+        }
+    )
 
 
 @bp.route("/usersearch/<term>")
@@ -547,8 +578,13 @@ def users_search(term):
     users = users.join(commcount, JOIN.LEFT_OUTER, on=User.uid == commcount.c.uid)
     users = users.where(User.name.contains(term)).order_by(User.joindate.desc()).dicts()
 
-    return render_template(
-        "admin/users.html", users=users, term=term, admin_route="admin.users_search"
+    return engine.get_template("admin/users.html").render(
+        {
+            "users": users,
+            "term": term,
+            "admin_route": "admin.users_search",
+            "page": None,
+        }
     )
 
 
@@ -559,30 +595,48 @@ def subs(page):
     """WIP: View subs. Assign new owners"""
     if not current_user.is_admin():
         abort(404)
-    subs = Sub.select().paginate(page, 50)
-    return render_template(
-        "admin/subs.html",
-        subs=subs,
-        page=page,
-        admin_route="admin.subs",
-        editmodform=EditModForm(),
+    subs = Sub.select().order_by(Sub.name).paginate(page, 50)
+    subMods = {sub.sid: getSubMods(sub.sid) for sub in subs}
+
+    return engine.get_template("admin/subs.html").render(
+        {
+            "subs": subs,
+            "page": page,
+            "term": None,
+            "admin_route": "admin.subs",
+            "editmodform": EditModForm(),
+            "subMods": subMods,
+        }
     )
 
 
-@bp.route("/subsearch/<term>")
+@bp.route("/subsearch/<term>", defaults={"page": 1})
+@bp.route("/subsearch/<term>/<int:page>")
 @login_required
-def subs_search(term):
-    """WIP: Search for a sub."""
+def subs_search(term, page):
+    """Search for a sub with pagination."""
     if not current_user.is_admin():
         abort(404)
+
     term = re.sub(r"[^A-Za-zÁ-ž0-9.\-_]+", "", term)
-    subs = Sub.select().where(Sub.name.contains(term))
-    return render_template(
-        "admin/subs.html",
-        subs=subs,
-        term=term,
-        admin_route="admin.subs_search",
-        editmodform=EditModForm(),
+
+    subs = (
+        Sub.select()
+        .where(Sub.name.contains(term))
+        .order_by(Sub.name)
+        .paginate(page, 50)
+    )
+    subMods = {sub.sid: getSubMods(sub.sid) for sub in subs}
+
+    return engine.get_template("admin/subs.html").render(
+        {
+            "subs": subs,
+            "term": term,
+            "page": page,
+            "subMods": subMods,
+            "admin_route": "admin.subs_search",
+            "editmodform": EditModForm(),
+        }
     )
 
 
@@ -603,8 +657,13 @@ def posts(page):
         page,
         page_size=50,
     )
-    return render_template(
-        "admin/posts.html", page=page, admin_route="admin.posts", posts=posts
+    return engine.get_template("admin/posts.html").render(
+        {
+            "page": page,
+            "posts": posts,
+            "posts_count": len(posts),
+            "admin_route": "admin.posts",
+        }
     )
 
 
@@ -615,37 +674,51 @@ def post_voting(page, term):
     """WIP: View post voting habits"""
     if not current_user.is_admin():
         abort(404)
+
     try:
         user = User.get(fn.Lower(User.name) == term.lower())
         msg = []
-        votes = SubPostVote.select(
-            SubPostVote.positive,
-            SubPostVote.pid,
-            User.name,
-            SubPostVote.datetime,
-            SubPost.title,
-            Sub.name.alias("sub"),
+
+        votes = (
+            SubPostVote.select(
+                SubPostVote.positive,
+                SubPostVote.pid,
+                User.name,
+                SubPostVote.datetime,
+                SubPost.title,
+                Sub.name.alias("sub"),
+            )
+            .join(SubPost, JOIN.LEFT_OUTER, on=(SubPost.pid == SubPostVote.pid))
+            .join(Sub)
+            .switch(SubPost)
+            .join(User, JOIN.LEFT_OUTER, on=(SubPost.uid == User.uid))
+            .where((SubPostVote.uid == user.uid) & (SubPost.uid != user.uid))
+            .order_by(SubPostVote.datetime.desc())
+            .paginate(page, 50)
+            .dicts()
         )
-        votes = votes.join(
-            SubPost, JOIN.LEFT_OUTER, on=SubPost.pid == SubPostVote.pid
-        ).join(Sub)
-        votes = votes.switch(SubPost).join(
-            User, JOIN.LEFT_OUTER, on=SubPost.uid == User.uid
+
+        votes_count = (
+            SubPostVote.select()
+            .join(SubPost, JOIN.LEFT_OUTER)
+            .where((SubPostVote.uid == user.uid) & (SubPost.uid != user.uid))
+            .count()
         )
-        votes = votes.where(
-            (SubPostVote.uid == user.uid) & (SubPost.uid != user.uid)
-        ).dicts()
+
     except User.DoesNotExist:
         votes = []
         msg = "user not found"
+        votes_count = 0
 
-    return render_template(
-        "admin/postvoting.html",
-        page=page,
-        msg=msg,
-        admin_route="admin.post_voting",
-        votes=votes,
-        term=term,
+    return engine.get_template("admin/postvoting.html").render(
+        {
+            "page": page,
+            "msg": msg,
+            "admin_route": "admin.post_voting",
+            "votes": votes,
+            "votes_count": votes_count,
+            "term": term,
+        }
     )
 
 
@@ -653,46 +726,58 @@ def post_voting(page, term):
 @bp.route("/commentvoting/<term>/<int:page>")
 @login_required
 def comment_voting(page, term):
-    """WIP: View comment voting habits"""
     if not current_user.is_admin():
         abort(404)
+
     try:
         user = User.get(fn.Lower(User.name) == term.lower())
         msg = []
-        votes = SubPostCommentVote.select(
-            SubPostCommentVote.positive,
-            SubPostCommentVote.cid,
-            SubPostComment.uid,
-            SubPostComment.content,
-            User.name,
-            SubPostCommentVote.datetime,
-            SubPost.pid,
-            Sub.name.alias("sub"),
-        )
         votes = (
-            votes.join(
+            SubPostCommentVote.select(
+                SubPostCommentVote.positive,
+                SubPostCommentVote.cid,
+                SubPostComment.uid,
+                SubPostComment.content,
+                User.name,
+                SubPostCommentVote.datetime,
+                SubPost.pid,
+                Sub.name.alias("sub"),
+            )
+            .join(
                 SubPostComment,
                 JOIN.LEFT_OUTER,
-                on=SubPostComment.cid == SubPostCommentVote.cid,
+                on=(SubPostComment.cid == SubPostCommentVote.cid),
             )
             .join(SubPost)
             .join(Sub)
+            .switch(SubPostComment)
+            .join(User, JOIN.LEFT_OUTER, on=(SubPostComment.uid == User.uid))
+            .where(SubPostCommentVote.uid == user.uid)
+            .order_by(SubPostCommentVote.datetime.desc())
+            .paginate(page, 50)
+            .dicts()
         )
-        votes = votes.switch(SubPostComment).join(
-            User, JOIN.LEFT_OUTER, on=SubPostComment.uid == User.uid
+
+        votes_count = (
+            SubPostCommentVote.select()
+            .where(SubPostCommentVote.uid == user.uid)
+            .count()
         )
-        votes = votes.where(SubPostCommentVote.uid == user.uid).dicts()
+
     except User.DoesNotExist:
         votes = []
         msg = "user not found"
+        votes_count = 0
 
-    return render_template(
-        "admin/commentvoting.html",
-        page=page,
-        msg=msg,
-        admin_route="admin.comment_voting",
-        votes=votes,
-        term=term,
+    return engine.get_template("admin/commentvoting.html").render(
+        {
+            "page": page,
+            "msg": msg,
+            "admin_route": "admin.comment_voting",
+            "votes": votes,
+            "votes_count": votes_count,
+            "term": term,
+        }
     )
 
 
@@ -721,24 +806,31 @@ def post_search(term):
     ccount = post.uid.comments.count()
     comms = (
         SubPostComment.select(
-            SubPostComment.score, SubPostComment.content, SubPostComment.cid, User.name
+            SubPostComment.score,
+            SubPostComment.content,
+            SubPostComment.status,
+            SubPostComment.cid,
+            User.name,
         )
         .join(User)
         .where(SubPostComment.pid == post.pid)
+        .order_by(SubPostComment.time.desc())
         .dicts()
     )
 
-    return render_template(
-        "admin/post.html",
-        sub=post.sid,
-        post=post,
-        votes=votes,
-        ccount=ccount,
-        pcount=pcount,
-        upcount=upcount,
-        downcount=downcount,
-        comms=comms,
-        user=post.uid,
+    return engine.get_template("admin/post.html").render(
+        {
+            "sub": post.sid,
+            "post": post,
+            "votes": votes,
+            "ccount": ccount,
+            "pcount": pcount,
+            "upcount": upcount,
+            "downcount": downcount,
+            "comms": comms,
+            "comms_count": len(comms),
+            "user": post.uid,
+        }
     )
 
 
@@ -762,13 +854,14 @@ def domains(domain_type, page):
         .where(SiteMetadata.key == key)
         .order_by(SiteMetadata.value)
     )
-    return render_template(
-        "admin/domains.html",
-        domains=domains,
-        title=title,
-        domain_type=domain_type,
-        page=page,
-        bandomainform=BanDomainForm(),
+    return engine.get_template("admin/domains.html").render(
+        {
+            "domains": domains,
+            "dtitle": title,
+            "domain_type": domain_type,
+            "page": page,
+            "bandomainform": BanDomainForm(),
+        }
     )
 
 
@@ -798,8 +891,12 @@ def user_uploads(page):
     users = (
         User.select(User.name).join(UserMetadata).where(UserMetadata.key == "canupload")
     )
-    return render_template(
-        "admin/uploads.html", page=page, uploads=uploads, users=users
+    return engine.get_template("admin/uploads.html").render(
+        {
+            "page": page,
+            "uploads": uploads,
+            "users": users,
+        }
     )
 
 

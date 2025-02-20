@@ -1,0 +1,85 @@
+@extends("shared/layout.html")
+@require(page, posts, posts_count, admin_route)
+
+@def title():
+@{_('Admin')} - @{config.site.lema}
+@end
+
+@def head():
+  <script src="@{url_for('static', filename='sorttable.js')}"></script>
+@end
+
+@def navbar():
+  <li><a href="@{url_for('admin.index')}">Admin</a></li>
+@end
+
+@def sidebar():
+  <div class="col-12 admin section search">
+    <form action="@{url_for('do.search', stype='admin.post')}" method="post">
+    <span class="search">
+        <span><i class="fa fa-search"></i></span>
+        <input id="term" name="term" type="number" placeholder="Post number...">
+        <span>
+          <button class="pure-button" type="submit">Submit</button>
+        </span>
+    </span>
+    </form>
+  </div>
+  <hr>
+  @include("admin/sidebar.html")
+@end
+
+@def main():
+  <div id="center-container">
+    <div class="content">
+      <h2>Posts</h2>
+      <div class="admin section subs posts">
+        <div>
+          @if admin_route == 'admin.post_search':
+            <div>Showing results for: @{term}</div>
+          @end
+          <table class="sortable pure-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Posted</th>
+                <th>Score</th>
+                <th>Title</th>
+                <th>User</th>
+                <th>Sub</th>
+                <th>Deleted</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for post in posts:
+                <tr class="@{'deletedrow' if post['deleted'] != 0 else ''}">
+                  <td><a href="@{url_for('admin.post_search', term=post['pid'])}">@{post['pid']}</a></td>
+                  <td class="convert-date"><time-ago datetime="@{post['posted'].isoformat()}Z"></time-ago></td>
+                  <td>@{post['score']}</td>
+                  <td><a href="@{url_for('site.view_post_inbox', pid=post['pid'])}">@{e(func.word_truncate(post['title'], 30))!!html}</a></td>
+                  <td><a href="@{url_for('user.view', user=post['user'])}">@{post['user']}</a></td>
+                  <td><a href="@{url_for('sub.view_sub', sub=post['sub'])}">@{post['sub']}</a></td>
+                  <td>
+                    @if post['deleted'] == 1:
+                      user
+                    @elif post['deleted'] == 2:
+                      mod
+                    @elif post['deleted'] == 3:
+                      admin
+                    @end
+                  </td>
+                </tr>
+              @end
+            </tbody>
+          </table>
+        </div>
+      </div>
+  @if page > 1:
+    <a href="@{url_for(admin_route, page=(page-1))}" class="pure-button">Previous</a>
+  @end
+  @if posts_count == 50:
+    <a href="@{url_for(admin_route, page=(page+1))}" class="pure-button">Next</a>
+  @end
+    </div>
+  </div>
+@end

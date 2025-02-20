@@ -4,7 +4,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, TextAreaField, FileField
 from wtforms import IntegerField, RadioField, FieldList, SelectField
 from wtforms import HiddenField
-from wtforms.validators import DataRequired, InputRequired, Length, Regexp
+from wtforms.validators import DataRequired, InputRequired, Length, Regexp, NumberRange
 from flask_babel import lazy_gettext as _l
 
 
@@ -107,7 +107,13 @@ class WikiForm(FlaskForm):
 
 class CreateInviteCodeForm(FlaskForm):
     code = StringField(_l("Code (empty to generate random)"))
-    uses = IntegerField(_l("Uses"), validators=[DataRequired()])
+    uses = IntegerField(
+        _l("Uses"),
+        validators=[
+            DataRequired(),
+            NumberRange(min=1, message="Uses must be a " "non-negative number."),
+        ],
+    )
     expires = StringField(_l("Expiration date"))
 
 

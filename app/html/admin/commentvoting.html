@@ -1,0 +1,69 @@
+@extends("shared/layout.html")
+@require(msg, term, votes, votes_count, page, admin_route)
+
+@def title():
+@{_('Admin')} - @{config.site.lema}
+@end
+
+@def head():
+  <script src="@{url_for('static', filename='sorttable.js')}"></script>
+@end
+
+@def navbar():
+  <li><a href="@{url_for('admin.index')}">Admin</a></li>
+@end
+
+@def sidebar():
+  @include("admin/sidebar.html")
+@end
+
+@def main():
+  <div id="center-container">
+    <div class="content">
+      @if not msg:
+        <h2>Comment Votes</h2>
+        <div>Go to <a href="@{url_for('admin.post_voting', term=term)}">posts</a></div>
+        <div class="admin section subs posts">
+          <div>
+            <div>Showing results for: @{term}</div><br>
+              <table class="sortable pure-table">
+                <thead>
+                  <tr>
+                    <th>comment</th>
+                    <th>vote</th>
+                    <th>user</th>
+                    <th>time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for vote in votes:
+                  <tr>
+                    <td><a href="@{url_for('sub.view_perm', sub=vote['sub'], pid=vote['pid'], cid=vote['cid'])}">@{e(func.word_truncate(vote['content'], 100))!!html}</a></td>
+                    <td>@if vote['positive'] == 1:
+                          up
+                        @else:
+                          down
+                        @end
+                    </td>
+                    <td>@{vote['name']}</td>
+                    <td><time-ago datetime="@{vote['datetime'].isoformat()}Z"></time-ago></td>
+                  </tr>
+                  @end
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <div class="adminpagenav">
+          @if page > 1:
+            <a href="@{url_for(admin_route, term=term, page=(page-1))}" class="pure-button">Previous</a>
+          @end
+          @if votes_count > page * 50:
+            <a href="@{url_for(admin_route, term=term, page=(page+1))}" class="pure-button">Next</a>
+          @end
+        </div>
+      @else:
+        <div>@{msg}</div>
+      @end
+    </div>
+  </div>
+@end

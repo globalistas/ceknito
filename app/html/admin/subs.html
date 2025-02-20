@@ -1,0 +1,155 @@
+@extends("shared/layout.html")
+@require(subs, page, term, admin_route, editmodform, subMods)
+
+@def title():
+@{_('Admin')} - @{config.site.lema}
+@end
+
+@def head():
+  <script src="@{url_for('static', filename='sorttable.js')}"></script>
+@end
+
+@def sidebar():
+  <div class="col-12 admin section search">
+    <form action="@{url_for('do.search', stype='admin.subs')}" method="post">
+    <span class="search">
+        <span><i class="fa fa-search"></i></span>
+        <input id="term" name="term" type="search" placeholder="Search Subs...">
+        <span>
+          <button class="pure-button" type="submit">Submit</button>
+        </span>
+    </span>
+    </form>
+  </div>
+  <hr>
+  @include("admin/sidebar.html")
+  <hr>
+  <ul>
+    <li>Default subs:
+    @for sub in func.getDefaultSubs():
+    <li><a href="@{url_for('sub.view_sub', sub=sub['name'])}">@{sub['name']}</a></li>
+    @end
+  </ul>
+@end
+
+@def main():
+  <div id="center-container">
+    <div class="content">
+      <h2>Subs</h2>
+      <hr>
+      <div class="col-12 admin-page-form">
+        <div>
+          <form  method="POST" class="ajaxform" id="edit-mod-form" data-reload="true" action="@{url_for('do.edit_mod')}">
+            @{editmodform.csrf_token()!!html}
+            <h4>Change owner of sub</h4>
+            <div>@{editmodform.sub(placeholder=editmodform.sub.label.text, required=True)!!html}</div>
+            <div>@{editmodform.user(placeholder=editmodform.user.label.text, required=True,)!!html}</div>
+            <div><button type="submit" class="pure-button" data-prog="Doing the magic...">Transfer sub</button></div>
+            <div class="alert div-error"></div>
+          </form>
+        </div>
+      </div>
+      <hr>
+      <div class="admin section subs">
+        <div>
+          @if admin_route == 'admin.subs_search':
+            <div>Showing results for: @{term}</div>
+          @end
+          <table class="sortable pure-table">
+            <thead>
+              <tr>
+                <th>Sub Name</th>
+                <th>Created</th>
+                <th>Owner</th>
+                <th>Mods</th>
+                <th>Subscribers</th>
+                <th>Posts</th>
+                <th>Delay</th>
+                <th>Default</th>
+                <th>Banned</th>
+                <th>Quarantined</th>
+                <th>Private</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for sub in subs:
+              <tr>
+                <td>
+                  <div class="subname" title="@{sub.title}"><a href="@{url_for('sub.view_sub', sub=sub.name)}">@{sub.name}</a>
+                    @if sub.nsfw:
+                      [nsfw]
+                    @end
+                  </div>
+                </td>
+                <td><time-ago datetime="@{sub.creation.isoformat()}Z"></time-ago></td>
+                <td>
+                  @for uid, name in subMods[sub.sid]['owners'].items():
+                    <a href="@{url_for('user.view', user=name)}">@{name}</a>
+                  @end
+                </td>
+                <td>@{len(subMods[sub.sid]['mods'])}</td>
+                <td>
+                  <a href="@{url_for('admin.subsubscribers', sub=sub.name, page=1)}">@{sub.subscribers}</a>
+                </td>
+                <td>@{sub.posts}</td>
+                <td>@{sub.commentscore_delay}</td>
+                <td>
+                  <div role="group" class="pure-button-group" data-sid="@{sub.name}" style="display:inline-block;">
+                  @if sub.name in [s['name'] for s in func.getDefaultSubs()]:
+                    <button data-ac="remove_default" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon"></span>Yes</button>
+                  @else:
+                    <button data-ac="add_default" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon"></span>No</button>
+                  @end
+                  </div>
+                </td>
+                <td>
+                  <div role="group" class="pure-button-group" data-sid="@{sub.name}" style="display:inline-block;">
+                  @if sub.status == 1:
+                    <button data-ac="unban_sub" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon"></span>Yes</button>
+                  @else:
+                    <button data-ac="ban_sub" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon"></span>No</button>
+                  @end
+                  </div>
+                </td>
+                <td>
+                  <div role="group" class="pure-button-group" data-sid="@{sub.name}" style="display:inline-block;">
+                  @if sub.status == 2:
+                    <button data-ac="unquarantine_sub" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon"></span>Yes</button>
+                  @else:
+                    <button data-ac="quarantine_sub" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon"></span>No</button>
+                  @end
+                  </div>
+                </td>
+                <td>
+                  <div role="group" class="pure-button-group" data-sid="@{sub.name}" style="display:inline-block;">
+                  @if sub.private == 1:
+                    <button data-ac="unprivate_sub" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon"></span>Yes</button>
+                  @else:
+                    <button data-ac="private_sub" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon"></span>No</button>
+                  @end
+                  </div>
+                </td>
+              </tr>
+              @end
+            </tbody>
+          </table>
+        </div>
+      </div>
+    @if admin_route == 'admin.subs':
+        @if page > 1:
+            <a href="@{url_for('admin.subs', page=(page-1))}" class="pure-button">Previous Page</a>
+        @end
+        @if len(subs) == 50:
+            <a href="@{url_for('admin.subs', page=(page+1))}" class="pure-button">Next Page</a>
+        @end
+    @elif admin_route == 'admin.subs_search':
+        @if page > 1:
+            <a href="@{url_for('admin.subs_search', term=term, page=(page-1))}" class="pure-button">Previous Page</a>
+        @end
+        @if len(subs) == 50:
+            <a href="@{url_for('admin.subs_search', term=term, page=(page+1))}" class="pure-button">Next Page</a>
+        @end
+    @end
+    </div>
+  </div>
+@end

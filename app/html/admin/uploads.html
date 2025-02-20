@@ -1,0 +1,72 @@
+@extends("shared/layout.html")
+@require(page, uploads, users)
+
+@def title():
+  @{_('Admin')} - @{config.site.lema}
+@end
+
+@def sidebar():
+  @include("admin/sidebar.html")
+  @if users:
+    <hr>
+    <h3 class="center">Allowed to upload</h3>
+    @for user in users:
+      <div>• @{user.name}</div>
+    @end
+  @end
+@end
+
+@def main():
+
+  @if not uploads:
+    <h3 class="notfound">There are no uploads, yet.</h3>
+  @else:
+    <div id="center-container">
+      <table class="uploads-table">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Thumbnail</th>
+            <th>Post</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for item in uploads:
+            <tr class="@{'deleted' if item['deleted'] != 0 else ''}">
+              <td>
+                <a href="@{url_for('user.view', user=item['name'])}">@{item['name']}</a>
+              </td>
+              <td>
+                <a href="@{file_url(item['fileid'])}" class="upload-thumb">
+                  @if item['thumbnail'] == '':
+                    <span class="placeholder" data-icon="link"></span>
+                  @elif item['thumbnail'] == 'deferred':
+                    <span class="placeholder deferred"
+                          data-icon="link"
+                          data-deferred="UserUploads-@{item['xid']}">
+                    </span>
+                  @else:
+                    <img class="lazy"
+                         src="@{url_for('static', filename='img/1x1.gif')}"
+                         data-src="@{thumbnail_url(item['thumbnail'])}"/>
+                  @end
+                </a>
+              </td>
+              <td>
+                <a href="@{url_for('site.view_post_inbox', pid=item['pid'])}">View Post</a>
+              </td>
+            </tr>
+          @end
+        </tbody>
+      </table>
+    </div>
+    <div class="col-12">
+      @if page > 1:
+        <a href="@{url_for('admin.user_uploads', page=(page-1))}" class="pure-button">Previous</a>
+      @end
+      @if len(uploads) == 30:
+        <a href="@{url_for('admin.user_uploads', page=(page+1))}" class="pure-button">Next</a>
+      @end
+    </div>
+  @end
+@end

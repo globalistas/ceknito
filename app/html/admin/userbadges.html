@@ -1,0 +1,75 @@
+@extends("shared/layout.html")
+@require(badges, assignuserbadgeform, ct, admin_route)
+
+@def title():
+@{_('Admin')} - @{config.site.lema}
+@end
+
+@def head():
+  <script src="@{url_for('static', filename='sorttable.js')}"></script>
+@end
+
+@def sidebar():
+@include("admin/sidebar.html")
+@end
+
+@def main():
+    <div id="center-container">
+      <div class="content">
+        <h2>User Badges: @{ct} assigned</h2>
+        <div class="admin section">
+          <hr>
+          <div class="col-12 admin-page-form">
+              <form  method="POST" class="ajaxform pure-form" data-reload="true" action="@{url_for('do.assign_userbadge')}">
+                @{assignuserbadgeform.csrf_token()!!html}
+                <h4>Modify User Badges</h4>
+                <p>
+                  @{assignuserbadgeform.user(placeholder=assignuserbadgeform.user.label.text, required=True)!!html}
+                  @{assignuserbadgeform.badge(placeholder=assignuserbadgeform.badge.label.text, required=True)!!html}
+                  <button type="submit" name="assign" class="pure-button" data-prog="Doing the magic...">Assign Badge</button>
+                  <button type="submit" name="delete" class="pure-button" formaction="@{url_for('do.remove_userbadge')}" data-prog="Doing the magic...">Delete Badge</button>
+                </p>
+                <div class="div-error error alertbox"></div>
+              </form>
+          </div>
+        <hr>
+          <div class="col-12">
+            <div class="userrow">
+              <h3>Badges</h3>
+              <p class="left"><a href="@{url_for('admin.newbadge')}">New Badge</a></p>
+              <table>
+                <tr>
+                  <th>Sort</th>
+                  <th>Icon</th>
+                  <th>Name</th>
+                  <th>Score</th>
+                  <th>Alt</th>
+                  <th>Trigger</th>
+                </tr>
+                @for badge in badges:
+                  <tr>
+                      <td>@{badge.rank}</td>
+                    <td>
+                        <span data-badge="@{badge.bid}" class="profilebadge" title="@{badge.name}"><img width="60" height="60" src="@{badge.icon_url()}" /></span>
+                    </td>
+                    <td>
+                        <a href="userbadges/edit/@{badge.bid}">@{badge.name}</a>
+                    </td>
+                    <td>
+                      @{badge.score}
+                    </td>
+                    <td class="left">
+                      @{badge.alt}
+                    </td>
+                    <td>
+                      @{badge.trigger}
+                    </td>
+                  </tr>
+                @end
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+@end
