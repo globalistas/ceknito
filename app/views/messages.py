@@ -1,7 +1,8 @@
 """ Messages endpoints """
-from flask import Blueprint, redirect, url_for, render_template, abort, jsonify
+from flask import Blueprint, redirect, url_for, abort, jsonify
 from flask_login import login_required, current_user
 from .. import misc
+from ..forms import CreateUserMessageReplyForm
 from ..notifications import Notifications
 from ..misc import engine, get_postmeta_dicts
 from ..models import Notification
@@ -70,12 +71,19 @@ def delete_notification(mid):
 def view_messages(page):
     """View user's messages"""
     msgs = misc.get_messages_inbox(page)
-    return render_template(
-        "messages/messages.html",
-        page=page,
-        messages=msgs,
-        box_name="Inbox",
-        box_route="messages.view_messages",
+    msgform = CreateUserMessageReplyForm()
+    msgform_content = CreateUserMessageReplyForm().content(
+        placeholder="", rows="10", **{"data-provide": "markdown"}
+    )
+    return engine.get_template("user/messages/messages.html").render(
+        {
+            "page": page,
+            "messages": msgs,
+            "box_route": "messages.view_messages",
+            "msgform": msgform,
+            "msgform_content": msgform_content,
+            "error": misc.get_errors(CreateUserMessageReplyForm(), True),
+        }
     )
 
 
@@ -85,11 +93,12 @@ def view_messages(page):
 def view_messages_sent(page):
     """View user's messages sent"""
     msgs = misc.get_messages_sent(page)
-    return render_template(
-        "messages/sent.html",
-        messages=msgs,
-        page=page,
-        box_route="messages.view_messages_sent",
+    return engine.get_template("user/messages/sent.html").render(
+        {
+            "messages": msgs,
+            "page": page,
+            "box_route": "messages.view_messages_sent",
+        }
     )
 
 
@@ -99,9 +108,17 @@ def view_messages_sent(page):
 def view_saved_messages(page):
     """WIP: View user's saved messages"""
     msgs = misc.get_messages_saved(page)
-    return render_template(
-        "messages/saved.html",
-        messages=msgs,
-        page=page,
-        box_route="messages.view_saved_messages",
+    msgform = CreateUserMessageReplyForm()
+    msgform_content = CreateUserMessageReplyForm().content(
+        placeholder="", rows="10", **{"data-provide": "markdown"}
+    )
+    return engine.get_template("user/messages/saved.html").render(
+        {
+            "messages": msgs,
+            "page": page,
+            "box_route": "messages.view_saved_messages",
+            "msgform": msgform,
+            "msgform_content": msgform_content,
+            "error": misc.get_errors(CreateUserMessageReplyForm(), True),
+        }
     )

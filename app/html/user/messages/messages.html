@@ -1,0 +1,86 @@
+@extends("shared/layout.html")
+@require(page, messages, box_route, msgform, msgform_content, error)
+@import 'shared/sidebar/messages.html' as sb
+@def sidebar():
+  @{sb.render_sidebar('messages')!!html}
+@end
+
+@def main():
+<div id="center-container">
+  <div class="inbox content">
+    <div class="user-activity col-12">
+      <h3 style="display: inline-block;"><span class="p-icon" data-icon="mail" style="display: inline-block;"></span>@{_('Inbox')}</h3>
+      - <span class="links"><a class="markall">@{_("Mark all as read")}</a></span>
+      @for message in messages:
+        <article class="pmessage post @{message['read'] == None and 'newmsg' or ''}">
+          <div class="main">
+            <p class="title">@{message['subject']}</p>
+            <p class="container">@{markdown(message['content'])!!html}</p>
+            <p class="author">&#10148;
+              @{_("sent")} <time-ago datetime="@{message['posted'].isoformat()}Z"></time-ago>
+              @if message['username']:
+                @{_("by user")} <a href="@{url_for('user.view', user=message['username'])}">@{message['username']}</a>
+                @if message['sub']:
+                  [as mod of <a href="@{url_for('sub.view_sub', sub=message['sub'])}">/@{config.site.sub_prefix}/@{message['sub']}</a>]
+                @end
+              @elif message['sub']:
+                  by the mods of <a href="@{url_for('sub.view_sub', sub=message['sub'])}">/@{config.site.sub_prefix}/@{message['sub']}</a>
+              @else:
+                via <a href="#">@{config.site.name}</a>
+              @end
+            </p>
+            <p class="container">
+              @if message['username'] and not message['sub'] or config.site.enable_modmail:
+                <a href="#msg-form" data-mid="@{message['mid']}" class="replymsg">@{_("reply")}</a>
+              @end
+              @if not message['read']:
+                <a class="readmsg" data-mid="@{message['mid']}">@{_("mark as read")}</a>
+              @end
+              @if message['username'] and not message['sub'] and not message['sender_can_admin'] and not current_user.can_admin:
+                <a class="block-msg" data-uid="@{message['sentby']}">@{_("block sender")}</a>
+              @end
+                <a class="savemsg" data-mid="@{message['mid']}">@{_("save")}</a>
+                <a class="deletemsg" data-mid="@{message['mid']}">@{_("delete")}</a>
+              <div class="alert div-error"></div>
+            </p>
+          </div>
+          <div id="replyto@{message['mid']}"></div>
+        </article>
+      @end
+    </div>
+    <div class="msgnav">
+      @if len(messages) == 20:
+        <a href="@{url_for(box_route, page=(page+1))}" class="pure-button">@{_('Next')}</a>
+      @end
+      @if page > 1:
+        <a href="@{url_for(box_route, page=(page-1))}" class="pure-button alldarightinbox">@{_('Previous')}</a>
+      @end
+    </div>
+  </div>
+</div>
+<div id="msgpop" style="display:none;">
+  <span class="closemsg">&times;</span>
+  <div class="modal-content">
+    <form data-reset="true" id="msg-form" action="@{url_for('do.create_replymsg')}" data-reload="true" class="pure-form pure-form-aligned ajaxform">
+      @{msgform.csrf_token!!html}
+      @{msgform.mid(required=True)!!html}
+      <div class="pure-control-group markdown-editor" id="msge">
+        @{msgform_content!!html}
+      </div>
+      <div>
+        @if error:
+        <div class="error">@{error}</div>
+        @end
+        <div class="alert div-error"></div>
+        <button type="submit" id="msg-btnsubmit" class="pure-button pure-button-primary" data-prog="Sending...">@{_('Submit')}</button>
+        <button data-pvid="msge" class="pure-button btn-preview">@{_('Preview')}</button>
+        <div class="cmpreview canclose" style="display:none;">
+          <h4>@{_('Message preview')}</h4>
+          <span class="closemsg">×</span>
+          <div class="cpreview-content"></div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+@end

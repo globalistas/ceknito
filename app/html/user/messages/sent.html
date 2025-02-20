@@ -1,0 +1,40 @@
+@extends("shared/layout.html")
+@require(messages, page, box_route)
+@import 'shared/sidebar/messages.html' as sb
+@def sidebar():
+  @{sb.render_sidebar('sent')!!html}
+@end
+
+@def main():
+  <div id="center-container">
+    <div class="inbox content">
+      <div class="user-activity col-12">
+        <h3><span class="p-icon" data-icon="mail" style="display: inline-block;"></span>@{_('Sent Messages')}</h3>
+        @for message in messages:
+          <article class="pmessage post">
+            <div class="main">
+              <p class="title">@{message['subject']}</p>
+              <p class="container">@{markdown(message['content'])!!html}</p>
+              <p class="author">&#10148; @{_('sent to user/mods')}
+                @if message['username']:
+                  <a href="@{url_for('user.view', user=message['username'])}">@{message['username']}</a>
+                @else:
+                  <a href="@{url_for('sub.view_sub', sub=message['sub'])}" class="btn small">/@{config.site.sub_prefix}/@{message['sub']}</a>
+                @end
+                <time-ago datetime="@{message['posted'].isoformat()}Z"></time-ago>
+              </p>
+            </div>
+          </article>
+        @end
+      </div>
+      <div class="msgnav">
+        @if len(messages) == 20:
+          <a href="@{url_for(box_route, page=(page+1))}" class="pure-button">@{_('Next')}</a>
+        @end
+        @if page > 1:
+          <a href="@{url_for(box_route, page=(page-1))}" class="pure-button alldarightinbox">@{_('Previous')}</a>
+        @end
+      </div>
+    </div>
+  </div>
+@end
