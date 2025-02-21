@@ -1,0 +1,117 @@
+@extends("shared/layout.html")
+@require(page, subs, nav, sort, cp_uri, term)
+
+@def title():
+  @{_('Subs')} | @{config.site.lema}
+@end
+
+@def sidebar():
+  <div>
+    <form class="pure-g search" action="@{url_for('do.search', stype='home.subs')}" method="post">
+      <div class="icon" data-icon="search"> </div>
+      <input name="term" placeholder="@{_('Search sub name...')}" type="search" class="pure-u-1" value="@{term}">
+    </form>
+  </div>
+  <hr>
+@end
+
+@def main():
+<!-- main content start -->
+  @if not subs:
+  <h3 class="notfound">@{_('There are no subs here, yet.')}</h3>
+  @end
+  <div id="container">
+    <div id="center-container">
+      <div class="subs content">
+        <table class="sortable pure-table" >
+          <thead>
+            <tr>
+              <th>
+                @if sort == 'name_asc':
+                  <a href="@{cp_uri}/name_desc">@{_('Sub')} <span class="tx-icon" data-icon="upvote"></span></a>
+                @elif sort == 'name_desc':
+                  <a href="@{cp_uri}/name_asc">@{_('Sub')} <span class="tx-icon" data-icon="downvote"></span></a>
+                @else:
+                  <a href="@{cp_uri}/name_asc">@{_('Sub')}</a>
+                @end
+              </th>
+              <th>
+                @if sort == 'subs_asc':
+                  <a href="@{cp_uri}/subs_desc">@{_('Number of subscribers')} <span class="tx-icon" data-icon="upvote"></span></a>
+                @elif sort == 'subs_desc':
+                  <a href="@{cp_uri}/subs_asc">@{_('Number of subscribers')} <span class="tx-icon" data-icon="downvote"></span></a>
+                @else:
+                <a href="@{cp_uri}/subs_desc">@{_('Number of subscribers')}</a>
+                @end
+              </th>
+              <th>
+                @if sort == 'posts_asc':
+                  <a href="@{cp_uri}/posts_desc">@{_('Number of posts')} <span class="tx-icon" data-icon="upvote"></span></a>
+                @elif sort == 'posts_desc':
+                  <a href="@{cp_uri}/posts_asc">@{_('Number of posts')} <span class="tx-icon" data-icon="downvote"></span></a>
+                @else:
+                  <a href="@{cp_uri}/posts_desc">@{_('Number of posts')}</span></a>
+                @end
+              </th>
+              <th>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for sub in subs:
+            <tr>
+              <td  class="subsentry @{current_user.has_subscribed(sub['name']) and 'subsubscribed' or ''} @{current_user.has_blocked(sub['sid']) and 'blocked' or ''}" data-sid="@{sub['sid']}">
+                  <div class="subname" title="@{sub['title']}">
+                    <a href="@{url_for('sub.view_sub', sub=sub['name'])}">@{sub['name']}</a>
+                    @if sub['nsfw']:
+                      <div class="nsfw">NSFW</div>
+                    @end
+                    @if sub['private']:
+                      <div class="nsfw">PRIVATE</div>
+                    @end
+                  </div>
+              </td>
+              <td>
+                <span style="margin-left: .3em;">@{sub['subscribers']}</span>
+              </td>
+              <td>@{sub['posts']}</td>
+                <td>
+                @if not sub['name'] == config.site.ann_sub:
+                  <div role="group" class="pure-button-group" data-sid="@{sub['sid']}" style="display:inline-block;">
+                    @if current_user.has_subscribed(sub['name']):
+                      <button data-ac="unsubscribe" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon" data-icon="check"></span>@{_('Subscribed')}</button>
+                    @elif current_user.has_blocked(sub['sid']):
+                      <button data-ac="unblock" class="blk button-warning pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon" data-icon="block"></span>@{_('Blocked')}</button>
+                    @else:
+                      <button data-ac="subscribe" class="unsub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon" data-icon="add"></span>@{_('Subscribe')}</button>
+                    @end
+                  </div>
+                @end
+                </td>
+            </tr>
+            @end
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+    @if nav=='home.subs_search':
+      <div class="col-12">
+        @if page > 1:
+        <a href="@{url_for(nav, term=term, page=(page-1))}" class="pure-button"><--</a>
+        @end
+        @if len(subs) == 50:
+        <a href="@{url_for(nav,term=term, page=(page+1))}" class="pure-button">--></a>
+        @end
+      </div>
+    @else:
+      <div class="col-12">
+        @if page > 1:
+        <a href="@{url_for(nav, page=(page-1))}" class="pure-button"><--</a>
+        @end
+        @if len(subs) == 50:
+        <a href="@{url_for(nav, page=(page+1))}" class="pure-button">--></a>
+        @end
+      </div>
+  @end
+@end

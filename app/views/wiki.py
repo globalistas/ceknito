@@ -1,5 +1,5 @@
 """ Pages to be migrated to a wiki-like system """
-from flask import Blueprint, render_template, abort, redirect, url_for
+from flask import Blueprint, abort, redirect, url_for
 from flask_babel import lazy_gettext as _l
 from flask_login import login_required
 from ..misc import engine
@@ -16,7 +16,7 @@ def welcome():
         Wiki.select().where(Wiki.slug == "welcome").where(Wiki.is_global).get()
         return redirect(url_for("wiki.view", slug="welcome"))
     except Wiki.DoesNotExist:
-        return render_template("welcome.html")
+        return engine.get_template("welcome.html").render({})
 
 
 try:

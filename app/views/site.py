@@ -1,6 +1,6 @@
 """ Miscellaneous site endpoints """
 from peewee import SQL
-from flask import Blueprint, redirect, url_for, abort, render_template
+from flask import Blueprint, redirect, url_for, abort
 from flask_login import login_required, current_user
 from .. import misc
 from ..models import SiteLog, SubPost, SubLog, Sub, SubPostComment
@@ -98,14 +98,18 @@ def view_multisub_new(sublist, page=1):
         "new",
         page,
     )
-    return render_template(
-        "indexmulti.html",
-        page=page,
-        posts=posts,
-        subs=subs,
-        sublist=sublist,
-        sort_type="site.view_multisub_new",
-        kw={"subs": sublist},
+    return engine.get_template("indexmulti.html").render(
+        {
+            "page": page,
+            "posts": posts,
+            "subs": subs,
+            "sublist": sublist,
+            "sort_type": "site.view_multisub_new",
+            "kw": {"subs": sublist},
+            "subOfTheDay": misc.getSubOfTheDay(),
+            "changeLog": misc.getChangelog(),
+            "ann": misc.getAnnouncement(),
+        }
     )
 
 

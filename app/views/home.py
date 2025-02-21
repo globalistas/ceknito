@@ -7,7 +7,6 @@ from flask import (
     url_for,
     Response,
     abort,
-    render_template,
     redirect,
     session,
 )
@@ -473,8 +472,15 @@ def view_subs(page, sort):
 
     c = c.paginate(page, 50).dicts()
     cp_uri = "/subs/" + str(page)
-    return render_template(
-        "subs.html", page=page, subs=c, nav="home.view_subs", sort=sort, cp_uri=cp_uri
+    return engine.get_template("subs.html").render(
+        {
+            "page": page,
+            "subs": c,
+            "nav": "home.view_subs",
+            "sort": sort,
+            "cp_uri": cp_uri,
+            "term": "",
+        }
     )
 
 
@@ -516,12 +522,14 @@ def subs_search(page, term, sort):
         return redirect(url_for("home.view_subs", page=page, sort="name_asc"))
     c = c.paginate(page, 50).dicts()
     cp_uri = "/subs/search/" + term + "/" + str(page)
-    return render_template(
-        "subs.html",
-        page=page,
-        subs=c,
-        nav="home.subs_search",
-        term=term,
-        sort=sort,
-        cp_uri=cp_uri,
+
+    return engine.get_template("subs.html").render(
+        {
+            "page": page,
+            "subs": c,
+            "nav": "home.subs_search",
+            "sort": sort,
+            "cp_uri": cp_uri,
+            "term": term,
+        }
     )

@@ -1,0 +1,67 @@
+@extends("shared/layout.html")
+@import "shared/post.html" as ipost
+@require(page, posts, subs, sublist, sort_type, kw, ann)
+
+@def title():
+
+    Multi - @{config.site.lema}
+@end
+
+
+@def sidebar():
+@include('shared/sidebar/home.html')
+  <div class="sidebarlists">
+    <h4 class="center">@{_('New posts from:')}</h4>
+    <ul>
+      @for sub in subs:
+        <li><a href="@{url_for('sub.view_sub', sub=sub.name)}">/@{config.site.sub_prefix}/@{sub.name}</a>
+        <div class="sidelocale">@{sub.title}</div></li>
+      @end
+    </ul>
+  </div>
+@end
+
+@def main():
+
+  @if not posts:
+    <h3 class="notfound">@{_("There are no posts here, yet.")}</h3>
+  @end
+    <div class="alldaposts">
+      @for post in posts:
+        @if not ann or ann['pid'] != post['pid']:
+          @{ipost.singlePost(post, False)!!html}
+        @end
+      @end
+    </div>
+
+<!--  {% if not kw %}-->
+<!--    {% set kw = {} %}-->
+<!--  {%endif%}-->
+
+  @if len(posts) == 25:
+    <a href="@{url_for(sort_type, page=(page+1), sublist=sublist, **kw)}" class="pure-button">@{_('Next page')}</a>
+  @end
+  @if page > 1:
+    <a href="@{url_for(sort_type, page=(page-1), sublist=sublist, **kw)}" class="pure-button">@{_('Previous page')}</a>
+  @end
+@end
+
+@def pagefoot():
+  <label id="pagefoot-oindex" data-value="true" class="hide"></label>
+  @if "labrat" in current_user.prefs:
+    <label id="pagefoot-labrat" data-value="true" class="hide"></label>
+  @end
+  @if sort_type == 'home.all_new':
+    <label id="pagefoot-blocked" data-value="@{current_user.blocksid}" class="hide"></label>
+  @end
+  <label id="pagefoot-admin" data-value="@{current_user.is_admin()}" class="hide"></label>
+  @if current_user.likes_scroll() and sort_type not in ('home.search', 'home.all_domain_new'):
+    @if sort_type.startswith("home.all_"):
+      <label id="pagefoot-moreuri" data-value="@{url_for('home.all_more', sort=sort_type.replace('home.all_', ''))}" class="hide"></label>
+    @elif sort_type.startswith("home."):
+      <label id="pagefoot-moreuri" data-value="@{url_for('home.home_more', sort=sort_type.replace('home.', ''))}" class="hide"></label>
+    @end
+  @end
+  <label id="pagefoot-nsfw" data-value="@{'nsfw' in current_user.prefs}" class="hide"></label>
+  <label id="pagefoot-nsfw-blur" data-value="@{'nsfw_blur' in current_user.prefs}" class="hide"></label>
+@end
