@@ -327,24 +327,32 @@ function updateSubmitPostFormFlairs(flairs) {
 // posts permitted and update which radio buttons are visible
 // accordingly.
 function onSubmitPostSubChange(e) {
-  if (e.classList.contains('sub_submitpost')) {
-    const name = e.value.toLowerCase();
-    let ptypes = null;
+  // First ensure we have the right element
+  const element = e.target ? e.target : e;
+
+  if (element.classList.contains('sub_submitpost')) {
+    const name = element.value.toLowerCase();
     const defaults = {
       link: true,
       upload: true,
       text: true,
       poll: false
-    }
+    };
 
-    if (e.value == '') {
+    if (element.value == '') {
       // No sub given, so show the defaults.
       updateSubmitPostForm(defaults);
       updateSubmitPostFormFlairs([], false, false);
     } else {
       u.get('/api/v3/sub/' + name, function(data) {
-        updateSubmitPostForm(data.postTypes);
-        updateSubmitPostFormFlairs(data.flairs);
+        if (data && data.postTypes) {
+          updateSubmitPostForm(data.postTypes);
+          updateSubmitPostFormFlairs(data.flairs || []);
+        } else {
+          // Fallback to defaults if data is malformed
+          updateSubmitPostForm(defaults);
+          updateSubmitPostFormFlairs([], false, false);
+        }
       });
     }
   }
@@ -375,9 +383,13 @@ if(sa){
         })
     },
     onSelect: function(item) {
-        sa.value = item.name;
-        if (sa.id == 'sub') {
-          onSubmitPostSubChange(sa);
+        this.input.value = item.name;
+        if (this.input.id == 'sub') {
+            // Make sure the input has the right class
+            if (!this.input.classList.contains('sub_submitpost')) {
+                this.input.classList.add('sub_submitpost');
+            }
+            onSubmitPostSubChange(this.input);
         }
     },
     render: function(item, currentValue) {
