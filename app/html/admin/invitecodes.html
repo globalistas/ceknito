@@ -62,7 +62,7 @@
         <h2>Invite Codes</h2>
         <form method="POST" class="pure-form">
         @{update_form.csrf_token()!!html}
-          <p>@{update_form.etype.label}</p>
+          <p>@{update_form.etype.label!!html}</p>
           <div style="margin-bottom: 1em;">
             @for subfield in update_form.etype:
               <td>@{subfield}</td>
