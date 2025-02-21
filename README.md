@@ -41,6 +41,7 @@ A link and discussion aggregator with snek (python3)
 - webp image uploads
 - improved diacritics support
 - translations support for Welcome page
+- all templates migrated to Wheezy
 - post flair colors
 - site color picker
 - post body in post list view links to post
