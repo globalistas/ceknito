@@ -35,7 +35,7 @@
                     @{useinvitecodeform.invitations_visible_to_users(checked=config.site.invitations_visible_to_users)!!html} @{useinvitecodeform.invitations_visible_to_users.label.text}
                   </label>
                   <div class="pure-control-group">
-                      <label for="confirm">@{useinvitecodeform.minlevel.label.text}</label>
+                      <label for="confirm">@{useinvitecodeform.minlevel.label.text!!html}</label>
                       @{useinvitecodeform.minlevel(autocomplete="off", required=True)!!html}
                   </div>
                   <div class="pure-control-group">
@@ -65,8 +65,8 @@
           <p>@{update_form.etype.label!!html}</p>
           <div style="margin-bottom: 1em;">
             @for subfield in update_form.etype:
-              <td>@{subfield}</td>
-              <td>@{subfield.label}</td>
+              <td>@{subfield!!html}</td>
+              <td>@{subfield.label!!html}</td>
             @end
             <td><input name="expires" type="text" class="date-picker-future" placeholder="Expiration"> </td>
             <td><button type="submit" class="pure-button pure-button-primary">Change Expiration</button></td>
