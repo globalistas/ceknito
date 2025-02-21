@@ -35,7 +35,7 @@
                     @{useinvitecodeform.invitations_visible_to_users(checked=config.site.invitations_visible_to_users)!!html} @{useinvitecodeform.invitations_visible_to_users.label.text}
                   </label>
                   <div class="pure-control-group">
-                      <label for="confirm">@{useinvitecodeform.minlevel.label.text!!html}</label>
+                      <label for="confirm">@{useinvitecodeform.minlevel.label.text}</label>
                       @{useinvitecodeform.minlevel(autocomplete="off", required=True)!!html}
                   </div>
                   <div class="pure-control-group">
