@@ -30,19 +30,19 @@
                 @{form.icon(required=new)!!html}
               </div>
               <div class="pure-control-group">
-                <label for="name">@{form.name.label!!html}</label>@{form.name(required=True)}
+                <label for="name">@{form.name.label}</label>@{form.name(required=True)!!html}
               </div>
               <div class="pure-control-group">
-                <label for="score">@{form.score.label!!html}</label>@{form.score(required=True)}
+                <label for="score">@{form.score.label}</label>@{form.score(required=True)!!html}
               </div>
               <div class="pure-control-group">
-                <label for="alt">@{form.alt.label!!html}</label>@{form.alt}
+                <label for="alt">@{form.alt.label}</label>@{form.alt}
               </div>
               <div class="pure-control-group">
-                <label for="trigger">@{form.trigger.label!!html}</label>@{form.trigger}
+                <label for="trigger">@{form.trigger.label}</label>@{form.trigger}
               </div>
               <div class="pure-control-group">
-                <label for="rank">@{form.rank.label!!html}</label>@{form.rank}
+                <label for="rank">@{form.rank.label}</label>@{form.rank}
               </div>
               <div class="pure-controls">
                 <button type="submit" class="pure-button" data-prog="Doing the magic...">
