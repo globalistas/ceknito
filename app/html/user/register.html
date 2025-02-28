@@ -34,7 +34,7 @@
 
                 <div class="pure-control-group">
                   @if email_validation_is_required():
-                    <label for="email">@{regform.email_required.label.text}</label>@{regform.email_required(placeholder=regform.email_required.label.text)!!html}
+                    <label for="email">@{regform.email_required.label.text}</label><br>@{regform.email_required(placeholder=regform.email_required.label.text)!!html}
                   @else:
                     <label for="email">@{regform.email_optional.label.text}</label>@{regform.email_optional(placeholder=regform.email_optional_placeholder.label.text)!!html}
                   @end

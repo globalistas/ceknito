@@ -1013,6 +1013,7 @@ def getSubOfTheDay():
                     & (Sub.name != config.site.ann_sub)
                     & (Sub.sid != config.site.changelog_sub)
                     & (Sub.posts > 0)
+                    & (Sub.private == 0)
                 )
                 .order_by(db.random())
                 .get()
@@ -2100,11 +2101,10 @@ def getUserComments(
             if current_user.can_admin:
                 pass
             else:
-                # Remove the join here, just keep the where clause
                 com = com.where(
-                    (Sub.private == 0)  # public subs
-                    | (SubPostComment.uid == current_user.uid)  # user's own comments
-                    | (SubSubscriber.uid.is_null(False))  # user is a sub member
+                    (Sub.private == 0)
+                    | (SubPostComment.uid == current_user.uid)
+                    | (SubSubscriber.uid.is_null(False))
                 )
 
         if filter_shadowbanned:

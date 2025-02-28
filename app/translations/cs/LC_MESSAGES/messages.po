@@ -3345,7 +3345,7 @@ msgstr "Odznaky"
 
 #: app/html/user/profile.html:91
 msgid "Owns"
-msgstr "Založené skupiny"
+msgstr "Vlastní skupiny"
 
 #: app/html/user/profile.html:101
 msgid "Mods"
