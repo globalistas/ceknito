@@ -2779,11 +2779,11 @@ msgstr "Čističi:"
 
 #: app/html/sub/mods.html:84
 msgid "Pending invites: none"
-msgstr "Neprijaté pozvánky: žiadne"
+msgstr "Otvorené pozvánky: žiadne"
 
 #: app/html/sub/mods.html:86
 msgid "Pending invites:"
-msgstr "Neprijaté pozvánky:"
+msgstr "Otvorené pozvánky:"
 
 #: app/html/sub/mods.html:101
 msgid "revoke"

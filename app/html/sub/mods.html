@@ -84,10 +84,12 @@
 
     <hr/>
 
-    @if len(subModInvites) == 0:
-      <p>@{_('Pending invites: none')}</p>
-    @else:
-      <p>@{_('Pending invites:')}</p>
+    @if current_user.is_admin() or current_user.is_mod(sub.sid, 0):
+      @if len(subModInvites) == 0:
+        <p>@{_('Pending invites: none')}</p>
+      @else:
+        <p>@{_('Pending invites:')}</p>
+      @end
     @end
 
     <ul>
