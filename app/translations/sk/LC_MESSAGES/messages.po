@@ -3664,6 +3664,10 @@ msgstr "Max. počet použití"
 msgid "%(user)s's preferences"
 msgstr "Preferencie používateľa %(user)s"
 
+#: app/html/user/settings/preferences.html:48
+msgid "Fill your email address in account settings to enable"
+msgstr "Pre aktiváciu vyplňte svoju e-mailovú adresu v nastaveniach konta"
+
 #: app/static/js/Editor.js:26
 msgid "Bold (ctrl-b)"
 msgstr "Tučné (ctrl-b)"

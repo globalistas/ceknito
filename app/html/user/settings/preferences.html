@@ -44,7 +44,11 @@
 
             <div class="new-form-one">
                 <label for="email_notify" class="new-form-one">@{edituserform.email_notify.label.text}</label>
-                @{edituserform.email_notify()!!html}
+                @if not current_user.email:
+                    @{edituserform.email_notify(disabled=True, title=_('Fill your email address in account settings to enable'))!!html}
+                @else:
+                    @{edituserform.email_notify()!!html}
+                @end
             </div>
 
             <div class="alert div-error"></div>

@@ -185,6 +185,7 @@ class SiteUser(object):
         self.prefs = [x["key"] for x in prefs]
 
         self.language = self.user["language"]
+        self.email = self.user["email"]
         self.resets = self.user["resets"]
 
         self.subsid = []
