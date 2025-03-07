@@ -79,7 +79,7 @@ function video_expando(link, expando) {
   const vid = document.createElement( "video" );
   vid.src = link;
   vid.preload = 'auto';
-  vid.autoplay = true;
+  vid.autoplay = false;
   vid.loop = false;
   vid.controls = true;
   vid.innerHTML = document.createElement("source").src = link;
