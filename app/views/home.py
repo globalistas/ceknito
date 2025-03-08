@@ -452,7 +452,7 @@ def view_subs(page, sort):
             (SubSubscriber.uid == current_user.uid) & (SubSubscriber.status == 1)
         )
 
-        c = c.where((Sub.private == 0) | (Sub.sid.in_(user_subs)))
+        c = c.where(((Sub.private == 0) | (Sub.sid.in_(user_subs))) & (Sub.status == 0))
 
     # sorts...
     if sort == "name_desc":

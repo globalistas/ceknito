@@ -54,7 +54,7 @@ def list_admins():
         print("  ", i.name)
 
 
-@admin.command(help="Resets TOTP setup for an administrator")
+@admin.command(name="reset_totp", help="Resets TOTP setup for an administrator")
 @click.argument("username")
 def reset_totp(username):
     try:

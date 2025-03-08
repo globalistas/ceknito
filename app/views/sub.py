@@ -67,7 +67,7 @@ def view_sub(sub):
     except Sub.DoesNotExist:
         abort(404)
 
-    if sub.status != 0 and not current_user.can_admin:
+    if sub.status != 0 and not current_user.is_admin():
         return engine.get_template("sub/blocked.html").render({"sub": sub})
 
     sub_mods = misc.getSubMods(sub.sid)
