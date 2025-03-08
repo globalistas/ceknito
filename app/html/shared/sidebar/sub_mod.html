@@ -9,6 +9,7 @@
   <div><a class="sbm-post pure-button @{curr_endpoint=='members' and 'button-secondary' or ''}" href="@{ url_for('sub.edit_sub_members', sub=sub) }">@{_('Members')}</a></div>
   <div><a class="sbm-post pure-button @{curr_endpoint=='mods' and 'button-secondary' or ''}" href="@{ url_for('sub.edit_sub_mods', sub=sub) }">@{_('Moderators')}</a></div>
   <div><a class="sbm-post pure-button @{curr_endpoint=='bans' and 'button-secondary' or ''}" href="@{ url_for('sub.view_sub_bans', sub=sub) }">@{_('Bans')}</a></div>
+  <div><a class="sbm-post pure-button @{curr_endpoint=='log' and 'button-secondary' or ''}" href="@{ url_for('sub.view_sublog', sub=sub) }">@{_('Sub Log')}</a></div>
   <hr/>
   <div><a class="sbm-post pure-button @{curr_endpoint=='open-reports' and 'button-secondary' or ''}" href="@{ url_for('mod.reports_sub', sub=sub) }">@{_('Open Reports')}</a></div>
   <div><a class="sbm-post pure-button @{curr_endpoint=='closed-reports' and 'button-secondary' or ''}" href="@{ url_for('mod.reports_sub_closed', sub=sub) }">@{_('Closed Reports')}</a></div>

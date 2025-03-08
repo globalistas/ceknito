@@ -283,7 +283,7 @@ def view_sublog(sub, page):
         if log_is_private and not (
             current_user.is_mod(sub["sid"], 1) or current_user.is_admin()
         ):
-            abort(404)
+            abort(403)
 
     subMods = misc.getSubMods(sub["sid"])
     logs = (
@@ -488,7 +488,7 @@ def view_sub_bans(sub):
         if (banned_users_is_private or sub.status != 0) and not (
             current_user.is_mod(sub.sid, 1) or current_user.is_admin()
         ):
-            abort(404)
+            abort(403)
 
     user = User.alias()
     created_by = User.alias()

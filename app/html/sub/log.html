@@ -1,8 +1,9 @@
 @extends("shared/sub.html")
 @require(sub, logs, page, subInfo, subMods)
 
+@import 'shared/sidebar/sub_mod.html' as sb
 @def sidebar():
-@include('shared/sidebar/sub.html')
+  @{sb.render_sidebar('log', sub=sub['name'])!!html}
 @end
 
 @def main():

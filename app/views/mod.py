@@ -167,7 +167,7 @@ def report_details(sub, report_type, report_id):
     except Sub.DoesNotExist:
         return abort(404)
 
-    if not (current_user.is_mod(sub.sid, 1) or current_user.is_admin()):
+    if not (current_user.is_mod(sub.sid, 2) or current_user.is_admin()):
         return abort(404)
 
     subInfo = misc.getSubData(sub.sid)

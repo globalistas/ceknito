@@ -140,9 +140,10 @@
 @if current_user.uid:
   @if current_user.uid in (list(subMods['owners']) + list(subMods['mods'])) or current_user.is_admin():
     <a href="@{url_for('sub.edit_sub', sub=sub['name'])}" class="sbm-post pure-button">@{_('Settings')}</a>
-    <a href="@{url_for('sub.edit_sub_flairs', sub=sub['name'])}" class="sbm-post pure-button">@{_('Edit flairs')}</a>
-    <a href="@{url_for('sub.edit_sub_rules', sub=sub['name'])}" class="sbm-post pure-button">@{_('Edit rules')}</a>
-    <a href="@{url_for('sub.edit_sub_css', sub=sub['name'])}" class="sbm-post pure-button">@{_('Edit stylesheet')}</a>
+    <a href="@{url_for('sub.edit_sub_flairs', sub=sub['name'])}" class="sbm-post pure-button">@{_('Post flairs')}</a>
+    <a href="@{url_for('sub.edit_sub_user_flairs', sub=sub['name'])}" class="sbm-post pure-button">@{_('User flairs')}</a>
+    <a href="@{url_for('sub.edit_sub_rules', sub=sub['name'])}" class="sbm-post pure-button">@{_('Rules')}</a>
+    <a href="@{url_for('sub.edit_sub_css', sub=sub['name'])}" class="sbm-post pure-button">@{_('Stylesheet')}</a>
     <a href="@{url_for('mod.reports_sub', sub=sub['name'])}" class="sbm-post pure-button">@{_('Sub Moderation')}</a>
   @end
   @if current_user.uid in subMods['all'] or current_user.is_admin():
@@ -150,11 +151,11 @@
     <a href="@{url_for('sub.edit_sub_mods', sub=sub['name'])}" class="sbm-post pure-button">@{_('Moderators')}</a>
   @end
 @end
+@if config.site.force_sublog_public or (subInfo.get('sub_banned_users_private', 0) != '1') or (current_user.uid in (subMods['all'])) or current_user.is_admin():
+  <a href="@{url_for('sub.view_sub_bans', sub=sub['name'])}" class="sbm-post pure-button">@{_('Bans')}</a>
+@end
 @if config.site.force_sublog_public or (subInfo.get('sublog_private', 0) != '1') or (current_user.uid in (subMods['all'])) or current_user.is_admin():
   <a href="@{url_for('sub.view_sublog', sub=sub['name'])}" class="sbm-post pure-button">@{_('Sub Log')}</a>
-@end
-@if config.site.force_sublog_public or (subInfo.get('sub_banned_users_private', 0) != '1') or (current_user.uid in (subMods['all'])) or current_user.is_admin():
-  <a href="@{url_for('sub.view_sub_bans', sub=sub['name'])}" class="sbm-post pure-button">@{_('Banned Users')}</a>
 @end
 <hr>
 
