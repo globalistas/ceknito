@@ -139,7 +139,7 @@ u.ready(function () {
   // initialize all date pickers
     flatpickr(".date-picker-future", {
       enableTime: true,
-      dateFormat: 'Y-m-d H:i',
+      dateFormat: 'Z',
       altInput: true,
       altFormat: 'Y-m-d H:i',
       time_24hr: true,
