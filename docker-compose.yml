@@ -28,7 +28,7 @@ services:
     tty: true
     volumes:
       - ./app/html:/throat/app/html
-      - ./app/templates:/throat/app/templates
+#      - ./app/templates:/throat/app/templates
     environment:
       WORKER_TYPE: local
       # Configs set here will override your config.yaml

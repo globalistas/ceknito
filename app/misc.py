@@ -1543,6 +1543,17 @@ def load_user(user_id):
             return None
 
 
+def get_last_login(user):
+    """Get the last login timestamp for a user"""
+    try:
+        umd = UserMetadata.get(
+            (UserMetadata.uid == user) & (UserMetadata.key == "last_login")
+        )
+        return datetime.fromisoformat(umd.value)
+    except (UserMetadata.DoesNotExist, ValueError):
+        return None
+
+
 def user_is_loaded():
     return has_request_context() and hasattr(_request_ctx_stack.top, "user")
 

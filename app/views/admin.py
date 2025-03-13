@@ -219,6 +219,9 @@ def users(page):
         .group_by(SubPostComment.uid)
         .alias("j2")
     )
+    last_login_query = UserMetadata.select(
+        UserMetadata.uid, UserMetadata.value.alias("last_login")
+    ).where(UserMetadata.key == "last_login")
 
     users = User.select(
         User.name,
@@ -228,10 +231,14 @@ def users(page):
         User.email,
         postcount.c.post_count.alias("post_count"),
         commcount.c.comment_count,
+        last_login_query.c.last_login.alias("last_login"),
     )
     users = users.join(postcount, JOIN.LEFT_OUTER, on=User.uid == postcount.c.uid)
     users = users.join(commcount, JOIN.LEFT_OUTER, on=User.uid == commcount.c.uid)
-    users = users.order_by(User.joindate.desc()).paginate(page, 50).dicts()
+    users = users.join(
+        last_login_query, JOIN.LEFT_OUTER, on=(User.uid == last_login_query.c.uid)
+    )
+    users = users.order_by(last_login_query.c.last_login).paginate(page, 50).dicts()
 
     return engine.get_template("admin/users.html").render(
         {
@@ -516,6 +523,9 @@ def view():
         .group_by(SubPostComment.uid)
         .alias("j2")
     )
+    last_login_query = UserMetadata.select(
+        UserMetadata.uid, UserMetadata.value.alias("last_login")
+    ).where(UserMetadata.key == "last_login")
 
     users = User.select(
         User.name,
@@ -525,9 +535,13 @@ def view():
         User.email,
         postcount.c.post_count.alias("post_count"),
         commcount.c.comment_count,
+        last_login_query.c.last_login.alias("last_login"),
     )
     users = users.join(postcount, JOIN.LEFT_OUTER, on=User.uid == postcount.c.uid)
     users = users.join(commcount, JOIN.LEFT_OUTER, on=User.uid == commcount.c.uid)
+    users = users.join(
+        last_login_query, JOIN.LEFT_OUTER, on=(User.uid == last_login_query.c.uid)
+    )
     users = (
         users.where(User.uid << [x.uid for x in admins])
         .order_by(User.joindate.asc())
@@ -564,6 +578,9 @@ def users_search(term):
         .group_by(SubPostComment.uid)
         .alias("j2")
     )
+    last_login_query = UserMetadata.select(
+        UserMetadata.uid, UserMetadata.value.alias("last_login")
+    ).where(UserMetadata.key == "last_login")
 
     users = User.select(
         User.name,
@@ -573,9 +590,13 @@ def users_search(term):
         User.email,
         postcount.c.post_count,
         commcount.c.comment_count,
+        last_login_query.c.last_login.alias("last_login"),
     )
     users = users.join(postcount, JOIN.LEFT_OUTER, on=User.uid == postcount.c.uid)
     users = users.join(commcount, JOIN.LEFT_OUTER, on=User.uid == commcount.c.uid)
+    users = users.join(
+        last_login_query, JOIN.LEFT_OUTER, on=(User.uid == last_login_query.c.uid)
+    )
     users = users.where(User.name.contains(term)).order_by(User.joindate.desc()).dicts()
 
     return engine.get_template("admin/users.html").render(

@@ -50,6 +50,7 @@
                   <th>XP</th>
                   <th>Status</th>
                   <th>Joined</th>
+                  <th>Last login</th>
                   <th>Email</th>
                 </tr>
               </thead>
@@ -82,6 +83,11 @@
                     <td>@{func.get_user_level(user['uid'])[1]}</td>
                     <td>@{user['status']}</td>
                     <td class="convert-date"><time-ago datetime="@{user['joindate'].isoformat()}Z"></time-ago></td>
+                    @if user['last_login']:
+                        <td class="convert-date"><time-ago datetime="@{user['last_login']}Z"></time-ago></td>
+                    @else:
+                        <td>N/A</td>
+                    @end
                     <td>@{user['email']}</td>
                   </tr>
                 @end

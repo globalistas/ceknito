@@ -1,5 +1,5 @@
 @extends("shared/layout.html")
-@require(user, level, progress, postCount, commentCount, givenScore, postScore, commentScore, userScore, invitecodeinfo, badges, owns, mods, habits, msgform, target_user_is_admin, ignform)
+@require(user, level, progress, postCount, commentCount, givenScore, postScore, commentScore, userScore, invitecodeinfo, last_login, badges, owns, mods, habits, msgform, target_user_is_admin, ignform)
 
 @def title():
 /u/@{user.name} |\
@@ -75,6 +75,7 @@
                     </div>
                     <p>@{_('Registered %(timeago)s', timeago='<time-ago datetime="'+ user.joindate.isoformat() + 'Z"></time-ago>')!!html}</p>
                     @if current_user.can_admin:
+                        <p>Last login <time-ago datetime="@{last_login}Z"></time-ago></p>
                         <p>Email: @{user.email}</p>
                     @end
                 @end

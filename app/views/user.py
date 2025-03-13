@@ -8,7 +8,7 @@ from .do import info_from_email_confirmation_token
 from .. import misc
 from ..config import config
 from ..auth import auth_provider, AuthError, normalize_email
-from ..misc import engine, gevent_required
+from ..misc import engine, gevent_required, get_last_login
 from ..misc import ratelimit, AUTH_LIMIT, SIGNUP_LIMIT, limit_pagination
 from ..forms import (
     CsrfTokenOnlyForm,
@@ -214,6 +214,7 @@ def view(user):
             "target_user_is_admin": user_is_admin,
             "msgform": CreateUserMessageForm(),
             "ignform": ignform,
+            "last_login": get_last_login(user),
         }
     )
 

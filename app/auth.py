@@ -221,6 +221,20 @@ class AuthProvider:
             UserMetadata.create(uid=user.uid, key="remote_uid", value=remote_uid)
         pass
 
+    @staticmethod
+    def update_last_login(user):
+        """Update the last active timestamp for a user"""
+        try:
+            umd = UserMetadata.get(
+                (UserMetadata.uid == user) & (UserMetadata.key == "last_login")
+            )
+            umd.value = datetime.utcnow().isoformat()
+            umd.save()
+        except UserMetadata.DoesNotExist:
+            UserMetadata.create(
+                uid=user, key="last_login", value=datetime.utcnow().isoformat()
+            )
+
     def change_password(self, user, old_password, new_password):
         if self.validate_password(user, old_password):
             auth_source = self.get_user_auth_source(user)

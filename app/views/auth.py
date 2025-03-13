@@ -543,6 +543,7 @@ def login():
     session.pop("reg", None)
     theuser = misc.load_user(user.uid)
     login_user(theuser, remember=form.remember.data)
+    auth_provider.update_last_login(user.uid)
     if request.args.get("service"):
         return handle_cas_ok(uid=user.uid)
 
