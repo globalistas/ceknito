@@ -1,4 +1,4 @@
-@extends("shared/layout.html")
+@extends("shared/newlayout.html")
 @require(messages, page, box_route)
 @import 'shared/sidebar/messages.html' as sb
 @def sidebar():
@@ -9,7 +9,7 @@
   <div id="center-container">
     <div class="inbox content">
       <div class="user-activity col-12">
-        <h3><span class="p-icon" data-icon="mail" style="display: inline-block;"></span>@{_('Sent Messages')}</h3>
+        <h3><span class="p-icon" data-icon="mail" style="display: inline-block; margin-right: 5px;"></span>@{_('Sent Messages')}</h3>
         @for message in messages:
           <article class="pmessage post">
             <div class="main">

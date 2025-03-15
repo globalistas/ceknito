@@ -69,10 +69,20 @@ function bitchuteID(url) {
   }
 }
 
-function close_expando( pid){
-  var k = document.querySelector('div.expando-master[pid="'+pid+'"]')
-  k.parentNode.removeChild(k);
-  document.querySelector('div.expando[data-pid="'+pid+'"] .expando-btn').innerHTML = icon[document.querySelector('div.expando[data-pid="'+pid+'"] .expando-btn').getAttribute('data-icon')];
+function close_expando(pid) {
+  var k = document.querySelector('div.expando-master[pid="'+pid+'"]');
+  if (k) {
+    k.parentNode.removeChild(k);
+    var expandoBtn = document.querySelector('div.expando[data-pid="'+pid+'"] .expando-btn');
+    if (expandoBtn) {
+      // Get the original icon from the data attribute
+      const origIcon = expandoBtn.closest('.icon').dataset.origIcon || 'expand';
+      // Set the data-icon back to the original icon
+      expandoBtn.closest('.icon').dataset.icon = origIcon;
+      // Update the HTML content
+      expandoBtn.innerHTML = icon[origIcon];
+    }
+  }
 }
 
 function video_expando(link, expando) {
@@ -104,7 +114,6 @@ const characterEscape = (character) => `&#${character.charCodeAt(0)};`;
 
 u.addEventForChild(document, 'click', '.expando', function(e, ematch){
     var th=ematch;
-
     var link=th.getAttribute('data-link');
     var pid=th.getAttribute('data-pid');
     if(document.querySelector('div.expando-master[pid="'+pid+'"]')){
@@ -114,12 +123,35 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch){
     expando.setAttribute('pid', pid);
     expando.classList.add('expando-master');
     expando.innerHTML = '<div class="expandotxt"></div>';
+
+    // New code to handle both cases - find the appropriate container
+    var postElement = document.querySelector('div.post[pid="'+pid+'"]');
+    var targetContainer;
+    // Check if we're in a postbar context
+    if (postElement.closest('.postbar')) {
+      targetContainer = postElement.closest('.postbar');
+    } else {
+      // Otherwise use the pbody container
+      targetContainer = postElement.querySelector('.pbody');
+    }
+
     if(link == 'None'){
-      u.get('/do/get_txtpost/' + pid, function(data){
-        if(data.status == 'ok'){
-          expando.querySelector('.expandotxt').innerHTML = data.content;
+    u.get('/do/get_txtpost/' + pid, function(data){
+      if(data.status == 'ok'){
+        // Create content element
+        const contentElement = document.createElement('div');
+
+        // Only add fade-out-content class if truncation is needed
+        if(data.content.length > 500) {
+          contentElement.classList.add('fade-out-content');
+          contentElement.innerHTML = data.content.substring(0, 1000);
+        } else {
+          contentElement.innerHTML = data.content;
         }
-      })
+
+        expando.querySelector('.expandotxt').appendChild(contentElement);
+      }
+    })
     }else{
       var domain = get_hostname(link);
       if((domain == 'youtube.com') || (domain == 'www.youtube.com') || (domain == 'youtu.be')){
@@ -177,7 +209,14 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch){
       }
     }
     th.querySelector('.expando-btn').innerHTML = icon.close;
-    document.querySelector('div.post[pid="'+pid+'"]').appendChild(expando);
+    const thirdChild = targetContainer.children[2];
+
+    if (thirdChild) {
+      targetContainer.insertBefore(expando, thirdChild);
+    } else {
+      // If there aren't enough children, append it to the end
+      targetContainer.appendChild(expando);
+    }
 
     const parentDiv = expando.parentElement;
     const showNSFWBlur = parentDiv.querySelector('.title.nsfw-blur') !== null;
@@ -310,27 +349,6 @@ function confResizer(el, pnode, corner) {
   }
 }
 
-// expand expando posts by default
-window.onload = function() {
-    var postPageElement = document.querySelector("div.postbar.post");
-    if (postPageElement) {
-        var expandoButtons = document.querySelectorAll(".expando");
-        for (var i = 0; i < expandoButtons.length; i++) {
-            var expandoBtn = expandoButtons[i].querySelector(".expando-btn");
-            if (expandoBtn) {
-                expandoBtn.setAttribute("data-icon", "remove");
-            }
-            expandoButtons[i].click();
-
-        const showNSFWBlur = document.querySelector('.nsfw-blur') !== null;
-        const expandotxt = document.querySelector('.expandotxt');
-        if (showNSFWBlur) {
-          expandotxt.classList.add('nsfw-blur');
-        }
-        }
-    }
-}
-
 // toggle expando icon between origin/remove states
 function updatePostExpandoIcon(iconEl, negate = false) {
     const postEl = iconEl.closest('.post')
@@ -353,3 +371,70 @@ for (const iconEl of document.querySelectorAll('.icon.expando-btn')) {
     })
     updatePostExpandoIcon(iconEl)
 }
+
+// Auto expand all expandos except those in announcement or nsfw posts
+function expandAllExpandos() {
+  // Loop through all elements with the class 'expando'
+  document.querySelectorAll('.expando').forEach(expandoElement => {
+    // Get the associated post
+    const postElement = expandoElement.closest('.post');
+
+    // Check if this post contains either an announcement or nsfw
+    const pbody = postElement.querySelector('.pbody');
+    const hasAnnouncementOrNSFW = pbody && (pbody.querySelector('.announcementnotfornow') || pbody.querySelector('.nsfw'));
+
+    // Only expand if it's not an announcement or nsfw post
+    if (!hasAnnouncementOrNSFW) {
+      const expandoBtn = expandoElement.querySelector('.expando-btn');
+      if (expandoBtn) {
+        // Manually trigger the click event on the expando button to open it
+        expandoBtn.click();
+      }
+    }
+
+    // Check if the post is NSFW and add the blur class to expandotxt
+    const nsfwPost = postElement.querySelector('.nsfw');
+    const expandotxt = postElement.querySelector('.expandotxt');
+    if (nsfwPost && expandotxt) {
+      expandotxt.classList.add('nsfw-blur');
+    }
+  });
+}
+window.addEventListener('load', expandAllExpandos);
+
+
+
+// Shift-X toggles expand/collapse all expandos
+window.onkeydown = function (e) {
+  if (!document.getElementsByClassName('alldaposts')[0]) {
+    return;
+  }
+
+  if (e.shiftKey && e.which === 88) {
+    console.log('wheee');
+
+    const allExpandos = document.querySelectorAll('.expando-btn');
+    let anyExpanded = false;
+
+    // Check if any are expanded
+    allExpandos.forEach((btn) => {
+      if (btn.closest('.post').querySelector('.expando-master')) {
+        anyExpanded = true;
+      }
+    });
+
+    // If any are expanded, collapse them; otherwise, expand all
+    allExpandos.forEach((btn) => {
+      if (anyExpanded) {
+        // Collapse
+        const pid = btn.closest('.post').getAttribute('pid');
+        close_expando(pid);
+        // Force redraw of icons
+        icon.rendericons();
+      } else {
+        // Expand
+        btn.click();
+      }
+    });
+  }
+};

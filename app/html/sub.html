@@ -38,8 +38,8 @@
 @end
 
 @def main():
-
-  @if func.getStickyPid and page == 1:
+<div id="container">
+  @if func.getStickyPid and page == 1 and func.getStickies(sub['sid']):
     <div class="stickyposts">
       @for post in func.getStickies(sub['sid']):
         @if flair is None or post['flair'] == flair:
@@ -64,7 +64,7 @@
   @if page > 1:
   <a href="@{url_for(sort_type, sub=sub['name'], page=(page-1), flair=flair)}" class="pure-button alldarightprev">@{_('Previous page')}</a>
   @end
-
+</div>
 @end
 
 @def pagefoot():

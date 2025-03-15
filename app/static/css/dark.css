@@ -137,6 +137,10 @@ body.dark .comments article.comment.highlight {
 }
 */
 
+body.dark .nobar {
+    background: #373a3f;
+}
+
 body.dark .content.highlight {
   background-color: #202225;
 }
@@ -158,12 +162,11 @@ body.dark .pbody {
   display: inline-block;
   width: calc(100% - 130px);
   padding: 5px 10px 5px 5px;
-  border: none;
-  box-shadow: none;
+  border: 1px solid #202225;
 }
 
 body.dark .pbody:hover {
-  box-shadow: none;
+  background: #2e3035;
 }
 
 body.dark .post {
@@ -172,10 +175,6 @@ body.dark .post {
 
 body.dark .post:nth-child(2n) {
   background-color: #313338;
-  -webkit-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
-
 }
 
 body.dark .pchild {
@@ -1098,4 +1097,8 @@ body.dark .markhelp table {
 
 body.dark .markhelp tr {
     background-color: #202225 !important;
+}
+
+body.dark .expando-master .fade-out-content::after {
+  background: linear-gradient(to bottom, rgba(49, 51, 56, 0), rgba(49, 51, 56, 1)); /* Fade from transparent to the dark background color */
 }

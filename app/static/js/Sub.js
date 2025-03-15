@@ -132,20 +132,6 @@ u.sub('button.blk,button.unblk,button.sub,button.unsub', 'click', function(e){
   });
 });
 
-window.onkeydown = function(e){
-  if(!document.getElementsByClassName('alldaposts')[0]){return;}
-  if(e.shiftKey == true && e.which == 88){
-    console.log('weew')
-    window.expandall = true;
-    u.each('div.post', function(t, i){
-      var q = t.getElementsByClassName('expando-btn')[0]
-      if(q && q.getAttribute('data-icon') == "image"){
-        q.click()
-      }
-    });
-  }
-}
-
 u.sub('#ban_timepick', 'change', function(e){
   document.querySelector('.date-picker-future.input').value = '';
   if(this.value == 'ban_temp'){

@@ -402,7 +402,9 @@ def invite_codes():
 @bp.route("/settings/subs")
 @login_required
 def edit_subs():
-    return engine.get_template("user/topbar.html").render({})
+    return engine.get_template("user/topbar.html").render(
+        {"subOfTheDay": misc.getSubOfTheDay(), "changeLog": misc.getChangelog()}
+    )
 
 
 @bp.route("/settings")

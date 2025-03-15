@@ -1,4 +1,4 @@
-@extends("shared/layout.html")
+@extends("shared/newlayout.html")
 @require(page, subs, nav, sort, cp_uri, term)
 
 @def title():
@@ -21,7 +21,7 @@
   <h3 class="notfound">@{_('There are no subs here, yet.')}</h3>
   @end
   <div id="container">
-    <div id="center-container">
+    <div id="center-container-subs">
       <div class="subs content">
         <table class="sortable pure-table" >
           <thead>

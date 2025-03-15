@@ -1481,7 +1481,10 @@ def getStickies(sid):
     )
     posts = posts.where(SubPost.sid == sid)
     posts = posts.order_by(SubMetadata.xid.desc()).dicts()
-    return [add_blur(p) for p in posts]
+
+    result = [add_blur(p) for p in posts]
+
+    return result if result else None
 
 
 def is_archived(post):

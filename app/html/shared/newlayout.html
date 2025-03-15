@@ -94,7 +94,7 @@
     </div>
   </div>
 
-  <div id="menu" class="th-subnavbar pure-g">
+  <div id="menu" class="th-navbar pure-g">
     @for sub in current_user.get_top_bar():
       <a class="banner-link" href="@{url_for('sub.view_sub', sub=sub['name'])}"></a>
     @end
@@ -112,10 +112,6 @@
           <s class="bar"></s>
         </a>
       </div>
-
-      @def subtitle():
-      @end
-      @{subtitle()!!html}
 
       @def sortbuttons():
       @end
@@ -140,7 +136,7 @@
         @else:
         <a href="@{ url_for('user.view', user=current_user.name)}" class="smallcaps" id="unameb">@{current_user.name}</a>
         <span class="currentuserscore">
-        (<abbr title="@{_('Score')}: @{func.getUserPostScore(current_user.uid)} | @{func.getUserCommentScore(current_user.uid)}" class="bold" id="postscore">@{current_user.score}</abbr>)
+          (<abbr title="@{_('Score')}: @{func.getUserPostScore(current_user.uid)} | @{func.getUserCommentScore(current_user.uid)}" class="bold" id="postscore">@{current_user.score}</abbr>)
         </span>
         <span class="separator"></span>
         <div class="glyphbutton">
@@ -201,7 +197,7 @@
         <div class="error">@{ err }</div>
       @end
       @for message in get_flashed_messages(category_filter=["message"]):
-        <div class="message" style="margin-top: 2em;">@{ message }</div>
+        <div class="message">@{ message }</div>
       @end
       @def main():
       @end
@@ -223,7 +219,7 @@
       @for text,link in config.site.footer.links.items():
         <a href="@{link}">@{text}</a> |
       @end
-      <a target="_blank" href="@{config.site.contactus_link}">@{_('Contact us')}</a>
+      <a target="_blank" rel="noopener nofollow ugc" href="@{config.site.contactus_link}">@{_('Contact us')}</a>
       <br>
       @{_('Served by %(hostname)s', hostname=hostname)} \
       @if config.app.debug:
