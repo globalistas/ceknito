@@ -61,10 +61,10 @@
   @if not posts and sort_type == 'home.search':
     @if not subname:
       <h3 class="notfound">@{_('No posts were found for the search term')} "@kw['term']". </h3>
-      <h4 style="margin-left: 155px;"><a href="@{url_for('home.index')}">@{_('Go back')}</a></h4>
+      <h4 style="text-align: center;"><a href="@{url_for('home.index')}">@{_('Go back')}</a></h4>
     @else:
       <h3 class="notfound">@{_('No posts were found in <a href="%(link)s">/%(prefix)s/%(sub)s</a> for the search term', link=url_for('sub.view_sub', sub=subname), prefix=config.site.sub_prefix, sub=subname)!!html} "@kw['term']". </h3>
-      <h4 style="margin-left: 50px;"><a href="@{url_for('sub.view_sub', sub=subname)}">@{_('Go back')}</a></h4>
+      <h4 style="text-align: center;"><a href="@{url_for('sub.view_sub', sub=subname)}">@{_('Go back')}</a></h4>
     @end
   @end
   @if sort_type == 'home.all_domain_new':

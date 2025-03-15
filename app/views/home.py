@@ -274,9 +274,10 @@ def search(page, term):
     term = re.sub(r'[^A-Za-zÁ-ž0-9.,\-_\'" ]+', "", term)
 
     search_context = session.get("search_context", {})
-    sub = search_context.get("sub")
-    sub_name = search_context.get("sub_name")
     subonlysearch = search_context.get("subonlysearch") == "y"
+
+    sub = search_context.get("sub") if subonlysearch else None
+    sub_name = search_context.get("sub_name") if subonlysearch else None
 
     posts_query = misc.postListQueryBase(
         filter_shadowbanned=True, filter_private_posts=True

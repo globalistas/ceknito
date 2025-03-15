@@ -372,6 +372,7 @@ div#sortbuttons {
     position: relative;
     z-index: 150;
     margin-top: -27px;
+    margin-left: -1px;
 }
 
 #center-container {
@@ -769,7 +770,7 @@ a.pure-button-primary {
 .post .title {
   color: #292828e0;
   text-decoration: none;
-  line-height: 1.6em;
+  line-height: 1.5rem;
   font-size: 1em;
   word-wrap: break-word;
 }
@@ -892,6 +893,7 @@ iframe {
 .resize-handle .i-icon {
   width: 24px;
   height: 24px;
+  display: none;
 }
 
 .post .domain a,
@@ -1810,23 +1812,24 @@ a.pure-button.alldarightcomments {
 }
 
 .sbm-post-grad {
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  color: #2e2e2e;
-  font-size: 17px;
-  line-height: 1.47059;
-  padding: 4px 15px;
-  text-align: center;
-  vertical-align: baseline;
-  -webkit-user-select: none;
-  user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 18px;
+    line-height: 1.47059;
+    padding: 4px 15px;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
 }
 
 .sbm-post-grad:hover {
-  background-color: var(--primary-color);
   color: white;
+  opacity: 90%;
 }
 
 .sbm-icon {

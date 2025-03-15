@@ -778,7 +778,7 @@ pbodyElements.forEach(pbody => {
             if (this.querySelector('[data-icon="image"], [data-icon="remove"]'))  {
                 redirToPost()
             }
-        } else if (event.target.closest('.post-heading, .author, .poll-space, .nsfw-blur')) {
+        } else if (event.target.closest('.post-heading, .author, .nsfw-blur')) {
             return false;
         } else {
             redirToPost()
