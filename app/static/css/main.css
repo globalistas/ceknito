@@ -1237,7 +1237,7 @@ img.block-blur {
 
 .postinfo {
   display: inline-block;
-  width: 80%;
+  width: 75%;
 }
 
 .popup {
@@ -2409,8 +2409,9 @@ form#msg-form h3 {
   box-shadow: -3px 2px 4px 0 rgba(0, 0, 0, .04);
 }
 
-.subs.content {
-  width: 90%;
+#center-container-subs {
+  display: flex;
+  justify-content: center;
 }
 
 .subsentry .author {
@@ -3870,7 +3871,7 @@ li.mod-table-header {
   padding: 1em;
 }
 
-/* New rules for Sidebar and Ccontainer. To be applied on mobile. It keeps the original widths. */
+/* New rules for Sidebar and Container. To be applied on mobile. It keeps the original widths. */
 @media only screen and (max-width: 915px) {
 
   .pure-u-md-3-4,
@@ -3888,6 +3889,15 @@ li.mod-table-header {
   .pure-u-5-5,
   .pure-u-24-24 {
     width: 100% !important;
+  }
+
+  .subs.content {
+  font-size: 11px;
+  }
+
+  .sbm-icon svg {
+    height: 12px;
+    left: -0.7em;
   }
 }
 
