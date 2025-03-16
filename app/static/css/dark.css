@@ -139,6 +139,7 @@ body.dark .comments article.comment.highlight {
 
 body.dark .nobar {
     background: #373a3f;
+    border-right: solid 1px #202225;
 }
 
 body.dark .content.highlight {

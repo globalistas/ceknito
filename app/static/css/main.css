@@ -367,7 +367,7 @@ a:hover {
 
 div#sortbuttons {
   display: inline-block;
-  margin-left: 80%;
+  margin-left: 16em;
   width: max-content;
 }
 
@@ -1736,7 +1736,8 @@ a.pure-button.alldarightcomments {
 }
 
 .nobar {
- /*   background: linear-gradient(0deg, #ffffff 30%, #e7e7e7 100%); */
+ background: linear-gradient(0deg, #ffffff 30%, #e7e7e7 100%);
+ border-right: solid 1px #cdcdcd;
 }
 
 /* mods */
@@ -3831,9 +3832,6 @@ li.mod-table-header {
     margin-bottom: 0px;
   }
 
-  .pure-u-md-7-24 {
-    width: auto;
-  }
 }
 
 
@@ -3905,6 +3903,6 @@ li.mod-table-header {
 
   .pure-u-md-1-4,
   .pure-u-md-6-24 {
-  width: 20%;
+  /* width: 20%; */
   }
 }

@@ -1381,7 +1381,7 @@ def limit_pagination(func):
     return wrapper
 
 
-def getPostList(baseQuery, sort, page, page_size=25):
+def getPostList(baseQuery, sort, page, page_size=20):
     if sort == "top":
         posts = baseQuery.order_by(SubPost.score.desc()).paginate(page, page_size)
     elif sort == "new":

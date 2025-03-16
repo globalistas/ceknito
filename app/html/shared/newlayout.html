@@ -185,14 +185,14 @@
 
   @def content():
   <div class="pure-g new-g">
-    <div id="nobar" class="nobar pure-u-1 pure-u-md-5-24"> <!-- nobar -->
+    <div id="nobar" class="nobar pure-u-1 pure-u-md-7-24"> <!-- nobar -->
     </div>
     @def sidebar():
     @end
     @(
       rendered_sidebar = sidebar()
     )
-    <div class="pure-u-1 @{ rendered_sidebar and 'pure-u-md-14-24' or '' }"> <!-- main -->
+    <div class="pure-u-1 @{ rendered_sidebar and 'pure-u-md-10-24' or '' }"> <!-- main -->
       @for err in get_flashed_messages(category_filter=["error"]):
         <div class="error">@{ err }</div>
       @end
@@ -204,7 +204,7 @@
       @{main()!!html}
     </div>
     @if rendered_sidebar:
-      <div id="sidebar" class="sidebar pure-u-1 pure-u-md-5-24"> <!-- sidebar -->
+      <div id="sidebar" class="sidebar pure-u-1 pure-u-md-7-24"> <!-- sidebar -->
         @{rendered_sidebar!!html}
       </div>
     @end
