@@ -121,12 +121,14 @@ img[src*='#center'] {
 
 /* sort buttons in Navbar */
 
+/*
 .pure-g-menu {
     height: 26px;
     position: absolute;
     margin-left: 226px;
     bottom: 0px;
 }
+*/
 
 .pure-g-menu .pure-button-primary {
     background-color: #ffffff !important;

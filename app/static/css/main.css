@@ -107,18 +107,23 @@ blockquote {
   .th-navbar, .th-subnavbar {
   overflow: hidden;
   }
+
+    .pure-u-1.pure-u-md-10-24 .pure-g-menu {
+      display: none;
+    }
+
+    /* Show sortbuttonn when the hamburger menu is open */
+    .th-navbar.open ~ * .pure-u-1.pure-u-md-10-24 .pure-g-menu,
+    .th-subnavbar.open ~ * .pure-u-1.pure-u-md-10-24 .pure-g-menu {
+      display: block;
+      margin-left: -1px;
+    }
+
 }
 
 .th-navbar.open, .th-subnavbar.open {
   height: 145px;
   overflow: visible;
-  /*    -webkit-box-shadow: 0 2px 3px 0 var(--primary-shadow);
-    -moz-box-shadow: 0 2px 3px 0 var(--primary-shadow);
-    box-shadow: 0 2px 3px 0 var(--primary-shadow); */
-}
-
-.th-navbar:not(.open) .pure-g-menu, .th-subnavbar:not(.open) .pure-g-menu  {
-  display: none;
 }
 
 #th-uinfo {
@@ -361,14 +366,12 @@ a:hover {
     border-radius: 2px 2px 0px 0px !important; */
 }
 
-#sortbuttons div {
-/*  justify-content: center; */
-}
-
 div#sortbuttons {
-  display: inline-block;
-  margin-left: 16em;
-  width: max-content;
+    display: block;
+    width: max-content;
+    position: relative;
+    z-index: 150;
+    margin-top: -27px;
 }
 
 #center-container {
@@ -3517,10 +3520,6 @@ article.text-post.comment.deleted {
 
   .banner-text-link {
     font-size: 18px;
-  }
-
-  div#sortbuttons {
-    margin-left: 0px;
   }
 
 }

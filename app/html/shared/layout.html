@@ -112,10 +112,6 @@
           <s class="bar"></s>
         </a>
       </div>
-
-      @def sortbuttons():
-      @end
-      @{sortbuttons()!!html}
     </div>
 
     <div id="th-uinfo" class="pure-u-1 pure-u-md-12-24"> <!-- class="pure-u-1 pure-u-md-8-24" -->
@@ -197,6 +193,9 @@
       @for message in get_flashed_messages(category_filter=["message"]):
         <div class="message">@{ message }</div>
       @end
+      @def sortbuttons():
+      @end
+      @{sortbuttons()!!html}
       @def main():
       @end
       @{main()!!html}
