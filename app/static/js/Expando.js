@@ -127,15 +127,23 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch){
     // New code to handle both cases - find the appropriate container
     var postElement = document.querySelector('div.post[pid="'+pid+'"]');
     var targetContainer;
-    // Check if we're in a postbar context
-    if (postElement.closest('.postbar')) {
+
+    // Check if this is a text post on mobile device
+    var isMobile = window.innerWidth <= 768;
+    var isTextPost = link == 'None';
+
+    if (isMobile && isTextPost) {
+      // Special case: for text posts on mobile, append to the post container directly
+      targetContainer = postElement;
+    } else if (postElement.closest('.postbar')) {
+      // Check if we're in a postbar context
       targetContainer = postElement.closest('.postbar');
     } else {
       // Otherwise use the pbody container
       targetContainer = postElement.querySelector('.pbody');
     }
 
-    if(link == 'None'){
+    if(isTextPost){
     u.get('/do/get_txtpost/' + pid, function(data){
       if(data.status == 'ok'){
         // Create content element
