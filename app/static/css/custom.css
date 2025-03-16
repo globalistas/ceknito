@@ -91,10 +91,10 @@ img[src*='#center'] {
     letter-spacing: normal;
     word-spacing: normal;
     position: absolute;
-    left: 10px;
-    bottom: 0px;
-    width: 226px;
-    text-align: right;
+    z-index: 150;
+    width: max-content;
+    margin-top: -24px;
+    margin-left: -210px;
 }
 
 .subtitle:hover {
@@ -119,16 +119,7 @@ img[src*='#center'] {
   border-bottom: 1px solid #101010;
 }
 
-/* sort buttons in Navbar */
-
-/*
-.pure-g-menu {
-    height: 26px;
-    position: absolute;
-    margin-left: 226px;
-    bottom: 0px;
-}
-*/
+/* sort buttons */
 
 .pure-g-menu .pure-button-primary {
     background-color: #ffffff !important;
