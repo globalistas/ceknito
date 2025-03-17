@@ -128,11 +128,12 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch){
     var postElement = document.querySelector('div.post[pid="'+pid+'"]');
     var targetContainer;
 
-    // Check if this is a text post on mobile device
-    var isMobile = window.innerWidth <= 768;
+    // Check if this is a text or youtube post on mobile device
+    var isMobile = window.innerWidth <= 480;
     var isTextPost = link == 'None';
+    var isYtPost = link.includes('youtube.com');
 
-    if (isMobile && isTextPost) {
+    if ((isMobile && isTextPost) || (isMobile && isYtPost)) {
       // Special case: for text posts on mobile, append to the post container directly
       targetContainer = postElement;
     } else if (postElement.closest('.postbar')) {
