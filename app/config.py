@@ -32,6 +32,7 @@ defaults = {  # key => default value
             "instaud.io",
             "player.vimeo.com",
             "www.bitchute.com",
+            "www.youtube-nocookie.com",
         ],
         "extra_connect_src": [],
         "footer": {

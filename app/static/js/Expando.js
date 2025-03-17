@@ -1,6 +1,181 @@
 import u from './Util'
 import icon from './Icon';
 
+// Lite YouTube Embed
+// Based on Paul Irish's lite-youtube-embed but simplified for your needs
+// https://github.com/paulirish/lite-youtube-embed
+class LiteYTEmbed {
+  constructor(element) {
+    this.videoId = element.getAttribute('data-videoid');
+    this.element = element;
+    this.t = element.getAttribute('data-t') || ''; // Handle timestamp
+    this.createInnerHTML();
+    this.setupEventListeners();
+  }
+
+  // Create the initial placeholder elements
+  createInnerHTML() {
+    const playBtnEl = document.createElement('div');
+    playBtnEl.classList.add('lty-playbtn');
+
+    // Use a simple play icon
+    playBtnEl.innerHTML = '<svg width="68" height="48" viewBox="0 0 68 48"><path class="lty-playbtn-svg" d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"></path><path d="M 45,24 27,14 27,34" fill="#fff"></path></svg>';
+
+    const container = document.createElement('div');
+    container.classList.add('lty-placeholder');
+
+    // Generate thumbnail URL from video ID
+    const posterUrl = `https://i.ytimg.com/vi/${this.videoId}/hqdefault.jpg`;
+    container.style.backgroundImage = `url('${posterUrl}')`;
+
+    this.element.appendChild(container);
+    container.appendChild(playBtnEl);
+  }
+
+  // Set up event listeners for the placeholder
+  setupEventListeners() {
+    this.element.addEventListener('click', () => {
+      this.addIframe();
+    });
+  }
+
+  // When clicked, replace the placeholder with the actual iframe
+  addIframe() {
+    // Create the iframe element
+    const iframeEl = document.createElement('iframe');
+    iframeEl.setAttribute('frameborder', '0');
+    iframeEl.setAttribute('allowfullscreen', '1');
+    iframeEl.setAttribute('allow', 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture');
+
+    // Handle timestamp if present
+    let params = '?autoplay=1&rel=0';
+    if (this.t) {
+      params += '&start=' + this.t;
+    }
+
+    // Use nocookie domain
+    iframeEl.setAttribute('src', `https://www.youtube-nocookie.com/embed/${this.videoId}${params}`);
+
+    // Replace the placeholder with the iframe
+    this.element.textContent = '';
+    this.element.appendChild(iframeEl);
+
+    // Add loaded class for styling
+    this.element.classList.add('lty-activated');
+  }
+}
+
+// Add CSS for the lite YouTube embed component
+function addLiteYTStyles() {
+  const style = document.createElement('style');
+  style.textContent = `
+    .lite-youtube {
+        background-color: #000; */
+        position: absolute;
+        /* display: block; */
+        /* top: 0; */
+        /* left: 0; */
+        /* width: 100% !important; */
+        height: 100%;
+        max-width: 100%;
+        /* contain: content; */
+        background-position: center center;
+        background-size: cover;
+        cursor: pointer;
+        width: 640px;
+        /* height: 360px; */
+    }
+
+    .lite-youtube .lty-placeholder {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lite-youtube .lty-playbtn {
+      width: 68px;
+      height: 48px;
+      opacity: 0.8;
+      transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
+    }
+
+    .lite-youtube:hover .lty-playbtn {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    .lite-youtube.lty-activated {
+      cursor: unset;
+    }
+
+    .lite-youtube.lty-activated .lty-playbtn,
+    .lite-youtube.lty-activated .lty-placeholder {
+      display: none;
+    }
+
+    .lite-youtube iframe {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+// Function to replace YouTube embeds in the expando
+function replaceYoutubeWithLiteYT(link, expandoElement) {
+  const youtubeId = youtubeID(link);
+  const timestamp = getParameterByName('t', link);
+
+  if (youtubeId) {
+    const container = document.createElement('div');
+    container.classList.add('expando-wrapper');
+    container.style.height = 'auto';
+    container.style.willChange = 'height';
+
+    const liteYT = document.createElement('div');
+    liteYT.classList.add('lite-youtube');
+    liteYT.setAttribute('data-videoid', youtubeId);
+
+    if (timestamp) {
+      liteYT.setAttribute('data-t', timestamp);
+    }
+
+    container.appendChild(liteYT);
+
+    // Add resize handle
+    const resizeHandle = document.createElement('div');
+    resizeHandle.classList.add('resize-handle');
+    resizeHandle.innerHTML = '<div class="i-icon" data-icon="resizeArrow"></div>';
+    container.appendChild(resizeHandle);
+
+    expandoElement.querySelector('.expandotxt').appendChild(container);
+
+    // Initialize the lite YT embed
+    new LiteYTEmbed(liteYT);
+
+    // Set up resizer
+    resizer(liteYT, resizeHandle, expandoElement.querySelector('.expandotxt'));
+
+    return true;
+  }
+
+  return false;
+}
+
+// Add the styles when the page loads
+document.addEventListener('DOMContentLoaded', addLiteYTStyles);
+
+
 function get_hostname(url) {
   if(!url || url.charAt(0) == "/"){return;}
   var matches = url.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i);
@@ -164,6 +339,11 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch){
     }else{
       var domain = get_hostname(link);
       if((domain == 'youtube.com') || (domain == 'www.youtube.com') || (domain == 'youtu.be')){
+
+      if (replaceYoutubeWithLiteYT(link, expando)) {
+        // Successfully replaced
+      } else {
+
         var extra = '?';
         if(getParameterByName('list', link)){
           extra += 'list=' + getParameterByName('list', link) + '&';
@@ -189,9 +369,10 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch){
             extra += 'start=' + start;
           }
         }
-        expando.querySelector('.expandotxt').innerHTML = '<div class="expando-wrapper" style="height: auto; will-change: height;"><iframe style="height: 360px; width: 640px;" src="https://www.youtube.com/embed/' + youtubeID(link) + extra +'" allowfullscreen=""></iframe><div class="resize-handle"><div class="i-icon" data-icon="resizeArrow"</div></div>';
+
+        expando.querySelector('.expandotxt').innerHTML = '<div class="expando-wrapper"><iframe style="height: 360px; width: 640px;" src="https://www.youtube-nocookie.com/embed/' + youtubeID(link) + extra + '" allowfullscreen=""></iframe><div class="resize-handle"><div class="i-icon" data-icon="resizeArrow"</div></div>';
         resizer(expando.querySelector('.expandotxt iframe'), expando.querySelector('.expandotxt .resize-handle'), expando.querySelector('.expandotxt'))
-      }else if(domain == 'gfycat.com'){
+      }}else if(domain == 'gfycat.com'){
         expando.querySelector('.expandotxt').innerHTML = '<div class="iframewrapper"><iframe width="100%" src="https://gfycat.com/ifr/' + gfycatID(link) +'"></iframe></div>';
       }else if(domain == 'vimeo.com'){
         expando.querySelector('.expandotxt').innerHTML = '<div class="iframewrapper"><iframe width="100%" src="https://player.vimeo.com/video/' + vimeoID(link) +'"></iframe></div>';

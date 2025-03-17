@@ -829,8 +829,10 @@ iframe {
 }
 
 .expando-wrapper {
-	display: inline-block;
-	will-change: height;
+/*	display: inline-block;
+	will-change: height; */
+	position: relative;
+	padding-bottom: 56.25%;  /* 16:9 aspect ratio */
 }
 
 .thumbnail .placeholder svg path {
