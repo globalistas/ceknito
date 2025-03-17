@@ -29,8 +29,8 @@
   <div class="pure-g-menu">
     <div id="sortbuttons" role="group" class="pure-button-group">
       <div class="pure-g">
-          @if sort_type.startswith('home.all_domain'):
-
+          @if sort_type.startswith('home.all_domain') or sort_type.startswith('home.search'):
+            <span style="visibility:hidden;">kek</span>
           @elif sort_type.startswith('home.all_'):
             <a href="@{url_for('home.all_hot')}" title="@{_('Order by hot posts')}" class="pure-button button-xsmall @{(sort_type == 'home.all_hot') and 'pure-button-primary' or ''}">@{_('Hot')}</a>
             <a href="@{url_for('home.all_top')}" title="@{_('Order by top posts')}" class="pure-button button-xsmall @{(sort_type == 'home.all_top') and 'pure-button-primary' or ''}">@{_('Top')}</a>
