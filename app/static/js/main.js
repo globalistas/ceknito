@@ -807,7 +807,7 @@ const pickr = Pickr.create({
         '#46586e', // dark blue default
         '#48506c', // deep purple
         '#800000', // original cekni.to
-        '#d94f00', // phuks
+        '#513863', // new purple
         '#5a8295', // politics blue
         '#4a384e', // deep violet
         randomColor, // the odd one out
