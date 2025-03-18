@@ -1617,7 +1617,7 @@ li.new-item {
 	background: #fafafa;
 	color: #222;
 	border: 1px solid var(--primary-color);
-	border-radius: 7px;
+	border-radius: 3px;
 	margin-left: 1.1em;
 	margin-right: 1.1em;
 	margin-bottom: 2em;
@@ -1625,7 +1625,6 @@ li.new-item {
 	font-family: verdana, arial, sans-serif;
 	font-size: 14px;
 	line-height: 20px;
-	max-width: 65em;
 }
 
 .post-content-link-container {
@@ -2495,6 +2494,11 @@ a[href="#toodamncool"] {
 .expando-master {
 	display: block;
 	margin-top: .7em;
+}
+
+.postbar .expando-master {
+	display: block;
+	margin-top: 20px;
 }
 
 .replybox {
