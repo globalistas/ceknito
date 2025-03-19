@@ -4253,6 +4253,29 @@ def sub_upload(sub):
             }
         )
 
+    # Check for duplicate filenames in the same sub
+    try:
+        SubUploads.select().where(
+            (SubUploads.sid == sub.sid) & (fn.Lower(SubUploads.name) == fname.lower())
+        ).get()
+        return engine.get_template("sub/css.html").render(
+            {
+                "sub": sub,
+                "form": form,
+                "storage": int(remaining - (1024 * 1024)),
+                "max_storage": config.storage.sub_css_max_file_size,
+                "error": _(
+                    "A file with this name already exists. Please choose a different name."
+                ),
+                "files": ufiles,
+                "subInfo": subInfo,
+                "subMods": subMods,
+            }
+        )
+    except SubUploads.DoesNotExist:
+        # No duplicate found, continue with upload
+        pass
+
     ufile = request.files.getlist("files")[0]
     if ufile.filename == "":
         return engine.get_template("sub/css.html").render(
@@ -4347,6 +4370,50 @@ def sub_upload_delete(sub, name):
             storage.remove_file(img.fileid)
 
     return jsonify(status="ok")
+
+
+@do.route("/do/set_sub_icon/<sub>", methods=["POST"])
+@login_required
+def set_sub_icon(sub):
+    try:
+        sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
+    except Sub.DoesNotExist:
+        abort(404)
+    if not current_user.is_mod(sub.sid, 1) and not current_user.is_admin():
+        abort(403)
+
+    selected_icon = request.form.get("sub_icon")
+
+    # Handle all icon options
+    if not selected_icon:  # "None" option selected
+        # Delete the record entirely to represent no icon preference
+        SubMetadata.delete().where(
+            (SubMetadata.sid == sub.sid) & (SubMetadata.key == "icon")
+        ).execute()
+    else:  # "Default" or a custom icon selected
+        # For custom icons, validate they exist
+        if selected_icon != "__default__":
+            existing_file = (
+                SubUploads.select()
+                .where((SubUploads.sid == sub.sid) & (SubUploads.name == selected_icon))
+                .first()
+            )
+            if not existing_file:
+                return jsonify(status="error", error=_("Invalid file selected."))
+
+        # Update or create metadata entry
+        query = (
+            SubMetadata.select()
+            .where((SubMetadata.sid == sub.sid) & (SubMetadata.key == "icon"))
+            .first()
+        )
+        if query:
+            query.value = selected_icon
+            query.save()
+        else:
+            SubMetadata.create(sid=sub.sid, key="icon", value=selected_icon)
+
+    return redirect(url_for("sub.edit_sub_css", sub=sub.name))
 
 
 @do.route("/do/admin/create_question", methods=["POST"])

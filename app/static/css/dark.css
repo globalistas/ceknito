@@ -248,7 +248,7 @@ body.dark .post .thumbnail img {
   filter: grayscale(50%);
 }
 
-body.dark .post .thumbnail img {
+body.dark .sub-icon-round img {
   -webkit-filter: grayscale(50%);
   -moz-filter: grayscale(50%);
   filter: grayscale(50%);
@@ -760,7 +760,7 @@ body.dark .alldaposts {
 }
 
 body.dark .alldaposts .links a.comments {
-  color: #526a7d;
+  color: #49708f;
 }
 
 body.dark .alldaposts .links a {

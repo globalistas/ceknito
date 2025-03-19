@@ -130,3 +130,38 @@ img[src*='#center'] {
     border-bottom: 1px solid #fff !important;
     margin: 0px 0px 0px 0px !important;
 }
+
+.sub-icon-round {
+  width: 25px;
+  height: 25px;
+  overflow: hidden; /* Ensures the image stays within bounds */
+  display: flex; /* Centers the image inside */
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px; /* Adds space between the icon and the link */
+  position: relative;
+}
+
+.sub-icon-round img {
+  border-radius: 50%;  /* Ensures a fully rounded image */
+  object-fit: cover;   /* Prevents stretching */
+  width: 100%;         /* Ensures it fills the parent div */
+  height: 100%;        /* Ensures it fills the parent div */
+}
+
+.sub-icon-name-container {
+  display: flex;        /* Layout for the container */
+  align-items: center;  /* Vertically centers the elements */
+  margin: 0px 0px 3px -1px;
+}
+
+.sub-icon-name-container span {
+  white-space: nowrap; /* Prevents the link from breaking into multiple lines */
+  font-size: 13px;
+}
+
+.sub-icon-text {
+    color: #414a4f;
+    font-size: 12px;
+    font-weight: 600;
+}

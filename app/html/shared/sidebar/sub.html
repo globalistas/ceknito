@@ -28,6 +28,18 @@
 @end
 
 <div class="subinfo">
+  <span style="vertical-align: middle;">
+    @if subInfo.get('icon_file'):
+      <br>
+      <span style="display: inline-block; vertical-align: middle;">
+        <div class="sub-icon-round">
+          <img id="icon-preview"
+               src="@{subInfo['icon_file'].get('url', '') if subInfo['icon_file'].get('default', False) else thumbnail_url(subInfo['icon_file']['thumbnail'])}"
+               alt="@{_('Sub Icon')}">
+        </div>
+      </span>
+    @end
+  </span>
   <h3><a href="@{url_for('sub.view_sub', sub=sub['name'])}">/@{config.site.sub_prefix}/@{sub['name']}</a> \
   @if sub['nsfw']:
     <div class="private" title="@{_('Not safe for work')}">@{_('NSFW')}</div> \

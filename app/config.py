@@ -51,6 +51,7 @@ defaults = {  # key => default value
         "custom_hot_sort": False,
         "icon_url": None,
         "logo": "app/static/img/throat-logo.svg",
+        "server_name": None,
     },
     "auth": {
         "provider": "LOCAL",

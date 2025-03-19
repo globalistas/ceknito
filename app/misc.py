@@ -2313,6 +2313,27 @@ def getSubData(sid, simple=False, extra=False):
                 data[p.key] = [p.value]
         else:
             data[p.key] = p.value
+    # Handle icon
+    if "icon" in data:
+        if data["icon"] == "__default__":  # Special value for default icon
+            data["icon_file"] = {"default": True, "url": "/static/img/generic_sub.png"}
+        elif data["icon"]:  # If icon has a non-empty value
+            icon_file = (
+                SubUploads.select()
+                .where((SubUploads.sid == sid) & (SubUploads.name == data["icon"]))
+                .first()
+            )
+            if icon_file:
+                data["icon_file"] = {
+                    "fileid": icon_file.fileid,
+                    "thumbnail": icon_file.thumbnail,
+                }
+            else:
+                data["icon_file"] = None
+        else:
+            data["icon_file"] = None  # Empty string means no icon
+    else:
+        data["icon_file"] = None  # No icon key means no icon
 
     if not simple:
         try:

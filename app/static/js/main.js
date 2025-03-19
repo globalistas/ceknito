@@ -627,9 +627,13 @@ u.addEventForChild(document, 'click', 'img.alimg', function (e, qelem) {
 
 /* sub banner href */
 if (typeof (document.getElementsByClassName("subinfo")[0]) != 'undefined' && document.getElementsByClassName("subinfo")[0] != null) {
-  //left side
-  var link = document.getElementsByClassName("subinfo")[0].children[0].children[0].getAttribute("href");
-  var text = document.getElementsByClassName("subinfo")[0].children[0].children[0].innerText;
+  // Find the h3 element inside subinfo
+  var h3Element = document.getElementsByClassName("subinfo")[0].querySelector("h3");
+
+  // Get the link from the a tag inside the h3
+  var link = h3Element.querySelector("a").getAttribute("href");
+  var text = h3Element.querySelector("a").innerText;
+
   var bannerLink = document.getElementsByClassName("banner-link")[0];
   bannerLink.setAttribute("href", link);
   bannerLink.style.position = "absolute";
@@ -638,6 +642,7 @@ if (typeof (document.getElementsByClassName("subinfo")[0]) != 'undefined' && doc
   bannerLink.style.width = "100%";
   bannerLink.style.height = "100%";
   document.getElementsByClassName("cw-brand")[0].style.zIndex = "10";
+
   //add text link
   var a = document.createElement('a');
   var linkText = document.createTextNode(text);
@@ -778,7 +783,7 @@ pbodyElements.forEach(pbody => {
             if (this.querySelector('[data-icon="image"], [data-icon="remove"]'))  {
                 redirToPost()
             }
-        } else if (event.target.closest('.author, .nsfw-blur, .lty-placeholder')) {
+        } else if (event.target.closest('.author, .nsfw-blur, .lty-placeholder, .sub-icon-link')) {
             return false;
         } else {
             redirToPost()

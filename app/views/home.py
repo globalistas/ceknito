@@ -472,6 +472,14 @@ def view_subs(page, sort):
         return redirect(url_for("home.view_subs", page=page, sort="name_asc"))
 
     c = c.paginate(page, 50).dicts()
+
+    # Fetch icon metadata for each sub
+    for sub in c:
+        # Get the sub data with icon metadata (using simple=True for efficiency)
+        sub_data = misc.getSubData(sub["sid"], simple=True)
+        # Add the icon_file to the sub dictionary
+        sub["icon_file"] = sub_data.get("icon_file")
+
     cp_uri = "/subs/" + str(page)
     return engine.get_template("subs.html").render(
         {
@@ -522,6 +530,13 @@ def subs_search(page, term, sort):
     else:
         return redirect(url_for("home.view_subs", page=page, sort="name_asc"))
     c = c.paginate(page, 50).dicts()
+
+    for sub in c:
+        # Get the sub data with icon metadata (using simple=True for efficiency)
+        sub_data = misc.getSubData(sub["sid"], simple=True)
+        # Add the icon_file to the sub dictionary
+        sub["icon_file"] = sub_data.get("icon_file")
+
     cp_uri = "/subs/search/" + term + "/" + str(page)
 
     return engine.get_template("subs.html").render(

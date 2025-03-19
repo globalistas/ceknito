@@ -9,14 +9,14 @@
     <meta name="referrer" content="always"/>
     @def meta_description():
         <meta name="twitter:description" content="@{config.site.lema}" />
-        <meta name="twitter:image:src" content="https://cekni.to/@{ url_for('static', filename='img/android-chrome-512x512.png') }" />
+        <meta name="twitter:image:src" content="https://@{config.site.server_name}@{ url_for('static', filename='img/android-chrome-512x512.png') }" />
         <meta name="twitter:title" content="čekni.to" />
         <meta name="twitter:image:width" content="512" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:image:height" content="512" />
         <meta name="description" content="@{config.site.lema}" />
         <meta property="og:description" content="@{config.site.lema}" />
-        <meta property="og:image" content="https://cekni.to/@{ url_for('static', filename='img/android-chrome-512x512.png') }" />
+        <meta property="og:image" content="https://@{config.site.server_name}@{ url_for('static', filename='img/android-chrome-512x512.png') }" />
         <meta property="og:title" content="čekni.to" />
         <meta property="og:image:width" content="512" />
         <meta property="og:image:height" content="512" />
@@ -56,7 +56,7 @@
 
     <link rel="stylesheet" type="text/css" href="@{asset_url_for('main.css') }">
 
-    <link rel="alternate" type="application/rss+xml" title="RSS" href="https://cekni.to/all/new.rss">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="https://@{config.site.server_name}/all/new.rss">
 
     <script src="@{url_for('static', filename='/js/Setcolor.js')}"></script>
 

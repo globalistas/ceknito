@@ -34,6 +34,20 @@
       </div>
     </div>
     <div class="pbody">
+      <div class="sub-icon-name-container">
+        <a class="sub-icon-link" href="/@{config.site.sub_prefix}/@{post['sub']}">
+          <div class="@{'sub-icon-round' if not sub and not announcement and func.getSubData(post['sid']).get('icon_file') else ''}">
+            @if not sub and not announcement and func.getSubData(post['sid']).get("icon_file"):
+              <img id="icon-preview"
+                   src="@{func.getSubData(post['sid'])['icon_file'].get('url', '') if func.getSubData(post['sid'])['icon_file'].get('default', False) else thumbnail_url(func.getSubData(post['sid'])['icon_file']['thumbnail'])}"
+                   alt="@{_('Sub Icon')}">
+            @end
+          </div>
+        </a>
+            @if not announcement and not sub:
+              <span><a class="sub-icon-text" href="/@{config.site.sub_prefix}/@{post['sub']}">/@{config.site.sub_prefix}/@{post['sub']}</a></span>
+            @end
+      </div>
       <div class="post-heading">
         @if post['flair']:
           <a class="postflair" style="color:@{post['text_color']}; background-color:@{post['bg_color']}; border-color:@{post['border_color']};" href="@{url_for('sub.view_sub_hot', sub=post['sub'], flair=post['flair'])}">@{post['flair']}</a> \
@@ -93,11 +107,7 @@
             user_html = '<a class="authorlink deleted">' + _('[deleted]') + '</a>'
         sublink = '<a href="/' + config.site.sub_prefix + '/' + post['sub'] + '">' + post['sub'] + '</a>'
         )
-        @if not sub:
-          @{_('posted %(timeago)s by %(user)s on %(sub)s', timeago=timeago, user=user_html, sub=sublink)!!html}
-        @else:
-          @{_('posted %(timeago)s by %(user)s', timeago=timeago, user=user_html)!!html}
-        @end
+        @{_('posted %(timeago)s by %(user)s', timeago=timeago, user=user_html)!!html}
 
         @if sub and post['pid'] in func.getStickyPid(sub['sid']):
         - <span class="stick">@{_('sticky')}</span>

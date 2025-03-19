@@ -2484,6 +2484,26 @@ msgstr "Uložené!"
 msgid "Save"
 msgstr "Uložíť"
 
+#: app/html/sub/css.html:51
+msgid "Select sub icon"
+msgstr "Nastaviť ikonu skupiny"
+
+#: app/html/sub/css.html:54
+msgid "Choose an icon:"
+msgstr "Použiť ikonu: "
+
+#: app/html/sub/css.html:62
+msgid "Set"
+msgstr "Nastaviť"
+
+#: app/html/sub/css.html:56
+msgid "None"
+msgstr "Žiadna"
+
+#: app/html/sub/css.html:57
+msgid "Default"
+msgstr "Štandardná"
+
 #: app/html/sub/css.html:35
 msgid "Upload files"
 msgstr "Nahrať súbory"
@@ -4622,6 +4642,10 @@ msgstr "Názov súboru je príliš krátky, alebo nebol zadaný."
 #: app/views/do.py:3439
 msgid "Invalid file name."
 msgstr "Neplatný názov súboru."
+
+#: app/views/do.py:4267
+msgid "A file with this name already exists. Please choose a different name."
+msgstr "Súbor s týmto názvom už existuje. Zvoľ si iný názov pre súbor."
 
 #: app/views/do.py:3454
 msgid "Please select a file to upload."

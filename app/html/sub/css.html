@@ -13,12 +13,24 @@
     @if not current_user.is_mod(sub.sid, 1) and current_user.is_admin():
       <div class="important"><h3>@{_('Editing as Admin')}</h3></div>
     @end
-
-    <h2>@{_('Editing stylesheet for <a href="%(url)s">/%(prefix)s/%(sub)s</a>', url=url_for('sub.view_sub', sub=sub.name), prefix=config.site.sub_prefix, sub=sub.name)!!html}
-    @if sub.private:
-      <span class="private" title="@{_('This sub is private.')}">@{_('PRIVATE')}</span>
+<h2>
+  <span style="vertical-align: middle;">
+    @if func.getSubData(sub.sid).get('icon_file'):
+      <span style="display: inline-block; vertical-align: middle;">
+        <div class="sub-icon-round">
+          <img id="icon-preview"
+               src="@{func.getSubData(sub.sid)['icon_file'].get('url', '') if func.getSubData(sub.sid)['icon_file'].get('default', False) else thumbnail_url(func.getSubData(sub.sid)['icon_file']['thumbnail'])}"
+               alt="@{_('Sub Icon')}">
+        </div>
+      </span>
     @end
-    </h2>
+    @{_('Editing stylesheet for <a href="%(url)s">/%(prefix)s/%(sub)s</a>', url=url_for('sub.view_sub', sub=sub.name), prefix=config.site.sub_prefix, sub=sub.name)!!html}
+  </span>
+
+  @if sub.private:
+    <span class="private" style="vertical-align: middle;" title="@{_('This sub is private.')}">@{_('PRIVATE')}</span>
+  @end
+</h2>
 
     <form  method="POST" class="ajaxform" action="@{url_for('do.edit_sub_css', sub=sub.name)}">
       @{form.csrf_token()!!html}
@@ -36,14 +48,31 @@
     </form>
 
     <hr>
+    <h3>@{_('Select sub icon')}</h3>
+    <form method="POST" action="@{url_for('do.set_sub_icon', sub=sub.name)}" class="pure-form">
+      @{form.csrf_token()!!html}
+      <label for="sub_icon">@{_('Choose an icon:')}</label>
+        <select name="sub_icon">
+          <option value="" @{'selected' if subInfo.get('icon') == '' else ''}>@{_('None')}</option>
+          <option value="__default__" @{'selected' if subInfo.get('icon') == '__default__' else ''}>@{_('Default')}</option>
+          @for f in files:
+            <option value="@{f.name}" @{'selected' if subInfo.get('icon') == f.name else ''}>@{f.name}</option>
+          @end
+        </select>
+      <button type="submit" class="pure-button pure-button-primary">@{_('Set')}</button>
+    </form>
+
+    <hr>
     <h3>@{_('Upload files')}</h3>
     @{_('Upload limit is %(max)i MiB. Space used: %(storage)i KiB', max=max_storage, storage=storage)}
     <form  method="POST" style="margin-top: 1em" action="@{url_for('do.sub_upload', sub=sub.name)}" class="pure-form pure-form-aligned" enctype="multipart/form-data">
       @if error:
         <div class="error">@{error}</div>
       @end
-        <input type="text" name="name" pattern="^[a-zA-Z0-9_-]+$" placeholder="@{_('Name')}" required/>
-        <input type="file" name="files" placeholder="@{_('Only images allowed')}" />
+        <input type="text" name="name" pattern="[a-zA-Z0-9]+" placeholder="@{_('Name')}" required/>
+        <input type="file" name="files" accept="image/jpeg,image/png,image/gif" placeholder="@{_('Only images allowed')}" />
+        <br/>
+        <br/>
         <button type="submit" class="pure-button pure-button-primary">@{_('Upload')}</button>
     </form>
     <br/>

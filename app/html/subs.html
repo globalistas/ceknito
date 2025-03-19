@@ -60,8 +60,17 @@
           <tbody>
             @for sub in subs:
             <tr>
-              <td  class="subsentry @{current_user.has_subscribed(sub['name']) and 'subsubscribed' or ''} @{current_user.has_blocked(sub['sid']) and 'blocked' or ''}" data-sid="@{sub['sid']}">
+              <td class="subsentry @{current_user.has_subscribed(sub['name']) and 'subsubscribed' or (not current_user.has_subscribed(sub['name']) and 'unsubscribed' or '')} @{current_user.has_blocked(sub['sid']) and 'blocked' or ''}" data-sid="@{sub['sid']}">
                   <div class="subname" title="@{sub['title']}">
+                    @if sub.get('icon_file'):
+                      <span style="display: inline-block; vertical-align: middle;">
+                        <div class="sub-icon-round">
+                          <img id="icon-preview"
+                               src="@{sub['icon_file'].get('url', '') if sub['icon_file'].get('default', False) else thumbnail_url(sub['icon_file']['thumbnail'])}"
+                               alt="@{_('Sub Icon')}">
+                        </div>
+                      </span>
+                    @end
                     <a href="@{url_for('sub.view_sub', sub=sub['name'])}">@{sub['name']}</a>
                     @if sub['nsfw']:
                       <div class="nsfw">NSFW</div>

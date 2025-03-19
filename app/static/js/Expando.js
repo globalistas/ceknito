@@ -399,10 +399,10 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch){
       }
     }
     th.querySelector('.expando-btn').innerHTML = icon.close;
-    const thirdChild = targetContainer.children[2];
+    const fourthChild = targetContainer.children[3];
 
-    if (thirdChild) {
-      targetContainer.insertBefore(expando, thirdChild);
+    if (fourthChild) {
+      targetContainer.insertBefore(expando, fourthChild);
     } else {
       // If there aren't enough children, append it to the end
       targetContainer.appendChild(expando);
