@@ -776,6 +776,7 @@ pbodyElements.forEach(pbody => {
                 targetClasses.contains("authorlink") ||
                 targetClasses.contains("domain") ||
                 targetClasses.contains("postflair") ||
+                targetClasses.contains("sub-icon-text") ||
                 targetClasses.length === 0 ||
                 targetClasses === undefined) {
                 return false;

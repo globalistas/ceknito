@@ -182,7 +182,7 @@ function getParameterByName(name, url) {
     return new URLSearchParams(new URL(url).search).get(name);
   } catch (e) {
     // Fallback to regex
-    name = name.replace(/[\[\]]/g, "\\$&");
+    name = name.replace(/([[\]\\])/g, "\\$&");
     const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
     const results = regex.exec(url);
     if (!results) return null;

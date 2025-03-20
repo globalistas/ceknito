@@ -44,7 +44,9 @@
             </div>
           </a>
         @end
+        @if not announcement and not sub:
         <span><a class="sub-icon-text" href="/@{config.site.sub_prefix}/@{post['sub']}">/@{config.site.sub_prefix}/@{post['sub']}</a></span>
+        @end
       </div>
       <div class="post-heading">
         @if post['flair']:
