@@ -2403,6 +2403,31 @@ def getSubData(sid, simple=False, extra=False):
     return data
 
 
+def get_sub_icons_for_posts(posts):
+    """Get a dictionary of sub icons for a list of posts.
+
+    Args:
+        posts: List of post dictionaries containing 'sid' keys
+
+    Returns:
+        Dictionary mapping sub IDs to their icon information
+    """
+    if not posts:
+        return {}
+
+    # Extract unique sub IDs from posts
+    sub_ids = {post["sid"] for post in posts}
+
+    # Fetch icon data for all subs at once
+    sub_icons = {}
+    for sid in sub_ids:
+        sub_data = getSubData(sid, simple=True)
+        if sub_data and "icon_file" in sub_data:
+            sub_icons[sid] = sub_data["icon_file"]
+
+    return sub_icons
+
+
 def getModSubs(uid, power_level):
     # returns all subs that the user can moderate
 

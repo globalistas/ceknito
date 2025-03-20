@@ -250,12 +250,14 @@ def view_user_posts(user, page):
         "new",
         page,
     )
+    sub_icons = misc.get_sub_icons_for_posts(posts)
     return engine.get_template("user/posts.html").render(
         {
             "page": page,
             "sort_type": "user.view_user_posts",
             "posts": posts,
             "user": user,
+            "sub_icons": sub_icons,
         }
     )
 
@@ -273,12 +275,14 @@ def view_user_savedposts(user, page):
             "new",
             page,
         )
+        sub_icons = misc.get_sub_icons_for_posts(posts)
         return engine.get_template("user/savedposts.html").render(
             {
                 "page": page,
                 "sort_type": "user.view_user_savedposts",
                 "posts": posts,
                 "user": current_user,
+                "sub_icons": sub_icons,
             }
         )
     else:

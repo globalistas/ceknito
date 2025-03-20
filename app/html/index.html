@@ -1,6 +1,6 @@
 @extends("shared/newlayout.html")
 @import "shared/post.html" as ipost
-@require(sort_type, subname, ann, page, posts, kw)
+@require(sort_type, subname, ann, page, posts, kw, sub_icons)
 
 @def sidebar():
 @include('shared/sidebar/home.html')
@@ -73,7 +73,7 @@
   <div class="alldaposts">
     @for post in posts:
       @if not ann or ann['pid'] != post['pid']:
-        @{ipost.singlePost(post, False)!!html}
+        @{ipost.singlePost(post, False, sub_icons=sub_icons)!!html}
       @end
     @end
   </div>

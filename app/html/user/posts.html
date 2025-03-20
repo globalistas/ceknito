@@ -1,6 +1,6 @@
 @extends("shared/newlayout.html")
 @import "shared/post.html" as ipost
-@require(page, sort_type, posts, user)
+@require(page, sort_type, posts, user, sub_icons)
 
 @def title():
 @{_("Posts made by")} /u/@{user.name} | @{config.site.lema}
@@ -39,7 +39,7 @@
 
     <div class="alldaposts">
     @for post in posts:
-      @{ipost.singlePost(post, False)!!html}
+      @{ipost.singlePost(post, False, sub_icons=sub_icons)!!html}
     @end
     </div>
 

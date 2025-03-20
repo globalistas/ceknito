@@ -32,6 +32,9 @@ def index():
 def hot(page):
     """/hot for subscriptions"""
     posts = misc.getPostList(misc.postListQueryHome(), "hot", page)
+
+    sub_icons = misc.get_sub_icons_for_posts(posts)
+
     return engine.get_template("index.html").render(
         {
             "posts": posts,
@@ -42,6 +45,7 @@ def hot(page):
             "changeLog": misc.getChangelog(),
             "ann": misc.getAnnouncement(),
             "kw": {},
+            "sub_icons": sub_icons,
         }
     )
 
@@ -52,6 +56,7 @@ def hot(page):
 def new(page):
     """/new for subscriptions"""
     posts = misc.getPostList(misc.postListQueryHome(), "new", page)
+    sub_icons = misc.get_sub_icons_for_posts(posts)
     return engine.get_template("index.html").render(
         {
             "posts": posts,
@@ -62,6 +67,7 @@ def new(page):
             "changeLog": misc.getChangelog(),
             "ann": misc.getAnnouncement(),
             "kw": {},
+            "sub_icons": sub_icons,
         }
     )
 
@@ -72,6 +78,7 @@ def new(page):
 def top(page):
     """/top for subscriptions"""
     posts = misc.getPostList(misc.postListQueryHome(), "top", page)
+    sub_icons = misc.get_sub_icons_for_posts(posts)
     return engine.get_template("index.html").render(
         {
             "posts": posts,
@@ -82,6 +89,7 @@ def top(page):
             "changeLog": misc.getChangelog(),
             "ann": misc.getAnnouncement(),
             "kw": {},
+            "sub_icons": sub_icons,
         }
     )
 
@@ -92,6 +100,7 @@ def top(page):
 def commented(page):
     """/last commented for subscriptions"""
     posts = misc.getPostList(misc.postListQueryHome(), "commented", page)
+    sub_icons = misc.get_sub_icons_for_posts(posts)
     return engine.get_template("index.html").render(
         {
             "posts": posts,
@@ -102,6 +111,7 @@ def commented(page):
             "changeLog": misc.getChangelog(),
             "ann": misc.getAnnouncement(),
             "kw": {},
+            "sub_icons": sub_icons,
         }
     )
 
@@ -140,6 +150,7 @@ def all_new(page):
         "new",
         page,
     )
+    sub_icons = misc.get_sub_icons_for_posts(posts)
     return engine.get_template("index.html").render(
         {
             "posts": posts,
@@ -150,6 +161,7 @@ def all_new(page):
             "changeLog": misc.getChangelog(),
             "ann": misc.getAnnouncement(),
             "kw": {},
+            "sub_icons": sub_icons,
         }
     )
 
@@ -251,6 +263,7 @@ def all_domain_new(domain, page):
         noAllFilter=True, filter_shadowbanned=True, filter_private_posts=True
     ).where(SubPost.link % ("%://" + domain + "/%") | SubPost.link % ("%://" + domain))
     post_count = len(count)
+    sub_icons = misc.get_sub_icons_for_posts(posts)
     return engine.get_template("index.html").render(
         {
             "posts": posts,
@@ -261,6 +274,7 @@ def all_domain_new(domain, page):
             "changeLog": misc.getChangelog(),
             "ann": misc.getAnnouncement(),
             "kw": {"domain": domain, "post_count": post_count},
+            "sub_icons": sub_icons,
         }
     )
 
@@ -290,7 +304,7 @@ def search(page, term):
         "new",
         page,
     )
-
+    sub_icons = misc.get_sub_icons_for_posts(posts)
     count_query = misc.postListQueryBase(
         filter_shadowbanned=True, filter_private_posts=True
     ).where(SubPost.title ** ("%" + term + "%"))
@@ -308,6 +322,7 @@ def search(page, term):
             "changeLog": misc.getChangelog(),
             "ann": misc.getAnnouncement(),
             "kw": {"term": term, "search_count": search_count},
+            "sub_icons": sub_icons,
         }
     )
 
@@ -355,6 +370,7 @@ def all_top(page):
         "top",
         page,
     )
+    sub_icons = misc.get_sub_icons_for_posts(posts)
     return engine.get_template("index.html").render(
         {
             "posts": posts,
@@ -365,6 +381,7 @@ def all_top(page):
             "changeLog": misc.getChangelog(),
             "ann": misc.getAnnouncement(),
             "kw": {},
+            "sub_icons": sub_icons,
         }
     )
 
@@ -384,7 +401,7 @@ def all_hot(page):
         "hot",
         page,
     )
-
+    sub_icons = misc.get_sub_icons_for_posts(posts)
     return engine.get_template("index.html").render(
         {
             "posts": posts,
@@ -395,6 +412,7 @@ def all_hot(page):
             "changeLog": misc.getChangelog(),
             "ann": misc.getAnnouncement(),
             "kw": {},
+            "sub_icons": sub_icons,
         }
     )
 
@@ -414,7 +432,7 @@ def all_commented(page):
         "commented",
         page,
     )
-
+    sub_icons = misc.get_sub_icons_for_posts(posts)
     return engine.get_template("index.html").render(
         {
             "posts": posts,
@@ -425,6 +443,7 @@ def all_commented(page):
             "changeLog": misc.getChangelog(),
             "ann": misc.getAnnouncement(),
             "kw": {},
+            "sub_icons": sub_icons,
         }
     )
 

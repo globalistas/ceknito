@@ -1,5 +1,5 @@
 @require(posts, sub)
-@def singlePost(post, sub, announcement=False):
+@def singlePost(post, sub, announcement=False, sub_icons=None):
 <div pid="@{post['pid']}" class="post @{(post['distinguish'] == 1 and 'mod' or '')} @{(post['distinguish'] == 2 and 'admin' or '')}">
     <div class="misctainer">
       <div class="votebuttons">
@@ -35,18 +35,16 @@
     </div>
     <div class="pbody">
       <div class="sub-icon-name-container">
-        <a class="sub-icon-link" href="/@{config.site.sub_prefix}/@{post['sub']}">
-          <div class="@{'sub-icon-round' if not sub and not announcement and func.getSubData(post['sid'], simple=True).get('icon_file') else ''}">
-            @if not sub and not announcement and func.getSubData(post['sid'], simple=True).get("icon_file"):
+        @if sub_icons and sub_icons.get(post['sid']):
+          <a class="sub-icon-link" href="/@{config.site.sub_prefix}/@{post['sub']}">
+            <div class="sub-icon-round">
               <img id="icon-preview"
-                   src="@{func.getSubData(post['sid'], simple=True)['icon_file'].get('url', '') if func.getSubData(post['sid'], simple=True)['icon_file'].get('default', False) else thumbnail_url(func.getSubData(post['sid'], simple=True)['icon_file']['thumbnail'])}"
+                   src="@{sub_icons[post['sid']].get('url', '') if sub_icons[post['sid']].get('default', False) else thumbnail_url(sub_icons[post['sid']]['thumbnail'])}"
                    alt="@{_('Sub Icon')}">
-            @end
-          </div>
-        </a>
-            @if not announcement and not sub:
-              <span><a class="sub-icon-text" href="/@{config.site.sub_prefix}/@{post['sub']}">/@{config.site.sub_prefix}/@{post['sub']}</a></span>
-            @end
+            </div>
+          </a>
+        @end
+        <span><a class="sub-icon-text" href="/@{config.site.sub_prefix}/@{post['sub']}">/@{config.site.sub_prefix}/@{post['sub']}</a></span>
       </div>
       <div class="post-heading">
         @if post['flair']:
