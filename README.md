@@ -12,6 +12,7 @@ A link and discussion aggregator with snek (python3)
 - save comment
 - expand all comments
 - sub-specific delay for showing comment scores
+- sub icons
 - active sub highlighted in topbar
 - sub name displayed in navbar
 - sub navbar linking to sub home

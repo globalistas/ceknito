@@ -15,11 +15,11 @@
     @end
 <h2>
   <span style="vertical-align: middle;">
-    @if func.getSubData(sub.sid).get('icon_file'):
+    @if func.getSubData(sub.sid, simple=True).get('icon_file'):
       <span style="display: inline-block; vertical-align: middle;">
         <div class="sub-icon-round">
           <img id="icon-preview"
-               src="@{func.getSubData(sub.sid)['icon_file'].get('url', '') if func.getSubData(sub.sid)['icon_file'].get('default', False) else thumbnail_url(func.getSubData(sub.sid)['icon_file']['thumbnail'])}"
+               src="@{func.getSubData(sub.sid, simple=True)['icon_file'].get('url', '') if func.getSubData(sub.sid)['icon_file'].get('default', False) else thumbnail_url(func.getSubData(sub.sid)['icon_file']['thumbnail'])}"
                alt="@{_('Sub Icon')}">
         </div>
       </span>

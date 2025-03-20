@@ -2303,86 +2303,102 @@ ptype_names = {
 
 
 def getSubData(sid, simple=False, extra=False):
-    sdata = SubMetadata.select().where(SubMetadata.sid == sid)
+    # 1. Fetch all metadata in a single query and convert to a dictionary
+    sdata = list(SubMetadata.select().where(SubMetadata.sid == sid))
+
+    # Initialize data dict with empty lists for multi-value fields
     data = {"xmod2": [], "sticky": []}
+
+    # 2. Process metadata more efficiently
     for p in sdata:
         if p.key in ["tag", "mod2i", "xmod2", "sticky"]:
-            if data.get(p.key):
-                data[p.key].append(p.value)
-            else:
-                data[p.key] = [p.value]
+            # Initialize the list if it doesn't exist
+            if p.key not in data:
+                data[p.key] = []
+            data[p.key].append(p.value)
         else:
             data[p.key] = p.value
-    # Handle icon
-    if "icon" in data:
-        if data["icon"] == "__default__":  # Special value for default icon
-            data["icon_file"] = {"default": True, "url": "/static/img/generic_sub.png"}
-        elif data["icon"]:  # If icon has a non-empty value
-            icon_file = (
-                SubUploads.select()
-                .where((SubUploads.sid == sid) & (SubUploads.name == data["icon"]))
-                .first()
-            )
-            if icon_file:
-                data["icon_file"] = {
-                    "fileid": icon_file.fileid,
-                    "thumbnail": icon_file.thumbnail,
-                }
-            else:
-                data["icon_file"] = None
-        else:
-            data["icon_file"] = None  # Empty string means no icon
+
+    # 3. Handle icon with fewer conditionals
+    icon = data.get("icon")
+    if icon == "__default__":
+        data["icon_file"] = {"default": True, "url": "/static/img/generic_sub.png"}
+    elif icon:
+        # Use get() instead of first() after a filter to reduce queries
+        icon_file = (
+            SubUploads.select()
+            .where((SubUploads.sid == sid) & (SubUploads.name == icon))
+            .first()
+        )
+
+        data["icon_file"] = (
+            {
+                "fileid": icon_file.fileid,
+                "thumbnail": icon_file.thumbnail,
+            }
+            if icon_file
+            else None
+        )
     else:
-        data["icon_file"] = None  # No icon key means no icon
+        data["icon_file"] = None
 
-    if not simple:
-        try:
-            data["wiki"]
-        except KeyError:
-            data["wiki"] = ""
+    if simple:
+        return data
 
-        if extra:
-            if data.get("xmod2"):
-                try:
-                    data["xmods"] = (
-                        User.select(User.uid, User.name)
-                        .where((User.uid << data["xmod2"]) & (User.status == 0))
-                        .dicts()
-                    )
-                except User.DoesNotExist:
-                    data["xmods"] = []
+    # 4. Set default values without try/except
+    data.setdefault("wiki", "")
 
+    # 5. Only execute relevant queries when needed
+    if extra and data.get("xmod2"):
+        # Use a more direct query without the try/except
+        data["xmods"] = list(
+            User.select(User.uid, User.name)
+            .where((User.uid.in_(data["xmod2"])) & (User.status == 0))
+            .dicts()
+        )
+
+    # 6. Handle creator data more efficiently
+    mod_uid = data.get("mod")
+    if mod_uid:
         try:
             creator = (
                 User.select(User.uid, User.name, User.status)
-                .where(User.uid == data.get("mod"))
+                .where(User.uid == mod_uid)
                 .dicts()
                 .get()
             )
+
+            data["creator"] = (
+                creator
+                if creator.get("status") == 0
+                else {"uid": "0", "name": _("[deleted]")}
+            )
         except User.DoesNotExist:
-            creator = {"uid": "0", "name": "Nobody"}
-        data["creator"] = (
-            creator
-            if creator.get("status", None) == 0
-            else {"uid": "0", "name": _("[deleted]")}
-        )
+            data["creator"] = {"uid": "0", "name": "Nobody"}
+    else:
+        data["creator"] = {"uid": "0", "name": "Nobody"}
 
-        data["flairs"] = [
-            sf.text
-            for sf in SubFlair.select(SubFlair.text)
-            .where(SubFlair.sid == sid)
-            .order_by(SubFlair.text)
-        ]
+    # 7. Get flairs in one query
+    data["flairs"] = [
+        sf.text
+        for sf in SubFlair.select(SubFlair.text)
+        .where(SubFlair.sid == sid)
+        .order_by(SubFlair.text)
+    ]
 
-        try:
-            data["stylesheet"] = SubStylesheet.get(SubStylesheet.sid == sid).content
-        except SubStylesheet.DoesNotExist:
-            data["stylesheet"] = ""
+    # 8. Get stylesheet with get_or_none pattern to avoid exceptions
+    stylesheet = (
+        SubStylesheet.select(SubStylesheet.content)
+        .where(SubStylesheet.sid == sid)
+        .first()
+    )
+    data["stylesheet"] = stylesheet.content if stylesheet else ""
 
-        try:
-            data["rules"] = SubRule.select().join(Sub).where(Sub.sid == sid)
-        except SubRule.DoesNotExist:
-            data["rules"] = ""
+    # 9. Handle rules more safely
+    try:
+        data["rules"] = list(SubRule.select().join(Sub).where(Sub.sid == sid))
+    except SubRule.DoesNotExist:
+        data["rules"] = ""
 
     return data
 
