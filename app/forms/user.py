@@ -89,7 +89,7 @@ class RegistrationForm(FlaskForm):
     """Registration form."""
 
     username = StringField(
-        _l("Username"), [UsernameLength(), Regexp(r"^[a-zA-ZÀ-ž0-9_-]+$")]
+        _l("Username"), [UsernameLength(), Regexp(r"^[a-zA-ZÁ-ž0-9_-]+$")]
     )
     username_placeholder = StringField(_l("No spaces or diacritics"))
     email_optional_placeholder = StringField(
