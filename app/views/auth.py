@@ -122,7 +122,7 @@ def register():
             {"error": _("Invalid captcha."), "regform": form, "captcha": captcha}
         )
 
-    if not misc.allowedNames.match(form.username.data):
+    if not misc.allowedUserNames.match(form.username.data):
         return engine.get_template("user/register.html").render(
             {
                 "error": _("Username has invalid characters."),

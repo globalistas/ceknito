@@ -409,10 +409,10 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch) {
           replaceTwitterWithLiteTwitter(link, expando)
     } else if (URL_REGEX.IMAGE.test(link)) {
       const img = document.createElement("img");
-      img.src = link;
+      img.src = characterEscape(link);
       img.draggable = false;
         const anchor = document.createElement("a");
-        anchor.setAttribute("href", link);
+        anchor.setAttribute("href", characterEscape(link));
         anchor.target = "_blank";
         anchor.appendChild(img);
       confResizer(img, expando.querySelector('.expandotxt'));

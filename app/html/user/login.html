@@ -13,7 +13,7 @@
         <fieldset>
           <div class="pure-control-group">
             <label for="username">@{_('Username')}</label>
-            @{loginform.username(placeholder=loginform.username.label.text, required=True, pattern="[a-zA-ZÁ-ž0-9]+", title=_('Alphanumeric characters plus \'-\' and \'_\''))!!html}
+            @{loginform.username(placeholder=loginform.username.label.text, required=True, pattern="[a-zA-ZÀ-ž0-9_-]+", title=_('Alphanumeric characters plus \'-\' and \'_\''))!!html}
           </div>
           <div class="pure-control-group">
             <label for="password">@{_('Password')}</label>
