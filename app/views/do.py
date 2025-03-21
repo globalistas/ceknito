@@ -4645,6 +4645,42 @@ def unshadowban_user(username):
     return redirect(url_for("user.view", user=user.name))
 
 
+@do.route("/do/admin/set_random_pwd/<user>", methods=["POST"])
+@login_required
+def set_random_pwd(user):
+    if not current_user.is_admin():
+        return abort(403)
+
+    form = CsrfTokenOnlyForm()
+    if not form.validate():
+        return abort(403)
+
+    try:
+        user = User.get(fn.Lower(User.name) == user.lower())
+    except User.DoesNotExist:
+        return abort(404)
+
+    if user.uid == current_user.uid:
+        return abort(403)
+
+    password = "".join(
+        random.choice(
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+"
+        )
+        for _ in range(12)
+    )
+
+    try:
+        auth_provider.reset_password(user, password)
+    except AuthError:
+        return jsonify(
+            status="error",
+            error=_("Password change failed. Please try again later."),
+        )
+
+    return jsonify(status="ok", password=password)
+
+
 @do.route("/do/edit_top_bar", methods=["POST"])
 @login_required
 def edit_top_bar():

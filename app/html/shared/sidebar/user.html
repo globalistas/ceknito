@@ -27,6 +27,10 @@
         @{form.CsrfTokenOnlyForm().csrf_token()!!html}
       <a id="wipevotes-button" class="sbm-post pure-button pure-button-primary">@{_('Remove votes')}</a>
     </form>
+    <form  method="POST" data-reload="true" id="setrandompwd" action="@{url_for('do.set_random_pwd', user=user.name)}">
+        @{form.CsrfTokenOnlyForm().csrf_token()!!html}
+      <a id="setrandompwd-button" class="sbm-post pure-button pure-button-primary">@{_('Reset user password')}</a>
+    </form>
     <hr>
 @end
 @if user.uid == current_user.uid:

@@ -868,3 +868,26 @@ function setCookie(cname, cvalue, exdays) {
   var expires = "expires=" + d.toGMTString();
   document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
 }
+
+document.getElementById("setrandompwd-button").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent default link behavior
+
+    const form = document.getElementById("setrandompwd");
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+        method: "POST",
+        body: formData,
+    })
+    .then(response => response.json()) // Parse JSON response
+    .then(data => {
+        if (data.status === "ok" && data.password) {
+            alert("New password: " + data.password); // Show password in alert
+        } else {
+            alert("Error: " + (data.error || "Failed to reset password."));
+        }
+    })
+    .catch(error => {
+        alert("Request failed: " + error);
+    });
+});
