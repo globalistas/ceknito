@@ -298,7 +298,7 @@ function videoExpando(link, expando) {
 
   // Create wrapper and append elements
   const wrapper = document.createElement('div');
-  wrapper.className = 'expando-wrapper';
+  wrapper.className = 'expando-video-wrapper';
   wrapper.appendChild(vid);
   wrapper.appendChild(handle);
 
@@ -411,8 +411,12 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch) {
       const img = document.createElement("img");
       img.src = link;
       img.draggable = false;
+        const anchor = document.createElement("a");
+        anchor.setAttribute("href", link);
+        anchor.target = "_blank";
+        anchor.appendChild(img);
       confResizer(img, expando.querySelector('.expandotxt'));
-      expando.querySelector('.expandotxt').appendChild(img);
+      expando.querySelector('.expandotxt').appendChild(anchor);
     } else if (URL_REGEX.VIDEO.test(link)) {
       videoExpando(link, expando);
     } else if (domain === 'i.imgur.com' && /\.gifv$/i.test(link)) {

@@ -604,6 +604,10 @@ span#notification.fade {
 	color: var(--post-link-hover);
 }
 
+.post a.title:visited:hover {
+	color: #5d5d5d;
+}
+
 .misctainer {
 	float: left;
 	padding: 0 .2em 0 .1em;

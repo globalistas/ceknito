@@ -781,7 +781,7 @@ pbodyElements.forEach(pbody => {
                 targetClasses === undefined) {
                 return false;
             }
-            if (this.querySelector('[data-icon="image"], [data-icon="remove"]'))  {
+            if (this.querySelector('[data-icon="image"], [data-orig-icon="image"]'))  {
                 redirToPost()
             }
         } else if (event.target.closest('.author, .nsfw-blur, .lty-placeholder, .sub-icon-link')) {
