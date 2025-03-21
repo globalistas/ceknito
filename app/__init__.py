@@ -73,6 +73,7 @@ def create_app(config=None):
         "media-src": ["'self'", "https:"],
         "style-src": ["'self'", "'unsafe-inline'"],
         "connect-src": ["'self'"] + config.site.extra_connect_src,
+        "script-src-elem": ["'self'", "https://platform.twitter.com"],
     }
 
     if "server_name" in config.site.keys():

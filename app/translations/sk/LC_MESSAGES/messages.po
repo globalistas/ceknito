@@ -1733,6 +1733,10 @@ msgstr "nie je https"
 msgid "Embed video"
 msgstr "Ukázať video"
 
+#: app/html/shared/post.html:78
+msgid "View tweet"
+msgstr "Zobraziť tweet"
+
 #: app/html/shared/post.html:64
 msgid "Show image"
 msgstr "Ukázať obrázok"

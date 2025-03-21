@@ -203,11 +203,15 @@
         @if post['visibility'] != 'none' and post['visibility'] != 'user-self-del':
           @if post['link']:
             @if func.getDomain(post['link']) in config.site.expando_sites:
-              <div class="expando" data-pid="@{post['pid']}" data-t="lnk" data-link="@{post['link']}"><div class="icon expando-btn" data-icon="play"></div></div>
-            @elif post['link'].lower().endswith(('.png', '.jpg', '.gif', '.tiff', '.bmp', '.jpeg', '.webp')):
-              <div class="expando" data-pid="@{post['pid']}" data-t="lnk" data-link="@{post['link']}"><div class="icon expando-btn" data-icon="image"></div></div>
-            @elif post['link'].lower().endswith(('.mp4', '.webm', '.gifv')):
-              <div class="expando" data-pid="@{post['pid']}" data-t="lnk" data-link="@{post['link']}"><div class="icon expando-btn" data-icon="play"></div></div>
+              @if post['link'].lower().startswith('https://x.com/'):
+              <div class="expando" data-pid="@{post['pid']}" data-t="lnk" title="@{_('View tweet')}" data-link="@{post['link']}"><div data-icon="twitter" class="icon expando-btn"></div></div>
+              @else:
+              <div class="expando" data-pid="@{post['pid']}" data-t="lnk" title="@{_('Embed video')}" data-link="@{post['link']}"><div data-icon="play" class="icon expando-btn"></div></div>
+              @end
+              @elif post['link'].lower().endswith(('.png', '.jpg', '.gif', '.tiff', '.bmp', '.jpeg', '.webp')):
+              <div class="expando" data-pid="@{post['pid']}" data-t="lnk" title="@{_('Show image')}" data-link="@{post['link']}"><div data-icon="image" class="icon expando-btn"></div></div>
+              @elif post['link'].lower().endswith(('.mp4', '.webm', '.gifv')):
+              <div class="expando" data-pid="@{post['pid']}" data-t="lnk" title="@{_('Play video')}" data-link="@{post['link']}"><div data-icon="play" class="icon expando-btn"></div></div>
             @end
           @end
         @end

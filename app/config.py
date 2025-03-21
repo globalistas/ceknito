@@ -33,6 +33,8 @@ defaults = {  # key => default value
             "player.vimeo.com",
             "www.bitchute.com",
             "www.youtube-nocookie.com",
+            "x.com",
+            "platform.twitter.com",
         ],
         "extra_connect_src": [],
         "footer": {

@@ -165,3 +165,56 @@ img[src*='#center'] {
     font-size: 12px;
     font-weight: 600;
 }
+
+.lite-youtube {
+    background-color: #000;
+    position: absolute;
+    height: 100%;
+    max-width: 100%;
+    background-position: center center;
+    background-size: cover;
+    cursor: pointer;
+    width: 640px;
+}
+
+.lite-youtube .lty-placeholder {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lite-youtube .lty-playbtn {
+  width: 68px;
+  height: 48px;
+  opacity: 0.8;
+  transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.lite-youtube:hover .lty-playbtn {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.lite-youtube.lty-activated {
+  cursor: unset;
+}
+
+.lite-youtube.lty-activated .lty-playbtn,
+.lite-youtube.lty-activated .lty-placeholder {
+  display: none;
+}
+
+.lite-youtube iframe {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

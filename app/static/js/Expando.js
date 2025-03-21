@@ -46,67 +46,47 @@ class LiteYTEmbed {
   }
 }
 
-// Add styles once on page load using a single style element
-function addLiteYTStyles() {
-  if (document.getElementById('lite-yt-styles')) return;
+// Create a lite Twitter embed class, similar to the YouTube one
+class LiteTwitterEmbed {
+  constructor(element) {
+    this.element = element;
+    this.tweetId = element.getAttribute('data-tweetid');
+    this.username = element.getAttribute('data-username');
 
-  const style = document.createElement('style');
-  style.id = 'lite-yt-styles';
-  style.textContent = `
-    .lite-youtube {
-        background-color: #000;
-        position: absolute;
-        height: 100%;
-        max-width: 100%;
-        background-position: center center;
-        background-size: cover;
-        cursor: pointer;
-        width: 640px;
-    }
+    this.loadEmbed();
+  }
 
-    .lite-youtube .lty-placeholder {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+  // Directly load the Twitter embed
+  loadEmbed() {
+    // Clear the element's existing content
+    this.element.innerHTML = '';
 
-    .lite-youtube .lty-playbtn {
-      width: 68px;
-      height: 48px;
-      opacity: 0.8;
-      transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
-    }
+    // Create the Twitter embed blockquote
+    const blockquote = document.createElement('blockquote');
+    blockquote.classList.add('twitter-tweet');
+    blockquote.innerHTML = `
+      <a href="https://twitter.com/${this.username}/status/${this.tweetId}"></a>
+    `;
 
-    .lite-youtube:hover .lty-playbtn {
-      opacity: 1;
-      transform: scale(1.1);
-    }
+    // Append the blockquote to the element
+    this.element.appendChild(blockquote);
 
-    .lite-youtube.lty-activated {
-      cursor: unset;
-    }
+    // Ensure the Twitter script is loaded (if not already loaded)
+    this.loadTwitterScript();
+  }
 
-    .lite-youtube.lty-activated .lty-playbtn,
-    .lite-youtube.lty-activated .lty-placeholder {
-      display: none;
+  // Load Twitter's widgets.js script to render the embed
+  loadTwitterScript() {
+    if (!window.twttr) {
+      const script = document.createElement('script');
+      script.src = "https://platform.twitter.com/widgets.js";
+      script.async = true;
+      script.charset = "utf-8";
+      document.body.appendChild(script);
+    } else {
+      window.twttr.widgets.load();
     }
-
-    .lite-youtube iframe {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-  `;
-  document.head.appendChild(style);
+  }
 }
 
 // Cache regex patterns for better performance
@@ -120,7 +100,8 @@ const URL_REGEX = {
   IMGUR: /^http(?:s?):\/\/(i\.)?imgur\.com\/(.*?)(?:\/.gifv|$)/,
   BITCHUTE: /^https?:\/\/(?:www\.)?bitchute\.com\/video\/([a-zA-Z0-9]+)/,
   IMAGE: /\.(png|jpg|gif|tiff|svg|bmp|jpeg)$/i,
-  VIDEO: /\.(mp4|webm)$/i
+  VIDEO: /\.(mp4|webm)$/i,
+  TWITTER: /https?:\/\/(?:twitter\.com|x\.com)\/([\w]+)\/status\/(\d+)/i
 };
 
 // Extract IDs from URLs - use cached regex patterns
@@ -160,6 +141,14 @@ function extractID(url, type) {
     case 'bitchute':
       match = url.match(URL_REGEX.BITCHUTE);
       return match ? match[1] : null;
+
+    case 'twitter':
+      match = url.match(URL_REGEX.TWITTER);
+      return match ? {
+        username: match[1],  // Extract username correctly
+        tweetId: match[2]    // Extract tweet ID correctly
+      } : null;
+
   }
   return null;
 }
@@ -228,6 +217,45 @@ function replaceYoutubeWithLiteYT(link, expandoElement) {
 
   // Set up resizer
   resizer(liteYT, resizeHandle, expandoText);
+
+  return true;
+}
+
+// Function to replace Twitter links with lite embeds
+function replaceTwitterWithLiteTwitter(link, expandoElement) {
+  const twitterData = extractID(link, 'twitter');
+  if (!twitterData) return false;
+
+  // Create container with proper structure
+  const container = document.createElement('div');
+  container.className = 'expando-wrapper';
+  container.style.height = 'auto';
+  container.style.willChange = 'height';
+
+  // Create lite Twitter element
+  const liteTwitter = document.createElement('div');
+  liteTwitter.className = 'lite-twitter';
+  liteTwitter.setAttribute('data-tweetid', twitterData.tweetId);
+  liteTwitter.setAttribute('data-username', twitterData.username);
+
+  // Create and add resize handle
+  const resizeHandle = document.createElement('div');
+  resizeHandle.className = 'resize-handle';
+  resizeHandle.innerHTML = '<div class="i-icon" data-icon="resizeArrow"></div>';
+
+  // Append elements
+  container.appendChild(liteTwitter);
+  container.appendChild(resizeHandle);
+
+  // Add to expando
+  const expandoText = expandoElement.querySelector('.expandotxt');
+  expandoText.appendChild(container);
+
+  // Initialize the lite Twitter embed
+  new LiteTwitterEmbed(liteTwitter);
+
+  // Set up resizer
+  resizer(liteTwitter, resizeHandle, expandoText);
 
   return true;
 }
@@ -309,10 +337,10 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch) {
 
   const isMobile = window.innerWidth <= 480;
   const isTextPost = link === 'None';
-  const isYtPost = link && link.includes('youtube.com');
+  const isWidePost = link && (link.includes('youtube.com') || link.includes('youtu.be') || link.includes('https://x.com'));
 
   let targetContainer;
-  if ((isMobile && isTextPost) || (isMobile && isYtPost)) {
+  if ((isMobile && isTextPost) || (isMobile && isWidePost)) {
     targetContainer = postElement;
   } else if (postElement.closest('.postbar')) {
     targetContainer = postElement.closest('.postbar');
@@ -341,48 +369,7 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch) {
     const domain = getHostname(link);
 
     if (domain === 'youtube.com' || domain === 'www.youtube.com' || domain === 'youtu.be') {
-      if (!replaceYoutubeWithLiteYT(link, expando)) {
-        // Fallback YouTube embed if lite version fails
-        const expandoText = expando.querySelector('.expandotxt');
-        let extra = '?';
-
-        const listParam = getParameterByName('list', link);
-        if (listParam) {
-          extra += `list=${listParam}&`;
-        }
-
-        const timeParam = getParameterByName('t', link);
-        if (timeParam) {
-          let start;
-          const timeRegex = /(?:(\d+)d)?(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?/;
-          const match = timeRegex.exec(timeParam);
-
-          if (match && !match[1] && !match[2] && !match[3] && !match[4]) {
-            start = timeParam.replace(/\D/g, '');
-          } else if (match) {
-            const days = parseInt(match[1] || 0);
-            const hours = parseInt(match[2] || 0);
-            const minutes = parseInt(match[3] || 0);
-            const seconds = parseInt(match[4] || 0);
-            start = days * 86400 + hours * 3600 + minutes * 60 + seconds;
-          } else {
-            start = timeParam.replace(/\D/g, '');
-          }
-
-          extra += `start=${start}`;
-        }
-
-        const youtubeEmbed = `
-          <div class="expando-wrapper">
-            <iframe style="height: 360px; width: 640px;"
-              src="https://www.youtube-nocookie.com/embed/${extractID(link, 'youtube')}${extra}"
-              allowfullscreen=""></iframe>
-            <div class="resize-handle"><div class="i-icon" data-icon="resizeArrow"></div></div>
-          </div>`;
-
-        expandoText.innerHTML = youtubeEmbed;
-        resizer(expandoText.querySelector('iframe'), expandoText.querySelector('.resize-handle'), expandoText);
-      }
+      replaceYoutubeWithLiteYT(link, expando)
     } else if (domain === 'gfycat.com') {
       expando.querySelector('.expandotxt').innerHTML = `
         <div class="iframewrapper">
@@ -418,6 +405,8 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch) {
 
       expando.querySelector('.expandotxt').innerHTML = characterEscape(bitchuteEmbed);
       resizer(expando.querySelector('.expandotxt iframe'), expando.querySelector('.expandotxt .resize-handle'), expando.querySelector('.expandotxt'));
+    } else if (domain === 'twitter.com' || domain === 'www.twitter.com' || domain === 'x.com' || domain === 'www.x.com' || domain === 'mobile.twitter.com') {
+          replaceTwitterWithLiteTwitter(link, expando)
     } else if (URL_REGEX.IMAGE.test(link)) {
       const img = document.createElement("img");
       img.src = link;
@@ -582,9 +571,6 @@ function updatePostExpandoIcon(iconEl, negate = false) {
 
 // Attach event listeners for all expando buttons
 document.addEventListener('DOMContentLoaded', function() {
-  // Add Lite YouTube styles
-  addLiteYTStyles();
-
   // Set up expando button event listeners
   const expandoBtns = document.querySelectorAll('.icon.expando-btn');
   expandoBtns.forEach(iconEl => {
@@ -595,18 +581,19 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// Auto expand all expandos except those in announcement or nsfw posts
+// Auto expand all expandos except those in announcement or nsfw posts or twitter posts
 function expandAllExpandos() {
   document.querySelectorAll('.expando').forEach(expandoElement => {
     const postElement = expandoElement.closest('.post');
     const pbody = postElement.querySelector('.pbody');
-    const hasAnnouncementOrNSFW = pbody && (
+    const stayPut = pbody && (
       pbody.querySelector('.announcementnotfornow') ||
-      pbody.querySelector('.nsfw')
+      pbody.querySelector('.nsfw') ||
+      pbody.querySelector('[data-icon="twitter"]')
     );
 
     // Only expand if not announcement or nsfw
-    if (!hasAnnouncementOrNSFW) {
+    if (!stayPut) {
       const expandoBtn = expandoElement.querySelector('.expando-btn');
       if (expandoBtn) {
         expandoBtn.click();

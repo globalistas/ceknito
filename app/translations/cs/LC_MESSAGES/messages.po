@@ -1735,6 +1735,10 @@ msgstr "není https"
 msgid "Embed video"
 msgstr "Ukázat video"
 
+#: app/html/shared/post.html:78
+msgid "View tweet"
+msgstr "Zobrazit tweet"
+
 #: app/html/shared/post.html:64
 msgid "Show image"
 msgstr "Ukázat obrázek"

@@ -767,6 +767,10 @@ body.dark .alldaposts .links a {
   color: #797979;
 }
 
+body.dark .alldaposts .links a.comments:hover, a:hover {
+    color: #49708f;
+}
+
 body.dark .stickyposts .links a {
   color: #797979;
 }

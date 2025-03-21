@@ -829,10 +829,12 @@ iframe {
 }
 
 .expando-wrapper {
-/*	display: inline-block;
-	will-change: height; */
 	position: relative;
-	padding-bottom: 56.25%;  /* 16:9 aspect ratio */
+	padding-bottom: 56.25%;  /* 16:9 aspect ratio for YT embeds*/
+}
+
+.expando-wrapper:has(.lite-twitter) {
+  padding-bottom: 0;
 }
 
 .thumbnail .placeholder svg path {
