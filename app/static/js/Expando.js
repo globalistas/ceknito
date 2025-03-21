@@ -337,7 +337,7 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch) {
 
   const isMobile = window.innerWidth <= 480;
   const isTextPost = link === 'None';
-  const isWidePost = link && (link.includes('youtube.com') || link.includes('youtu.be') || link.includes('https://x.com'));
+  const isWidePost = link && (link.includes('https://www.youtube.com') || link.includes('https://youtu.be') || link.includes('https://x.com')) || link.includes('https://uploads.cekni.to');
 
   let targetContainer;
   if ((isMobile && isTextPost) || (isMobile && isWidePost)) {
