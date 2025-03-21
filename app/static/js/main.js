@@ -50,7 +50,7 @@ function vote(obj, how, comment) {
           <input type="hidden" name="csrf_token" value="' + document.getElementById('csrf_token').value + '"/> \
           <fieldset> \
             <div class="pure-control-group"> \
-              <input id="username" name="username" pattern="[a-zA-ZÁ-ž0-9_-]+" placeholder="' + _('Username') + '" required="" title="' + _('Alphanumeric characters plus \'-\' and \'_\'') + '" type="text"> \
+              <input id="username" name="username" placeholder="' + _('Username') + '" required="" title="' + _('Alphanumeric characters plus \'-\' and \'_\'') + '" type="text"> \
             </div> \
             <div class="pure-control-group"> \
               <input id="password" name="password" placeholder="' + _('Password') + '" required type="password"> \
@@ -717,7 +717,7 @@ function handleSubscriptionClick(event) {
           <input type="hidden" name="csrf_token" value="' + document.getElementById('csrf_token').value + '"/> \
           <fieldset> \
             <div class="pure-control-group"> \
-              <input id="username" name="username" pattern="[a-zA-ZÁ-ž0-9_-]+" placeholder="' + _('Username') + '" required="" title="' + _('Alphanumeric characters plus \'-\' and \'_\'') + '" type="text"> \
+              <input id="username" name="username" placeholder="' + _('Username') + '" required="" title="' + _('Alphanumeric characters plus \'-\' and \'_\'') + '" type="text"> \
             </div> \
             <div class="pure-control-group"> \
               <input id="password" name="password" placeholder="' + _('Password') + '" required type="password"> \

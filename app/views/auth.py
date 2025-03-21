@@ -334,6 +334,7 @@ def login_with_token(token):
         auth_provider.set_email_verified(user)
         theuser = misc.load_user(user.uid)
         login_user(theuser)
+        auth_provider.update_last_login(user.uid)
         session["remember_me"] = False
         session.pop("reg", None)
     return redirect(url_for("wiki.welcome"))
@@ -480,6 +481,7 @@ def login_redirect():
 
     theuser = misc.load_user(user.uid)
     login_user(theuser)
+    auth_provider.update_last_login(user.uid)
 
     next_uri = session.pop("next_url", None)
     if not next_uri:
