@@ -272,6 +272,7 @@ def register():
     else:
         theuser = misc.load_user(user.uid)
         login_user(theuser)
+        auth_provider.update_last_login(user.uid)
         session["remember_me"] = False
         return redirect(url_for("wiki.welcome"))
 
