@@ -341,7 +341,20 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch) {
 
   let targetContainer;
   if ((isMobile && isTextPost) || (isMobile && isWidePost)) {
-    targetContainer = postElement;
+      targetContainer = postElement;
+      expando.addEventListener('click', function(event) {
+        // Skip if clicking on specific elements
+        if (event.target.tagName === "A" ||
+            event.target.closest('.author, .nsfw-blur, .lty-placeholder, .sub-icon-link')) {
+          return false;
+        }
+
+        // Find the comments link and redirect
+        const commentsElement = postElement.querySelector(".comments");
+        if (commentsElement && commentsElement.href) {
+          window.location.href = commentsElement.href;
+        }
+      });
   } else if (postElement.closest('.postbar')) {
     targetContainer = postElement.closest('.postbar');
   } else {
