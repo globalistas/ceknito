@@ -470,6 +470,10 @@ body.dark .pmessage.post {
   background-color: #202225;
 }
 
+body.dark .main .container {
+  color: inherit;
+}
+
 body.dark .pmessage.post p.container a {
   background-color: rgba(0, 0, 0, 0.2);
 }

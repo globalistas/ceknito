@@ -168,7 +168,6 @@ img[src*='#center'] {
 
 .lite-youtube {
     background-color: #000;
-    position: absolute;
     height: 100%;
     max-width: 100%;
     background-position: center center;

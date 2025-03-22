@@ -1849,6 +1849,13 @@ article.comment .score {
 
 .pmessage.post p.title {
 	border-bottom: 1px solid #c8c8c8;
+	font-size: inherit;
+    line-height: inherit;
+    padding-bottom: 5px;
+}
+
+.pmessage .links {
+    margin: 0.8px 0 0 2px;
 }
 
 .pmessage.post {
@@ -1867,6 +1874,21 @@ article.comment .score {
 	-webkit-box-shadow: -3px 2px 4px 0 rgba(0,0,0,.1);
 	-moz-box-shadow: -3px 2px 4px 0 rgba(0,0,0,.1);
 	box-shadow: -3px 2px 4px 0 rgba(0,0,0,.1);
+}
+
+.main .container {
+    font-family: verdana, arial, sans-serif;
+    font-size: 13.5px;
+    line-height: normal;
+    color: #222;
+}
+
+.main .votecomment {
+    margin-top: -3px;
+}
+
+.main .pchild .votecomment {
+    margin-top: 0px;
 }
 
 .pmessage p.container a:hover {
