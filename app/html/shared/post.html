@@ -61,7 +61,7 @@
         @if post['link'] == None:
           <a href="/@{config.site.sub_prefix}/@{post['sub']}/@{post['pid']}/@{func.slugify(post['title'])}" class="title @{post['blur']} @{sub and ((post['pid'] in func.getStickyPid(sub['sid'])) and 'stickytitle' or '')}">@{post['title']}</a> \
         @else:
-          <a target="_blank" rel="noopener nofollow ugc" href="@{post['link']}" class="title @{post['blur']} @{sub and ((post['pid'] in func.getStickyPid(sub['sid'])) and 'stickytitle' or '')}">@{post['title']} <span class="domain">(@{func.getDomain(post['link'])})</span></a>
+          <a target="_blank" rel="noopener nofollow ugc" href="@{post['link']}" class="title @{post['blur']} @{sub and ((post['pid'] in func.getStickyPid(sub['sid'])) and 'stickytitle' or '')}">@{post['title']}</a> <a href="/domain/@{func.getDomain(post['link'])}" class="domain">(@{func.getDomain(post['link'])})</a>
         @end
         @if post['nsfw']:
           <div class="nsfw" title="@{_('Not safe for work')}">@{_('NSFW')}</div> \

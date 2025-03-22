@@ -714,10 +714,22 @@ iframe {
 	display: none;
 }
 
+.indexdomain {
+    color: #25b2dce8;
+}
+
+.indexdomain:hover {
+    color: #83d4f1;
+}
+
 .post .domain, .post .domain a {
 	color: #25b2dce8;
 	font-size: .7em;
 	transition: all .15s ease;
+}
+
+.post .domain:hover {
+  color: #83d4f1;
 }
 
 .post .author {
@@ -1015,7 +1027,7 @@ img.block-blur, img.nsfw-blur {
 }
 
 .pbody .postflair {
-	font-size: 11px;
+	font-size: 12px;
 }
 
 .submitflair {
@@ -1055,9 +1067,10 @@ img.block-blur, img.nsfw-blur {
 }
 
 .pollflair {
-	margin-right: .5em;
+	margin: 0px 3px 0px 0px;
 	color: #fff;
 	background-color: #6a6c6e;
+	vertical-align: middle;
 }
 
 .user_flair {
@@ -1462,7 +1475,7 @@ a.pure-button.alldarightcomments {
 .sidebarlists ul.top5 {
 	padding: 0 8px 10px 24px;
 	margin: 12px 5px;
-	background: #e6e6e6;
+	/* background: #e6e6e6; */
 	border-radius: 2px;
 	border: 1px solid #ccc;
 }
@@ -1522,7 +1535,17 @@ hr {
 	font-size: 14px;
 }
 
+.sidelocale {
+	color: #757575;
+	margin-top: 1px;
+}
+
 .sidelocale, .sidescore {
+	font-size: 12px;
+}
+
+.postedspan {
+	color: #757575;
 	font-size: 12px;
 }
 
@@ -1569,7 +1592,7 @@ input[type=search] {
 }
 
 a.title {
-	color: #4f5156;
+	color: #454545;
 	transition: all .15s ease;
 }
 

@@ -1908,6 +1908,19 @@ msgstr "komentář:"
 msgid "live updates"
 msgstr "update v reálném čase"
 
+#: app/html/shared/sidebar/home.html:55
+msgid "commented"
+msgstr "přidal(a) komentář"
+
+#: app/html/shared/sidebar/home.html:58
+msgid "posted"
+msgstr "přidal(a) příspěvek"
+
+#: app/static/js/Socket.js:223
+#, python-format
+msgid "%1:<br>%2 %3 in %4"
+msgstr "%1:<br>%2 %3 v %4"
+
 #: app/html/shared/sidebar/home.html:52
 #, python-format
 msgid "%(user)s posted: %(text)s"

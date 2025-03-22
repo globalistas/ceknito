@@ -68,7 +68,7 @@
     @end
   @end
   @if sort_type == 'home.all_domain_new':
-    <h4 class="notfound">@{_('We have')} @{kw['post_count']} @{_('posts from the domain')} <a href="https://@{kw['domain']}" target="_blank">@{kw['domain']}</a></h4>
+    <h4 class="notfound">@{_('We have')} @{kw['post_count']} @{_('posts from the domain')} <a class="indexdomain" href="https://@{kw['domain']}" target="_blank">@{kw['domain']}</a></h4>
   @end
   <div class="alldaposts">
     @for post in posts:

@@ -48,17 +48,19 @@
       </h4>
       @for post in func.recent_activity(sidebar=True, filter_shadowbanned=True, filter_private=True):
         <li>
-          <div class="sidelocale">
-            @{_("%(timeago)s in %(sub)s", timeago='<time-ago datetime="' + post['time'].isoformat() + 'Z"></time-ago>', sub='<a href="' + url_for('sub.view_sub', sub=post['sub']) + '">/' + config.site.sub_prefix + '/' + post['sub'] + '</a>') !!html}
-          </div>
           @if post['type'] == 'comment':
-            @{_('%(user)s commented: %(text)s', user='<a href="/u/' + post['user'] + '">' + post['user'] + '</a>', text='<a class="title ' + post['blur'] + '" href="' + url_for('sub.view_perm', sub=post['sub'], cid=post['cid'], pid=post['pid'], slug=func.slugify(post['content'])) + '#comment-' + post['cid'] + '"><br>' + e(func.word_truncate(''.join(BeautifulSoup(markdown(post['content']), features='lxml').findAll(text=True)).replace('\n', ' '), 150)) + '</a>')!!html}
+            <a href="/u/@{post['user']}">@{post['user']} </a><span class="postedspan">@{_('commented')}:</span><br>
+            <a class="title @{post['blur']}" href="@{url_for('sub.view_perm', sub=post['sub'], cid=post['cid'], pid=post['pid'], slug=func.slugify(post['content'])) + '#comment-' + post['cid']}">@{e(func.word_truncate(''.join(BeautifulSoup(markdown(post['content']), features='lxml').findAll(text=True)).replace('\n', ' '), 150))!!html}</a>
           @else:
-            @{_('%(user)s posted: %(text)s', user='<a href="/u/' + post['user'] + '">' + post['user'] + '</a>', text='<a class="title ' + post['blur'] + '" href="' + url_for('sub.view_post', sub=post['sub'], pid=post['pid']) + '"><br>' + e(func.word_truncate(post['content'], 150)) + '</a>')!!html}
+            <a href="/u/@{post['user']}">@{post['user']} </a><span class="postedspan">@{_('posted')}:</span><br>
+            <a class="title @{post['blur']}" href="@{url_for('sub.view_post', sub=post['sub'], pid=post['pid'])}">@{e(func.word_truncate(post['content'], 150))!!html}</a>
           @end
           @if post['nsfw'] or post['sub_nsfw']:
             <span class="nsfw smaller" title="@{_('Not safe for work')}">@{_('NSFW')}</span>
           @endif
+          <div class="sidelocale">
+            @{_("%(timeago)s in %(sub)s", timeago='<time-ago datetime="' + post['time'].isoformat() + 'Z"></time-ago>', sub='<a href="' + url_for('sub.view_sub', sub=post['sub']) + '">/' + config.site.sub_prefix + '/' + post['sub'] + '</a>') !!html}
+          </div>
         </li>
       @end
     </ul>
@@ -69,7 +71,7 @@
   <hr>
   <div class="sidebarlists">
     <ul class="top5">
-      <h4 class="center top5">@{_('Sub of the day')}</h4>
+      <h4 class="center top5"><a href="@{url_for('sub.view_sub', sub=subOfTheDay.name)}" style="text-decoration: none; color: inherit;">@{_('Sub of the day')}</a></h4>
       <li><a href="@{url_for('sub.view_sub', sub=subOfTheDay.name)}">/@{config.site.sub_prefix}/@{subOfTheDay.name}</a>
         <div class="sidelocale">@{subOfTheDay.title}</div></li>
     </ul>

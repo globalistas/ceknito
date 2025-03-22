@@ -414,6 +414,10 @@ body.dark .sidebar {
 
 }
 
+body.dark .postedspan, body.dark .sidelocale {
+    color: #6b6b6b;
+}
+
 body.dark .sidebarlists .sidelocale.top5 {
     color: #b9bbbe;
 }
@@ -423,7 +427,7 @@ body.dark  .sidebarlists {
 }
 
 body.dark .sidebarlists ul.top5 {
-    background: #313338;
+    background: none;
     border: 1px solid #303030;
 }
 
@@ -448,7 +452,7 @@ body.dark .flairpicker select {
 }
 
 body.dark .sidebar ul.top5 li a {
-  color: #717171;
+  color: #898989;
 }
 
 body.dark hr {
