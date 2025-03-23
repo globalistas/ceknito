@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2025-03-22 15:11+0100\n"
+"POT-Creation-Date: 2025-03-23 11:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -516,7 +516,7 @@ msgstr ""
 
 #: app/notifications.py:347
 #, python-format
-msgid "Post reply in %(prefix)s/%(sub)s"
+msgid "Post reply in /%(prefix)s/%(sub)s"
 msgstr ""
 
 #: app/notifications.py:352
@@ -526,7 +526,7 @@ msgstr ""
 
 #: app/notifications.py:358
 #, python-format
-msgid "Comment reply in %(prefix)s/%(sub)s"
+msgid "Comment reply in /%(prefix)s/%(sub)s"
 msgstr ""
 
 #: app/notifications.py:363
@@ -536,7 +536,7 @@ msgstr ""
 
 #: app/notifications.py:369
 #, python-format
-msgid "You were mentioned in %(prefix)s/%(sub)s"
+msgid "You were mentioned in /%(prefix)s/%(sub)s"
 msgstr ""
 
 #: app/notifications.py:374
@@ -1806,7 +1806,7 @@ msgstr ""
 
 #: app/html/mod/reportdetails.html:92
 #, python-format
-msgid "%(reported)s has been banned from %(prefix)s/%(sub)s"
+msgid "%(reported)s has been banned from /%(prefix)s/%(sub)s"
 msgstr ""
 
 #: app/html/mod/reportdetails.html:96
@@ -2875,6 +2875,10 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
+#: app/html/sub/create.html:25
+msgid "Brief description for the sub"
+msgstr ""
+
 #: app/html/sub/createpost.html:17
 msgid ""
 "This sub only allows upload posts, and you don't have permission to "
@@ -3282,7 +3286,7 @@ msgstr ""
 
 #: app/html/sub/post.html:31
 #, python-format
-msgid "Posted in %(prefix)s/%(sub)s by %(username)s"
+msgid "Posted in /%(prefix)s/%(sub)s by %(username)s"
 msgstr ""
 
 #: app/html/sub/post.html:65

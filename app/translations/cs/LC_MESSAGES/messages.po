@@ -2422,6 +2422,10 @@ msgstr "Použij prosím pouze alfanumerické znaky a bez mezer. Diakritika je po
 msgid "Description"
 msgstr "Popis"
 
+#: app/html/sub/create.html:25
+msgid "Brief description for the sub"
+msgstr "Stručný popis skupiny"
+
 #: app/html/sub/createpost.html:17
 msgid "This sub only allows upload posts, and you don't have permission to upload files yet."
 msgstr "V této skupině jsou povoleny pouze upload příspěvky a zatím na to nemáš level."

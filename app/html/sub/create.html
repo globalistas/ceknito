@@ -18,18 +18,20 @@
             <fieldset>
                 <div class="pure-control-group">
                     <label for="subname">@{_('Sub name')}</label>
-                    @{ csubform.subname(placeholder=csubform.subname.label.text, required=True, pattern="[a-zA-ZÁ-ž0-9_-]+", title=_('Alphanumeric characters')) !!html}
+                    @{csubform.subname(placeholder=csubform.subname.label.text, required=True, pattern="[a-zA-ZÁ-ž0-9_-]+", title=_('Alphanumeric characters'))!!html}
                 </div>
-                <div class="pure-control-group">
+                <div class="pure-control-group txcont">
                     <label for="description">@{_('Description')}</label>
-                    @{ csubform.title(placeholder=csubform.title.label.text, required=True)!!html }
+                    @{csubform.title(placeholder=csubform.title.label.text, required=True, title=_('Brief description for the sub'))!!html}
                 </div>
-                <div class="pure-control-group">
-                    @{ csubform.nsfw.label()!!html}@{ csubform.nsfw()!!html}
+                <br>
+                <div class="pure-control-group" style="font-size:15px;">
+                    @{csubform.nsfw.label()!!html}@{csubform.nsfw()!!html}
                 </div>
-                <div class="pure-control-group">
-                    @{ csubform.private.label()!!html}@{ csubform.private()!!html}
+                <div class="pure-control-group" style="font-size:15px;">
+                    @{csubform.private.label()!!html}@{csubform.private()!!html}
                 </div>
+                <br>
                 <div class="pure-controls">
                     <div class="alert div-error"></div>
                     <button type="submit" id="csub-btnsubmit" class="pure-button pure-button-primary">@{_('Create sub')}</button>
