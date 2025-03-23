@@ -28,7 +28,7 @@
     @end
 
     <meta property="og:site_name" content="@{config.site.lema}">
-    <meta property="og:description" content="@{_('Posted in %(prefix)s/%(sub)s by %(username)s', prefix=config.site.sub_prefix, sub=sub['name'], username=post['user'] if post['userstatus'] != 10 else _('[deleted]'))}">
+    <meta property="og:description" content="@{_('Posted in /%(prefix)s/%(sub)s by %(username)s', prefix=config.site.sub_prefix, sub=sub['name'], username=post['user'] if post['userstatus'] != 10 else _('[deleted]'))}">
     <meta property="og:title" content="@{post['title']}">
     @if post['thumbnail'] != '' and post['thumbnail'] != 'deferred' and post['link'] != None and post['visibility'] != 'none':
     <meta property="og:image" content="@{thumbnail_url(post['thumbnail'])}">

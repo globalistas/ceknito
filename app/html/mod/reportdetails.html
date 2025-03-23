@@ -89,7 +89,7 @@ Mod |\
             <div class="pure-u-1-2 pure-u-md-1-1">
             @if is_sub_banned:
               <button class="sbm-post pure-button pure-button-primary disabled">
-                @{_('%(reported)s has been banned from %(prefix)s/%(sub)s', reported=report['reported'], prefix=config.site.sub_prefix, sub=report['sub'])}
+                @{_('%(reported)s has been banned from /%(prefix)s/%(sub)s', reported=report['reported'], prefix=config.site.sub_prefix, sub=report['sub'])}
               </button>
             @else:
                 <button class="sbm-post pure-button pure-button-primary banuserbutton">

@@ -373,8 +373,8 @@ msgstr "Nová notifikace z čekni.to"
 
 #: app/notifications.py:277
 #, python-format
-msgid "Post reply in %(prefix)s/%(sub)s"
-msgstr "Reakce na příspěvek v %(prefix)s/%(sub)s"
+msgid "Post reply in /%(prefix)s/%(sub)s"
+msgstr "Reakce na příspěvek v /%(prefix)s/%(sub)s"
 
 #: app/notifications.py:282
 #, python-format
@@ -383,8 +383,8 @@ msgstr "%(name)s reagoval(a) na tvůj příspěvek %(title)s"
 
 #: app/notifications.py:288
 #, python-format
-msgid "Comment reply in %(prefix)s/%(sub)s"
-msgstr "Odpověď na komentář v %(prefix)s/%(sub)s"
+msgid "Comment reply in /%(prefix)s/%(sub)s"
+msgstr "Odpověď na komentář v /%(prefix)s/%(sub)s"
 
 #: app/notifications.py:293
 #, python-format
@@ -393,8 +393,8 @@ msgstr "%(name)s reagoval(a) na tvůj komentář v příspěvku %(title)s"
 
 #: app/notifications.py:299
 #, python-format
-msgid "You were mentioned in %(prefix)s/%(sub)s"
-msgstr "Zmínili tě v %(prefix)s/%(sub)s"
+msgid "You were mentioned in /%(prefix)s/%(sub)s"
+msgstr "Zmínili tě v /%(prefix)s/%(sub)s"
 
 #: app/notifications.py:304
 #, python-format
@@ -1418,13 +1418,13 @@ msgstr "Nahlášený uživatel"
 
 #: app/html/mod/reportdetails.html:92
 #, python-format
-msgid "%(reported)s has been banned from %(prefix)s/%(sub)s"
-msgstr "%(reported)s byl zabanován ve skupině %(prefix)s/%(sub)s"
+msgid "%(reported)s has been banned from /%(prefix)s/%(sub)s"
+msgstr "%(reported)s byl zabanován ve skupině /%(prefix)s/%(sub)s"
 
 #: app/html/mod/reportdetails.html:96
 #, python-format
-msgid "Ban %(reported)s from %(prefix)s/%(sub)s"
-msgstr "Zabanovat uživatele %(reported)s ve skupině %(prefix)s/%(sub)s"
+msgid "Ban %(reported)s from /%(prefix)s/%(sub)s"
+msgstr "Zabanovat uživatele %(reported)s ve skupině /%(prefix)s/%(sub)s"
 
 #: app/html/mod/reportdetails.html:103
 #, python-format
@@ -2850,8 +2850,8 @@ msgstr "[Vymazaný příspěvek]"
 
 #: app/html/sub/post.html:29
 #, python-format
-msgid "Posted in %(prefix)s/%(sub)s by %(username)s"
-msgstr "Přidal(a) %(username)s v %(prefix)s/%(sub)s"
+msgid "Posted in /%(prefix)s/%(sub)s by %(username)s"
+msgstr "Přidal(a) %(username)s v /%(prefix)s/%(sub)s"
 
 #: app/html/sub/post.html:53
 #, python-format

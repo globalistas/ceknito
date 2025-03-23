@@ -231,7 +231,7 @@ class Notifications(object):
         content=None,
     ):
         """
-        Sends a notification to an user
+        Sends a notification to a user
         @param notification_type: Type of notification. May be one of:
          - POST_REPLY
          - COMMENT_REPLY
@@ -345,7 +345,7 @@ class Notifications(object):
             message_title = _("New notification.")
             if notification_type == "POST_REPLY":
                 message_title = _(
-                    "Post reply in %(prefix)s/%(sub)s",
+                    "Post reply in /%(prefix)s/%(sub)s",
                     prefix=config.site.sub_prefix,
                     sub=sub.name,
                 )
@@ -356,7 +356,7 @@ class Notifications(object):
                 )
             elif notification_type == "COMMENT_REPLY":
                 message_title = _(
-                    "Comment reply in %(prefix)s/%(sub)s",
+                    "Comment reply in /%(prefix)s/%(sub)s",
                     prefix=config.site.sub_prefix,
                     sub=sub.name,
                 )
@@ -367,7 +367,7 @@ class Notifications(object):
                 )
             elif notification_type in ("POST_MENTION", "COMMENT_MENTION"):
                 message_title = _(
-                    "You were mentioned in %(prefix)s/%(sub)s",
+                    "You were mentioned in /%(prefix)s/%(sub)s",
                     prefix=config.site.sub_prefix,
                     sub=sub.name,
                 )
