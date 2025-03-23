@@ -283,8 +283,8 @@ function videoExpando(link, expando) {
   vid.src = link;
   vid.preload = 'auto';
   vid.controls = true;
-  vid.style.width = "640px";
-  vid.style.height = "360px";
+  vid.style.width = "100%";
+  vid.style.height = "auto";
 
   // Create source element
   const source = document.createElement("source");
