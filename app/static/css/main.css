@@ -1119,7 +1119,6 @@ img.block-blur, img.nsfw-blur {
 
 .comment-form {
 	margin: 1em 1em 0;
-	max-width: 40em;
 }
 
 .comment-form button {
@@ -1690,6 +1689,10 @@ li.new-item {
 	resize: both;
 	width: 100%;
 	overflow: auto;
+}
+
+.comment-form textarea {
+	resize: vertical;
 }
 
 .expando-master .fade-out-content {

@@ -459,6 +459,10 @@ body.dark hr {
   border-bottom: 2px dotted #545454;
 }
 
+body.dark .sidescore {
+    color: #b9bbb1;
+}
+
 /* /Sidebar */
 
 /* MESSAGES STYLES */

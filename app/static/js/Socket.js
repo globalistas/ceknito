@@ -227,7 +227,7 @@ socket.on('comment', function (data) {
     elem.setAttribute('data-cid', data.comment_url);
     elem.innerHTML = _('%1:<br>%2 %3 in %4',
       '<a href="/u/' + data.user + '">' + data.user + '</a> <span class="postedspan">' + _('commented') + '</span>',
-      '<a class="' + nsfwClass + '" href="' + data.post_url + '">' + content + '</a>' + nsfwElem,
+      '<a class="' + nsfwClass + '" href="' + data.comment_url + '">' + content + '</a>' + nsfwElem,
       '<div class="sidelocale"><time-ago datetime="' + new Date().toISOString() + '"></time-ago>',
       '<a href="' + data.sub_url + '">' + decodeURIComponent(data.sub_url) + '</a></div>');
     elem.classList.add('new-item');
