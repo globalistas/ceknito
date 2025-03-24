@@ -4957,7 +4957,7 @@ msgstr "Hledat skupinu..."
 
 #: app/templates/subs.html:27
 msgid "There are no subs here, yet."
-msgstr "Nenašla se žáadná skupina."
+msgstr "Nenašla se žádná skupina."
 
 #: app/templates/subs.html:45 app/templates/subs.html:47
 #: app/templates/subs.html:49

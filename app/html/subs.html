@@ -1,5 +1,5 @@
 @extends("shared/newlayout.html")
-@require(page, subs, nav, sort, cp_uri, term)
+@require(page, subs, nav, sort, cp_uri, term, kw)
 
 @def title():
   @{_('Subs')} | @{config.site.lema}
@@ -13,6 +13,13 @@
     </form>
   </div>
   <hr>
+  @if (config.site.sub_creation_admin_only == False and current_user.is_authenticated) or current_user.is_admin():
+  <a href="@{url_for('subs.create_sub')}" class="sbm-post pure-button">@{_('Create a sub')}</a>
+  @end
+  <a href="@{url_for('subs.random_sub')}" class="sbm-post pure-button">@{_('Go to random sub')}</a>
+  @if nav=='home.subs_search':
+  <a href="@{url_for('home.view_subs')}" class="sbm-post pure-button">@{_('View all subs')}</a>
+  @end
 @end
 
 @def main():
@@ -106,20 +113,20 @@
   </div>
     @if nav=='home.subs_search':
       <div class="col-12">
-        @if page > 1:
-        <a href="@{url_for(nav, term=term, page=(page-1))}" class="pure-button"><==</a>
+        @if len(subs) == 50 and kw['subs_count'] > 50:
+        <a href="@{url_for(nav,term=term, page=(page+1))}" class="pure-button alldaright">==></a>
         @end
-        @if len(subs) == 50:
-        <a href="@{url_for(nav,term=term, page=(page+1))}" class="pure-button">==></a>
+        @if page > 1:
+        <a href="@{url_for(nav, term=term, page=(page-1))}" class="pure-button alldaleftposts"><==</a>
         @end
       </div>
     @else:
       <div class="col-12">
-        @if page > 1:
-        <a href="@{url_for(nav, page=(page-1))}" class="pure-button"><==</a>
+        @if len(subs) == 50 and kw['subs_count'] > 50:
+        <a href="@{url_for(nav, page=(page+1))}" class="pure-button alldaright">==></a>
         @end
-        @if len(subs) == 50:
-        <a href="@{url_for(nav, page=(page+1))}" class="pure-button">==></a>
+        @if page > 1:
+        <a href="@{url_for(nav, page=(page-1))}" class="pure-button alldaleftposts"><==</a>
         @end
       </div>
   @end

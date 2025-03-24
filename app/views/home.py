@@ -490,6 +490,8 @@ def view_subs(page, sort):
     else:
         return redirect(url_for("home.view_subs", page=page, sort="name_asc"))
 
+    subs_count = c.count()
+
     c = c.paginate(page, 50).dicts()
 
     # Fetch icon metadata for each sub
@@ -508,6 +510,7 @@ def view_subs(page, sort):
             "sort": sort,
             "cp_uri": cp_uri,
             "term": "",
+            "kw": {"subs_count": subs_count},
         }
     )
 
@@ -548,6 +551,8 @@ def subs_search(page, term, sort):
         c = c.order_by(Sub.subscribers.asc())
     else:
         return redirect(url_for("home.view_subs", page=page, sort="name_asc"))
+
+    subs_count = c.count()
     c = c.paginate(page, 50).dicts()
 
     for sub in c:
@@ -566,5 +571,6 @@ def subs_search(page, term, sort):
             "sort": sort,
             "cp_uri": cp_uri,
             "term": term,
+            "kw": {"subs_count": subs_count},
         }
     )
