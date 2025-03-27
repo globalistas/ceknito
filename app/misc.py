@@ -1012,7 +1012,7 @@ def getSubOfTheDay():
                 Sub.select(Sub.sid, Sub.name, Sub.title)
                 .where(
                     (Sub.status == 0)
-                    & (Sub.name != config.site.ann_sub)
+                    & (Sub.sid != config.site.ann_sub)
                     & (Sub.sid != config.site.changelog_sub)
                     & (Sub.posts > 0)
                     & (Sub.private == 0)
@@ -1441,6 +1441,28 @@ def getAnnouncement():
     ann = getAnnouncementPid()
     if not ann:
         return False
+
+    current_language = session.get("language") or get_locale()
+
+    # If language is Czech, try to find an alternative post
+    if current_language == "cs":
+        try:
+            alternative_post = (
+                postListQueryBase(nofilter=True)
+                .where(
+                    (SubPost.pid != ann)
+                    & (Sub.sid == config.site.ann_sub)
+                    & (SubPost.deleted == 0)
+                )
+                .dicts()
+                .get()
+            )
+
+            return add_blur(alternative_post)
+        except Exception:
+            # Fall back to original announcement if no alternative found
+            pass
+
     return add_blur(
         postListQueryBase(nofilter=True).where(SubPost.pid == ann).dicts().get()
     )

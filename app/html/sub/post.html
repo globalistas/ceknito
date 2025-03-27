@@ -291,10 +291,8 @@
               <li><a class="stick-post">@{_('make sticky')}</a></li>
             @end
 
-            @if post['sub'] == config.site.ann_sub and current_user.is_admin():
-              @if not func.getAnnouncement() or func.getAnnouncement()['pid'] != post['pid']:
-                <li><a class="announce-post">@{_('make announcement')}</a></li>
-              @end
+            @if post['sid'] == config.site.ann_sub and current_user.is_admin() and (not func.getAnnouncement() or func.getAnnouncement()['pid'] != post['pid']):
+              <li><a class="announce-post">@{_('make announcement')}</a></li>
             @end
             @if str(post['pid']) in subInfo['sticky']:
               @if sticky_sort == 'new' and post['best_sort_enabled']:

@@ -92,7 +92,7 @@
               </td>
               <td>@{sub['posts']}</td>
                 <td>
-                @if not sub['name'] == config.site.ann_sub:
+                @if not sub['sid'] == config.site.ann_sub:
                   <div role="group" class="pure-button-group" data-sid="@{sub['sid']}" style="display:inline-block;">
                     @if current_user.has_subscribed(sub['name']):
                       <button data-ac="unsubscribe" class="sub pure-button button-xsmall" style="display:inline-block; width: 8em;"><span class="sbm-icon" data-icon="check"></span>@{_('Subscribed')}</button>

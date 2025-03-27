@@ -52,7 +52,7 @@
 <div class="subs">@{_('%(subs)i subscribers', subs=sub['subscribers'])}</div>
 
 @if current_user.is_authenticated:
-  @if not sub['name'] == config.site.ann_sub:
+  @if not sub['sid'] == config.site.ann_sub:
 	<div class="subbuttonscentered">
 	  <div role="group" class="pure-button-group" data-sid="@{sub['sid']}">
     @if current_user.has_subscribed(sub['name']):

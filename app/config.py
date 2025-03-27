@@ -569,7 +569,7 @@ configurable_defaults = {
             },
             "ann_sub": {
                 "type": "string",
-                "doc": _l("Sets the sub used for announcement posts. Case sensitive."),
+                "doc": _l("Sets the sub sid used for announcement posts."),
                 "value": "announcements",
             },
             "contactus_link": {
