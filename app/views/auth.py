@@ -226,13 +226,18 @@ def register():
     )
 
     # Custom sendmail info for regs
+    user_url = url_for("user.view", user=user.name, _external=True)
     regdate = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     useragent = request.headers.get("User-Agent")
     ip = request.environ.get("HTTP_X_REAL_IP", request.remote_addr)
-    text_content = (
-        user.name + "\n" + user.email + "\n" + ip + "\n" + regdate + "\n" + useragent
-    )
-    send_email(config.mail.default_to, "New registration", text_content, "")
+    html_content = f"""
+    <p><strong>Username:</strong> <a href="{user_url}">{user.name}</a></p>
+    <p><strong>Email:</strong> {user.email}</p>
+    <p><strong>IP:</strong> {ip}</p>
+    <p><strong>Registration Date:</strong> {regdate}</p>
+    <p><strong>User Agent:</strong> {useragent}</p>
+    """
+    send_email(config.mail.default_to, "New registration", "", html_content)
 
     if config.site.auto_adopter:
         triggers["user registers"](user.uid)
