@@ -1897,6 +1897,10 @@ msgstr "%(user)s pridal(a) komentár: %(text)s"
 msgid "commented: %(text)s"
 msgstr "komentár: %(text)s"
 
+#: app/html/site/activity.html:32
+msgid "posted:"
+msgstr "príspevok:"
+
 #: app/html/shared/sidebar/home.html:50
 #, python-format
 msgid "commented:"

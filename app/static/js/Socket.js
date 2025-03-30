@@ -269,7 +269,7 @@ socket.on('thread', function (data) {
     const elem = document.createElement('li');
     elem.setAttribute('data-pid', data.pid);
     elem.innerHTML = _('%1:<br>%2 %3 in %4',
-      '<a href="/u/' + data.user + '">' + data.user + '</a> <span class="postedspan">' + _('commented') + '</span>',
+      '<a href="/u/' + data.user + '">' + data.user + '</a> <span class="postedspan">' + _('posted') + '</span>',
       '<a class="' + nsfwClass + '" href="' + data.post_url + '">' + title + '</a>' + nsfwElem,
       '<div class="sidelocale"><time-ago datetime="' + new Date().toISOString() + '"></time-ago>',
       '<a href="' + data.sub_url + '">' + decodeURIComponent(data.sub_url) + '</a></div>');
