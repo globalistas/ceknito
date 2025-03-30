@@ -564,4 +564,7 @@
   @if not current_user.block_styles():
     <link rel="stylesheet" href="@{url_for('sub.get_css', sub=post['sub'])}">
   @end
+  @if "labrat" in current_user.prefs:
+    <label id="pagefoot-labrat" data-value="true" class="hide"></label>
+  @end
 @end

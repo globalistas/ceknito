@@ -565,14 +565,14 @@ u.ready(function () {
     window.oindex = "true";
   }
 
-  if (document.getElementById("pagefoot-labrat")) {
-    window.blocked = document.getElementById("pagefoot-blocked");
-    if (window.blocked) {
-      window.blocked = window.blocked.getAttribute('data-value');
-      console.log("Blocked=", window.blocked)
-      window.nposts = '/all/new';
-    }
-  }
+//  if (document.getElementById("pagefoot-labrat")) {
+//    window.blocked = document.getElementById("pagefoot-blocked");
+//    if (window.blocked) {
+//      window.blocked = window.blocked.getAttribute('data-value');
+//      console.log("Blocked=", window.blocked)
+//      window.nposts = '/all/new';
+//    }
+//  }
 
   u.addEventForChild(document, 'click', '#btn-sending', function (e, target) {
     window.sending = true;

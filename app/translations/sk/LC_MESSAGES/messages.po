@@ -846,8 +846,8 @@ msgid "Blur until clicked"
 msgstr "Zobraziť po kliknutí"
 
 #: app/forms/user.py:178
-msgid "Enable experimental features"
-msgstr "Zapnúť experimentálne funkcie"
+msgid "Disable auto expandos"
+msgstr "Vypnúť samo-rozbaľovanie"
 
 #: app/forms/user.py:179
 msgid "Disable infinite scroll"

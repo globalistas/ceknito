@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2025-03-23 11:06+0100\n"
+"POT-Creation-Date: 2025-03-30 12:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -350,7 +350,7 @@ msgid ""
 msgstr ""
 
 #: app/config.py:572
-msgid "Sets the sub used for announcement posts. Case sensitive."
+msgid "Sets the sub sid used for announcement posts."
 msgstr ""
 
 #: app/config.py:577
@@ -366,12 +366,12 @@ msgstr ""
 msgid "[a comment](%(url)s)"
 msgstr ""
 
-#: app/misc.py:1835
+#: app/misc.py:1857
 #, python-format
 msgid "Error in the '%(field)s' field - %(error)s"
 msgstr ""
 
-#: app/misc.py:2023
+#: app/misc.py:2045
 #, python-format
 msgid "Re: %(subject)s"
 msgstr ""
@@ -380,68 +380,68 @@ msgstr ""
 #: app/html/site/log.html:28 app/html/sub/log.html:35 app/html/sub/post.html:56
 #: app/html/sub/post.html:58 app/html/sub/post.html:144
 #: app/html/sub/post.html:163 app/html/sub/post.html:220
-#: app/html/sub/post.html:229 app/html/sub/post.html:361
-#: app/html/sub/post.html:385 app/html/sub/postcomments.html:43
+#: app/html/sub/post.html:229 app/html/sub/post.html:359
+#: app/html/sub/post.html:383 app/html/sub/postcomments.html:43
 #: app/html/user/comments.html:50 app/html/user/savedcomments.html:47
-#: app/misc.py:2375 app/misc.py:3381 app/misc.py:3387 app/misc.py:3392
+#: app/misc.py:2397 app/misc.py:3403 app/misc.py:3409 app/misc.py:3414
 msgid "[deleted]"
 msgstr ""
 
-#: app/misc.py:2531
+#: app/misc.py:2553
 msgid "URLs not allowed, uploaded files only"
 msgstr ""
 
-#: app/misc.py:2542
+#: app/misc.py:2564
 msgid "Invalid characters in string."
 msgstr ""
 
-#: app/misc.py:2560
+#: app/misc.py:2582
 msgid "@import token not allowed"
 msgstr ""
 
-#: app/misc.py:2576
+#: app/misc.py:2598
 msgid "Invalid CSS"
 msgstr ""
 
-#: app/misc.py:2644 app/misc.py:2706
+#: app/misc.py:2666 app/misc.py:2728
 #, python-format
 msgid "User %(user_name)s sent you a <a href=\"%(url)s\">private message</a>"
 msgstr ""
 
-#: app/misc.py:2650 app/misc.py:2712 app/misc.py:2793 app/notifications.py:290
+#: app/misc.py:2672 app/misc.py:2734 app/misc.py:2815 app/notifications.py:290
 msgid "New notification"
 msgstr ""
 
-#: app/misc.py:2787
+#: app/misc.py:2809
 #, python-format
 msgid "User %(user_name)s <a href=\"%(url)s\">replied</a> to your private message"
 msgstr ""
 
-#: app/html/sub/postcomments.html:56 app/misc.py:3362
+#: app/html/sub/postcomments.html:56 app/misc.py:3384
 msgid "[Blocked]"
 msgstr ""
 
-#: app/misc.py:3375
+#: app/misc.py:3397
 msgid "[deleted by user]"
 msgstr ""
 
-#: app/misc.py:3459
+#: app/misc.py:3481
 msgid "Already processing previous request."
 msgstr ""
 
-#: app/misc.py:3481
+#: app/misc.py:3503
 msgid "Unknown error. User disappeared"
 msgstr ""
 
-#: app/misc.py:3488
+#: app/misc.py:3510
 msgid "Score balance is negative"
 msgstr ""
 
-#: app/misc.py:3490
+#: app/misc.py:3512
 msgid "Invalid vote value"
 msgstr ""
 
-#: app/misc.py:3506 app/views/do.py:331 app/views/do.py:485 app/views/do.py:867
+#: app/misc.py:3528 app/views/do.py:331 app/views/do.py:485 app/views/do.py:867
 #: app/views/do.py:902 app/views/do.py:1294 app/views/do.py:1400
 #: app/views/do.py:2782 app/views/do.py:2888 app/views/do.py:3063
 #: app/views/do.py:3078 app/views/do.py:3182 app/views/do.py:3267
@@ -451,44 +451,44 @@ msgstr ""
 msgid "Post does not exist"
 msgstr ""
 
-#: app/misc.py:3509
+#: app/misc.py:3531
 msgid "You can't vote on your own posts"
 msgstr ""
 
-#: app/misc.py:3511
+#: app/misc.py:3533
 msgid "You can't vote on deleted posts"
 msgstr ""
 
-#: app/misc.py:3544 app/views/do.py:3094 app/views/do.py:3109
+#: app/misc.py:3566 app/views/do.py:3094 app/views/do.py:3109
 #: app/views/do.py:3232 app/views/do.py:3551 app/views/do.py:3599
 #: app/views/do.py:3738 app/views/do.py:4043 app/views/do.py:4068
 #: app/views/do.py:5090 app/views/do.py:5203
 msgid "Comment does not exist"
 msgstr ""
 
-#: app/misc.py:3547
+#: app/misc.py:3569
 msgid "You can't vote on your own comments"
 msgstr ""
 
-#: app/misc.py:3549
+#: app/misc.py:3571
 msgid "You can't vote on deleted comments"
 msgstr ""
 
-#: app/misc.py:3561
+#: app/misc.py:3583
 msgid "Invalid target"
 msgstr ""
 
-#: app/misc.py:3564 app/views/do.py:1348 app/views/do.py:2789
+#: app/misc.py:3586 app/views/do.py:1348 app/views/do.py:2789
 #: app/views/do.py:3563
 msgid "You are banned on this sub."
 msgstr ""
 
-#: app/misc.py:3569 app/views/do.py:1351 app/views/do.py:1405
+#: app/misc.py:3591 app/views/do.py:1351 app/views/do.py:1405
 #: app/views/do.py:3574
 msgid "Post is archived"
 msgstr ""
 
-#: app/misc.py:3923
+#: app/misc.py:3945
 msgid "Invalid status request"
 msgstr ""
 
@@ -561,8 +561,8 @@ msgstr ""
 #: app/html/admin/reports.html:24 app/html/mod/closed.html:25
 #: app/html/mod/reportdetails.html:62 app/html/mod/reports.html:24
 #: app/html/mod/sub_reports.html:29 app/html/mod/sub_reports_closed.html:31
-#: app/html/site/activity.html:17 app/html/subs.html:31 app/html/subs.html:33
-#: app/html/subs.html:35
+#: app/html/site/activity.html:17 app/html/subs.html:38 app/html/subs.html:40
+#: app/html/subs.html:42
 msgid "Sub"
 msgstr ""
 
@@ -1030,7 +1030,7 @@ msgid "Blur until clicked"
 msgstr ""
 
 #: app/forms/user.py:183
-msgid "Enable experimental features"
+msgid "Disable auto expandos"
 msgstr ""
 
 #: app/forms/user.py:184
@@ -1174,36 +1174,51 @@ msgstr ""
 msgid "Search sub name..."
 msgstr ""
 
+#: app/html/shared/sidebar/home.html:12 app/html/shared/sidebar/sub.html:175
+#: app/html/subs.html:17
+msgid "Create a sub"
+msgstr ""
+
+#: app/html/shared/sidebar/home.html:14 app/html/shared/sidebar/sub.html:177
+#: app/html/subs.html:19
+msgid "Go to random sub"
+msgstr ""
+
+#: app/html/shared/sidebar/home.html:15 app/html/shared/sidebar/sub.html:178
 #: app/html/subs.html:21
+msgid "View all subs"
+msgstr ""
+
+#: app/html/subs.html:28
 msgid "There are no subs here, yet."
 msgstr ""
 
-#: app/html/subs.html:40 app/html/subs.html:42 app/html/subs.html:44
+#: app/html/subs.html:47 app/html/subs.html:49 app/html/subs.html:51
 msgid "Number of subscribers"
 msgstr ""
 
-#: app/html/subs.html:49 app/html/subs.html:51 app/html/subs.html:53
+#: app/html/subs.html:56 app/html/subs.html:58 app/html/subs.html:60
 msgid "Number of posts"
 msgstr ""
 
 #: app/html/shared/post.html:43 app/html/shared/sidebar/sub.html:38
-#: app/html/sub/css.html:23 app/html/subs.html:70
+#: app/html/sub/css.html:23 app/html/subs.html:77
 msgid "Sub Icon"
 msgstr ""
 
-#: app/html/shared/sidebar/sub.html:59 app/html/subs.html:91
+#: app/html/shared/sidebar/sub.html:59 app/html/subs.html:98
 msgid "Subscribed"
 msgstr ""
 
-#: app/html/shared/sidebar/sub.html:64 app/html/subs.html:93
+#: app/html/shared/sidebar/sub.html:64 app/html/subs.html:100
 msgid "Blocked"
 msgstr ""
 
-#: app/html/shared/sidebar/sub.html:61 app/html/subs.html:95
+#: app/html/shared/sidebar/sub.html:61 app/html/subs.html:102
 msgid "Subscribe"
 msgstr ""
 
-#: app/html/welcome.html:10 app/views/auth.py:247
+#: app/html/welcome.html:10 app/views/auth.py:252
 msgid "Welcome to čekni.to"
 msgstr ""
 
@@ -1391,19 +1406,19 @@ msgid ""
 msgstr ""
 
 #: app/html/admin/createwiki.html:36 app/html/sub/createpost.html:57
-#: app/html/sub/createpost.html:91 app/html/sub/post.html:436
+#: app/html/sub/createpost.html:91 app/html/sub/post.html:434
 #: app/static/js/Post.js:827
 msgid "formatting help"
 msgstr ""
 
 #: app/html/admin/createwiki.html:37 app/html/sub/createpost.html:58
-#: app/html/sub/createpost.html:92 app/html/sub/post.html:437
+#: app/html/sub/createpost.html:92 app/html/sub/post.html:435
 #: app/static/js/Post.js:828
 msgid "hide help"
 msgstr ""
 
 #: app/html/admin/createwiki.html:40 app/html/sub/createpost.html:61
-#: app/html/sub/createpost.html:95 app/html/sub/post.html:440
+#: app/html/sub/createpost.html:95 app/html/sub/post.html:438
 #: app/static/js/Post.js:831
 msgid ""
 "This site uses a slightly-customized version of <a "
@@ -1414,37 +1429,37 @@ msgid ""
 msgstr ""
 
 #: app/html/admin/createwiki.html:44 app/html/sub/createpost.html:65
-#: app/html/sub/createpost.html:99 app/html/sub/post.html:444
+#: app/html/sub/createpost.html:99 app/html/sub/post.html:442
 #: app/static/js/Post.js:835
 msgid "you type:"
 msgstr ""
 
 #: app/html/admin/createwiki.html:45 app/html/sub/createpost.html:66
-#: app/html/sub/createpost.html:100 app/html/sub/post.html:445
+#: app/html/sub/createpost.html:100 app/html/sub/post.html:443
 #: app/static/js/Post.js:836
 msgid "you see:"
 msgstr ""
 
 #: app/html/admin/createwiki.html:47 app/html/sub/createpost.html:68
-#: app/html/sub/createpost.html:102 app/html/sub/post.html:447
+#: app/html/sub/createpost.html:102 app/html/sub/post.html:445
 #: app/static/js/Post.js:838
 msgid "italics"
 msgstr ""
 
 #: app/html/admin/createwiki.html:48 app/html/sub/createpost.html:69
-#: app/html/sub/createpost.html:103 app/html/sub/post.html:448
+#: app/html/sub/createpost.html:103 app/html/sub/post.html:446
 #: app/static/js/Post.js:839
 msgid "bold"
 msgstr ""
 
 #: app/html/admin/createwiki.html:51 app/html/sub/createpost.html:72
-#: app/html/sub/createpost.html:106 app/html/sub/post.html:451
+#: app/html/sub/createpost.html:106 app/html/sub/post.html:449
 #: app/static/js/Post.js:842 app/static/js/Post.js:843
 msgid "item"
 msgstr ""
 
 #: app/html/admin/createwiki.html:52 app/html/sub/createpost.html:73
-#: app/html/sub/createpost.html:107 app/html/sub/post.html:452
+#: app/html/sub/createpost.html:107 app/html/sub/post.html:450
 #: app/static/js/Post.js:844
 msgid "quoted text"
 msgstr ""
@@ -1452,13 +1467,13 @@ msgstr ""
 #: app/html/admin/createwiki.html:53 app/html/admin/createwiki.html:54
 #: app/html/sub/createpost.html:74 app/html/sub/createpost.html:75
 #: app/html/sub/createpost.html:108 app/html/sub/createpost.html:109
-#: app/html/sub/post.html:453 app/html/sub/post.html:454
+#: app/html/sub/post.html:451 app/html/sub/post.html:452
 #: app/static/js/Post.js:845 app/static/js/Post.js:847
 msgid "Lines starting with four spaces<br>are treated like code:"
 msgstr ""
 
 #: app/html/admin/createwiki.html:55 app/html/sub/createpost.html:76
-#: app/html/sub/createpost.html:110 app/html/sub/post.html:455
+#: app/html/sub/createpost.html:110 app/html/sub/post.html:453
 #: app/static/js/Post.js:848
 msgid "strikethrough"
 msgstr ""
@@ -1679,7 +1694,7 @@ msgstr ""
 
 #: app/html/errors/layout.html:63 app/html/shared/layout.html:76
 #: app/html/shared/newlayout.html:76 app/html/shared/sub.html:76
-#: app/html/sub/post.html:495 app/html/sub/post.html:533
+#: app/html/sub/post.html:493 app/html/sub/post.html:531
 msgid "new"
 msgstr ""
 
@@ -1985,7 +2000,7 @@ msgid "Closed all reports related to: "
 msgstr ""
 
 #: app/html/mod/reportdetails.html:284 app/html/shared/post.html:132
-#: app/html/sub/post.html:315 app/html/sub/postcomments.html:150
+#: app/html/sub/post.html:313 app/html/sub/postcomments.html:150
 msgid "report"
 msgstr ""
 
@@ -2216,7 +2231,7 @@ msgstr ""
 msgid "comment"
 msgstr ""
 
-#: app/html/shared/post.html:135 app/html/sub/post.html:318
+#: app/html/shared/post.html:135 app/html/sub/post.html:316
 #, python-format
 msgid "open reports (%(num)s)"
 msgstr ""
@@ -2283,18 +2298,6 @@ msgstr ""
 #: app/html/shared/sidebar/home.html:8 app/html/shared/sidebar/sub.html:18
 #: app/html/shared/sidebar/sub.html:24 app/html/sub/createpost.html:10
 msgid "Submit a post"
-msgstr ""
-
-#: app/html/shared/sidebar/home.html:12 app/html/shared/sidebar/sub.html:175
-msgid "Create a sub"
-msgstr ""
-
-#: app/html/shared/sidebar/home.html:14 app/html/shared/sidebar/sub.html:177
-msgid "Go to random sub"
-msgstr ""
-
-#: app/html/shared/sidebar/home.html:15 app/html/shared/sidebar/sub.html:178
-msgid "View all subs"
 msgstr ""
 
 #: app/html/shared/sidebar/home.html:21
@@ -2859,7 +2862,7 @@ msgid "The sub is temporally quarantined and will be back soon."
 msgstr ""
 
 #: app/html/sub/create.html:4 app/html/sub/create.html:12
-#: app/html/sub/create.html:35
+#: app/html/sub/create.html:37
 msgid "Create sub"
 msgstr ""
 
@@ -2931,7 +2934,7 @@ msgid "Submit post"
 msgstr ""
 
 #: app/html/sub/createpost.html:196 app/html/sub/createpost.html:201
-#: app/html/sub/post.html:464 app/html/user/messages/messages.html:76
+#: app/html/sub/post.html:462 app/html/user/messages/messages.html:76
 #: app/html/user/messages/saved.html:68 app/html/user/profile.html:206
 #: app/static/js/Post.js:377 app/static/js/Post.js:432
 #: app/static/js/Post.js:517 app/static/js/Post.js:854
@@ -3388,44 +3391,44 @@ msgstr ""
 msgid "make sticky"
 msgstr ""
 
-#: app/html/sub/post.html:296
+#: app/html/sub/post.html:295
 msgid "make announcement"
 msgstr ""
 
-#: app/html/sub/post.html:301
+#: app/html/sub/post.html:299
 msgid "sort by best"
 msgstr ""
 
-#: app/html/sub/post.html:303
+#: app/html/sub/post.html:301
 msgid "sort by top"
 msgstr ""
 
-#: app/html/sub/post.html:305
+#: app/html/sub/post.html:303
 msgid "sort by new"
 msgstr ""
 
-#: app/html/sub/post.html:309
+#: app/html/sub/post.html:307
 msgid "unlock comments"
 msgstr ""
 
-#: app/html/sub/post.html:311
+#: app/html/sub/post.html:309
 msgid "lock comments"
 msgstr ""
 
-#: app/html/sub/post.html:322 app/html/sub/postcomments.html:153
+#: app/html/sub/post.html:320 app/html/sub/postcomments.html:153
 msgid "un-delete"
 msgstr ""
 
-#: app/html/sub/post.html:325 app/html/sub/postcomments.html:164
+#: app/html/sub/post.html:323 app/html/sub/postcomments.html:164
 msgid "undistinguish"
 msgstr ""
 
-#: app/html/sub/post.html:325 app/html/sub/postcomments.html:164
+#: app/html/sub/post.html:323 app/html/sub/postcomments.html:164
 #: app/static/js/Post.js:56
 msgid "distinguish"
 msgstr ""
 
-#: app/html/sub/post.html:337
+#: app/html/sub/post.html:335
 #, python-format
 msgid ""
 "Current flair: <span class=\"postflair\" style=\"color:%(text_color)s; "
@@ -3433,64 +3436,64 @@ msgid ""
 "color:%(border_color)s;\">%(flair)s</span>"
 msgstr ""
 
-#: app/html/sub/post.html:339
+#: app/html/sub/post.html:337
 msgid "Remove"
 msgstr ""
 
-#: app/html/sub/post.html:343
+#: app/html/sub/post.html:341
 msgid "Select a new flair"
 msgstr ""
 
-#: app/html/sub/post.html:418 app/html/sub/postcomments.html:120
+#: app/html/sub/post.html:416 app/html/sub/postcomments.html:120
 msgid "Viewing edit history:"
 msgstr ""
 
-#: app/html/sub/post.html:463
+#: app/html/sub/post.html:461
 msgid "Submit comment"
 msgstr ""
 
-#: app/html/sub/post.html:466 app/static/js/Post.js:379
+#: app/html/sub/post.html:464 app/static/js/Post.js:379
 #: app/static/js/Post.js:434 app/static/js/Post.js:856
 #: app/static/js/Post.js:879
 msgid "Comment preview"
 msgstr ""
 
-#: app/html/sub/post.html:473
+#: app/html/sub/post.html:471
 msgid ""
 "This post is closed to new comments.  It has been locked by the "
 "moderators."
 msgstr ""
 
-#: app/html/sub/post.html:477
+#: app/html/sub/post.html:475
 msgid "This post is closed to new comments.  It has been automatically archived."
 msgstr ""
 
-#: app/html/sub/post.html:482
+#: app/html/sub/post.html:480
 msgid "No comments, yet..."
 msgstr ""
 
-#: app/html/sub/post.html:485
+#: app/html/sub/post.html:483
 msgid "Show comments"
 msgstr ""
 
-#: app/html/sub/post.html:494 app/html/sub/post.html:523
+#: app/html/sub/post.html:492 app/html/sub/post.html:521
 msgid "top"
 msgstr ""
 
-#: app/html/sub/post.html:496 app/html/sub/post.html:543
+#: app/html/sub/post.html:494 app/html/sub/post.html:541
 msgid "old"
 msgstr ""
 
-#: app/html/sub/post.html:499 app/html/sub/post.html:512
+#: app/html/sub/post.html:497 app/html/sub/post.html:510
 msgid "best"
 msgstr ""
 
-#: app/html/sub/post.html:502
+#: app/html/sub/post.html:500
 #, python-format
 msgid "sorted by: <b><u>%(currsort)s</u></b>"
 msgstr ""
 
-#: app/html/sub/post.html:552
+#: app/html/sub/post.html:550
 #, python-format
 msgid "%(comments)i comments"
 msgstr ""
@@ -4705,11 +4708,11 @@ msgstr ""
 msgid "Username is not available."
 msgstr ""
 
-#: app/views/auth.py:165 app/views/auth.py:377 app/views/do.py:203
+#: app/views/auth.py:165 app/views/auth.py:382 app/views/do.py:203
 msgid "We do not accept emails from your email provider."
 msgstr ""
 
-#: app/views/auth.py:174 app/views/auth.py:384 app/views/do.py:212
+#: app/views/auth.py:174 app/views/auth.py:389 app/views/do.py:212
 msgid "E-mail address is already in use."
 msgstr ""
 
@@ -4721,7 +4724,7 @@ msgstr ""
 msgid "Invalid invite code."
 msgstr ""
 
-#: app/views/auth.py:249
+#: app/views/auth.py:254
 #, python-format
 msgid ""
 "And thanks for registering!\n"
@@ -4741,20 +4744,20 @@ msgid ""
 "https://cekni.to/s/Oznamy/2594/ako-pouzivat-tento-web"
 msgstr ""
 
-#: app/views/auth.py:285
+#: app/views/auth.py:290
 #, python-format
 msgid "Confirm your new account on %(site)s"
 msgstr ""
 
-#: app/views/auth.py:329 app/views/auth.py:363
+#: app/views/auth.py:334 app/views/auth.py:368
 msgid "The link you used is invalid or has expired."
 msgstr ""
 
-#: app/views/auth.py:424
+#: app/views/auth.py:429
 msgid "Your email is already confirmed."
 msgstr ""
 
-#: app/views/auth.py:526 app/views/auth.py:535 app/views/auth.py:540
+#: app/views/auth.py:531 app/views/auth.py:540 app/views/auth.py:545
 msgid "Invalid username or password."
 msgstr ""
 

@@ -180,7 +180,7 @@ class EditUserForm(FlaskForm):
             ("blur", _l("Blur until clicked")),
         ],
     )
-    experimental = BooleanField(_l("Enable experimental features"))
+    experimental = BooleanField(_l("Disable auto expandos"))
     noscroll = BooleanField(_l("Disable infinite scroll"))
     nochat = BooleanField(_l("Disable chat"))
     language = SelectField(_l("Language"), choices=[], validate_choice=False)

@@ -627,7 +627,11 @@ function expandAllExpandos() {
 }
 
 // Add page load event listener
-window.addEventListener('load', expandAllExpandos);
+document.addEventListener("DOMContentLoaded", function () {
+    if (!document.getElementById("pagefoot-labrat")) {
+        window.addEventListener("load", expandAllExpandos);
+    }
+});
 
 // Keyboard shortcut for toggling all expandos
 window.addEventListener('keydown', function(e) {
