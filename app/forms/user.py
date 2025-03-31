@@ -184,7 +184,7 @@ class EditUserForm(FlaskForm):
     noscroll = BooleanField(_l("Disable infinite scroll"))
     nochat = BooleanField(_l("Disable chat"))
     language = SelectField(_l("Language"), choices=[], validate_choice=False)
-    email_notify = BooleanField(_l("Send email notifications"))
+    email_notify = BooleanField(_l("Email notifications"))
 
 
 class EditIgnoreForm(FlaskForm):

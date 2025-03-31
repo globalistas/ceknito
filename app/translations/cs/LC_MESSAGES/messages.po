@@ -863,7 +863,7 @@ msgid "Global stylesheet (select a sub)"
 msgstr "Globální styl (převzít z)"
 
 #: app/forms/user.py:186
-msgid "Send email notifications"
+msgid "Email notifications"
 msgstr "Emailové notifikace"
 
 #: app/forms/user.py:184

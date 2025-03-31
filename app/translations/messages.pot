@@ -1046,7 +1046,7 @@ msgid "Language"
 msgstr ""
 
 #: app/forms/user.py:187
-msgid "Send email notifications"
+msgid "Email notifications"
 msgstr ""
 
 #: app/forms/user.py:194

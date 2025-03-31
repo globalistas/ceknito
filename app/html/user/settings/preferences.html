@@ -12,13 +12,13 @@
         @{edituserform.csrf_token()!!html}
         <fieldset>
             <div class="new-form-one">
+                <label for="show_nsfw" class="new-form-one">@{edituserform.show_nsfw.label.text}</label>
+                @{edituserform.show_nsfw()!!html}
+            </div>
+            <div class="new-form-one">
                 <label for="disable_sub_style"
                        class="new-form-one">@{edituserform.disable_sub_style.label.text}</label>
                 @{edituserform.disable_sub_style()!!html}
-            </div>
-            <div class="new-form-one">
-                <label for="show_nsfw" class="new-form-one">@{edituserform.show_nsfw.label.text}</label>
-                @{edituserform.show_nsfw()!!html}
             </div>
             <div class="new-form-one">
                 <label for="experimental" class="new-form-one">@{edituserform.experimental.label.text}</label>
