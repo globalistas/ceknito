@@ -376,7 +376,7 @@ u.addEventForChild(document, 'click', '.edit-post', function (e, qelem) {
         '</div><button class="pure-button pure-button-primary button-small btn-editpost" data-pid="' + qelem.parentNode.parentNode.getAttribute('data-pid') + '">' +
         _('Save changes') + '</button> <button class="pure-button button-small btn-preview" data-pvid="editpost" >' + _('Preview') + '</button>' +
         '<button class="pure-button button-small btn-rcancel button-transparent" data-pvid="editpost" >' + _('Cancel') + '</button>' +
-        '<div class="cmpreview canclose" style="display:none;"><h4>' + _('Comment preview') + '</h4><span class="closemsg">&times;</span><div class="cpreview-content">' +
+        '<div class="cmpreview canclose" style="display:none;"><h4>' + _('Post preview') + '</h4><span class="closemsg">&times;</span><div class="cpreview-content">' +
         '</div></div>';
     elem.querySelector('.btn-rcancel').onclick = back.onclick;
     qelem.replaceWith(back);

@@ -1185,6 +1185,10 @@ img.block-blur, img.nsfw-blur {
 	margin-bottom: .4em;
 }
 
+.cpreview-content {
+    display: inline-grid;
+}
+
 .votecomment {
 	display: inline-block;
 	float: left;
