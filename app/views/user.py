@@ -425,6 +425,7 @@ def edit_user():
     noscroll = "noscroll" in current_user.prefs
     nochat = "nochat" in current_user.prefs
     email_notify = "email_notify" in current_user.prefs
+    highlight_unseen_comments = "highlight_unseen_comments" in current_user.prefs
 
     form = EditUserForm(
         show_nsfw=nsfw_option,
@@ -434,6 +435,7 @@ def edit_user():
         nochat=nochat,
         language=current_user.language,
         email_notify=email_notify,
+        highlight_unseen_comments=highlight_unseen_comments,
     )
     languages = config.app.languages
     form.language.choices = []

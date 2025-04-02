@@ -1720,7 +1720,15 @@ def get_settings():
     prefs = UserMetadata.select().where(UserMetadata.uid == uid)
     prefs = prefs.where(
         UserMetadata.key
-        << ("labrat", "nostyles", "nsfw", "nsfw_blur", "nochat", "email_notify")
+        << (
+            "labrat",
+            "nostyles",
+            "nsfw",
+            "nsfw_blur",
+            "nochat",
+            "email_notify",
+            "highlight_unseen_comments",
+        )
     )
     prefs = {x.key: x.value for x in prefs}
     return jsonify(
@@ -1731,6 +1739,9 @@ def get_settings():
             "nsfw_blur": True if prefs.get("nsfw_blur", False) == "1" else False,
             "nochat": True if prefs.get("nochat", False) == "1" else False,
             "email_notify": True if prefs.get("email_notify", False) == "1" else False,
+            "highlight_unseen_comments": True
+            if prefs.get("highlight_unseen_comments", False) == "1"
+            else False,
         }
     )
 
@@ -1755,7 +1766,15 @@ def set_settings():
         x
         for x in settings.keys()
         if x
-        not in ["labrat", "nostyles", "nsfw", "nsfw_blur", "nochat", "email_notify"]
+        not in [
+            "labrat",
+            "nostyles",
+            "nsfw",
+            "nsfw_blur",
+            "nochat",
+            "email_notify",
+            "highlight_unseen_comments",
+        ]
     ]:
         return jsonify(msg="Invalid setting options sent"), 400
 
@@ -1770,6 +1789,7 @@ def set_settings():
             "nsfw_blur",
             "nochat",
             "email_notify",
+            "highlight_unseen_comments",
         ]:
             if not isinstance(settings[sett], bool):
                 return jsonify(msg="Invalid type for setting"), 400

@@ -870,6 +870,10 @@ msgstr "Emailové notifikace"
 msgid "Language"
 msgstr "Jazyk"
 
+#: app/forms/user.py:187
+msgid "Highlight new comments"
+msgstr "Zvýrazňovat nové komentáře"
+
 #: app/forms/user.py:191
 msgid "Hide messages"
 msgstr "Skrýt zprávy"

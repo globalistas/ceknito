@@ -312,6 +312,9 @@ def edit_user():
         current_user.update_prefs("nsfw_blur", form.show_nsfw.data == "blur")
         current_user.update_prefs("noscroll", form.noscroll.data)
         current_user.update_prefs("nochat", form.nochat.data)
+        current_user.update_prefs(
+            "highlight_unseen_comments", form.highlight_unseen_comments.data
+        )
         current_user.update_prefs("email_notify", form.email_notify.data)
 
         return json.dumps({"status": "ok"})
@@ -4931,22 +4934,17 @@ def mark_comments_viewed():
             )
             .where(
                 SubPostCommentView.id.is_null(True)
-                & (SubPostComment.status.is_null(True))
                 & (SubPostComment.cid << cids)
                 & (SubPostComment.uid != current_user.uid)
-                & (User.status != UserStatus.DELETED)
             )
         ).dicts()
 
         comments = list(comments)
         if comments and not misc.is_archived(comments[0]):
             for comment in comments:
-                best_score = misc.best_score(
-                    comment["upvotes"], comment["downvotes"], comment["views"] + 1
-                )
-                SubPostComment.update(
-                    views=SubPostComment.views + 1, best_score=best_score
-                ).where(SubPostComment.cid == comment["cid"]).execute()
+                SubPostComment.update(views=SubPostComment.views + 1).where(
+                    SubPostComment.cid == comment["cid"]
+                ).execute()
 
             view_records = [
                 {"uid": current_user.uid, "cid": comment["cid"], "pid": comment["pid"]}

@@ -70,10 +70,12 @@ from .models import (
     UserUnreadMessage,
     UserMessageMailbox,
     SubMessageMailbox,
+    SubPostView,
     SubPostVote,
     SubPostComment,
     SubPostCommentVote,
     SubPostCommentView,
+    SubPostCommentCheckoff,
     SiteLog,
     SubLog,
     db,
@@ -351,6 +353,10 @@ class SiteUser(object):
         """Returns true if user selects to block sub styles"""
         return "nostyles" in self.prefs
 
+    def highlight_unseen_comments(self):
+        """Returns true if user selects to highliht new comments"""
+        return "highlight_unseen_comments" in self.prefs
+
     @cache.memoize(300)
     def get_user_level(self):
         """Returns the level and xp of a user."""
@@ -452,6 +458,11 @@ class SiteAnon(AnonymousUserMixin):
 
     @classmethod
     def block_styles(cls):
+        """Anons dont get usermetadata options."""
+        return False
+
+    @classmethod
+    def highlight_unseen_comments(cls):
         """Anons dont get usermetadata options."""
         return False
 
@@ -1118,6 +1129,19 @@ def getSinglePost(pid):
     posts["slug"] = slugify(posts["title"])
     posts["is_archived"] = is_archived(posts)
     posts["best_sort_enabled"] = posts["posted"] > get_best_comment_sort_init_date()
+
+    posts["user_has_viewed"] = False
+    posts["user_last_view_time"] = None
+    if current_user.is_authenticated:
+        try:
+            view = SubPostView.get(
+                (SubPostView.uid == current_user.uid) & (SubPostView.pid == pid)
+            )
+            posts["user_has_viewed"] = True
+            posts["user_last_view_time"] = view.datetime
+        except SubPostView.DoesNotExist:
+            posts["user_has_viewed"] = False
+
     return posts
 
 
@@ -1382,7 +1406,7 @@ def limit_pagination(func):
     return wrapper
 
 
-def getPostList(baseQuery, sort, page, page_size=20):
+def getPostList(baseQuery, sort, page, page_size=20, include_mod_counts=False):
     if sort == "top":
         posts = baseQuery.order_by(SubPost.score.desc()).paginate(page, page_size)
     elif sort == "new":
@@ -1409,7 +1433,68 @@ def getPostList(baseQuery, sort, page, page_size=20):
         else:
             hot = SubPost.score * 20 + (posted - 1134028003) / 1500
         posts = baseQuery.order_by(hot.desc()).limit(100).paginate(page, page_size)
-    return [add_blur(p) for p in posts.dicts()]
+    return add_calculated_fields(posts.dicts(), include_mod_counts=include_mod_counts)
+
+
+def add_calculated_fields(posts, include_mod_counts=False):
+    posts = list(posts)
+    if current_user.is_authenticated:
+        pids = [p["pid"] for p in posts]
+        # Count new comments for posts that the user has previously
+        # looked at.
+        new_comment_counts = (
+            SubPostComment.select(
+                SubPostComment.pid, fn.Count(SubPostComment.cid).alias("count")
+            )
+            .join(
+                SubPostView,
+                JOIN.LEFT_OUTER,
+                on=(
+                    (SubPostView.pid == SubPostComment.pid)
+                    & (SubPostView.uid == current_user.uid)
+                ),
+            )
+            .where(
+                (SubPostComment.pid << pids)
+                & (SubPostComment.uid != current_user.uid)
+                & (fn.COALESCE(SubPostComment.status, 0) == 0)
+                & SubPostView.id.is_null(False)
+                & (SubPostComment.time > SubPostView.datetime)
+            )
+            .group_by(SubPostComment.pid)
+            .dicts()
+        )
+        new_comment_counts = {n["pid"]: n["count"] for n in new_comment_counts}
+
+    if include_mod_counts:
+        subq = SubPostCommentCheckoff.select().where(
+            SubPostCommentCheckoff.cid == SubPostComment.cid
+        )
+        checkoffs = (
+            SubPostComment.select(
+                SubPostComment.pid,
+                fn.Count(SubPostComment.cid).alias("count"),
+            )
+            .join(SubPost, on=(SubPostComment.pid == SubPost.pid))
+            .where(
+                ~fn.EXISTS(subq)
+                & (fn.Coalesce(SubPostComment.status, 0) == 0)
+                & (SubPost.pid << [p["pid"] for p in posts])
+            )
+            .group_by(SubPostComment.pid)
+        )
+        mod_counts = {c.pid_id: c.count for c in checkoffs}
+
+    def update(post):
+        post = add_blur(post)
+        if current_user.is_authenticated:
+            post["new_comments"] = new_comment_counts.get(post["pid"], 0)
+        if include_mod_counts:
+            post["unchecked_off_count"] = mod_counts.get(post["pid"], 0)
+        post["best_sort_enabled"] = post["posted"] > get_best_comment_sort_init_date()
+        return post
+
+    return [update(p) for p in posts]
 
 
 def add_blur(post):
@@ -1436,6 +1521,11 @@ def getAnnouncementPid():
         return 0
 
 
+@cache.memoize(600)
+def getAnnouncementMemoized(pid):
+    return postListQueryBase(nofilter=True).where(SubPost.pid == pid).dicts().get()
+
+
 def getAnnouncement():
     """Returns sitewide announcement post or False"""
     ann = getAnnouncementPid()
@@ -1457,15 +1547,29 @@ def getAnnouncement():
                 .dicts()
                 .get()
             )
-
-            return add_blur(alternative_post)
+            # Handle the post based on authentication status
+            if not current_user.is_authenticated:
+                alternative_post = add_blur(alternative_post)
+                return add_calculated_fields([alternative_post])[0]
+            else:
+                return add_calculated_fields(
+                    [alternative_post],
+                    include_mod_counts=current_user.is_mod(alternative_post["sid"]),
+                )[0]
         except Exception:
             # Fall back to original announcement if no alternative found
             pass
 
-    return add_blur(
-        postListQueryBase(nofilter=True).where(SubPost.pid == ann).dicts().get()
-    )
+    # Process the original announcement
+    if not current_user.is_authenticated:
+        ann = getAnnouncementMemoized(ann)
+        return add_calculated_fields([ann])[0]
+    else:
+        ann_query = postListQueryBase(nofilter=True).where(SubPost.pid == ann)
+        posts = list(ann_query.dicts())
+        return add_calculated_fields(
+            posts, include_mod_counts=current_user.is_mod(posts[0]["sid"])
+        )[0]
 
 
 @cache.memoize(5)
@@ -1493,21 +1597,45 @@ def getStickyPid(sid):
 
 
 @cache.memoize(60)
-def getStickies(sid):
-    posts = postListQueryBase().join(
-        SubMetadata,
-        on=(
-            (SubPost.sid == SubMetadata.sid)
-            & (SubPost.pid == SubMetadata.value.cast("int"))
-            & (SubMetadata.key == "sticky")
-        ),
-    )
-    posts = posts.where(SubPost.sid == sid)
-    posts = posts.order_by(SubMetadata.xid.desc()).dicts()
+def getStickiesMemoized(sid):
+    return getStickyPid(sid)
 
-    result = [add_blur(p) for p in posts]
 
-    return result if result else None
+def getStickies(sid, isSubMod):
+    if not current_user.is_authenticated or not isSubMod:
+        # Get just the PIDs first
+        sticky_pids = (
+            getStickyPid(sid)
+            if not current_user.is_authenticated
+            else getStickiesMemoized(sid)
+        )
+
+        # Then fetch the actual post data for these PIDs
+        if sticky_pids:
+            posts = (
+                postListQueryBase(isSubMod=False)
+                .where(SubPost.pid.in_(sticky_pids))
+                .dicts()
+            )
+            # Optional: Sort posts to match the original sticky order
+            pid_order = {pid: idx for idx, pid in enumerate(sticky_pids)}
+            posts = sorted(list(posts), key=lambda p: pid_order.get(p["pid"], 999))
+        else:
+            posts = []
+    else:
+        # For mods - keep the existing efficient join query
+        posts = postListQueryBase(isSubMod=isSubMod).join(
+            SubMetadata,
+            on=(
+                (SubPost.sid == SubMetadata.sid)
+                & (SubPost.pid == SubMetadata.value.cast("int"))
+                & (SubMetadata.key == "sticky")
+            ),
+        )
+        posts = posts.where(SubPost.sid == sid)
+        posts = posts.order_by(SubMetadata.xid.asc()).dicts()
+
+    return add_calculated_fields(posts, include_mod_counts=isSubMod)
 
 
 def is_archived(post):

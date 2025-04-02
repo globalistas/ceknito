@@ -118,7 +118,7 @@
                 @end
               @end
             </p>
-            <div class="container @{msg['unseen']} @{msg['blur']} @{msg['read'] == None and 'newmsgbg' or ''}" id="content-@{msg['cid']}">@{markdown(msg['comment_content'])!!html}</div>
+            <div class="container @{msg['blur']} @{msg['read'] == None and 'newmsgbg' or ''}" id="content-@{msg['cid']}">@{markdown(msg['comment_content'])!!html}</div>
             <ul class="bottombar links">
               <li><a href="@{url_for('sub.view_perm', sub=msg['sub_name'], cid=msg['cid'], pid=msg['pid'])}#comment-@{msg['cid']}">@{_('permalink')}</a></li>
               <li><a class="deletenotif" data-mid="@{msg['id']}">@{_('delete notification')}</a></li>

@@ -414,6 +414,34 @@ class SubPostCommentVote(BaseModel):
         table_name = "sub_post_comment_vote"
 
 
+class SubPostView(BaseModel):
+    uid = ForeignKeyField(db_column="uid", model=User, field="uid")
+    pid = ForeignKeyField(db_column="pid", model=SubPost, field="pid")
+    datetime = DateTimeField(null=True, default=datetime.datetime.utcnow)
+
+    def __repr__(self):
+        return f"<SubPostView{self.cid}>"
+
+    class Meta:
+        table_name = "sub_post_view"
+
+
+class SubPostCommentCheckoff(BaseModel):
+    """Allow mods to check off comments."""
+
+    cid = ForeignKeyField(
+        column_name="cid", model=SubPostComment, field="cid", unique=True
+    )
+    uid = ForeignKeyField(column_name="uid", model=User, field="uid")
+    datetime = DateTimeField(default=datetime.datetime.now)
+
+    def __repr__(self):
+        return f'<SubPostCommentCheckoff "{self.id}">'
+
+    class Meta:
+        table_name = "sub_post_comment_checkoff"
+
+
 class SubPostCommentView(BaseModel):
     cid = ForeignKeyField(db_column="cid", model=SubPostComment, field="cid")
     uid = ForeignKeyField(db_column="uid", model=User, field="uid")

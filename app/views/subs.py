@@ -19,6 +19,7 @@ from ..models import (
     SubSubscriber,
     SiteMetadata,
     SubPost,
+    SubPostView,
 )
 from ..models import SubPostPollOption, SubPostMetadata, SubPostVote, User, UserUploads
 from ..forms import CreateSubPostForm, CreateSubForm
@@ -287,6 +288,7 @@ def create_post(ptype, sub):
         thumbnail=img,
         flair=flair,
     )
+    SubPostView.create(pid=post.pid, uid=current_user.uid, datetime=post.posted)
     thumbnail_store = [(SubPost, "pid", post.pid)]
 
     if form.ptype.data == "poll":

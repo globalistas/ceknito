@@ -15,6 +15,7 @@ from ..models import (
     SubPostComment,
     SubPost,
     SubPostPollOption,
+    SubPostView,
     SubSubscriber,
 )
 from ..models import (
@@ -457,10 +458,13 @@ def view_sub_new(sub, page):
         page,
     )
 
+    isSubMod = current_user.is_mod(sub["sid"], 1) or current_user.is_admin()
+
     return engine.get_template("sub.html").render(
         {
             "sub": sub,
             "subInfo": misc.getSubData(sub["sid"]),
+            "isSubMod": isSubMod,
             "posts": posts,
             "page": page,
             "sort_type": "sub.view_sub_new",
@@ -596,10 +600,13 @@ def view_sub_top(sub, page):
         page,
     )
 
+    isSubMod = current_user.is_mod(sub["sid"], 1) or current_user.is_admin()
+
     return engine.get_template("sub.html").render(
         {
             "sub": sub,
             "subInfo": misc.getSubData(sub["sid"]),
+            "isSubMod": isSubMod,
             "posts": posts,
             "page": page,
             "sort_type": "sub.view_sub_top",
@@ -666,10 +673,13 @@ def view_sub_hot(sub, page):
         page,
     )
 
+    isSubMod = current_user.is_mod(sub["sid"], 1) or current_user.is_admin()
+
     return engine.get_template("sub.html").render(
         {
             "sub": sub,
             "subInfo": misc.getSubData(sub["sid"]),
+            "isSubMod": isSubMod,
             "posts": posts,
             "page": page,
             "sort_type": "sub.view_sub_hot",
@@ -736,10 +746,13 @@ def view_sub_commented(sub, page):
         page,
     )
 
+    isSubMod = current_user.is_mod(sub["sid"], 1) or current_user.is_admin()
+
     return engine.get_template("sub.html").render(
         {
             "sub": sub,
             "subInfo": misc.getSubData(sub["sid"]),
+            "isSubMod": isSubMod,
             "posts": posts,
             "page": page,
             "sort_type": "sub.view_sub_commented",
@@ -936,6 +949,16 @@ def view_post(sub, pid, slug=None, comments=False, highlight=None):
         post["blur"] = "nsfw-blur"
     else:
         post["blur"] = ""
+
+    if current_user.is_authenticated and not post["is_archived"]:
+        try:
+            view = SubPostView.get(
+                (SubPostView.uid == current_user.uid) & (SubPostView.pid == pid)
+            )
+            view.datetime = datetime.datetime.utcnow()
+            view.save()
+        except SubPostView.DoesNotExist:
+            SubPostView.create(uid=current_user.uid, pid=pid)
 
     if sub["private"]:  # Private sub
         # Check if user is an admin or mod for the sub

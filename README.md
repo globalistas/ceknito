@@ -4,11 +4,12 @@ https://cekni.to/
 
 A link and discussion aggregator with snek (python3)
 
-## Some major improvements over upstream (phuks.co)
+## Some major changes over upstream (throat/phuks.co)
 
 - new post sort type (Commented)
 - reddit-like comments look&feel
 - new comment sort type (Old)
+- new comments highlight option
 - save comment
 - expand all comments
 - sub-specific delay for showing comment scores

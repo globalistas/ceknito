@@ -660,17 +660,19 @@ const markCommentsSeen = u.debounce(function () {
         if (u.bottomInViewport(elem)) {
             let cid = elem.id.substring("content-".length);
             cids.push(cid);
-            elem.classList.remove('unseen-comment');
+            // Really not sure why this was here:
+            // elem.classList.remove('unseen-comment');
         }
     }
     if (cids.length > 0) {
-        u.post('/do/mark_viewed', { 'cids': JSON.stringify(cids) }, function (data) { });
+        u.post('/do/mark_viewed', {'cids': JSON.stringify(cids)}, function (data) {});
     }
 }, false, 250);
 
 window.addEventListener('load', markCommentsSeen);
 window.addEventListener('scroll', markCommentsSeen);
 window.addEventListener('resize', markCommentsSeen);
+
 
 // Refresh save button events
 function refresh_save_button_events(text){

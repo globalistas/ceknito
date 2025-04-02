@@ -1,6 +1,6 @@
 @extends("shared/sub.html")
 @import "shared/post.html" as ipost
-@require(sub, posts, page, sort_type, subInfo, flair, text_color, bg_color, border_color)
+@require(sub, isSubMod, posts, page, sort_type, subInfo, flair, text_color, bg_color, border_color)
 
 
 @def title():
@@ -39,9 +39,9 @@
 
 @def main():
 <div id="container">
-  @if func.getStickyPid and page == 1 and func.getStickies(sub['sid']):
+  @if func.getStickyPid and page == 1 and func.getStickies(sub['sid'], isSubMod=isSubMod):
     <div class="stickyposts">
-      @for post in func.getStickies(sub['sid']):
+      @for post in func.getStickies(sub['sid'], isSubMod=isSubMod):
         @if flair is None or post['flair'] == flair:
           @{ipost.singlePost(post, sub)!!html}
         @end

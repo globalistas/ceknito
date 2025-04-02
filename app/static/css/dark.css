@@ -1119,3 +1119,7 @@ body.dark .markhelp tr {
 body.dark .expando-master .fade-out-content::after {
   background: linear-gradient(to bottom, rgba(49, 51, 56, 0), rgba(49, 51, 56, 1)); /* Fade from transparent to the dark background color */
 }
+
+body.dark .unseen-comment {
+	background-color: #484957;
+}
