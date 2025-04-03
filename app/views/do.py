@@ -3223,7 +3223,7 @@ def toggle_sticky(post):
             )
 
         cache.delete_memoized(misc.getStickyPid, post.sid_id)
-        cache.delete_memoized(misc.getStickies, post.sid_id)
+        cache.delete_memoized(misc.getStickiesMemoized, post.sid_id)
     return jsonify(status="ok")
 
 
