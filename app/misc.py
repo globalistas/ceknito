@@ -4341,3 +4341,65 @@ def gevent_required(f):
 
     decorated_function.gevent_required = True
     return decorated_function
+
+
+def mark_all_comments_viewed(user_uid):
+    """
+    Mark all comments as viewed for a specific user.
+
+    This utility function is designed to be called when a user enables
+    the highlight_unseen_comments preference in their settings.
+
+    Args:
+        user_uid: The user ID for whom to mark all comments as viewed
+
+    Returns:
+        int: Number of comments marked as viewed
+    """
+
+    # Get all comments not made by the user and not already in the view table
+    # Join with SubPost to check if the post is archived
+    comments_to_mark = (
+        SubPostComment.select(
+            SubPostComment.cid, SubPostComment.pid, SubPost.posted, SubPost.sid
+        )
+        .join(SubPost)
+        .switch(SubPostComment)
+        .join(
+            SubPostCommentView,
+            JOIN.LEFT_OUTER,
+            on=(
+                (SubPostCommentView.cid == SubPostComment.cid)
+                & (SubPostCommentView.uid == user_uid)
+            ),
+        )
+        .where(SubPostCommentView.id.is_null(True) & (SubPostComment.uid != user_uid))
+    ).dicts()
+
+    # Convert to list to evaluate the query
+    comments_to_mark = list(comments_to_mark)
+
+    # Filter out comments from archived posts
+    comments_to_mark = [
+        comment for comment in comments_to_mark if not is_archived(comment)
+    ]
+
+    if comments_to_mark:
+        # Create records for batch insertion
+        view_records = [
+            {"uid": user_uid, "cid": comment["cid"], "pid": comment["pid"]}
+            for comment in comments_to_mark
+        ]
+
+        # Insert all records in a single batch operation
+        with db.atomic():
+            # Update view counts
+            cids = [comment["cid"] for comment in comments_to_mark]
+            SubPostComment.update(views=SubPostComment.views + 1).where(
+                SubPostComment.cid << cids
+            ).execute()
+
+            # Insert view records
+            SubPostCommentView.insert_many(view_records).on_conflict_ignore().execute()
+
+    return len(comments_to_mark)

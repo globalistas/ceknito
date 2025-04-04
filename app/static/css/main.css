@@ -1459,7 +1459,7 @@ a.pure-button.alldarightcomments {
 }
 
 .sidebarlists ul li {
-	padding-top: 8px;
+	padding-top: 14px;
 }
 
 .sidebar h4, .sidebarlists, .sidebarlists.top5 {
@@ -1476,7 +1476,7 @@ a.pure-button.alldarightcomments {
 }
 
 .sidebarlists ul.top5 {
-	padding: 0 8px 10px 24px;
+	padding: 0 14px 10px 25px;
 	margin: 12px 5px;
 	/* background: #e6e6e6; */
 	border-radius: 2px;

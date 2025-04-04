@@ -302,6 +302,7 @@ def edit_user():
     """Edit user endpoint"""
     form = EditUserForm()
     if form.validate():
+        old_highlight_setting = "highlight_unseen_comments" in current_user.prefs
         usr = User.get(User.uid == current_user.uid)
         usr.language = form.language.data
         session["language"] = form.language.data
@@ -312,10 +313,14 @@ def edit_user():
         current_user.update_prefs("nsfw_blur", form.show_nsfw.data == "blur")
         current_user.update_prefs("noscroll", form.noscroll.data)
         current_user.update_prefs("nochat", form.nochat.data)
-        current_user.update_prefs(
-            "highlight_unseen_comments", form.highlight_unseen_comments.data
-        )
         current_user.update_prefs("email_notify", form.email_notify.data)
+
+        new_highlight_setting = form.highlight_unseen_comments.data
+        current_user.update_prefs("highlight_unseen_comments", new_highlight_setting)
+
+        # If the user is enabling highlight_unseen_comments for the first time
+        if new_highlight_setting and not old_highlight_setting:
+            misc.mark_all_comments_viewed(current_user.uid)
 
         return json.dumps({"status": "ok"})
     return json.dumps({"status": "error", "error": get_errors(form)})
