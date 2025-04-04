@@ -1123,3 +1123,7 @@ body.dark .expando-master .fade-out-content::after {
 body.dark .unseen-comment {
 	background-color: #484957;
 }
+
+body.dark .prev-unseen-comment {
+	background-color: #484957;
+}

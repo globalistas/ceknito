@@ -660,8 +660,9 @@ const markCommentsSeen = u.debounce(function () {
         if (u.bottomInViewport(elem)) {
             let cid = elem.id.substring("content-".length);
             cids.push(cid);
-            // Really not sure why this was here:
-            // elem.classList.remove('unseen-comment');
+            // Remove original class and add new one so comment stays highlighted on the page
+            elem.classList.remove('unseen-comment');
+            elem.classList.add('prev-unseen-comment');
         }
     }
     if (cids.length > 0) {

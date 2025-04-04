@@ -1937,6 +1937,10 @@ article.pmessage.post.newmsg {
 	background-color: #edf9ff;
 }
 
+.prev-unseen-comment {
+	background-color: #edf9ff;
+}
+
 .inbox.content {
 	width: 96%;
 }
