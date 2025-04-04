@@ -1596,34 +1596,31 @@ def getStickyPid(sid):
     return [int(y["value"]) for y in x]
 
 
+def getStickyPosts(sid):
+    posts = postListQueryBase().join(
+        SubMetadata,
+        on=(
+            (SubPost.sid == SubMetadata.sid)
+            & (SubPost.pid == SubMetadata.value.cast("int"))
+            & (SubMetadata.key == "sticky")
+        ),
+    )
+    posts = posts.where(SubPost.sid == sid)
+    posts = posts.order_by(SubMetadata.xid.asc()).dicts()
+    return list(posts)
+
+
 @cache.memoize(60)
 def getStickiesMemoized(sid):
-    return getStickyPid(sid)
+    return getStickyPosts(sid)
 
 
 def getStickies(sid, isSubMod):
-    if not current_user.is_authenticated or not isSubMod:
-        # Get just the PIDs first
-        sticky_pids = (
-            getStickyPid(sid)
-            if not current_user.is_authenticated
-            else getStickiesMemoized(sid)
-        )
-
-        # Then fetch the actual post data for these PIDs
-        if sticky_pids:
-            posts = (
-                postListQueryBase(isSubMod=False)
-                .where(SubPost.pid.in_(sticky_pids))
-                .dicts()
-            )
-            # Optional: Sort posts to match the original sticky order
-            pid_order = {pid: idx for idx, pid in enumerate(sticky_pids)}
-            posts = sorted(list(posts), key=lambda p: pid_order.get(p["pid"], 999))
-        else:
-            posts = []
+    if not current_user.is_authenticated:
+        posts = getStickiesMemoized(sid)
+    elif not isSubMod:
+        posts = getStickyPosts(sid)
     else:
-        # For mods - keep the existing efficient join query
         posts = postListQueryBase(isSubMod=isSubMod).join(
             SubMetadata,
             on=(
@@ -1634,7 +1631,6 @@ def getStickies(sid, isSubMod):
         )
         posts = posts.where(SubPost.sid == sid)
         posts = posts.order_by(SubMetadata.xid.asc()).dicts()
-
     return add_calculated_fields(posts, include_mod_counts=isSubMod)
 
 
