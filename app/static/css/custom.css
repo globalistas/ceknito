@@ -91,11 +91,12 @@ img[src*='#center'] {
     font-variant: small-caps;
     letter-spacing: normal;
     word-spacing: normal;
-    position: absolute;
+    text-align: right;
+    position: relative;
     z-index: 150;
-    width: max-content;
     margin-top: -24px;
-    margin-left: -210px;
+    margin-right: 1ex;
+    float: right;
 }
 
 .subtitle:hover {

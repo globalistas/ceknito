@@ -3308,9 +3308,6 @@ li.mod-table-header {
   }
 
   /* Layout and Positioning */
-  .subtitle {
-    left: 10px !important;
-  }
 
   .cw-items {
     align-items: baseline;

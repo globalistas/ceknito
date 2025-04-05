@@ -182,6 +182,9 @@
   @def content():
   <div class="pure-g new-g">
     <div id="nobar" class="nobar pure-u-1 pure-u-md-7-24"> <!-- nobar -->
+      @def subtitle():
+      @end
+      @{subtitle()!!html}
     </div>
     @def sidebar():
     @end
@@ -197,9 +200,6 @@
       @end
       @def sortbuttons():
       @end
-      @def subtitle():
-      @end
-      @{subtitle()!!html}
       @{sortbuttons()!!html}
       @def main():
       @end
