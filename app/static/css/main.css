@@ -1386,14 +1386,14 @@ a.pure-button.alldaright {
 	position: relative;
 }
 
-a.pure-button.alldarightprev {
+a.pure-button.alldarightnext {
 	right: 14px;
 }
 
-a.pure-button.alldarightinbox, a.pure-button.alldarightprev {
+a.pure-button.alldarightinbox, a.pure-button.alldarightnext {
 	display: inline-block;
 	float: right;
-	position: relative;
+	/* position: relative; */
 }
 
 a.pure-button.alldaleftposts {

@@ -79,24 +79,24 @@
   </div>
   @if sort_type == 'home.search':
     @if len(posts) == 20 and kw['search_count'] > 20:
-      <a href="@{url_for(sort_type, page=(page+1), **kw)}" class="pure-button">@{_('Next page')}</a>
+      <a href="@{url_for(sort_type, page=(page+1), **kw)}" class="pure-button alldarightnext" style="font-size:15px;">@{_('Next page')}</a>
     @end
     @if page > 1:
-      <a href="@{url_for(sort_type, page=(page-1), **kw)}" class="pure-button alldarightprev">@{_('Previous page')}</a>
+      <a href="@{url_for(sort_type, page=(page-1), **kw)}" class="pure-button" style="font-size:15px;">@{_('Previous page')}</a>
     @end
   @elif sort_type == 'home.all_domain_new':
     @if len(posts) == 20 and kw['post_count'] > 20:
-      <a href="@{url_for(sort_type, page=(page+1), **kw)}" class="pure-button">@{_('Next page')}</a>
+      <a href="@{url_for(sort_type, page=(page+1), **kw)}" class="pure-button alldarightnext" style="font-size:15px;">@{_('Next page')}</a>
     @end
     @if page > 1:
-      <a href="@{url_for(sort_type, page=(page-1), **kw)}" class="pure-button alldarightprev">@{_('Previous page')}</a>
+      <a href="@{url_for(sort_type, page=(page-1), **kw)}" class="pure-button" style="font-size:15px;">@{_('Previous page')}</a>
     @end
   @elif not current_user.likes_scroll():
-      @if len(posts) == 20:
-      <a href="@{url_for(sort_type, page=(page+1), **kw)}" class="pure-button">@{_('Next page')}</a>
+    @if len(posts) == 20:
+    <a href="@{url_for(sort_type, page=(page+1), **kw)}" class="pure-button alldarightnext" style="font-size:15px;">@{_('Next page')}</a>
     @end
     @if page > 1:
-      <a href="@{url_for(sort_type, page=(page-1), **kw)}" class="pure-button alldarightprev">@{_('Previous page')}</a>
+      <a href="@{url_for(sort_type, page=(page-1), **kw)}" class="pure-button" style="font-size:15px;">@{_('Previous page')}</a>
     @end
   @end
 </div>
