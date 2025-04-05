@@ -44,10 +44,10 @@
     </div>
 
     @if len(posts) == 20:
-      <a href="@{url_for(sort_type, page=(page+1), user=user.name)}" class="pure-button alldaleftposts">@{_('Next')}</a>
+      <a href="@{url_for(sort_type, page=(page+1), user=user.name)}" class="pure-button alldarightposts">@{_('Next')}</a>
     @end
     @if page > 1:
-      <a href="@{url_for(sort_type, page=(page-1), user=user.name)}" class="pure-button alldarightposts">@{_('Previous')}</a>
+      <a href="@{url_for(sort_type, page=(page-1), user=user.name)}" class="pure-button alldaleftposts">@{_('Previous')}</a>
     @end
 </div>
 @end

@@ -1387,30 +1387,21 @@ a.pure-button.alldaright {
 }
 
 a.pure-button.alldarightnext {
-	right: 14px;
-}
-
-a.pure-button.alldarightinbox, a.pure-button.alldarightnext {
 	display: inline-block;
 	float: right;
-	/* position: relative; */
+	right: 14px;
 }
 
 a.pure-button.alldaleftposts {
 	display: inline-block;
 	left: 14px;
-	position: relative;
+	font-size: 15px;
 }
 
-a.pure-button.alldarightcomments, a.pure-button.alldarightposts {
+a.pure-button.alldarightposts {
 	display: inline-block;
 	float: right;
-	right: 14px;
-	position: relative;
-}
-
-a.pure-button.alldarightcomments {
-	right: 20px;
+	font-size: 15px;
 }
 
 .nobar, .sidebar {

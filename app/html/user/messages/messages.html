@@ -50,10 +50,10 @@
     </div>
     <div class="msgnav">
       @if len(messages) == 20:
-        <a href="@{url_for(box_route, page=(page+1))}" class="pure-button">@{_('Next')}</a>
+        <a href="@{url_for(box_route, page=(page+1))}" class="pure-button alldarightposts">@{_('Next')}</a>
       @end
       @if page > 1:
-        <a href="@{url_for(box_route, page=(page-1))}" class="pure-button alldarightinbox">@{_('Previous')}</a>
+        <a href="@{url_for(box_route, page=(page-1))}" class="pure-button alldaleftposts">@{_('Previous')}</a>
       @end
     </div>
   </div>
