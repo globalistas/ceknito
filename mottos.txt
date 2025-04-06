@@ -10,4 +10,6 @@
 "normálne už bolo",
 "based and #800000pilled",
 "kočkovanie s registráciou",
-"tvoj zdroj malinformácií"]
+"tvoj zdroj malinformácií",
+"press shift+x to collapse",
+"↑ ↑ ↓ ↓ ← → ← → b a"]

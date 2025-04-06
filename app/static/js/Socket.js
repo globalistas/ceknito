@@ -406,20 +406,43 @@ socket.on('rmannouncement', function () {
   }
 })
 
+// Track the timestamp of when the socket connection was established
+let connectionTimestamp = Date.now() / 1000;
+
 socket.on('msg', function (data) {
   if (document.getElementById('matrix-chat')) return
   var cont = document.getElementById('chcont')
   if (!cont) { return; }
+
   var uname = document.getElementById('unameb').innerHTML.toLowerCase();
-  var reg = /(^|\s)(@|\/u\/)([a-zA-Z0-9_-]{3,})(\s|\'|\.|,|$)/g
+  var testString = data.msg;
+  var reg = /(^|\s)(@|\/u\/)([a-zA-Z0-9_-]{3,})(\s|\'|\.|,|$)/g;
+  var matches = [];
+  var match;
+
+  while ((match = reg.exec(testString)) !== null) {
+    matches.push(match[3]);
+  }
+
   var reg2 = /\u0001ACTION (.+)\u0001/
   var m = data.msg.match(reg);
   var m2 = data.msg.match(reg2);
   var xc = "";
-  if (m && !m[3]) { m[3] = ''; }
-  if (m && m[3].toLowerCase() == uname && data.user.toLowerCase() != uname) {
+
+  // Only play sound if:
+  // 1. Message timestamp is newer than when we connected (it's a new message)
+  // 2. The message mentions the current user
+  // 3. The message isn't from the current user
+  if (data.time >= connectionTimestamp &&
+      matches.length > 0 &&
+      matches.some(username => username.toLowerCase() === uname) &&
+      data.user.toLowerCase() !== uname) {
     xc = "msg-hl";
-    // TODO: Ping sounds here?
+    let audio = new Audio('/static/ceknipop.mp3');
+    audio.volume = 0.7;
+    audio.play().catch(err => {});
+  } else if (matches.length > 0 && matches.some(username => username.toLowerCase() === uname)) {
+    xc = "msg-hl";
   }
   if (m2) {
     data.msg = data.user + ' ' + m2[1];
