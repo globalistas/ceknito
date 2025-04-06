@@ -673,6 +673,7 @@ def edit_sub(sub):
             sub.update_metadata(
                 "disable_auto_expandos", form.disable_auto_expandos.data
             )
+            sub.update_metadata("enable_flairpicker", form.enable_flairpicker.data)
 
             if form.subsort.data != "None":
                 sub.update_metadata("sort", form.subsort.data, boolean=False)

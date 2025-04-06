@@ -173,6 +173,7 @@ class EditSubForm(FlaskForm):
     allow_upload_posts = BooleanField(_l("Enable upload posts"))
     allow_polls = BooleanField(_l("Enable polls"))
     disable_auto_expandos = BooleanField(_l("Disable auto expandos"))
+    enable_flairpicker = BooleanField(_l("Show flair picker in the sidebar"))
     commentscore_delay = IntegerField(
         _l("Show comment score only after"),
         validators=[

@@ -123,6 +123,13 @@
           </label>
         </div>
 
+        <div class="pure-control-group">
+          <label for="enable_flairpicker" class="pure-checkbox">
+            @{editsubform.enable_flairpicker(checked=True if metadata.get('enable_flairpicker') else False)!!html}
+            @{editsubform.enable_flairpicker.label.text}
+          </label>
+        </div>
+
         <h4>@{_('User flairs')}</h4>
         <div class="pure-control-group">
           <label for="user_can_flair_self" class="pure-checkbox">

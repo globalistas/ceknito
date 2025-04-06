@@ -446,7 +446,7 @@ body.dark input[type="search"] {
 }
 
 body.dark .flairpicker select {
-  background-color: #000;
+  background-color: #1a1b2d;
   color: #fff;
   border-color: #40444b;
 }

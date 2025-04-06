@@ -849,6 +849,10 @@ msgstr "Zobraziť po kliknutí"
 msgid "Disable auto expandos"
 msgstr "Vypnúť samo-rozbaľovanie"
 
+#: app/forms/sub.py:176
+msgid "Show flair picker in the sidebar"
+msgstr "Zobrazovať filter tagov v sidebare"
+
 #: app/forms/user.py:179
 msgid "Disable infinite scroll"
 msgstr "Nekonečné rolovanie"

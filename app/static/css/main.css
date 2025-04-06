@@ -571,6 +571,10 @@ span#notification.fade {
 	margin-top: 10px;
 }
 
+h1 {
+    line-height: 1em;
+}
+
 .post {
 	min-height: 70px;
 	padding: .6em .1em .6em .2em;
@@ -2572,6 +2576,10 @@ a[href="#toodamncool"] {
 .replybox {
 	margin-bottom: 1em;
 	max-width: 48em;
+}
+
+.pure-form select {
+    height: auto;
 }
 
 .pure-form input:focus:invalid, .pure-form select:focus:invalid, .pure-form textarea:focus:invalid {
