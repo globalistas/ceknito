@@ -94,7 +94,7 @@ img[src*='#center'] {
     text-align: right;
     position: relative;
     z-index: 150;
-    margin-top: -24px;
+    margin-top: -21px;
     margin-right: 1ex;
     float: right;
 }
