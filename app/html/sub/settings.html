@@ -93,13 +93,14 @@
             @{editsubform.allow_polls.label.text}
           </label>
         </div>
-
+        @if config.site.auto_expandos:
         <div class="pure-control-group">
           <label for="disable_auto_expandos" class="pure-checkbox">
             @{editsubform.disable_auto_expandos(checked=True if metadata.get('disable_auto_expandos') else False)!!html}
             @{editsubform.disable_auto_expandos.label.text}
           </label>
         </div>
+        @end
 
         <div class="pure-control-group">
           <label for="commentscore_delay" class="pure-control-group">

@@ -20,10 +20,12 @@
                        class="new-form-one">@{edituserform.disable_sub_style.label.text}</label>
                 @{edituserform.disable_sub_style()!!html}
             </div>
+            @if config.site.auto_expandos:
             <div class="new-form-one">
                 <label for="experimental" class="new-form-one">@{edituserform.experimental.label.text}</label>
                 @{edituserform.experimental()!!html}
             </div>
+            @end
 <!--            <div class="new-form-one">
                 <label for="noscroll" class="new-form-one">@{edituserform.noscroll.label.text}</label>
                 @{edituserform.noscroll()!!html}

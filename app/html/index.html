@@ -108,7 +108,7 @@
 
 @def pagefoot():
   <label id="pagefoot-oindex" data-value="true" class="hide"></label>
-  @if "labrat" in current_user.prefs:
+  @if not config.site.auto_expandos or ("labrat" in current_user.prefs):
     <label id="pagefoot-labrat" data-value="true" class="hide"></label>
   @end
   @if sort_type == 'home.all_new':

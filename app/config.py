@@ -556,6 +556,15 @@ configurable_defaults = {
                 ),
                 "value": False,
             },
+            "auto_expandos": {
+                "type": "bool",
+                "doc": _l(
+                    "When enabled, auto-expand postlists expandos by default. "
+                    "This can be further controlled at sub and user level. "
+                    "Single post expandos are always auto-expanded."
+                ),
+                "value": False,
+            },
             "admin_sub": {
                 "type": "string",
                 "doc": _l(
