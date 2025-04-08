@@ -33,6 +33,7 @@ from ..models import (
     SubPostComment,
     UserSaved,
     InviteCode,
+    UserMetadata,
 )
 from ..badges import badges as badges_module
 
@@ -426,6 +427,16 @@ def edit_user():
     nochat = "nochat" in current_user.prefs
     email_notify = "email_notify" in current_user.prefs
     highlight_unseen_comments = "highlight_unseen_comments" in current_user.prefs
+    # Fetch the comment_sort value
+    try:
+        comment_sort_metadata = UserMetadata.get(
+            (UserMetadata.uid == current_user.uid)
+            & (UserMetadata.key == "comment_sort")
+        )
+        comment_sort = comment_sort_metadata.value
+    except UserMetadata.DoesNotExist:
+        # Default value if not set
+        comment_sort = "new"
 
     form = EditUserForm(
         show_nsfw=nsfw_option,
@@ -436,6 +447,7 @@ def edit_user():
         language=current_user.language,
         email_notify=email_notify,
         highlight_unseen_comments=highlight_unseen_comments,
+        comment_sort=comment_sort,
     )
     languages = config.app.languages
     form.language.choices = []

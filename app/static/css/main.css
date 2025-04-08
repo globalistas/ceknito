@@ -69,7 +69,9 @@ blockquote {
 
 .announcement {
 	padding: 3px;
-	margin-right: .5em;
+	margin-right: 3px;
+	position: relative;
+	top: -1px;
 	border-radius: 5px;
 	color: #fff;
 	background-color: var(--primary-color);
@@ -1031,6 +1033,8 @@ img.block-blur, img.nsfw-blur {
 }
 
 .pbody .postflair {
+    top: -1px;
+    position: relative;
 	font-size: 12px;
 }
 
@@ -2565,7 +2569,7 @@ a[href="#toodamncool"] {
 
 .expando-master {
 	display: block;
-	margin-top: .7em;
+	margin-top: 10px;
 }
 
 .postbar .expando-master {

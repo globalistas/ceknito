@@ -314,6 +314,7 @@ def edit_user():
         current_user.update_prefs("noscroll", form.noscroll.data)
         current_user.update_prefs("nochat", form.nochat.data)
         current_user.update_prefs("email_notify", form.email_notify.data)
+        current_user.update_prefs("comment_sort", form.comment_sort.data, boolean=False)
 
         new_highlight_setting = form.highlight_unseen_comments.data
         current_user.update_prefs("highlight_unseen_comments", new_highlight_setting)

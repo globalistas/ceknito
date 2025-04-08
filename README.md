@@ -9,6 +9,7 @@ A link and discussion aggregator with snek (python3)
 - new post sort type (Commented)
 - reddit-like comments look&feel
 - new comment sort type (Old)
+- user-specific comment sort setting
 - new comments highlight option
 - save comment
 - expand all comments

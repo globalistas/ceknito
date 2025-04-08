@@ -42,7 +42,10 @@
                 <label for="language" class="new-form-one">@{edituserform.language.label.text}</label>
                 @{edituserform.language(autocomplete="off")!!html}
             </div>
-
+            <div class="new-form-one">
+                <label for="comment_sort" class="new-form-one">@{edituserform.comment_sort.label.text}</label>
+                @{edituserform.comment_sort()!!html}
+            </div>
             <div class="new-form-one">
                 <label for="highlight_unseen_comments" class="new-form-one">@{edituserform.highlight_unseen_comments.label.text}</label>
                 @{edituserform.highlight_unseen_comments()!!html}

@@ -24,6 +24,7 @@ from ..models import (
     SubFlair,
     SubLog,
     User,
+    UserMetadata,
     UserSaved,
     SubMod,
     SubBan,
@@ -795,12 +796,33 @@ def view_post(sub, pid, slug=None, comments=False, highlight=None):
         SubPostMetadata.select().where(SubPostMetadata.pid == pid)
     )
 
+    # First, get the user's preferred sort from their preferences
+    user_pref_sort = "new"  # Default if no preference or not logged in
+    if current_user.is_authenticated:
+        try:
+            comment_sort_metadata = UserMetadata.get(
+                (UserMetadata.uid == current_user.uid)
+                & (UserMetadata.key == "comment_sort")
+            )
+            user_pref_sort = comment_sort_metadata.value
+        except UserMetadata.DoesNotExist:
+            pass  # Keep default
+
+    # Then apply your existing sticky logic
     sticky_sort = "best" if post["best_sort_enabled"] else "new"
     if str(pid) in subInfo["sticky"]:
         sticky_sort = postmeta.get("sort", sticky_sort)
 
+    # Determine final sort value, respecting priorities
     if sort is None:
-        sort = sticky_sort
+        # If it's a sticky post, sticky_sort takes precedence
+        if str(pid) in subInfo["sticky"]:
+            sort = sticky_sort
+        else:
+            # Otherwise use user preference
+            sort = user_pref_sort
+
+    # Safety check for best sort
     if sort == "best" and not post["best_sort_enabled"]:
         sort = "new"
 

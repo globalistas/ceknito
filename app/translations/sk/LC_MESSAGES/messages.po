@@ -869,6 +869,10 @@ msgstr "Globálny štýl (prevziať z)"
 msgid "Email notifications"
 msgstr "Emailové notifikácie"
 
+#: app/forms/user.py:190
+msgid "Sort comments by"
+msgstr "Radenie komentárov"
+
 #: app/forms/user.py:184
 msgid "Language"
 msgstr "Jazyk"

@@ -186,6 +186,14 @@ class EditUserForm(FlaskForm):
     language = SelectField(_l("Language"), choices=[], validate_choice=False)
     highlight_unseen_comments = BooleanField(_l("Highlight new comments"))
     email_notify = BooleanField(_l("Email notifications"))
+    comment_sort = SelectField(
+        _l("Sort comments by"),
+        choices=[
+            ("new", _l("New")),
+            ("top", _l("Top")),
+            ("old", _l("Old")),
+        ],
+    )
 
 
 class EditIgnoreForm(FlaskForm):

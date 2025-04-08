@@ -1728,6 +1728,7 @@ def get_settings():
             "nochat",
             "email_notify",
             "highlight_unseen_comments",
+            "comment_sort",
         )
     )
     prefs = {x.key: x.value for x in prefs}
@@ -1738,6 +1739,7 @@ def get_settings():
             "nsfw": True if prefs.get("nsfw", False) == "1" else False,
             "nsfw_blur": True if prefs.get("nsfw_blur", False) == "1" else False,
             "nochat": True if prefs.get("nochat", False) == "1" else False,
+            "comment_sort": prefs.get("comment_sort", "new"),
             "email_notify": True if prefs.get("email_notify", False) == "1" else False,
             "highlight_unseen_comments": True
             if prefs.get("highlight_unseen_comments", False) == "1"
@@ -1774,6 +1776,7 @@ def set_settings():
             "nochat",
             "email_notify",
             "highlight_unseen_comments",
+            "comment_sort",
         ]
     ]:
         return jsonify(msg="Invalid setting options sent"), 400
@@ -1790,6 +1793,7 @@ def set_settings():
             "nochat",
             "email_notify",
             "highlight_unseen_comments",
+            "comment_sort",
         ]:
             if not isinstance(settings[sett], bool):
                 return jsonify(msg="Invalid type for setting"), 400
