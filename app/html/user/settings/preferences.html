@@ -5,68 +5,74 @@
 @end
 
 @def main():
-<div id="container">
+<div id="container" class="new-form-one">
     <h2>@{_('%(user)s\'s preferences', user=current_user.name)}</h2>
-    <form method="POST" id="edit-user-form" data-refresh='true' action="@{url_for('do.edit_user')}"
-          class="ajaxform pure-form pure-form-aligned">
+    <form method="POST" id="edit-user-form" data-refresh='true' action="@{url_for('do.edit_user')}" class="ajaxform pure-form pure-form-aligned">
         @{edituserform.csrf_token()!!html}
         <fieldset>
-            <div class="new-form-one">
-                <label for="show_nsfw" class="new-form-one">@{edituserform.show_nsfw.label.text}</label>
-                @{edituserform.show_nsfw()!!html}
-            </div>
-            <div class="new-form-one">
-                <label for="disable_sub_style"
-                       class="new-form-one">@{edituserform.disable_sub_style.label.text}</label>
-                @{edituserform.disable_sub_style()!!html}
-            </div>
-            @if config.site.auto_expandos:
-            <div class="new-form-one">
-                <label for="experimental" class="new-form-one">@{edituserform.experimental.label.text}</label>
-                @{edituserform.experimental()!!html}
-            </div>
-            @end
-<!--            <div class="new-form-one">
-                <label for="noscroll" class="new-form-one">@{edituserform.noscroll.label.text}</label>
-                @{edituserform.noscroll()!!html}
-            </div>-->
-            @if config.site.enable_chat:
-              <div class="new-form-one">
-                  <label for="nochat" class="new-form-one">@{edituserform.nochat.label.text}</label>
-                  @{edituserform.nochat()!!html}
-              </div>
-            @end
+                <div class="new-form-one">
+                    <label for="show_nsfw" class="new-form-one">@{edituserform.show_nsfw.label.text}</label>
+                    @{edituserform.show_nsfw()!!html}
+                </div>
 
-            <div class="pure-control-group"></div>
-            <div class="new-form-one">
-                <label for="language" class="new-form-one">@{edituserform.language.label.text}</label>
-                @{edituserform.language(autocomplete="off")!!html}
-            </div>
-            <div class="new-form-one">
-                <label for="comment_sort" class="new-form-one">@{edituserform.comment_sort.label.text}</label>
-                @{edituserform.comment_sort()!!html}
-            </div>
-            <div class="new-form-one">
-                <label for="highlight_unseen_comments" class="new-form-one">@{edituserform.highlight_unseen_comments.label.text}</label>
-                @{edituserform.highlight_unseen_comments()!!html}
-            </div>
+                <div class="new-form-one">
+                    <label for="disable_sub_style"
+                           class="new-form-one">@{edituserform.disable_sub_style.label.text}</label>
+                    @{edituserform.disable_sub_style()!!html}
+                </div>
 
-            <div class="new-form-one">
-                <label for="email_notify" class="new-form-one">@{edituserform.email_notify.label.text}</label>
-                @if not current_user.email:
-                    @{edituserform.email_notify(disabled=True, title=_('Fill your email address in account settings to enable'))!!html}
-                @else:
-                    @{edituserform.email_notify()!!html}
+                @if config.site.auto_expandos:
+                <div class="new-form-one">
+                    <label for="experimental" class="new-form-one">@{edituserform.experimental.label.text}</label>
+                    @{edituserform.experimental()!!html}
+                </div>
                 @end
-            </div>
+    <!--            <div class="new-form-one">
+                    <label for="noscroll" class="new-form-one">@{edituserform.noscroll.label.text}</label>
+                    @{edituserform.noscroll()!!html}
+                </div>-->
+                @if config.site.enable_chat:
+                  <div class="new-form-one">
+                      <label for="nochat" class="new-form-one">@{edituserform.nochat.label.text}</label>
+                      @{edituserform.nochat()!!html}
+                  </div>
+                @end
 
-            <div class="alert div-error"></div>
+                <div class="pure-control-group"></div>
 
-			<div>
-            <button type="submit" class="pure-button pure-button-primary new-form-one" id="edituser-btnsubmit"
-                    data-prog="@{_('Editing...')}" data-success="@{_('Saved!')}">@{_('Save')}
-            </button>
-			</div>
+                <div class="new-form-one">
+                    <label for="language" class="new-form-one">@{edituserform.language.label.text}</label>
+                    @{edituserform.language(autocomplete="off")!!html}
+                </div>
+
+                <div class="pure-control-group"></div>
+
+                <div class="new-form-one">
+                    <label for="comment_sort" class="new-form-one">@{edituserform.comment_sort.label.text}</label>
+                    @{edituserform.comment_sort()!!html}
+                </div>
+
+                <div class="new-form-one">
+                    <label for="highlight_unseen_comments" class="new-form-one">@{edituserform.highlight_unseen_comments.label.text}</label>
+                    @{edituserform.highlight_unseen_comments()!!html}
+                </div>
+
+                <div class="new-form-one">
+                    <label for="email_notify" class="new-form-one">@{edituserform.email_notify.label.text}</label>
+                    @if not current_user.email:
+                        @{edituserform.email_notify(disabled=True, title=_('Fill your email address in account settings to enable'))!!html}
+                    @else:
+                        @{edituserform.email_notify()!!html}
+                    @end
+                </div>
+
+                <div class="alert div-error"></div>
+
+                <div>
+                    <button type="submit" class="pure-button pure-button-primary new-form-one" id="edituser-btnsubmit"
+                            data-prog="@{_('Editing...')}" data-success="@{_('Saved!')}">@{_('Save')}
+                    </button>
+                </div>
         </fieldset>
     </form>
 </div>

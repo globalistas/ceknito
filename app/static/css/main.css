@@ -3244,10 +3244,6 @@ li.mod-table-header {
     width: 100%;
   }
 
-    #container {
-        padding-left: 0;
-    }
-
   .misctainer {
     margin: 0;
   }
@@ -3286,6 +3282,10 @@ li.mod-table-header {
     display: block;
     margin-left: -1px;
   }
+
+    .new-form-one {
+        font-size: 12px;
+    }
 
   /* User Info and Sidebar */
   #th-uinfo {
