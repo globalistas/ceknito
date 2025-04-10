@@ -207,6 +207,9 @@ def users(page):
     if not current_user.is_admin():
         abort(404)
 
+    sort_by = request.args.get("sort", "joindate")  # Default sort by last login
+    sort_dir = request.args.get("dir", "desc")  # Default direction descending
+
     postcount = (
         SubPost.select(SubPost.uid, fn.Count(SubPost.pid).alias("post_count"))
         .group_by(SubPost.uid)
@@ -238,7 +241,41 @@ def users(page):
     users = users.join(
         last_login_query, JOIN.LEFT_OUTER, on=(User.uid == last_login_query.c.uid)
     )
-    users = users.order_by(last_login_query.c.last_login).paginate(page, 50).dicts()
+
+    if sort_by == "name":
+        order_clause = User.name if sort_dir == "asc" else User.name.desc()
+    elif sort_by == "posts":
+        # Use SQL COALESCE to handle NULL values
+        order_clause = (
+            fn.COALESCE(postcount.c.post_count, 0)
+            if sort_dir == "asc"
+            else fn.COALESCE(postcount.c.post_count, 0).desc()
+        )
+    elif sort_by == "comments":
+        order_clause = (
+            fn.COALESCE(commcount.c.comment_count, 0)
+            if sort_dir == "asc"
+            else fn.COALESCE(commcount.c.comment_count, 0).desc()
+        )
+    elif sort_by == "status":
+        order_clause = User.status if sort_dir == "asc" else User.status.desc()
+    elif sort_by == "email":
+        order_clause = User.email if sort_dir == "asc" else User.email.desc()
+    elif sort_by == "login":
+        if sort_dir == "asc":
+            # For ascending order, NULL values first, then oldest to newest dates
+            order_clause = fn.COALESCE(
+                last_login_query.c.last_login, "1970-01-01 00:00:00"
+            )
+        else:
+            # For descending order, newest dates first, then NULL values
+            order_clause = fn.COALESCE(
+                last_login_query.c.last_login, "1970-01-01 00:00:00"
+            ).desc()
+    elif sort_by == "joindate":
+        order_clause = User.joindate if sort_dir == "asc" else User.joindate.desc()
+
+    users = users.order_by(order_clause).paginate(page, 50).dicts()
 
     return engine.get_template("admin/users.html").render(
         {
@@ -246,6 +283,8 @@ def users(page):
             "page": page,
             "term": None,
             "admin_route": "admin.users",
+            "sort_by": sort_by,
+            "sort_dir": sort_dir,
         }
     )
 
@@ -554,6 +593,8 @@ def view():
             "admin_route": "admin.view",
             "page": None,
             "term": None,
+            "sort_by": None,
+            "sort_dir": None,
         }
     )
 
@@ -605,6 +646,8 @@ def users_search(term):
             "term": term,
             "admin_route": "admin.users_search",
             "page": None,
+            "sort_by": None,
+            "sort_dir": None,
         }
     )
 

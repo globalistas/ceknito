@@ -1,5 +1,5 @@
 @extends("shared/layout.html")
-@require(users, page, term, admin_route)
+@require(users, page, term, admin_route, sort_by, sort_dir)
 
 @def title():
 @{_('Admin')} - @{config.site.lema}
@@ -39,19 +39,19 @@
             @if admin_route == 'admin.users_search':
               <div>Showing results for: @{term}</div>
             @end
-            <table class="sortable pure-table">
+            <table class="pure-table">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Posts</th>
-                  <th>Comments</th>
+                  <th><a href="@{url_for('admin.users', page=page, sort='name', dir='desc' if sort_by=='name' and sort_dir=='asc' else 'asc')}">Name</a></th>
+                  <th><a href="@{url_for('admin.users', page=page, sort='posts', dir='desc' if sort_by=='posts' and sort_dir=='asc' else 'asc')}">Posts</a></th>
+                  <th><a href="@{url_for('admin.users', page=page, sort='comments', dir='desc' if sort_by=='comments' and sort_dir=='asc' else 'asc')}">Comments</a></th>
                   <th>Votes</th>
                   <th>Level</th>
                   <th>XP</th>
-                  <th>Status</th>
-                  <th>Joined</th>
-                  <th>Last login</th>
-                  <th>Email</th>
+                  <th><a href="@{url_for('admin.users', page=page, sort='status', dir='desc' if sort_by=='status' and sort_dir=='asc' else 'asc')}">Status</a></th>
+                  <th><a href="@{url_for('admin.users', page=page, sort='joindate', dir='desc' if sort_by=='joindate' and sort_dir=='asc' else 'asc')}">Joined</a></th>
+                  <th><a href="@{url_for('admin.users', page=page, sort='login', dir='desc' if sort_by=='login' and sort_dir=='asc' else 'asc')}">Last login</a></th>
+                  <th><a href="@{url_for('admin.users', page=page, sort='email', dir='desc' if sort_by=='email' and sort_dir=='asc' else 'asc')}">Email</a></th>
                 </tr>
               </thead>
               <tbody>
@@ -97,10 +97,10 @@
         </div>
         @if admin_route == 'admin.users':
             @if page > 1:
-                <a href="@{url_for('admin.users', page=(page-1))}" class="pure-button">Previous Page</a>
+                <a href="@{url_for('admin.users', page=(page-1), sort=sort_by, dir=sort_dir)}" class="pure-button">Previous Page</a>
             @end
             @if len(users) == 50:
-                <a href="@{url_for('admin.users', page=(page+1))}" class="pure-button">Next Page</a>
+                <a href="@{url_for('admin.users', page=(page+1), sort=sort_by, dir=sort_dir)}" class="pure-button">Next Page</a>
             @end
         @end
       </div>
