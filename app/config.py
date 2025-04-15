@@ -521,6 +521,11 @@ configurable_defaults = {
                 "doc": _l("Globally disables/enables the send_email function."),
                 "value": True,
             },
+            "reg_email": {
+                "type": "bool",
+                "doc": _l("Disables/enables reg notify admin emailing"),
+                "value": False,
+            },
             "email_notify": {
                 "type": "map",
                 "value": {

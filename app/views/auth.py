@@ -237,7 +237,8 @@ def register():
     <p><strong>Registration Date:</strong> {regdate}</p>
     <p><strong>User Agent:</strong> {useragent}</p>
     """
-    send_email(config.mail.default_to, "New registration", "", html_content)
+    if config.site.reg_email:
+        send_email(config.mail.default_to, "New registration", "", html_content)
 
     if config.site.auto_adopter:
         triggers["user registers"](user.uid)
@@ -264,7 +265,14 @@ def register():
         user_name=user.name,
     )
     if config.site.auto_welcome:
-        create_message(admin_primary.uid, user.uid, subject, content, 100)
+        create_message(
+            admin_primary.uid,
+            user.uid,
+            subject,
+            content,
+            100,
+            send_notification_email=False,
+        )
 
     if email_validation_is_required():
         send_login_link_email(user)

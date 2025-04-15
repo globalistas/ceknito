@@ -780,6 +780,15 @@ def send_email(to, subject, text_content, html_content, sender=None):
 def send_email_with_smtp(sender, recipients, subject, text_content, html_content):
     if not isinstance(recipients, list):
         recipients = [recipients]
+
+    # Filter out any empty recipients
+    recipients = [r for r in recipients if r]
+
+    # Only proceed if we have valid recipients
+    if not recipients:
+        current_app.logger.warning("Attempted to send email with no valid recipients")
+        return
+
     msg = EmailMessage(
         subject,
         sender=sender,
@@ -2739,7 +2748,7 @@ def pick_random_security_question():
     return sc[1]
 
 
-def create_message(mfrom, to, subject, content, mtype):
+def create_message(mfrom, to, subject, content, mtype, send_notification_email=True):
     """Creates a message."""
     posted = datetime.utcnow()
     msg_thread = MessageThread.create(subject=subject)
@@ -2761,41 +2770,41 @@ def create_message(mfrom, to, subject, content, mtype):
         namespace="/snt",
         room="user" + to,
     )
-
     target_email_notify = (
         UserMetadata.select(UserMetadata.value)
         .where((UserMetadata.uid == to) & (UserMetadata.key == "email_notify"))
         .scalar()  # Use scalar() to get the actual value
     ) == "1"
+    if target_email_notify and send_notification_email:
+        user = User.get_by_id(pk=to)
+        user_email = user.email
+        if user_email:
+            locale_map = {
+                "sk": "sk_SK",
+                "cs": "cs_CZ",
+                "en": "en_US",
+                "es": "es_ES",
+                "ru": "ru_RU",
+            }
+            locale_language = locale_map.get(
+                user.language, "sk_SK"
+            )  # Default to Slovak if no target language found
 
-    if target_email_notify:
-        target_language = User.get_by_id(pk=to).language
-        locale_map = {
-            "sk": "sk_SK",
-            "cs": "cs_CZ",
-            "en": "en_US",
-            "es": "es_ES",
-            "ru": "ru_RU",
-        }
-        locale_language = locale_map.get(
-            target_language, "sk_SK"
-        )  # Default to Slovak if no target language found
+            with force_locale(locale_language):  # Ensure correct locale is set
+                email = _(
+                    'User %(user_name)s sent you a <a href="%(url)s">private message</a>',
+                    user_name=getattr(current_user, "name", "Admin"),
+                    post_title=None,
+                    sub_name=None,
+                    url=url_for("messages.view_messages", _external=True),
+                )
 
-        with force_locale(locale_language):  # Ensure correct locale is set
-            email = _(
-                'User %(user_name)s sent you a <a href="%(url)s">private message</a>',
-                user_name=getattr(current_user, "name", "Admin"),
-                post_title=None,
-                sub_name=None,
-                url=url_for("messages.view_messages", _external=True),
-            )
-
-            send_email(
-                User.get_by_id(pk=to).email,
-                subject=_("New notification"),
-                text_content="",
-                html_content=email,
-            )
+                send_email(
+                    user_email,  # Use the email we already fetched
+                    subject=_("New notification"),
+                    text_content="",
+                    html_content=email,
+                )
     return msg
 
 
