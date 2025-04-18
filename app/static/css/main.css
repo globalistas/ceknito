@@ -1849,6 +1849,11 @@ article.comment .score {
 	background-color: silver;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 .center-container .content, .comments .content img, .post-content-container img {
 	max-width: 100%;
 }
