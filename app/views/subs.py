@@ -335,7 +335,7 @@ def create_post(ptype, sub):
                 # "addr": addr,
                 # "sub": sub.name,
                 # "type": form.ptype.data,
-                # "show_sidebar": show_sidebar,
+                "show_sidebar": show_sidebar,
                 "user": current_user.name,
                 "pid": post.pid,
                 "sid": sub.sid,

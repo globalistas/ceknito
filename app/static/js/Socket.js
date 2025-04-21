@@ -214,7 +214,7 @@ socket.on('comment-deletion', function (data) {
 // Recent activity comment updates
 socket.on('comment', function (data) {
   const recentActivity = document.getElementById('activity_list_sidebar');
-  if (recentActivity) {
+  if (recentActivity && data.show_sidebar) {
     const showNSFW = document.getElementById('pagefoot-nsfw').getAttribute('data-value') == 'True';
     if (data.nsfw && !showNSFW) {
       return;
@@ -265,7 +265,7 @@ socket.on('thread', function (data) {
   const nsfwElem = data.nsfw ? ('<span class="nsfw smaller" title="' + _('Not safe for work') + '">' + _('NSFW') + '</span>') : '';
   const recentActivity = document.getElementById('activity_list_sidebar');
   const title = data.title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  if (recentActivity) {
+  if (recentActivity && data.show_sidebar) {
     const elem = document.createElement('li');
     elem.setAttribute('data-pid', data.pid);
     elem.innerHTML = _('%1:<br>%2 %3 in %4',
