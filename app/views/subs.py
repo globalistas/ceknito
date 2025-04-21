@@ -510,4 +510,8 @@ def create_sub():
 
     SubSubscriber.create(uid=current_user.uid, sid=sub.sid, status=1)
 
+    if form.private.data:
+        sub.update_metadata("sublog_private", True)
+        sub.update_metadata("sub_banned_users_private", True)
+
     return redirect(url_for("sub.view_sub", sub=form.subname.data))
