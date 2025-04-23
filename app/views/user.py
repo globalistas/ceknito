@@ -115,7 +115,7 @@ def view(user):
             & (
                 (Sub.private == 0)
                 | current_user.can_admin
-                | (user.uid == current_user.uid)  # Add this condition
+                | (user.uid == current_user.uid)
             )
         )
     )

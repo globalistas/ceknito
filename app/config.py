@@ -514,6 +514,11 @@ configurable_defaults = {
                         ),
                         "value": True,
                     },
+                    "defaults_only": {
+                        "type": "bool",
+                        "doc": _l("If enabled, only show posts from default subs."),
+                        "value": False,
+                    },
                 },
             },
             "send_email": {

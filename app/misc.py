@@ -1002,6 +1002,11 @@ def fetchTodaysTopPosts(uid, include_nsfw, filter_shadowbanned=False):
 
     if not include_nsfw:
         query = query.where(SubPost.nsfw == 0)
+
+    defaults = getDefaultSubs()
+    if config.site.top_posts.defaults_only:
+        query = query.where(SubPost.sid << [d["sid"] for d in defaults])
+
     return list(query.order_by(SubPost.score.desc()).limit(5).dicts())
 
 
