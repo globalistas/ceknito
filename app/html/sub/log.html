@@ -28,12 +28,12 @@
           <time-ago datetime="@{log.time.isoformat()}Z">@{log.time.isoformat()}</time-ago>
         </div>
         <div data-name="@{_('Moderator:')}" class="elem sub pure-u-1 pure-u-md-4-24">
-          @if log.uid:
-          @if log.uid.status != 10:
-          <a href="/u/@{log.uid.name}">@{log.uid.name}</a>\
-          @else:
-          @{_('[deleted]')}
-          @end
+          @if log.uid and log.action != 36 and log.action != 37:
+            @if log.uid.status != 10:
+            <a href="/u/@{log.uid.name}">@{log.uid.name}</a>\
+            @else:
+            @{_('[deleted]')}
+            @end
           @end
         </div>
         <div data-name="@{_('Action:')}" class="elem sub pure-u-1 pure-u-md-11-24">
