@@ -2000,7 +2000,11 @@ def inv_member(sub):
     except SubMod.DoesNotExist:
         is_owner = False
 
-    if is_owner or current_user.is_admin():
+    if (
+        current_user.is_mod(sub.sid, power_level=1)
+        or is_owner
+        or current_user.is_admin()
+    ):
         form = EditMemberForm()
         if form.validate():
             try:
@@ -2345,7 +2349,11 @@ def revoke_memberinv(sub, user):
     except SubMod.DoesNotExist:
         is_owner = False
 
-    if is_owner or current_user.is_admin():
+    if (
+        current_user.is_mod(sub.sid, power_level=1)
+        or is_owner
+        or current_user.is_admin()
+    ):
         form = CsrfTokenOnlyForm()
         if form.validate():
             try:
