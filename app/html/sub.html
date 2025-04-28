@@ -9,7 +9,7 @@
 
 @def subtitle():
   <div id="subtitle" class="subtitle">
-    <a href="@{url_for('sub.view_sub_hot', sub=sub['name'], flair=None)}">/@{config.site.sub_prefix}/@{sub['name']}</a> \
+    <a href="@{url_for('sub.view_sub', sub=sub['name'])}">/@{config.site.sub_prefix}/@{sub['name']}</a> \
   </div>
 @end
 
@@ -31,7 +31,7 @@
 <div id="flair">
   @if flair:
     <span class="postflair" style="color:@{text_color}; background-color:@{bg_color}; border-color:@{border_color};">@{flair}</span>
-    <a href="@{url_for('sub.view_sub_hot', sub=sub['name'])}">@{_('(show all)')}</a>
+    <a href="@{url_for('sub.view_sub', sub=sub['name'])}">@{_('(show all)')}</a>
   @end
 </div>
 @include('shared/sidebar/sub.html')

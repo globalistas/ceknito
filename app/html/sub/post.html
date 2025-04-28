@@ -45,7 +45,7 @@
 
 @def subtitle():
   <div class="subtitle">
-    <a href="@{url_for('sub.view_sub_hot', sub=post['sub'], flair=None)}">/@{config.site.sub_prefix}/@{sub['name']}</a> \
+    <a href="@{url_for('sub.view_sub', sub=post['sub'])}">/@{config.site.sub_prefix}/@{sub['name']}</a> \
   </div>
 @end
 
