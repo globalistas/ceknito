@@ -60,6 +60,7 @@ def view_deleted_user(user):
             "target_user_is_admin": None,
             "msgform": None,
             "ignform": None,
+            "last_login": None,
         }
     )
 
@@ -84,6 +85,7 @@ def view_shadownbanned_user(user):
             "target_user_is_admin": None,
             "msgform": CreateUserMessageForm(),
             "ignform": EditIgnoreForm(view_messages=None, view_content=None),
+            "last_login": get_last_login(user),
         }
     )
 
