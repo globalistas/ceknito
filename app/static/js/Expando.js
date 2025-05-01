@@ -43,6 +43,25 @@ class LiteYTEmbed {
     this.element.textContent = '';
     this.element.appendChild(iframeEl);
     this.element.classList.add('lty-activated');
+
+      // Remove NSFW blur from expandotxt if present
+      const expandoTxt = this.element.closest('.expandotxt.nsfw-blur');
+      if (expandoTxt) {
+        expandoTxt.classList.remove('nsfw-blur');
+      }
+
+      // Also remove NSFW blur from expando-master if present
+      const expandoMaster = this.element.closest('.expando-master.nsfw-blur');
+      if (expandoMaster) {
+        expandoMaster.classList.remove('nsfw-blur');
+      }
+
+      // Find any parent elements with nsfw-blur class and remove it
+      const anyBlurredParent = this.element.closest('.nsfw-blur');
+      if (anyBlurredParent) {
+        anyBlurredParent.classList.remove('nsfw-blur');
+      }
+
   }
 }
 
@@ -52,7 +71,6 @@ class LiteTwitterEmbed {
     this.element = element;
     this.tweetId = element.getAttribute('data-tweetid');
     this.username = element.getAttribute('data-username');
-
     this.loadEmbed();
   }
 
@@ -73,6 +91,9 @@ class LiteTwitterEmbed {
 
     // Ensure the Twitter script is loaded (if not already loaded)
     this.loadTwitterScript();
+
+    // Remove NSFW blur from any parent elements
+    this.removeNSFWBlur();
   }
 
   // Load Twitter's widgets.js script to render the embed
@@ -85,6 +106,27 @@ class LiteTwitterEmbed {
       document.body.appendChild(script);
     } else {
       window.twttr.widgets.load();
+    }
+  }
+
+  // New method to handle removing NSFW blur
+  removeNSFWBlur() {
+    // Remove NSFW blur from expandotxt if present
+    const expandoTxt = this.element.closest('.expandotxt.nsfw-blur');
+    if (expandoTxt) {
+      expandoTxt.classList.remove('nsfw-blur');
+    }
+
+    // Also remove NSFW blur from expando-master if present
+    const expandoMaster = this.element.closest('.expando-master.nsfw-blur');
+    if (expandoMaster) {
+      expandoMaster.classList.remove('nsfw-blur');
+    }
+
+    // Find any parent elements with nsfw-blur class and remove it
+    const anyBlurredParent = this.element.closest('.nsfw-blur');
+    if (anyBlurredParent) {
+      anyBlurredParent.classList.remove('nsfw-blur');
     }
   }
 }
@@ -399,10 +441,50 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch) {
           <iframe width="100%" src="https://streamja.com/embed/${extractID(link, 'streamja')}"></iframe>
         </div>`;
     } else if (domain === 'streamable.com') {
-      expando.querySelector('.expandotxt').innerHTML = `
-        <div class="iframewrapper">
-          <iframe width="100%" src="https://streamable.com/o/${extractID(link, 'streamable')}"></iframe>
-        </div>`;
+      const streamableId = extractID(link, 'streamable');
+      if (streamableId) {
+        // Create a special wrapper with a click handler to remove blur
+        const expandoTxt = expando.querySelector('.expandotxt');
+
+        // Create the wrapper and iframe, but add a click overlay
+        const wrapperHtml = `
+          <div class="iframewrapper">
+            <div class="blur-removal-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; cursor: pointer;"></div>
+            <iframe width="100%" src="https://streamable.com/o/${streamableId}"></iframe>
+          </div>`;
+
+        // Set the HTML content
+        expandoTxt.innerHTML = wrapperHtml;
+
+        // Style the iframewrapper for the overlay to work
+        const wrapper = expandoTxt.querySelector('.iframewrapper');
+        if (wrapper) {
+          wrapper.style.position = 'relative';
+        }
+
+        // Add click handler to the overlay
+        const overlay = expandoTxt.querySelector('.blur-removal-overlay');
+        if (overlay) {
+          overlay.addEventListener('click', function(e) {
+            // Remove blur from expandotxt
+            if (expandoTxt.classList.contains('nsfw-blur')) {
+              expandoTxt.classList.remove('nsfw-blur');
+            }
+
+            // Remove blur from expando-master
+            const expandoMaster = expandoTxt.closest('.expando-master');
+            if (expandoMaster && expandoMaster.classList.contains('nsfw-blur')) {
+              expandoMaster.classList.remove('nsfw-blur');
+            }
+
+            // Remove the overlay itself after click
+            this.remove();
+
+            // Stop propagation to allow normal iframe interaction after first click
+            e.stopPropagation();
+          });
+        }
+      }
     } else if (domain === 'vine.co') {
       expando.querySelector('.expandotxt').innerHTML = `
         <div class="iframewrapper">
