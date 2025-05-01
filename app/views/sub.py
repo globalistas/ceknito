@@ -342,11 +342,7 @@ def edit_sub_members(sub):
     except Sub.DoesNotExist:
         abort(404)
 
-    if (
-        current_user.is_mod(sub.sid, 2)
-        or current_user.is_memberinv(sub.sid)
-        or current_user.is_admin()
-    ):
+    if current_user.is_mod(sub.sid, 1) or current_user.is_admin():
         subMods = misc.getSubMods(sub.sid)
         subMembers = misc.getSubMembers(sub.sid)
         memberInvites = (

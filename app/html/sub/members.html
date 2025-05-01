@@ -74,7 +74,7 @@
       <hr/>
       @end
 
-      @if current_user.is_admin() or current_user.is_mod(sub.sid, 1):
+      @if current_user.is_admin() or current_user.is_mod(sub.sid, 0):
         @if len(subMembers['members']) == 0:
           <p>@{_('Active members: none')}</p>
         @else:
@@ -85,9 +85,7 @@
                 <li>
                   <a href="@{url_for('user.view', user=member['name'])}">@{member['name']}</a>
                   @if sub.private:
-                    @if current_user.is_admin() or current_user.is_mod(sub.sid, 0):
                     (<a data-sub="@{sub.name}" data-user="@{member['name']}" class="slink remove-member">@{_('remove')}</a>)
-                    @end
                   @end
                 </li>
               </span>
