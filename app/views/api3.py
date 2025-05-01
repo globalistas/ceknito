@@ -14,6 +14,7 @@ from flask_jwt_extended import (
     get_jwt_identity,
     verify_jwt_in_request,
 )
+from flask_login import current_user
 from .. import misc
 from .. import tasks
 from ..auth import (
@@ -1195,12 +1196,22 @@ def search_sub():
         return jsonify(results=[])
 
     query = "%" + query + "%"
-    subs = (
-        Sub.select(Sub.name)
-        .where((Sub.name**query) & (Sub.status == 0) & (Sub.private == 0))
-        .limit(10)
-        .dicts()
-    )
+
+    conditions = (Sub.name**query) & (Sub.status == 0)
+
+    if current_user.is_authenticated:
+        if current_user.can_admin:
+            # Admins can see all subs including private ones
+            # No additional condition needed for admins
+            pass
+        else:
+            # Regular authenticated users can see public subs and private subs they belong to
+            user_subs = SubSubscriber.select(SubSubscriber.sid).where(
+                (SubSubscriber.uid == current_user.uid) & (SubSubscriber.status == 1)
+            )
+            conditions = conditions & ((Sub.private == 0) | (Sub.sid.in_(user_subs)))
+
+    subs = Sub.select(Sub.name).where(conditions).limit(10).dicts()
 
     return jsonify(results=list(subs))
 
