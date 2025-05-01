@@ -534,7 +534,14 @@ def subs_search(page, term, sort):
         Sub.posts,
     )
 
-    c = c.where((Sub.name.contains(term)) & (Sub.private == 0))
+    c = c.where(Sub.name.contains(term))
+
+    if not current_user.can_admin:
+        user_subs = SubSubscriber.select(SubSubscriber.sid).where(
+            (SubSubscriber.uid == current_user.uid) & (SubSubscriber.status == 1)
+        )
+
+        c = c.where(((Sub.private == 0) | (Sub.sid.in_(user_subs))) & (Sub.status == 0))
 
     # sorts...
     if sort == "name_desc":
