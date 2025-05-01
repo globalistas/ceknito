@@ -1127,3 +1127,13 @@ body.dark .unseen-comment {
 body.dark .prev-unseen-comment {
 	background-color: #484957;
 }
+
+body.dark .nsfw, .private {
+    color: #b93d3d;
+    border: 1px solid #b93d3d;
+}
+
+body.dark .live-activity-tag {
+    color: #678392;
+    border: 1px solid #678392;
+}
