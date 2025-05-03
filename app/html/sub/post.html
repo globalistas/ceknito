@@ -559,7 +559,8 @@
 @end
 
 @def pagefoot():
-
+  <label id="pagefoot-nsfw" data-value="@{'nsfw' in current_user.prefs}" class="hide"></label>
+  <label id="pagefoot-nsfw-blur" data-value="@{'nsfw_blur' in current_user.prefs}" class="hide"></label>
   <label id="pagefoot-admin" data-value="@{current_user.is_admin()}" class="hide"></label>
   @if not current_user.block_styles():
     <link rel="stylesheet" href="@{url_for('sub.get_css', sub=post['sub'])}">

@@ -682,6 +682,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Auto expand all expandos except those in announcement or nsfw posts or twitter posts
 function expandAllExpandos() {
+  // Check if user wants blur on NSFW content
+  const nsfwBlurElement = document.querySelector('#pagefoot-nsfw-blur');
+  let nsfwBlurEnabled = true; // Default to true for anonymous users
+
+  if (nsfwBlurElement && nsfwBlurElement.dataset) {
+    // Only override the default if we find the preference element
+    nsfwBlurEnabled = nsfwBlurElement.dataset.value === 'True';
+  }
+
   document.querySelectorAll('.expando').forEach(expandoElement => {
     const postElement = expandoElement.closest('.post');
     const pbody = postElement.querySelector('.pbody');
@@ -699,10 +708,10 @@ function expandAllExpandos() {
       }
     }
 
-    // Add blur class to NSFW posts
+    // Add blur class to NSFW posts only if user has NSFW blur enabled
     const nsfwPost = postElement.querySelector('.nsfw');
     const expandotxt = postElement.querySelector('.expandotxt');
-    if (nsfwPost && expandotxt) {
+    if (nsfwPost && expandotxt && nsfwBlurEnabled) {  // Only blur if preference is set
       expandotxt.classList.add('nsfw-blur');
     }
   });
