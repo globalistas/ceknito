@@ -4259,11 +4259,11 @@ def recent_activity(sidebar=True, filter_shadowbanned=False, filter_private=Fals
             )
 
             post_activity = post_activity.where(
-                (Sub.private == 0) | (Sub.sid.in_(user_subs))
+                ((Sub.private == 0) | (Sub.sid.in_(user_subs))) & (Sub.status == 0)
             )
 
             comment_activity = comment_activity.where(
-                (Sub.private == 0) | (Sub.sid.in_(user_subs))
+                ((Sub.private == 0) | (Sub.sid.in_(user_subs))) & (Sub.status == 0)
             )
 
     if sidebar and config.site.recent_activity.defaults_only:

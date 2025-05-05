@@ -5,6 +5,10 @@
 @include('shared/sidebar/home.html')
 @end
 
+@def title():
+  @{_("Recent activity")} | @{config.site.lema}
+@end
+
 @def main():
 <div id="center-container">
   <div class="content" style="margin-left: 1em">
