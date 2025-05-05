@@ -1360,7 +1360,10 @@ def postListQueryBase(
             # Also hide posts from suspended subs
             posts = posts.where(Sub.status == 0)
     else:
-        posts = posts.where((SubPost.deleted == 0) & (Sub.status == 0))
+        if not current_user.is_admin():
+            posts = posts.where((SubPost.deleted == 0) & (Sub.status == 0))
+        else:
+            posts = posts.where(SubPost.deleted == 0)
 
     if filter_shadowbanned:
         if current_user.can_admin:

@@ -27,6 +27,12 @@
   @end
 @end
 
+@if sub['status'] == 1:
+  <div style="text-align: center;"><h3>@{_('The sub has been banned by the administration due to ToS/rule violations.')}</h3></div>
+@elif sub['status'] == 2:
+  <div style="text-align: center;"><h3>@{_('The sub has been temporarily quarantined.')}</h3></div>
+@endif
+
 <div class="subinfo">
   <span style="vertical-align: middle;">
     @if subInfo.get('icon_file'):
