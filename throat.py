@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" From here we start the app in debug mode with the command line interface. """
+"""From here we start the app in debug mode with the command line interface."""
 from gevent import monkey
 
 monkey.patch_all()

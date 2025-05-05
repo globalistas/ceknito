@@ -1,4 +1,5 @@
-""" Manages notifications """
+"""Manages notifications"""
+
 from datetime import datetime, timedelta
 
 from flask_login import current_user

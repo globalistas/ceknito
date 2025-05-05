@@ -1,4 +1,5 @@
-""" Database and storage related functions and classes """
+"""Database and storage related functions and classes"""
+
 import datetime
 import time
 import logging

@@ -1,4 +1,5 @@
-""" Misc helper function and classes. """
+"""Misc helper function and classes."""
+
 import hashlib
 from urllib.parse import urlparse, parse_qs
 import json
@@ -116,8 +117,8 @@ from wheezy.template.loader import FileLoader
 allowedUserNames = re.compile(r"^[a-zA-ZÁ-ž0-9_-]+$")
 allowedNames = re.compile(r"^[a-zA-ZÁ-ž0-9_-]+$")
 WHITESPACE = (
-    "\u0009\u000A\u000B\u000C\u000D\u0020\u0085\u00A0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007"
-    "\u2008\u2009\u200a\u200b\u2029\u202f\u205f\u3000\u180e\u200b\u200c\u200d\u2060\ufeff\u00AD\ufffc "
+    "\u0009\u000a\u000b\u000c\u000d\u0020\u0085\u00a0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007"
+    "\u2008\u2009\u200a\u200b\u2029\u202f\u205f\u3000\u180e\u200b\u200c\u200d\u2060\ufeff\u00ad\ufffc "
 )
 
 

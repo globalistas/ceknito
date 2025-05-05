@@ -1,4 +1,5 @@
-""" Pages to be migrated to a wiki-like system """
+"""Pages to be migrated to a wiki-like system"""
+
 from flask import Blueprint, request, redirect, url_for, jsonify
 from ..misc import engine, logger, ensure_locale_loaded, get_locale
 from ..caching import cache

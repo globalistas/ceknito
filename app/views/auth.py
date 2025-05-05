@@ -1,4 +1,5 @@
-""" Authentication endpoints and functions """
+"""Authentication endpoints and functions"""
+
 import time
 from urllib.parse import urlparse
 from datetime import datetime, timedelta, timezone

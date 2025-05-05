@@ -2,6 +2,7 @@
 
 Add a table to keep track of when each user last looked at each post.
 """
+
 import datetime as dt
 import peewee as pw
 

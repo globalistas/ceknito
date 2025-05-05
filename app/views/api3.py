@@ -1,4 +1,4 @@
-""" API endpoints. """
+"""API endpoints."""
 
 import datetime
 import uuid
@@ -1752,9 +1752,9 @@ def get_settings():
             "nochat": True if prefs.get("nochat", False) == "1" else False,
             "comment_sort": prefs.get("comment_sort", "new"),
             "email_notify": True if prefs.get("email_notify", False) == "1" else False,
-            "highlight_unseen_comments": True
-            if prefs.get("highlight_unseen_comments", False) == "1"
-            else False,
+            "highlight_unseen_comments": (
+                True if prefs.get("highlight_unseen_comments", False) == "1" else False
+            ),
         }
     )
 

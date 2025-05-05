@@ -1,4 +1,5 @@
-""" User-related forms """
+"""User-related forms"""
+
 from flask import request, redirect, url_for
 from urllib.parse import urlparse, urljoin
 from flask_wtf import FlaskForm

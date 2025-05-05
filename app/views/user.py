@@ -1,4 +1,5 @@
-""" Profile and settings endpoints """
+"""Profile and settings endpoints"""
+
 from peewee import fn, JOIN
 from flask import Blueprint, abort, redirect, url_for, flash, request
 from flask_login import login_required, current_user

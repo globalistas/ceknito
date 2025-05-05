@@ -1,4 +1,5 @@
-""" Admin endpoints """
+"""Admin endpoints"""
+
 import time
 import re
 import datetime

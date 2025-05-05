@@ -1,4 +1,5 @@
-""" Messages endpoints """
+"""Messages endpoints"""
+
 from flask import Blueprint, redirect, url_for, abort, jsonify
 from flask_login import login_required, current_user
 from .. import misc

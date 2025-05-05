@@ -1,4 +1,5 @@
-""" Generic sub actions (creating subs, creating posts, etc) """
+"""Generic sub actions (creating subs, creating posts, etc)"""
+
 import uuid
 from datetime import datetime, timedelta, timezone
 from peewee import fn

@@ -1,5 +1,4 @@
-"""Peewee migrations -- 001_initial.py.
-"""
+"""Peewee migrations -- 001_initial.py."""
 
 import datetime as dt
 import peewee as pw

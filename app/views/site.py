@@ -1,4 +1,5 @@
-""" Miscellaneous site endpoints """
+"""Miscellaneous site endpoints"""
+
 from peewee import SQL
 from flask import Blueprint, redirect, url_for, abort
 from flask_login import login_required, current_user

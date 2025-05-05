@@ -1,4 +1,5 @@
-""" Pages to be migrated to a wiki-like system """
+"""Pages to be migrated to a wiki-like system"""
+
 from flask import Blueprint, abort, redirect, url_for
 from flask_babel import lazy_gettext as _l
 from flask_login import login_required

@@ -7,7 +7,7 @@ COPY app/translations /translations
 RUN pybabel compile --directory=translations
 
 
-FROM node:14-buster-slim as webpack
+FROM node:20-bookworm-slim AS webpack
 # Install our npm requirements
 COPY package.json package-lock.json /
 RUN npm ci

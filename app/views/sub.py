@@ -1,4 +1,5 @@
-""" All endpoints related to stuff done inside of a particular sub """
+"""All endpoints related to stuff done inside of a particular sub"""
+
 import datetime
 import time
 from flask import Blueprint, redirect, url_for, abort, request, Response

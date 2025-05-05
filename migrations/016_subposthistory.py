@@ -1,5 +1,4 @@
-"""Peewee migrations -- 016_SubPostContentHistory.py.
-"""
+"""Peewee migrations -- 016_SubPostContentHistory.py."""
 
 import datetime as dt
 import peewee as pw

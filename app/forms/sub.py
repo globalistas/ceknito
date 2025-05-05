@@ -1,4 +1,4 @@
-""" Sub-related forms """
+"""Sub-related forms"""
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, BooleanField, HiddenField, IntegerField

@@ -5,6 +5,7 @@ UserMessageBlock models to give users more options for blocking
 other users.
 
 """
+
 import datetime
 import peewee as pw
 

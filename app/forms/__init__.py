@@ -1,4 +1,5 @@
-""" Uhh... Here we import stuff """
+"""Uhh... Here we import stuff"""
+
 from .user import *  # noqa
 from .sub import *  # noqa
 from .admin import *  # noqa

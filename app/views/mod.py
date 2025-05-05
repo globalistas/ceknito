@@ -1,4 +1,5 @@
-""" Mod endpoints """
+"""Mod endpoints"""
+
 from peewee import fn
 from flask import Blueprint, abort
 from flask_login import login_required, current_user

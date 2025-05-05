@@ -32,7 +32,7 @@ requests = "^2.28.2"
 pytest = "^7.2.1"
 pytest-flask = "^1.2.0"
 qrcode = "^7.4.2"
-black = "^23.1.0"
+black = "25.1.0"
 gevent = "^22.10.2"
 wheezy-html = "^3.0.1"
 wheezy-template = "^3.1.0"
@@ -59,7 +59,7 @@ psycogreen = "^1.0.2"
 
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.1.0"
+black = "25.1.0"
 flake8 = "^6.0.0"
 pytest = "^7.2.1"
 pre-commit = "^3.0.4"

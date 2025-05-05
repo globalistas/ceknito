@@ -1,4 +1,5 @@
-""" Home, all and related endpoints """
+"""Home, all and related endpoints"""
+
 import re
 from feedgen.feed import FeedGenerator
 from flask import (

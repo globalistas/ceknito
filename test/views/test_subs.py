@@ -69,7 +69,7 @@ def test_submit_text_post(client, user_info, test_config):
     register_user(client, user_info)
     create_sub(client)
     rv = client.get(url_for("subs.submit", ptype="text", sub="test"))
-    data = {"csrf_token": csrf_token(rv.data), "title": "f\u000A\u000A\u000A"}
+    data = {"csrf_token": csrf_token(rv.data), "title": "f\u000a\u000a\u000a"}
 
     rv = client.post(
         url_for("subs.submit", ptype="text", sub="does_not_exist"),

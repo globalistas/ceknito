@@ -1,4 +1,4 @@
-""" /do/ views (AJAX stuff) """
+"""/do/ views (AJAX stuff)"""
 
 import json
 import re
@@ -413,9 +413,11 @@ def delete_post():
                 post.sid,
                 comment=form.reason.data,
                 link=url_for("site.view_post_inbox", pid=post.pid),
-                admin=True
-                if (not current_user.is_mod(post.sid) and current_user.is_admin())
-                else False,
+                admin=(
+                    True
+                    if (not current_user.is_mod(post.sid) and current_user.is_admin())
+                    else False
+                ),
                 target=post.uid,
             )
 
@@ -564,9 +566,11 @@ def undelete_post():
             post.sid,
             comment=form.reason.data,
             link=url_for("site.view_post_inbox", pid=post.pid),
-            admin=True
-            if (not current_user.is_mod(post.sid) and current_user.is_admin())
-            else False,
+            admin=(
+                True
+                if (not current_user.is_mod(post.sid) and current_user.is_admin())
+                else False
+            ),
             target=post.uid,
         )
 
@@ -3317,9 +3321,11 @@ def toggle_sort(post):
             smd = SubPostMetadata.create(pid=post.pid, key="sort", value="new")
 
         misc.create_sublog(
-            misc.LOG_TYPE_STICKY_SORT_NEW
-            if smd.value == "new"
-            else misc.LOG_TYPE_STICKY_SORT_TOP_OR_BEST,
+            (
+                misc.LOG_TYPE_STICKY_SORT_NEW
+                if smd.value == "new"
+                else misc.LOG_TYPE_STICKY_SORT_TOP_OR_BEST
+            ),
             current_user.uid,
             post.sid,
             link=url_for("sub.view_post", sub=post.sid.name, pid=post.pid),
@@ -3709,9 +3715,11 @@ def delete_comment():
                     cid=comment.cid,
                     slug="_",
                 ),
-                admin=True
-                if (not current_user.is_mod(sid) and current_user.is_admin())
-                else False,
+                admin=(
+                    True
+                    if (not current_user.is_mod(sid) and current_user.is_admin())
+                    else False
+                ),
                 target=comment.uid,
             )
             related_reports = SubPostCommentReport.select().where(
@@ -3844,9 +3852,11 @@ def undelete_comment():
                 cid=comment.cid,
                 slug="_",
             ),
-            admin=True
-            if (not current_user.is_mod(sid) and current_user.is_admin())
-            else False,
+            admin=(
+                True
+                if (not current_user.is_mod(sid) and current_user.is_admin())
+                else False
+            ),
             target=comment.uid,
         )
         related_reports = SubPostCommentReport.select().where(

@@ -1,5 +1,4 @@
-"""Peewee migrations -- 014_createreportlogs.py.
-"""
+"""Peewee migrations -- 014_createreportlogs.py."""
 
 import datetime as dt
 import peewee as pw

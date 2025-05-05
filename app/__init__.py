@@ -1,5 +1,5 @@
 # -*- coding: utf-8
-""" Here is where all the good stuff happens """
+"""Here is where all the good stuff happens"""
 
 import time
 import socket

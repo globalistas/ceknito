@@ -1,5 +1,4 @@
-"""Peewee migrations -- 010_subrules.py.
-"""
+"""Peewee migrations -- 010_subrules.py."""
 
 import datetime as dt
 import peewee as pw

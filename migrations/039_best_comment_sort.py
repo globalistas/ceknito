@@ -5,6 +5,7 @@ Add fields to SubPostComment to cache how many users have viewed each
 comment, and to cache the calculated "best" score.
 
 """
+
 import datetime as dt
 import peewee as pw
 

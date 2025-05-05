@@ -1,4 +1,5 @@
-""" Config manager """
+"""Config manager"""
+
 import os
 from pathlib import Path
 import yaml
@@ -675,7 +676,7 @@ def get_environment_values(config, prefix=""):
                 env_key = var[len(prefix) :].lower()
                 env_value = os.environ.get(var)
                 existing = config.get(env_key)
-                if existing is not None and type(existing["value"]) == int:
+                if existing is not None and isinstance(existing["value"], int):
                     new_items[env_key] = int(env_value)
                 else:
                     new_items[env_key] = env_value

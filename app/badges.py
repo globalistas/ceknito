@@ -1,4 +1,5 @@
-""" Here we store badges. """
+"""Here we store badges."""
+
 from .storage import FILE_NAMESPACE, mtype_from_file, calculate_file_hash, store_file
 from peewee import JOIN
 from .models import Badge, UserMetadata, SubMod

@@ -1,4 +1,5 @@
-""" From here we start the app for a production environment. """
+"""From here we start the app for a production environment."""
+
 from gevent import monkey
 
 # If the gunicorn worker is one of the gevent ones, it will have

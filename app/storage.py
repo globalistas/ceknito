@@ -1,4 +1,5 @@
-""" Store and serve uploads and thumbnails. """
+"""Store and serve uploads and thumbnails."""
+
 import uuid
 import pathlib
 
@@ -149,9 +150,9 @@ def clear_metadata(fileobj: FileStorage, mime_type: str):
         # rotated images...
         # Also, Pillow can't encode EXIF data, so we have to do it manually
         if exifdata.endian == "<":
-            head = b"II\x2A\x00\x08\x00\x00\x00"
+            head = b"II\x2a\x00\x08\x00\x00\x00"
         else:
-            head = b"MM\x00\x2A\x00\x00\x00\x08"
+            head = b"MM\x00\x2a\x00\x00\x00\x08"
         ifd = TiffImagePlugin.ImageFileDirectory_v2(ifh=head)
         for tag, value in exifdata.items():
             if tag == 274:
