@@ -244,129 +244,133 @@ def fresh_login():
     return jsonify(access_token=new_token)
 
 
-@API.route("/post/<target>", methods=["GET"])
-@jwt_required(optional=True)
-def get_post_list(target):
-    """Same as v2, but `content` is returned as parsed markdown and the `sort` can be `default`
-    when `target` is a sub"""
-
-    if target not in ("all", "home"):
-        sort = request.args.get("sort", default="default")
-    else:
-        sort = request.args.get("sort", default="new")
-    page = request.args.get("page", default=1, type=int)
-
-    if sort not in ("hot", "top", "new", "commented", "default"):
-        return jsonify(msg="Invalid sort"), 400
-    if page < 1:
-        return jsonify(msg="Invalid page number"), 400
-
-    uid = get_jwt_identity()
-    base_query = SubPost.select(
-        SubPost.nsfw,
-        SubPost.content,
-        SubPost.pid,
-        SubPost.title,
-        SubPost.posted,
-        SubPost.score,
-        SubPost.thumbnail,
-        SubPost.link,
-        User.name.alias("user"),
-        Sub.name.alias("sub"),
-        SubPost.flair,
-        SubPost.edited,
-        SubPost.comments,
-        SubPost.ptype,
-        User.status.alias("userstatus"),
-        User.uid,
-        SubPost.upvotes,
-        *([SubPost.downvotes, SubPostVote.positive] if uid else [SubPost.downvotes]),
-    )
-    blocked = []
-    subscribed = []
-    if uid:
-        base_query = base_query.join(
-            SubPostVote,
-            JOIN.LEFT_OUTER,
-            on=((SubPostVote.pid == SubPost.pid) & (SubPostVote.uid == uid)),
-        ).switch(SubPost)
-        subs = SubSubscriber.select().where(SubSubscriber.uid == uid)
-        subs = subs.order_by(SubSubscriber.order.asc())
-        subscribed = [x.sid_id for x in subs if x.status == 1]
-        blocked = [x.sid_id for x in subs if x.status == 2]
-
-    base_query = (
-        base_query.join(User, JOIN.LEFT_OUTER)
-        .switch(SubPost)
-        .join(Sub, JOIN.LEFT_OUTER)
-    )
-
-    if target == "all":
-        if sort == "default":
-            return jsonify(msg="Invalid sort"), 400
-        if uid:
-            base_query = base_query.where(SubPost.sid.not_in(blocked))
-    elif target == "home":
-        if sort == "default":
-            return jsonify(msg="Invalid sort"), 400
-
-        if not uid:
-            base_query = base_query.join(
-                SiteMetadata, JOIN.LEFT_OUTER, on=(SiteMetadata.key == "default")
-            ).where(SubPost.sid == SiteMetadata.value)
-        else:
-            base_query = base_query.where(SubPost.sid << subscribed)
-            base_query = base_query.where(SubPost.sid.not_in(blocked))
-
-    else:
-        try:
-            sub = Sub.get(fn.Lower(Sub.name) == target.lower())
-        except Sub.DoesNotExist:
-            return jsonify(msg="Target does not exist"), 404
-
-        if sort == "default":
-            try:
-                sort = SubMetadata.get(
-                    (SubMetadata.sid == sub.sid) & (SubMetadata.key == "sort")
-                )
-                sort = sort.value
-            except SubMetadata.DoesNotExist:
-                sort = "hot"
-
-            if sort == "v":
-                sort = "hot"
-            elif sort == "v_two":
-                sort = "new"
-            elif sort == "v_three":
-                sort = "top"
-            elif sort == "v_four":
-                sort = "commented"
-        base_query = base_query.where(Sub.sid == sub.sid)
-
-    base_query = base_query.where(SubPost.deleted == 0)
-    posts = misc.getPostList(base_query, sort, page)
-
-    cnt = base_query.count() - page * 25
-    postList = []
-    for post in posts:
-        if post["userstatus"] == 10:  # account deleted
-            post["user"] = "[deleted]"
-        post["archived"] = misc.is_archived(post)
-        del post["userstatus"]
-        del post["uid"]
-        post["content"] = (
-            misc.our_markdown(post["content"]) if post["ptype"] != 1 else ""
-        )
-        postList.append(post)
-
-    return jsonify(posts=postList, sort=sort, continues=True if cnt > 0 else False)
+# TODO add logic for private access control
+# @API.route("/post/<target>", methods=["GET"])
+# @jwt_required(optional=True)
+# def get_post_list(target):
+#     """Same as v2, but `content` is returned as parsed markdown and the `sort` can be `default`
+#     when `target` is a sub"""
+#
+#     if target not in ("all", "home"):
+#         sort = request.args.get("sort", default="default")
+#     else:
+#         sort = request.args.get("sort", default="new")
+#     page = request.args.get("page", default=1, type=int)
+#
+#     if sort not in ("hot", "top", "new", "commented", "default"):
+#         return jsonify(msg="Invalid sort"), 400
+#     if page < 1:
+#         return jsonify(msg="Invalid page number"), 400
+#
+#     uid = get_jwt_identity()
+#     base_query = SubPost.select(
+#         SubPost.nsfw,
+#         SubPost.content,
+#         SubPost.pid,
+#         SubPost.sid,
+#         Sub.nsfw.alias("sub_nsfw"),
+#         SubPost.title,
+#         SubPost.posted,
+#         SubPost.score,
+#         SubPost.thumbnail,
+#         SubPost.link,
+#         User.name.alias("user"),
+#         Sub.name.alias("sub"),
+#         SubPost.flair,
+#         SubPost.edited,
+#         SubPost.comments,
+#         SubPost.ptype,
+#         User.status.alias("userstatus"),
+#         User.uid,
+#         SubPost.upvotes,
+#         *([SubPost.downvotes, SubPostVote.positive] if uid else [SubPost.downvotes]),
+#     )
+#     blocked = []
+#     subscribed = []
+#     if uid:
+#         base_query = base_query.join(
+#             SubPostVote,
+#             JOIN.LEFT_OUTER,
+#             on=((SubPostVote.pid == SubPost.pid) & (SubPostVote.uid == uid)),
+#         ).switch(SubPost)
+#         subs = SubSubscriber.select().where(SubSubscriber.uid == uid)
+#         subs = subs.order_by(SubSubscriber.order.asc())
+#         subscribed = [x.sid_id for x in subs if x.status == 1]
+#         blocked = [x.sid_id for x in subs if x.status == 2]
+#
+#     base_query = (
+#         base_query.join(User, JOIN.LEFT_OUTER)
+#         .switch(SubPost)
+#         .join(Sub, JOIN.LEFT_OUTER)
+#     )
+#
+#     if target == "all":
+#         if sort == "default":
+#             return jsonify(msg="Invalid sort"), 400
+#         if uid:
+#             base_query = base_query.where(SubPost.sid.not_in(blocked))
+#     elif target == "home":
+#         if sort == "default":
+#             return jsonify(msg="Invalid sort"), 400
+#
+#         if not uid:
+#             base_query = base_query.join(
+#                 SiteMetadata, JOIN.LEFT_OUTER, on=(SiteMetadata.key == "default")
+#             ).where(SubPost.sid == SiteMetadata.value)
+#         else:
+#             base_query = base_query.where(SubPost.sid << subscribed)
+#             base_query = base_query.where(SubPost.sid.not_in(blocked))
+#
+#     else:
+#         try:
+#             sub = Sub.get(fn.Lower(Sub.name) == target.lower())
+#         except Sub.DoesNotExist:
+#             return jsonify(msg="Target does not exist"), 404
+#
+#         if sort == "default":
+#             try:
+#                 sort = SubMetadata.get(
+#                     (SubMetadata.sid == sub.sid) & (SubMetadata.key == "sort")
+#                 )
+#                 sort = sort.value
+#             except SubMetadata.DoesNotExist:
+#                 sort = "hot"
+#
+#             if sort == "v":
+#                 sort = "hot"
+#             elif sort == "v_two":
+#                 sort = "new"
+#             elif sort == "v_three":
+#                 sort = "top"
+#             elif sort == "v_four":
+#                 sort = "commented"
+#         base_query = base_query.where(Sub.sid == sub.sid)
+#
+#     base_query = base_query.where(SubPost.deleted == 0)
+#     posts = misc.getPostList(base_query, sort, page)
+#
+#     cnt = base_query.count() - page * 25
+#     postList = []
+#     for post in posts:
+#         if post["userstatus"] == 10:  # account deleted
+#             post["user"] = "[deleted]"
+#         post["archived"] = misc.is_archived(post)
+#         del post["userstatus"]
+#         del post["uid"]
+#         post["content"] = (
+#             misc.our_markdown(post["content"]) if post["ptype"] != 1 else ""
+#         )
+#         postList.append(post)
+#
+#     return jsonify(posts=postList, sort=sort, continues=True if cnt > 0 else False)
 
 
 @API.get("/post/<sub>/<int:pid>")
 @jwt_required(optional=True)
 def get_post(sub, pid):
     """Returns information for a post"""
-    uid = get_jwt_identity()
+    uid = get_jwt_identity()  # Used only for vote info
+
     base_query = SubPost.select(
         SubPost.nsfw,
         SubPost.content,
@@ -377,8 +381,10 @@ def get_post(sub, pid):
         SubPost.deleted,
         SubPost.thumbnail,
         SubPost.link,
+        SubPost.sid,
         User.name.alias("user"),
         Sub.name.alias("sub"),
+        Sub.private,
         SubPost.flair,
         SubPost.edited,
         SubPost.comments,
@@ -395,29 +401,51 @@ def get_post(sub, pid):
             JOIN.LEFT_OUTER,
             on=((SubPostVote.pid == SubPost.pid) & (SubPostVote.uid == uid)),
         ).switch(SubPost)
+
     base_query = (
         base_query.join(User, JOIN.LEFT_OUTER)
         .switch(SubPost)
         .join(Sub, JOIN.LEFT_OUTER)
     )
 
-    post = base_query.where(
+    post_query = base_query.where(
         (SubPost.pid == pid) & (fn.Lower(Sub.name) == sub.lower())
     ).dicts()
 
-    if not post.count():
+    if not post_query.count():
         return jsonify(msg="Post does not exist"), 404
 
-    post = post[0]
-    post["deleted"] = True if post["deleted"] != 0 else False
+    post = post_query[0]
 
-    if post["deleted"]:  # Clear data for deleted posts
-        post["content"] = None
-        post["link"] = None
-        post["uid"] = None
-        post["user"] = "[deleted]"
-        post["thumbnail"] = None
-        post["edited"] = None
+    if post["private"]:
+        if not current_user.is_authenticated:
+            return jsonify(msg="Post does not exist"), 404
+        if not current_user.can_admin:
+            is_subscribed = (
+                SubSubscriber.select()
+                .where(
+                    (SubSubscriber.uid == current_user.uid)
+                    & (SubSubscriber.sid == post["sid"])
+                    & (SubSubscriber.status == 1)
+                )
+                .exists()
+            )
+            if not is_subscribed:
+                return jsonify(msg="Post does not exist"), 404
+
+    post["deleted"] = bool(post["deleted"])
+
+    if post["deleted"]:
+        post.update(
+            {
+                "content": None,
+                "link": None,
+                "uid": None,
+                "user": "[deleted]",
+                "thumbnail": None,
+                "edited": None,
+            }
+        )
 
     post["source"] = post["content"]
     if post["content"]:
@@ -428,17 +456,13 @@ def get_post(sub, pid):
 
     post["archived"] = misc.is_archived(post)
 
-    if post["ptype"] == 0:
-        post["type"] = "text"
-    elif post["ptype"] == 1:
-        post["type"] = "link"
-    elif post["ptype"] == 2:
-        post["type"] = "upload"
-    elif post["ptype"] == 3:
-        post["type"] = "poll"
-    del post["ptype"]
-    del post["userstatus"]
-    del post["uid"]
+    post["type"] = {0: "text", 1: "link", 2: "upload", 3: "poll"}.get(
+        post["ptype"], "unknown"
+    )
+
+    # Clean up extra fields
+    for field in ("ptype", "userstatus", "uid", "private"):
+        post.pop(field, None)
 
     return jsonify(post=post)
 
@@ -1191,7 +1215,11 @@ def create_post():
 def search_sub():
     """Search for subs matching the query parameter.  Return, for each sub
     found, its name and a list of the post types allowed."""
+    if not current_user.is_authenticated:
+        return jsonify(error="Not authenticated"), 403
+
     query = request.args.get("query", "")
+
     if len(query) < 3 or not misc.allowedNames.match(query):
         return jsonify(results=[])
 
@@ -1199,17 +1227,16 @@ def search_sub():
 
     conditions = (Sub.name**query) & (Sub.status == 0)
 
-    if current_user.is_authenticated:
-        if current_user.can_admin:
-            # Admins can see all subs including private ones
-            # No additional condition needed for admins
-            pass
-        else:
-            # Regular authenticated users can see public subs and private subs they belong to
-            user_subs = SubSubscriber.select(SubSubscriber.sid).where(
-                (SubSubscriber.uid == current_user.uid) & (SubSubscriber.status == 1)
-            )
-            conditions = conditions & ((Sub.private == 0) | (Sub.sid.in_(user_subs)))
+    if current_user.can_admin:
+        # Admins can see all subs including private ones
+        # No additional condition needed for admins
+        pass
+    else:
+        # Regular authenticated users can see public subs and private subs they belong to
+        user_subs = SubSubscriber.select(SubSubscriber.sid).where(
+            (SubSubscriber.uid == current_user.uid) & (SubSubscriber.status == 1)
+        )
+        conditions = conditions & ((Sub.private == 0) | (Sub.sid.in_(user_subs)))
 
     subs = Sub.select(Sub.name).where(conditions).limit(10).dicts()
 
@@ -1218,10 +1245,27 @@ def search_sub():
 
 @API.route("/sub/<name>", methods=["GET"])
 def get_sub(name):
+    if not current_user.is_authenticated:
+        return jsonify(error="Not authenticated"), 403
+
     try:
         sub = Sub.get(fn.Lower(Sub.name) == name.lower())
     except Sub.DoesNotExist:
         return jsonify(error="Sub does not exist"), 404
+
+    if sub.private:
+        if not current_user.can_admin:
+            is_subscribed = (
+                SubSubscriber.select()
+                .where(
+                    (SubSubscriber.uid == current_user.uid)
+                    & (SubSubscriber.sid == sub.sid)
+                    & (SubSubscriber.status == 1)
+                )
+                .exists()
+            )
+            if not is_subscribed:
+                return jsonify(error="Sub does not exist"), 404
 
     post_types = (
         SubMetadata.select()
@@ -1264,119 +1308,142 @@ def get_sub(name):
 
 @API.route("/sub/rules", methods=["GET"])
 def get_sub_rules():
-    pid = request.args.get("pid", "")
-    sub = (
-        SubPost.select()
-        .where(SubPost.pid == pid)
-        .join(Sub)
-        .where(Sub.sid == SubPost.sid)
-        .dicts()
-        .get()
-    )
-    rules = list(SubRule.select().where(SubRule.sid == sub["sid"]).dicts())
+    if not current_user.is_authenticated:
+        return jsonify(error="Not authenticated"), 403
 
+    pid = request.args.get("pid", "")
+
+    try:
+        sub_post = (
+            SubPost.select(SubPost, Sub.private)
+            .join(Sub)
+            .where(SubPost.pid == pid)
+            .dicts()
+            .get()
+        )
+    except SubPost.DoesNotExist:
+        return jsonify(error="Post does not exist"), 404
+
+    # Access control for private subs
+    if sub_post["private"]:
+        if not current_user.can_admin:
+            is_subscribed = (
+                SubSubscriber.select()
+                .where(
+                    (SubSubscriber.uid == current_user.uid)
+                    & (SubSubscriber.sid == sub_post["sid"])
+                    & (SubSubscriber.status == 1)
+                )
+                .exists()
+            )
+            if not is_subscribed:
+                return jsonify(error="Sub does not exist"), 404
+
+    rules = list(SubRule.select().where(SubRule.sid == sub_post["sid"]).dicts())
     return jsonify(results=rules)
 
 
-@API.route("/user/<username>", methods=["GET"])
-def get_user(username, uid=False):
-    """Returns user profile data"""
-    if not uid:
-        try:
-            user = (
-                User.select()
-                .where((User.status == 0) & (fn.Lower(User.name) == username.lower()))
-                .get()
-            )
-        except User.DoesNotExist:
-            return jsonify(msg="User does not exist"), 404
-    else:
-        user = User.get(User.uid == username)
-
-    level = misc.get_user_level(user.uid, user.score)
-    pcount = SubPost.select().where(SubPost.uid == user.uid).count()
-    ccount = SubPostComment.select().where(SubPostComment.uid == user.uid).count()
-
-    modsquery = (
-        SubMod.select(Sub.name, SubMod.power_level)
-        .join(Sub)
-        .where((SubMod.uid == user.uid) & (~SubMod.invite))
-    )
-    owns = [x.sub.name for x in modsquery if x.power_level == 0]
-    mods = [x.sub.name for x in modsquery if 1 <= x.power_level <= 2]
-    return jsonify(
-        user={
-            "name": user.name,
-            "score": user.score,
-            "given": user.given,
-            "joindate": user.joindate,
-            "level": level[0],
-            "xp": level[1],
-            "badges": list(badges.badges_for_user(user.uid).dicts()),
-            "posts": pcount,
-            "comments": ccount,
-            "subs": {"owns": owns, "mods": mods},
-        }
-    )
-
-
-@API.route("/user/<username>/overview", methods=["GET"])
-def user_overview(username):
-    """
-    Returns an overview of the user's activity (comments/posts)
-    """
-    if config.site.block_anon_stalking:
-        verify_jwt_in_request()
-    try:
-        user = User.get(fn.Lower(User.name) == username.lower())
-    except User.DoesNotExist:
-        return jsonify(msg="User does not exist"), 404
-    page = request.args.get("page", default=1, type=int)
-    posts = (
-        SubPost.select(
-            SubPost.pid,
-            Sub.name.alias("sub"),
-            SubPost.title,
-            SubPost.posted,
-            SubPost.flair,
-            SubPost.nsfw,
-            SubPost.comments,
-            SubPost.ptype,
-            SubPost.link,
-            SubPost.content,
-            SubPost.thumbnail,
-            SubPost.upvotes,
-            SubPost.downvotes,
-        )
-        .join(Sub, on=Sub.sid == SubPost.sid)
-        .where(SubPost.uid == user.uid)
-        .where(SubPost.deleted == 0)
-        .paginate(page, 10)
-        .order_by(SubPost.pid.desc())
-        .dicts()
-    )
-
-    comments = (
-        SubPostComment.select(
-            SubPostComment.upvotes,
-            SubPostComment.downvotes,
-            SubPostComment.content,
-            SubPostComment.time,
-            SubPostComment.lastedit,
-            SubPost.pid,
-            SubPost.title.alias("post_title"),
-            Sub.name.alias("sub_name"),
-        )
-        .join(SubPost, on=SubPostComment.pid == SubPost.pid)
-        .join(Sub, on=Sub.sid == SubPost.sid)
-        .where(SubPostComment.uid == user.uid)
-        .where(SubPostComment.status.is_null())
-        .paginate(page, 10)
-        .order_by(SubPostComment.time.desc())
-        .dicts()
-    )
-
-    return jsonify(posts=list(posts), comments=list(comments))
+# TODO add logic for private access control
+# @API.route("/user/<username>", methods=["GET"])
+# def get_user(username, uid=False):
+#     """Returns user profile data"""
+#     if not uid:
+#         try:
+#             user = (
+#                 User.select()
+#                 .where((User.status == 0) & (fn.Lower(User.name) == username.lower()))
+#                 .get()
+#             )
+#         except User.DoesNotExist:
+#             return jsonify(msg="User does not exist"), 404
+#     else:
+#         user = User.get(User.uid == username)
+#
+#     level = misc.get_user_level(user.uid, user.score)
+#     pcount = SubPost.select().where(SubPost.uid == user.uid).count()
+#     ccount = SubPostComment.select().where(SubPostComment.uid == user.uid).count()
+#
+#     modsquery = (
+#         SubMod.select(Sub.name, SubMod.power_level)
+#         .join(Sub)
+#         .where((SubMod.uid == user.uid) & (~SubMod.invite))
+#     )
+#     owns = [x.sub.name for x in modsquery if x.power_level == 0]
+#     mods = [x.sub.name for x in modsquery if 1 <= x.power_level <= 2]
+#     return jsonify(
+#         user={
+#             "name": user.name,
+#             "score": user.score,
+#             "given": user.given,
+#             "joindate": user.joindate,
+#             "level": level[0],
+#             "xp": level[1],
+#             "badges": list(badges.badges_for_user(user.uid).dicts()),
+#             "posts": pcount,
+#             "comments": ccount,
+#             "subs": {"owns": owns, "mods": mods},
+#         }
+#     )
+#
+#
+# TODO add logic for private access control
+# @API.route("/user/<username>/overview", methods=["GET"])
+# def user_overview(username):
+#     """
+#     Returns an overview of the user's activity (comments/posts)
+#     """
+#     if config.site.block_anon_stalking:
+#         verify_jwt_in_request()
+#     try:
+#         user = User.get(fn.Lower(User.name) == username.lower())
+#     except User.DoesNotExist:
+#         return jsonify(msg="User does not exist"), 404
+#     page = request.args.get("page", default=1, type=int)
+#     posts = (
+#         SubPost.select(
+#             SubPost.pid,
+#             Sub.name.alias("sub"),
+#             SubPost.title,
+#             SubPost.posted,
+#             SubPost.flair,
+#             SubPost.nsfw,
+#             SubPost.comments,
+#             SubPost.ptype,
+#             SubPost.link,
+#             SubPost.content,
+#             SubPost.thumbnail,
+#             SubPost.upvotes,
+#             SubPost.downvotes,
+#         )
+#         .join(Sub, on=Sub.sid == SubPost.sid)
+#         .where(SubPost.uid == user.uid)
+#         .where(SubPost.deleted == 0)
+#         .paginate(page, 10)
+#         .order_by(SubPost.pid.desc())
+#         .dicts()
+#     )
+#
+#     comments = (
+#         SubPostComment.select(
+#             SubPostComment.upvotes,
+#             SubPostComment.downvotes,
+#             SubPostComment.content,
+#             SubPostComment.time,
+#             SubPostComment.lastedit,
+#             SubPost.pid,
+#             SubPost.title.alias("post_title"),
+#             Sub.name.alias("sub_name"),
+#         )
+#         .join(SubPost, on=SubPostComment.pid == SubPost.pid)
+#         .join(Sub, on=Sub.sid == SubPost.sid)
+#         .where(SubPostComment.uid == user.uid)
+#         .where(SubPostComment.status.is_null())
+#         .paginate(page, 10)
+#         .order_by(SubPostComment.time.desc())
+#         .dicts()
+#     )
+#
+#     return jsonify(posts=list(posts), comments=list(comments))
 
 
 @API.route("/user", methods=["GET"])

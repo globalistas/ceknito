@@ -13,4 +13,6 @@ ignore =
     # line break before binary operator
     W503,
     # whitespace before ':'
-    E203
+    E203,
+    # unused imports
+    F401,
