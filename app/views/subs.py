@@ -496,7 +496,12 @@ def create_sub():
         private=form.private.data,
     )
 
-    smd = [dict(sid=sub.sid, key="mod", value=current_user.uid)]
+    smd = [
+        dict(sid=sub.sid, key="mod", value=current_user.uid),
+        dict(sid=sub.sid, key="sublog_private", value="1"),
+        dict(sid=sub.sid, key="sub_banned_users_private", value="1"),
+    ]
+
     for key in ["allow_text_posts", "allow_link_posts", "allow_upload_posts"]:
         smd.append(dict(sid=sub.sid, key=key, value="1"))
     SubMetadata.insert_many(smd).execute()
