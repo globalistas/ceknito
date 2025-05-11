@@ -411,7 +411,7 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch) {
 
         if (data.content.length > 500) {
           contentElement.classList.add('fade-out-content');
-          contentElement.innerHTML = data.content.substring(0, 1000);
+          contentElement.innerHTML = data.content.substring(0, 700);
         } else {
           contentElement.innerHTML = data.content;
         }

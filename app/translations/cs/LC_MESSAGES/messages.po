@@ -3055,7 +3055,7 @@ msgstr "nej"
 
 #: app/html/sub/post.html:403
 #, python-format
-msgid "sorted by: <b><u>%(currsort)s</u></b>
+msgid "sorted by: <b><u>%(currsort)s</u></b>"
 msgstr "řadit podle: <b><u>%(currsort)s</u></b>"
 
 #: app/html/sub/post.html:413

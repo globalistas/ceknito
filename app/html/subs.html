@@ -80,10 +80,10 @@
                     @end
                     <a href="@{url_for('sub.view_sub', sub=sub['name'])}">@{sub['name']}</a>
                     @if sub['nsfw']:
-                      <div class="nsfw">NSFW</div>
+                      <div class="nsfw" style="position:relative;bottom:1px;font-size:9px;">NSFW</div>
                     @end
                     @if sub['private']:
-                      <div class="nsfw">PRIVATE</div>
+                      <div class="nsfw" style="position:relative;bottom:1px;font-size:9px;">PRIVATE</div>
                     @end
                   </div>
               </td>
