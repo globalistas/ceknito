@@ -2736,7 +2736,7 @@ msgstr "Odemknutí komentářů k příspěvku"
 #: app/html/sub/log.html:80
 #, python-format
 msgid "[Type %(type)i]"
-msgstr "[Napiš %(type)i]"
+msgstr "[Typ %(type)i]"
 
 #: app/html/sub/members.html:22
 #, python-format

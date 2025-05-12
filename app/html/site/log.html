@@ -105,7 +105,7 @@
                     @elif log.action == 87:
                       @{_('Set sub public')}
                     @else:
-                        <i>[Type @{log.action}]</i> @{log.desc}
+                        <i>@{_('[Type %(type)i]', type=log.action)!!html}</i> @{log.desc}
                     @end
                 </td>
                 <td>
@@ -123,12 +123,12 @@
             @end
             </tbody>
         </table>
-        @if page > 1:
-        <a href="@{url_for('site.view_sitelog', page=(page-1))}" class="btn">@{_('Previous page')}</a>
+        @if len(logs) == 50:
+        <a href="@{url_for('site.view_sitelog', page=(page+1))}" class="pure-button alldarightposts">@{_('Next')}</a>
         @end
 
-        @if len(logs) == 50:
-        <a href="@{url_for('site.view_sitelog', page=(page+1))}" class="btn">@{_('Next page')}</a>
+        @if page > 1:
+        <a href="@{url_for('site.view_sitelog', page=(page-1))}" class="pure-button alldaleftposts">@{_('Previous')}</a>
         @end
     </div>
 </div>

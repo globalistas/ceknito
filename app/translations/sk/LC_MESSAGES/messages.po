@@ -2713,7 +2713,7 @@ msgstr "Odomknutie komentárov k príspevku"
 #: app/html/sub/log.html:80
 #, python-format
 msgid "[Type %(type)i]"
-msgstr "[Napíš %(type)i]"
+msgstr "[Typ %(type)i]"
 
 #: app/html/sub/members.html:22
 #, python-format

@@ -2406,7 +2406,7 @@ def revoke_memberinv(sub, user):
                     current_user.uid,
                     sub.sid,
                     target=user.uid,
-                    admin=not is_owner,
+                    admin=True if (not is_owner and current_user.is_admin()) else False,
                 )
 
                 return jsonify(status="ok")
