@@ -23,11 +23,12 @@ function initializeEditor(element) {
   var textarea = element.children[0];
   el.classList.add('editbtns');
 
-  el.appendChild(makeThingy('bold', _('Bold (ctrl-b)'), function (e) { addTags(textarea, '**', '**'); }));
-  el.appendChild(makeThingy('italic', _('Italic (ctrl-i)'), function (e) { addTags(textarea, '*', '*'); }));
-  el.appendChild(makeThingy('strikethrough', _('Strikethrough (ctrl-shift-s)'), function (e) { addTags(textarea, '~~', '~~'); }));
-  el.appendChild(makeThingy('title', _('Title (ctrl-shift-h)'), function (e) { addTags(textarea, '# ', ''); }));
-  el.appendChild(makeThingy('gradient', _('Spoiler'), function (e) { addTags(textarea, '>! ', ' !<'); }));
+    el.appendChild(makeThingy('bold', _('Bold (ctrl-b)'), function(e){addTagsEnclosingEachLineInSelection(textarea, '**', '**');}));
+    el.appendChild(makeThingy('italic', _('Italic (ctrl-i)'), function(e){addTagsEnclosingEachLineInSelection(textarea, '*', '*');}));
+    el.appendChild(makeThingy('strikethrough',  _('Strikethrough (ctrl-shift-s)'), function(e){addTagsEnclosingEachLineInSelection(textarea, '~~', '~~');}));
+    el.appendChild(makeThingy('title',  _('Title (ctrl-shift-h)'), function(e){addTagForTitle(textarea);}));
+    el.appendChild(makeThingy('gradient',  _('Spoiler'), function(e){addTagsEnclosingEachLineInSelection(textarea, ">!", "!<");}));
+
 
   var x = document.createElement('span');
   x.className = 'separator';
@@ -57,8 +58,8 @@ function initializeEditor(element) {
   x.className = 'separator';
   el.appendChild(x);
 
-  el.appendChild(makeThingy('code', _('Code'), function (e) { addTags(textarea, '`', '`'); }));
-  el.appendChild(makeThingy('quote', _('Quote (ctrl-shift-.)'), function (e) { addTags(textarea, '> ', ''); }));
+    el.appendChild(makeThingy('code', _('Code'), function(e){addTagsForCode(textarea);}));
+    el.appendChild(makeThingy('quote', _('Quote (ctrl-shift-.)'), function(e){addTagsForQuotes(textarea);}));
 
   var x = document.createElement('span');
   x.className = 'separator';
@@ -271,19 +272,19 @@ function initializeEditor(element) {
     }
     if (textarea !== document.activeElement) { return; }
     if (e.ctrlKey == true && e.which == 66) {
-      addTags(textarea, '**', '**'); e.preventDefault();
+      addTagsEnclosingEachLineInSelection(textarea, '**', '**'); e.preventDefault();
     } else if (e.ctrlKey == true && e.shiftKey == true && e.which == 73) {
-      addTags(textarea, '*', '*'); e.preventDefault(); return false;
+      addTagsEnclosingEachLineInSelection(textarea, '*', '*'); e.preventDefault(); return false;
     } else if (e.ctrlKey == true && e.shiftKey == true && e.which == 83) {
-      addTags(textarea, '~~', '~~'); e.preventDefault();
+      addTagsEnclosingEachLineInSelection(textarea, '~~', '~~'); e.preventDefault();
     } else if (e.ctrlKey == true && e.shiftKey == true && e.which == 72) {
-      addTags(textarea, '# ', ''); e.preventDefault();
+      addTagForTitle(textarea); e.preventDefault();
     } else if (e.ctrlKey == true && e.shiftKey == true && e.which == 75) {
       makeLink(e); e.preventDefault();
     } else if (e.ctrlKey == true && e.shiftKey == true && e.which == 75) {
       makeImgUpload(e); e.preventDefault();
     } else if (e.ctrlKey == true && e.shiftKey == true && e.which == 190) {
-      addTags(textarea, '> ', ''); e.preventDefault();
+      addTagsForQuotes(textarea); e.preventDefault();
     }
   }
 }
@@ -304,6 +305,60 @@ function addTags(textarea, begin, end, bm) {
     setSelection(textarea, u, u);
   }
 }
+
+
+function addTagForTitle(textarea) {
+  const [beforeText, selectedText, afterText] = getExpandedSelection(textarea);
+  const modifiedText = "# " + selectedText;
+  setTextAndUpdateCursor(textarea, beforeText, modifiedText, afterText);
+}
+
+function addTagsForQuotes(textarea) {
+  const [beforeText, selectedText, afterText] = getExpandedSelection(textarea);
+  const modifiedText = selectedText.replace(/^(.*)$/gm, "> $1");
+  setTextAndUpdateCursor(textarea, beforeText, modifiedText, afterText);
+}
+
+function addTagsEnclosingEachLineInSelection(textarea, prefix, suffix) {
+  const [beforeText, selectedText, afterText] = getCursorSelection(textarea);
+  const modifiedText = selectedText.replace(/^(.+)$/gm, prefix + "$1" + suffix);
+  setTextAndUpdateCursor(textarea, beforeText, modifiedText, afterText);
+}
+
+function addTagsForCode(textarea) {
+  let [beforeText, selectedText, afterText] = getCursorSelection(textarea);
+  let modifiedText;
+  if (selectedText.includes("\n")) {
+    [beforeText, selectedText, afterText] = getExpandedSelection(textarea);
+    modifiedText = "```\n" + selectedText + "\n```";
+  } else {
+    modifiedText = "`" + selectedText + "`";
+  }
+  setTextAndUpdateCursor(textarea, beforeText, modifiedText, afterText);
+}
+
+/* Drops the cursor just inside the end of the selection. */
+function setTextAndUpdateCursor(textarea, beforeText, modifiedText, afterText) {
+  textarea.value = beforeText + modifiedText + afterText;
+  const cursorIndex = beforeText.length + modifiedText.length;
+  setSelection(textarea, cursorIndex, cursorIndex);
+}
+
+/* Expands the selection to encompass the beginning of the first line selected and the end of the last line selected. */
+function getExpandedSelection(textarea) {
+  let i = textarea.selectionStart;
+  let n = textarea.selectionEnd;
+  while (i > 0 && textarea.value.charAt(i - 1) !== "\n") {
+    i--;
+  }
+  while (n < textarea.value.length && textarea.value.charAt(n) !== "\n") {
+    n++;
+  }
+  return [textarea.value.substring(0,i),
+          textarea.value.substring(i,n),
+          textarea.value.substring(n, textarea.value.length)];
+}
+
 
 function getCursorSelection(textarea) {
   var i = textarea.selectionStart;

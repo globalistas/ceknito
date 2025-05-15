@@ -816,7 +816,12 @@ u.addEventForChild(document, 'click', '.reply-comment', function (e, qelem) {
     let pp = "";
     if (cs) {
         if (cs.parentNode.parentNode.parentNode && cs.parentNode.parentNode.parentNode.classList.contains('content')) {
-            pp = '> ' + window.getSelection().getRangeAt(0).cloneContents().textContent + '\n\n';
+            // Get the selected text
+            const selectedText = window.getSelection().getRangeAt(0).cloneContents().textContent;
+
+            // Apply quote formatting to each paragraph
+            // This uses the same regex pattern as in addTagsForQuotes function in editor.js
+            pp = selectedText.replace(/^(.*)$/gm, "> $1") + '\n\n';
         }
     }
 
