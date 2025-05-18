@@ -38,7 +38,7 @@ A link and discussion aggregator with snek (python3)
 - banning, quarantining, defaulting subs from admin interface
 - sub subscribers list in admin interface
 - improved image quality for thumbnails
-- Twitter and Bitchute expando support
+- Twitter, Rumble and Bitchute expando support
 - Recent Activity comments permalink
 - fixed mp4 uploads
 - webp image uploads

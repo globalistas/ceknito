@@ -379,7 +379,7 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch) {
 
   const isMobile = window.innerWidth <= 480;
   const isTextPost = link === 'None';
-  const isWidePost = link && (link.includes('https://www.youtube.com') || link.includes('https://youtu.be') || link.includes('https://x.com')) || link.includes('https://uploads.cekni.to');
+  const isWidePost = link && (link.includes('https://www.youtube.com') || link.includes('https://youtu.be') || link.includes('https://rumble.com') || link.includes('https://streamable.com') || link.includes('https://x.com')) || link.includes('https://uploads.cekni.to');
 
   let targetContainer;
   if ((isMobile && isTextPost) || (isMobile && isWidePost)) {
@@ -425,7 +425,26 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch) {
 
     if (domain === 'youtube.com' || domain === 'www.youtube.com' || domain === 'youtu.be') {
       replaceYoutubeWithLiteYT(link, expando)
-    } else if (domain === 'gfycat.com') {
+    }
+    else if (domain === 'rumble.com' || domain === 'www.rumble.com') {
+      fetch('/api/v3/rumble-embed?url=' + encodeURIComponent(link))
+        .then(res => res.json())
+        .then(data => {
+          if (data.embed_id) {
+            expando.querySelector('.expandotxt').innerHTML = `
+              <div class="iframewrapper">
+                <iframe width="100%" height="360" src="https://rumble.com/embed/${data.embed_id}/?pub=4" frameborder="0" allowfullscreen></iframe>
+              </div>`;
+          } else {
+            expando.querySelector('.expandotxt').textContent = 'Could not load Rumble video.';
+          }
+        })
+        .catch(err => {
+          console.error("Error loading Rumble embed:", err);
+          expando.querySelector('.expandotxt').textContent = 'Error loading Rumble video.';
+        });
+    }
+    else if (domain === 'gfycat.com') {
       expando.querySelector('.expandotxt').innerHTML = `
         <div class="iframewrapper">
           <iframe width="100%" src="https://gfycat.com/ifr/${extractID(link, 'gfycat')}"></iframe>

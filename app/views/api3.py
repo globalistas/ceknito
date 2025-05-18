@@ -2,6 +2,9 @@
 
 import datetime
 import uuid
+import requests
+import urllib.parse
+import re
 from bs4 import BeautifulSoup
 from email_validator import EmailNotValidError
 from flask import Blueprint, jsonify, request, url_for, Markup
@@ -1209,6 +1212,37 @@ def create_post():
     )
 
     return jsonify(status="ok", pid=post.pid, sub=sub.name)
+
+
+@API.route("/rumble-embed", methods=["GET"])
+def rumble_embed():
+    url = request.args.get("url")
+    if not url or not url.startswith("https://rumble.com/"):
+        return jsonify(error="Invalid or missing Rumble URL"), 400
+
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+            "(KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+        )
+    }
+
+    try:
+        response = requests.get(url, headers=headers, timeout=5)
+        response.raise_for_status()
+
+        soup = BeautifulSoup(response.text, "html.parser")
+        oembed = soup.find("link", rel="alternate", type="application/json+oembed")
+        if oembed and "href" in oembed.attrs:
+            decoded = urllib.parse.unquote(oembed["href"])
+            match = re.search(r"/embed/([a-zA-Z0-9]+)/", decoded)
+            if match:
+                return jsonify(embed_id=match.group(1))
+
+        return jsonify(error="Embed ID not found"), 404
+
+    except Exception as e:
+        return jsonify(error="Server error", detail=str(e)), 500
 
 
 @API.route("/sub", methods=["GET"])

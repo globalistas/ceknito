@@ -36,6 +36,7 @@ defaults = {  # key => default value
             "www.youtube-nocookie.com",
             "x.com",
             "platform.twitter.com",
+            "rumble.com",
         ],
         "extra_connect_src": [],
         "footer": {
