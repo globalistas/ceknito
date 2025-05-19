@@ -431,10 +431,45 @@ u.addEventForChild(document, 'click', '.expando', function(e, ematch) {
         .then(res => res.json())
         .then(data => {
           if (data.embed_id) {
-            expando.querySelector('.expandotxt').innerHTML = `
-              <div class="iframewrapper">
+            const expandoTxt = expando.querySelector('.expandotxt');
+
+            // Create the iframe wrapper with a click overlay for NSFW blur removal
+            const wrapperHtml = `
+              <div class="iframewrapper" style="position: relative;">
+                <div class="blur-removal-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; cursor: pointer;"></div>
                 <iframe width="100%" height="360" src="https://rumble.com/embed/${data.embed_id}/?pub=4" frameborder="0" allowfullscreen></iframe>
               </div>`;
+
+            expandoTxt.innerHTML = wrapperHtml;
+
+            // Add click handler to the overlay to remove NSFW blur
+            const overlay = expandoTxt.querySelector('.blur-removal-overlay');
+            if (overlay) {
+              overlay.addEventListener('click', function(e) {
+                // Remove blur from expandotxt
+                if (expandoTxt.classList.contains('nsfw-blur')) {
+                  expandoTxt.classList.remove('nsfw-blur');
+                }
+
+                // Remove blur from expando-master
+                const expandoMaster = expandoTxt.closest('.expando-master');
+                if (expandoMaster && expandoMaster.classList.contains('nsfw-blur')) {
+                  expandoMaster.classList.remove('nsfw-blur');
+                }
+
+                // Find any parent elements with nsfw-blur class and remove it
+                const anyBlurredParent = expandoTxt.closest('.nsfw-blur');
+                if (anyBlurredParent) {
+                  anyBlurredParent.classList.remove('nsfw-blur');
+                }
+
+                // Remove the overlay itself after click
+                this.remove();
+
+                // Stop propagation to allow normal iframe interaction after first click
+                e.stopPropagation();
+              });
+            }
           } else {
             expando.querySelector('.expandotxt').textContent = 'Could not load Rumble video.';
           }
