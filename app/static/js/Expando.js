@@ -133,7 +133,7 @@ class LiteTwitterEmbed {
 
 // Cache regex patterns for better performance
 const URL_REGEX = {
-  YOUTUBE: /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|hooktube.com\/(watch\?v=)?)([^#\&\?]*).*/,
+  YOUTUBE: /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|live\/|shorts\/|hooktube.com\/(watch\?v=)?)([^#\&\?]*).*/,
   VIMEO: /https?:\/\/(?:www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/,
   VINE: /^http(?:s?):\/\/(?:www\.)?vine\.co\/v\/([a-zA-Z0-9]{1,13})$/,
   STREAMABLE: /^http(?:s?):\/\/(?:www\.)?streamable\.com\/([a-zA-Z0-9]{1,13})$/,
