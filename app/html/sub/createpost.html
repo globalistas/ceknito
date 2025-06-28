@@ -149,7 +149,7 @@
 
                 <div class="pure-control-group ulcont pure-u-sm-20-24" style="display:none">
                     @if current_user.canupload:
-                    <label for="files">@{_('File')}</label><input type="file" accept="image/jpeg,image/png,image/gif,video/mp4,video/webm" name="files" class="requpload"
+                    <label for="files">@{_('File')}</label><input type="file" accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm" name="files" class="requpload"
                            data-max="@{ config.site.upload_max_size }" placeholder="@{_('Upload a file!')}"/>
                     @end
                 </div>

@@ -141,7 +141,7 @@ const URL_REGEX = {
   STREAMJA: /^https?:\/\/streamja\.com\/([a-zA-Z0-9]{1,20})$/,
   IMGUR: /^http(?:s?):\/\/(i\.)?imgur\.com\/(.*?)(?:\/.gifv|$)/,
   BITCHUTE: /^https?:\/\/(?:www\.)?bitchute\.com\/video\/([a-zA-Z0-9]+)/,
-  IMAGE: /\.(png|jpg|gif|tiff|svg|bmp|jpeg)$/i,
+  IMAGE: /\.(png|jpg|gif|tiff|svg|bmp|jpeg|webp)$/i,
   VIDEO: /\.(mp4|webm)$/i,
   TWITTER: /https?:\/\/(?:twitter\.com|x\.com)\/([\w]+)\/status\/(\d+)/i
 };
