@@ -3381,6 +3381,10 @@ li.mod-table-header {
     width: 40px;
   }
 
+  .wholepost .votebuttons {
+    right: 4px;
+  }
+
   .pure-u-1-2 {
     display: block;
   }
@@ -3540,6 +3544,10 @@ li.mod-table-header {
 
    .votebuttons {
         right: 8px;
+    }
+
+   .wholepost .votebuttons {
+        right: 17px;
     }
 
     .thcontainer {
