@@ -894,3 +894,28 @@ if (resetPasswordButton) {
         });
     });
 }
+
+// Recent activity posts only toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.getElementById('posts-only-toggle');
+    const activityItems = document.querySelectorAll('.mod-table-row[data-type]');
+
+    // Only proceed if toggle exists (on activity page)
+    if (!toggle) return;
+
+    toggle.addEventListener('change', function() {
+        const postsOnly = this.checked;
+        filterActivities(postsOnly);
+    });
+
+    function filterActivities(postsOnly) {
+        activityItems.forEach(function(item) {
+            const itemType = item.getAttribute('data-type');
+            if (postsOnly && itemType === 'comment') {
+                item.classList.add('hidden');
+            } else {
+                item.classList.remove('hidden');
+            }
+        });
+    }
+});

@@ -218,3 +218,28 @@ img[src*='#center'] {
   top: 0;
   left: 0;
 }
+
+/** Recent activity posts only toggle *//
+.toggle-switch input:checked + .slider {
+    background-color: #2196F3;
+}
+
+.toggle-switch input:checked + .slider:before {
+    transform: translateX(18px); /* 26px × 0.7 = 18.2px ≈ 18px */
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px; /* 26px × 0.7 = 18.2px ≈ 18px */
+    width: 18px;  /* 26px × 0.7 = 18.2px ≈ 18px */
+    left: 3px;    /* 4px × 0.7 = 2.8px ≈ 3px */
+    bottom: 3px;  /* 4px × 0.7 = 2.8px ≈ 3px */
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.hidden {
+    display: none !important;
+}

@@ -5191,6 +5191,10 @@ msgstr "zde"
 msgid "View saved comments"
 msgstr "Uložené komentáře"
 
+#: app/html/site/activity.html:18
+msgid "Show posts only:"
+msgstr "Zobrazit pouze příspěvky:"
+
 #: app/templates/usercomments.html:2
 msgid "Comments made by"
 msgstr "Komentáře uživatele"
