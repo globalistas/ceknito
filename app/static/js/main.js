@@ -920,9 +920,9 @@ document.addEventListener('DOMContentLoaded', function() {
         activityItems.forEach(function(item) {
             const itemType = item.getAttribute('data-type');
             if (postsOnly && itemType === 'comment') {
-                item.classList.add('hidden');
+                item.classList.add('hiddencomm');
             } else {
-                item.classList.remove('hidden');
+                item.classList.remove('hiddencomm');
             }
         });
     }

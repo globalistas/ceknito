@@ -240,6 +240,10 @@ img[src*='#center'] {
     border-radius: 50%;
 }
 
-.hidden {
+input:checked + .slider:before {
+    background-color: var(--primary-color);
+}
+
+.hiddencomm {
     display: none !important;
 }
