@@ -898,13 +898,21 @@ if (resetPasswordButton) {
 // Recent activity posts only toggle
 document.addEventListener('DOMContentLoaded', function() {
     const toggle = document.getElementById('posts-only-toggle');
-    const activityItems = document.querySelectorAll('.mod-table-row[data-type]');
+    const activityItems = document.querySelectorAll('.mod-table-row[data-type]'); // Changed this line
 
     // Only proceed if toggle exists (on activity page)
     if (!toggle) return;
 
+    // Load saved preference
+    const savedPreference = localStorage.getItem('posts-only-toggle');
+    if (savedPreference === 'true') {
+        toggle.checked = true;
+        filterActivities(true);
+    }
+
     toggle.addEventListener('change', function() {
         const postsOnly = this.checked;
+        localStorage.setItem('posts-only-toggle', postsOnly);
         filterActivities(postsOnly);
     });
 
