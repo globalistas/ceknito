@@ -82,14 +82,13 @@
               @end
               <br/>
             </div>
-            @(
-                unseen = ''
-                if (comment['userstatus'] != 10 and current_user.is_authenticated and current_user.highlight_unseen_comments() and comment['uid'] != current_user.uid
-                    and not comment['already_viewed'] and comment['visibility'] in ['', 'blur-block']
-                    and not post['is_archived'] and post['user_has_viewed']
-                    and comment['time'] > post['user_last_view_time']):
-                  unseen = 'unseen-comment'
-            )
+              @(
+                  unseen = ''
+                  if (comment['userstatus'] != 10 and current_user.is_authenticated and current_user.highlight_unseen_comments() and comment['uid'] != current_user.uid
+                      and not comment['already_viewed'] and comment['visibility'] in ['', 'blur-block']
+                      and not post['is_archived'] and post['user_has_viewed']):
+                    unseen = 'unseen-comment'
+              )
             <div class="content @{unseen} @{(comment['cid'] == highlight) and 'highlight ' or ''}@{(comment['visibility'] not in ['', 'mod-del', 'admin-del']) and 'hidden' or ''}" id="content-@{comment['cid']}">
               @if comment['visibility'] == 'none':
               <div class="deleted-comment">
