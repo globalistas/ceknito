@@ -980,8 +980,12 @@ def view_post(sub, pid, slug=None, comments=False, highlight=None):
             )
             view.datetime = datetime.datetime.utcnow()
             view.save()
+            post["user_has_viewed"] = True
         except SubPostView.DoesNotExist:
             SubPostView.create(uid=current_user.uid, pid=pid)
+            post["user_has_viewed"] = True
+    else:
+        post["user_has_viewed"] = False
 
     if sub["private"]:  # Private sub
         # Check if user is an admin or mod for the sub
