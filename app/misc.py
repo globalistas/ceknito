@@ -1155,7 +1155,9 @@ def getSinglePost(pid):
             posts["user_has_viewed"] = True
             posts["user_last_view_time"] = view.datetime
         except SubPostView.DoesNotExist:
-            posts["user_has_viewed"] = False
+            view = SubPostView.create(uid=current_user.uid, pid=pid)
+            posts["user_has_viewed"] = True
+            posts["user_last_view_time"] = view.datetime
 
     return posts
 

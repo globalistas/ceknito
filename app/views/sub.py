@@ -973,20 +973,6 @@ def view_post(sub, pid, slug=None, comments=False, highlight=None):
     else:
         post["blur"] = ""
 
-    if current_user.is_authenticated and not post["is_archived"]:
-        try:
-            view = SubPostView.get(
-                (SubPostView.uid == current_user.uid) & (SubPostView.pid == pid)
-            )
-            view.datetime = datetime.datetime.utcnow()
-            view.save()
-            post["user_has_viewed"] = True
-        except SubPostView.DoesNotExist:
-            SubPostView.create(uid=current_user.uid, pid=pid)
-            post["user_has_viewed"] = True
-    else:
-        post["user_has_viewed"] = False
-
     if sub["private"]:  # Private sub
         # Check if user is an admin or mod for the sub
         is_admin_or_mod = current_user.can_admin or current_user.is_mod(sub["sid"], 2)
