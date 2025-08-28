@@ -3160,6 +3160,10 @@ li.mod-table-header {
 	vertical-align: bottom;
 }
 
+.mod-table-row .pure-u-md-14-24 {
+  min-width: 300px;
+}
+
 .mod-table .close-button {
 	display: block;
 	margin-top: 2px;

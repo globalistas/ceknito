@@ -1,5 +1,5 @@
 @extends("shared/newlayout.html")
-@require(activity)
+@require(activity, has_posts)
 @def sidebar():
 
 @include('shared/sidebar/home.html')
@@ -14,6 +14,7 @@
   <div class="content" style="margin-left: 1em">
     <h1>@{_("Recent activity")}</h1>
     <!-- Toggle control -->
+    @if has_posts:
     <div class="toggle-container" style="margin: 1em 0; display: flex; align-items: center; gap: 10px;">
       <span class="toggle-label" style="font-weight: bold;">@{_("Show posts only:")}</span>
       <label class="toggle-switch" style="position: relative; display: inline-block; width: 42px; height: 24px;">
@@ -21,6 +22,7 @@
         <span class="slider" style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 24px;"></span>
       </label>
     </div>
+    @end
     <ol class="mod-table">
     <li class="mod-table-header pure-g">
       <div class="header pure-u-1 pure-u-md-3-24">@{_('Time')}</div>

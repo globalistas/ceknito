@@ -116,13 +116,17 @@ def view_multisub_new(sublist, page=1):
 
 @bp.route("/activity")
 def view_activity():
+    activity_data = misc.recent_activity(
+        sidebar=False, filter_shadowbanned=True, filter_private=True
+    )
+
+    has_posts = any(item["type"] == "post" for item in activity_data)
+
     return engine.get_template("site/activity.html").render(
         {
-            # 'page': page,
             "subOfTheDay": misc.getSubOfTheDay(),
             "changeLog": misc.getChangelog(),
-            "activity": misc.recent_activity(
-                sidebar=False, filter_shadowbanned=True, filter_private=True
-            ),
+            "activity": activity_data,
+            "has_posts": has_posts,
         }
     )
