@@ -168,6 +168,6 @@ To pass arguments to pytest, invoke make like so: `make test ARGS="-x -k my_test
 
 ## Chat
 
-If you have any questions, you can reach us on [Discord](https://discord.gg/8HFrGrzEx2)
+If you have any questions, you can reach us on [Discord](https://discord.gg/8HFrGrzEx2).
 
 ---
