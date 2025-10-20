@@ -1734,7 +1734,7 @@ def ban_user_sub(sub):
             try:
                 expires = datetime.datetime.strptime(
                     form.expires.data, "%Y-%m-%dT%H:%M:%S.%fZ"
-                )
+                ).replace(tzinfo=datetime.timezone.utc)
                 seconds = (expires - datetime.datetime.utcnow()).total_seconds()
                 days = int(round(seconds / (60 * 60 * 24), 0))
                 if days > 365:
