@@ -56,6 +56,7 @@ site:
   # Enforces 2FA for administrators. This will remove _most_ privileges from administrators until they introduce
   # a timed one-time password.
   enable_totp: False
+  totp_timeout: 300  # five minutes
 
 auth:
   # Set to LOCAL to store user authentication in database,

@@ -12,6 +12,7 @@ import logging
 defaults = {  # key => default value
     "site": {
         "enable_totp": False,
+        "totp_timeout": 300,  # five minutes
         "sub_prefix": "s",
         "cas_authorized_hosts": [],
         "upload_max_size": 16777216,

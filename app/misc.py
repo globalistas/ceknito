@@ -230,7 +230,10 @@ class SiteUser(object):
 
         self.can_admin = "admin" in self.prefs
 
-        if time.time() - session.get("apriv", 0) < 7200 or not config.site.enable_totp:
+        if (
+            time.time() - session.get("apriv", 0) < config.site.totp_timeout
+            or not config.site.enable_totp
+        ):
             self.admin = "admin" in self.prefs
         else:
             self.admin = False
