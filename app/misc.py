@@ -230,6 +230,8 @@ class SiteUser(object):
 
         self.can_admin = "admin" in self.prefs
 
+        if session.get("apriv", 0):
+            logger.info("Session apriv: %s", session.get("apriv", 0))
         if (
             time.time() - session.get("apriv", 0) < config.site.totp_timeout
             or not config.site.enable_totp
