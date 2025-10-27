@@ -174,7 +174,14 @@ def report_details(sub, report_type, report_id):
     subInfo = misc.getSubData(sub.sid)
     subMods = misc.getSubMods(sub.sid)
 
-    report = getReports("mod", "all", 1, type=report_type, report_id=report_id)
+    try:
+        report = getReports("mod", "all", 1, type=report_type, report_id=report_id)
+    except IndexError:
+        return abort(404)
+
+    if report["sub"] != sub.name:
+        return abort(404)
+
     reported_user = User.select().where(User.name == report["reported"]).get()
     related_reports = getReports(
         "mod", "all", 1, type=report_type, report_id=report_id, related=True
