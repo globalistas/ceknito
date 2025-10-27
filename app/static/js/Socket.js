@@ -24,12 +24,15 @@ function setupTinycon() {
 const socket = io('///snt', { transports: ['websocket'], upgrade: false });
 
 function updateNotifications(count) {
-  if (count == 0) {
-    document.getElementById('mailcount').innerHTML = '';
-    document.getElementById('mailcount').style.display = 'none';
-  } else {
-    document.getElementById('mailcount').innerHTML = count;
-    document.getElementById('mailcount').style.display = 'inline-block';
+  const mailCount = document.getElementById('mailcount');
+  if (mailCount) {
+    if (count == 0) {
+      mailCount.innerHTML = '';
+      mailCount.style.display = 'none';
+    } else {
+      mailCount.innerHTML = count;
+      mailCount.style.display = 'inline-block';
+    }
   }
 }
 
@@ -171,7 +174,10 @@ socket.on('uinfo', function (d) {
   modData = d.mod_ntf;
   updateModNotifications(modData);
   updateTitleNotifications();
-  document.getElementById('postscore').innerHTML = numberWithCommas(d.taken);
+  const postScore = document.getElementById('postscore');
+  if (postScore) {
+    postScore.innerHTML = numberWithCommas(d.taken);
+  }
 });
 
 socket.on('uscore', function (d) {
