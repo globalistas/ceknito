@@ -3211,7 +3211,7 @@ def toggle_sticky(post):
     except SubPost.DoesNotExist:
         return jsonify(status="error", error=_("Post does not exist"))
 
-    if not current_user.is_mod(post.sid_id):
+    if not (current_user.is_mod(post.sid_id) or current_user.is_admin()):
         abort(403)
 
     form = DeletePost()
@@ -3234,9 +3234,9 @@ def toggle_sticky(post):
             stickies = SubMetadata.select().where(
                 (SubMetadata.sid == post.sid_id) & (SubMetadata.key == "sticky")
             )
-            if stickies.count() >= 3:
+            if stickies.count() >= 4:
                 return jsonify(
-                    status="error", error=_("This sub already has three sticky posts")
+                    status="error", error=_("Unable to sticky any more posts")
                 )
             SubMetadata.create(sid=post.sid_id, key="sticky", value=post.pid)
             misc.create_sublog(

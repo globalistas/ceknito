@@ -4555,8 +4555,8 @@ msgid "Post was not saved"
 msgstr "Príspevok nebol uložený"
 
 #: app/views/do.py:2555
-msgid "This sub already has three sticky posts"
-msgstr "Táto skupina už má 3 sticky príspevky"
+msgid "Unable to sticky any more posts"
+msgstr "Nie je možné prilepiť ďalšie príspevky"
 
 #: app/views/do.py:2781
 msgid "Rule does not exist"

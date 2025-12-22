@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Throat 1.0\n"
 "Report-Msgid-Bugs-To: polsaker@phuks.co\n"
-"POT-Creation-Date: 2025-07-31 08:52+0200\n"
+"POT-Creation-Date: 2025-12-16 22:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,108 +29,108 @@ msgstr ""
 msgid "Invalid file type. Only jpg, png and gif allowed."
 msgstr ""
 
-#: app/config.py:112
+#: app/config.py:113
 msgid "Name of the site."
 msgstr ""
 
-#: app/config.py:117
+#: app/config.py:118
 msgid "Lema shown in the page's title."
 msgstr ""
 
-#: app/config.py:122
+#: app/config.py:123
 msgid "Copyright line shown in the footer."
 msgstr ""
 
-#: app/config.py:127
+#: app/config.py:128
 msgid "Name shown when a sub is owned by a deleted account or abandoned."
 msgstr ""
 
-#: app/config.py:134
+#: app/config.py:135
 msgid ""
 "Enables setting security questions on the admin page. Users will be asked"
 " to answer one of these security questions before registering."
 msgstr ""
 
-#: app/config.py:142
+#: app/config.py:143
 msgid ""
 "Allow the application to expose a single endpoint offering results to "
 "global keyword searches in the form of web feeds."
 msgstr ""
 
-#: app/config.py:150
+#: app/config.py:151
 msgid ""
 "Allow everybody to upload files (by default it's only admins and users "
 "authorized through a metadata key)."
 msgstr ""
 
-#: app/config.py:158
+#: app/config.py:159
 msgid ""
 "For those who are allowed to upload files, allow video uploads (.mp4 and "
 ".webm) as well."
 msgstr ""
 
-#: app/config.py:165
+#: app/config.py:166
 msgid ""
 "Minimum level a user must have before being able to upload files. Set to "
 "zero to disable file upload level limits."
 msgstr ""
 
-#: app/config.py:173
+#: app/config.py:174
 msgid ""
 "Allow chat access for all users. If enabled, each user will have the "
 "option of disabling chat for themselves."
 msgstr ""
 
-#: app/config.py:181
+#: app/config.py:182
 msgid ""
 "Allow all users to view the site log. When disabled, only admins can view"
 " the sitelog."
 msgstr ""
 
-#: app/config.py:188
+#: app/config.py:189
 msgid ""
 "Forces all the sub logs and banned user lists to be public and removes "
 "the option to make them private."
 msgstr ""
 
-#: app/config.py:196
+#: app/config.py:197
 msgid "Show the \"Submit a post\" button on the frontpage."
 msgstr ""
 
-#: app/config.py:201
+#: app/config.py:202
 msgid ""
 "Blocks anonymous users from being able to look at a particular user's "
 "posts or comments (IE blocks /u/<user>/posts and /u/<user>/comments)."
 msgstr ""
 
-#: app/config.py:209
+#: app/config.py:210
 msgid "SID of the sub for changelog entries."
 msgstr ""
 
-#: app/config.py:214
+#: app/config.py:215
 msgid ""
 "Amount of time in seconds the post author can edit a post's title after "
 "the post was created. Set to zero to disable title editing (default is 5 "
 "minutes)."
 msgstr ""
 
-#: app/config.py:222
+#: app/config.py:223
 msgid "Enable sub owners to set sub to private."
 msgstr ""
 
-#: app/config.py:227
+#: app/config.py:228
 msgid ""
 "Minimum level a user must have before being able to create a sub. Set to "
 "zero to disable sub creation level limits."
 msgstr ""
 
-#: app/config.py:235
+#: app/config.py:236
 msgid ""
 "When enabled, only admins can create new subs, otherwise "
 "`sub_creation_min_level` controls who can create a sub."
 msgstr ""
 
-#: app/config.py:243
+#: app/config.py:244
 msgid ""
 "Maximum amount of subs a single user can own. The actual amount of subs a"
 " user may register scales with user level (user level minus one) so a "
@@ -138,225 +138,225 @@ msgid ""
 "disabled if `sub_creation_min_level` is zero."
 msgstr ""
 
-#: app/config.py:253
+#: app/config.py:254
 msgid "Allows Sub Mods and Admins to view the edit history of posts."
 msgstr ""
 
-#: app/config.py:260
+#: app/config.py:261
 msgid ""
 "Removes the name of the Mod or Admin who took action on a post or user in"
 " notifications sent to user."
 msgstr ""
 
-#: app/config.py:268
+#: app/config.py:269
 msgid ""
 "Minimum level required for a user to be permitted to private message "
 "nonprivileged users. Set to zero to allow users of all levels to PM other"
 " users. Users of any level may PM site admins."
 msgstr ""
 
-#: app/config.py:277
+#: app/config.py:278
 msgid ""
 "Minimum level required for a user to be permitted to create posts. Set to"
 " zero to allow users of all levels to post."
 msgstr ""
 
-#: app/config.py:285
+#: app/config.py:286
 msgid "Enable optional text for link posts."
 msgstr ""
 
-#: app/config.py:290
+#: app/config.py:291
 msgid "Maximum amount of posts a user can create in a single sub in a day."
 msgstr ""
 
-#: app/config.py:297
+#: app/config.py:298
 msgid "Maximum amount of posts a user can create in a single day."
 msgstr ""
 
-#: app/config.py:302
+#: app/config.py:303
 msgid ""
 "Maximum amount of post/comment image uploads a user can perform in a "
 "single day."
 msgstr ""
 
-#: app/config.py:309
+#: app/config.py:310
 msgid "Number of days after which posts will be archived."
 msgstr ""
 
-#: app/config.py:314
+#: app/config.py:315
 msgid ""
 "When enabled, archive sticky posts after 'archive_post_after' days, the "
 "same as regular posts. When disabled, sticky posts will not be archived."
 msgstr ""
 
-#: app/config.py:325
+#: app/config.py:326
 msgid "Enables or disables the recent activity sidebar and the page in /activity."
 msgstr ""
 
-#: app/config.py:332
+#: app/config.py:333
 msgid "Enables or disables live updates in the recent activity sidebar."
 msgstr ""
 
-#: app/config.py:339
+#: app/config.py:340
 msgid ""
 "Only show recent activity from default subs in the sidebar (recent "
 "activity for all subs will be shown in /activity)."
 msgstr ""
 
-#: app/config.py:347
+#: app/config.py:348
 msgid "If enabled, only show recent comments (and not posts) in the sidebar."
 msgstr ""
 
-#: app/config.py:354
+#: app/config.py:355
 msgid "Number of entries to display in the recent activity sidebar."
 msgstr ""
 
-#: app/config.py:363
+#: app/config.py:364
 msgid ""
 "Show the 'Contact the Mods' button in sub sidebars, which provides a link"
 " to the modmail server."
 msgstr ""
 
-#: app/config.py:371
+#: app/config.py:372
 msgid "Allow users to make posts and comments."
 msgstr ""
 
-#: app/config.py:376
+#: app/config.py:377
 msgid "Allow new users to register."
 msgstr ""
 
-#: app/config.py:381
+#: app/config.py:382
 msgid ""
 "Allow users to see the usernames of the people they invited or were "
 "invited by."
 msgstr ""
 
-#: app/config.py:388
+#: app/config.py:389
 msgid "Level requirement before a user can generate invite codes."
 msgstr ""
 
-#: app/config.py:393
+#: app/config.py:394
 msgid ""
 "The number of invite codes each user is allowed to generate (see also "
 "site.invite_level)."
 msgstr ""
 
-#: app/config.py:400
+#: app/config.py:401
 msgid "Require the user to solve a captcha to register or post."
 msgstr ""
 
-#: app/config.py:405
+#: app/config.py:406
 msgid "Require an invite code to register."
 msgstr ""
 
-#: app/config.py:410
+#: app/config.py:411
 msgid ""
 "If enabled, show the notification count on the page title icon.  "
 "Otherwise, show the notification count in parentheses in the page title."
 msgstr ""
 
-#: app/config.py:418
+#: app/config.py:419
 msgid ""
 "The maximum length of a user name, applied to new registrations. This "
 "should be set to a number between 2 and 64."
 msgstr ""
 
-#: app/config.py:432
+#: app/config.py:433
 msgid "If enabled, show NSFW content to anonymous users."
 msgstr ""
 
-#: app/config.py:439
+#: app/config.py:440
 msgid ""
 "If enabled, and 'site.nsfw.anon.show' is also enabled, blur NSFW content "
 "when it is shown to anonymous users."
 msgstr ""
 
-#: app/config.py:452
+#: app/config.py:453
 msgid "If enabled, set the NSFW preference of new users to show NSFW content."
 msgstr ""
 
-#: app/config.py:459
+#: app/config.py:460
 msgid ""
 "If enabled, and 'site.nsfw.new_user_default.show' is also enabled, set "
 "the NSFW preference of new users to blur NSFW content."
 msgstr ""
 
-#: app/config.py:471
+#: app/config.py:472
 msgid ""
 "If enabled, show upvotes and downvotes in addition to total post score. "
 "Otherwise, only show post upvotes and downvotes to admins and mods in "
 "their own subs."
 msgstr ""
 
-#: app/config.py:479
+#: app/config.py:480
 msgid ""
 "If enabled, show upvotes and downvotes in addition to total comment "
 "score. Otherwise, only show comment upvotes and downvotes to admins and "
 "mods in their own subs."
 msgstr ""
 
-#: app/config.py:490
+#: app/config.py:491
 msgid ""
 "If enabled, users will automatically upvote their own posts, and are "
 "allowed to change their vote.  If disabled, users cannot upvote or "
 "downvote their own posts."
 msgstr ""
 
-#: app/config.py:499
+#: app/config.py:500
 msgid ""
 "If enabled, users will automatically upvote their own comments, and are "
 "allowed to change their vote.  If disabled, users cannot upvote or "
 "downvote their own comments."
 msgstr ""
 
-#: app/config.py:513
+#: app/config.py:514
 msgid ""
 "If enabled, show the post score next to its title in the list of top "
 "posts in the last 24 hours."
 msgstr ""
 
-#: app/config.py:521
+#: app/config.py:522
 msgid "If enabled, only show posts from default subs."
 msgstr ""
 
-#: app/config.py:528
+#: app/config.py:529
 msgid "Globally disables/enables the send_email function."
 msgstr ""
 
-#: app/config.py:533
+#: app/config.py:534
 msgid "Disables/enables reg notify admin emailing"
 msgstr ""
 
-#: app/config.py:541
+#: app/config.py:542
 msgid "If enabled, new users have email notifications enabled by default."
 msgstr ""
 
-#: app/config.py:550
+#: app/config.py:551
 msgid ""
 "If enabled, new users get an automated welcome message from the first "
 "admin user."
 msgstr ""
 
-#: app/config.py:557
+#: app/config.py:558
 msgid ""
 "If enabled, new users get their Early Adopter badge automatically. Badge "
 "trigger used: 'user registers'."
 msgstr ""
 
-#: app/config.py:565
+#: app/config.py:566
 msgid ""
 "If enabled, users get their Ready Steady Check badge after their first "
 "post automatically. Badge trigger used: 'first post'."
 msgstr ""
 
-#: app/config.py:573
+#: app/config.py:574
 msgid ""
 "When enabled, auto-expand postlists expandos by default. This can be "
 "further controlled at sub and user level. Single post expandos are always"
 " auto-expanded."
 msgstr ""
 
-#: app/config.py:582
+#: app/config.py:583
 msgid ""
 "If set, and site.enable_modmail is also set, when an admin removes a "
 "user's content, a reply by the user to the notification message will be "
@@ -364,29 +364,29 @@ msgid ""
 "to the modmail of the sub in which the removed content was posted."
 msgstr ""
 
-#: app/config.py:593
+#: app/config.py:594
 msgid "Sets the sub sid used for announcement posts."
 msgstr ""
 
-#: app/config.py:598
+#: app/config.py:599
 msgid "Sets the link for the Contact us in footer (e.g. https://example.com)."
 msgstr ""
 
-#: app/config.py:610
+#: app/config.py:611
 msgid "Max storage for image uploads for subs' stylesheets (in MiB)."
 msgstr ""
 
-#: app/misc.py:629
+#: app/misc.py:634
 #, python-format
 msgid "[a comment](%(url)s)"
 msgstr ""
 
-#: app/misc.py:1999
+#: app/misc.py:2006
 #, python-format
 msgid "Error in the '%(field)s' field - %(error)s"
 msgstr ""
 
-#: app/misc.py:2187
+#: app/misc.py:2194
 #, python-format
 msgid "Re: %(subject)s"
 msgstr ""
@@ -398,65 +398,65 @@ msgstr ""
 #: app/html/sub/post.html:229 app/html/sub/post.html:359
 #: app/html/sub/post.html:383 app/html/sub/postcomments.html:43
 #: app/html/user/comments.html:50 app/html/user/savedcomments.html:47
-#: app/misc.py:2539 app/misc.py:3540 app/misc.py:3546 app/misc.py:3551
+#: app/misc.py:2546 app/misc.py:3547 app/misc.py:3553 app/misc.py:3558
 msgid "[deleted]"
 msgstr ""
 
-#: app/misc.py:2695
+#: app/misc.py:2702
 msgid "URLs not allowed, uploaded files only"
 msgstr ""
 
-#: app/misc.py:2706
+#: app/misc.py:2713
 msgid "Invalid characters in string."
 msgstr ""
 
-#: app/misc.py:2724
+#: app/misc.py:2731
 msgid "@import token not allowed"
 msgstr ""
 
-#: app/misc.py:2740
+#: app/misc.py:2747
 msgid "Invalid CSS"
 msgstr ""
 
-#: app/misc.py:2808 app/misc.py:2869
+#: app/misc.py:2815 app/misc.py:2876
 #, python-format
 msgid "User %(user_name)s sent you a <a href=\"%(url)s\">private message</a>"
 msgstr ""
 
-#: app/misc.py:2813 app/misc.py:2874 app/misc.py:2952 app/notifications.py:291
+#: app/misc.py:2820 app/misc.py:2881 app/misc.py:2959 app/notifications.py:291
 msgid "New notification"
 msgstr ""
 
-#: app/misc.py:2947
+#: app/misc.py:2954
 #, python-format
 msgid "User %(user_name)s <a href=\"%(url)s\">replied</a> to your private message"
 msgstr ""
 
-#: app/html/sub/postcomments.html:56 app/misc.py:3521
+#: app/html/sub/postcomments.html:56 app/misc.py:3528
 msgid "[Blocked]"
 msgstr ""
 
-#: app/misc.py:3534
+#: app/misc.py:3541
 msgid "[deleted by user]"
 msgstr ""
 
-#: app/misc.py:3618
+#: app/misc.py:3625
 msgid "Already processing previous request."
 msgstr ""
 
-#: app/misc.py:3640
+#: app/misc.py:3647
 msgid "Unknown error. User disappeared"
 msgstr ""
 
-#: app/misc.py:3647
+#: app/misc.py:3654
 msgid "Score balance is negative"
 msgstr ""
 
-#: app/misc.py:3649
+#: app/misc.py:3656
 msgid "Invalid vote value"
 msgstr ""
 
-#: app/misc.py:3665 app/views/do.py:340 app/views/do.py:496 app/views/do.py:884
+#: app/misc.py:3672 app/views/do.py:340 app/views/do.py:496 app/views/do.py:884
 #: app/views/do.py:919 app/views/do.py:1311 app/views/do.py:1417
 #: app/views/do.py:2812 app/views/do.py:2918 app/views/do.py:3093
 #: app/views/do.py:3108 app/views/do.py:3212 app/views/do.py:3297
@@ -466,44 +466,44 @@ msgstr ""
 msgid "Post does not exist"
 msgstr ""
 
-#: app/misc.py:3668
+#: app/misc.py:3675
 msgid "You can't vote on your own posts"
 msgstr ""
 
-#: app/misc.py:3670
+#: app/misc.py:3677
 msgid "You can't vote on deleted posts"
 msgstr ""
 
-#: app/misc.py:3703 app/views/do.py:3124 app/views/do.py:3139
+#: app/misc.py:3710 app/views/do.py:3124 app/views/do.py:3139
 #: app/views/do.py:3262 app/views/do.py:3583 app/views/do.py:3631
 #: app/views/do.py:3772 app/views/do.py:4079 app/views/do.py:4104
 #: app/views/do.py:5121 app/views/do.py:5234
 msgid "Comment does not exist"
 msgstr ""
 
-#: app/misc.py:3706
+#: app/misc.py:3713
 msgid "You can't vote on your own comments"
 msgstr ""
 
-#: app/misc.py:3708
+#: app/misc.py:3715
 msgid "You can't vote on deleted comments"
 msgstr ""
 
-#: app/misc.py:3720
+#: app/misc.py:3727
 msgid "Invalid target"
 msgstr ""
 
-#: app/misc.py:3723 app/views/do.py:1365 app/views/do.py:2819
+#: app/misc.py:3730 app/views/do.py:1365 app/views/do.py:2819
 #: app/views/do.py:3595
 msgid "You are banned on this sub."
 msgstr ""
 
-#: app/misc.py:3728 app/views/do.py:1368 app/views/do.py:1422
+#: app/misc.py:3735 app/views/do.py:1368 app/views/do.py:1422
 #: app/views/do.py:3606
 msgid "Post is archived"
 msgstr ""
 
-#: app/misc.py:4082
+#: app/misc.py:4089
 msgid "Invalid status request"
 msgstr ""
 
@@ -576,7 +576,7 @@ msgstr ""
 #: app/html/admin/reports.html:24 app/html/mod/closed.html:25
 #: app/html/mod/reportdetails.html:62 app/html/mod/reports.html:24
 #: app/html/mod/sub_reports.html:29 app/html/mod/sub_reports_closed.html:31
-#: app/html/site/activity.html:29 app/html/subs.html:38 app/html/subs.html:40
+#: app/html/site/activity.html:31 app/html/subs.html:38 app/html/subs.html:40
 #: app/html/subs.html:42
 msgid "Sub"
 msgstr ""
@@ -1576,7 +1576,7 @@ msgstr ""
 #: app/html/mod/reportdetails.html:68 app/html/mod/reportdetails.html:237
 #: app/html/mod/reportdetails.html:311 app/html/mod/reports.html:29
 #: app/html/mod/sub_reports.html:34 app/html/mod/sub_reports_closed.html:36
-#: app/html/site/activity.html:26 app/html/site/log.html:11
+#: app/html/site/activity.html:28 app/html/site/log.html:11
 #: app/html/sub/log.html:19
 msgid "Time"
 msgstr ""
@@ -1764,7 +1764,7 @@ msgstr ""
 
 #: app/html/mod/closed.html:35 app/html/mod/reports.html:34
 #: app/html/mod/sub_reports.html:39 app/html/mod/sub_reports_closed.html:41
-#: app/html/site/activity.html:51
+#: app/html/site/activity.html:53
 msgid "Sub:"
 msgstr ""
 
@@ -1793,7 +1793,7 @@ msgstr ""
 #: app/html/mod/closed.html:50 app/html/mod/reportdetails.html:244
 #: app/html/mod/reportdetails.html:319 app/html/mod/reports.html:49
 #: app/html/mod/sub_reports.html:54 app/html/mod/sub_reports_closed.html:56
-#: app/html/site/activity.html:33 app/html/sub/log.html:27
+#: app/html/site/activity.html:35 app/html/sub/log.html:27
 msgid "Time:"
 msgstr ""
 
@@ -1891,16 +1891,16 @@ msgstr ""
 msgid "Post Preview:"
 msgstr ""
 
-#: app/html/mod/reportdetails.html:139 app/html/sub/postcomments.html:104
+#: app/html/mod/reportdetails.html:139 app/html/sub/postcomments.html:106
 msgid "[post deleted by admin]"
 msgstr ""
 
-#: app/html/mod/reportdetails.html:141 app/html/sub/postcomments.html:101
+#: app/html/mod/reportdetails.html:141 app/html/sub/postcomments.html:103
 msgid "[post deleted by mod]"
 msgstr ""
 
 #: app/html/mod/reportdetails.html:143 app/html/mod/reportdetails.html:156
-#: app/html/sub/postcomments.html:98
+#: app/html/sub/postcomments.html:100
 msgid "[post deleted by user]"
 msgstr ""
 
@@ -2031,7 +2031,7 @@ msgid "Closed all reports related to: "
 msgstr ""
 
 #: app/html/mod/reportdetails.html:284 app/html/shared/post.html:132
-#: app/html/sub/post.html:313 app/html/sub/postcomments.html:151
+#: app/html/sub/post.html:313 app/html/sub/postcomments.html:153
 msgid "report"
 msgstr ""
 
@@ -2184,17 +2184,17 @@ msgstr ""
 #: app/html/user/messages/notifications.html:26
 #: app/html/user/messages/notifications.html:31
 #: app/html/user/messages/notifications.html:36
-#: app/html/user/savedcomments.html:50 app/static/js/Socket.js:224
+#: app/html/user/savedcomments.html:50 app/static/js/Socket.js:230
 msgid "Not safe for work"
 msgstr ""
 
 #: app/html/shared/post.html:67 app/html/shared/sidebar/home.html:29
 #: app/html/shared/sidebar/home.html:59 app/html/shared/sidebar/sub.html:51
-#: app/html/site/activity.html:48 app/html/sub/post.html:172
+#: app/html/site/activity.html:50 app/html/sub/post.html:172
 #: app/html/user/comments.html:53 app/html/user/messages/notifications.html:26
 #: app/html/user/messages/notifications.html:31
 #: app/html/user/messages/notifications.html:36
-#: app/html/user/savedcomments.html:50 app/static/js/Socket.js:224
+#: app/html/user/savedcomments.html:50 app/static/js/Socket.js:230
 msgid "NSFW"
 msgstr ""
 
@@ -2268,7 +2268,7 @@ msgid "open reports (%(num)s)"
 msgstr ""
 
 #: app/html/shared/post.html:138 app/html/sub/post.html:272
-#: app/html/sub/postcomments.html:174 app/html/user/comments.html:116
+#: app/html/sub/postcomments.html:176 app/html/user/comments.html:116
 #: app/html/user/messages/messages.html:43 app/html/user/messages/saved.html:36
 #: app/html/user/savedcomments.html:96
 msgid "delete"
@@ -2609,36 +2609,36 @@ msgstr ""
 msgid "View saved comments"
 msgstr ""
 
-#: app/html/site/activity.html:18
+#: app/html/site/activity.html:19
 msgid "Show posts only:"
 msgstr ""
 
-#: app/html/site/activity.html:27 app/html/site/log.html:12
+#: app/html/site/activity.html:29 app/html/site/log.html:12
 #: app/html/sub/bans.html:61 app/html/sub/bans.html:123
 #: app/html/sub/log.html:22 app/html/sub/user_flairs.html:26
 #: app/html/user/profile.html:194
 msgid "User"
 msgstr ""
 
-#: app/html/site/activity.html:36 app/html/sub/bans.html:85
+#: app/html/site/activity.html:38 app/html/sub/bans.html:85
 #: app/html/sub/bans.html:144 app/html/sub/log.html:114
 msgid "User:"
 msgstr ""
 
-#: app/html/site/activity.html:39
+#: app/html/site/activity.html:41
 msgid "Content:"
 msgstr ""
 
-#: app/html/site/activity.html:41
+#: app/html/site/activity.html:43
 msgid "commented:"
 msgstr ""
 
-#: app/html/site/activity.html:42 app/html/site/activity.html:45
+#: app/html/site/activity.html:44 app/html/site/activity.html:47
 #, python-format
 msgid "%(text)s"
 msgstr ""
 
-#: app/html/site/activity.html:44
+#: app/html/site/activity.html:46
 msgid "posted:"
 msgstr ""
 
@@ -3385,14 +3385,14 @@ msgstr ""
 msgid "Viewing title history:"
 msgstr ""
 
-#: app/html/sub/post.html:246 app/html/sub/postcomments.html:145
+#: app/html/sub/post.html:246 app/html/sub/postcomments.html:147
 #: app/html/user/comments.html:100
 #: app/html/user/messages/notifications.html:126
 #: app/html/user/savedcomments.html:94
 msgid "unsave"
 msgstr ""
 
-#: app/html/sub/post.html:248 app/html/sub/postcomments.html:147
+#: app/html/sub/post.html:248 app/html/sub/postcomments.html:149
 #: app/html/user/comments.html:102 app/html/user/messages/messages.html:42
 #: app/html/user/messages/notifications.html:128
 msgid "save"
@@ -3402,7 +3402,7 @@ msgstr ""
 msgid "flair"
 msgstr ""
 
-#: app/html/sub/post.html:257 app/html/sub/postcomments.html:157
+#: app/html/sub/post.html:257 app/html/sub/postcomments.html:159
 #: app/html/user/comments.html:106 app/static/js/Post.js:365
 #: app/static/js/Post.js:368 app/static/js/Post.js:423
 #: app/static/js/Post.js:426
@@ -3413,12 +3413,12 @@ msgstr ""
 msgid "edit title"
 msgstr ""
 
-#: app/html/sub/post.html:264 app/html/sub/postcomments.html:159
+#: app/html/sub/post.html:264 app/html/sub/postcomments.html:161
 #: app/html/user/comments.html:108
 msgid "disable notifications"
 msgstr ""
 
-#: app/html/sub/post.html:266 app/html/sub/postcomments.html:161
+#: app/html/sub/post.html:266 app/html/sub/postcomments.html:163
 #: app/html/user/comments.html:110
 msgid "enable notifications"
 msgstr ""
@@ -3435,11 +3435,11 @@ msgstr ""
 msgid "close poll"
 msgstr ""
 
-#: app/html/sub/post.html:289 app/html/sub/postcomments.html:167
+#: app/html/sub/post.html:289 app/html/sub/postcomments.html:169
 msgid "unstick"
 msgstr ""
 
-#: app/html/sub/post.html:291 app/html/sub/postcomments.html:167
+#: app/html/sub/post.html:291 app/html/sub/postcomments.html:169
 msgid "make sticky"
 msgstr ""
 
@@ -3467,15 +3467,15 @@ msgstr ""
 msgid "lock comments"
 msgstr ""
 
-#: app/html/sub/post.html:320 app/html/sub/postcomments.html:154
+#: app/html/sub/post.html:320 app/html/sub/postcomments.html:156
 msgid "un-delete"
 msgstr ""
 
-#: app/html/sub/post.html:323 app/html/sub/postcomments.html:165
+#: app/html/sub/post.html:323 app/html/sub/postcomments.html:167
 msgid "undistinguish"
 msgstr ""
 
-#: app/html/sub/post.html:323 app/html/sub/postcomments.html:165
+#: app/html/sub/post.html:323 app/html/sub/postcomments.html:167
 #: app/static/js/Post.js:56
 msgid "distinguish"
 msgstr ""
@@ -3496,7 +3496,7 @@ msgstr ""
 msgid "Select a new flair"
 msgstr ""
 
-#: app/html/sub/post.html:416 app/html/sub/postcomments.html:121
+#: app/html/sub/post.html:416 app/html/sub/postcomments.html:123
 msgid "Viewing edit history:"
 msgstr ""
 
@@ -3579,37 +3579,37 @@ msgstr ""
 msgid "last edited %(timeago)s"
 msgstr ""
 
-#: app/html/sub/postcomments.html:107
+#: app/html/sub/postcomments.html:109
 #, python-format
 msgid "[You have blocked <a href=\"%(link)s\">%(name)s</a>]"
 msgstr ""
 
-#: app/html/sub/postcomments.html:135
+#: app/html/sub/postcomments.html:137
 msgid "blocked users"
 msgstr ""
 
-#: app/html/sub/postcomments.html:138
+#: app/html/sub/postcomments.html:140
 #: app/html/user/messages/notifications.html:123
 #: app/html/user/messages/notifications.html:140
 msgid "permalink"
 msgstr ""
 
-#: app/html/sub/postcomments.html:141 app/html/user/comments.html:96
+#: app/html/sub/postcomments.html:143 app/html/user/comments.html:96
 #: app/html/user/savedcomments.html:92 app/static/js/Post.js:344
 #: app/static/js/Post.js:347 app/static/js/Post.js:399
 #: app/static/js/Post.js:402
 msgid "source"
 msgstr ""
 
-#: app/html/sub/postcomments.html:170
+#: app/html/sub/postcomments.html:172
 msgid "unlock"
 msgstr ""
 
-#: app/html/sub/postcomments.html:170
+#: app/html/sub/postcomments.html:172
 msgid "lock"
 msgstr ""
 
-#: app/html/sub/postcomments.html:177 app/html/user/comments.html:113
+#: app/html/sub/postcomments.html:179 app/html/user/comments.html:113
 #: app/html/user/messages/messages.html:34
 #: app/html/user/messages/notifications.html:131
 #: app/html/user/messages/notifications.html:143
@@ -3618,12 +3618,12 @@ msgstr ""
 msgid "reply"
 msgstr ""
 
-#: app/html/sub/postcomments.html:191
+#: app/html/sub/postcomments.html:193
 #, python-format
 msgid "Load more (%(amt)i comments)"
 msgstr ""
 
-#: app/html/sub/postcomments.html:193
+#: app/html/sub/postcomments.html:195
 msgid "Load more (1 comment)"
 msgstr ""
 
@@ -5277,7 +5277,7 @@ msgid "Comment was not saved"
 msgstr ""
 
 #: app/views/do.py:3239
-msgid "This sub already has three sticky posts"
+msgid "Unable to sticky any more posts"
 msgstr ""
 
 #: app/views/do.py:3388 app/views/do.py:3438

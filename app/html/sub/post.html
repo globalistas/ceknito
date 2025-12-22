@@ -284,7 +284,7 @@
               <li><a class="poll-close"> @{_('close poll')} </a></li>
           @end
 
-          @if current_user.is_mod(post['sid']):
+          @if current_user.is_mod(post['sid']) or current_user.is_admin():
             @if str(post['pid']) in subInfo['sticky']:
               <li><a class="stick-post">@{_('unstick')}</a></li>
             @else:

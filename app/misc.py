@@ -1655,7 +1655,7 @@ def getStickies(sid, isSubMod):
             ),
         )
         posts = posts.where(SubPost.sid == sid)
-        posts = posts.order_by(SubMetadata.xid.asc()).dicts()
+        posts = posts.order_by(SubMetadata.xid.desc()).dicts()
     return add_calculated_fields(posts, include_mod_counts=isSubMod)
 
 
