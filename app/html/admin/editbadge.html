@@ -25,24 +25,24 @@
                 @if not new:
                   <label for="icon"><img src="@{badge.icon_url()}" width="60" height="60" /></label>
                 @else:
-                  <label for="icon">@{form.icon.label}</label>
+                  <label for="icon">@{form.icon.label!!html}</label>
                 @end
                 @{form.icon(required=new)!!html}
               </div>
               <div class="pure-control-group">
-                <label for="name">@{form.name.label}</label>@{form.name(required=True)!!html}
+                <label for="name">@{form.name.label!!html}</label>@{form.name(required=True)!!html}
               </div>
               <div class="pure-control-group">
-                <label for="score">@{form.score.label}</label>@{form.score(required=True)!!html}
+                <label for="score">@{form.score.label!!html}</label>@{form.score(required=True)!!html}
               </div>
               <div class="pure-control-group">
-                <label for="alt">@{form.alt.label}</label>@{form.alt!!html}
+                <label for="alt">@{form.alt.label!!html}</label>@{form.alt!!html}
               </div>
               <div class="pure-control-group">
-                <label for="trigger">@{form.trigger.label}</label>@{form.trigger!!html}
+                <label for="trigger">@{form.trigger.label!!html}</label>@{form.trigger!!html}
               </div>
               <div class="pure-control-group">
-                <label for="rank">@{form.rank.label}</label>@{form.rank!!html}
+                <label for="rank">@{form.rank.label!!html}</label>@{form.rank!!html}
               </div>
               <div class="pure-controls">
                 <button type="submit" class="pure-button" data-prog="Doing the magic...">
