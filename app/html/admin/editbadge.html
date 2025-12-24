@@ -36,13 +36,13 @@
                 <label for="score">@{form.score.label}</label>@{form.score(required=True)!!html}
               </div>
               <div class="pure-control-group">
-                <label for="alt">@{form.alt.label}</label>@{form.alt}
+                <label for="alt">@{form.alt.label}</label>@{form.alt!!html}
               </div>
               <div class="pure-control-group">
-                <label for="trigger">@{form.trigger.label}</label>@{form.trigger}
+                <label for="trigger">@{form.trigger.label}</label>@{form.trigger!!html}
               </div>
               <div class="pure-control-group">
-                <label for="rank">@{form.rank.label}</label>@{form.rank}
+                <label for="rank">@{form.rank.label}</label>@{form.rank!!html}
               </div>
               <div class="pure-controls">
                 <button type="submit" class="pure-button" data-prog="Doing the magic...">
