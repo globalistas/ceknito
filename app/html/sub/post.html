@@ -103,7 +103,9 @@
           <div class="thumbnail">
             @if post['link'] != None:
             <a target="_blank" rel="noopener nofollow ugc" href="@{post['link']}">
-              @if post['thumbnail'] == '' or post['visibility'] == 'none' or post['visibility'] == 'user-self-del':
+              @if post['thumbnail'] == '' and post['link'].lower().endswith(('.mp4', '.webm')):
+                <span class="placeholder" data-icon="video"></span>
+              @elif post['thumbnail'] == '' or post['visibility'] == 'none' or post['visibility'] == 'user-self-del':
                 <span class="placeholder" data-icon="link"></span>
               @elif post['thumbnail'] == 'deferred':
                 <span class="placeholder deferred @{post['blur']}" data-icon="link" data-deferred="SubPost-@{post['pid']}"></span>

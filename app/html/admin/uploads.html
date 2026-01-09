@@ -39,7 +39,7 @@
               <td>
                 <a href="@{file_url(item['fileid'])}" class="upload-thumb">
                   @if item['thumbnail'] == '':
-                    <span class="placeholder" data-icon="link"></span>
+                    <span class="placeholder placeholder-video" data-icon="video" style="width:70px;height:70px;"></span>
                   @elif item['thumbnail'] == 'deferred':
                     <span class="placeholder deferred"
                           data-icon="link"

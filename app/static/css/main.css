@@ -472,6 +472,8 @@ span#notification.fade {
 	left: 0;
 }
 
+
+
 .editbar path {
 	fill: #fff;
 }
@@ -857,6 +859,10 @@ iframe {
 
 .expando-wrapper:has(.lite-twitter) {
   padding-bottom: 0;
+}
+
+.placeholder-video svg path {
+    fill: #888;
 }
 
 .thumbnail .placeholder svg path {

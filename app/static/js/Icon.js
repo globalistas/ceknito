@@ -23,6 +23,7 @@ var Icons = {
   color: require('../svg/color-wheel.svg'),
 
   play: require('../svg/play_arrow.svg'),
+  video: require('../svg/video.svg'),
   twitter: require('../svg/twitter.svg'),
   image: require('../svg/image.svg'),
   text: require('../svg/file-text.svg'),

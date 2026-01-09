@@ -17,19 +17,26 @@
         @else:
           <a target="_blank" rel="noopener nofollow ugc" href="@{post['link']}">
         @end
-          <div class="thumbnail">
-            @if post['link'] != None:
-              @if post['thumbnail'] == '':
-                <span class="placeholder" data-icon="link"></span>
-              @elif post['thumbnail'] == 'deferred':
-                <span class="placeholder deferred @{post['blur']}" data-icon="link" data-deferred="SubPost-@{post['pid']}"></span>
-              @else:
-                <img alt="@{_('Thumbnail')}" class="lazy @{post['blur']}" src="@{url_for('static', filename='img/1x1.gif')}" data-src="@{thumbnail_url(post['thumbnail'])}"/>
-              @end
+        <div class="thumbnail">
+          @if post['link'] != None:
+            @if post['thumbnail'] == '' and post['link'].lower().endswith(('.mp4', '.webm')):
+              <span class="placeholder" data-icon="video"></span>
+            @elif post['thumbnail'] == '':
+              <span class="placeholder" data-icon="link"></span>
+            @elif post['thumbnail'] == 'deferred':
+              <span class="placeholder deferred @{post['blur']}"
+                    data-icon="link"
+                    data-deferred="SubPost-@{post['pid']}"></span>
             @else:
-              <span class="placeholder" data-icon="chat"></span>
+              <img alt="@{_('Thumbnail')}"
+                   class="lazy @{post['blur']}"
+                   src="@{url_for('static', filename='img/1x1.gif')}"
+                   data-src="@{thumbnail_url(post['thumbnail'])}"/>
             @end
-          </div>
+          @else:
+            <span class="placeholder" data-icon="chat"></span>
+          @end
+        </div>
         </a>
       </div>
     </div>
