@@ -228,7 +228,13 @@ socket.on('comment', function (data) {
     const showNSFWBlur = document.getElementById('pagefoot-nsfw-blur').getAttribute('data-value') == 'True';
     const nsfwClass = (data.nsfw && showNSFWBlur) ? 'nsfw-blur' : '';
     const nsfwElem = data.nsfw ? ('<span class="nsfw smaller" title="' + _('Not safe for work') + '">' + _('NSFW') + '</span>') : '';
-    const content = data.content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    // Handle image-only comments
+    let content;
+    if (data.content === '<image>' || !data.content || data.content.trim() === '') {
+      content = '&lt;image&gt;';
+    } else {
+      content = data.content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
     const elem = document.createElement('li');
     elem.setAttribute('data-cid', data.comment_url);
     elem.innerHTML = _('%1:<br>%2 %3 in %4',
