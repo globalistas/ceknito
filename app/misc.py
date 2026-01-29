@@ -4314,7 +4314,13 @@ def recent_activity(sidebar=True, filter_shadowbanned=False, filter_private=Fals
             for spoiler in parsed.findAll("spoiler"):
                 spoiler.string.replace_with("█" * len(spoiler.string))
             stripped = parsed.findAll(string=True)
-            rec["content"] = word_truncate("".join(stripped).replace("\n", " "), 350)
+            text_content = "".join(stripped).replace("\n", " ").strip()
+
+            # If no text content, check for images or other content
+            if not text_content:
+                rec["content"] = "<image>"
+            else:
+                rec["content"] = word_truncate(text_content, 350)
         add_blur(rec)
 
     return data
