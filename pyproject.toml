@@ -65,6 +65,7 @@ pytest = "^7.2.1"
 pre-commit = "^3.0.4"
 mock = "^5.0.1"
 pyrsistent = "^0.19.3"
+virtualenv = ">=20.20.0"
 
 [build-system]
 requires = ["poetry-core"]
