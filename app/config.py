@@ -406,6 +406,13 @@ configurable_defaults = {
                 "doc": _l("Require the user to solve a captcha to post."),
                 "value": False,
             },
+            "require_captchas_post_level": {
+                "type": "int",
+                "doc": _l(
+                    "Minimal level required to avoid post captchas when enabled."
+                ),
+                "value": 4,
+            },
             "require_invite_code": {
                 "type": "bool",
                 "doc": _l("Require an invite code to register."),
