@@ -398,8 +398,13 @@ configurable_defaults = {
             },
             "require_captchas": {
                 "type": "bool",
-                "doc": _l("Require the user to solve a captcha to register or post."),
+                "doc": _l("Require the user to solve a captcha to register."),
                 "value": True,
+            },
+            "require_captchas_post": {
+                "type": "bool",
+                "doc": _l("Require the user to solve a captcha to post."),
+                "value": False,
             },
             "require_invite_code": {
                 "type": "bool",

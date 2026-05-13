@@ -38,7 +38,10 @@ def submit(ptype, sub):
         abort(404)
 
     captcha = None
-    if misc.get_user_level(current_user.uid)[0] <= 4:
+    if (
+        config.site.require_captchas_post
+        and misc.get_user_level(current_user.uid)[0] <= 4
+    ):
         captcha = misc.create_captcha()
 
     form = CreateSubPostForm()
@@ -82,7 +85,10 @@ def create_post(ptype, sub):
         abort(404)
 
     captcha = None
-    if misc.get_user_level(current_user.uid)[0] <= 4:
+    if (
+        config.site.require_captchas_post
+        and misc.get_user_level(current_user.uid)[0] <= 4
+    ):
         captcha = misc.create_captcha()
 
     form = CreateSubPostForm()

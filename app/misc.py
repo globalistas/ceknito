@@ -3195,7 +3195,7 @@ def is_domain_banned(addr, domain_type):
 def create_captcha():
     """Generates a captcha image.
     Returns a tuple with a token and the base64 encoded image"""
-    if not config.site.require_captchas or config.app.testing:
+    if config.app.testing:
         return None
     token = str(uuid.uuid4())
     captchagen = ImageCaptcha(width=250, height=70)
