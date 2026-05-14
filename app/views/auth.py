@@ -108,7 +108,7 @@ def register():
         del form.email_optional
     else:
         del form.email_required
-    captcha = misc.create_captcha()
+    captcha = misc.create_captcha() if config.site.require_captchas else None
 
     if not config.site.enable_registration:
         return engine.get_template("user/registration_disabled.html").render({})
