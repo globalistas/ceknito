@@ -691,7 +691,7 @@ def edit_sub(sub):
                 misc.create_sitelog(
                     misc.LOG_TYPE_SUB_SETTINGS,
                     current_user.uid,
-                    comment="/s/" + sub.name,
+                    comment="/" + config.site.sub_prefix + "/" + sub.name,
                     link=url_for("sub.view_sub", sub=sub.name),
                 )
 

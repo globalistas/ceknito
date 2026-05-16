@@ -86,7 +86,9 @@ u.sub('.revoke-mod2', 'click', function(e){
         if(!data.resign){
           document.location.reload();
         }else{
-          document.location = '/s/' + nsub;
+          var subPrefixEl = document.getElementById('pagefoot-sub-prefix');
+          var subPrefix = subPrefixEl ? subPrefixEl.getAttribute('data-value') : 's';
+          document.location = '/' + subPrefix + '/' + nsub;
         }
       }
     });
@@ -103,7 +105,9 @@ u.sub('.remove-member', 'click', function(e){
         if(!data.resign){
           document.location.reload();
         }else{
-          document.location = '/s/' + nsub;
+          var subPrefixEl = document.getElementById('pagefoot-sub-prefix');
+          var subPrefix = subPrefixEl ? subPrefixEl.getAttribute('data-value') : 's';
+          document.location = '/' + subPrefix + '/' + nsub;
         }
       }
     });
