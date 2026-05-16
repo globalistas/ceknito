@@ -166,6 +166,8 @@ def search(stype):
     if not current_user.is_admin() and stype.startswith("admin"):
         abort(403)
     form = SearchForm()
+    if not form.term.data:
+        return redirect(url_for(stype, term=""))
     term = re.sub(r'[^A-Za-zÁ-ž0-9.,\-_\'" ]+', "", form.term.data)
     # Store search context in session
     session["search_context"] = {
