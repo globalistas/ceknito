@@ -166,7 +166,7 @@ def generate_thumb(im: Image) -> Image:
         x, y = im.size
         gevent.sleep(0)
 
-    im.thumbnail((140, 140), Image.ANTIALIAS)
+    im.thumbnail((140, 140), Image.LANCZOS)
     return im
 
 
