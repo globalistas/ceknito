@@ -138,6 +138,26 @@ blockquote {
 	transform: rotate(-45deg);
 }
 
+.th-toggle .togglecount {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  line-height: 1.2em;
+  min-width: 1.35em;
+  border-radius: 1.25em;
+  font-size: small;
+  letter-spacing: normal;
+  text-align: center;
+  padding: 0.1em 0.25em;
+  background: #000;
+  color: #fff;
+}
+
+
+.th-toggle.x .togglecount {
+  display: none !important;
+}
+
 #th-menu a.pure-menu-link, .cw-items a {
 	color: #fff;
 }

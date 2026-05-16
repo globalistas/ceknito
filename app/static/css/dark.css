@@ -567,7 +567,8 @@ body.dark .newmsgbg {
 /* /USER PAGE */
 
 /* misc */
-body.dark span.mailcount {
+body.dark span.mailcount,
+body.dark .th-toggle .togglecount {
   background: #526a7d;
 }
 

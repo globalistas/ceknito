@@ -68,6 +68,17 @@ function updateTitleNotifications() {
 
   setupTinycon();
   Tinycon.setBubble(count)
+
+  const toggleCount = document.getElementById('togglecount');
+  if (toggleCount) {
+    if (count == 0) {
+      toggleCount.innerHTML = '';
+      toggleCount.style.display = 'none';
+    } else {
+      toggleCount.innerHTML = count;
+      toggleCount.style.display = 'inline-block';
+    }
+  }
 }
 
 
