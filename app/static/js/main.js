@@ -396,6 +396,11 @@ u.ready(function () {
         x = x + '<li>' + e.innerHTML + '</li>'
       }
     });
+    var allSubsUrl = document.getElementById('subsdropdown').dataset.allSubsUrl;
+    if (allSubsUrl) {
+      var cls = x ? 'all-subs-link' : 'all-subs-link-only';
+      x = x + '<li class="' + cls + '"><a href="' + allSubsUrl + '">' + _("View all subs") + '</a></li>';
+    }
     document.getElementById('hiddensubs').innerHTML = x;
     hsubs.style.display = 'inline-flex';
 

@@ -1355,6 +1355,12 @@ span.mailcount {
 	vertical-align: super;
 }
 
+#hiddensubs li.all-subs-link {
+  border-top: 1px solid #ccc;
+  margin-top: 2px;
+  padding-top: 3px;
+}
+
 .th-subbar {
 	background-color: #101010;
 	border-bottom: 1px solid #101010;
