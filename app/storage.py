@@ -251,6 +251,24 @@ def store_file(ufile, basename, mtype, remove_metadata=False):
     ).name
 
 
+def read_stored_file(name):
+    """Read the raw bytes of an uploaded file straight from storage.
+
+    Returns None if the object does not exist.
+    """
+    if isinstance(storage, S3Storage):
+        try:
+            obj = storage.s3.get_object(Bucket=storage.container, Key=name)
+        except Exception:
+            return None
+        return obj["Body"].read()
+    path = pathlib.Path(config.storage.uploads.path) / name
+    try:
+        return path.read_bytes()
+    except (FileNotFoundError, IsADirectoryError):
+        return None
+
+
 def get_stored_file_size(filename):
     obj = storage.get(filename)
 
