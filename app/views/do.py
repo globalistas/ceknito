@@ -4508,6 +4508,7 @@ def ban_user(username):
         return abort(403)
 
     auth_provider.change_user_status(user, 5)
+    SubMod.delete().where(SubMod.uid == user.uid).execute()
     misc.create_sitelog(misc.LOG_TYPE_USER_BAN, uid=current_user.uid, comment=user.name)
 
     related_post_reports = (
