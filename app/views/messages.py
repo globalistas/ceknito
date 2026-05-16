@@ -14,12 +14,11 @@ bp = Blueprint("messages", __name__)
 @bp.route("/")
 @login_required
 def inbox_sort():
-    """Go to inbox with the new message"""
+    """Go to inbox if there are new messages, otherwise notifications."""
     if misc.get_unread_count() > 0:
         return redirect(url_for("messages.view_messages"))
-    elif misc.get_notif_count():
+    else:
         return redirect(url_for("messages.view_notifications"))
-    return redirect(url_for("messages.view_messages"))
 
 
 @bp.route("/notifications", defaults={"page": 1})

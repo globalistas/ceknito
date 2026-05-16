@@ -75,7 +75,7 @@ def app_before_init_db(test_config):
             "testing": True,
         },
         # TODO set Redis database number to different than dev-server and use Redis here.
-        "cache": {"type": "simple"},
+        "cache": {"type": "null"},
         "database": {"engine": "SqliteDatabase", "name": db_name},
         "mail": {
             "server": "smtp.example.com",
