@@ -29,7 +29,7 @@ Admin |\
 
           <div class="pure-control-group txcont">
             @{form.content.label()!!html}
-            <div class="markdown-editor">
+            <div class="markdown-editor" id="wiki-editor">
                 @{form.content(class_="exalert", placeholder=_('(Optional) Write your post content here. Styling with Markdown format is supported.'), rows="10", style="width: 100%")!!html}
                   <div class="bottom-area">
                       <span class="help-toggle toggle">
@@ -61,7 +61,15 @@ Admin |\
             </div>
           </div>
           <div class="pure-controls">
-            <button id="btn-sending" type="submit" class="pure-button pure-button-primary" style="display: inline-block">@{_('Submit')}</button>
+            <div>
+              <button id="btn-sending" type="submit" class="pure-button pure-button-primary" style="display: inline-block">@{_('Submit')}</button>
+              <button data-pvid="wiki-editor" class="pure-button btn-preview">@{_('Preview')}</button>
+              <div class="cmpreview canclose" style="display:none;">
+                <h4>@{_('Wiki preview')}</h4>
+                <span class="closemsg">&times;</span>
+                <div class="cpreview-content"></div>
+              </div>
+            </div>
           </div>
         </fieldset>
       </form>
