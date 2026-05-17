@@ -3702,6 +3702,17 @@ msgstr "Nová pozvánka"
 msgid "You cannot create invite codes."
 msgstr "Nemůžeš vytvářet pozvánky."
 
+#: app/html/user/settings/invitecode.html:18
+#, python-format
+msgid ""
+"You have not reached level %(minimum)i, so you cannot create an invite "
+"code yet."
+msgstr "K vytváření pozvánek potřebuješ mít level %(minimum)i."
+
+#: app/html/user/settings/invitecode.html:20
+msgid "You have already created the maximum number of invite codes."
+msgstr "Už jsi vytvořil(a) maximální počet pozvánek."
+
 #: app/html/user/settings/invitecode.html:20
 msgid "Your invite codes"
 msgstr "Tvoje pozvánky"

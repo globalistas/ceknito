@@ -1,5 +1,5 @@
 @extends("shared/newlayout.html")
-@require(codes, avail, csrf_form)
+@require(codes, avail, csrf_form, user_level, min_level, created, max)
 @def sidebar():
   @include('shared/sidebar/user.html')
 @end
@@ -13,8 +13,14 @@
       @{ csrf_form.csrf_token()!!html }
       <input type="submit" name="createinvite-button" class="pure-button pure-button-primary" value="@{_('Create new')}">
     </form>
-  @else:
-    @{_('You cannot create invite codes.')}
+  @elif not current_user.can_admin:
+    @if user_level < min_level:
+      @{_('You have not reached level %(minimum)i, so you cannot create an invite code yet.', minimum=min_level)!!html}
+    @elif max > 0 and created >= max:
+      @{_('You have already created the maximum number of invite codes.')}
+    @else:
+      @{_('You cannot create invite codes.')}
+    @end
   @end
   <hr/>
   <h2>@{_('Your invite codes')}</h2>

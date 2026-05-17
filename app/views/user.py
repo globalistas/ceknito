@@ -399,12 +399,15 @@ def invite_codes():
     avail = 0
     if (maxcodes - created) >= 0:
         avail = maxcodes - created
+    user_level = misc.get_user_level(current_user.uid)[0]
     return engine.get_template("user/settings/invitecode.html").render(
         {
             "codes": codes,
             "created": created,
             "max": maxcodes,
             "avail": avail,
+            "user_level": user_level,
+            "min_level": config.site.invite_level,
             "user": User.get(User.uid == current_user.uid),
             "csrf_form": CsrfTokenOnlyForm(),
         }
