@@ -158,15 +158,24 @@
         <hr/>
         <h4>@{_('Sidebar text')}</h4>
         <div class="pure-control-group">
-          <div class="markdown-editor cwrap">
+          <div class="markdown-editor cwrap" id="sidebar-editor">
             @{editsubform.sidebar(class_="cwrap", placeholder=_("Sidebar text. Markdown allowed."), rows="10")!!html}
           </div>
         </div>
       </fieldset>
 
       <div class="alert div-error"></div>
-      <p>
-      <button type="submit" class="pure-button pure-button-primary" id="editsub-btnsubmit" data-prog="@{_('Saving...')}" data-success="@{_('Saved!')}">@{_('Save changes')}</button></p>
+      <div>
+        <div>
+          <button type="submit" class="pure-button pure-button-primary" id="editsub-btnsubmit" data-prog="@{_('Saving...')}" data-success="@{_('Saved!')}">@{_('Save changes')}</button>
+          <button data-pvid="sidebar-editor" class="pure-button btn-preview">@{_('Preview')}</button>
+          <div class="cmpreview canclose" style="display:none;">
+            <h4>@{_('Preview')}</h4>
+            <span class="closemsg">&times;</span>
+            <div class="cpreview-content"></div>
+          </div>
+        </div>
+      </div>
 
     </form>
 
