@@ -5699,3 +5699,12 @@ def unprivate_sub(sub):
         misc.LOG_TYPE_UNPRIVATE_SUB, uid=current_user.uid, sid=sub.sid, admin=False
     )
     return jsonify(status="ok", addr=url_for("sub.view_sub", sub=sub.name))
+
+
+@do.route("/do/captcha", methods=["GET"])
+def get_captcha():
+    """Returns a new captcha token and image."""
+    captcha = misc.create_captcha()
+    if captcha is None:
+        return jsonify(token=None, image=None)
+    return jsonify(token=captcha[0], image=captcha[1])

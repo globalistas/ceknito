@@ -21,6 +21,7 @@ var Icons = {
   sun: require('../svg/sun-fill.svg') ,
   moon: require('../svg/moon-fill.svg'),
   color: require('../svg/color-wheel.svg'),
+  refresh: require('../svg/refresh.svg'),
 
   play: require('../svg/play_arrow.svg'),
   video: require('../svg/video.svg'),

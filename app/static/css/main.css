@@ -540,6 +540,12 @@ span#notification.fade {
 	display: inline-block;
 }
 
+.r-icon {
+	width: 22px;
+	height: 22px;
+	display: inline-block;
+}
+
 .p-icon path {
 	fill: #e3e3e3;
 }

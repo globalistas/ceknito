@@ -932,3 +932,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Refrsh captcha
+u.sub('#refresh-captcha', 'click', function(e) {
+  e.preventDefault();
+  fetch('/do/captcha')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.token) {
+        document.getElementById('ctok').value = data.token;
+        document.getElementById('captcha-img').src = 'data:image/png;base64,' + data.image;
+        document.getElementById('captcha').value = '';
+      }
+    });
+});

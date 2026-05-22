@@ -178,9 +178,10 @@
                 </div>
 
                 @if captcha:
-                <input type="hidden" name="ctok" value="@{captcha[0]}"/>
-                <div class="pure-controls">
-                    <img src="data:image/png;base64,@{captcha[1]}"/>
+                <input type="hidden" name="ctok" id="ctok" value="@{captcha[0]}"/>
+                <div class="pure-controls" style="display:flex; align-items:center; gap:0.5em;">
+                    <img id="captcha-img" src="data:image/png;base64,@{ captcha[1] }"/>
+                    <a href="#" id="refresh-captcha"><span class="r-icon" data-icon="refresh"></span></a>
                 </div>
                 <div class="pure-control-group">
                     <label for="captcha">@{_('Captcha')}</label>@{form.captcha(autocomplete="off", required=True)!!html}

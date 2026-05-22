@@ -260,6 +260,10 @@ body.dark .post .thumbnail img:hover {
   filter: grayscale(0);
 }
 
+body.dark .r-icon svg path {
+    stroke: gray;
+}
+
 body.dark .p-icon[data-icon="exclaim"] path {
   fill: #8c8c8c;
 }
