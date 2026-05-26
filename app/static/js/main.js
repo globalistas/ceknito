@@ -933,7 +933,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Refrsh captcha
+// Refresh captcha
 u.sub('#refresh-captcha', 'click', function(e) {
   e.preventDefault();
   fetch('/do/captcha')

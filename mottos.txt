@@ -1,15 +1,15 @@
 ["homepage tvojho internetu",
 "zrušme slušne facebook",
-"celoplošné čekovanie",
 "made in slovakia",
 "made in argentina",
 "beta",
 "vlastné motto už od 5€ !",
-"sloboda je vakcína",
 "vybrali.cekni.to",
 "normálne už bolo",
 "based and #800000pilled",
 "kočkovanie s registráciou",
 "tvoj zdroj malinformácií",
 "press shift+x to collapse",
-"↑ ↑ ↓ ↓ ← → ← → b a"]
+"↑ ↑ ↓ ↓ ← → ← → b a",
+"straight outta debni.to",
+"lajkujte a subscribujte"]

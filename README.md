@@ -1,59 +1,18 @@
-# Web
+# cekni.to
 
-https://cekni.to/
+A self-hostable Reddit-like link aggregator and discussion platform, built with Python 3 and Flask.
 
-A link and discussion aggregator with snek (python3)
+**Live instance:** https://cekni.to/
 
-## Some major changes over upstream (throat/phuks.co)
+## About
 
-- new post sort type (Commented)
-- reddit-like comments look&feel
-- new comment sort type (Old)
-- user-specific comment sort setting
-- new comments highlight option
-- save comment
-- expand all comments
-- sub-specific delay for showing comment scores
-- sub icons
-- active sub highlighted in topbar
-- sub name displayed in navbar
-- sub navbar linking to sub home
-- sub-specific search
-- image and video posts expanded by default
-- support for image uploads and embeds in comments
-- working email notifications (see https://github.com/Phuks-co/throat/issues/525)
-- disable notifications on a per-post/comment basis
-- delete posts directly from Home page or Sub page
-- config option to enable private subs
-- config option for minimum post creation user level
-- config option to enable live updates of recent activity sidebar
-- config option to enable additional text in link post
-- config option for user badge auto-assignment (Early Adopter and First Post)
-- config option to send automated welcome message from site admin
-- config option to specify announcements sub
-- config option to specify Contact us link
-- poll options limit increased to 12
-- display of number of posts for a domain
-- alphabetic ordering of default subs
-- banning, quarantining, defaulting subs from admin interface
-- sub subscribers list in admin interface
-- improved image quality for thumbnails
-- Twitter, Rumble and Bitchute expando support
-- Recent Activity comments permalink
-- fixed mp4 uploads
-- webp image uploads
-- improved diacritics support
-- translations support for Welcome page
-- all templates migrated to Wheezy
-- post flair colors
-- site color picker
-- post body in post list view links to post
-- post score upvote percentage display
-- fixed auto-quote selected text when replying to comments
-- date in chat timestamps
-- shadowban support
-- proxy support for metadata scraper
-- support for locking stickied comments
+cekni.to is a fork of [Throat](https://github.com/Phuks-co/throat) with significant improvements:
+
+- **Richer content** — image and video embeds in comments, webp support, improved thumbnails, expanded media by default
+- **Better communities** — private subs, sub icons, sub-specific search and settings, improved admin tools
+- **Improved discussions** — new sort types, comment saving, new comments highlighting, per-user sort preferences
+- **More control** — granular notification settings, shadowban support, extensive new config options
+- **UI polish** — site color picker, post flair colors, live activity sidebar, Twitter/Rumble/Bitchute embeds
 
 ## Dependencies:
 
