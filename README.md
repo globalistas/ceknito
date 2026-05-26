@@ -8,11 +8,11 @@ A self-hostable Reddit-like link aggregator and discussion platform, built with 
 
 cekni.to is a fork of [Throat](https://github.com/Phuks-co/throat) with significant improvements:
 
-- **Richer content** — image and video embeds in comments, webp support, improved thumbnails, expanded media by default
-- **Better communities** — private subs, sub icons, sub-specific search and settings, improved admin tools
-- **Improved discussions** — new sort types, comment saving, new comments highlighting, per-user sort preferences
-- **More control** — granular notification settings, shadowban support, extensive new config options
-- **UI polish** — site color picker, post flair colors, live activity sidebar, Twitter/Rumble/Bitchute embeds
+- **Richer content** - image and video embeds in comments, webp support, improved thumbnails, expanded media by default
+- **Better communities** - private subs, sub icons, sub-specific search and settings, improved admin tools
+- **Improved discussions** - new sort types, comment saving, new comments highlighting, per-user sort preferences
+- **More control** - granular notification settings, shadowban support, extensive new config options
+- **UI polish** - site color picker, post flair colors, live activity sidebar, Twitter/Rumble/Bitchute embeds
 
 ## Dependencies:
 
