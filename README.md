@@ -14,7 +14,7 @@ cekni.to is a fork of [Throat](https://github.com/Phuks-co/throat) with signific
 - **More control** - granular notification settings, shadowban support, extensive new config options
 - **UI polish** - site color picker, post flair colors, live activity sidebar, Twitter/Rumble/Bitchute embeds
 
-## Dependencies:
+## Dependencies
 
  - A database server - MySQL, MariaDB and Postgres have been tested. Sqlite should work for messing locally
  - Redis
@@ -23,7 +23,7 @@ cekni.to is a fork of [Throat](https://github.com/Phuks-co/throat) with signific
  - libmagic
  - libpq-dev
 
-## Setup:
+## Setup
 
 We recommend using a virtualenv or Pyenv and setting it up to use Python 3.9 for best compatibility (higher versions might fail to build dependencies). See for e.g. [pyenv](https://github.com/pyenv/pyenv) to learn how to install multiple Python versions on your workstation. Refer to your virtual environment manager for documentation on selecting specific Python versions.
 
