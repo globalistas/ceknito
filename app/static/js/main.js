@@ -637,7 +637,7 @@ if (typeof (document.getElementsByClassName("subinfo")[0]) != 'undefined' && doc
 
   // Get the link from the a tag inside the h3
   var link = h3Element.querySelector("a").getAttribute("href");
-  var text = h3Element.querySelector("a").innerText;
+  var text = h3Element.querySelector("a").innerText.split("/").pop();
 
   var bannerLink = document.getElementsByClassName("banner-link")[0];
   bannerLink.setAttribute("href", link);
