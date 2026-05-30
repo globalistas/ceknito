@@ -1,7 +1,12 @@
 """Pages to be migrated to a wiki-like system"""
 
+from datetime import datetime
+
 from flask import Blueprint, request, redirect, url_for, jsonify
-from ..misc import engine, logger, ensure_locale_loaded, get_locale
+from flask_login import current_user
+
+from .. import config
+from ..misc import engine, logger, ensure_locale_loaded, get_locale, send_email
 from ..caching import cache
 
 bp = Blueprint("errors", __name__)
@@ -49,6 +54,24 @@ def server_error(_):
 
     typ, val, tb = sys.exc_info()
     logger.error('EXCEPTION: %s, "%s", %s', typ.__name__, val, traceback.format_tb(tb))
+
+    try:
+        username = current_user.name if current_user.is_authenticated else "Anonymous"
+        error_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        tb_str = "".join(traceback.format_tb(tb))
+        html_content = f"""
+        <p><strong>User:</strong> {username}</p>
+        <p><strong>Time:</strong> {error_time} UTC</p>
+        <p><strong>Path:</strong> {request.path}</p>
+        <p><strong>Error:</strong> {typ.__name__}: {val}</p>
+        <pre>{tb_str}</pre>
+        """
+        send_email(
+            config.mail.default_to, "500 Internal Server Error", "", html_content
+        )
+    except Exception as e:
+        logger.error("Failed to send error email: %s", e)
+
     if request.path.startswith("/api"):
         if request.path.startswith("/api/v3"):
             return jsonify(msg="Internal error"), 500

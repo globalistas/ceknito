@@ -155,11 +155,7 @@ def create_post(ptype, sub):
     if ptype_flag is None or subdata.get(ptype_flag, "0") == "0":
         return error_response(_("That post type is not allowed in this sub."))
 
-    if (
-        config.site.require_captchas_post
-        and misc.get_user_level(current_user.uid)[0]
-        < config.site.require_captchas_post_level
-    ):
+    if misc.get_user_level(current_user.uid)[0] <= 4:
         if not misc.validate_captcha(form.ctok.data, form.captcha.data):
             return error_response(_("Invalid captcha."))
 
