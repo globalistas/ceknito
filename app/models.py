@@ -421,7 +421,7 @@ class SubPostView(BaseModel):
     datetime = DateTimeField(null=True, default=datetime.datetime.utcnow)
 
     def __repr__(self):
-        return f"<SubPostView{self.cid}>"
+        return f"<SubPostView{self.pid}>"
 
     class Meta:
         table_name = "sub_post_view"
@@ -709,7 +709,7 @@ class SubPostTitleHistory(BaseModel):
     title = TextField(null=True)
 
     def __repr__(self):
-        return f'<SubPostContentHistory "{self.content[:20]}">'
+        return f'<SubPostContentHistory "{self.title[:20]}">'
 
     class Meta:
         table_name = "sub_post_title_history"
