@@ -5,5 +5,6 @@ from .migration import migration
 from .route import route
 from .translations import translations
 from .user import user
+from .export import export
 
-commands = [migration, recount, route, admin, default, translations, user]
+commands = [migration, recount, route, admin, default, translations, user, export]
