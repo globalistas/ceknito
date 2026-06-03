@@ -154,7 +154,12 @@
       <hr>
       <h2>Sub of the Day</h2>
       <p>
-        Current: <a href="@{url_for('sub.view_sub', sub=func.getSubOfTheDay().name)}">/@{config.site.sub_prefix}/@{func.getSubOfTheDay().name}</a>
+        @(sotd = func.getSubOfTheDay())
+        @if sotd:
+          Current: <a href="@{url_for('sub.view_sub', sub=sotd.name)}">/@{config.site.sub_prefix}/@{sotd.name}</a>
+        @else:
+          Current: <em>None set</em>
+        @end
       </p>
       <form method="POST" data-reload="true" action="@{url_for('do.set_suboftheday')}" class="inline pure-form pure-form-aligned ajaxform">
         @{subOfTheDay.csrf_token()!!html}
