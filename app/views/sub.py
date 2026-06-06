@@ -276,7 +276,7 @@ def view_sublog(sub, page):
     except Sub.DoesNotExist:
         abort(404)
 
-    if sub["status"] != 0:
+    if sub["status"] != 0 and not current_user.is_admin():
         return redirect(url_for("sub.view_sub", sub=sub["name"]))
 
     subInfo = misc.getSubData(sub["sid"])
@@ -305,8 +305,11 @@ def view_sublog(sub, page):
 def edit_sub_mods(sub):
     """Here we can edit moderators for a sub"""
     try:
-        sub = Sub.get((fn.Lower(Sub.name) == sub.lower()) & (Sub.status == 0))
+        sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
     except Sub.DoesNotExist:
+        abort(404)
+
+    if sub.status != 0 and not current_user.is_admin():
         abort(404)
 
     if (
@@ -339,8 +342,11 @@ def edit_sub_mods(sub):
 def edit_sub_members(sub):
     """Here we can edit members for a sub"""
     try:
-        sub = Sub.get((fn.Lower(Sub.name) == sub.lower()) & (Sub.status == 0))
+        sub = Sub.get(fn.Lower(Sub.name) == sub.lower())
     except Sub.DoesNotExist:
+        abort(404)
+
+    if sub.status != 0 and not current_user.is_admin():
         abort(404)
 
     if (
