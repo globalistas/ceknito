@@ -1,56 +1,170 @@
-User-agent: PetalBot
-Disallow: /
+# AI / LLM Crawlers
 
-User-agent: SemrushBot
-Disallow: /
-
-User-agent: MJ12bot
-Disallow: /
-
-User-agent: AhrefsBot
-Disallow: /
-
-User-agent: MauiBot
-Disallow: /
-
-User-agent: BLEXBot
-Disallow: /
-
-User-agent: MegaIndex.ru
-Disallow: /
-
-User-agent: Barkrowler
-Disallow: /
-
-User-agent: VelenPublicWebCrawler
-Disallow: /
-
-User-agent: dotbot
-Disallow: /
-
-User-agent: DataForSeoBot
-Disallow: /
-
-User-agent: AdsBot
-Disallow: /
-
-User-agent: YandexBot
-Disallow: /
-
-User-agent: BLEXBot
-Disallow: /
-
-User-agent: bingbot
-Disallow: /
-
-User-agent: SEOkicks
+User-agent: OAI-SearchBot
 Disallow: /
 
 User-agent: CCBot
 Disallow: /
 
-User-agent: PhxBot
+User-agent: Bytespider
+Disallow: /
+
+User-agent: ByteSpider
 Disallow: /
 
 User-agent: Amazonbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: YouBot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+# Search Engines
+
+User-agent: YandexBot
+Disallow: /
+
+User-agent: YandexImages
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: Baiduspider-image
+Disallow: /
+
+User-agent: Sogou
+Disallow: /
+
+User-agent: Exabot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: Qwantify
+Disallow: /
+
+# SEO / Backlink Crawlers
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: AhrefsSiteAudit
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: SemrushBot-SA
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: Barkrowler
+Disallow: /
+
+User-agent: SEOkicks
+Disallow: /
+
+User-agent: MegaIndex.ru
+Disallow: /
+
+User-agent: MauiBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: AwarioBot
+Disallow: /
+
+User-agent: DomainStatsBot
+Disallow: /
+
+User-agent: serpstatbot
+Disallow: /
+
+User-agent: LinkpadBot
+Disallow: /
+
+User-agent: SeekportBot
+Disallow: /
+
+User-agent: BacklinkCrawler
+Disallow: /
+
+# Research / Archiving
+
+User-agent: ia_archiver
+Disallow: /
+
+User-agent: archive.org_bot
+Disallow: /
+
+User-agent: ArchiveBot
+Disallow: /
+
+User-agent: CommonCrawler
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+# Commercial Scrapers
+
+User-agent: ZoominfoBot
+Disallow: /
+
+User-agent: BrightDataBot
+Disallow: /
+
+User-agent: BrightData
+Disallow: /
+
+User-agent: OxylabsBot
+Disallow: /
+
+User-agent: Seekr
+Disallow: /
+
+User-agent: VelenPublicWebCrawler
+Disallow: /
+
+User-agent: NetcraftSurveyAgent
+Disallow: /
+
+User-agent: AI2Bot
+Disallow: /
+
+User-agent: Scrapy
+Disallow: /
+
+User-agent: Webzio-Extended
+Disallow: /
+
+# Monitoring / Misc
+
+User-agent: PhxBot
+Disallow: /
+
+User-agent: CensysInspect
+Disallow: /
+
+User-agent: HTTPBannerScanner
 Disallow: /
