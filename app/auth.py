@@ -495,9 +495,8 @@ class AuthProvider:
 auth_provider = AuthProvider()
 
 
-# Someday config.auth.require_valid_emails may move to site metadata.
 def email_validation_is_required():
-    return config.auth.require_valid_emails
+    return config.site.require_valid_emails
 
 
 def normalize_email(email):

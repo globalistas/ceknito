@@ -15,7 +15,7 @@ from test.utilities import promote_user_to_admin
 
 @pytest.mark.parametrize(
     "test_config",
-    [{"auth": {"require_valid_emails": False}}],
+    [{"site": {"require_valid_emails": False}}],
 )
 def test_registration_login(client, test_config):
     """The registration page logs a user in if they register correctly."""
@@ -49,7 +49,7 @@ def test_registration_login(client, test_config):
         assert b"Log out" in rv.data
 
 
-@pytest.mark.parametrize("test_config", [{"auth": {"require_valid_emails": True}}])
+@pytest.mark.parametrize("test_config", [{"site": {"require_valid_emails": True}}])
 def test_email_required_for_registration(client, user_info, test_config):
     """
     If emails are required, trying to register without one will fail.
@@ -73,7 +73,7 @@ def test_email_required_for_registration(client, user_info, test_config):
         assert b"Log out" not in rv.data
 
 
-@pytest.mark.parametrize("test_config", [{"auth": {"require_valid_emails": True}}])
+@pytest.mark.parametrize("test_config", [{"site": {"require_valid_emails": True}}])
 def test_login_before_confirming_email(client, user_info, test_config):
     """Registered users with unconfirmed emails can't log in."""
     rv = client.get(url_for("auth.register"))
@@ -121,7 +121,7 @@ def test_login_before_confirming_email(client, user_info, test_config):
         assert b"Log out" in rv.data
 
 
-@pytest.mark.parametrize("test_config", [{"auth": {"require_valid_emails": True}}])
+@pytest.mark.parametrize("test_config", [{"site": {"require_valid_emails": True}}])
 def test_resend_registration_email(client, user_info, test_config):
     """Registered but unconfirmed users can resend the registration link."""
     rv = client.get(url_for("auth.register"))
@@ -171,7 +171,7 @@ def test_resend_registration_email(client, user_info, test_config):
         assert b"Log out" in rv.data
 
 
-@pytest.mark.parametrize("test_config", [{"auth": {"require_valid_emails": True}}])
+@pytest.mark.parametrize("test_config", [{"site": {"require_valid_emails": True}}])
 def test_resend_registration_email_after_confirmation(client, user_info, test_config):
     """Registration instructions cannot be resent after confirmation."""
     with mail.record_messages() as outbox:
@@ -211,7 +211,7 @@ def test_resend_registration_email_after_confirmation(client, user_info, test_co
     assert b"Log out" not in rv.data
 
 
-@pytest.mark.parametrize("test_config", [{"auth": {"require_valid_emails": True}}])
+@pytest.mark.parametrize("test_config", [{"site": {"require_valid_emails": True}}])
 def test_fix_registration_email(client, user_info, user2_info, test_config):
     """Registered users can fix errors in their email addresses."""
     rv = client.get(url_for("auth.register"))
@@ -328,8 +328,8 @@ def test_change_password(client, user_info):
 @pytest.mark.parametrize(
     "test_config",
     [
-        {"auth": {"require_valid_emails": True}},
-        {"auth": {"require_valid_emails": False}},
+        {"site": {"require_valid_emails": True}},
+        {"site": {"require_valid_emails": False}},
     ],
 )
 def test_change_password_recovery_email(client, user_info, test_config):
@@ -409,7 +409,7 @@ def test_change_password_recovery_email(client, user_info, test_config):
         assert outbox.pop().send_to == {new_email}
 
 
-@pytest.mark.parametrize("test_config", [{"auth": {"require_valid_emails": True}}])
+@pytest.mark.parametrize("test_config", [{"site": {"require_valid_emails": True}}])
 def test_password_required_to_change_recovery_email(client, user_info, test_config):
     """Changing the password recovery requires the correct password."""
     register_user(client, user_info)
@@ -556,7 +556,7 @@ def test_delete_account(client, user_info):
 # same email but banned users should not
 
 
-@pytest.mark.parametrize("test_config", [{"auth": {"require_valid_emails": True}}])
+@pytest.mark.parametrize("test_config", [{"site": {"require_valid_emails": True}}])
 def test_reregister(client, user_info, user2_info, test_config):
     "A user account which is unconfirmed after two days can be re-registered."
     rv = client.get(url_for("auth.register"))

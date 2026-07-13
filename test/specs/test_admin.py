@@ -38,7 +38,7 @@ def test_admin_can_ban_and_unban_user(client, user_info, user2_info):
     log_in_user(client, user_info)
 
 
-@pytest.mark.parametrize("test_config", [{"auth": {"require_valid_emails": True}}])
+@pytest.mark.parametrize("test_config", [{"site": {"require_valid_emails": True}}])
 def test_admin_can_ban_email_domain(client, user_info, test_config):
     register_user(client, user_info)
     promote_user_to_admin(client, user_info)

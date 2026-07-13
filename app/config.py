@@ -60,7 +60,6 @@ defaults = {  # key => default value
     },
     "auth": {
         "provider": "LOCAL",
-        "require_valid_emails": False,
         "keycloak": {"use_oidc": False, "active_session_check": False},
     },
     "cache": {"type": "null"},
@@ -535,6 +534,15 @@ configurable_defaults = {
                         "value": False,
                     },
                 },
+            },
+            "require_valid_emails": {
+                "type": "bool",
+                "doc": _l(
+                    "Require new users to enter an email address at registration "
+                    "and to confirm it by clicking a link in an email before "
+                    "logging in."
+                ),
+                "value": False,
             },
             "send_email": {
                 "type": "bool",
